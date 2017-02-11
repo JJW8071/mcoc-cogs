@@ -274,16 +274,22 @@ class MCOC:
         await self.bot.say('Test string with\n line break')
 
     @commands.command()
-    async def warmap(self, maptype=''):
+    async def warmap(self, maptype='ai'):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
         Where <right> = [f, g, g+, h, i]'''
-        if maptype in self.warmap_links:
+        content=='**Alliance War Map '+title.upper()+'**'
+        filepath='data/mcoc/warmaps/warmap_'
+        maps={'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg','cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
+        if maptype in maps:
+            filepath=filepath+maptype+'.png'
+            await self.bot.send_file(channel, filepath, content)
+        #if maptype in self.warmap_links:
             ##await self.bot.say('JJW: I **did** find the maptype in warmap_links')
-            await self.bot.say('**{}**\n{}'.format(*self.warmap_links[maptype]))
+        #    await self.bot.say('**{}**\n{}'.format(*self.warmap_links[maptype]))
         else :
-            raise KeyError('I cannot find that map')
+            raise KeyError('Summoner, I cannot find that map')
 
     #@alias_resolve
     @commands.command()
