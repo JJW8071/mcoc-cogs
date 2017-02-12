@@ -279,7 +279,7 @@ class MCOC:
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
         Where <right> = [f, g, g+, h, i]'''
-        mapTitle=='**Alliance War Map '+title.upper()+'**'
+        mapTitle='**Alliance War Map '+title.upper()+'**'
         filepath='data/mcoc/warmaps/warmap_'
         maps={'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg','cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
