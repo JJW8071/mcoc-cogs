@@ -78,87 +78,6 @@ class MCOC:
                 #'http://simians.tk/SDFstreak')
             }
 
-    warmap_links = {
-            '': (
-                'AW Map',
-                'http://i.imgur.com/h1N8O4R.png'),
-            'eh': (
-                'AW Map E-H',
-                'http://i.imgur.com/ACw1wS3.png'),
-            'af': (
-                'AW Map A-F',
-                'http://i.imgur.com/p5F0L6I.png'),
-            'eg': (
-                'AW Map E-G',
-                'http://i.imgur.com/Gh9EK8N.png'),
-            'eg+': (
-                'AW Map E to G+',
-                'http://i.imgur.com/l9KxWHJ.png'),
-            'df': (
-                'AW Map D to F',
-                'http://i.imgur.com/zlGSwbj.png'),
-            'ei': (
-                'AW Map E to I',
-                'http://i.imgur.com/JUTXNpf.png'),
-            'ag+': (
-                'AW Map A to G+',
-                'http://i.imgur.com/KTZrCZN.png'),
-            'dg+': (
-                'AW Map D to G+',
-                'http://i.imgur.com/3kmzhIG.png'),
-            'ci': (
-                'AW Map C to I',
-                'http://i.imgur.com/BBFc0GS.png'),
-            'dh': (
-                'AW Map D to H',
-                'http://i.imgur.com/DlnHQ0F.png'),
-            'ag': (
-                'AW Map A to G',
-                'http://i.imgur.com/oQNRLTA.png'),
-            'cf': (
-                'AW Map C to F',
-                'http://i.imgur.com/IcVC0Y8.png'),
-            'ef': (
-                'AW Map E to F ',
-                'http://i.imgur.com/eiftXZK.png'),
-            'cg+': (
-                'AW Map C to G+',
-                'http://i.imgur.com/smlAKwu.png'),
-            'di': (
-                'AW Map D to I',
-                'http://i.imgur.com/WIMHR7t.png'),
-            'ch': (
-                'AW Map C to H',
-                'http://i.imgur.com/uBpUC0y.png'),
-            'bg': (
-                'AW Map B to G',
-                'http://i.imgur.com/hlMU7vw.png'),
-            'dg': (
-                'AW Map D to G',
-                'http://i.imgur.com/WI7SxWT.png'),
-            'ai': (
-                'AW Map A to I',
-                'http://i.imgur.com/h1N8O4R.png'),
-            'bg+': (
-                'AW Map B to G+',
-                'http://i.imgur.com/i2xh3eM.png'),
-            'bi': (
-                'AW Map B to I',
-                'http://i.imgur.com/Um06tbU.png'),
-            'cg': (
-                'AW Map C to G',
-                'http://i.imgur.com/wM0LSed.png'),
-            'bh': (
-                'AW Map B to H',
-                'http://i.imgur.com/gug9NyC.png'),
-            'af': (
-                'AW Map B to F',
-                'http://i.imgur.com/0NOI2lK.png'),
-            'ah': (
-                'AW Map A to H',
-                'http://i.imgur.com/6c96hBj.png')
-            }
-
     lessons = {
             'parry': (
                 'How to Parry Like a Boss',
@@ -185,8 +104,6 @@ class MCOC:
                 }
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
-        #print(MCOC.event.callback, MCOC.warmap.callback)
-        #print(isig(MCOC.event.callback), isig(MCOC.warmap.callback))
 
     @commands.command()
     async def mcocset(self, setting, value):
@@ -278,7 +195,9 @@ class MCOC:
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
-        Where <right> = [f, g, g+, h, i]'''
+        Where <right> = [f, g, g+, h, i]
+        Example:
+        /warmap ai'''
         channel=ctx.message.channel
         mapTitle='**Alliance War Map '+maptype.upper()+'**'
         filepath='data/mcoc/warmaps/warmap_'
@@ -286,9 +205,6 @@ class MCOC:
         if maptype in maps:
             filepath=filepath+maptype+'.png'
             await self.bot.send_file(channel, filepath, content=mapTitle)
-        #if maptype in self.warmap_links:
-            ##await self.bot.say('JJW: I **did** find the maptype in warmap_links')
-        #    await self.bot.say('**{}**\n{}'.format(*self.warmap_links[maptype]))
         else :
             raise KeyError('Summoner, I cannot find that map')
 
