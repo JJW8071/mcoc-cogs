@@ -264,7 +264,7 @@ class MCOC:
     @commands.command()
     async def tools(self):
         self.hook()
-        self.marvelynergy()
+        self.marvelsynergy()
         self.frogspawn()
         self.simulator()
         #list the useful links from lookup_links
@@ -286,6 +286,9 @@ class MCOC:
         if maptype in maps:
             filepath=filepath+maptype+'.png'
             await self.bot.send_file(channel, filepath, content=mapTitle)
+            #em = discord.Embed(image=filepath, title=mapTitle)
+            #em.set_image(filepath)
+            #await self.bot.say(embed=em)
         #if maptype in self.warmap_links:
             ##await self.bot.say('JJW: I **did** find the maptype in warmap_links')
         #    await self.bot.say('**{}**\n{}'.format(*self.warmap_links[maptype]))
