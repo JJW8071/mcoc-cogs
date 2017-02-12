@@ -273,12 +273,13 @@ class MCOC:
     async def test(self):
         await self.bot.say('Test string with\n line break')
 
-    @commands.command()
-    async def warmap(self, maptype='ai'):
+    @commands.command(pass_context=True)
+    async def warmap(self, ctx, maptype='ai'):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
         Where <right> = [f, g, g+, h, i]'''
+        channel=maptype.channel
         mapTitle='**Alliance War Map '+maptype.upper()+'**'
         filepath='data/mcoc/warmaps/warmap_'
         maps={'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg','cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
