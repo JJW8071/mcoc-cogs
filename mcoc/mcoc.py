@@ -1,6 +1,7 @@
 import re
 from textwrap import wrap
 from math import log2
+#from tabulate import tabulate
 import inspect
 import urllib
 import requests
@@ -78,6 +79,87 @@ class MCOC:
                 #'http://simians.tk/SDFstreak')
             }
 
+    warmap_links = {
+            '': (
+                'AW Map',
+                'http://i.imgur.com/h1N8O4R.png'),
+            'eh': (
+                'AW Map E-H',
+                'http://i.imgur.com/ACw1wS3.png'),
+            'af': (
+                'AW Map A-F',
+                'http://i.imgur.com/p5F0L6I.png'),
+            'eg': (
+                'AW Map E-G',
+                'http://i.imgur.com/Gh9EK8N.png'),
+            'eg+': (
+                'AW Map E to G+',
+                'http://i.imgur.com/l9KxWHJ.png'),
+            'df': (
+                'AW Map D to F',
+                'http://i.imgur.com/zlGSwbj.png'),
+            'ei': (
+                'AW Map E to I',
+                'http://i.imgur.com/JUTXNpf.png'),
+            'ag+': (
+                'AW Map A to G+',
+                'http://i.imgur.com/KTZrCZN.png'),
+            'dg+': (
+                'AW Map D to G+',
+                'http://i.imgur.com/3kmzhIG.png'),
+            'ci': (
+                'AW Map C to I',
+                'http://i.imgur.com/BBFc0GS.png'),
+            'dh': (
+                'AW Map D to H',
+                'http://i.imgur.com/DlnHQ0F.png'),
+            'ag': (
+                'AW Map A to G',
+                'http://i.imgur.com/oQNRLTA.png'),
+            'cf': (
+                'AW Map C to F',
+                'http://i.imgur.com/IcVC0Y8.png'),
+            'ef': (
+                'AW Map E to F ',
+                'http://i.imgur.com/eiftXZK.png'),
+            'cg+': (
+                'AW Map C to G+',
+                'http://i.imgur.com/smlAKwu.png'),
+            'di': (
+                'AW Map D to I',
+                'http://i.imgur.com/WIMHR7t.png'),
+            'ch': (
+                'AW Map C to H',
+                'http://i.imgur.com/uBpUC0y.png'),
+            'bg': (
+                'AW Map B to G',
+                'http://i.imgur.com/hlMU7vw.png'),
+            'dg': (
+                'AW Map D to G',
+                'http://i.imgur.com/WI7SxWT.png'),
+            'ai': (
+                'AW Map A to I',
+                'http://i.imgur.com/h1N8O4R.png'),
+            'bg+': (
+                'AW Map B to G+',
+                'http://i.imgur.com/i2xh3eM.png'),
+            'bi': (
+                'AW Map B to I',
+                'http://i.imgur.com/Um06tbU.png'),
+            'cg': (
+                'AW Map C to G',
+                'http://i.imgur.com/wM0LSed.png'),
+            'bh': (
+                'AW Map B to H',
+                'http://i.imgur.com/gug9NyC.png'),
+            'af': (
+                'AW Map B to F',
+                'http://i.imgur.com/0NOI2lK.png'),
+            'ah': (
+                'AW Map A to H',
+                'http://i.imgur.com/6c96hBj.png')
+            }
+
     lessons = {
             'parry': (
                 'How to Parry Like a Boss',
@@ -104,6 +186,8 @@ class MCOC:
                 }
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
+        #print(MCOC.event.callback, MCOC.warmap.callback)
+        #print(isig(MCOC.event.callback), isig(MCOC.warmap.callback))
 
     @commands.command()
     async def mcocset(self, setting, value):
@@ -161,8 +245,9 @@ class MCOC:
     async def portrait(self, ctx, champ):
         '''View Champion Portraits'''
         channel=ctx.message.channel
-        #        await self.bot.send_file(channel,champ_portraits''champ'.png', content='**'champ'**')
-        await self.bot.send_file(channel,champ_portraits+champ+'.png', content='**'+champ+'**')
+        #await self.bot.send_file(channel,'{}{}.png'.format(champ_portraits,champ), content='**'+champ+'**')
+        champ = self._resolve_alias(champ)
+        await self.bot.send_file(channel, champ.get_portrait(), content='**'+champ.full_name+'**')
 
     @commands.command(pass_context=True)
     async def featured(self, ctx, champ):
@@ -181,7 +266,7 @@ class MCOC:
     @commands.command()
     async def tools(self):
         self.hook()
-        self.marvelynergy()
+        self.marvelsynergy()
         self.frogspawn()
         self.simulator()
         #list the useful links from lookup_links
@@ -191,22 +276,26 @@ class MCOC:
         await self.bot.say('Test string with\n line break')
 
     @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai'):
+    async def warmap(self, ctx, maptype='ai', link=False):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
-        Where <right> = [f, g, g+, h, i]
-        Example:
-        /warmap ai'''
-        channel=ctx.message.channel
-        mapTitle='**Alliance War Map '+maptype.upper()+'**'
-        filepath='data/mcoc/warmaps/warmap_'
-        maps={'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg','cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
+        Where <right> = [f, g, g+, h, i]'''
+        channel = ctx.message.channel
+        filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
+        maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
+                'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
-            filepath=filepath+maptype+'.png'
-            await self.bot.send_file(channel, filepath, content=mapTitle)
+            mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
+            if link:
+                filepath = self.warmap_links[maptype][1]
+                em = discord.Embed(title=mapTitle).set_image(url=filepath)
+                await self.bot.say(embed=em)
+            else:
+                filepath = filepath_png.format(maptype.lower())
+                await self.bot.send_file(channel, filepath, content=mapTitle)
         else :
-            raise KeyError('Summoner, I cannot find that map')
+            raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
     @commands.command()
@@ -238,10 +327,18 @@ class MCOC:
                 description=desc)
         await self.bot.say(embed=em)
 
+    #@commands.command()
+    #async def champs(self):
+        #'''Return a list of all the champs'''
+        #await self.bot.say('\n'.join(wrap(', '.join(self.champ_data.keys()))))
+
     @commands.command()
-    async def champs(self):
-        '''Return a list of all the champs'''
-        await self.bot.say('\n'.join(wrap(', '.join(self.champ_data.keys()))))
+    async def champ_aliases(self, champ):
+        champ = self._resolve_alias(champ)
+        title, desc = champ.get_aliases()
+        em = discord.Embed(color=discord.Color.green(), title=title, 
+                description=desc)
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def tst(self, *args):
@@ -283,7 +380,7 @@ class MCOC:
         response = urllib.request.urlopen(champ_data_json)
         champ_data = json.loads(response.read().decode('utf-8'))
         for champ in self.champs:
-            champ.update_frogspawn(champ_data[champ.frogspawnid])
+            champ.update_frogspawn(champ_data.get(champ.frogspawnid))
 
     def _resolve_alias(self, alias):
         for champ in self.champs:
@@ -331,6 +428,9 @@ class Champion:
             return round(base + log2(siglvl) * multi, 1)
         else:
             return '-'
+
+    def get_portrait(self):
+        return '{}{}.png'.format(champ_portraits, self.mcocui)
 
     @validate_attr('frogspawn')
     def get_bio(self):
@@ -384,6 +484,11 @@ class Champion:
                 self.full_name.capitalize()) 
         response = sig_str.format(*str_data) + self._tabulate(table_data, width=width)
         return (title, response)
+
+    def get_aliases(self):
+        title = 'Aliases for {}'.format(self.full_name.capitalize())
+        response = '```{}```'.format(', '.join(self.alias_set))
+        return title, response
 
     @staticmethod
     def _sig_header(str_data):
