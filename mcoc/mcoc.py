@@ -37,7 +37,7 @@ champ_data_json_local='data/mcoc/champ_data.json'
 champ_crossreference_json='https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_features='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
-
+champ_avatar='http://www.marvelsynergy.com/images/'
 frogspawn=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
 frogspawn_data=frogspawn.json()
 with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
@@ -304,6 +304,7 @@ class MCOC:
         champ = self._resolve_alias(champ)
         em = discord.Embed(color=discord.Color.blue(), title=champ.full_name, 
                 description=champ.get_bio())
+        em.add_field(name=Portrait,value=champ_avatar+champ.marvelsynergy+'.png')
         await self.bot.say(embed=em)
         
     @commands.command()
