@@ -304,7 +304,7 @@ class MCOC:
         champ = self._resolve_alias(champ)
         em = discord.Embed(color=discord.Color.blue(), title=champ.full_name, 
                 description=champ.get_bio())
-        em.set_image(url=champ_avatar+champ.marvelsynergy+'.png')
+        em.set_image(url=champ_avatar+champ.marvelsynergyid+'.png')
         await self.bot.say(embed=em)
         
     @commands.command()
