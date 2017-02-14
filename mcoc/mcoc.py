@@ -36,8 +36,10 @@ champ_data_json='http://coc.frogspawn.de/champions/js/champ_data.json'
 champ_data_json_local='data/mcoc/champ_data.json'
 champ_crossreference_json='https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json'
 champ_portraits='data/mcoc/portraits/portrait_'
-champ_features='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
+champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
+lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
+
 frogspawn=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
 frogspawn_data=frogspawn.json()
 with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
@@ -228,11 +230,16 @@ class MCOC:
 
     @commands.command()
     async def howto(self, choice=None):
-        if choice is None:
-            sometxt = 'Choose\n'
-            await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
-        else:
+        if choice in self.lessons:
+            #title, url, desc = self.lessons[choice]
+            #em = discord.Embed(title=title, description=desc, url=url)
+            #await self.bot.say(embed=em)
             await self.bot.say('**{}**\n{}\n{}'.format(*self.lessons[choice]))
+        else:
+            sometxt = 'Choose'
+            em = discord.Embed(title=sometxt, description='\n'.join(self.lessons.keys()))
+            await self.bot.say(embed=em)
+            #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
 
 # This is what I'm using to test image uploading, vs link reference
    # @commands.command(pass_context=True)
@@ -247,21 +254,23 @@ class MCOC:
         channel=ctx.message.channel
         #await self.bot.send_file(channel,'{}{}.png'.format(champ_portraits,champ), content='**'+champ+'**')
         champ = self._resolve_alias(champ)
+        #em = discord.Embed(title=champ.full_name).set_image(url=champ.get_portrait())
+        #await self.bot.say(embed=em)
         await self.bot.send_file(channel, champ.get_portrait(), content='**'+champ.full_name+'**')
 
     @commands.command(pass_context=True)
     async def featured(self, ctx, champ):
         '''View Champion Feature Images'''
         channel=ctx.message.channel
-        #        await self.bot.send_file(channel,champ_portraits''champ'.png', content='**'champ'**')
-        await self.bot.send_file(channel,champ_features+champ+'.png', content='**'+champ+'**')
+        champ = self._resolve_alias(champ)
+        await self.bot.send_file(channel, champ.get_featured(), content='**'+champ.full_name+'**')
+        #await self.bot.send_file(channel,champ_features+champ+'.png', content='**'+champ+'**')
 
     @commands.command(pass_context=True)
     async def lolmap(self, ctx):
         '''Labrynth of Legends Map'''
         channel=ctx.message.channel
-        filepath='data/mcoc/maps/lolmap.png'
-        await self.bot.send_file(channel, filepath, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
+        await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
 
     @commands.command()
     async def tools(self):
@@ -304,7 +313,8 @@ class MCOC:
         champ = self._resolve_alias(champ)
         em = discord.Embed(color=discord.Color.blue(), title=champ.full_name, 
                 description=champ.get_bio())
-        em.set_image(url=champ_avatar+champ.marvelsynergy+'.png')
+        em.set_thumbnail(url=champ.get_avatar())
+        #em.set_thumbnail(url=champ.get_portrait())
         await self.bot.say(embed=em)
         
     @commands.command()
@@ -317,6 +327,7 @@ class MCOC:
         title, desc = champ.get_sig(**settings)
         em = discord.Embed(color=discord.Color.red(), title=title, 
                 description=desc)
+        em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     @commands.command()
@@ -430,8 +441,14 @@ class Champion:
         else:
             return '-'
 
+    def get_avatar(self):
+        return '{}{}.png'.format(champ_avatar, self.marvelsynergyid)
+
     def get_portrait(self):
         return '{}{}.png'.format(champ_portraits, self.mcocui)
+
+    def get_featured(self):
+        return '{}{}.png'.format(champ_featured, self.mcocui)
 
     @validate_attr('frogspawn')
     def get_bio(self):
