@@ -302,9 +302,10 @@ class MCOC:
     async def bio(self, champ):
         '''Retrieve the Bio of a Champion'''
         champ = self._resolve_alias(champ)
-        em = discord.Embed(color=discord.Color.blue(), title=champ.full_name, 
-                description=champ.get_bio())
-        em.set_image(url=champ_avatar+champ.marvelsynergyid+'.png',width=128)
+        em = discord.Embed(color=discord.Color.blue(), title=champ.full_name)
+        em.add_field(image=champ_avatar+champ.marvelsynergyid+'.png',width=129,height=128)
+        emd.add_field(description=champ.get_bio()
+#        em.set_image(url=champ_avatar+champ.marvelsynergyid+'.png')
         await self.bot.say(embed=em)
         
     @commands.command()
