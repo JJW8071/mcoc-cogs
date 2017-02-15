@@ -442,7 +442,7 @@ class Champion:
             return '-'
 
     def get_avatar(self):
-        return '{}{}.png'.format(champ_avatar, self.marvelsynergyid)
+        return '{}{}.png'.format(champ_avatar, self.marvelthumbnail)
 
     def get_portrait(self):
         return '{}{}.png'.format(champ_portraits, self.mcocui)
