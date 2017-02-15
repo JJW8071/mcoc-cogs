@@ -41,6 +41,9 @@ champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
 
+spotlight_data=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json').json()
+with open('data/mcoc/frogspawn_data.json','w') as outfile:
+    json.dump(spotlight_data,outfile)
 frogspawn=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
 frogspawn_data=frogspawn.json()
 with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
