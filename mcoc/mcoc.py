@@ -229,6 +229,12 @@ class MCOC:
     async def streak(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['streak']))
 
+    @commands.command(pass_context=True)
+    async def lolmap(self, ctx):
+        '''Labrynth of Legends Map'''
+        channel=ctx.message.channel
+        await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
+
     @commands.command()
     async def howto(self, choice=None):
         if choice in self.lessons:
@@ -253,25 +259,17 @@ class MCOC:
     async def portrait(self, ctx, champ):
         '''View Champion Portraits'''
         channel=ctx.message.channel
-        #await self.bot.send_file(channel,'{}{}.png'.format(champ_portraits,champ), content='**'+champ+'**')
         champ = self._resolve_alias(champ)
         #em = discord.Embed(title=champ.full_name).set_image(url=champ.get_portrait())
         #await self.bot.say(embed=em)
-        await self.bot.send_file(channel, champ.get_portrait(), content='**'+champ.full_name+'**')
+        await self.bot.send_file(channel, champ.get_portrait(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
     async def featured(self, ctx, champ):
         '''View Champion Feature Images'''
         channel=ctx.message.channel
         champ = self._resolve_alias(champ)
-        await self.bot.send_file(channel, champ.get_featured(), content='**'+champ.full_name+'**')
-        #await self.bot.send_file(channel,champ_features+champ+'.png', content='**'+champ+'**')
-
-    @commands.command(pass_context=True)
-    async def lolmap(self, ctx):
-        '''Labrynth of Legends Map'''
-        channel=ctx.message.channel
-        await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
+        await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
 
     @commands.command()
     async def tools(self):
@@ -326,12 +324,9 @@ class MCOC:
         if siglvl is not None:
             settings['siglvl'] = int(siglvl)
         title, desc, siglvl = champ.get_sig(**settings)
-        #em = discord.Embed(color=discord.Color.red(), title=title, 
         if dbg == 0:
-            em = discord.Embed(color=discord.Color.red(), 
-                title='Signature Ability of {} at Level {}'.format(
-                    champ.full_name, siglvl),
-                description=desc)
+            em = discord.Embed(color=discord.Color.red(), title=champ.full_name)
+            em.add_field(name='Signature Level '+str(siglvl),  value=desc)
         elif dbg == 1:
             em = discord.Embed(color=discord.Color.red(), title='Signature Ability')
             em.add_field(name='@ Level', value=siglvl)
@@ -371,12 +366,6 @@ class MCOC:
         em = discord.Embed(color=discord.Color.green(), title=title, 
                 description=desc)
         await self.bot.say(embed=em)
-
-    @commands.command()
-    async def tst(self, *args):
-        '''Return a list of all the champs'''
-        print('\n'.join(args))
-        await self.bot.say("I'm awesome!")
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
@@ -445,6 +434,8 @@ class Champion:
         for key, value in kwargs.items():
             setattr(self, key, value)
         self.full_name = self.champ
+        self.bold_name = '**' + ' '.join(
+            [word.capitalize() for word in self.full_name.split(' ')]) + '**'
 
     def update_frogspawn(self, data):
         self.frogspawn_data = data
@@ -533,7 +524,7 @@ class Champion:
     @staticmethod
     def _sig_header(str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
-        return hex_re.sub(r'**\1**', str_data)
+        return hex_re.sub(r'**\*\1\***', str_data)
 
     @staticmethod
     def bound_lvl(siglvl, max_lvl=99):
