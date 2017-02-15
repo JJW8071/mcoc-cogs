@@ -347,9 +347,9 @@ class MCOC:
             em = discord.Embed(color=discord.Color.dark_magenta(), title=title, 
                     description=desc)
         else if dbg == 1:
-            em = discord.Embed(color=discord.Color.dark_magenta(),title=champ.full_name)
-            em.add_field(name='Signature Ability Array',value='Signature Ability Array')
-            em.add_field(name='Description',description=desc)
+            em = discord.Embed(color=discord.Color.dark_magenta(), title=champ.full_name)
+            em.add_field(name='Signature Ability Array', value='Signature Ability Array')
+            em.add_field(name='Description', value=desc)
         else:
             em = discord.Embed(color=discord.Color.dark_magenta(), title=title)
             em.add_field(name='__SigLvl__', value='1\n20\n40')
