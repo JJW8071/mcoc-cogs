@@ -339,7 +339,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def sigarray(self, champ, dbg=0, *args):
+    async def sigarray(self, champ, dbg=1, *args):
         '''Retrieve the Signature Ability of a Champion at multiple levels'''
         champ = self._resolve_alias(champ)
         title, desc = champ.get_sigarray(**self.settings)
