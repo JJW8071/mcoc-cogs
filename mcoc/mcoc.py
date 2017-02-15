@@ -524,7 +524,7 @@ class Champion:
     @staticmethod
     def _sig_header(str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
-        return hex_re.sub(r'**\[ \1 \]**', str_data)
+        return hex_re.sub(r'`` \1 ``', str_data)
 
     @staticmethod
     def bound_lvl(siglvl, max_lvl=99):
