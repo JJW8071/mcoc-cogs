@@ -35,6 +35,7 @@ from .utils.dataIO import dataIO
 champ_data_json='http://coc.frogspawn.de/champions/js/champ_data.json'
 champ_data_json_local='data/mcoc/champ_data.json'
 champ_crossreference_json='https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json'
+champ_crossreference_json_debug='https://spreadsheets.google.com/feeds/list/112Q53wW0JX2Xt8BLgQlnpieiz8f9mR0wbfqJdHubd64/1/public/values?alt=json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
@@ -318,25 +319,44 @@ class MCOC:
         await self.bot.say(embed=em)
         
     @commands.command()
-    async def sig(self, champ, siglvl=None, *args):
+    async def sig(self, champ, siglvl=None, dbg=0, *args):
         '''Retrieve the Signature Ability of a Champion'''
         champ = self._resolve_alias(champ)
         settings = self.settings.copy()
         if siglvl is not None:
             settings['siglvl'] = int(siglvl)
-        title, desc = champ.get_sig(**settings)
-        em = discord.Embed(color=discord.Color.red(), title=title, 
+        title, desc, siglvl = champ.get_sig(**settings)
+        #em = discord.Embed(color=discord.Color.red(), title=title, 
+        if dbg == 0:
+            em = discord.Embed(color=discord.Color.red(), 
+                title='Signature Ability of {} at Level {}'.format(
+                    champ.full_name, siglvl),
                 description=desc)
+        elif dbg == 1:
+            em = discord.Embed(color=discord.Color.red(), title='Signature Ability')
+            em.add_field(name='@ Level', value=siglvl)
+            em.add_field(name = champ.full_name, value=desc)
+        else:
+            em = discord.Embed(color=discord.Color.red(), 
+                title=champ.full_name + ' Signature Ability')
+            em.add_field(name='Level '+str(siglvl),  value=desc)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def sigarray(self, champ, *args):
+    async def sigarray(self, champ, dbg=0, *args):
         '''Retrieve the Signature Ability of a Champion at multiple levels'''
         champ = self._resolve_alias(champ)
         title, desc = champ.get_sigarray(**self.settings)
-        em = discord.Embed(color=discord.Color.dark_magenta(), title=title, 
-                description=desc)
+        if dbg == 0:
+            em = discord.Embed(color=discord.Color.dark_magenta(), title=title, 
+                    description=desc)
+        else:
+            em = discord.Embed(color=discord.Color.dark_magenta(), title=title)
+            em.add_field(name='__SigLvl__', value='1\n20\n40')
+            em.add_field(name='__X__', value='1.0\n1.9\n2.1', inline=True)
+
+        em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     #@commands.command()
@@ -361,6 +381,7 @@ class MCOC:
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
         response = urllib.request.urlopen(champ_crossreference_json)
+        #response = urllib.request.urlopen(champ_crossreference_json_debug)
         raw_data = json.loads(response.read().decode('utf-8'))
         champs = []
         all_aliases = set()
@@ -392,7 +413,8 @@ class MCOC:
         response = urllib.request.urlopen(champ_data_json)
         champ_data = json.loads(response.read().decode('utf-8'))
         for champ in self.champs:
-            champ.update_frogspawn(champ_data.get(champ.frogspawnid))
+            if getattr(champ, 'frogspawnid', None):
+                champ.update_frogspawn(champ_data.get(champ.frogspawnid))
 
     def _resolve_alias(self, alias):
         for champ in self.champs:
@@ -406,7 +428,7 @@ def validate_attr(*expected_args):
             for attr in expected_args:
                 if getattr(self, attr + '_data', None) is None:
                     raise AttributeError("{} for Champion ".format(attr.capitalize())
-                        + "{} has not been initialized.".format(self.champ))
+                        + "'{}' has not been initialized.".format(self.champ))
             return func(self, *args, **kwargs)
         return wrapper
     return decorator
@@ -466,8 +488,8 @@ class Champion:
                 str_data.append(self.getSigValue(siglvl, i))
             else:
                 str_data.append(self.getSigValue(siglvl))
-        return ('Signature Ability for {} at level={}:'.format(
-                self.full_name.capitalize(), siglvl), sig_str.format(*str_data))
+        return ('Signature Ability for {}'.format(
+                self.full_name.capitalize()), sig_str.format(*str_data), siglvl)
 
     @validate_attr('frogspawn')
     def get_sigarray(self, sigstep=20, width=10, inc_zero=False, **kwargs):
