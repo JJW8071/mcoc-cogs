@@ -50,6 +50,13 @@ frogspawn_data=frogspawn_json.json()
 with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
     json.dump(frogspawn_data,outfile)
 
+class_color_codes = {
+        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
+        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200), 
+        'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
+        'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
+        }
+
 def alias_resolve(f):
     @wraps(f)
     def wrapper(self, *args, **kwargs):
@@ -314,7 +321,7 @@ class MCOC:
     async def bio(self, champ):
         '''Retrieve the Bio of a Champion'''
         champ = self._resolve_alias(champ)
-        em = discord.Embed(color=discord.Color.blue(), title=champ.full_name, 
+        em = discord.Embed(color=champ.class_color, title=champ.full_name, 
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
         #em.set_thumbnail(url=champ.get_portrait())
@@ -329,14 +336,14 @@ class MCOC:
             settings['siglvl'] = int(siglvl)
         title, desc, siglvl = champ.get_sig(**settings)
         if dbg == 0:
-            em = discord.Embed(color=discord.Color.red(), title=champ.full_name)
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
             em.add_field(name='Signature Level '+str(siglvl),  value=desc)
         elif dbg == 1:
-            em = discord.Embed(color=discord.Color.red(), title='Signature Ability')
+            em = discord.Embed(color=champ.class_color, title='Signature Ability')
             em.add_field(name='@ Level', value=siglvl)
             em.add_field(name = champ.full_name, value=desc)
         else:
-            em = discord.Embed(color=discord.Color.red(), 
+            em = discord.Embed(color=champ.class_color, 
                 title=champ.full_name + ' Signature Ability')
             em.add_field(name='Level '+str(siglvl),  value=desc)
         em.set_thumbnail(url=champ.get_avatar())
@@ -348,13 +355,13 @@ class MCOC:
         champ = self._resolve_alias(champ)
         title, desc = champ.get_sigarray(**self.settings)
         if dbg == 0:
-            em = discord.Embed(color=discord.Color.dark_magenta(), title=title, 
+            em = discord.Embed(color=champ.class_color, title=title, 
                     description=desc)
         elif dbg == 1:
-            em = discord.Embed(color=discord.Color.dark_magenta(), title=champ.full_name)
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
             em.add_field(name='Signature Ability Array', value=desc)
         else:
-            em = discord.Embed(color=discord.Color.dark_magenta(), title=title)
+            em = discord.Embed(color=champ.class_color, title=title)
             em.add_field(name='__SigLvl__', value='1\n20\n40')
             em.add_field(name='__X__', value='1.0\n1.9\n2.1', inline=True)
 
@@ -369,7 +376,7 @@ class MCOC:
     @commands.command()
     async def champ_aliases(self, *args):
         champs_matched = []
-        em = discord.Embed(color=discord.Color.green(), title='Champion Aliases') 
+        em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases') 
         for arg in args:
             if (arg.startswith("'") and arg.endswith("'")) or (arg.startswith('"') and arg.endswith('"')) :
                 champs = self._resolve_mult_aliases(arg[1:-1])
@@ -406,7 +413,7 @@ class MCOC:
                 k, v = cells[i].split(': ')
                 key_values[k] = v
                 if i < id_index:
-                    if i is not 'n/a':
+                    if v != 'n/a':
                         alias_set.add(v.lower())
             if all_aliases.isdisjoint(alias_set):
                 all_aliases.union(alias_set)
@@ -460,10 +467,13 @@ class Champion:
         if debug:
             print(kwargs)
         for key, value in kwargs.items():
+            if value == 'n/a':
+                value = None
             setattr(self, key, value)
         self.full_name = self.champ
         self.bold_name = '**' + ' '.join(
             [word.capitalize() for word in self.full_name.split(' ')]) + '**'
+        self.class_color = class_color_codes[getattr(self, 'class', 'default')]
 
     def update_frogspawn(self, data):
         self.frogspawn_data = data
