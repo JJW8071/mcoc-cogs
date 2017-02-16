@@ -84,6 +84,9 @@ class MCOC:
             'frogspawn': (
                 'Champion Signature Abilities',
                 '<http://coc.frogspawn.de/champions>'),
+            'alsciende':(
+                'Alsciende Mastery Tool',
+                '<https://alsciende.github.io/masteries/v10.0.1/#>'),
             'simulator': (
                 'Mastery Simulator',
                 '<http://simians.tk/msimSDF>'),
@@ -236,6 +239,14 @@ class MCOC:
     async def simulator(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['simulator']))
 
+    @commands.command(help=lookup_links['alsciende'][0])       
+    async def alsciende(self):
+        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
+
+    @commands.command(help=lookup_links['alsciende'][0])       
+    async def mrig(self):
+        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
+
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['streak']))
@@ -281,18 +292,6 @@ class MCOC:
         channel=ctx.message.channel
         champ = self._resolve_alias(champ)
         await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
-
-    @commands.command()
-    async def tools(self):
-        self.hook()
-        self.marvelsynergy()
-        self.frogspawn()
-        self.simulator()
-        #list the useful links from lookup_links
-
-    @commands.command()
-    async def test(self):
-        await self.bot.say('Test string with\n line break')
 
     @commands.command(pass_context=True)
     async def warmap(self, ctx, maptype='ai', link=False):
@@ -560,7 +559,7 @@ class Champion:
     @staticmethod
     def _sig_header(str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
-        return hex_re.sub(r'**\[ \1 \]**', str_data)
+        return hex_re.sub(r'**[ \1 ]**', str_data)
 
     @staticmethod
     def bound_lvl(siglvl, max_lvl=99):
