@@ -367,11 +367,21 @@ class MCOC:
         #await self.bot.say('\n'.join(wrap(', '.join(self.champ_data.keys()))))
 
     @commands.command()
-    async def champ_aliases(self, champ):
-        champ = self._resolve_alias(champ)
-        title, desc = champ.get_aliases()
-        em = discord.Embed(color=discord.Color.green(), title=title, 
-                description=desc)
+    async def champ_aliases(self, *args):
+        champs_matched = []
+        em = discord.Embed(color=discord.Color.green(), title='Champion Aliases') 
+        for arg in args:
+            if (arg.startswith("'") and arg.endswith("'")) or (arg.startswith('"') and arg.endswith('"')) :
+                champs = self._resolve_mult_aliases(arg[1:-1])
+            elif '*' in arg:
+                champs = self._resolve_mult_aliases('.*'.join(arg.split('*')))
+            else:
+                champs = (self._resolve_alias(arg),)
+            for champ in champs:
+                if champ not in champs_matched:
+                    print(champ.alias_set)
+                    em.add_field(name=champ.full_name, value=champ.get_aliases())
+                    champs_matched.append(champ)
         await self.bot.say(embed=em)
 
     def _prepare_aliases(self):
@@ -396,7 +406,8 @@ class MCOC:
                 k, v = cells[i].split(': ')
                 key_values[k] = v
                 if i < id_index:
-                    alias_set.add(v.lower())
+                    if i is not 'n/a':
+                        alias_set.add(v.lower())
             if all_aliases.isdisjoint(alias_set):
                 all_aliases.union(alias_set)
             else:
@@ -417,6 +428,16 @@ class MCOC:
             if champ.re_alias.fullmatch(alias):
                 return champ
         raise KeyError("Champion for alias '{}' not found".format(alias))
+
+    def _resolve_mult_aliases(self, match_str):
+        re_champ = re.compile(match_str)
+        champs = []
+        for champ in self.champs:
+            for alias in champ.alias_set:
+                if re_champ.fullmatch(alias):
+                    champs.append(champ)
+                    break
+        return champs
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -524,9 +545,7 @@ class Champion:
         return (title, response)
 
     def get_aliases(self):
-        title = 'Aliases for {}'.format(self.full_name.capitalize())
-        response = '```{}```'.format(', '.join(self.alias_set))
-        return title, response
+        return '```{}```'.format(', '.join(self.alias_set))
 
     @staticmethod
     def _sig_header(str_data):
