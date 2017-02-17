@@ -9,7 +9,7 @@ class Calculator:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group(pass_context=True, name='calculator')
+    @commands.group(pass_context=True, name='calc')
     async def _calc(self, context, *, m):
         m = ''.join(m)
         math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
