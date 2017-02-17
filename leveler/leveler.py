@@ -273,6 +273,7 @@ class Leveler:
         # creates user if doesn't exist
         await self._create_user(user, server)
 
+## Delta can we change this to an EMBED with clickable links in INFO -- strip out the ```
         msg = "```xl\n"
         msg += "Name: {}\n".format(user.name)
         msg += "Title: {}\n".format(userinfo["title"])
@@ -726,6 +727,7 @@ class Leveler:
 
         fileIO('data/leveler/settings.json', "save", self.settings)
 
+    ## Don't think we need this
     async def _process_purchase(self, ctx):
         user = ctx.message.author
         server = ctx.message.server
@@ -1332,7 +1334,7 @@ class Leveler:
         label_align = 105
         _write_unicode(u"Rank:", label_align, 165, general_info_fnt, general_info_u_fnt, light_color)
         draw.text((label_align, 180), "Exp:",  font=general_info_fnt, fill=light_color) # Exp
-        draw.text((label_align, 195), "Credits:",  font=general_info_fnt, fill=light_color) # Credits
+        #draw.text((label_align, 195), "Credits:",  font=general_info_fnt, fill=light_color) # Credits
 
         # local stats
         num_local_align = 180
@@ -1550,7 +1552,7 @@ class Leveler:
                     else:
                         draw.rectangle([(left_pos,vert_pos + i*17), (right_pos, vert_pos + 15 + i*17)], fill = bg_color, outline = border_color) # bg
                     bar_fnt = ImageFont.truetype(font_bold_file, 14) # a slightly bigger font was requested
-                    draw.text((self._center(left_pos,right_pos, text, bar_fnt), vert_pos + 2 + i*17), text,  font=bar_fnt, fill = text_color) # Credits
+                   # draw.text((self._center(left_pos,right_pos, text, bar_fnt), vert_pos + 2 + i*17), text,  font=bar_fnt, fill = text_color) # Credits
                 vert_pos += 2 # spacing
                 i += 1
 
@@ -2048,26 +2050,13 @@ def check_files():
 
     bgs = {
             "profile": {
-                "alice": "http://puu.sh/qAoLx/7335f697fb.png",
-                "bluestairs": "http://puu.sh/qAqpi/5e64aa6804.png",
-                "lamp": "http://puu.sh/qJJIb/05e4e02edd.jpg",
-                "coastline": "http://puu.sh/qJJVl/f4bf98d408.jpg",
-                "redblack": "http://puu.sh/qI0lQ/3a5e04ff05.jpg",
-                "default": "http://puu.sh/qNrD6/ee0ef9462d.jpg",
-                "iceberg": "http://puu.sh/qAr6p/1d4e031a9e.png",
-                "miraiglasses": "http://puu.sh/qArax/ce8a8bf12e.png",
-                "miraikuriyama": "http://puu.sh/qArbY/59b883fe71.png",
-                "mountaindawn": "http://puu.sh/qJJLa/568b9a318b.jpg",
-                "waterlilies": "http://puu.sh/qJJSL/43b0f852c0.jpg"
+                "default": "https://cdn.discordapp.com/attachments/204677306223034368/281890461260447746/profilebg.jpg",
             },
             "rank": {
-                "aurora" : "http://puu.sh/qJJv4/82aeb6de54.jpg",
-                "default" : "http://puu.sh/qJJgx/abeda18e15.jpg",
-                "nebula": "http://puu.sh/qJJqh/4a530e48ef.jpg",
-                "mountain" : "http://puu.sh/qJvR4/52a5797b4f.jpg"
+                "default" : "https://cdn.discordapp.com/attachments/204677306223034368/281890482978684930/levelbg.jpg",
             },
             "levelup": {
-                "default" : "http://puu.sh/qJJjz/27f499f989.jpg",
+                "default" : "https://cdn.discordapp.com/attachments/204677306223034368/281890482978684930/levelbg.jpg",
             },
         }
 
