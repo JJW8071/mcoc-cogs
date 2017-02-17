@@ -727,7 +727,6 @@ class Leveler:
 
         fileIO('data/leveler/settings.json', "save", self.settings)
 
-    ## Don't think we need this
     async def _process_purchase(self, ctx):
         user = ctx.message.author
         server = ctx.message.server
@@ -1334,7 +1333,7 @@ class Leveler:
         label_align = 105
         _write_unicode(u"Rank:", label_align, 165, general_info_fnt, general_info_u_fnt, light_color)
         draw.text((label_align, 180), "Exp:",  font=general_info_fnt, fill=light_color) # Exp
-        #draw.text((label_align, 195), "Credits:",  font=general_info_fnt, fill=light_color) # Credits
+        draw.text((label_align, 195), "Credits:",  font=general_info_fnt, fill=light_color) # Credits
 
         # local stats
         num_local_align = 180
@@ -1552,7 +1551,7 @@ class Leveler:
                     else:
                         draw.rectangle([(left_pos,vert_pos + i*17), (right_pos, vert_pos + 15 + i*17)], fill = bg_color, outline = border_color) # bg
                     bar_fnt = ImageFont.truetype(font_bold_file, 14) # a slightly bigger font was requested
-                   # draw.text((self._center(left_pos,right_pos, text, bar_fnt), vert_pos + 2 + i*17), text,  font=bar_fnt, fill = text_color) # Credits
+                    draw.text((self._center(left_pos,right_pos, text, bar_fnt), vert_pos + 2 + i*17), text,  font=bar_fnt, fill = text_color) # Credits
                 vert_pos += 2 # spacing
                 i += 1
 
