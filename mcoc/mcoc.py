@@ -1,11 +1,13 @@
 import re
+from datetime import datetime
 from textwrap import wrap
 from math import log2
-#from tabulate import tabulate
+import os
 import inspect
 import urllib
 import requests
 import json
+import asyncio
 from functools import wraps
 import discord
 from discord.ext import commands
@@ -32,24 +34,31 @@ from .utils.dataIO import dataIO
 ## Howto <fight|use> <Champion>
 ## About <Champion>
 
-champ_data_json='http://coc.frogspawn.de/champions/js/champ_data.json'
-champ_data_json_local='data/mcoc/champ_data.json'
-champ_crossreference_json='https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json'
+json_data = {
+    'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
+               'local':'data/mcoc/frogspawn_data.json'},
+    'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
+                'local': 'data/mcoc/spotlight_data.json'},
+    'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
+                'local': 'data/mcoc/crossreference.json'},
+    }
+
+prestige_data = 'data/mcoc/prestige_data.json'
 champ_crossreference_json_debug='https://spreadsheets.google.com/feeds/list/112Q53wW0JX2Xt8BLgQlnpieiz8f9mR0wbfqJdHubd64/1/public/values?alt=json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
 
-spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
-spotlight_data=spotlight_json.json()
-with open('data/mcoc/spotlight_data.json','w') as outfile:
-    json.dump(spotlight_data,outfile)
-
-frogspawn_json=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
-frogspawn_data=frogspawn_json.json()
-with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
-    json.dump(frogspawn_data,outfile)
+#spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
+#spotlight_data=spotlight_json.json()
+#with open('data/mcoc/spotlight_data.json','w') as outfile:
+#    json.dump(spotlight_data,outfile)
+#
+#frogspawn_json=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
+#frogspawn_data=frogspawn_json.json()
+#with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
+#    json.dump(frogspawn_data,outfile)
 
 class_color_codes = {
         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
@@ -57,6 +66,7 @@ class_color_codes = {
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
+
 
 def alias_resolve(f):
     @wraps(f)
@@ -195,17 +205,20 @@ class MCOC:
 
     def __init__(self, bot):
         self.bot = bot
-        isig = inspect.signature
-        #self.champ_data = dataIO.load_json('data/mcoc/frogspawn_data.json')
-        self.settings = {'siglvl': 1,
+
+        self.settings = {
+                'siglvl': 1,
                 'sigstep': 20,
                 'table_width': 10,
                 'sig_inc_zero': False,
                 }
+
+        for val in json_data.values():
+            self.cache_json_file(**val)
+
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
-        #print(MCOC.event.callback, MCOC.warmap.callback)
-        #print(isig(MCOC.event.callback), isig(MCOC.warmap.callback))
+        self._prepare_prestige_data()
 
     @commands.command()
     async def mcocset(self, setting, value):
@@ -270,6 +283,36 @@ class MCOC:
             em = discord.Embed(title=sometxt, description='\n'.join(self.lessons.keys()))
             await self.bot.say(embed=em)
             #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
+
+    def cache_json_file(self, remote=None, local=None):
+        resp = requests.get(remote)
+        copy_to_cache = self.check_local_remote_timestamp(resp, local)
+        if copy_to_cache:
+            #await self.bot.say('Caching remote contents to local file: ' + local)
+            print('Caching remote contents to local file: ' + local)
+            fp = open(local, 'wb')
+            for chunk in resp.iter_content():
+                fp.write(chunk)
+        else:
+            #await self.bot.say('Local file up-to-date: ' + local)
+            print('Local file up-to-date: ' + local)
+        #self.report_cache_status(local, copy_to_cache)
+
+    #async def report_cache_status(self, local, caching_statuIs):
+        #if caching_status:            
+            #await self.bot.say('Caching remote contents to local file: ' + local)
+        #else:
+            #await self.bot.say('Local file up-to-date: ' + local)
+
+    def check_local_remote_timestamp(self, resp, local):
+        strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
+        if os.path.exists(local):
+            remote_dt = datetime.strptime(resp.headers['Last-Modified'], strf_remote)
+            local_dt = datetime.fromtimestamp(os.path.getmtime(local))
+            copy_to_cache = remote_dt > local_dt
+        else:
+            copy_to_cache = True
+        return copy_to_cache
 
 # This is what I'm using to test image uploading, vs link reference
    # @commands.command(pass_context=True)
@@ -368,10 +411,14 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    #@commands.command()
-    #async def champs(self):
-        #'''Return a list of all the champs'''
-        #await self.bot.say('\n'.join(wrap(', '.join(self.champ_data.keys()))))
+    @commands.command()
+    async def prestige(self, champ):    
+        champ = self._resolve_alias(champ)
+        title, desc = champ.get_prestige(**self.settings)
+        em = discord.Embed(color=champ.class_color, title=title, 
+                description=desc)
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def champ_aliases(self, *args):
@@ -386,16 +433,18 @@ class MCOC:
                 champs = (self._resolve_alias(arg),)
             for champ in champs:
                 if champ not in champs_matched:
-                    print(champ.alias_set)
+                    #print(champ.alias_set)
                     em.add_field(name=champ.full_name, value=champ.get_aliases())
                     champs_matched.append(champ)
         await self.bot.say(embed=em)
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
-        response = urllib.request.urlopen(champ_crossreference_json)
+        #response = urllib.request.urlopen(json_data['crossreference']['local'])
         #response = urllib.request.urlopen(champ_crossreference_json_debug)
-        raw_data = json.loads(response.read().decode('utf-8'))
+        #raw_data = json.loads(response.read().decode('utf-8'))
+        fp = open(json_data['crossreference']['local'], encoding='utf-8')
+        raw_data = json.load(fp)
         champs = []
         all_aliases = set()
         id_index = False
@@ -420,12 +469,16 @@ class MCOC:
             else:
                 raise KeyError("There are aliases that conflict with previous aliases."
                         + "  First occurance with champ {}.".format(key_values['champ']))
-            champs.append(Champion(alias_set, **key_values, debug=len(champs)==0))
+            #champs.append(Champion(alias_set, **key_values, debug=len(champs)==0))
+            champs.append(Champion(alias_set, **key_values))
         self.champs = champs
 
     def _prepare_frogspawn_champ_data(self):
-        response = urllib.request.urlopen(champ_data_json)
-        champ_data = json.loads(response.read().decode('utf-8'))
+        #response = urllib.request.urlopen(champ_data_json)
+        #response = urllib.request.urlopen(json_data['frogspawn']['remote'])
+        #champ_data = json.loads(response.read().decode('utf-8'))
+        fp = open(json_data['frogspawn']['local'], encoding='utf-8')
+        champ_data = json.load(fp)
         for champ in self.champs:
             if getattr(champ, 'frogspawnid', None):
                 champ.update_frogspawn(champ_data.get(champ.frogspawnid))
@@ -445,6 +498,44 @@ class MCOC:
                     champs.append(champ)
                     break
         return champs
+
+    def _prepare_prestige_data(self):
+        fp = open(json_data['spotlight']['local'], encoding='utf-8')
+        raw_data = json.load(fp)
+        champs = {}
+        for row in raw_data['feed']['entry']:
+            #cells = row['content']['$t'].split(', ')
+            raw_dict = dict([kv.split(': ') for kv in re.split(', (?=\w+:)', row['content']['$t'])])
+            if 'champ' not in raw_dict:
+                continue
+            champ_name = raw_dict['champ']
+            if champ_name not in champs:
+                champs[champ_name] = {}
+                champs[champ_name][4] = [None] * 5
+                champs[champ_name][5] = [None] * 4
+            if int(raw_dict['star']) == 5:
+                sig_len = 200
+            else:
+                sig_len = 100
+            key_values = {}
+            sig = [0] * sig_len
+            for k, v in raw_dict.items():
+                if k.startswith('sig'):
+                    try:
+                        if (int(k[3:]) < sig_len) and v != '#N/A':
+                            sig[int(k[3:])] = int(v)
+                    except:
+                        print(champ_name, k, v, len(sig))
+                        raise
+                #else:
+                    #key_values[k] = v
+            champs[champ_name][int(raw_dict['star'])][int(raw_dict['rank'])-1] = sig
+        dumpfp = open(prestige_data, 'w')
+        json.dump(champs, dumpfp)
+        for champ in self.champs:
+            if champ.full_name in champs:
+                champ.prestige_data = champs[champ.full_name]
+
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -550,9 +641,26 @@ class Champion:
                 #  but we need to make sure the length is correct for format
                 str_data.append('dummy')
         title = 'Signature Ability for {} at multiple Sig Levels:'.format(
-                self.full_name.capitalize()) 
+                self.bold_name)
         response = sig_str.format(*str_data) + self._tabulate(table_data, width=width)
         return (title, response)
+
+    @validate_attr('prestige')
+    def get_prestige(self, rank=None, sig=None, star=None, sigstep=20, width=10, **kwargs):
+        sigstep_arr = self.bound_lvl(list(range(0, 101, sigstep)))
+        table_data = [[''] + sigstep_arr]
+        for rank in (4,5):
+            row = ['rank{}'.format(rank)]
+            for sig in sigstep_arr:
+                try:
+                    row.append(self.prestige_data[4][rank-1][sig])
+                except:
+                    print(rank, sig, self.prestige_data)
+                    raise
+            table_data.append(row)
+        title = 'Debug Prestige for {}'.format(self.bold_name)
+        return (title, self._tabulate(table_data, width=width))
+
 
     def get_aliases(self):
         return '```{}```'.format(', '.join(self.alias_set))
