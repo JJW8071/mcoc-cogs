@@ -41,19 +41,15 @@ champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
 
-await self.bot.say('I am retrieving Spotlight Data')
 spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
 spotlight_data=spotlight_json.json()
 with open('data/mcoc/spotlight_data.json','w') as outfile:
     json.dump(spotlight_data,outfile)
-await self.bot.say('Done.')
 
-await self.bot.say('I am retrieving Frogspawn Data')
 frogspawn_json=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
 frogspawn_data=frogspawn_json.json()
 with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
     json.dump(frogspawn_data,outfile)
-await self.bog.say('Done.')
 
 class_color_codes = {
         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
