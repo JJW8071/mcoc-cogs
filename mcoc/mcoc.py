@@ -41,6 +41,8 @@ json_data = {
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json'},
+    'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
+                'local': 'data/mcoc/coefficient-by-rank.json'},
     }
 
 prestige_data = 'data/mcoc/prestige_data.json'
