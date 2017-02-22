@@ -50,22 +50,6 @@ champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
 
-<<<<<<< HEAD
-hook_pi_json=requests.get('https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json')
-hook_pi_data=hook_pi.json()
-with open('data/mcoc/coefficient-by-rank.json','w') as outfile
-    json.dumb(hook_pi_data,outfile)
-
-spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
-spotlight_data=spotlight_json.json()
-with open('data/mcoc/spotlight_data.json','w') as outfile:
-    json.dump(spotlight_data,outfile)
-
-frogspawn_json=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
-frogspawn_data=frogspawn_json.json()
-with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
-    json.dump(frogspawn_data,outfile)
-=======
 #spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
 #spotlight_data=spotlight_json.json()
 #with open('data/mcoc/spotlight_data.json','w') as outfile:
@@ -75,7 +59,6 @@ with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
 #frogspawn_data=frogspawn_json.json()
 #with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
 #    json.dump(frogspawn_data,outfile)
->>>>>>> 89cadc9b802dcd881392097bc7fe45cc989c776c
 
 class_color_codes = {
         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
