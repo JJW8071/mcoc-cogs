@@ -41,8 +41,12 @@ json_data = {
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json'},
-    #'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
-    #            'local': 'data/mcoc/coefficient-by-rank.json'},
+    'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
+                'local': 'data/mcoc/five-star-sig.json'},
+    'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
+                'local': 'data/mcoc/five-star-sig.json'},
+#   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
+#               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
 
 prestige_data = 'data/mcoc/prestige_data.json'
@@ -317,12 +321,11 @@ class MCOC:
             copy_to_cache = True
         return copy_to_cache
 
-# This is what I'm using to test image uploading, vs link reference
-   # @commands.command(pass_context=True)
-   # async def phc(self,ctx):
-   #     '''Premium Hero Crystal Release Dates'''
-   #     channel=ctx.message.channel
-   #     await self.bot.say('<http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg>')
+    @commands.command(pass_context=True)
+    async def phc(self,ctx):
+        '''Premium Hero Crystal Release Dates'''
+        channel=ctx.message.channel
+        await self.bot.say('<http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg>')
 
     @commands.command(pass_context=True)
     async def portrait(self, ctx, champ):
@@ -659,8 +662,8 @@ class Champion:
         response = sig_str.format(*str_data) + self._tabulate(table_data, width=width)
         return (title, response)
 
-    @validate_attr('spotlight')
-    def get_spotlight(self, rank=None, star=None, **kwargs):
+ #   @validate_attr('spotlight')
+ #   def get_spotlight(self, rank=None, star=None, **kwargs):
 
 
 
