@@ -35,14 +35,14 @@ from .utils.dataIO import dataIO
 ## About <Champion>
 
 json_data = {
-   # 'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
-   #            'local':'data/mcoc/frogspawn_data.json'},
+    'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
+               'local':'data/mcoc/frogspawn_data.json'},
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json'},
-    'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
-                'local': 'data/mcoc/coefficient-by-rank.json'},
+    #'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
+    #            'local': 'data/mcoc/coefficient-by-rank.json'},
     }
 
 prestige_data = 'data/mcoc/prestige_data.json'
@@ -423,10 +423,10 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command()
-    async def champ_stats(self, star=4, champ, rank=5):
-        '''JJW trying to get Spotlight data'''
-        champ = self._resovle_alias(champ)
+    #@commands.command()
+    #async def champ_stats(self, star=4, champ, rank=5):
+    #    '''JJW trying to get Spotlight data'''
+    #    champ = self._resovle_alias(champ)
 
 
     @commands.command()
