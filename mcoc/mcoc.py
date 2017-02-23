@@ -24,7 +24,7 @@ from .utils.dataIO import dataIO
 ### Warmap <lanelane>
 ## Sig
 ### Sig <champ> <value>
-## Roster 
+## Roster
 ## PlayerCards
 ### Username
 ### Mastery Rig link
@@ -41,12 +41,16 @@ json_data = {
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json'},
+## prestige - strictly the export of mattkraft's prestige table
+    'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
+                'local': 'data/mcoc/prestige.json'},
     'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
                 'local': 'data/mcoc/five-star-sig.json'},
     'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
                 'local': 'data/mcoc/five-star-sig.json'},
-#   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
-#               'local': 'data/mcoc/coefficient-by-rank.json'},
+### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
+##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
+##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
 
 prestige_data = 'data/mcoc/prestige_data.json'
@@ -67,8 +71,8 @@ champ_avatar='http://www.marvelsynergy.com/images/'
 #    json.dump(frogspawn_data,outfile)
 
 class_color_codes = {
-        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
-        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200), 
+        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
+        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
@@ -260,11 +264,11 @@ class MCOC:
     async def simulator(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['simulator']))
 
-    @commands.command(help=lookup_links['alsciende'][0])       
+    @commands.command(help=lookup_links['alsciende'][0])
     async def alsciende(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
 
-    @commands.command(help=lookup_links['alsciende'][0])       
+    @commands.command(help=lookup_links['alsciende'][0])
     async def mrig(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
 
@@ -306,7 +310,7 @@ class MCOC:
         #self.report_cache_status(local, copy_to_cache)
 
     #async def report_cache_status(self, local, caching_statuIs):
-        #if caching_status:            
+        #if caching_status:
             #await self.bot.say('Caching remote contents to local file: ' + local)
         #else:
             #await self.bot.say('Local file up-to-date: ' + local)
@@ -370,12 +374,12 @@ class MCOC:
     async def bio(self, champ):
         '''Retrieve the Bio of a Champion'''
         champ = self._resolve_alias(champ)
-        em = discord.Embed(color=champ.class_color, title=champ.full_name, 
+        em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
         #em.set_thumbnail(url=champ.get_portrait())
         await self.bot.say(embed=em)
-        
+
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
         '''Retrieve the Signature Ability of a Champion'''
@@ -392,7 +396,7 @@ class MCOC:
             em.add_field(name='@ Level', value=siglvl)
             em.add_field(name = champ.full_name, value=desc)
         else:
-            em = discord.Embed(color=champ.class_color, 
+            em = discord.Embed(color=champ.class_color,
                 title=champ.full_name + ' Signature Ability')
             em.add_field(name='Level '+str(siglvl),  value=desc)
         em.set_thumbnail(url=champ.get_avatar())
@@ -404,7 +408,7 @@ class MCOC:
         champ = self._resolve_alias(champ)
         title, desc = champ.get_sigarray(**self.settings)
         if dbg == 0:
-            em = discord.Embed(color=champ.class_color, title=title, 
+            em = discord.Embed(color=champ.class_color, title=title,
                     description=desc)
         elif dbg == 1:
             em = discord.Embed(color=champ.class_color, title=champ.full_name)
@@ -418,10 +422,10 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def prestige(self, champ):    
+    async def prestige(self, champ):
         champ = self._resolve_alias(champ)
         title, desc = champ.get_prestige(**self.settings)
-        em = discord.Embed(color=champ.class_color, title=title, 
+        em = discord.Embed(color=champ.class_color, title=title,
                 description=desc)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -435,7 +439,7 @@ class MCOC:
     @commands.command()
     async def champ_aliases(self, *args):
         champs_matched = []
-        em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases') 
+        em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         for arg in args:
             if (arg.startswith("'") and arg.endswith("'")) or (arg.startswith('"') and arg.endswith('"')) :
                 champs = self._resolve_mult_aliases(arg[1:-1])
@@ -454,8 +458,8 @@ class MCOC:
         '''Create a python friendly data structure from the aliases json'''
         #response = urllib.request.urlopen(json_data['crossreference']['local'])
         #response = urllib.request.urlopen(champ_crossreference_json_debug)
-        #raw_data = json.loads(response.read().decode('utf-8'))
         fp = open(json_data['crossreference']['local'], encoding='utf-8')
+        #raw_data = json.loads(response.read().decode('utf-8'))
         raw_data = json.load(fp)
         champs = []
         all_aliases = set()
@@ -511,8 +515,9 @@ class MCOC:
                     break
         return champs
 
+## I replaced 'spotlight' with 'prestige'
     def _prepare_prestige_data(self):
-        fp = open(json_data['spotlight']['local'], encoding='utf-8')
+        fp = open(json_data['prestige']['local'], encoding='utf-8')
         raw_data = json.load(fp)
         champs = {}
         for row in raw_data['feed']['entry']:
@@ -551,7 +556,7 @@ class MCOC:
     # def _prepare_spotlight_data(self):
     #     fp = open(json_data['spotlight']['local'],encoding='utf-8')
     #     raw_data = json.load(fp)
-    #     cahmps = {}
+    #     champs = {}
 
 
 def validate_attr(*expected_args):
@@ -587,7 +592,7 @@ class Champion:
         self.frogspawn_data = data
 
     def getSigValue(self, siglvl, i=None):
-        '''Python port of siglvl interpolator from 
+        '''Python port of siglvl interpolator from
         http://coc.frogspawn.de/champions/js/functions.js'''
         if i is None:
             base = self.frogspawn_data['sb']
@@ -733,7 +738,7 @@ class Champion:
             for i in range(len(array)):
                 row.append(array[i][j])
             yield row
-      
+
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
