@@ -35,8 +35,8 @@ from .utils.dataIO import dataIO
 ## About <Champion>
 
 json_data = {
-    'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
-               'local':'data/mcoc/frogspawn_data.json'},
+   # 'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
+   #            'local':'data/mcoc/frogspawn_data.json'},
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
@@ -221,6 +221,7 @@ class MCOC:
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
+        # self._prepare_spotlight_data()
 
     @commands.command()
     async def mcocset(self, setting, value):
@@ -423,6 +424,12 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
+    async def champ_stats(self, star=4, champ, rank=5):
+        '''JJW trying to get Spotlight data'''
+        champ = self._resovle_alias(champ)
+
+
+    @commands.command()
     async def champ_aliases(self, *args):
         champs_matched = []
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases') 
@@ -538,6 +545,11 @@ class MCOC:
             if champ.full_name in champs:
                 champ.prestige_data = champs[champ.full_name]
 
+    # def _prepare_spotlight_data(self):
+    #     fp = open(json_data['spotlight']['local'],encoding='utf-8')
+    #     raw_data = json.load(fp)
+    #     cahmps = {}
+
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -646,6 +658,11 @@ class Champion:
                 self.bold_name)
         response = sig_str.format(*str_data) + self._tabulate(table_data, width=width)
         return (title, response)
+
+    @validate_attr('spotlight')
+    def get_spotlight(self, rank=None, star=None, **kwargs):
+
+
 
     @validate_attr('prestige')
     def get_prestige(self, rank=None, sig=None, star=None, sigstep=20, width=10, **kwargs):
