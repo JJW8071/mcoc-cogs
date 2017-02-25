@@ -34,7 +34,7 @@ from .utils.dataIO import dataIO
 ## Howto <fight|use> <Champion>
 ## About <Champion>
 
-json_data = {
+data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
                'local':'data/mcoc/frogspawn_data.json'},
     'spotlight': {#'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
@@ -49,6 +49,8 @@ json_data = {
                 'local': 'data/mcoc/five-star-sig.json'},
     'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
                 'local': 'data/mcoc/five-star-sig.json'},
+    'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
+                'local': 'data/mcoc/dates_PCHen.jpg'},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
@@ -224,8 +226,8 @@ class MCOC:
                 'sig_inc_zero': False,
                 }
 
-        for val in json_data.values():
-            self.cache_json_file(**val)
+        for val in data_files.values():
+            self.cache_remote_file(**val, verbose=True)
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')    
 
@@ -298,7 +300,7 @@ class MCOC:
             await self.bot.say(embed=em)
             #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
 
-    def cache_json_file(self, remote=None, local=None):
+    def cache_remote_file(self, remote=None, local=None, verbose=False):
         resp = requests.get(remote)
         copy_to_cache = self.check_local_remote_timestamp(resp, local)
         if copy_to_cache:
@@ -307,16 +309,9 @@ class MCOC:
             fp = open(local, 'wb')
             for chunk in resp.iter_content():
                 fp.write(chunk)
-        else:
-            #await self.bot.say('Local file up-to-date: ' + local)
+        elif verbose:
             print('Local file up-to-date: ' + local)
-        #self.report_cache_status(local, copy_to_cache)
-
-    #async def report_cache_status(self, local, caching_statuIs):
-        #if caching_status:
-            #await self.bot.say('Caching remote contents to local file: ' + local)
-        #else:
-            #await self.bot.say('Local file up-to-date: ' + local)
+        return local
 
     def check_local_remote_timestamp(self, resp, local):
         strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
@@ -332,7 +327,10 @@ class MCOC:
     async def phc(self,ctx):
         '''Premium Hero Crystal Release Dates'''
         channel=ctx.message.channel
-        await self.bot.say('<http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg>')
+        #filename = self.cache_remote_file(**data_files['phc_jpg'])
+        #await self.bot.say('<http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg>')
+        await self.bot.send_file(channel, data_files['phc_jpg']['local'],
+                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
     @commands.command(pass_context=True)
     async def portrait(self, ctx, champ):
@@ -482,10 +480,10 @@ class MCOC:
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
-        #response = urllib.request.urlopen(json_data['crossreference']['local'])
+        #response = urllib.request.urlopen(data_files['crossreference']['local'])
         #response = urllib.request.urlopen(champ_crossreference_json_debug)
         #raw_data = json.loads(response.read().decode('utf-8'))
-        fp = open(json_data['crossreference']['local'], encoding='utf-8')
+        fp = open(data_files['crossreference']['local'], encoding='utf-8')
         raw_data = json.load(fp)
         champs = []
         all_aliases = set()
@@ -517,9 +515,9 @@ class MCOC:
 
     def _prepare_frogspawn_champ_data(self):
         #response = urllib.request.urlopen(champ_data_json)
-        #response = urllib.request.urlopen(json_data['frogspawn']['remote'])
+        #response = urllib.request.urlopen(data_files['frogspawn']['remote'])
         #champ_data = json.loads(response.read().decode('utf-8'))
-        fp = open(json_data['frogspawn']['local'], encoding='utf-8')
+        fp = open(data_files['frogspawn']['local'], encoding='utf-8')
         champ_data = json.load(fp)
         for champ in self.champs:
             if getattr(champ, 'frogspawnid', None):
@@ -544,7 +542,7 @@ class MCOC:
     def _prepare_prestige_data(self):
         mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
         split_re = re.compile(', (?=\w+:)')
-        fp = open(json_data['spotlight']['local'], encoding='utf-8')
+        fp = open(data_files['spotlight']['local'], encoding='utf-8')
         raw_data = json.load(fp)
         champs = {}
         for row in raw_data['feed']['entry']:
