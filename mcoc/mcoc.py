@@ -24,7 +24,7 @@ from .utils.dataIO import dataIO
 ### Warmap <lanelane>
 ## Sig
 ### Sig <champ> <value>
-## Roster
+## Roster 
 ## PlayerCards
 ### Username
 ### Mastery Rig link
@@ -37,7 +37,8 @@ from .utils.dataIO import dataIO
 json_data = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
                'local':'data/mcoc/frogspawn_data.json'},
-    'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
+    'spotlight': {#'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
+                'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json'},
@@ -71,8 +72,8 @@ champ_avatar='http://www.marvelsynergy.com/images/'
 #    json.dump(frogspawn_data,outfile)
 
 class_color_codes = {
-        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
-        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
+        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
+        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200), 
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
@@ -219,12 +220,14 @@ class MCOC:
         self.settings = {
                 'siglvl': 1,
                 'sigstep': 20,
-                'table_width': 10,
+                'table_width': 9,
                 'sig_inc_zero': False,
                 }
 
         for val in json_data.values():
             self.cache_json_file(**val)
+
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')    
 
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
@@ -422,19 +425,36 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def prestige(self, champ):
-        champ = self._resolve_alias(champ)
-        title, desc = champ.get_prestige(**self.settings)
-        em = discord.Embed(color=champ.class_color, title=title,
-                description=desc)
-        em.set_thumbnail(url=champ.get_avatar())
+    async def prestige(self, *args):
+        champs = []
+        default = {'star': 4, 'rank': 5, 'sig': 0}
+        for arg in args:
+            attrs = default.copy()
+            for m in self.parse_re.finditer(arg):
+                attrs[m.lastgroup] = int(m.group(m.lastgroup))
+            remain = self.parse_re.sub('', arg)
+            if remain != '':
+                try:
+                    champs.append((self._resolve_alias(remain),attrs))
+                except KeyError:
+                    raise KeyError('Cannot resolve: arg {},'.format(arg)
+                            + ' residual champ {}, processing with {}'.format(remain, str(attrs)))
+            else:
+                default.update(attrs)
+        #sigstep_arr = bound_lvl(list(range(0, 101, self.settings['sigstep'])))
+        #table_data = [[''] + sigstep_arr]
+        #table_data.append(champ.get_prestige(5, sigstep_arr))
+        em = discord.Embed(color=discord.Color.magenta(), title='Debug', )
+                #description=tabulate(table_data, self.settings['table_width']))
+        for champ, attrs in champs:
+            pres_dict = champ.get_prestige(**attrs)
+            if pres_dict is None:
+                await self.bot.say("**WARNING** Champion Data for {}, {star}*, rank {rank} does not exist".format(
+                    champ.full_name, **attrs))
+            else:
+                em.add_field(**(champ.get_prestige(**attrs)))
+        ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
-
-    #@commands.command()
-    #async def champ_stats(self, star=4, champ, rank=5):
-    #    '''JJW trying to get Spotlight data'''
-    #    champ = self._resovle_alias(champ)
-
 
     @commands.command()
     async def champ_aliases(self, *args):
@@ -454,12 +474,18 @@ class MCOC:
                     champs_matched.append(champ)
         await self.bot.say(embed=em)
 
+    @commands.command()
+    async def tst(self, a, *, m):
+        await self.bot.say('a: {}   m:  {}'.format(type(a), type(m)))
+        await self.bot.say(a)
+        await self.bot.say(m)
+
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
         #response = urllib.request.urlopen(json_data['crossreference']['local'])
         #response = urllib.request.urlopen(champ_crossreference_json_debug)
-        fp = open(json_data['crossreference']['local'], encoding='utf-8')
         #raw_data = json.loads(response.read().decode('utf-8'))
+        fp = open(json_data['crossreference']['local'], encoding='utf-8')
         raw_data = json.load(fp)
         champs = []
         all_aliases = set()
@@ -515,23 +541,30 @@ class MCOC:
                     break
         return champs
 
-## I replaced 'spotlight' with 'prestige'
     def _prepare_prestige_data(self):
-        fp = open(json_data['prestige']['local'], encoding='utf-8')
+        mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
+        split_re = re.compile(', (?=\w+:)')
+        fp = open(json_data['spotlight']['local'], encoding='utf-8')
         raw_data = json.load(fp)
         champs = {}
         for row in raw_data['feed']['entry']:
-            #cells = row['content']['$t'].split(', ')
-            raw_dict = dict([kv.split(': ') for kv in re.split(', (?=\w+:)', row['content']['$t'])])
-            if 'champ' not in raw_dict:
+            champ_match = mattkraft_re.fullmatch(row['title']['$t'])
+            raw_dict = dict([kv.split(': ') for kv in split_re.split(row['content']['$t'])])
+            if champ_match:
+                champ_name = champ_match.group('champ')
+                champ_star = int(champ_match.group('star'))
+                champ_rank = int(champ_match.group('rank'))
+            else:
                 continue
-            champ_name = raw_dict['champ']
+            #if 'champ' not in raw_dict:
+                #continue
+            #champ_name = raw_dict['champ']
             if champ_name not in champs:
                 champs[champ_name] = {}
                 champs[champ_name][4] = [None] * 5
                 champs[champ_name][5] = [None] * 4
-            if int(raw_dict['star']) == 5:
-                sig_len = 200
+            if champ_star == 5:
+                sig_len = 201
             else:
                 sig_len = 100
             key_values = {}
@@ -544,19 +577,13 @@ class MCOC:
                     except:
                         print(champ_name, k, v, len(sig))
                         raise
-                #else:
-                    #key_values[k] = v
-            champs[champ_name][int(raw_dict['star'])][int(raw_dict['rank'])-1] = sig
+            champs[champ_name][champ_star][champ_rank-1] = sig
         dumpfp = open(prestige_data, 'w')
         json.dump(champs, dumpfp)
         for champ in self.champs:
-            if champ.full_name in champs:
-                champ.prestige_data = champs[champ.full_name]
-
-    # def _prepare_spotlight_data(self):
-    #     fp = open(json_data['spotlight']['local'],encoding='utf-8')
-    #     raw_data = json.load(fp)
-    #     champs = {}
+            if champ.mattkraftid in champs:
+                champ.prestige_data = champs[champ.mattkraftid]
+                #champ.prestige_data = champs[champ.full_name]
 
 
 def validate_attr(*expected_args):
@@ -621,7 +648,7 @@ class Champion:
     @validate_attr('frogspawn')
     def get_sig(self, **kwargs):
         sig_str = self._sig_header(self.frogspawn_data['sd'])
-        siglvl = self.bound_lvl(kwargs['siglvl'])
+        siglvl = bound_lvl(kwargs['siglvl'])
         str_data = []
         for i in range(len(self.frogspawn_data['sn'])):
             if self.frogspawn_data['sn'][i] != 0:
@@ -639,7 +666,7 @@ class Champion:
         var_list = 'XYZABCDEF'
         sig_str = self._sig_header(self.frogspawn_data['sd'])
         str_data = []
-        sigstep_arr = self.bound_lvl(list(range(0, 101, sigstep)))
+        sigstep_arr = bound_lvl(list(range(0, 101, sigstep)))
         if inc_zero:
             sigstep_arr.insert(1, 1)
         else:
@@ -664,29 +691,29 @@ class Champion:
                 str_data.append('dummy')
         title = 'Signature Ability for {} at multiple Sig Levels:'.format(
                 self.bold_name)
-        response = sig_str.format(*str_data) + self._tabulate(table_data, width=width)
+        response = sig_str.format(*str_data) + tabulate(table_data, width=width)
         return (title, response)
 
- #   @validate_attr('spotlight')
- #   def get_spotlight(self, rank=None, star=None, **kwargs):
-
-
+    @validate_attr('prestige')
+    def get_prestige(self, *, rank, sig, star):
+        if star == 5 and rank == 5:
+            #silently reduce to max rank for 5*
+            rank = 4
+        if self.prestige_data[star][rank-1] is None:
+            return None
+        return {'name':'{}*{}r{}s{}'.format(star, self.short, rank, sig),
+                'value':self.prestige_data[star][rank-1][sig]}
 
     @validate_attr('prestige')
-    def get_prestige(self, rank=None, sig=None, star=None, sigstep=20, width=10, **kwargs):
-        sigstep_arr = self.bound_lvl(list(range(0, 101, sigstep)))
-        table_data = [[''] + sigstep_arr]
-        for rank in (4,5):
-            row = ['rank{}'.format(rank)]
-            for sig in sigstep_arr:
-                try:
-                    row.append(self.prestige_data[4][rank-1][sig])
-                except:
-                    print(rank, sig, self.prestige_data)
-                    raise
-            table_data.append(row)
-        title = 'Debug Prestige for {}'.format(self.bold_name)
-        return (title, self._tabulate(table_data, width=width))
+    def get_prestige_arr(self, rank, sig_arr, star=4):
+        row = ['{}r{}'.format(self.short, rank)]
+        for sig in sig_arr:
+            try:
+                row.append(self.prestige_data[star][rank-1][sig])
+            except:
+                print(rank, sig, self.prestige_data)
+                raise
+        return row
 
 
     def get_aliases(self):
@@ -697,48 +724,46 @@ class Champion:
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
         return hex_re.sub(r'**[ \1 ]**', str_data)
 
-    @staticmethod
-    def bound_lvl(siglvl, max_lvl=99):
-        if isinstance(siglvl, list):
-            ret = []
-            for j in siglvl:
-                if j > max_lvl:
-                    j = max_lvl
-                elif j < 0:
-                    j = 0
-                ret.append(j)
-        else:
-            ret = siglvl
-            if siglvl > max_lvl:
-                ret = max_lvl
-            elif siglvl < 0:
-                ret = 0
-        return ret
+def bound_lvl(siglvl, max_lvl=99):
+    if isinstance(siglvl, list):
+        ret = []
+        for j in siglvl:
+            if j > max_lvl:
+                j = max_lvl
+            elif j < 0:
+                j = 0
+            ret.append(j)
+    else:
+        ret = siglvl
+        if siglvl > max_lvl:
+            ret = max_lvl
+        elif siglvl < 0:
+            ret = 0
+    return ret
 
-    def _tabulate(self, table_data, width, rotate=True, header_sep=True):
-        rows = []
-        cells_in_row = None
-        for i in self._rotate(table_data, rotate):
-            if cells_in_row is None:
-                cells_in_row = len(i)
-            elif cells_in_row != len(i):
-                raise IndexError("Array is not uniform")
-            rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
-        if header_sep:
-            rows.insert(1, '|'.join(['-' * width] * cells_in_row))
-        return '```' + '\n'.join(rows) + '```'
+def tabulate(table_data, width, do_rotate=True, header_sep=True):
+    rows = []
+    cells_in_row = None
+    for i in rotate(table_data, rotate):
+        if cells_in_row is None:
+            cells_in_row = len(i)
+        elif cells_in_row != len(i):
+            raise IndexError("Array is not uniform")
+        rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
+    if header_sep:
+        rows.insert(1, '|'.join(['-' * width] * cells_in_row))
+    return '```' + '\n'.join(rows) + '```'
 
-    @staticmethod
-    def _rotate(array, rotate):
-        if not rotate:
-            for i in array:
-                yield i
-        for j in range(len(array[0])):
-            row = []
-            for i in range(len(array)):
-                row.append(array[i][j])
-            yield row
-
+def rotate(array, do_rotate):
+    if not do_rotate:
+        for i in array:
+            yield i
+    for j in range(len(array[0])):
+        row = []
+        for i in range(len(array)):
+            row.append(array[i][j])
+        yield row
+      
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
