@@ -24,7 +24,7 @@ from .utils.dataIO import dataIO
 ### Warmap <lanelane>
 ## Sig
 ### Sig <champ> <value>
-## Roster 
+## Roster
 ## PlayerCards
 ### Username
 ### Mastery Rig link
@@ -49,8 +49,8 @@ data_files = {
                 'local': 'data/mcoc/five-star-sig.json'},
     'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
                 'local': 'data/mcoc/five-star-sig.json'},
-    'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
-                'local': 'data/mcoc/dates_PCHen.jpg'},
+    #'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
+    #            'local': 'data/mcoc/dates_PCHen.jpg'},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
@@ -74,8 +74,8 @@ champ_avatar='http://www.marvelsynergy.com/images/'
 #    json.dump(frogspawn_data,outfile)
 
 class_color_codes = {
-        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
-        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200), 
+        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
+        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
@@ -120,87 +120,6 @@ class MCOC:
                 #'http://simians.tk/SDFstreak')
             }
 
-    warmap_links = {
-            '': (
-                'AW Map',
-                'http://i.imgur.com/h1N8O4R.png'),
-            'eh': (
-                'AW Map E-H',
-                'http://i.imgur.com/ACw1wS3.png'),
-            'af': (
-                'AW Map A-F',
-                'http://i.imgur.com/p5F0L6I.png'),
-            'eg': (
-                'AW Map E-G',
-                'http://i.imgur.com/Gh9EK8N.png'),
-            'eg+': (
-                'AW Map E to G+',
-                'http://i.imgur.com/l9KxWHJ.png'),
-            'df': (
-                'AW Map D to F',
-                'http://i.imgur.com/zlGSwbj.png'),
-            'ei': (
-                'AW Map E to I',
-                'http://i.imgur.com/JUTXNpf.png'),
-            'ag+': (
-                'AW Map A to G+',
-                'http://i.imgur.com/KTZrCZN.png'),
-            'dg+': (
-                'AW Map D to G+',
-                'http://i.imgur.com/3kmzhIG.png'),
-            'ci': (
-                'AW Map C to I',
-                'http://i.imgur.com/BBFc0GS.png'),
-            'dh': (
-                'AW Map D to H',
-                'http://i.imgur.com/DlnHQ0F.png'),
-            'ag': (
-                'AW Map A to G',
-                'http://i.imgur.com/oQNRLTA.png'),
-            'cf': (
-                'AW Map C to F',
-                'http://i.imgur.com/IcVC0Y8.png'),
-            'ef': (
-                'AW Map E to F ',
-                'http://i.imgur.com/eiftXZK.png'),
-            'cg+': (
-                'AW Map C to G+',
-                'http://i.imgur.com/smlAKwu.png'),
-            'di': (
-                'AW Map D to I',
-                'http://i.imgur.com/WIMHR7t.png'),
-            'ch': (
-                'AW Map C to H',
-                'http://i.imgur.com/uBpUC0y.png'),
-            'bg': (
-                'AW Map B to G',
-                'http://i.imgur.com/hlMU7vw.png'),
-            'dg': (
-                'AW Map D to G',
-                'http://i.imgur.com/WI7SxWT.png'),
-            'ai': (
-                'AW Map A to I',
-                'http://i.imgur.com/h1N8O4R.png'),
-            'bg+': (
-                'AW Map B to G+',
-                'http://i.imgur.com/i2xh3eM.png'),
-            'bi': (
-                'AW Map B to I',
-                'http://i.imgur.com/Um06tbU.png'),
-            'cg': (
-                'AW Map C to G',
-                'http://i.imgur.com/wM0LSed.png'),
-            'bh': (
-                'AW Map B to H',
-                'http://i.imgur.com/gug9NyC.png'),
-            'af': (
-                'AW Map B to F',
-                'http://i.imgur.com/0NOI2lK.png'),
-            'ah': (
-                'AW Map A to H',
-                'http://i.imgur.com/6c96hBj.png')
-            }
-
     lessons = {
             'parry': (
                 'How to Parry Like a Boss',
@@ -229,12 +148,21 @@ class MCOC:
         for val in data_files.values():
             self.cache_remote_file(**val, verbose=True)
 
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')    
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
 
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
+
+    @commands.command(self)
+    async def mcoc_update(self)
+        await self.bot.say('Summoner, I am attempting to Collect the requisite data')
+        for val in data_files.values():
+            self.bot.say('Retrieving ['+val+']')
+            self.cache_remote_files(**val, verbots=True)
+            self.bot.say(val+' retrieved.')
+        await self.bot.say('Summoner, I have Collected the data')
 
     @commands.command()
     async def mcocset(self, setting, value):
@@ -330,7 +258,8 @@ class MCOC:
         #filename = self.cache_remote_file(**data_files['phc_jpg'])
         #await self.bot.say('<http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg>')
         await self.bot.send_file(channel, data_files['phc_jpg']['local'],
-                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
+                title='PHC Release Dates')
+                #content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
     @commands.command(pass_context=True)
     async def portrait(self, ctx, champ):
@@ -349,7 +278,7 @@ class MCOC:
         await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai', link=False):
+    async def warmap(self, ctx, maptype='ai'):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
@@ -360,13 +289,6 @@ class MCOC:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
-            if link:
-                filepath = self.warmap_links[maptype][1]
-                em = discord.Embed(title=mapTitle).set_image(url=filepath)
-                await self.bot.say(embed=em)
-            else:
-                filepath = filepath_png.format(maptype.lower())
-                await self.bot.send_file(channel, filepath, content=mapTitle)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
@@ -761,7 +683,7 @@ def rotate(array, do_rotate):
         for i in range(len(array)):
             row.append(array[i][j])
         yield row
-      
+
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
