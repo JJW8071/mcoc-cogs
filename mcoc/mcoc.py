@@ -161,7 +161,7 @@ class MCOC:
         for val in data_files.values():
             self.bot.say('Retrieving ['+{}+']'.format(val))
             self.cache_remote_files(**val, verbots=True)
-            self.bot.say(val+' retrieved.')
+            self.bot.say({}+' retrieved.'.format(val))
         await self.bot.say('Summoner, I have Collected the data')
 
     @commands.command()
