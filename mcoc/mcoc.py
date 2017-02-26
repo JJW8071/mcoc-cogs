@@ -145,8 +145,8 @@ class MCOC:
                 'sig_inc_zero': False,
                 }
 
-        #for val in data_files.values():
-        #    self.cache_remote_file(**val, verbose=True)
+        for val in data_files.values():
+            self.cache_remote_file(**val, verbose=True)
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
 
@@ -155,12 +155,12 @@ class MCOC:
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
 
-    @commands.command()
-    async def mcoc_update(self):
-        await self.bot.say('Summoner, I am attempting to Collect the requisite data')
-        for val in data_files.values():
-            self.cache_remote_files(**val, verbose=True)
-        await self.bot.say('Summoner, I have Collected the data')
+    # @commands.command()
+    # async def mcoc_update(self):
+    #     await self.bot.say('Summoner, I am attempting to Collect the requisite data')
+    #     for val in data_files.values():
+    #         self.cache_remote_files(**val, verbose=True)
+    #     await self.bot.say('Summoner, I have Collected the data')
 
     @commands.command()
     async def mcocset(self, setting, value):
