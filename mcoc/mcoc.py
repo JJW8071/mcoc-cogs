@@ -37,7 +37,7 @@ from .utils.dataIO import dataIO
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
                'local':'data/mcoc/frogspawn_data.json'},
-    'spotlight': {#'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
+    'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
                 'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json'},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
@@ -57,7 +57,7 @@ data_files = {
     }
 
 prestige_data = 'data/mcoc/prestige_data.json'
-champ_crossreference_json_debug='https://spreadsheets.google.com/feeds/list/112Q53wW0JX2Xt8BLgQlnpieiz8f9mR0wbfqJdHubd64/1/public/values?alt=json'
+#champ_crossreference_json_debug='https://spreadsheets.google.com/feeds/list/112Q53wW0JX2Xt8BLgQlnpieiz8f9mR0wbfqJdHubd64/1/public/values?alt=json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
