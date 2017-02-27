@@ -24,7 +24,7 @@ from .utils.dataIO import dataIO
 ### Warmap <lanelane>
 ## Sig
 ### Sig <champ> <value>
-## Roster 
+## Roster
 ## PlayerCards
 ### Username
 ### Mastery Rig link
@@ -49,8 +49,8 @@ data_files = {
                 'local': 'data/mcoc/five-star-sig.json'},
     'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
                 'local': 'data/mcoc/five-star-sig.json'},
-    'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
-                'local': 'data/mcoc/dates_PCHen.jpg'},
+    #'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
+    #            'local': 'data/mcoc/dates_PCHen.jpg'},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
@@ -74,8 +74,8 @@ champ_avatar='http://www.marvelsynergy.com/images/'
 #    json.dump(frogspawn_data,outfile)
 
 class_color_codes = {
-        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff), 
-        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200), 
+        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
+        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
@@ -229,7 +229,7 @@ class MCOC:
         for val in data_files.values():
             self.cache_remote_file(**val, verbose=True)
 
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')    
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
 
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
@@ -761,7 +761,7 @@ def rotate(array, do_rotate):
         for i in range(len(array)):
             row.append(array[i][j])
         yield row
-      
+
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
