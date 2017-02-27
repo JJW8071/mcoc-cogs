@@ -64,15 +64,6 @@ lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
 file_checks_json = 'data/mcoc/file_checks.json'
 
-#spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
-#spotlight_data=spotlight_json.json()
-#with open('data/mcoc/spotlight_data.json','w') as outfile:
-#    json.dump(spotlight_data,outfile)
-#
-#frogspawn_json=requests.get('http://coc.frogspawn.de/champions/js/champ_data.json')
-#frogspawn_data=frogspawn_json.json()
-#with open('data/mcoc/frogspawn_data.json', 'w') as outfile:
-#    json.dump(frogspawn_data,outfile)
 
 class_color_codes = {
         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
@@ -366,19 +357,15 @@ class MCOC:
     async def phc(self,ctx):
         '''Premium Hero Crystal Release Dates'''
         channel=ctx.message.channel
-        #filename = self.cache_remote_file(**data_files['phc_jpg'])
-        #await self.bot.say('<http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg>')
         await self.bot.send_file(channel, data_files['phc_jpg']['local'],
-                title='PHC Release Dates')
-                #content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
+                #title='PHC Release Dates')
+                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
     @commands.command(pass_context=True)
     async def portrait(self, ctx, champ):
         '''View Champion Portraits'''
         channel=ctx.message.channel
         champ = self._resolve_alias(champ)
-        #em = discord.Embed(title=champ.full_name).set_image(url=champ.get_portrait())
-        #await self.bot.say(embed=em)
         await self.bot.send_file(channel, champ.get_portrait(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
