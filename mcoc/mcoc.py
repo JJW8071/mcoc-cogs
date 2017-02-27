@@ -1,5 +1,5 @@
 import re
-from datetime import datetime
+from datetime import datetime, timedelta
 from textwrap import wrap
 from math import log2
 import os
@@ -36,21 +36,21 @@ from .utils.dataIO import dataIO
 
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
-               'local':'data/mcoc/frogspawn_data.json'},
+               'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
     'spotlight': {#'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json',
                 'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/spotlight_data.json'},
+                'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
-                'local': 'data/mcoc/crossreference.json'},
+                'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
 ## prestige - strictly the export of mattkraft's prestige table
-    'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/prestige.json'},
-    'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
-                'local': 'data/mcoc/five-star-sig.json'},
-    'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
-                'local': 'data/mcoc/five-star-sig.json'},
-    #'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
-    #            'local': 'data/mcoc/dates_PCHen.jpg'},
+    #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
+                #'local': 'data/mcoc/prestige.json'},
+    #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
+                #'local': 'data/mcoc/five-star-sig.json'},
+    #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
+                #'local': 'data/mcoc/five-star-sig.json'},
+    'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
+                'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
@@ -62,6 +62,7 @@ champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='http://www.marvelsynergy.com/images/'
+file_checks_json = 'data/mcoc/file_checks.json'
 
 #spotlight_json=requests.get('https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/1/public/values?alt=json')
 #spotlight_data=spotlight_json.json()
@@ -120,6 +121,87 @@ class MCOC:
                 #'http://simians.tk/SDFstreak')
             }
 
+    warmap_links = {
+            '': (
+                'AW Map',
+                'http://i.imgur.com/h1N8O4R.png'),
+            'eh': (
+                'AW Map E-H',
+                'http://i.imgur.com/ACw1wS3.png'),
+            'af': (
+                'AW Map A-F',
+                'http://i.imgur.com/p5F0L6I.png'),
+            'eg': (
+                'AW Map E-G',
+                'http://i.imgur.com/Gh9EK8N.png'),
+            'eg+': (
+                'AW Map E to G+',
+                'http://i.imgur.com/l9KxWHJ.png'),
+            'df': (
+                'AW Map D to F',
+                'http://i.imgur.com/zlGSwbj.png'),
+            'ei': (
+                'AW Map E to I',
+                'http://i.imgur.com/JUTXNpf.png'),
+            'ag+': (
+                'AW Map A to G+',
+                'http://i.imgur.com/KTZrCZN.png'),
+            'dg+': (
+                'AW Map D to G+',
+                'http://i.imgur.com/3kmzhIG.png'),
+            'ci': (
+                'AW Map C to I',
+                'http://i.imgur.com/BBFc0GS.png'),
+            'dh': (
+                'AW Map D to H',
+                'http://i.imgur.com/DlnHQ0F.png'),
+            'ag': (
+                'AW Map A to G',
+                'http://i.imgur.com/oQNRLTA.png'),
+            'cf': (
+                'AW Map C to F',
+                'http://i.imgur.com/IcVC0Y8.png'),
+            'ef': (
+                'AW Map E to F ',
+                'http://i.imgur.com/eiftXZK.png'),
+            'cg+': (
+                'AW Map C to G+',
+                'http://i.imgur.com/smlAKwu.png'),
+            'di': (
+                'AW Map D to I',
+                'http://i.imgur.com/WIMHR7t.png'),
+            'ch': (
+                'AW Map C to H',
+                'http://i.imgur.com/uBpUC0y.png'),
+            'bg': (
+                'AW Map B to G',
+                'http://i.imgur.com/hlMU7vw.png'),
+            'dg': (
+                'AW Map D to G',
+                'http://i.imgur.com/WI7SxWT.png'),
+            'ai': (
+                'AW Map A to I',
+                'http://i.imgur.com/h1N8O4R.png'),
+            'bg+': (
+                'AW Map B to G+',
+                'http://i.imgur.com/i2xh3eM.png'),
+            'bi': (
+                'AW Map B to I',
+                'http://i.imgur.com/Um06tbU.png'),
+            'cg': (
+                'AW Map C to G',
+                'http://i.imgur.com/wM0LSed.png'),
+            'bh': (
+                'AW Map B to H',
+                'http://i.imgur.com/gug9NyC.png'),
+            'af': (
+                'AW Map B to F',
+                'http://i.imgur.com/0NOI2lK.png'),
+            'ah': (
+                'AW Map A to H',
+                'http://i.imgur.com/6c96hBj.png')
+            }
+
     lessons = {
             'parry': (
                 'How to Parry Like a Boss',
@@ -145,11 +227,10 @@ class MCOC:
                 'sig_inc_zero': False,
                 }
 
-        for val in data_files.values():
-            self.cache_remote_file(**val, verbose=True)
 
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
 
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')    
+        self.verify_cache_remote_files(verbose=True)
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
@@ -226,28 +307,60 @@ class MCOC:
             await self.bot.say(embed=em)
             #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
 
-    def cache_remote_file(self, remote=None, local=None, verbose=False):
-        resp = requests.get(remote)
-        copy_to_cache = self.check_local_remote_timestamp(resp, local)
-        if copy_to_cache:
-            #await self.bot.say('Caching remote contents to local file: ' + local)
+    def verify_cache_remote_files(self, verbose=False):
+        if os.path.exists(file_checks_json):
+            try:
+                fp = open(file_checks_json)
+                file_checks = json.load(fp)
+                fp.close()
+            except:
+                file_checks = {}
+        else:
+            file_checks = {}
+        for key, val in data_files.items():
+            if key in file_checks:
+                last_check = datetime(*file_checks.get(key))
+            else:
+                last_check = None
+            remote_check = self.cache_remote_file(**val, verbose=verbose, last_check=last_check)
+            if remote_check:
+                file_checks[key] = remote_check.timetuple()[:6]
+            #print(key, remote_check)
+        json.dump(file_checks, open(file_checks_json, 'w'), indent=4)
+
+    def cache_remote_file(self, remote=None, local=None, verbose=False, 
+                update_delta=0, last_check=None):
+        strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
+        response = None
+        remote_check = False
+        now = datetime.now()
+        if os.path.exists(local):
+            check_marker = None
+            if last_check:
+                check_marker = now - timedelta(days=update_delta)
+                refresh_remote_check = check_marker > last_check
+            else:
+                refresh_remote_check = True
+            local_dt = datetime.fromtimestamp(os.path.getmtime(local))
+            #print(check_marker, last_check, refresh_remote_check, local_dt)
+            if refresh_remote_check:
+                response = requests.get(remote)
+                remote_dt = datetime.strptime(response.headers['Last-Modified'], strf_remote)
+                remote_check = now
+                if remote_dt < local_dt:
+                    # Remote file is older, so no need to transfer
+                    response = None
+        else:
+            response = requests.get(remote)
+        if response:
             print('Caching remote contents to local file: ' + local)
             fp = open(local, 'wb')
-            for chunk in resp.iter_content():
+            for chunk in response.iter_content():
                 fp.write(chunk)
-        elif verbose:
-            print('Local file up-to-date: ' + local)
-        return local
-
-    def check_local_remote_timestamp(self, resp, local):
-        strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
-        if os.path.exists(local):
-            remote_dt = datetime.strptime(resp.headers['Last-Modified'], strf_remote)
-            local_dt = datetime.fromtimestamp(os.path.getmtime(local))
-            copy_to_cache = remote_dt > local_dt
-        else:
-            copy_to_cache = True
-        return copy_to_cache
+            remote_check = now
+        elif verbose and remote_check:
+            print('Local file up-to-date:', local, now)
+        return remote_check
 
     @commands.command(pass_context=True)
     async def phc(self,ctx):
@@ -276,7 +389,7 @@ class MCOC:
         await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai'):
+    async def warmap(self, ctx, maptype='ai', link=False):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
@@ -287,6 +400,13 @@ class MCOC:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
+            if link:
+                filepath = self.warmap_links[maptype][1]
+                em = discord.Embed(title=mapTitle).set_image(url=filepath)
+                await self.bot.say(embed=em)
+            else:
+                filepath = filepath_png.format(maptype.lower())
+                await self.bot.send_file(channel, filepath, content=mapTitle)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
