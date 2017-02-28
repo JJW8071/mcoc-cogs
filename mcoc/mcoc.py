@@ -44,7 +44,7 @@ data_files = {
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
 ## prestige - strictly the export of mattkraft's prestige table
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/prestige.json'},
+                'local': 'data/mcoc/prestige.json': 0},
     #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
                 #'local': 'data/mcoc/five-star-sig.json'},
     #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
@@ -66,7 +66,7 @@ file_checks_json = 'data/mcoc/file_checks.json'
 
 ## KEYS for MCOC JSON Data Extraction
 mcoc_files='/data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
-mcoc_special_attacks
+#mcoc_special_attacks
 
 
 class_color_codes = {
@@ -151,11 +151,11 @@ class MCOC:
 
      @commands.command()
      async def mcoc_update_data(self):
-         await self.bot.say('Summoner, I am attempting to Collect the requisite data')
-         for val in data_files.values():
-            #self.bot.say('Fetching {} ...'.format(data_files[val])
+        await self.bot.say('Summoner, I am attempting to Collect the requisite data')
+        for val in data_files.values():
+            self.bot.say('Fetching {} ...'.format(data_files[val])
             self.cache_remote_files(**val, verbose=True)
-         await self.bot.say('Summoner, I have Collected the data')
+        await self.bot.say('Summoner, I have Collected the data')
 
     @commands.command()
     async def mcocset(self, setting, value):
