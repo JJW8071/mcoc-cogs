@@ -7,7 +7,7 @@ class Lessons:
             'parry': (
                 'How to Parry Like a Boss',
                 'https://www.youtube.com/watch?v=VRPXxHrgDnY',
-                '```Parry Types:\n1. The First Kiss\n2. The Cherry Picker\n3. Quick Draw\n4. The Second Coming\n~~5. Unspecial~~```'
+                '``Parry Types:``\n1. The First Kiss\n2. The Cherry Picker\n3. Quick Draw\n4. The Second Coming\n~~5. Unspecial~~'
             ),
             'intercept': (
                 'How to Intercept Like a Boss',
@@ -45,15 +45,11 @@ class Lessons:
     @commands.command()
     async def howto(self, choice=None):
         if choice in self.lessons:
-            #title, url, desc = self.lessons[choice]
-            #em = discord.Embed(title=title, description=desc, url=url)
-            #await self.bot.say(embed=em)
             await self.bot.say('**{}**\n{}\n{}'.format(*self.lessons[choice]))
         else:
             sometxt = 'Choose'
             em = discord.Embed(title=sometxt, description='\n'.join(self.lessons.keys()))
             await self.bot.say(embed=em)
-            #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
 
         @commands.command()
         async def fight(self, choice=None):
