@@ -18,6 +18,19 @@ class Lessons:
                 "```Magik's L3 increases Attack 50% for every enemy buff Nullified.```\nWait until the target has stacked many buffs, then drop the L3.\nThis is excellent versus Venom and Groot")
             }
 
+    fight = {
+            'spiderman': (
+            'How to fight Spiderman',
+            'https://www.youtube.com/watch?v=U-hPA-gNqqk',
+            'Slow down. Don\'t rely on your standard combo pattern.\nParry-stun or bait a heavy attack.\nRely on Medium-Medium combos.\nBuild Spiderman to an L2 and Evade.'
+            ),
+            'cyclops': (
+            'How to fight Cyclops',
+            'https://www.youtube.com/watch?v=iRay5dQBRbs',
+            'Watch Cyclops\' **head** during a L1 special.  When he prepares to fire a special Cyclops leans back, then leans forward. **Evade** as soon as his head shifts forward and the background darkens. If you evade too soon you will catch one of his beams.\nCyclops L2 includes a punch, a kick, and then the headshift for the blast.  '
+            )
+        }
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -36,7 +49,7 @@ class Lessons:
 
         @commands.command()
         async def fight(self, choice=None):
-            if choice in self.lessons:
+            if choice in self.fight:
                 await self.bot.say('**{}**\n{}\n{}'.format(*self.fight[choice]))
             else:
                 sometxt = 'Choose'
