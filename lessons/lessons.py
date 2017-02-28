@@ -65,4 +65,4 @@ class Lessons:
                 await self.bot.say(embed=em)
 
 def setup(bot):
-    bot.add_cog(Mycog(bot))
+    bot.add_cog(Lessons(bot))
