@@ -44,7 +44,7 @@ data_files = {
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
 ## prestige - strictly the export of mattkraft's prestige table
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/prestige.json': 0},
+                'local': 'data/mcoc/prestige.json', 'update_delta': 0},
     #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
                 #'local': 'data/mcoc/five-star-sig.json'},
     #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
@@ -65,8 +65,12 @@ champ_avatar='http://www.marvelsynergy.com/images/'
 file_checks_json = 'data/mcoc/file_checks.json'
 
 ## KEYS for MCOC JSON Data Extraction
-mcoc_files='/data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
-#mcoc_special_attacks
+#mcoc_files='/data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
+## Special attacks require:
+## mcoc_special_attack + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack title
+#mcoc_special_attack='ID_SPECIAL_ATTACK_'
+## mcoc_special_attack_desc + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack Short description
+#mcoc_special_attack_desc='ID_SPECIAL_ATTACK_DESCRIPTION_'
 
 
 class_color_codes = {
