@@ -8,6 +8,11 @@ class Lessons:
                 'How to Parry Like a Boss',
                 'https://www.youtube.com/watch?v=VRPXxHrgDnY',
                 '```Parry Types:\n1. The First Kiss\n2. The Cherry Picker\n3. Quick Draw\n4. The Second Coming\n~~5. Unspecial~~```'),
+            'intercept': (
+                'How to Intercept Like a Boss',
+                'https://www.youtube.com/watch?v=fIaGpZgmQJs',
+                'Intercept Types:\n1. **Yo-Yo** - Dash toward your target **the very instant** they dash toward you, interrupting the target animation\n2. **Backdraft** - bait an attack, back off, then strike as they rush you\n3. **Come At Me Bro** - No bait to set up the target, you just have to be ready when they dash\n4. **Parry Mason** - As soon as the target leaves the parry you strike on their attack\n5. **Special Delivery** - This one is easy, fire a special when the target is rushing you.\n```Warning: Cannot use this well on Rhino or Juggernaut (Unstoppable)```'
+            ),
             'thor': (
                 'How to Use Duped Thor',
                 'https://www.youtube.com/watch?v=Ng31Ow1SNOk',
@@ -15,7 +20,7 @@ class Lessons:
             'magik': (
                 'How to Magik',
                 'https://www.youtube.com/watch?v=zC47YeI1b8g',
-                "```Magik's L3 increases Attack 50% for every enemy buff Nullified.```\nWait until the target has stacked many buffs, then drop the L3.\nThis is excellent versus Venom and Groot")
+                '```Magik\'s L3 increases Attack 50% for every enemy buff Nullified.```\nWait until the target has stacked many buffs, then drop the L3.\nThis is excellent versus Venom and Groot')
             }
 
     fight = {
