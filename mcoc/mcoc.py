@@ -153,13 +153,13 @@ class MCOC:
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
 
-     @commands.command()
-     async def mcoc_update_data(self):
-        await self.bot.say('Summoner, I am attempting to Collect the requisite data')
-        for val in data_files.values():
-            self.bot.say('Fetching {} ...'.format(data_files[val])
-            self.cache_remote_files(**val, verbose=True)
-        await self.bot.say('Summoner, I have Collected the data')
+    #  @commands.command()
+    #  async def mcoc_update_data(self):
+    #     await self.bot.say('Summoner, I am attempting to Collect the requisite data')
+    #     for val in data_files.values():
+    #         self.bot.say('Fetching {} ...'.format(data_files[val])
+    #         self.cache_remote_files(**val, verbose=True)
+    #     await self.bot.say('Summoner, I have Collected the data')
 
     @commands.command()
     async def mcocset(self, setting, value):
