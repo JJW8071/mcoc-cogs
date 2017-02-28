@@ -153,7 +153,7 @@ class MCOC:
      async def mcoc_update_data(self):
          await self.bot.say('Summoner, I am attempting to Collect the requisite data')
          for val in data_files.values():
-             self.bot.say('Fetching '+{}'...'.format(**val))
+             self.bot.say('Fetching '+{}+'...'.format(*self.data_files.values(val))
              self.cache_remote_files(**val, verbose=True)
          await self.bot.say('Summoner, I have Collected the data')
 
