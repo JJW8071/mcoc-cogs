@@ -298,6 +298,14 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
+    async def mcoc_bio(sef, champ):
+        '''Retrieve Champion Bio from MCOC Files'''
+        champ = self._resolve_alias(champ)
+        em = discord.Embed(color=champ.class_color, title=champ.full_name,
+                description='Fetch bio data with key: {}'.format(champ.mcocjson))
+        em.set_thumbnail(url=champ.get_avatar())
+
+    @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
         '''Retrieve the Signature Ability of a Champion'''
         champ = self._resolve_alias(champ)
