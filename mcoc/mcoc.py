@@ -31,7 +31,6 @@ from .utils.dataIO import dataIO
 ### Frogspawn Card Link
 ### Member Since
 ### Avatar
-## Howto <fight|use> <Champion>
 ## About <Champion>
 
 data_files = {
@@ -196,25 +195,10 @@ class MCOC:
         channel=ctx.message.channel
         await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
 
-    @commands.command()
-    async def howto(self, choice=None):
-        if choice in self.lessons:
-            #title, url, desc = self.lessons[choice]
-            #em = discord.Embed(title=title, description=desc, url=url)
-            #await self.bot.say(embed=em)
-            await self.bot.say('**{}**\n{}\n{}'.format(*self.lessons[choice]))
-        else:
-            sometxt = 'Choose'
-            em = discord.Embed(title=sometxt, description='\n'.join(self.lessons.keys()))
-            await self.bot.say(embed=em)
-            #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
-
     def verify_cache_remote_files(self, verbose=False):
         if os.path.exists(file_checks_json):
             try:
-                fp = open(file_checks_json)
                 file_checks = json.load(open(file_checks_json))
-                fp.close()
             except:
                 file_checks = {}
         else:
@@ -298,13 +282,6 @@ class MCOC:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
-            if link:
-                filepath = self.warmap_links[maptype][1]
-                em = discord.Embed(title=mapTitle).set_image(url=filepath)
-                await self.bot.say(embed=em)
-            else:
-                filepath = filepath_png.format(maptype.lower())
-                await self.bot.send_file(channel, filepath, content=mapTitle)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
@@ -492,7 +469,6 @@ class MCOC:
         raw_data = json.load(fp)
         champs = {}
         for row in raw_data['feed']['entry']:
-            champ_match = mattkraft_re.fullmatch(row['title']['$t'])
             raw_dict = dict([kv.split(': ') for kv in split_re.split(row['content']['$t'])])
             champ_match = mattkraft_re.fullmatch(raw_dict['mattkraftid'])
             if champ_match:
