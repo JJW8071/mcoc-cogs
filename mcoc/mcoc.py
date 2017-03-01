@@ -59,7 +59,8 @@ prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
-champ_avatar='http://www.marvelsynergy.com/images/'
+champ_avatar='https://github.com/JasonJW/mcoc-cogs/tree/master/mcoc/data/portraits/portrait_'
+#champ_avatar='http://www.marvelsynergy.com/images/'
 file_checks_json = 'data/mcoc/file_checks.json'
 
 ###### KEYS for MCOC JSON Data Extraction
@@ -555,7 +556,7 @@ class Champion:
             return '-'
 
     def get_avatar(self):
-        return '{}{}.png'.format(champ_avatar, self.marvelthumbnail)
+        return '{}{}.png'.format(champ_avatar, self.mcocui)
 
     def get_portrait(self):
         return '{}{}.png'.format(champ_portraits, self.mcocui)
