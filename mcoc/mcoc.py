@@ -31,6 +31,7 @@ from .utils.dataIO import dataIO
 ### Frogspawn Card Link
 ### Member Since
 ### Avatar
+## Howto <fight|use> <Champion>
 ## About <Champion>
 
 data_files = {
@@ -41,8 +42,8 @@ data_files = {
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
 ## prestige - strictly the export of mattkraft's prestige table
-    'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/prestige.json', 'update_delta': 1},
+    #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
+                #'local': 'data/mcoc/prestige.json'},
     #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
                 #'local': 'data/mcoc/five-star-sig.json'},
     #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
@@ -195,11 +196,24 @@ class MCOC:
         channel=ctx.message.channel
         await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
 
+    @commands.command()
+    async def howto(self, choice=None):
+        if choice in self.lessons:
+            #title, url, desc = self.lessons[choice]
+            #em = discord.Embed(title=title, description=desc, url=url)
+            #await self.bot.say(embed=em)
+            await self.bot.say('**{}**\n{}\n{}'.format(*self.lessons[choice]))
+        else:
+            sometxt = 'Choose'
+            em = discord.Embed(title=sometxt, description='\n'.join(self.lessons.keys()))
+            await self.bot.say(embed=em)
+            #await self.bot.say(sometxt + '\n'.join(self.lessons.keys()))
+
     def verify_cache_remote_files(self, verbose=False):
         if os.path.exists(file_checks_json):
             try:
                 fp = open(file_checks_json)
-                file_checks = json.load(fp)
+                file_checks = json.load(open(file_checks_json))
                 fp.close()
             except:
                 file_checks = {}
@@ -284,6 +298,13 @@ class MCOC:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
+            if link:
+                filepath = self.warmap_links[maptype][1]
+                em = discord.Embed(title=mapTitle).set_image(url=filepath)
+                await self.bot.say(embed=em)
+            else:
+                filepath = filepath_png.format(maptype.lower())
+                await self.bot.send_file(channel, filepath, content=mapTitle)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
@@ -473,6 +494,7 @@ class MCOC:
         for row in raw_data['feed']['entry']:
             champ_match = mattkraft_re.fullmatch(row['title']['$t'])
             raw_dict = dict([kv.split(': ') for kv in split_re.split(row['content']['$t'])])
+            champ_match = mattkraft_re.fullmatch(raw_dict['mattkraftid'])
             if champ_match:
                 champ_name = champ_match.group('champ')
                 champ_star = int(champ_match.group('star'))
