@@ -272,7 +272,7 @@ class MCOC:
         await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai', link=False):
+    async def warmap(self, ctx, maptype='ai'):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
