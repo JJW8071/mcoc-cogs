@@ -65,7 +65,8 @@ champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portrait
 file_checks_json = 'data/mcoc/file_checks.json'
 
 ###### KEYS for MCOC JSON Data Extraction
-#mcoc_files='/data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
+mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
+kabam_bio = mcoc_dir + 'character_bios_en.json'
 ##### Special attacks require:
 ## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack title
 #mcoc_special_attack='ID_SPECIAL_ATTACK_'
@@ -150,12 +151,8 @@ class MCOC:
         if setting in self.settings:
             self.settings[setting] = int(value)
 
-    @commands.command(help=lookup_links['event'][0])
+    @commands.command(help=lookup_links['event'][0], aliases=('events',))
     async def event(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
-
-    @commands.command(help=lookup_links['event'][0])
-    async def events(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
 
     @commands.command(help=lookup_links['spotlight'][0])
@@ -178,12 +175,8 @@ class MCOC:
     async def simulator(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['simulator']))
 
-    @commands.command(help=lookup_links['alsciende'][0])
+    @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
     async def alsciende(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
-
-    @commands.command(help=lookup_links['alsciende'][0])
-    async def mrig(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
 
     @commands.command(help=lookup_links['streak'][0])
@@ -397,10 +390,12 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def tst(self, a, *, m):
-        await self.bot.say('a: {}   m:  {}'.format(type(a), type(m)))
-        await self.bot.say(a)
-        await self.bot.say(m)
+    async def tst(self):
+        bios = load_kabam_json(kabam_bio)
+        for champ in self.champs:
+            if 'ID_CHARACTER_BIOS_' + champ.mcocjson not in bios:
+                await self.bot.say('Could not find bio for champ: ' + champ.full_name)
+        await self.bot.say('Done')
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
@@ -541,7 +536,7 @@ class Champion:
             return '-'
 
     def get_avatar(self):
-        print('{}{}.png'.format(champ_avatar, self.mcocui))
+        #print('{}{}.png'.format(champ_avatar, self.mcocui))
         return '{}{}.png'.format(champ_avatar, self.mcocui)
 
     def get_portrait(self):
@@ -550,9 +545,11 @@ class Champion:
     def get_featured(self):
         return '{}{}.png'.format(champ_featured, self.mcocui)
 
-    @validate_attr('frogspawn')
+    #@validate_attr('frogspawn')
     def get_bio(self):
-        return self.frogspawn_data['bio']
+        #return self.frogspawn_data['bio']
+        bios = load_kabam_json(kabam_bio)
+        return bios['ID_CHARACTER_BIOS_' + self.mcocjson]
 
     @validate_attr('frogspawn')
     def get_sig(self, **kwargs):
@@ -672,6 +669,13 @@ def rotate(array, do_rotate):
         for i in range(len(array)):
             row.append(array[i][j])
         yield row
+
+def load_kabam_json(file):
+    raw_data = dataIO.load_json(file)
+    data = {}
+    for d in raw_data['strings']:
+        data[d['k']] = d['v']
+    return data
 
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
