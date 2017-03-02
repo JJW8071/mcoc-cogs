@@ -340,8 +340,8 @@ class MCOC:
         await self.bot.say(embed=em)
         await self.bot.say(embed=em2)
 
-    @commands.command()
-    async def special(self, )
+    # @commands.command()
+    # async def special(self, )
 
     @commands.command()
     async def sigarray(self, champ, dbg=1, *args):
