@@ -67,6 +67,7 @@ file_checks_json = 'data/mcoc/file_checks.json'
 ###### KEYS for MCOC JSON Data Extraction
 mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
 kabam_bio = mcoc_dir + 'character_bios_en.json'
+kabam_special_attacks = mcoc_dir+ 'special_attacks_en.json'
 ##### Special attacks require:
 ## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack title
 #mcoc_special_attack='ID_SPECIAL_ATTACK_'
@@ -321,6 +322,28 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
+    async def abilities(self,champ)
+        '''Champion Abilities List'''
+        champ = self._resolve_alias(champ)
+        specials = get_special_attacks(champ)
+        em = discord.Embed(color=champ.class_color,
+                title=champ.full_name + 'Abilities')
+                em.add_field(name='Passive',value='placeholder')
+                em.add_field(name='All Attacks',value='placeholder')
+                em.add_field(name='When Attacked',value='placeholder')
+                em.set_thumbnail(url=champ.get_avatar())
+        em2 = discord.Embed(color=champ.class_color,
+                title=champ.full_name + 'Special Attacks')
+                em.add_field(name=specials[0], value=specials[3])
+                em.add_field(name=specials[1], value=specials[4])
+                em.add_field(name=specials[2], value=specials[5])
+        await self.bot.say(embed=em)
+        await self.bot.say(embed=em2)
+
+    @commands.command()
+    async def special(self, )
+
+    @commands.command()
     async def sigarray(self, champ, dbg=1, *args):
         '''Retrieve the Signature Ability of a Champion at multiple levels'''
         champ = self._resolve_alias(champ)
@@ -550,6 +573,22 @@ class Champion:
         #return self.frogspawn_data['bio']
         bios = load_kabam_json(kabam_bio)
         return bios['ID_CHARACTER_BIOS_' + self.mcocjson]
+
+    def get_special_attacks(self)
+        specials = load_kabam_json(kabam_special_attacks)
+        prefix = 'ID_SPECIAL_ATTACK_'
+        desc = 'DESCRIPTION_'
+        zero = '_0'
+        one = '_1'
+        two = '_2'
+        s0 = specials[prefix + self.mcocjson + zero]
+        s1 = specials[prefix + self.mcocjson + one]
+        s2 = specials[prefix + self.mcocjson + two]
+        s0d = specials[prefix + desc + self.mcocjson + zero]
+        s1d = specials[prefix + desc + self.mcocjson + one]
+        s2d = specials[prefix + desc + self.mcocjson + two]
+        specials = (s0, s1, s2, s0d, s1d, s2d)
+        return specials
 
     @validate_attr('frogspawn')
     def get_sig(self, **kwargs):
