@@ -6,8 +6,9 @@ import os
 import inspect
 import urllib
 import requests
-import json
+#import json
 import asyncio
+from .utils.dataIO import dataIO
 from functools import wraps
 import discord
 from discord.ext import commands
@@ -59,7 +60,7 @@ prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
-champ_avatar='https://github.com/JasonJW/mcoc-cogs/tree/master/mcoc/data/portraits/portrait_'
+champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
 #champ_avatar='http://www.marvelsynergy.com/images/'
 file_checks_json = 'data/mcoc/file_checks.json'
 
@@ -198,7 +199,7 @@ class MCOC:
     def verify_cache_remote_files(self, verbose=False):
         if os.path.exists(file_checks_json):
             try:
-                file_checks = json.load(open(file_checks_json))
+                file_checks = dataIO.load_json(file_checks_json)
             except:
                 file_checks = {}
         else:
@@ -212,7 +213,7 @@ class MCOC:
             if remote_check:
                 file_checks[key] = remote_check.timetuple()[:6]
             #print(key, remote_check)
-        json.dump(file_checks, open(file_checks_json, 'w'), indent=4)
+        dataIO.save_json(file_checks_json, file_checks)
 
     def cache_remote_file(self, remote=None, local=None, verbose=False,
                 update_delta=0, last_check=None):
@@ -403,11 +404,7 @@ class MCOC:
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
-        #response = urllib.request.urlopen(data_files['crossreference']['local'])
-        #response = urllib.request.urlopen(champ_crossreference_json_debug)
-        #raw_data = json.loads(response.read().decode('utf-8'))
-        fp = open(data_files['crossreference']['local'], encoding='utf-8')
-        raw_data = json.load(fp)
+        raw_data = dataIO.load_json(data_files['crossreference']['local'])
         champs = []
         all_aliases = set()
         id_index = False
@@ -437,11 +434,7 @@ class MCOC:
         self.champs = champs
 
     def _prepare_frogspawn_champ_data(self):
-        #response = urllib.request.urlopen(champ_data_json)
-        #response = urllib.request.urlopen(data_files['frogspawn']['remote'])
-        #champ_data = json.loads(response.read().decode('utf-8'))
-        fp = open(data_files['frogspawn']['local'], encoding='utf-8')
-        champ_data = json.load(fp)
+        champ_data = dataIO.load_json(data_files['frogspawn']['local'])
         for champ in self.champs:
             if getattr(champ, 'frogspawnid', None):
                 champ.update_frogspawn(champ_data.get(champ.frogspawnid))
@@ -465,8 +458,7 @@ class MCOC:
     def _prepare_prestige_data(self):
         mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
         split_re = re.compile(', (?=\w+:)')
-        fp = open(data_files['spotlight']['local'], encoding='utf-8')
-        raw_data = json.load(fp)
+        raw_data = dataIO.load_json(data_files['spotlight']['local'])
         champs = {}
         for row in raw_data['feed']['entry']:
             raw_dict = dict([kv.split(': ') for kv in split_re.split(row['content']['$t'])])
@@ -477,9 +469,6 @@ class MCOC:
                 champ_rank = int(champ_match.group('rank'))
             else:
                 continue
-            #if 'champ' not in raw_dict:
-                #continue
-            #champ_name = raw_dict['champ']
             if champ_name not in champs:
                 champs[champ_name] = {}
                 champs[champ_name][4] = [None] * 5
@@ -499,12 +488,10 @@ class MCOC:
                         print(champ_name, k, v, len(sig))
                         raise
             champs[champ_name][champ_star][champ_rank-1] = sig
-        dumpfp = open(prestige_data, 'w')
-        json.dump(champs, dumpfp)
+        dataIO.save_json(prestige_data, champs)
         for champ in self.champs:
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
-                #champ.prestige_data = champs[champ.full_name]
 
 
 def validate_attr(*expected_args):
@@ -554,6 +541,7 @@ class Champion:
             return '-'
 
     def get_avatar(self):
+        print('{}{}.png'.format(champ_avatar, self.mcocui))
         return '{}{}.png'.format(champ_avatar, self.mcocui)
 
     def get_portrait(self):
