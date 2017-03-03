@@ -325,7 +325,7 @@ class MCOC:
     async def abilities(self, champ):
         '''Champion Abilities List'''
         champ = self._resolve_alias(champ)
-        specials = self.get_special_attacks(champ)
+        specials = get_special_attacks(champ)
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
         em.add_field(name='Passive',value='placeholder')
