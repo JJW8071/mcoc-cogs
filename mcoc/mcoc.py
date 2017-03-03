@@ -574,7 +574,7 @@ class Champion:
         bios = load_kabam_json(kabam_bio)
         return bios['ID_CHARACTER_BIOS_' + self.mcocjson]
 
-    def get_special_attacks(self)
+    def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
         prefix = 'ID_SPECIAL_ATTACK_'
         desc = 'DESCRIPTION_'
