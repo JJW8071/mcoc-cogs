@@ -422,7 +422,8 @@ class MCOC:
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
-        raw_data = dataIO.load_json(data_files['crossreference']['local'])
+        #raw_data = dataIO.load_json(data_files['crossreference']['local'])
+        raw_data = dataIO.load_json(data_files['crossreference']['remote'])
         champs = []
         all_aliases = set()
         id_index = False
