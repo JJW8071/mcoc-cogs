@@ -333,10 +333,10 @@ class MCOC:
         em.add_field(name='When Attacked',value='placeholder')
         em.set_thumbnail(url=champ.get_avatar())
         em2 = discord.Embed(color=champ.class_color,
-        title=champ.full_name + 'Special Attacks')
-        em.add_field(name=specials[0], value=specials[3])
-        em.add_field(name=specials[1], value=specials[4])
-        em.add_field(name=specials[2], value=specials[5])
+        title=champ.full_name + ' Special Attacks')
+        em2.add_field(name=specials[0], value=specials[3])
+        em2.add_field(name=specials[1], value=specials[4])
+        em2.add_field(name=specials[2], value=specials[5])
         await self.bot.say(embed=em)
         await self.bot.say(embed=em2)
 
