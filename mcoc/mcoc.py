@@ -14,25 +14,6 @@ import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
 
-## Class : Champion Parser
-
-## Command list
-## Spotlight - done
-## Event/Events - done
-## Sig
-### Sig <champ> <value>
-## Warmap
-### Warmap <lanelane>
-## Sig
-### Sig <champ> <value>
-## Roster
-## PlayerCards
-### Username
-### Mastery Rig link
-### Frogspawn Card Link
-### Member Since
-### Avatar
-## About <Champion>
 
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
@@ -40,7 +21,7 @@ data_files = {
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
-                'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
+                'local': 'data/mcoc/crossreference.json', 'update_delta': 0},
 ## prestige - strictly the export of mattkraft's prestige table
     #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 #'local': 'data/mcoc/prestige.json'},
@@ -422,8 +403,7 @@ class MCOC:
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
-        #raw_data = dataIO.load_json(data_files['crossreference']['local'])
-        raw_data = dataIO.load_json(data_files['crossreference']['remote'])
+        raw_data = dataIO.load_json(data_files['crossreference']['local'])
         champs = []
         all_aliases = set()
         id_index = False
