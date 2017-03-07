@@ -323,6 +323,7 @@ class MCOC:
 
         await self.bot.say('I am testing the following key: ' + testing)
         if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in signatures:
+            await self.bot.say('I passed the first if: TITLE_LOWER')
             sigtitle = signatures['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
             desc_simple = signatures['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
             # desc = ['placeholder', None, None, None, None]
