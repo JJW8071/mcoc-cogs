@@ -137,7 +137,7 @@ class MCOC:
         self.verify_cache_remote_files(verbose=True)
         self._init()
 
-    def _init(self):    
+    def _init(self):
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
@@ -313,54 +313,54 @@ class MCOC:
                 description='Fetch bio data with key: {}'.format(champ.mcocjson))
         em.set_thumbnail(url=champ.get_avatar())
 
-    # @commands.command()
-    # async def mcoc_sig(self, champ):
-    #     '''Retrieve Champion Signature Ability from MCOC Files'''
-    #     champ = self._resolve_alias(champ)
-    #     settings = self.settings.copy()
-    #     if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in kabam_bcg_stat_en:
-    #         sigtitle = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
-    #         desc_simple = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
-    #         desc = ("placeholder", None, None, None)
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-    #         em.add_field(title=sigtitle,value=desc_simple)
-    #         if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_AO' in kabam_bcg_stat_en:
-    #             desc(1) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
-    #             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO' in kabam_bcg_stat_en:
-    #                 desc(2) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO']
-    #                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO' in kabam_bcg_stat_en:
-    #                     desc(3) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO']
-    #                     if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO' in kabam_bcg_stat_en:
-    #                         desc(4) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO']
-    #                         if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO' in kabam_bcg_stat_en:
-    #                             desc(5) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO']
-    #         elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO' in kabam_bcg_stat_en:
-    #             desc(1) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO']
-    #             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO' in kabam_bcg_stat_en:
-    #                 desc(2) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO']
-    #         elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_90S' in kabam_bcg_stat_en:
-    #             desc(1) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_90S_AO']
-    #         elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT' in kabam_bcg_stat_en:
-    #             desc(1) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT']
-    #         elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC' in kabam_bcg_stat_en:
-    #             desc(1) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC']
-    #             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B' in kabam_bcg_stat_en:
-    #                 desc(2) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_B']
-    #             elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC2' in kabam_bcg_stat_en:
-    #                 desc(2) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC2']
-    #                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC3' in kabam_bcg_stat_en:
-    #                     desc(3) = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC3']
-    #         em.add_field(value=desc[1])
-    #         if desc[2] is not None:
-    #             em.add_field(value=desc[2])
-    #             if desc[3] is not None:
-    #                 em.add_field(value=desc[3])
-    #                 if desc[4] is not None:
-    #                     em.add_field(value=desc[4])
-    #         em.thumbnail(url=get_avatar())
-    #         await self.bot.say(embed=em)
-    #     else:
-    #         await self.bot.say('Yeah, no.  I couldn\'t find anything')
+    @commands.command()
+    async def mcoc_sig(self, champ):
+        '''Retrieve Champion Signature Ability from MCOC Files'''
+        champ = self._resolve_alias(champ)
+        settings = self.settings.copy()
+        if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in kabam_bcg_stat_en:
+            sigtitle = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
+            desc_simple = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
+            desc = ("placeholder", None, None, None)
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.add_field(title=sigtitle,value=desc_simple)
+            if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_AO' in kabam_bcg_stat_en:
+                desc[1] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
+                if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO' in kabam_bcg_stat_en:
+                    desc[2] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO']
+                    if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO' in kabam_bcg_stat_en:
+                        desc[3] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO']
+                        if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO' in kabam_bcg_stat_en:
+                            desc[4] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO']
+                            if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO' in kabam_bcg_stat_en:
+                                desc[5] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO']
+            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO' in kabam_bcg_stat_en:
+                desc[1] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO']
+                if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO' in kabam_bcg_stat_en:
+                    desc[2] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO']
+            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_90S' in kabam_bcg_stat_en:
+                desc[1] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_90S_AO']
+            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT' in kabam_bcg_stat_en:
+                desc[1] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT']
+            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC' in kabam_bcg_stat_en:
+                desc[1] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC']
+                if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B' in kabam_bcg_stat_en:
+                    desc[2] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC_B']
+                elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC2' in kabam_bcg_stat_en:
+                    desc[2] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC2']
+                    if 'ID_UI_STAT_' + champ.mcocsig + 'DESC3' in kabam_bcg_stat_en:
+                        desc[3] = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'DESC3']
+            em.add_field(value=desc[1])
+            if desc[2] is not None:
+                em.add_field(value=desc[2])
+                if desc[3] is not None:
+                    em.add_field(value=desc[3])
+                    if desc[4] is not None:
+                        em.add_field(value=desc[4])
+            em.thumbnail(url=get_avatar())
+            await self.bot.say(embed=em)
+        else:
+            await self.bot.say('Yeah, no.  I couldn\'t find anything')
         # this is where I'm working
 
     @commands.command()
