@@ -363,7 +363,7 @@ class MCOC:
                         em.add_field(name="",value=desc[3])
                         if desc[4] is not None:
                             em.add_field(name="",value=desc[4])
-            em.thumbnail(url=champ.get_avatar())
+            em.set_thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Yeah, no.  I couldn\'t find anything')
