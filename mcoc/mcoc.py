@@ -320,13 +320,14 @@ class MCOC:
         champ = self._resolve_alias(champ)
         settings = self.settings.copy()
         testing = 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER'
+
         await self.bot.say('I am testing the following key: ' + testing)
         if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in signatures:
             sigtitle = signatures['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
             desc_simple = signatures['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
             desc = ("placeholder", None, None, None)
             em = discord.Embed(color=champ.class_color, title=champ.full_name)
-            em.add_field(title=sigtitle,value=desc_simple)
+            em.add_field(description=sigtitle,value=desc_simple)
             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_AO' in signatures:
                 desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO' in signatures:
@@ -360,7 +361,7 @@ class MCOC:
                     em.add_field(value=desc[3])
                     if desc[4] is not None:
                         em.add_field(value=desc[4])
-            em.thumbnail(url=get_avatar())
+            em.thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Yeah, no.  I couldn\'t find anything')
