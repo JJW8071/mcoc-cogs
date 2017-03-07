@@ -14,6 +14,25 @@ import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
 
+## Class : Champion Parser
+
+## Command list
+## Spotlight - done
+## Event/Events - done
+## Sig
+### Sig <champ> <value>
+## Warmap
+### Warmap <lanelane>
+## Sig
+### Sig <champ> <value>
+## Roster
+## PlayerCards
+### Username
+### Mastery Rig link
+### Frogspawn Card Link
+### Member Since
+### Avatar
+## About <Champion>
 
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
@@ -116,18 +135,30 @@ class MCOC:
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
         self.verify_cache_remote_files(verbose=True)
+        self._init()
+
+    def _init(self):    
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
 
-    #  @commands.command()
-    #  async def mcoc_update_data(self):
-    #     await self.bot.say('Summoner, I am attempting to Collect the requisite data')
-    #     for val in data_files.values():
-    #         self.bot.say('Fetching {} ...'.format(data_files[val])
-    #         self.cache_remote_files(**val, verbose=True)
-    #     await self.bot.say('Summoner, I have Collected the data')
+    @commands.command()
+    async def mcoc_update(self, fname, force=False):
+        if len(fname) > 3:
+            for key in data_files.keys():
+                if key.startswith(fname):
+                    fname = key
+                    break
+        if fname in data_files:
+            self.cache_remote_file(**data_files[fname], force_cache=force, verbose=True)
+        else:
+            await self.bot.say('Valid options for 1st argument are one of (or initial portion of)\n\t'
+                    + '\n\t'.join(data_files.keys()))
+            return
+
+        self._init()
+        await self.bot.say('Summoner, I have Collected the data')
 
     @commands.command()
     async def mcocset(self, setting, value):
@@ -172,7 +203,7 @@ class MCOC:
         channel=ctx.message.channel
         await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
 
-    def verify_cache_remote_files(self, verbose=False):
+    def verify_cache_remote_files(self, verbose=False, force_cache=False):
         if os.path.exists(file_checks_json):
             try:
                 file_checks = dataIO.load_json(file_checks_json)
@@ -192,12 +223,12 @@ class MCOC:
         dataIO.save_json(file_checks_json, file_checks)
 
     def cache_remote_file(self, remote=None, local=None, verbose=False,
-                update_delta=0, last_check=None):
+                update_delta=0, last_check=None, force_cache=False):
         strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
         response = None
         remote_check = False
         now = datetime.now()
-        if os.path.exists(local):
+        if os.path.exists(local) and not force_cache:
             check_marker = None
             if last_check:
                 check_marker = now - timedelta(days=update_delta)
@@ -448,9 +479,23 @@ class MCOC:
     @commands.command()
     async def tst(self):
         bios = load_kabam_json(kabam_bio)
+        no_mcocjson = []
+        no_kabam_key = []
+        bio_keys = set(bios.keys())
         for champ in self.champs:
-            if 'ID_CHARACTER_BIOS_' + champ.mcocjson not in bios:
-                await self.bot.say('Could not find bio for champ: ' + champ.full_name)
+            if not getattr(champ, 'mcocjson', None):
+                no_mcocjson.append(champ.full_name)
+            elif 'ID_CHARACTER_BIOS_' + champ.mcocjson not in bios:
+                no_kabam_key.append(champ.full_name)
+                #await self.bot.say('Could not find bio for champ: ' + champ.full_name)
+            else:
+                bio_keys.remove('ID_CHARACTER_BIOS_' + champ.mcocjson)
+        if no_mcocjson:
+            await self.bot.say('Could not find mcocjson alias for champs:\n\t' + ', '.join(no_mcocjson))
+        if no_kabam_key:
+            await self.bot.say('Could not find Kabam key for champs:\n\t' + ', '.join(no_kabam_key))
+        if bio_keys:
+            await self.bot.say('Residual BIO keys:\n\t' + ', '.join(bio_keys))
         await self.bot.say('Done')
 
     def _prepare_aliases(self):
@@ -605,7 +650,10 @@ class Champion:
     def get_bio(self):
         #return self.frogspawn_data['bio']
         bios = load_kabam_json(kabam_bio)
-        return bios['ID_CHARACTER_BIOS_' + self.mcocjson]
+        key = 'ID_CHARACTER_BIOS_' + self.mcocjson
+        if key not in bios:
+            raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
+        return bios[key]
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
