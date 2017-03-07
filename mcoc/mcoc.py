@@ -325,42 +325,44 @@ class MCOC:
         if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in signatures:
             sigtitle = signatures['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
             desc_simple = signatures['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
-            desc = ("placeholder", None, None, None)
+            desc = ['placeholder', None, None, None, None]
             em = discord.Embed(color=champ.class_color, title=champ.full_name)
             em.add_field(name=sigtitle,value=desc_simple)
             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_AO' in signatures:
-                desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
+                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO' in signatures:
-                    desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO']
+                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO']
                     if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO' in signatures:
-                        desc[3] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO']
+                        desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO']
                         if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO' in signatures:
-                            desc[4] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO']
+                            desc[3] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO']
                             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO' in signatures:
-                                desc[5] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO']
+                                desc[4] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO']
             elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO' in signatures:
-                desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO']
+                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO']
                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO' in signatures:
-                    desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO']
+                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO']
             elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_90S' in signatures:
-                desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_90S_AO']
+                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_90S_AO']
             elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT' in signatures:
-                desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT']
+                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT']
             elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC' in signatures:
-                desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC']
+                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC']
                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B' in signatures:
-                    desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_B']
+                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_B']
                 elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC2' in signatures:
-                    desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC2']
+                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC2']
                     if 'ID_UI_STAT_' + champ.mcocsig + 'DESC3' in signatures:
-                        desc[3] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC3']
-            em.add_field(value=desc[1])
-            if desc[2] is not None:
-                em.add_field(value=desc[2])
-                if desc[3] is not None:
-                    em.add_field(value=desc[3])
-                    if desc[4] is not None:
-                        em.add_field(value=desc[4])
+                        desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC3']
+            em.add_field(value=desc[0])
+            if desc[1] is not None:
+                em.add_field(value=desc[1])
+                if desc[2] is not None:
+                    em.add_field(value=desc[2])
+                    if desc[3] is not None:
+                        em.add_field(value=desc[3])
+                        if desc[4] is not None:
+                            em.add_field(value=desc[4])
             em.thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
         else:
