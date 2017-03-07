@@ -318,6 +318,8 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         settings = self.settings.copy()
+        testing = 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER'
+        await self.bot.say('I am testing the following key: ' + testing)
         if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in kabam_bcg_stat_en:
             sigtitle = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
             desc_simple = kabam_bcg_stat_en['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
