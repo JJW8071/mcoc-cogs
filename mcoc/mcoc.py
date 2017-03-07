@@ -327,9 +327,8 @@ class MCOC:
             desc_simple = signatures['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
             # desc = ['placeholder', None, None, None, None]
             desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
-            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em = discord.Embed(color=champ.class_color, title=champ.full_name,description=sigtitle,value=desc_simple)
             # em.set_thumbnail(url=champ.get_avatar())
-            em.add_field(name=sigtitle,value=desc_simple)
             if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_AO' in signatures:
                 desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
                 if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO' in signatures:
