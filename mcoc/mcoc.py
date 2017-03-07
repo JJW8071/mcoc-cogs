@@ -354,15 +354,15 @@ class MCOC:
                     desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC2']
                     if 'ID_UI_STAT_' + champ.mcocsig + 'DESC3' in signatures:
                         desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC3']
-            em.add_field(value=desc[0])
+            em.add_field(name="",value=desc[0])
             if desc[1] is not None:
-                em.add_field(value=desc[1])
+                em.add_field(name="",value=desc[1])
                 if desc[2] is not None:
-                    em.add_field(value=desc[2])
+                    em.add_field(name="",value=desc[2])
                     if desc[3] is not None:
-                        em.add_field(value=desc[3])
+                        em.add_field(name="",value=desc[3])
                         if desc[4] is not None:
-                            em.add_field(value=desc[4])
+                            em.add_field(name="",value=desc[4])
             em.thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
         else:
