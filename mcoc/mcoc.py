@@ -318,44 +318,45 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         signatures = load_kabam_json(kabam_bcg_stat_en)
         champ = self._resolve_alias(champ)
+        basename = 'ID_UI_STAT_' + champ.mcocsig
         settings = self.settings.copy()
-        testing = 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER'
+        testing = basename + 'TITLE_LOWER'
 
         await self.bot.say('I am testing the following key: ' + testing)
-        if 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER' in signatures:
+        if basename + 'TITLE_LOWER' in signatures:
             await self.bot.say('I passed the first if: TITLE_LOWER')
-            sigtitle = signatures['ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER']
-            desc_simple = signatures['ID_UI_STAT_' + champ.mcocsig + 'SIMPLE']
-            # desc = ['placeholder', None, None, None, None]
-            desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
+            sigtitle = signatures[basename + 'TITLE_LOWER']
+            desc_simple = signatures[basename + 'SIMPLE']
+            desc = ['placeholder', None, None, None, None]
+            #desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
             em = discord.Embed(color=champ.class_color, title=champ.full_name, description=sigtitle)#, value=desc_simple)
             em.set_thumbnail(url=champ.get_avatar())
-            if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_AO' in signatures:
-                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_AO']
-                if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO' in signatures:
-                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_B_AO']
-                    if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO' in signatures:
-                        desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_C_AO']
-                        if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO' in signatures:
-                            desc[3] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_D_AO']
-                            if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO' in signatures:
-                                desc[4] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_E_AO']
-            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO' in signatures:
-                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_AO']
-                if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO' in signatures:
-                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_NEW_B_AO']
-            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_90S' in signatures:
-                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_90S_AO']
-            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT' in signatures:
-                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_ALT']
-            elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC' in signatures:
-                desc[0] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC']
-                if 'ID_UI_STAT_' + champ.mcocsig + 'DESC_B' in signatures:
-                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC_B']
-                elif 'ID_UI_STAT_' + champ.mcocsig + 'DESC2' in signatures:
-                    desc[1] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC2']
-                    if 'ID_UI_STAT_' + champ.mcocsig + 'DESC3' in signatures:
-                        desc[2] = signatures['ID_UI_STAT_' + champ.mcocsig + 'DESC3']
+            if basename + 'DESC_AO' in signatures:
+                desc[0] = signatures[basename + 'DESC_AO']
+                if basename + 'DESC_B_AO' in signatures:
+                    desc[1] = signatures[basename + 'DESC_B_AO']
+                    if basename + 'DESC_C_AO' in signatures:
+                        desc[2] = signatures[basename + 'DESC_C_AO']
+                        if basename + 'DESC_D_AO' in signatures:
+                            desc[3] = signatures[basename + 'DESC_D_AO']
+                            if basename + 'DESC_E_AO' in signatures:
+                                desc[4] = signatures[basename + 'DESC_E_AO']
+            elif basename + 'DESC_NEW_AO' in signatures:
+                desc[0] = signatures[basename + 'DESC_NEW_AO']
+                if basename + 'DESC_NEW_B_AO' in signatures:
+                    desc[1] = signatures[basename + 'DESC_NEW_B_AO']
+            elif basename + 'DESC_90S' in signatures:
+                desc[0] = signatures[basename + 'DESC_90S_AO']
+            elif basename + 'DESC_ALT' in signatures:
+                desc[0] = signatures[basename + 'DESC_ALT']
+            elif basename + 'DESC' in signatures:
+                desc[0] = signatures[basename + 'DESC']
+                if basename + 'DESC_B' in signatures:
+                    desc[1] = signatures[basename + 'DESC_B']
+                elif basename + 'DESC2' in signatures:
+                    desc[1] = signatures[basename + 'DESC2']
+                    if basename + 'DESC3' in signatures:
+                        desc[2] = signatures[basename + 'DESC3']
             em.add_field(name="",value=desc[0])
             if desc[1] is not None:
                 em.add_field(name="",value=desc[1])
