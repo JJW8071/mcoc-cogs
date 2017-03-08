@@ -31,6 +31,9 @@ class ClanMod:
         channel = message.channel
         package = mesage.attachments
 
+        if package > 0:
+            await self.bot.say('DEBUG: message.attachements > 0')
+        
         if 'champions.csv' in package:
             await self.bot.say('DEBUG: champions.csv detected on channel {}'.format(channel))
 
