@@ -43,8 +43,7 @@ class ClanMod:
 
         await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
-
-    async def on_attachement(self, message):
+    async def on_attachment(self, message):
         user = message.author
         server = user.server
         channel = message.channel
@@ -52,17 +51,7 @@ class ClanMod:
         if len(message.attachments):
             for attachment in message.attachments:
                 if attachment['filename'] == 'champions.csv':
-                    await self.bot.send_message(channel, 'DEBUG: Message attachement detected')
-                    await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
-                    url = open(attachment[0]['url'])
-                    with requests.Session() as s:
-                        download = s.get(url)
-                        decoded_content = download.content.decode('utf-8')
-                        cr = csv.reader(decoded_content.splitlines(),delimiter=',')
-                        for i in 10:
-                            temp = cr[i]
-                    await self.bot.say(temp)
-                    await self.bot.say('DEBUG: CSV file opened')
+                    _parse_champions_csv(self, message, attachment, user, server, channel)
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -94,7 +83,20 @@ class ClanMod:
         except AttributeError as e:
             pass
 
+    async def _parse_champions_csv(self, message, attachment, user, server, channel):
+        await self.bot.send_message(channel, 'DEBUG: Message attachment detected')
+        await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
+        url = open(attachment[0]['url'])
+        with requests.Session() as s:
+            download = s.get(url)
+            decoded_content = download.content.decode('utf-8')
+            cr = csv.reader(decoded_content.splitlines(),delimiter=',')
+            for i in 10:
+                temp = cr[i]
+        await self.bot.say(temp)
+        await self.bot.say('DEBUG: CSV file opened')
+
 def setup(bot):
     n = ClanMod(bot)
     bot.add_cog(n)
-    bot.add_listener(n.on_attachement, name='on_message')
+    bot.add_listener(n.on_attachment, name='on_message')
