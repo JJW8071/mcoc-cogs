@@ -27,10 +27,11 @@ class ClanMod:
     async def on_attachement(self, message):
         user = message.author
         channel = message.channel
-        #await self.bot.send_message(channel, 'DEBUG: message.attachments len = '+len(message.attachements))
-        if len(message.attachments) != 0:
-            await self.bot.send_message(channel, 'DEBUG: Message attachement detected')
-            await self.bot.send_message(channel, 'attachment[0]: {}'.format(message.attachments[0]))
+        if len(message.attachments):
+            for attachment in message.attachments:
+                if attachment['filename'] == 'champions.csv':
+                    await self.bot.send_message(channel, 'DEBUG: Message attachement detected')
+                    await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
 
 
 def setup(bot):
