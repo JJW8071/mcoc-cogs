@@ -25,10 +25,10 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
-    @commands.command(pass_context=True)
-    async def champions(self,ctx, user : discord.Member):
-        channel = message.channel
-        author = message.author
+    async def on_message(self,ctx):
+        channel = ctx.message.channel
+        author = ctx.message.author
+        message = ctx.message
 
         if message.server is None:
             return
@@ -38,6 +38,8 @@ class ClanMod:
 
         if message.attachements > 0:
             await self.bot.say('DEBUG: File attachement detected.')
+            package = message.attachements
+            await self.bot.say('DEBUG: Item 0 in attachment list is {}'.format(package[0]))
 
         await bot.process_commands(message)
 
