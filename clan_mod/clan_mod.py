@@ -5,6 +5,8 @@ from .utils.dataIO import fileIO
 from .utils import checks
 import time
 import os
+import csv
+import urllib2
 
 class ClanMod:
 
@@ -44,12 +46,22 @@ class ClanMod:
 
     async def on_attachement(self, message):
         user = message.author
+        server = user.server
         channel = message.channel
+        await self._create_user(user,server)
         if len(message.attachments):
             for attachment in message.attachments:
                 if attachment['filename'] == 'champions.csv':
                     await self.bot.send_message(channel, 'DEBUG: Message attachement detected')
                     await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
+                    url = open(attachment[0]['url'])
+                    response = urllib2.urlopen(url)
+                    cr = csv.reader(response)
+                    i = 0
+                    for i to 10
+                        temp = cr[i +'\n]
+                        await self.bot.say(temp)
+                    await self.bot.say('DEBUG: CSV file opened')
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -59,6 +71,8 @@ class ClanMod:
                 os.makedirs("data/clanmod/users/{}".format(user.id))
                 new_account = {
                     "servers": {},
+                    "clan":{},
+                    "battlegroup":{},
                     "champs": {},
                     "prestige": 0,
                     "top5": {},
