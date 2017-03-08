@@ -25,7 +25,7 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
-    async def _on_attachement(self):
+    async def _on_attachement(self, message):
         user = message.author
         msg = message.content.lower()
         channel = message.channel
