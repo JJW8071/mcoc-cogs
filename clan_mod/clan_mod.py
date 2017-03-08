@@ -59,7 +59,7 @@ class ClanMod:
                     cr = csv.reader(response)
                     i = 0
                     for i to 10
-                        temp = cr[i +'\n]
+                        temp = cr[i +'\n']
                         await self.bot.say(temp)
                     await self.bot.say('DEBUG: CSV file opened')
 
