@@ -45,7 +45,8 @@ class ClanMod:
 
     async def _on_attachment(self, message):
         channel = message.channel
-        if len(message.attachments):
+        attachments = message.attachments
+        if len(attachments):
             await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
             self._parse_champions_csv(message)
 
@@ -84,7 +85,7 @@ class ClanMod:
         user = message.author
         server = user.server
         channel = message.channel
-        await self.bot.send_message(channel, 'DEBUG: Message attachment detected')
+        await self.bot.send_message(channel, 'DEBUG: attachment[0] = {}'.format(attachment))
         for attachment in message.attachments:
             if attachment['filename'] == 'champions.csv':
                 await self._create_user(user,server)
@@ -96,7 +97,6 @@ class ClanMod:
                     cr = csv.reader(decoded_content.splitlines(),delimiter=',')
                     for i in 10:
                         temp = cr[i]
-                await self.bot.say(temp)
                 await self.bot.say('DEBUG: CSV file opened')
 
 #-------------- setup -------------
