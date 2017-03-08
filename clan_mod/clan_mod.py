@@ -73,6 +73,7 @@ class ClanMod:
                     "aq": {},
                     "awd": {},
                     "awo": {},
+                    "max5":{},
                     "last_updated": time.time()
                 }
                 fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", userinfo)
