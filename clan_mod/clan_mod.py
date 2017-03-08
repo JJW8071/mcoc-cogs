@@ -26,9 +26,10 @@ class ClanMod:
 
 
     async def on_message(self):
-        user = messague.author
+        user = message.author
         msg = message.content.lower()
         channel = message.channel
+        await self.bot.say('DEBUG: on_message parsed message')
 
         if len(message.attachements) != 0:
             await self.bot.say('DEBUG: Message attachement detected')
