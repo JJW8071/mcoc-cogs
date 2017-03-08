@@ -81,22 +81,23 @@ class ClanMod:
             pass
 
     async def _parse_champions_csv(self, message):
+
         user = message.author
         server = user.server
         channel = message.channel
-        attachment = message.attachments[0] # what if there are multiple?
-        await self._create_user(user,server)
         await self.bot.send_message(channel, 'DEBUG: Message attachment detected')
-        await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
-        url = open(attachment[0]['url'])
-        with requests.Session() as s:
-            download = s.get(url)
-            decoded_content = download.content.decode('utf-8')
-            cr = csv.reader(decoded_content.splitlines(),delimiter=',')
-            for i in 10:
-                temp = cr[i]
-        await self.bot.say(temp)
-        await self.bot.say('DEBUG: CSV file opened')
+        for attachment in message.attachments:
+            await self._create_user(user,server)
+            await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
+            url = open(attachment[0]['url'])
+            with requests.Session() as s:
+                download = s.get(url)
+                decoded_content = download.content.decode('utf-8')
+                cr = csv.reader(decoded_content.splitlines(),delimiter=',')
+                for i in 10:
+                    temp = cr[i]
+            await self.bot.say(temp)
+            await self.bot.say('DEBUG: CSV file opened')
 
 #-------------- setup -------------
 def check_folders():
