@@ -47,7 +47,7 @@ class ClanMod:
         if len(message.attachments):
             for attachment in message.attachments:
                 if attachment['filename'] == 'champions.csv':
-                    _parse_champions_csv(self, message)
+                    self._parse_champions_csv(self, message)
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -99,7 +99,19 @@ class ClanMod:
         await self.bot.say(temp)
         await self.bot.say('DEBUG: CSV file opened')
 
+#-------------- setup -------------
+def check_folders():
+    if not os.path.exists("data/clanmod"):
+        print("Creating data/clanmod folder...")
+        os.makedirs("data/clanmod")
+
+    if not os.path.exists("data/clanmod/users"):
+        print("Creating data/clanmod/users folder...")
+        os.makedirs("data/clanmod/users")
+        transfer_info()
+
 def setup(bot):
+    check_folders()
     n = ClanMod(bot)
     bot.add_cog(n)
     bot.add_listener(n.on_attachment, name='on_message')
