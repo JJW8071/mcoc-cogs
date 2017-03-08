@@ -24,21 +24,18 @@ class ClanMod:
             await self.bot.say("I cannot do that, I lack the "
                 "\"Manage Nicknames\" permission.")
 
-
-    async def _on_attachement(self, message):
+    async def on_attachement(self, message):
         user = message.author
         msg = message.content.lower()
         channel = message.channel
         await self.bot.say('DEBUG: on_message parsed message')
-
+        await self.bot.say('DEBUG: message.attachments len = '+len(message.attachements))
         if len(message.attachements) != 0:
             await self.bot.say('DEBUG: Message attachement detected')
             await self.bot.say('attachment[0]: {}'.format(message.attachements[0]))
 
 
-
-
 def setup(bot):
     n = ClanMod(bot)
     bot.add_cog(n)
-    bot.add_listener(n._on_attachement, name='on_message')
+    bot.add_listener(n.on_attachement, name='on_message')
