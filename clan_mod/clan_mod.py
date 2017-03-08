@@ -3,6 +3,7 @@ from discord.ext import commands
 from .utils.dataIO import dataIO
 from .utils import checks
 import time
+import os
 
 class ClanMod:
 
