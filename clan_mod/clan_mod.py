@@ -45,8 +45,8 @@ class ClanMod:
 
     async def _on_attachment(self, message):
         channel = message.channel
-        #await self.bot.send_message(channel,'DEBUG: _on_attachment initialized')
-        if len(message.attachments) > 0:
+        if len(message.attachments):
+            await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
             self._parse_champions_csv(message)
 
     # handles user creation, adding new server, blocking
