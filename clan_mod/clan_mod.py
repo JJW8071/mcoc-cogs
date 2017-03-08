@@ -25,7 +25,8 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
-    async def on_message(self,message):
+    @commands.command()
+    async def champions(self,message):
         channel = message.channel
         author = message.author
 
