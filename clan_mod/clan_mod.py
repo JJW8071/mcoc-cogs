@@ -39,5 +39,6 @@ class ClanMod:
 
 
 def setup(bot):
-    bot.add_cog(ClanMod(bot))
-    bot.add_listener(ClanMod._on_attachement, 'on_message')
+    n = ClanMod(bot)
+    bot.add_cog(n)
+    bot.add_listener(n._on_attachement, name='on_message')
