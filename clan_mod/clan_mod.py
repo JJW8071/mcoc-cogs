@@ -6,7 +6,7 @@ from .utils import checks
 import time
 import os
 import csv
-import urllib2
+import requests
 
 class ClanMod:
 
@@ -55,9 +55,12 @@ class ClanMod:
                     await self.bot.send_message(channel, 'DEBUG: Message attachement detected')
                     await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
                     url = open(attachment[0]['url'])
-                    response = urllib2.urlopen(url)
-                    cr = csv.reader(response)
-                    temp = cr[0]+'\n' + cr[1]+'\n' + cr[2] + '\n' + cr[3] + '\n' + cr[4] + '\n' + cr[5]
+                    with requests.Session() as s:
+                        download = s.get(url)
+                        decoded_content = download.content.decode('utf-8')
+                        cr = csv.reader(decoded_content.splitlines(),delimiter=',')
+                        for i in 10:
+                            temp = cr[i]
                     await self.bot.say(temp)
                     await self.bot.say('DEBUG: CSV file opened')
 
