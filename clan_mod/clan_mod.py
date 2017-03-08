@@ -25,5 +25,22 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
+    async def on_message(self,message):
+        channel = message.channel
+        author = message.author
+
+        if message.server is None:
+            return
+
+        if author == self.bot.user:
+            return
+
+        if message.attachements > 0:
+            await self.bot.say('DEBUG: File attachement detected.')
+
+        await bot.process_commands(message)
+
+
+
 def setup(bot):
     bot.add_cog(ClanMod(bot))
