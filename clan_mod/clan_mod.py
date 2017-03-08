@@ -44,14 +44,10 @@ class ClanMod:
         await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
     async def on_attachment(self, message):
-        user = message.author
-        server = user.server
-        channel = message.channel
-        await self._create_user(user,server)
         if len(message.attachments):
             for attachment in message.attachments:
                 if attachment['filename'] == 'champions.csv':
-                    _parse_champions_csv(self, message, attachment, user, server, channel)
+                    _parse_champions_csv(self, message)
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -83,7 +79,12 @@ class ClanMod:
         except AttributeError as e:
             pass
 
-    async def _parse_champions_csv(self, message, attachment, user, server, channel):
+    async def _parse_champions_csv(self, message):
+        user = message.author
+        server = user.server
+        channel = message.channel
+        attachment = message.attachments[0] # what if there are multiple?
+        await self._create_user(user,server)
         await self.bot.send_message(channel, 'DEBUG: Message attachment detected')
         await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
         url = open(attachment[0]['url'])
