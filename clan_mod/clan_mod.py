@@ -25,7 +25,7 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
-    async def on_message(self):
+    async def _on_attachement(self):
         user = message.author
         msg = message.content.lower()
         channel = message.channel
@@ -40,3 +40,4 @@ class ClanMod:
 
 def setup(bot):
     bot.add_cog(ClanMod(bot))
+    bot.add_listener(ClanMod._on_attachement, 'on_message')
