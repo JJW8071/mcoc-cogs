@@ -45,7 +45,7 @@ class ClanMod:
 
     async def _on_attachment(self, message):
         channel = message.channel
-        await self.bot.send_message(channel,'DEBUG: _on_attachment initialized')
+        #await self.bot.send_message(channel,'DEBUG: _on_attachment initialized')
         if len(message.attachments) > 0:
             self._parse_champions_csv(message)
 
