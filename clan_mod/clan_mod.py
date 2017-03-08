@@ -25,11 +25,10 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
-    async def on_message(self,ctx):
-        channel = ctx.message.channel
-        author = ctx.message.author
-        message = ctx.message
-
+    async def on_message(self):
+        channel = message.channel
+        author = message.author
+        
         if message.server is None:
             return
 
