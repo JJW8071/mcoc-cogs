@@ -44,7 +44,8 @@ class ClanMod:
         await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
     async def _on_attachment(self, message):
-        await self.bot.say('DEBUG: _on_attachment initialized')
+        channel = message.channel
+        await self.bot.send_message(channel,'DEBUG: _on_attachment initialized')
         if len(message.attachments) > 0:
             self._parse_champions_csv(message)
 
