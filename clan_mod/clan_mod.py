@@ -57,6 +57,14 @@ class ClanMod:
                 os.makedirs("data/clanmod/users/{}".format(user.id))
                 new_account = {
                     "servers": {},
+                    "created": time.time(),
+                    "last_updated": time.time()
+                }
+                fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", new_account)
+
+            userinfo = fileIO("data/clanmod/users/{}/info.json".format(user.id), "load")
+            if server.id not in userinfo["servers"]:
+                userinfo["servers"][server.id] = {
                     "clan":{},
                     "battlegroup":{},
                     "champs": {},
@@ -65,17 +73,7 @@ class ClanMod:
                     "aq": {},
                     "awd": {},
                     "awo": {},
-                    "created": time.time(),
                     "last_updated": time.time()
-
-                }
-                fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", new_account)
-
-            userinfo = fileIO("data/clanmod/users/{}/info.json".format(user.id), "load")
-            if server.id not in userinfo["servers"]:
-                userinfo["servers"][server.id] = {
-                    "clan": {},
-                    "battlegroup": {}
                 }
                 fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", userinfo)
         except AttributeError as e:
