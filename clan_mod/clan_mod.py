@@ -64,7 +64,9 @@ class ClanMod:
                     "top5": {},
                     "aq": {},
                     "awd": {},
-                    "awo": {}
+                    "awo": {},
+                    "created": time.time()
+                    "last_updated": time.time()
 
                 }
                 fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", new_account)
