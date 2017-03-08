@@ -65,7 +65,7 @@ class ClanMod:
                     "aq": {},
                     "awd": {},
                     "awo": {},
-                    "created": time.time()
+                    "created": time.time(),
                     "last_updated": time.time()
 
                 }
