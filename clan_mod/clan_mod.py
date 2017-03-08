@@ -43,12 +43,10 @@ class ClanMod:
 
         await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
-    async def on_attachment(self, message):
-        await self.bot.say('DEBUG: on_attachment initialized')
+    async def _on_attachment(self, message):
+        await self.bot.say('DEBUG: _on_attachment initialized')
         if len(message.attachments) > 0:
-            for attachment in message.attachments:
-                if attachment['filename'] == 'champions.csv':
-                    self._parse_champions_csv(self, message)
+            self._parse_champions_csv(message)
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -82,23 +80,23 @@ class ClanMod:
             pass
 
     async def _parse_champions_csv(self, message):
-
         user = message.author
         server = user.server
         channel = message.channel
         await self.bot.send_message(channel, 'DEBUG: Message attachment detected')
         for attachment in message.attachments:
-            await self._create_user(user,server)
-            await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
-            url = open(attachment[0]['url'])
-            with requests.Session() as s:
-                download = s.get(url)
-                decoded_content = download.content.decode('utf-8')
-                cr = csv.reader(decoded_content.splitlines(),delimiter=',')
-                for i in 10:
-                    temp = cr[i]
-            await self.bot.say(temp)
-            await self.bot.say('DEBUG: CSV file opened')
+            if attachment['filename'] == 'champions.csv':
+                await self._create_user(user,server)
+                await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
+                url = open(attachment[0]['url'])
+                with requests.Session() as s:
+                    download = s.get(url)
+                    decoded_content = download.content.decode('utf-8')
+                    cr = csv.reader(decoded_content.splitlines(),delimiter=',')
+                    for i in 10:
+                        temp = cr[i]
+                await self.bot.say(temp)
+                await self.bot.say('DEBUG: CSV file opened')
 
 #-------------- setup -------------
 def check_folders():
