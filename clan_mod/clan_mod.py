@@ -113,4 +113,4 @@ def setup(bot):
     check_folders()
     n = ClanMod(bot)
     bot.add_cog(n)
-    bot.add_listener(n.on_attachment, name='on_message')
+    bot.add_listener(n._on_attachment, name='on_message')
