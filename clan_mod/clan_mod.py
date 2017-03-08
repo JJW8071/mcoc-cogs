@@ -25,17 +25,14 @@ class ClanMod:
                 "\"Manage Nicknames\" permission.")
 
 
-    async def on_message(self, message):
+    async def on_message(self):
         user = messague.author
         msg = message.content.lower()
         channel = message.channel
-        package = mesage.attachments
 
-        if package > 0:
-            await self.bot.say('DEBUG: message.attachements > 0')
-        
-        if 'champions.csv' in package:
-            await self.bot.say('DEBUG: champions.csv detected on channel {}'.format(channel))
+        if len(message.attachements) != 0:
+            await self.bot.say('DEBUG: Message attachement detected')
+            await self.bot.say('attachment[0]: {}'.format(message.attachements[0]))
 
 
 
