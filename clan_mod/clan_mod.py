@@ -57,8 +57,8 @@ class ClanMod:
                     url = open(attachment[0]['url'])
                     response = urllib2.urlopen(url)
                     cr = csv.reader(response)
-                    temp = (cr[0]+'\n',cr[1]+'\n',cr[2]+'\n',cr[3]+'\n',cr[4]+'\n',cr[5])
-                    await self.bot.say(temp
+                    temp = cr[0]+'\n' + cr[1]+'\n' + cr[2] + '\n' + cr[3] + '\n' + cr[4] + '\n' + cr[5]
+                    await self.bot.say(temp)
                     await self.bot.say('DEBUG: CSV file opened')
 
     # handles user creation, adding new server, blocking
