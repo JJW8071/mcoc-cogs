@@ -261,7 +261,7 @@ class MCOC:
         await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai', dbg=0):
+    async def warmap(self, ctx, maptype='ai', dbg=1):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
@@ -282,8 +282,7 @@ class MCOC:
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
         elif dbg == 1:
             if maptype in maps:
-                await self.bot.say('DEBUG: Warmap found')
-                em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle)
+                em = discord.Embed(color=discord.Color(0xfce017)),title=mapTitle)
                 em.set_image(url=mapurl)
                 await self.bot.say(embed=em)
             else :
