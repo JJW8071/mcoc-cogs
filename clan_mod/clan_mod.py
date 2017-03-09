@@ -7,11 +7,15 @@ import time
 import os
 import csv
 import requests
+import re
 
 class ClanMod:
 
     def __init__(self, bot):
         self.bot = bot
+        self.data_dir = 'data/clanmod/users/{}/'
+        self.champs_file = self.data_dir + 'champs.json'
+        self.champ_re = re.compile(r'champions(?: \(\d+\))?.csv')
 
     @commands.command(no_pm=True, pass_context=True)
     @checks.admin_or_permissions(manage_nicknames=True)
@@ -32,84 +36,83 @@ class ClanMod:
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
         """Displays a user profile."""
-        if user == None:
+        if user is None:
             user = ctx.message.author
         channel = ctx.message.channel
-        server = user.server
-        curr_time = time.time()
         # creates user if doesn't exist
-        await self._create_user(user, server)
+        self._create_user(user)
         userinfo = fileIO("data/clanmod/users/{}/info.json".format(user.id), "load")
 
         await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
+    # handles user creation, adding new server, blocking
+    def _create_user(self, user):
+        if not os.path.exists(self.champs_file.format(user.id)):
+            if not os.path.exists(self.data_dir.format(user.id)):
+                os.makedirs(self.data_dir.format(user.id))
+            champ_data = {
+                "clan": None,
+                "battlegroup": None,
+                "fieldnames": [],
+                "champs": [],
+                "prestige": 0,
+                "top5": [],
+                "aq": [],
+                "awd": [],
+                "awo": [],
+                "max5": [],
+            }
+            dataIO.save_json(self.champs_file.format(user.id), champ_data)
+
+    async def _parse_champions_csv(self, message, attachment):
+        channel = message.channel
+        self._create_user(message.author)
+        response = requests.get(attachment['url'])
+        cr = csv.DictReader(response.text.split('\n'))
+
+        chfile = self.champs_file.format(message.author.id)
+        champ_data = dataIO.load_json(chfile)
+
+        champ_data['fieldnames'] = cr.fieldnames
+        champ_data['champs'] = list(cr)
+        champ_data.update({'awd': [], 'awo': [], 'aq': []})
+
+        for champ in champ_data['champs']:
+            if champ['Role']:
+                print(champ['Role'])
+            if champ['Role'] == 'alliance-war-defense':
+                champ_data['awd'].append(champ['Id'])
+            elif champ['Role'] == 'alliance-war-attack':
+                champ_data['awo'].append(champ['Id'])
+            elif champ['Role'] == 'alliance-quest':
+                champ_data['aq'].append(champ['Id'])
+
+        dataIO.save_json(chfile, champ_data)
+        await self.bot.send_message(channel, 'Updated Champion Information')
+
     async def _on_attachment(self, message):
         channel = message.channel
-        user = message.author
-        server = user.server
-        if len(message.attachments):
-            for attachment in message.attachments:
-                if attachment['filename'] == 'champions.csv':
-                    await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
-                    self._parse_champions_csv(channel, server, user, attachement)
-
-    # handles user creation, adding new server, blocking
-    async def _create_user(self, user, server):
-        await self.bot.say('DEBUG: _create_user has been initialized')
-        try:
-            if not os.path.exists("data/clanmod/users/{}".format(user.id)):
-                os.makedirs("data/clanmod/users/{}".format(user.id))
-                new_account = {
-                    "servers": {},
-                    "created": time.time(),
-                    "last_updated": time.time()
-                }
-                fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", new_account)
-
-            userinfo = fileIO("data/clanmod/users/{}/info.json".format(user.id), "load")
-            if server.id not in userinfo["servers"]:
-                userinfo["servers"][server.id] = {
-                    "clan":{},
-                    "battlegroup":{},
-                    "champs": {},
-                    "prestige": 0,
-                    "top5": {},
-                    "aq": {},
-                    "awd": {},
-                    "awo": {},
-                    "max5":{},
-                    "last_updated": time.time()
-                }
-                fileIO("data/clanmod/users/{}/info.json".format(user.id), "save", userinfo)
-        except AttributeError as e:
-            pass
-
-    async def _parse_champions_csv(self, channel, server, user, attachment):
-        await self.bot.send_message(channel, 'DEBUG: _parse_champions_csv initialized')
-        await self.bot.send_message(channel, 'DEBUG: attachment[0] = {}'.format(attachment))
         for attachment in message.attachments:
-            if attachment['filename'] == 'champions.csv':
-                await self._create_user(user,server)
-                await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
-                url = open(attachment[0]['url'])
-                with requests.Session() as s:
-                    download = s.get(url)
-                    decoded_content = download.content.decode('utf-8')
-                    cr = csv.reader(decoded_content.splitlines(),delimiter=',')
-                    for i in 10:
-                        temp = cr[i]
-                await self.bot.say('DEBUG: CSV file opened')
+            if self.champ_re.match(attachment['filename']):
+                await self.bot.send_message(channel, 
+                        "Found a CSV file to import.  Load new champions?  Type 'yes'.")
+                reply = await self.bot.wait_for_message(30, channel=channel, 
+                        author=message.author, content='yes')
+                if reply:
+                    await self._parse_champions_csv(message, attachment)
+                else:
+                    await self.bot.send_message(channel, "Did not import")
 
 #-------------- setup -------------
 def check_folders():
-    if not os.path.exists("data/clanmod"):
-        print("Creating data/clanmod folder...")
-        os.makedirs("data/clanmod")
+    #if not os.path.exists("data/clanmod"):
+        #print("Creating data/clanmod folder...")
+        #os.makedirs("data/clanmod")
 
     if not os.path.exists("data/clanmod/users"):
         print("Creating data/clanmod/users folder...")
         os.makedirs("data/clanmod/users")
-        transfer_info()
+        #transfer_info()
 
 def setup(bot):
     check_folders()
