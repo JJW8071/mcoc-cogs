@@ -45,10 +45,13 @@ class ClanMod:
 
     async def _on_attachment(self, message):
         channel = message.channel
-        attachments = message.attachments
+        user = message.author
+        server = user.server
+        attachment = message.attachments
         if len(attachments):
-            await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
-            self._parse_champions_csv(message)
+            if attachment['filename'] == 'champions.csv':
+                await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
+                self._parse_champions_csv(message, channel, user, attachement)
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -81,23 +84,20 @@ class ClanMod:
         except AttributeError as e:
             pass
 
-    async def _parse_champions_csv(self, message):
-        user = message.author
-        server = user.server
-        channel = message.channel
+    async def _parse_champions_csv(self, message, channel, user, attachement):
+        await self.bot.send_message(channel, 'DEBUG: _parse_champions_csv initialized')
         await self.bot.send_message(channel, 'DEBUG: attachment[0] = {}'.format(attachment))
         for attachment in message.attachments:
-            if attachment['filename'] == 'champions.csv':
-                await self._create_user(user,server)
-                await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
-                url = open(attachment[0]['url'])
-                with requests.Session() as s:
-                    download = s.get(url)
-                    decoded_content = download.content.decode('utf-8')
-                    cr = csv.reader(decoded_content.splitlines(),delimiter=',')
-                    for i in 10:
-                        temp = cr[i]
-                await self.bot.say('DEBUG: CSV file opened')
+            await self._create_user(user,server)
+            await self.bot.send_message(channel, 'attachment[0]: {}'.format(attachment))
+            url = open(attachment[0]['url'])
+            with requests.Session() as s:
+                download = s.get(url)
+                decoded_content = download.content.decode('utf-8')
+                cr = csv.reader(decoded_content.splitlines(),delimiter=',')
+                for i in 10:
+                    temp = cr[i]
+            await self.bot.say('DEBUG: CSV file opened')
 
 #-------------- setup -------------
 def check_folders():
