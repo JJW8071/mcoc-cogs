@@ -380,7 +380,7 @@ class MCOC:
             #em.add_field(name=sigs[title], value=sigs[simple])
             em.add_field(name=sigs[title],
                 value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
-            if dbg = 1:
+            if dbg == 1:
                 em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
                 if desc_set - desc_final:
                     em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
