@@ -261,23 +261,33 @@ class MCOC:
         await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
 
     @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai'):
+    async def warmap(self, ctx, maptype='ai', dbg=0):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
         Where <right> = [f, g, g+, h, i]'''
         channel = ctx.message.channel
-        filepath = 'data/mcoc/warmaps/warmap_{}.png'.format(maptype)
+        filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
         #mapurl = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/warmaps/warmap_{}'.format(maptype)
         maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
-        if maptype in maps:
-            await self.bot.say('DEBUG: Warmap found')
-            mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
-            em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle).set_image(url=filepath)
-            await self.bot.say(embed=em)
-        else :
-            raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
+        mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
+        filepath = filepath_png.format(maptypte.lower())
+        if dbg ==0:
+            if maptype in maps:
+                await self.bot.send_file(channel, filepath, content=maptTitle)
+                #em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle).set_image(url=filepath)
+                #await self.bot.say(embed=em)
+            else :
+                raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
+        elif dbg == 1:
+            if maptype in maps:
+                await self.bot.say('DEBUG: Warmap found')
+                em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle)
+                em.set_image(url=filepath)
+                await self.bot.say.(embed=em)
+            else:
+                raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
     @commands.command()
