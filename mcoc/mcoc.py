@@ -272,7 +272,8 @@ class MCOC:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
-            em = discord.Embed(title=mapTitle, image=filepath_png)
+            em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle)
+            em.addfield(image=filepath_png)
             self.bot.say(embed=em)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
