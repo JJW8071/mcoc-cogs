@@ -14,26 +14,6 @@ import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
 
-## Class : Champion Parser
-
-## Command list
-## Spotlight - done
-## Event/Events - done
-## Sig
-### Sig <champ> <value>
-## Warmap
-### Warmap <lanelane>
-## Sig
-### Sig <champ> <value>
-## Roster
-## PlayerCards
-### Username
-### Mastery Rig link
-### Frogspawn Card Link
-### Member Since
-### Avatar
-## About <Champion>
-
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
                'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
@@ -56,12 +36,10 @@ data_files = {
     }
 
 prestige_data = 'data/mcoc/prestige_data.json'
-#champ_crossreference_json_debug='https://spreadsheets.google.com/feeds/list/112Q53wW0JX2Xt8BLgQlnpieiz8f9mR0wbfqJdHubd64/1/public/values?alt=json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
-#champ_avatar='http://www.marvelsynergy.com/images/'
 file_checks_json = 'data/mcoc/file_checks.json'
 
 ###### KEYS for MCOC JSON Data Extraction
@@ -82,6 +60,10 @@ class_color_codes = {
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
+
+# if message.attachments > 0 :
+#   if message.attachments = champsions.csv
+#       store user champions.cons
 
 
 def alias_resolve(f):
@@ -290,6 +272,9 @@ class MCOC:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
+            em = discord.Embed(title=mapTitle)
+            em.set_image(url=filepath_png)
+            self.bot.say(embed=em)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
@@ -320,9 +305,7 @@ class MCOC:
         champ = self._resolve_alias(champ)
         basename = 'ID_UI_STAT_' + champ.mcocsig
         settings = self.settings.copy()
-        testing = 'ID_UI_STAT_' + champ.mcocsig + 'TITLE_LOWER'
 
-        await self.bot.say('I am testing the following key: ' + testing)
         if basename + 'TITLE_LOWER' in signatures:
             await self.bot.say('I passed the first if: TITLE_LOWER')
             sigtitle = signatures[basename + 'TITLE_LOWER']
@@ -386,7 +369,7 @@ class MCOC:
             desc_final = desc_flat if desc_flat else desc_set
 
             #em.add_field(name=sigs[title], value=sigs[simple])
-            em.add_field(name=sigs[title], 
+            em.add_field(name=sigs[title],
                 value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
 
             em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
@@ -397,7 +380,7 @@ class MCOC:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
-			
+
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
         '''Retrieve the Signature Ability of a Champion'''
@@ -512,43 +495,25 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def tst(self, key):
-        files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'), 
-                 'sig': (kabam_bcg_stat_en, 'ID_UI_STAT_', 'mcocsig')}
-        ignore_champs = ('DRONE', 'SYMBIOD')
-        if key not in files:
-            await self.bot.say('Accepted Key values:\n\t' + '\n\t'.join(files.keys()))
-            return
-        data = load_kabam_json(files[key][0])
+    async def tst(self):
+        bios = load_kabam_json(kabam_bio)
         no_mcocjson = []
         no_kabam_key = []
-        data_keys = {k for k in data.keys() if k.startswith(files[key][1])}
-        ignore_keys = set()
-        for champ in ignore_champs:
-            ignore_keys.update({k for k in data_keys if k.find(champ) != -1})
-        data_keys -= ignore_keys
-        print(ignore_keys)
+        bio_keys = set(bios.keys())
         for champ in self.champs:
-            if not getattr(champ, files[key][2], None):
+            if not getattr(champ, 'mcocjson', None):
                 no_mcocjson.append(champ.full_name)
-                continue
-            kabam_key = files[key][1] + getattr(champ, files[key][2])
-            champ_keys = {k for k in data.keys() if k.startswith(kabam_key)}
-            if not champ_keys:
+            elif 'ID_CHARACTER_BIOS_' + champ.mcocjson not in bios:
                 no_kabam_key.append(champ.full_name)
+                #await self.bot.say('Could not find bio for champ: ' + champ.full_name)
             else:
-                data_keys -= champ_keys
+                bio_keys.remove('ID_CHARACTER_BIOS_' + champ.mcocjson)
         if no_mcocjson:
             await self.bot.say('Could not find mcocjson alias for champs:\n\t' + ', '.join(no_mcocjson))
         if no_kabam_key:
             await self.bot.say('Could not find Kabam key for champs:\n\t' + ', '.join(no_kabam_key))
-        if data_keys:
-            #print(data_keys, len(data_keys))
-            if len(data_keys) > 20:
-                dump = {k for k in data_keys if k.endswith('TITLE')}
-            else:
-                dump = data_keys
-            await self.bot.say('Residual keys:\n\t' + '\n\t'.join(dump))
+        if bio_keys:
+            await self.bot.say('Residual BIO keys:\n\t' + ', '.join(bio_keys))
         await self.bot.say('Done')
 
     def _prepare_aliases(self):
