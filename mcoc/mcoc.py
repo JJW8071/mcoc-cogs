@@ -275,7 +275,7 @@ class MCOC:
         filepath = filepath_png.format(maptype.lower())
         if dbg == 0:
             if maptype in maps:
-                await self.bot.send_file(channel, filepath, content=maptTitle)
+                await self.bot.send_file(channel, filepath, content=mapTitle)
                 #em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle).set_image(url=filepath)
                 #await self.bot.say(embed=em)
             else :
