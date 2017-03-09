@@ -282,7 +282,7 @@ class MCOC:
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
         elif dbg == 1:
             if maptype in maps:
-                em = discord.Embed(color=discord.Color(0xfce017)),title=mapTitle)
+                em = discord.Embed(color=discord.Color(0xf1c40f)),title=mapTitle)
                 em.set_image(url=mapurl)
                 await self.bot.say(embed=em)
             else :
