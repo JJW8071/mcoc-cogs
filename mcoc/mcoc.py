@@ -14,10 +14,7 @@ import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
 
-try:
-    import hook
-except
-    hook = None
+
 
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
@@ -528,6 +525,7 @@ class MCOC:
             await self.bot.say('Residual BIO keys:\n\t' + ', '.join(bio_keys))
         await self.bot.say('Done')
 
+#My intention was to create a hook command group. If nothing is specified, then drop the URL
     @commands.command()
     async def hook(self, args=None):
         if args is None:
@@ -852,8 +850,8 @@ def load_kabam_json(file):
 
 
 def setup(bot):
-    if hook is None:
-        raise RuntimeError('Please install mcoc-cogs hook')
-    if clanmod is None:
-        raise RuntimeError('Please install mcoc-cogs clan_mod')
+    # if hook is None:
+    #     raise RuntimeError('Please install mcoc-cogs hook')
+    # if clanmod is None:
+    #     raise RuntimeError('Please install mcoc-cogs clan_mod')
     bot.add_cog(MCOC(bot))
