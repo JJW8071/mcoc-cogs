@@ -285,7 +285,7 @@ class MCOC:
                 await self.bot.say('DEBUG: Warmap found')
                 em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle)
                 em.set_image(url=filepath)
-                await self.bot.say.(embed=em)
+                await self.bot.say(embed=em)
             else :
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
