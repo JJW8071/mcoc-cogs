@@ -9,29 +9,13 @@ import csv
 import requests
 import re
 
-class ClanMod:
+class Hook:
 
     def __init__(self, bot):
         self.bot = bot
-        self.data_dir = 'data/clanmod/users/{}/'
+        self.data_dir = 'data/hook/users/{}/'
         self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champions(?: \(\d+\))?.csv')
-
-    @commands.command(no_pm=True, pass_context=True)
-    @checks.admin_or_permissions(manage_nicknames=True)
-    async def assign_clan(self, ctx, user : discord.Member, *, clanname=""):
-        """Change user's nickname to match his clan
-
-        Leaving the nickname empty will remove it."""
-        nickname = '[{}] {}'.format(clanname.strip(), user.name)
-        if clanname == "":
-            nickname = None
-        try:
-            await self.bot.change_nickname(user, nickname)
-            await self.bot.say("Done.")
-        except discord.Forbidden:
-            await self.bot.say("I cannot do that, I lack the "
-                "\"Manage Nicknames\" permission.")
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -41,7 +25,7 @@ class ClanMod:
         channel = ctx.message.channel
         # creates user if doesn't exist
         self._create_user(user)
-        userinfo = fileIO("data/clanmod/users/{}/info.json".format(user.id), "load")
+        userinfo = fileIO("data/hook/users/{}/info.json".format(user.id), "load")
 
         await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
@@ -94,9 +78,9 @@ class ClanMod:
         channel = message.channel
         for attachment in message.attachments:
             if self.champ_re.match(attachment['filename']):
-                await self.bot.send_message(channel, 
+                await self.bot.send_message(channel,
                         "Found a CSV file to import.  Load new champions?  Type 'yes'.")
-                reply = await self.bot.wait_for_message(30, channel=channel, 
+                reply = await self.bot.wait_for_message(30, channel=channel,
                         author=message.author, content='yes')
                 if reply:
                     await self._parse_champions_csv(message, attachment)
@@ -105,17 +89,17 @@ class ClanMod:
 
 #-------------- setup -------------
 def check_folders():
-    #if not os.path.exists("data/clanmod"):
-        #print("Creating data/clanmod folder...")
-        #os.makedirs("data/clanmod")
+    #if not os.path.exists("data/hook"):
+        #print("Creating data/hook folder...")
+        #os.makedirs("data/hook")
 
-    if not os.path.exists("data/clanmod/users"):
-        print("Creating data/clanmod/users folder...")
-        os.makedirs("data/clanmod/users")
+    if not os.path.exists("data/hook/users"):
+        print("Creating data/hook/users folder...")
+        os.makedirs("data/hook/users")
         #transfer_info()
 
 def setup(bot):
     check_folders()
-    n = ClanMod(bot)
+    n = hook(bot)
     bot.add_cog(n)
     bot.add_listener(n._on_attachment, name='on_message')
