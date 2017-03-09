@@ -272,8 +272,8 @@ class MCOC:
         maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
-        filepath = filepath_png.format(maptypte.lower())
-        if dbg ==0:
+        filepath = filepath_png.format(maptype.lower())
+        if dbg == 0:
             if maptype in maps:
                 await self.bot.send_file(channel, filepath, content=maptTitle)
                 #em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle).set_image(url=filepath)
@@ -286,7 +286,7 @@ class MCOC:
                 em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle)
                 em.set_image(url=filepath)
                 await self.bot.say.(embed=em)
-            else:
+            else :
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
