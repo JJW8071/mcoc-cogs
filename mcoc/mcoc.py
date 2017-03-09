@@ -364,7 +364,7 @@ class MCOC:
     #     # this is where I'm working
 
     @commands.command()
-    async def mcoc_sig(self, champ, dbg=0):
+    async def mcoc_sig(self, champ, siglvl=99, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
