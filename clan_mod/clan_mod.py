@@ -51,7 +51,7 @@ class ClanMod:
             for attachment in message.attachments:
                 if attachment['filename'] == 'champions.csv':
                     await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
-                    self._parse_champions_csv(message, channel, user, attachement)
+                    self._parse_champions_csv(channel, server, user, attachement)
 
     # handles user creation, adding new server, blocking
     async def _create_user(self, user, server):
@@ -84,7 +84,7 @@ class ClanMod:
         except AttributeError as e:
             pass
 
-    async def _parse_champions_csv(self, message, channel, user, attachement):
+    async def _parse_champions_csv(self, channel, server, user, attachment):
         await self.bot.send_message(channel, 'DEBUG: _parse_champions_csv initialized')
         await self.bot.send_message(channel, 'DEBUG: attachment[0] = {}'.format(attachment))
         for attachment in message.attachments:
