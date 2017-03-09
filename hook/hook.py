@@ -100,6 +100,6 @@ def check_folders():
 
 def setup(bot):
     check_folders()
-    n = hook(bot)
+    n = Hook(bot)
     bot.add_cog(n)
     bot.add_listener(n._on_attachment, name='on_message')
