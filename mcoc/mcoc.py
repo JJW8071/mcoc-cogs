@@ -14,6 +14,11 @@ import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
 
+try:
+    import hook
+except
+    hook = None
+
 data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
                'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
@@ -87,9 +92,6 @@ class MCOC:
             'marvelsynergy': (
                 'Marvel Synergy Builder',
                 '<http://www.marvelsynergy.com/team-builder>'),
-            'hook': (
-                'Hook Roster Manager',
-                '<http://hook.github.io/champions>'),
             'frogspawn': (
                 'Champion Signature Abilities',
                 '<http://coc.frogspawn.de/champions>'),
@@ -155,9 +157,9 @@ class MCOC:
     async def spotlight(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
 
-    @commands.command(help=lookup_links['hook'][0])
-    async def hook(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
+    # @commands.command(help=lookup_links['hook'][0])
+    # async def hook(self):
+    #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
 
     @commands.command(help=lookup_links['frogspawn'][0])
     async def frogspawn(self):
@@ -271,7 +273,7 @@ class MCOC:
         mapurl = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/warmaps/warmap_{}.png'.format(maptype.lower())
         maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
-        mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
+        mapTitle = 'Alliance War Map {}'.format(maptype.upper())
         filepath = filepath_png.format(maptype.lower())
         if dbg == 0:
             if maptype in maps:
@@ -525,6 +527,17 @@ class MCOC:
         if bio_keys:
             await self.bot.say('Residual BIO keys:\n\t' + ', '.join(bio_keys))
         await self.bot.say('Done')
+
+    @commands.command()
+    async def hook(self, args=None):
+        if args is None:
+            hookTitle = 'Hook Roster Manager'
+            hookPayload = '<http://hook.github.io/champions>'
+            em = discord.Embed(color=discord.Color.gold(),title=hookTitle,value=hookPayload)
+            await self.bot.say(embed=em)
+        else:
+            await self.bot.say('DEBUG: process hook args')
+
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
@@ -839,4 +852,8 @@ def load_kabam_json(file):
 
 
 def setup(bot):
+    if hook is None:
+        raise RuntimeError('Please install mcoc-cogs hook')
+    if clanmod is None:
+        raise RuntimeError('Please install mcoc-cogs clan_mod')
     bot.add_cog(MCOC(bot))
