@@ -267,14 +267,14 @@ class MCOC:
         Where <left> = [a, b, c, d, e]
         Where <right> = [f, g, g+, h, i]'''
         channel = ctx.message.channel
-        filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
+        filepath_png = 'data/mcoc/warmaps/warmap_{}.png'.format(maptype)
         maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
             await self.bot.say('DEBUG: Warmap found')
             mapTitle = '**Alliance War Map {}**'.format(maptype.upper())
             em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle)
-            em.addfield(image=filepath_png)
+            em.add_field(image=filepath_png)
             await self.bot.say(embed=em)
         else :
             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
