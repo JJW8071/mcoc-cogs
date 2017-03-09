@@ -268,7 +268,7 @@ class MCOC:
         Where <right> = [f, g, g+, h, i]'''
         channel = ctx.message.channel
         #filepath_png = 'data/mcoc/warmaps/warmap_{}.png'.format(maptype)
-        mapurl = 'https://github.com/JasonJW/mcoc-cogs/tree/master/mcoc/data/warmaps/warmap_{}'.format(maptype)
+        mapurl = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/warmaps/warmap_{}'.format(maptype)
         maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
         if maptype in maps:
