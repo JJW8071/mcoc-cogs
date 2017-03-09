@@ -531,7 +531,7 @@ class MCOC:
         if args is None:
             hookTitle = 'Hook Roster Manager'
             hookPayload = '<http://hook.github.io/champions>'
-            em = discord.Embed(color=discord.Color.gold(),title=hookTitle,content=hookPayload)
+            em = discord.Embed(color=discord.Color.gold(), title=hookTitle, description=hookPayload)
             await self.bot.say(embed=em)
         else:
             await self.bot.say('DEBUG: process hook args')
