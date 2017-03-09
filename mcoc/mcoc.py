@@ -307,64 +307,64 @@ class MCOC:
                 description='Fetch bio data with key: {}'.format(champ.mcocjson))
         em.set_thumbnail(url=champ.get_avatar())
 
-    @commands.command()
-    async def mcoc_sig(self, champ):
-        '''Retrieve Champion Signature Ability from MCOC Files'''
-        signatures = load_kabam_json(kabam_bcg_stat_en)
-        champ = self._resolve_alias(champ)
-        basename = 'ID_UI_STAT_' + champ.mcocsig
-        settings = self.settings.copy()
+    # @commands.command()
+    # async def mcoc_sig(self, champ):
+    #     '''Retrieve Champion Signature Ability from MCOC Files'''
+    #     signatures = load_kabam_json(kabam_bcg_stat_en)
+    #     champ = self._resolve_alias(champ)
+    #     basename = 'ID_UI_STAT_' + champ.mcocsig
+    #     settings = self.settings.copy()
+    #
+    #     if basename + 'TITLE_LOWER' in signatures:
+    #         await self.bot.say('I passed the first if: TITLE_LOWER')
+    #         sigtitle = signatures[basename + 'TITLE_LOWER']
+    #         desc_simple = signatures[basename + 'SIMPLE']
+    #         desc = ['placeholder', None, None, None, None]
+    #         #desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
+    #         em = discord.Embed(color=champ.class_color, title=champ.full_name, description=sigtitle)#, value=desc_simple)
+    #         em.set_thumbnail(url=champ.get_avatar())
+    #         if basename + 'DESC_AO' in signatures:
+    #             desc[0] = signatures[basename + 'DESC_AO']
+    #             if basename + 'DESC_B_AO' in signatures:
+    #                 desc[1] = signatures[basename + 'DESC_B_AO']
+    #                 if basename + 'DESC_C_AO' in signatures:
+    #                     desc[2] = signatures[basename + 'DESC_C_AO']
+    #                     if basename + 'DESC_D_AO' in signatures:
+    #                         desc[3] = signatures[basename + 'DESC_D_AO']
+    #                         if basename + 'DESC_E_AO' in signatures:
+    #                             desc[4] = signatures[basename + 'DESC_E_AO']
+    #         elif basename + 'DESC_NEW_AO' in signatures:
+    #             desc[0] = signatures[basename + 'DESC_NEW_AO']
+    #             if basename + 'DESC_NEW_B_AO' in signatures:
+    #                 desc[1] = signatures[basename + 'DESC_NEW_B_AO']
+    #         elif basename + 'DESC_90S' in signatures:
+    #             desc[0] = signatures[basename + 'DESC_90S_AO']
+    #         elif basename + 'DESC_ALT' in signatures:
+    #             desc[0] = signatures[basename + 'DESC_ALT']
+    #         elif basename + 'DESC' in signatures:
+    #             desc[0] = signatures[basename + 'DESC']
+    #             if basename + 'DESC_B' in signatures:
+    #                 desc[1] = signatures[basename + 'DESC_B']
+    #             elif basename + 'DESC2' in signatures:
+    #                 desc[1] = signatures[basename + 'DESC2']
+    #                 if basename + 'DESC3' in signatures:
+    #                     desc[2] = signatures[basename + 'DESC3']
+    #         em.add_field(name="",value=desc[0])
+    #         if desc[1] is not None:
+    #             em.add_field(name="",value=desc[1])
+    #             if desc[2] is not None:
+    #                 em.add_field(name="",value=desc[2])
+    #                 if desc[3] is not None:
+    #                     em.add_field(name="",value=desc[3])
+    #                     if desc[4] is not None:
+    #                         em.add_field(name="",value=desc[4])
+    #         await self.bot.say(embed=em)
+    #     else:
+    #         await self.bot.say('Yeah, no.  I couldn\'t find anything')
+    #     # this is where I'm working
 
-        if basename + 'TITLE_LOWER' in signatures:
-            await self.bot.say('I passed the first if: TITLE_LOWER')
-            sigtitle = signatures[basename + 'TITLE_LOWER']
-            desc_simple = signatures[basename + 'SIMPLE']
-            desc = ['placeholder', None, None, None, None]
-            #desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
-            em = discord.Embed(color=champ.class_color, title=champ.full_name, description=sigtitle)#, value=desc_simple)
-            em.set_thumbnail(url=champ.get_avatar())
-            if basename + 'DESC_AO' in signatures:
-                desc[0] = signatures[basename + 'DESC_AO']
-                if basename + 'DESC_B_AO' in signatures:
-                    desc[1] = signatures[basename + 'DESC_B_AO']
-                    if basename + 'DESC_C_AO' in signatures:
-                        desc[2] = signatures[basename + 'DESC_C_AO']
-                        if basename + 'DESC_D_AO' in signatures:
-                            desc[3] = signatures[basename + 'DESC_D_AO']
-                            if basename + 'DESC_E_AO' in signatures:
-                                desc[4] = signatures[basename + 'DESC_E_AO']
-            elif basename + 'DESC_NEW_AO' in signatures:
-                desc[0] = signatures[basename + 'DESC_NEW_AO']
-                if basename + 'DESC_NEW_B_AO' in signatures:
-                    desc[1] = signatures[basename + 'DESC_NEW_B_AO']
-            elif basename + 'DESC_90S' in signatures:
-                desc[0] = signatures[basename + 'DESC_90S_AO']
-            elif basename + 'DESC_ALT' in signatures:
-                desc[0] = signatures[basename + 'DESC_ALT']
-            elif basename + 'DESC' in signatures:
-                desc[0] = signatures[basename + 'DESC']
-                if basename + 'DESC_B' in signatures:
-                    desc[1] = signatures[basename + 'DESC_B']
-                elif basename + 'DESC2' in signatures:
-                    desc[1] = signatures[basename + 'DESC2']
-                    if basename + 'DESC3' in signatures:
-                        desc[2] = signatures[basename + 'DESC3']
-            em.add_field(name="",value=desc[0])
-            if desc[1] is not None:
-                em.add_field(name="",value=desc[1])
-                if desc[2] is not None:
-                    em.add_field(name="",value=desc[2])
-                    if desc[3] is not None:
-                        em.add_field(name="",value=desc[3])
-                        if desc[4] is not None:
-                            em.add_field(name="",value=desc[4])
-            await self.bot.say(embed=em)
-        else:
-            await self.bot.say('Yeah, no.  I couldn\'t find anything')
-        # this is where I'm working
-
     @commands.command()
-    async def mcoc_sig_alt(self, champ):
+    async def mcoc_sig(self, champ, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
@@ -380,11 +380,11 @@ class MCOC:
             #em.add_field(name=sigs[title], value=sigs[simple])
             em.add_field(name=sigs[title],
                 value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
-
-            em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
-            if desc_set - desc_final:
-                em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
-            #print(champ, champ.get_avatar())
+            if dbg = 1:
+                em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
+                if desc_set - desc_final:
+                    em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
+                #print(champ, champ.get_avatar())
             em.set_thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
         else:
