@@ -48,8 +48,8 @@ class ClanMod:
         user = message.author
         server = user.server
         if len(message.attachments):
-            for attachement in message.attachments:
-                if attachment['filename'] = 'champions.csv':
+            for attachment in message.attachments:
+                if attachment['filename'] == 'champions.csv':
                     await self.bot.send_message(channel, 'DEBUG: Attachment detected, calling _parse_champions_csv(message)')
                     self._parse_champions_csv(message, channel, user, attachement)
 
