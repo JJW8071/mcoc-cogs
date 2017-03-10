@@ -289,7 +289,7 @@ class MCOC:
 
     #@alias_resolve
     @commands.command()
-    async def bio(self, champ):
+    async def bio(self, champ, dbg=0):
         '''Retrieve the Bio of a Champion'''
         champ = self._resolve_alias(champ)
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
@@ -297,15 +297,8 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         #em.set_thumbnail(url=champ.get_portrait())
         await self.bot.say(embed=em)
-
-## DELTA please review  - Something isn't right, Collector says 'can't assing to function call'
-    @commands.command()
-    async def mcoc_bio(sef, champ):
-        '''Retrieve Champion Bio from MCOC Files'''
-        champ = self._resolve_alias(champ)
-        em = discord.Embed(color=champ.class_color, title=champ.full_name,
-                description='Fetch bio data with key: {}'.format(champ.mcocjson))
-        em.set_thumbnail(url=champ.get_avatar())
+        if dbg = 1:
+            await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
     # @commands.command()
     # async def mcoc_sig(self, champ):
@@ -392,6 +385,8 @@ class MCOC:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
+            if dbg = 1:
+                await self.bot.say('title key: '+title)
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
@@ -507,7 +502,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def tst(self, key):
+    async def /tst(self, key):
         files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
                  'sig': (kabam_bcg_stat_en, 'ID_UI_STAT_', 'mcocsig')}
         ignore_champs = ('DRONE', 'SYMBIOD')
