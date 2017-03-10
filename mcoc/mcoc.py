@@ -364,7 +364,13 @@ class MCOC:
         # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
         # simple = 'ID_UI_STAT_SIGNATURE_{}_SIMPLE'.format(champ.mcocjson)
         # desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocjson)
-        title = 'ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
+        title0 ='ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
+        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE_LOWER'.format(champ.mcocjson)
+        #title = 'ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
+        if title0 in sigs:
+            title = title0
+        elif title1 in sigs:
+            title = title1
         simple = 'ID_UI_STAT_{}SIMPLE'.format(champ.mcocsig)
         desc_str = 'ID_UI_STAT_{}DESC'.format(champ.mcocsig)
         desc_set = {key for key in sigs if key.startswith(desc_str)}
