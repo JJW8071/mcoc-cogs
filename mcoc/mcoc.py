@@ -297,7 +297,7 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         #em.set_thumbnail(url=champ.get_portrait())
         await self.bot.say(embed=em)
-        if dbg = 1:
+        if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
     # @commands.command()
@@ -385,8 +385,6 @@ class MCOC:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
-            if dbg == 1:
-                await self.bot.say('title key: '+title)
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
