@@ -385,7 +385,7 @@ class MCOC:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
-            if dbg = 1:
+            if dbg == 1:
                 await self.bot.say('title key: '+title)
 
     @commands.command()
