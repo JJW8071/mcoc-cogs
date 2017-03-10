@@ -500,7 +500,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def /tst(self, key):
+    async def tst(self, key):
         files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
                  'sig': (kabam_bcg_stat_en, 'ID_UI_STAT_', 'mcocsig')}
         ignore_champs = ('DRONE', 'SYMBIOD')
