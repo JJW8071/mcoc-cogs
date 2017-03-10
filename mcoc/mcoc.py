@@ -368,9 +368,9 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        simple = 'ID_UI_STAT_SIGNATURE_{}_SIMPLE'.format(champ.mcocjson)
-        desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocjson)
+        title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocsig)
+        simple = 'ID_UI_STAT_SIGNATURE_{}_SIMPLE'.format(champ.mcocsig)
+        desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
         desc_set = {key for key in sigs if key.startswith(desc_str)}
         desc_flat = {key for key in desc_set if key.endswith('_AO')}
         if title in sigs:
@@ -505,7 +505,7 @@ class MCOC:
 
     @commands.command()
     async def tst(self, key):
-        files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'), 
+        files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
                  'sig': (kabam_bcg_stat_en, 'ID_UI_STAT_', 'mcocsig')}
         ignore_champs = ('DRONE', 'SYMBIOD')
         if key not in files:
