@@ -382,9 +382,9 @@ class MCOC:
         else:
             title = title.capitalize()
         # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        preamble0 ='ID_UI_STAT_SIGNATURE_{}_'.format(champ.mcocsig)
-        preamble1 = 'ID_UI_STAT_{}_SIGNATURE_'.format(champ.mcocsig)
-        preamble2 = 'ID_UI_STAT_SIG_{}_'.format(champ.mcocsig)
+        preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(champ.mcocsig)
+        preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(champ.mcocsig)
+        preamble2 = 'ID_UI_STAT_SIG_{}'.format(champ.mcocsig)
         preamble = 'undefined'
 
         if preamble0+'_SIMPLE' in sigs:
@@ -396,7 +396,7 @@ class MCOC:
         else:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
 
-        simple = premable+'_SIMPLE'.format(champ.mcocsig)
+        simple = premable + '_SIMPLE'.format(champ.mcocsig)
         #
         # desc0 = preamble + '_DESC'
         # desc1 = preamble + '_DESC_NEW'
