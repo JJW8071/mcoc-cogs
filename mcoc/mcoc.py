@@ -361,10 +361,10 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocsig)
-        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE_LOWER'.format(champ.mcocsig)
-        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE_LOWER'.format(champ.mcocsig)
-        title3 = 'ID_UI_STAT_SIG_{}_TITLE_LOWER'.format(champ.mcocsig)
+        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
+        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
+        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
+        title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(champ.mcocsig)
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
@@ -375,6 +375,11 @@ class MCOC:
             title = title3
         else :
             raise KeyError('Title key not found for {}'.format(champ.mcocsig))
+
+        if title+'_LOWER' in sigs:
+            title = title+'_LOWER'
+        else:
+            title = title.capitalize()
         # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
         preamble0 ='ID_UI_STAT_SIGNATURE_{}_'.format(champ.mcocsig)
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE_'.format(champ.mcocsig)
