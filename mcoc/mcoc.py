@@ -397,6 +397,7 @@ class MCOC:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
 
         simple = premable + '_SIMPLE'
+
         #
         # desc0 = preamble + '_DESC'
         # desc1 = preamble + '_DESC_NEW'
@@ -426,10 +427,6 @@ class MCOC:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
-            if dbg == 1:
-                await self.bot.say('title = {}'.format(title))
-                await self.bot.say('preamble = {}'.format(preamble))
-                await self.bot.say('simple = {}'.format(simple))
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
