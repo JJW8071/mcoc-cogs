@@ -427,9 +427,9 @@ class MCOC:
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
             if dbg == 1:
-                await.bot.say('title = {}'.format(title))
-                await.bot.say('preamble = {}'.format(preamble))
-                await.bot.say('simple = {}'.format(simple))
+                await self.bot.say('title = {}'.format(title))
+                await self.bot.say('preamble = {}'.format(preamble))
+                await self.bot.say('simple = {}'.format(simple))
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
