@@ -379,8 +379,7 @@ class MCOC:
 
         if title+'_LOWER' in sigs:
             title = title+'_LOWER'
-        else:
-            title = title.capitalize()
+        await self.bot.say('Title: '+title)
         # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
         preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(champ.mcocsig)
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(champ.mcocsig)
