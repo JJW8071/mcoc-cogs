@@ -364,26 +364,41 @@ class MCOC:
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocsig)
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE_LOWER'.format(champ.mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE_LOWER'.format(champ.mcocsig)
+        title3 = 'ID_UI_STAT_SIG_{}_TITLE_LOWER'.format(champ.mcocsig)
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
             title = title1
         elif title2 in sigs:
             title = title2
+        elif title3 in sigs:
+            title = title3
         else :
             raise KeyError('Title key not found for {}'.format(champ.mcocsig))
         # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        simple0 ='ID_UI_STAT_SIGNATURE_{}_SIMPLE'.format(champ.mcocsig)
-        simple1 = 'ID_UI_STAT_{}_SIGNATURE_SIMPLE'.format(champ.mcocsig)
-        if simple0 in sigs:
-            simple = simple0
-        elif simple1 in sigs:
-            simple = simple1
+        preamble0 ='ID_UI_STAT_SIGNATURE_{}_'.format(champ.mcocsig)
+        preamble1 = 'ID_UI_STAT_{}_SIGNATURE_'.format(champ.mcocsig)
+        preamble2 = 'ID_UI_STAT_SIG_{}_'.format(champ.mcocsig)
+
+        if preamble0+'_SIMPLE' in sigs:
+            premable = preamble0
+        elif preamble1+'_SIMPLE' in sigs:
+            premable = preamble1
+        elif preamble2+'_SIMPLE' in sigs:
+            premable = preamble2
         else:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
 
-        desc0 = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
-        desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
+        simple = premable+'_SIMPLE'.format(champ.mcocsig)
+
+        desc0 = preamble + '_DESC'
+        desc1 = preamble + '_DESC_NEW'
+        desc1 = preamble + '_DESC_NEW_B'
+        descb = preambele + '_DESC_B'
+
+        desc_str = preamble + '_DESC'
+
+        #desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
         #title = 'ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
 
         desc_set = {key for key in sigs if key.startswith(desc_str)}
