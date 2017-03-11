@@ -379,7 +379,7 @@ class MCOC:
             simple = simple0
         elif simple1 in sigs:
             simple = simple1
-        else
+        else:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
 
         desc0 = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
