@@ -396,7 +396,7 @@ class MCOC:
         else:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
 
-        simple = premable + '_SIMPLE'.format(champ.mcocsig)
+        simple = premable + '_SIMPLE'
         #
         # desc0 = preamble + '_DESC'
         # desc1 = preamble + '_DESC_NEW'
