@@ -361,18 +361,31 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        # simple = 'ID_UI_STAT_SIGNATURE_{}_SIMPLE'.format(champ.mcocjson)
-        # desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocjson)
-        title0 ='ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
-        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        #title = 'ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
+        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocsig)
+        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE_LOWER'.format(champ.mcocsig)
+        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE_LOWER'.format(champ.mcocsig)
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
             title = title1
-        simple = 'ID_UI_STAT_{}SIMPLE'.format(champ.mcocsig)
-        desc_str = 'ID_UI_STAT_{}DESC'.format(champ.mcocsig)
+        elif title2 in sigs:
+            title = title2
+        else :
+            raise KeyError('Title key not found for {}'.format(champ.mcocsig))
+        # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
+        simple0 ='ID_UI_STAT_SIGNATURE_{}_SIMPLE'.format(champ.mcocsig)
+        simple1 = 'ID_UI_STAT_{}_SIGNATURE_SIMPLE'.format(champ.mcocsig)
+        if simple0 in sigs:
+            simple = simple0
+        elif simple1 in sigs:
+            simple = simple1
+        else
+            raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
+
+        desc0 = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
+        desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
+        #title = 'ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
+
         desc_set = {key for key in sigs if key.startswith(desc_str)}
         desc_flat = {key for key in desc_set if key.endswith('_AO')}
         if title in sigs:
