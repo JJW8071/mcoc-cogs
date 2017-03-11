@@ -365,6 +365,7 @@ class MCOC:
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
         title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(champ.mcocsig)
+        title = 'undefined'
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
@@ -384,6 +385,7 @@ class MCOC:
         preamble0 ='ID_UI_STAT_SIGNATURE_{}_'.format(champ.mcocsig)
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE_'.format(champ.mcocsig)
         preamble2 = 'ID_UI_STAT_SIG_{}_'.format(champ.mcocsig)
+        preamble = 'undefined'
 
         if preamble0+'_SIMPLE' in sigs:
             premable = preamble0
@@ -395,11 +397,11 @@ class MCOC:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
 
         simple = premable+'_SIMPLE'.format(champ.mcocsig)
-
-        desc0 = preamble + '_DESC'
-        desc1 = preamble + '_DESC_NEW'
-        desc1 = preamble + '_DESC_NEW_B'
-        descb = preambele + '_DESC_B'
+        #
+        # desc0 = preamble + '_DESC'
+        # desc1 = preamble + '_DESC_NEW'
+        # desc1 = preamble + '_DESC_NEW_B'
+        # descb = preambele + '_DESC_B'
 
         desc_str = preamble + '_DESC'
 
@@ -424,6 +426,10 @@ class MCOC:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
+            if dbg == 1:
+                await.bot.say('title = {}'.format(title))
+                await.bot.say('preamble = {}'.format(preamble))
+                await.bot.say('simple = {}'.format(simple))
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
