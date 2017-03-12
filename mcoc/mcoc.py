@@ -829,8 +829,8 @@ class Champion:
         if value:
             return self.prestige_data[star][rank-1][sig]
         else:
-        return {'name':'{}*{}r{}s{}'.format(star, self.short, rank, sig),
-                'value':self.prestige_data[star][rank-1][sig]}
+            return {'name':'{}*{}r{}s{}'.format(star, self.short, rank, sig),
+                    'value':self.prestige_data[star][rank-1][sig]}
 
     @validate_attr('prestige')
     def get_prestige_arr(self, rank, sig_arr, star=4):
