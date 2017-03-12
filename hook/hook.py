@@ -3,8 +3,11 @@ from discord.ext import commands
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
+from operator import itemgetter
+from functools import reduce
 import time
 import os
+import ast
 import csv
 import requests
 import re
@@ -52,18 +55,42 @@ class Hook:
         channel = message.channel
         self._create_user(message.author)
         response = requests.get(attachment['url'])
-        cr = csv.DictReader(response.text.split('\n'))
+        cr = csv.DictReader(response.text.split('\n'), quoting=csv.QUOTE_NONE)
+        champ_list = []
+        for row in cr:
+            champ_list.append({k: parse_value(k, v) for k, v in row.items()})
+
+        mcoc = self.bot.get_cog('MCOC')
+        if mcoc:
+            missing = self.hook_prestige(champ_list)
+            if missing:
+                await self.bot.send_message(channel, 'Missing hookid for champs: ' 
+                        + ', '.join(missing))
+
+            # max prestige calcs
+            champ_list.sort(key=itemgetter('maxpi', 'Id'), reverse=True)
+            maxpi = sum([champ['maxpi'] for champ in champ_list[:5]])/5
+            max_champs = ['{0[Stars]}* {0[Id]}'.format(champ) for champ in champ_list[:5]]
+
+            # prestige calcs
+            champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
+            prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
+            top_champs = ['{0[Stars]}* {0[Id]}'.format(champ) for champ in champ_list[:5]]
+
+            em = discord.Embed(title="Updated Champions")
+            em.add_field(name='Prestige', value=prestige)
+            em.add_field(name='Max Prestige', value=maxpi, inline=True)
+            em.add_field(name='Top Champs', value='\n'.join(top_champs), inline=False)
+            em.add_field(name='Max PI Champs', value='\n'.join(max_champs), inline=True)
 
         chfile = self.champs_file.format(message.author.id)
         champ_data = dataIO.load_json(chfile)
 
         champ_data['fieldnames'] = cr.fieldnames
-        champ_data['champs'] = list(cr)
+        champ_data['champs'] = champ_list
         champ_data.update({'awd': [], 'awo': [], 'aq': []})
 
         for champ in champ_data['champs']:
-            if champ['Role']:
-                print(champ['Role'])
             if champ['Role'] == 'alliance-war-defense':
                 champ_data['awd'].append(champ['Id'])
             elif champ['Role'] == 'alliance-war-attack':
@@ -72,7 +99,33 @@ class Hook:
                 champ_data['aq'].append(champ['Id'])
 
         dataIO.save_json(chfile, champ_data)
-        await self.bot.send_message(channel, 'Updated Champion Information')
+        if mcoc:
+            await self.bot.send_message(channel, embed=em)
+        else:
+            await self.bot.send_message(channel, 'Updated Champion Information')
+
+    def hook_prestige(self, roster):
+        '''Careful.  This modifies the array of dicts in place.'''
+        mcoc = self.bot.get_cog('MCOC')
+        missing = []
+        for cdict in roster:
+            cdict['maxpi'] = 0
+            if cdict['Stars'] < 4:
+                continue
+            try:
+                champ_obj = mcoc.find_champ(cdict['Id'], 'hookid')
+            except KeyError:
+                missing.append(cdict['Id'])
+                continue
+            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'], 
+                    sig=cdict['Awakened'], star=cdict['Stars'], value=True)
+            if cdict['Stars'] == 5:
+                maxrank = 3 if cdict['Rank'] < 4 else 4
+            else:
+                maxrank = 5
+            cdict['maxpi'] = champ_obj.get_prestige(rank=maxrank,
+                    sig=cdict['Awakened'], star=cdict['Stars'], value=True)
+        return missing
 
     async def _on_attachment(self, message):
         channel = message.channel
@@ -86,6 +139,14 @@ class Hook:
                     await self._parse_champions_csv(message, attachment)
                 else:
                     await self.bot.send_message(channel, "Did not import")
+
+
+def parse_value(key, value):
+    try:
+        return ast.literal_eval(value)
+    except Exception:
+        return value
+
 
 #-------------- setup -------------
 def check_folders():

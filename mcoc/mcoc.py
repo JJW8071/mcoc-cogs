@@ -518,9 +518,15 @@ class MCOC:
                 await self.bot.say("**WARNING** Champion Data for {}, {star}*, rank {rank} does not exist".format(
                     champ.full_name, **attrs))
             else:
-                em.add_field(**(champ.get_prestige(**attrs)))
+                em.add_field(**pres_dict)
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    def find_champ(self, champ_name, key):
+        for champ in self.champs:
+            if getattr(champ, key, '') == champ_name:
+                return champ
+        raise KeyError('No champion {} with key {}'.format(champ_name, key))
 
     @commands.command()
     async def champ_aliases(self, *args):
@@ -579,6 +585,7 @@ class MCOC:
                 dump = data_keys
             await self.bot.say('Residual keys:\n\t' + '\n\t'.join(dump))
         await self.bot.say('Done')
+
 #My intention was to create a hook command group. If nothing is specified, then drop the URL
     @commands.command()
     async def hook(self, args=None):
@@ -813,12 +820,15 @@ class Champion:
         return (title, response)
 
     @validate_attr('prestige')
-    def get_prestige(self, *, rank, sig, star):
+    def get_prestige(self, *, rank, sig, star, value=False):
         if star == 5 and rank == 5:
             #silently reduce to max rank for 5*
             rank = 4
         if self.prestige_data[star][rank-1] is None:
-            return None
+            return 0 if value else None
+        if value:
+            return self.prestige_data[star][rank-1][sig]
+        else:
         return {'name':'{}*{}r{}s{}'.format(star, self.short, rank, sig),
                 'value':self.prestige_data[star][rank-1][sig]}
 
