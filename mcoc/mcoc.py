@@ -556,7 +556,7 @@ class MCOC:
         else:
             await self.bot.say('DEBUG: process hook args')
 
-    def _get_mcoc_keys(self, champ, sigs)
+    def _get_mcoc_keys(self, champ, sigs):
         await self.bot.say('DEBUG: _get_mcoc_keys initialized')
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
@@ -598,7 +598,7 @@ class MCOC:
         # desc1 = preamble + '_DESC_NEW'
         # desc1 = preamble + '_DESC_NEW_B'
         # descb = preambele + '_DESC_B'
-
+        # desc_str = 'tbd'
     return title, preamble, simple
 
     def _prepare_aliases(self):
