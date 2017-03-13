@@ -423,7 +423,10 @@ class MCOC:
                     em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
                 #print(champ, champ.get_avatar())
             em.set_thumbnail(url=champ.get_avatar())
-            await self.bot.say(embed=em)
+            if len(em) > 2000:
+                await self.bot.say('DEBUG: Embed > 2000 characters')
+            else:
+                await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
 
@@ -899,6 +902,13 @@ def load_kabam_json(file):
         data[d['k']] = d['v']
     return data
 
+def _truncate_text(self, text, max_length):
+    if len(text) > max_length:
+        if text.strip('$').isdigit():
+            text = int(text.strip('$'))
+            return "${:.2E}".format(text)
+        return text[:max_length-3] + "..."
+    return text
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
