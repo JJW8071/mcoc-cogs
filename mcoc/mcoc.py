@@ -593,8 +593,15 @@ class MCOC:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
         simple = preamble + '_SIMPLE'
 
-        # suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3','_DESC_AO','_DESC_NEW_AO','_DESC_NEW_B_AO','_DESC_C_AO','_DESC_D_AO','_DESC_E_AO','_DESC_ALT_AO','_DESC2_AO','_DESC3_AO'}
-
+        suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3'}
+        desc = []
+        
+        for k in suffix:
+            if preamble+k in sigs:
+                if preamble+k+'_AO' in sigs:
+                    desc.append(preamble+k+'_AO')
+                else
+                    desc.append(preamble+k)
         # for k in suffix:
         #     if preamble +suffix[k] in sigs:
         #         desc[k]=preamble + suffix[k]
