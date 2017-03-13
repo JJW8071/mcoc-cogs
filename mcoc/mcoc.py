@@ -363,9 +363,9 @@ class MCOC:
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, preamble, simple = self._get_mcoc_keys(champ, sigs)
 
-        await self.bot.say('DEBUG: Title: '+title)
-        await self.bot.say('DEBUG: Preamble: '+preamble)
-        await self.bot.say('DEBUG: Simple: '+simple)
+        await self.bot.say('DEBUG: Title: '+ title)
+        await self.bot.say('DEBUG: Preamble: '+ preamble)
+        await self.bot.say('DEBUG: Simple: '+ simple)
 
         # desc_str = preamble + '_DESC'
         # desc_set = {key for key in sigs if key.startswith(desc_str)}
@@ -557,11 +557,14 @@ class MCOC:
             await self.bot.say('DEBUG: process hook args')
 
     def _get_mcoc_keys(self, champ, sigs):
+        preamble = 'undefined'
+        title = 'undefined'
+        simple = 'undefined'
+        
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
         title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(champ.mcocsig)
-        title = 'undefined'
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
@@ -579,7 +582,7 @@ class MCOC:
         preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(champ.mcocsig)
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(champ.mcocsig)
         preamble2 = 'ID_UI_STAT_SIG_{}'.format(champ.mcocsig)
-        preamble = 'undefined'
+
         if preamble0+'_SIMPLE' in sigs:
             premable = preamble0
         elif preamble1+'_SIMPLE' in sigs:
