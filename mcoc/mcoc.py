@@ -566,7 +566,6 @@ class MCOC:
         simple = 'undefined'
 
         if mcocsig == 'CYCLOPS_90S':
-            await self.bot.say('DEBUG: C90.')
             mcocsig = 'CYCLOPS'
 
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
@@ -609,22 +608,22 @@ class MCOC:
         simple = preamble + '_SIMPLE'
 
         desc = []
-        if champ.mcocsig == 'BEAST':
-            preamble = 'ID_UI_STAT_ATTRIBUTE_LONG'
-
-        suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
-        for k in suffix:
-            if preamble + k in sigs:
-                if preamble + k + '_AO' in sigs:
-                    desc.append(preamble + k + '_AO')
-                else:
-                    desc.append(preamble + k)
-
         if champ.mcocsig == 'CYCLOPS_90S':
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
             desc[0]='ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'
+        else:
+            if champ.mcocsig == 'BEAST':
+                await self.bot.say('DEBUG: Beast identified')
+                preamble = 'ID_UI_STAT_ATTRIBUTE_LONG'
 
+            suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
+            for k in suffix:
+                if preamble + k in sigs:
+                    if preamble + k + '_AO' in sigs:
+                        desc.append(preamble + k + '_AO')
+                    else:
+                        desc.append(preamble + k)
 
         # for k in suffix:
         #     if preamble +suffix[k] in sigs:
