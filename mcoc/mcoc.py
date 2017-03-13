@@ -598,6 +598,8 @@ class MCOC:
             preamble = preamble1
         elif preamble2+'_SIMPLE' in sigs:
             preamble = preamble2
+        elif preamble3+'_SIMPLE' in sigs:
+            preamble = preamble3
         else:
             raise KeyError('Simple key not found for {}'.format(mcocsig))
         simple = preamble + '_SIMPLE'
