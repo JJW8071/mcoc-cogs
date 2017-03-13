@@ -614,7 +614,6 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         else:
             if champ.mcocsig == 'BEAST':
-                await self.bot.say('DEBUG: Beast identified')
                 preamble = 'ID_UI_STAT_ATTRIBUTE_LONG'
 
             suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
