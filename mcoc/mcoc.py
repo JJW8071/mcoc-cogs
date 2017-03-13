@@ -320,7 +320,7 @@ class MCOC:
         valueblock = ''
         for k in sorted(desc):
             tmp = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', k)
-            valueblock = valueblock + '\n'+'• ' + tmp
+            valueblock = valueblock + '\n'+'• {}'.format(tmp)
         em.add_field(name='Signature Level {}'.format(siglvl),value=valueblock)
 #        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + sigs[k] for k in sorted(desc)]))
 
