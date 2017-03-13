@@ -600,11 +600,11 @@ class MCOC:
         desc = []
 
         for k in suffix:
-            if preamble+k in sigs:
-                if preamble+k+'_AO' in sigs:
-                    desc.append(preamble+k+'_AO')
-                else
-                    desc.append(preamble+k)
+            if preamble + k in sigs:
+                if preamble + k + '_AO' in sigs:
+                    desc.append(preamble + k + '_AO')
+                else:
+                    desc.append(preamble + k)
         # for k in suffix:
         #     if preamble +suffix[k] in sigs:
         #         desc[k]=preamble + suffix[k]
