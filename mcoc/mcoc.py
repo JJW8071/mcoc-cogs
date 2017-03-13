@@ -316,14 +316,7 @@ class MCOC:
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=sigs[title], value=sigs[simple])
-
-        valueblock = ''
-        for k in sorted(desc):
-            tmp = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', k)
-            valueblock = valueblock + '\n'+'• ' + tmp
-        em.add_field(name='Signature Level {}'.format(siglvl),value=valueblock)
-#        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + sigs[k] for k in sorted(desc)]))
-
+        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + sigs[k] for k in sorted(desc)]))
         em.set_thumbnail(url=champ.get_avatar())
 
         await self.bot.say(embed=em)
