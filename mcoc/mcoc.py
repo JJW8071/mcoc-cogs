@@ -557,7 +557,6 @@ class MCOC:
             await self.bot.say('DEBUG: process hook args')
 
     def _get_mcoc_keys(self, champ, sigs):
-        await self.bot.say('DEBUG: _get_mcoc_keys initialized')
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
