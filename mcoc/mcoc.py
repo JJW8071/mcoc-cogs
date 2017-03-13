@@ -320,8 +320,8 @@ class MCOC:
         valueblock = ''
         for k in sorted(desc):
             valueblock.append('• {}\n'.format(k))
-        em.add_field(name='Signature Level {}'.format(siglvl),value=valueblock)
-#        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + sigs[k] for k in sorted(desc)]))
+#        em.add_field(name='Signature Level [{}]'.format(siglvl),value=valueblock)
+        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + sigs[k] for k in sorted(desc)]))
 
         em.set_thumbnail(url=champ.get_avatar())
 
