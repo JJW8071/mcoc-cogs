@@ -413,7 +413,8 @@ class MCOC:
         if title in sigs:
             em = discord.Embed(color=champ.class_color, title=champ.full_name)
             desc_final = desc_flat if desc_flat else desc_set
-
+            if len(desc_final) > 2000:
+                await self.bot.say('DEBUG: desc_final > 2000 characters')
             #em.add_field(name=sigs[title], value=sigs[simple])
             em.add_field(name=sigs[title],
                 value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
@@ -423,10 +424,7 @@ class MCOC:
                     em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
                 #print(champ, champ.get_avatar())
             em.set_thumbnail(url=champ.get_avatar())
-            if len(em) > 2000:
-                await self.bot.say('DEBUG: Embed > 2000 characters')
-            else:
-                await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
         else:
             await self.bot.say('Cannot find any keys for ' + champ.full_name)
 
