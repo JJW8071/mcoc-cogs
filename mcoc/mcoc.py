@@ -605,10 +605,8 @@ class MCOC:
         simple = preamble + '_SIMPLE'
 
         desc = []
-        if champ.mcocsig is 'BEAST':
+        if champ.mcocsig == 'BEAST':
             preamble = 'ID_UI_STAT_ATTRIBUTE_LONG'
-        elif champ.mcocsig is 'CYCLOPS_90S':
-            desc[0]='ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'
 
         suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
         for k in suffix:
@@ -617,6 +615,13 @@ class MCOC:
                     desc.append(preamble + k + '_AO')
                 else:
                     desc.append(preamble + k)
+
+        if champ.mcocsig == 'CYCLOPS_90S':
+            title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
+            simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
+            desc[0]='ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'
+
+
         # for k in suffix:
         #     if preamble +suffix[k] in sigs:
         #         desc[k]=preamble + suffix[k]
