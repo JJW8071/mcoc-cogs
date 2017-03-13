@@ -368,21 +368,21 @@ class MCOC:
 
         # desc_set = {key for key in sigs if key.startswith(desc_str)}
         # desc_flat = {key for key in desc_set if key.endswith('_AO')}
-         if title in sigs:
-             em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        if title in sigs:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
         #     desc_final = desc_flat if desc_flat else desc_set
-             em.add_field(name=sigs[title], value=sigs[simple])
+            em.add_field(name=sigs[title], value=sigs[simple])
         #     em.add_field(name=sigs[title],
         #         value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
-             if dbg == 1:
-                 em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
+            if dbg == 1:
+                em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
         #         if desc_set - desc_final:
         #             em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
         #         #print(champ, champ.get_avatar())
-             em.set_thumbnail(url=champ.get_avatar())
-             await self.bot.say(embed=em)
-         else:
-             await self.bot.say('Cannot find any keys for ' + champ.full_name)
+            em.set_thumbnail(url=champ.get_avatar())
+            await self.bot.say(embed=em)
+        else:
+            await self.bot.say('Cannot find any keys for ' + champ.full_name)
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
