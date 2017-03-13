@@ -560,7 +560,7 @@ class MCOC:
         preamble = 'undefined'
         title = 'undefined'
         simple = 'undefined'
-        
+
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
@@ -584,14 +584,14 @@ class MCOC:
         preamble2 = 'ID_UI_STAT_SIG_{}'.format(champ.mcocsig)
 
         if preamble0+'_SIMPLE' in sigs:
-            premable = preamble0
+            preamble = preamble0
         elif preamble1+'_SIMPLE' in sigs:
-            premable = preamble1
+            preamble = preamble1
         elif preamble2+'_SIMPLE' in sigs:
-            premable = preamble2
+            preamble = preamble2
         else:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
-        simple = premable + '_SIMPLE'
+        simple = preamble + '_SIMPLE'
 
         # suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3','_DESC_AO','_DESC_NEW_AO','_DESC_NEW_B_AO','_DESC_C_AO','_DESC_D_AO','_DESC_E_AO','_DESC_ALT_AO','_DESC2_AO','_DESC3_AO'}
 
