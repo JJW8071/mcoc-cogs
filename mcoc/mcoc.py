@@ -80,7 +80,7 @@ class MCOC:
     '''A Cog for Marvel's Contest of Champions'''
 
     lookup_links = {
-            'event': (
+            'event: (
                 'Tiny MCoC Schedule',
                 '<http://simians.tk/MCOC-Sched>'),
             'spotlight': (
@@ -580,7 +580,6 @@ class MCOC:
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(champ.mcocsig)
         preamble2 = 'ID_UI_STAT_SIG_{}'.format(champ.mcocsig)
         preamble = 'undefined'
-
         if preamble0+'_SIMPLE' in sigs:
             premable = preamble0
         elif preamble1+'_SIMPLE' in sigs:
@@ -589,16 +588,33 @@ class MCOC:
             premable = preamble2
         else:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
-
         simple = premable + '_SIMPLE'
 
-        #
-        # desc0 = preamble + '_DESC'
-        # desc1 = preamble + '_DESC_NEW'
-        # desc1 = preamble + '_DESC_NEW_B'
-        # descb = preambele + '_DESC_B'
-        # desc_str = 'tbd'
-    return title, preamble, simple
+        suffix = {'_DESC',
+            '_DESC_NEW',
+            '_DESC_NEW_B',
+            '_DESC_C',
+            '_DESC_D',
+            '_DESC_E',
+            '_DESC_ALT',
+            '_DESC2',
+            '_DESC3',
+            '_DESC_AO',
+            '_DESC_NEW_AO',
+            '_DESC_NEW_B_AO',
+            '_DESC_C_AO',
+            '_DESC_D_AO',
+            '_DESC_E_AO',
+            '_DESC_ALT_AO',
+            '_DESC2_AO',
+            '_DESC3_AO'
+            }
+
+        for k in suffix:
+            if preamble +suffix[k] in sigs:
+                desc[k]=preamble + suffix[k]
+
+        return title, preamble, simple#, desc
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
