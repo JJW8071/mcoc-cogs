@@ -317,7 +317,7 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=sigs[title], value=sigs[simple])
         em.add_field(name=sigs[title], value='\n'.join(['* ' + sigs[k] for k in sorted(desc)]))
-        em.set_thumbnail(champ.get_avatar())
+        em.set_thumbnail(url=champ.get_avatar())
 
         await self.bot.say(embed=em)
 
