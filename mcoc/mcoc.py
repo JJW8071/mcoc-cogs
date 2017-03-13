@@ -604,12 +604,13 @@ class MCOC:
             raise KeyError('Simple key not found for {}'.format(mcocsig))
         simple = preamble + '_SIMPLE'
 
-        if mcocsig is 'BEAST':
-            mcocsig = 'LONG'
+        desc = []
+        if champ.mcocsig is 'BEAST':
+            preamble = 'ID_UI_STAT_ATTRIBUTE_LONG'
+        elif champ.mcocsig is 'CYCLOPS_90S':
+            desc[0]='ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'
 
         suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
-        desc = []
-
         for k in suffix:
             if preamble + k in sigs:
                 if preamble + k + '_AO' in sigs:
