@@ -616,7 +616,7 @@ class MCOC:
             if champ.mcocsig == 'BEAST':
                 preamble = 'ID_UI_STAT_SIGNATURE_LONG'
 
-            suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
+            suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_AO','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
             for k in suffix:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
