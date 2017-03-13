@@ -300,62 +300,6 @@ class MCOC:
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
-    # @commands.command()
-    # async def mcoc_sig(self, champ):
-    #     '''Retrieve Champion Signature Ability from MCOC Files'''
-    #     signatures = load_kabam_json(kabam_bcg_stat_en)
-    #     champ = self._resolve_alias(champ)
-    #     basename = 'ID_UI_STAT_' + champ.mcocsig
-    #     settings = self.settings.copy()
-    #
-    #     if basename + 'TITLE_LOWER' in signatures:
-    #         await self.bot.say('I passed the first if: TITLE_LOWER')
-    #         sigtitle = signatures[basename + 'TITLE_LOWER']
-    #         desc_simple = signatures[basename + 'SIMPLE']
-    #         desc = ['placeholder', None, None, None, None]
-    #         #desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name, description=sigtitle)#, value=desc_simple)
-    #         em.set_thumbnail(url=champ.get_avatar())
-    #         if basename + 'DESC_AO' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_AO']
-    #             if basename + 'DESC_B_AO' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC_B_AO']
-    #                 if basename + 'DESC_C_AO' in signatures:
-    #                     desc[2] = signatures[basename + 'DESC_C_AO']
-    #                     if basename + 'DESC_D_AO' in signatures:
-    #                         desc[3] = signatures[basename + 'DESC_D_AO']
-    #                         if basename + 'DESC_E_AO' in signatures:
-    #                             desc[4] = signatures[basename + 'DESC_E_AO']
-    #         elif basename + 'DESC_NEW_AO' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_NEW_AO']
-    #             if basename + 'DESC_NEW_B_AO' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC_NEW_B_AO']
-    #         elif basename + 'DESC_90S' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_90S_AO']
-    #         elif basename + 'DESC_ALT' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_ALT']
-    #         elif basename + 'DESC' in signatures:
-    #             desc[0] = signatures[basename + 'DESC']
-    #             if basename + 'DESC_B' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC_B']
-    #             elif basename + 'DESC2' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC2']
-    #                 if basename + 'DESC3' in signatures:
-    #                     desc[2] = signatures[basename + 'DESC3']
-    #         em.add_field(name="",value=desc[0])
-    #         if desc[1] is not None:
-    #             em.add_field(name="",value=desc[1])
-    #             if desc[2] is not None:
-    #                 em.add_field(name="",value=desc[2])
-    #                 if desc[3] is not None:
-    #                     em.add_field(name="",value=desc[3])
-    #                     if desc[4] is not None:
-    #                         em.add_field(name="",value=desc[4])
-    #         await self.bot.say(embed=em)
-    #     else:
-    #         await self.bot.say('Yeah, no.  I couldn\'t find anything')
-    #     # this is where I'm working
-
     @commands.command()
     async def mcoc_sig(self, champ, siglvl=99, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
@@ -363,12 +307,19 @@ class MCOC:
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, preamble, simple, desc = self._get_mcoc_keys(champ, sigs)
 
-        await self.bot.say('DEBUG: Title: '+ title)
-        await self.bot.say('DEBUG: Preamble: '+ preamble)
-        await self.bot.say('DEBUG: Simple: '+ simple)
+        if dbg == 1:
+            await self.bot.say('DEBUG: Title: '+ title)
+            await self.bot.say('DEBUG: Preamble: '+ preamble)
+            await self.bot.say('DEBUG: Simple: '+ simple)
+            for k in desc:
+                await self.bot.say('DEBUG: Desc: '+ k)
 
-        for k in desc:
-            await self.bot.say('DEBUG: Desc: '+ k)
+        em = discord.Embed(color=cham.class_color, title=champ.full_name)
+        em.add_field(name=sigs[title], value=sigs[simple])
+        em.add_field(name=sigs[title], value=value='\n'.join(['* ' + sigs[k] for k in desc]))
+        em.set_thumbnail(champ.get_avatar())
+
+        await self.bot.say(embed=em)
 
         # desc_str = preamble + '_DESC'
         # desc_set = {key for key in sigs if key.startswith(desc_str)}
@@ -589,7 +540,6 @@ class MCOC:
         if title+'_LOWER' in sigs:
             title = title+'_LOWER'
 
-        # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
         preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(mcocsig)
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig)
         preamble2 = 'ID_UI_STAT_SIG_{}'.format(mcocsig)
@@ -620,13 +570,9 @@ class MCOC:
             for k in suffix:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
-                        desc.append(preamble + k + '_AO')
+                        await desc.append(preamble + k + '_AO')
                     else:
                         desc.append(preamble + k)
-
-        # for k in suffix:
-        #     if preamble +suffix[k] in sigs:
-        #         desc[k]=preamble + suffix[k]
 
         return title, preamble, simple, desc
 
