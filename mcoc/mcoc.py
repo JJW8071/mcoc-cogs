@@ -611,7 +611,7 @@ class MCOC:
         if champ.mcocsig == 'CYCLOPS_90S':
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
-            desc[0]='ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'
+            desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         else:
             if champ.mcocsig == 'BEAST':
                 await self.bot.say('DEBUG: Beast identified')
