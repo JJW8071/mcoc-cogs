@@ -565,6 +565,10 @@ class MCOC:
         title = 'undefined'
         simple = 'undefined'
 
+        if mcocsig == 'CYCLOPS_90S':
+            await self.bot.say('DEBUG: C90.')
+            mcocsig = 'CYCLOPS'
+
         title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
