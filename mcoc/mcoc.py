@@ -560,15 +560,16 @@ class MCOC:
             await self.bot.say('DEBUG: process hook args')
 
     def _get_mcoc_keys(self, champ, sigs):
+        mcocsig = champ.mcocsig
         preamble = 'undefined'
         title = 'undefined'
         simple = 'undefined'
 
-        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
-        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
-        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
-        title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(champ.mcocsig)
-        title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
+        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
+        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig)
+        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
+        title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig)
+        title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig)
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
@@ -580,14 +581,16 @@ class MCOC:
         elif title4 in sigs:
             title = title4
         else :
-            raise KeyError('Title key not found for {}'.format(champ.mcocsig))
+            raise KeyError('Title key not found for {}'.format(mcocsig))
 
         if title+'_LOWER' in sigs:
             title = title+'_LOWER'
+
         # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(champ.mcocsig)
-        preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(champ.mcocsig)
-        preamble2 = 'ID_UI_STAT_SIG_{}'.format(champ.mcocsig)
+        preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(mcocsig)
+        preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig)
+        preamble2 = 'ID_UI_STAT_SIG_{}'.format(mcocsig)
+        preamble3 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig)
 
         if preamble0+'_SIMPLE' in sigs:
             preamble = preamble0
@@ -596,10 +599,13 @@ class MCOC:
         elif preamble2+'_SIMPLE' in sigs:
             preamble = preamble2
         else:
-            raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
+            raise KeyError('Simple key not found for {}'.format(mcocsig))
         simple = preamble + '_SIMPLE'
 
-        suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3'}
+        if mcocsig is 'BEAST':
+            mcocsig = 'LONG'
+
+        suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
         desc = []
 
         for k in suffix:
