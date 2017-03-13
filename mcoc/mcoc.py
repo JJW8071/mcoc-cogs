@@ -568,7 +568,7 @@ class MCOC:
         title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
         title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(champ.mcocsig)
-        title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
+        title4 = 'ID_UI_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
