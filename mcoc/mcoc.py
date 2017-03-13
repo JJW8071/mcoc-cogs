@@ -361,7 +361,7 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title, preamble, simple = _get_mcoc_keys(champ, sigs)
+        title, preamble, simple = self._get_mcoc_keys(champ, sigs)
 
         await self.bot.say('DEBUG: Title: '+title)
         await self.bot.say('DEBUG: Preamble: '+preamble)
@@ -590,11 +590,11 @@ class MCOC:
             raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
         simple = premable + '_SIMPLE'
 
-        suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3','_DESC_AO','_DESC_NEW_AO','_DESC_NEW_B_AO','_DESC_C_AO','_DESC_D_AO','_DESC_E_AO','_DESC_ALT_AO','_DESC2_AO','_DESC3_AO'}
+        # suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3','_DESC_AO','_DESC_NEW_AO','_DESC_NEW_B_AO','_DESC_C_AO','_DESC_D_AO','_DESC_E_AO','_DESC_ALT_AO','_DESC2_AO','_DESC3_AO'}
 
-        for k in suffix:
-            if preamble +suffix[k] in sigs:
-                desc[k]=preamble + suffix[k]
+        # for k in suffix:
+        #     if preamble +suffix[k] in sigs:
+        #         desc[k]=preamble + suffix[k]
 
         return title, preamble, simple#, desc
 
