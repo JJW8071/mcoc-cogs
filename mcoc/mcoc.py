@@ -361,11 +361,14 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title, preamble, simple = self._get_mcoc_keys(champ, sigs)
+        title, preamble, simple, desc = self._get_mcoc_keys(champ, sigs)
 
         await self.bot.say('DEBUG: Title: '+ title)
         await self.bot.say('DEBUG: Preamble: '+ preamble)
         await self.bot.say('DEBUG: Simple: '+ simple)
+
+        for k in desc:
+            await self.bot.say('DEBUG: Desc: '+ k)
 
         # desc_str = preamble + '_DESC'
         # desc_set = {key for key in sigs if key.startswith(desc_str)}
@@ -595,7 +598,7 @@ class MCOC:
 
         suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3'}
         desc = []
-        
+
         for k in suffix:
             if preamble+k in sigs:
                 if preamble+k+'_AO' in sigs:
@@ -606,7 +609,7 @@ class MCOC:
         #     if preamble +suffix[k] in sigs:
         #         desc[k]=preamble + suffix[k]
 
-        return title, preamble, simple#, desc
+        return title, preamble, simple, desc
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
