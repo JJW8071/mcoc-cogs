@@ -572,11 +572,9 @@ class MCOC:
             for k in suffix:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
-#                        desc.append(Champion._sig_header(preamble + k + '_AO'))
-                        desc.append((preamble + k + '_AO')
+                        desc.append(preamble + k + '_AO')
                     else:
-#                        desc.append(Champion._sig_header(preamble + k))
-                        desc.append((preamble + k)
+                        desc.append(preamble + k)
 
         return title, preamble, simple, desc
 
