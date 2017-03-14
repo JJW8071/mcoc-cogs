@@ -534,7 +534,7 @@ class MCOC:
                 break
 
         if preamble is 'undefined':
-            raise KeyError('DEBUG - Preamble not found: ' + )
+            raise KeyError('DEBUG - Preamble not found')
 
         simple[0] = preamble + '_SIMPLE'
         if simple[0] + '2' in sigs:
