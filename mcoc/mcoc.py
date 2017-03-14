@@ -497,6 +497,7 @@ class MCOC:
         mcocsig = champ.mcocsig
         preamble = 'undefined'
         title = 'undefined'
+        title_lower = 'undefined'
         simple = []
         desc = []
 
