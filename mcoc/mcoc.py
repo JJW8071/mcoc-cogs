@@ -556,6 +556,8 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
         elif champ.mcocsig == 'DEADPOOL':
             desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
+        elif champ.mcocsig == 'ULTRON':
+            desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
         else:
             if champ.mcocsig == 'BEAST':
                 preamble = 'ID_UI_STAT_SIGNATURE_LONG'
