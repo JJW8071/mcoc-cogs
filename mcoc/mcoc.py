@@ -517,7 +517,7 @@ class MCOC:
                 title = x
                 break
             else:
-                raise KeyError('DEBUG: Title not found for {}'.format(mcocsig))
+                raise KeyError('DEBUG - Title not found for: '+x)
 
         if title+'_LOWER' in sigs:
             title = title+'_LOWER'
@@ -537,7 +537,7 @@ class MCOC:
                     break
                 break
             else:
-                raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
+                raise KeyError('DEBUG - Preamble not found: ' + x)
 
         simple[0] = preamble + '_SIMPLE'
         if simple[0] + '2' in sigs:
