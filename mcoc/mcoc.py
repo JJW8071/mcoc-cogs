@@ -309,8 +309,9 @@ class MCOC:
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
-            await self.bot.say('DEBUG: Preamble: '+ preamble)
-            await self.bot.say('DEBUG: Simple: '+ simple)
+            await self.bot.say('DEBUG: title_lower: '+ title_lower)
+            for k in simple:
+                await self.bot.say('DEBUG: Simple: '+ k)
             for k in desc:
                 await self.bot.say('DEBUG: Desc: '+ k)
 
