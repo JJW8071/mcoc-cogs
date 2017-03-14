@@ -537,7 +537,7 @@ class MCOC:
                 break
 
         if champ.mcocsig == 'COMICULTRON':
-            mcocsig = champ.mcocsig
+            preamble = 'ID_UI_STAT_SIGNATURE_ULTRON'
 
         if preamble is 'undefined':
             raise KeyError('DEBUG - Preamble not found')
