@@ -305,7 +305,7 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title, simple, desc = self._get_mcoc_keys(champ, sigs)
+        title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
@@ -315,7 +315,7 @@ class MCOC:
                 await self.bot.say('DEBUG: Desc: '+ k)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.add_field(name=capitalize(sigs[title]), value='\n'.join(['• ' + sigs[k] for k in sorted(simple)]))
+        em.add_field(name=sigs[title], value='\n'.join(['• ' + sigs[k] for k in sorted(simple)]))
 
         em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in sorted(desc)]))
 
@@ -519,7 +519,7 @@ class MCOC:
         if title is 'undefined':
             raise KeyError('DEBUG - title not found')
         elif title+'_LOWER' in sigs:
-            title = title+'_LOWER'
+            title_lower = title+'_LOWER'
 
         preambles ={'ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
@@ -558,7 +558,7 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
-        return title, simple, desc
+        return title, title_lower, simple, desc
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
