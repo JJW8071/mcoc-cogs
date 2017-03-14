@@ -568,15 +568,17 @@ class MCOC:
                         k = k + '_NEW'
                         if preamble + k + '_AO' in sigs:
                             desc.append(preamble + k + '_AO')
-                        else desc.append(preamble + k)
+                        else:
+                            desc.append(preamble + k)
                         if preamble + k + '_B' in sigs:
                             k = k + '_B'
                             if preamble + k + '_AO' in sigs:
                                 desc.append(preamble + k + '_AO')
-                        else desc.append(preamble + k)
-                    elif preamble + k + '_ALT' in sigs
+                        else:
+                            desc.append(preamble + k)
+                    elif preamble + k + '_ALT' in sigs:
                         desc.append(preamble + k + '_ALT')
-                    elif preamble + k + '_AO' in sigs
+                    elif preamble + k + '_AO' in sigs:
                         desc.append(preamble + k + '_AO')
                     else:
                         desc.append(preamble + k)
