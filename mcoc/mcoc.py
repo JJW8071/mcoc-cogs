@@ -536,11 +536,11 @@ class MCOC:
         if preamble is 'undefined':
             raise KeyError('DEBUG - Preamble not found')
 
-        simple[0] = preamble + '_SIMPLE'
+        simple.append(preamble + '_SIMPLE')
         if simple[0] + '2' in sigs:
-            simple[1] = simple[0]+'2'
-            if simple+'3' in sigs:
-                simple[2] = simple[0]+'3'
+            simple.append(simple[0]+'2')
+            if simple[0] + '3' in sigs:
+                simple.append(simple[0]+'3')
 
         if champ.mcocsig == 'CYCLOPS_90S':
             preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
