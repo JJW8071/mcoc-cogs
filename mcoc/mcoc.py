@@ -515,11 +515,10 @@ class MCOC:
         for x in titles:
             if x in sigs:
                 title = x
-                break
-            else:
-                raise KeyError('DEBUG - Title not found for: '+x)
 
-        if title+'_LOWER' in sigs:
+        if title is 'undefined':
+            raise KeyError('DEBUG - title not found')
+        elif title+'_LOWER' in sigs:
             title = title+'_LOWER'
 
         preambles ={'ID_UI_STAT_SIGNATURE_'.format(mcocsig),
@@ -532,11 +531,8 @@ class MCOC:
         for x in preambles:
             if x in sigs:
                 preamble = x
-                if preamble+'_LOWER' in sigs:
-                    preamble = preamble+'_LOWER'
-                    break
-                break
-            else:
+
+        if preamble is 'undefined':
                 raise KeyError('DEBUG - Preamble not found: ' + x)
 
         simple[0] = preamble + '_SIMPLE'
