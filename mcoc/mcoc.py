@@ -548,7 +548,7 @@ class MCOC:
             preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
-        elif cham.mcocsig == 'LOKI'
+        elif cham.mcocsig == 'LOKI':
             desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
         else:
             if champ.mcocsig == 'BEAST':
