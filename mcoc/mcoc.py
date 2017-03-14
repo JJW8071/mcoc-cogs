@@ -521,26 +521,41 @@ class MCOC:
         if mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
 
-        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
-        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig)
-        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
-        title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig)
-        title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig)
-        title5 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig)
-        if title0 in sigs:
-            title = title0
-        elif title1 in sigs:
-            title = title1
-        elif title2 in sigs:
-            title = title2
-        elif title3 in sigs:
-            title = title3
-        elif title4 in sigs:
-            title = title4
-        elif title5 in sigs:
-            title = title5
-        else :
-            raise KeyError('Title key not found for {}'.format(mcocsig))
+        titles={'SIGNATURE_{}_TITLE','ATTRIBUTE_{}_TITLE','{}_SIGNATURE_TITLE','SIG_{}_TITLE','ATTRIBUTE_{}_SIGNATURE_TITLE','SIGNATURE_FORMAT_{}_SIG_TITLE','SIGNATURE_{}_SIG_TITLE'}
+        for x in titles:
+            if 'ID_UI_STAT_'+x.format(mcocsig) in sigs:
+                title = 'ID_UI_STAT_'+x.format(mcosig)
+                break
+
+        if title is not 'undefined':
+            if title+'_LOWER' in sigs:
+                title = title+'_LOWER'
+            else:
+                title = title.capitalize()
+                
+        # title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
+        # title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig)
+        # title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
+        # title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig)
+        # title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig)
+        # title5 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig)
+        # title6 = 'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig)
+        # if title0 in sigs:
+        #     title = title0
+        # elif title1 in sigs:
+        #     title = title1
+        # elif title2 in sigs:
+        #     title = title2
+        # elif title3 in sigs:
+        #     title = title3
+        # elif title4 in sigs:
+        #     title = title4
+        # elif title5 in sigs:
+        #     title = title5
+        # elif title6 in sigs:
+        #     title = title6
+        # else :
+        #     raise KeyError('Title key not found for {}'.format(mcocsig))
 
         if title+'_LOWER' in sigs:
             title = title+'_LOWER'
@@ -550,6 +565,7 @@ class MCOC:
         preamble2 = 'ID_UI_STAT_SIG_{}'.format(mcocsig)
         preamble3 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig)
         preamble4 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig)
+        preamble5 = 'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig)
 
         if preamble0+'_SIMPLE' in sigs:
             preamble = preamble0
@@ -561,6 +577,8 @@ class MCOC:
             preamble = preamble3
         elif preamble4+'_SIMPLE' in sigs:
             preamble = preamble4
+        elif preamble5+'_SIMPLE' in sigs:
+            preamble = preamble5
         else:
             raise KeyError('Simple key not found for {}'.format(mcocsig))
         simple = preamble + '_SIMPLE'
