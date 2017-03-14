@@ -502,38 +502,36 @@ class MCOC:
         if mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
 
-        titles={'SIGNATURE_{}_TITLE',
-            'ATTRIBUTE_{}_TITLE',
-            '{}_SIGNATURE_TITLE',
-            'SIG_{}_TITLE',
-            'ATTRIBUTE_{}_SIGNATURE_TITLE',
-            'SIGNATURE_FORMAT_{}_SIG_TITLE',
-            'SIGNATURE_{}_SIG_TITLE'}
-        for x in titles:
-            if 'ID_UI_STAT_'+x.format(mcocsig) in sigs:
-                title = 'ID_UI_STAT_'+x.format(mcocsig)
+        titles={'ID_UI_STAT_SIGNATURE_{}_TITLE',
+            'ID_UI_STAT_ATTRIBUTE_{}_TITLE',
+            'ID_UI_STAT_{}_SIGNATURE_TITLE',
+            'ID_UI_STAT_SIG_{}_TITLE',
+            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE',
+            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE',
+            'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'}
+        for x.format(mcocsig) in titles:
+            if x in sigs:
+                title = x
                 if title+'_LOWER' in sigs:
                     title = title+'_LOWER'
-                else:
-                    title = title.capitalize()
+                    break
                 break
             else:
                 raise KeyError('DEBUG: Title not found for {}'.format(mcocsig))
 
-        preambles ={'SIGNATURE_',
-            '{}_SIGNATURE',
-            'SIG_{}',
-            'ATTRIBUTE_{}_SIGNATURE',
-            'SIGNATURE_FORMAT_{}_SIG',
-            'SIGNATURE_{}_SIG'}
+        preambles ={'ID_UI_STAT_SIGNATURE_',
+            'ID_UI_STAT_{}_SIGNATURE',
+            'ID_UI_STAT_SIG_{}',
+            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE',
+            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG',
+            'ID_UI_STAT_SIGNATURE_{}_SIG'}
 
-        for x in preambles:
-            if 'ID_UI_STAT_'+x.format(mcocsig) in sigs:
-                preamble = 'ID_UI_STAT_'+x.format(mcocsig)
+        for x.format(mcocsig) in preambles:
+            if x in sigs:
+                preamble = x
                 if preamble+'_LOWER' in sigs:
                     preamble = preamble+'_LOWER'
-                else:
-                    preamble = preamble.capitalize()
+                    break
                 break
             else:
                 raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
