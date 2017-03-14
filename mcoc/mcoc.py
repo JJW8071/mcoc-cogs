@@ -497,7 +497,8 @@ class MCOC:
         mcocsig = champ.mcocsig
         preamble = 'undefined'
         title = 'undefined'
-        simple = 'undefined'
+        simple = []
+        desc = []
 
         if mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
@@ -538,14 +539,12 @@ class MCOC:
             else:
                 raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
 
-        simple[]
         simple[0] = preamble + '_SIMPLE'
         if simple[0] + '2' in sigs:
             simple[1] = simple[0]+'2'
             if simple+'3' in sigs:
                 simple[2] = simple[0]+'3'
 
-        desc = []
         if champ.mcocsig == 'CYCLOPS_90S':
             preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
