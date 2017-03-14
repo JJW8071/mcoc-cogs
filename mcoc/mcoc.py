@@ -565,7 +565,7 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_E_AO')
             desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_UPDATE')
         elif preamble + k + '_DESC_NEW' in sigs:
-            for k in {'_DESC_NEW','_DESC_NEW_B'}
+            for k in {'_DESC_NEW','_DESC_NEW_B'}:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
                         desc.append(preamble + k + '_AO')
