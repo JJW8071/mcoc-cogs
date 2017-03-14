@@ -509,8 +509,9 @@ class MCOC:
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE',
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE',
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'}
-        for x.format(mcocsig) in titles:
-            if x in sigs:
+
+        for x in titles:
+            if x.format(mcocsig) in sigs:
                 title = x
                 if title+'_LOWER' in sigs:
                     title = title+'_LOWER'
@@ -518,6 +519,7 @@ class MCOC:
                 break
             else:
                 raise KeyError('DEBUG: Title not found for {}'.format(mcocsig))
+        continue
 
         preambles ={'ID_UI_STAT_SIGNATURE_',
             'ID_UI_STAT_{}_SIGNATURE',
@@ -526,8 +528,8 @@ class MCOC:
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG',
             'ID_UI_STAT_SIGNATURE_{}_SIG'}
 
-        for x.format(mcocsig) in preambles:
-            if x in sigs:
+        for x in preambles:
+            if x.format(mcocsig) in sigs:
                 preamble = x
                 if preamble+'_LOWER' in sigs:
                     preamble = preamble+'_LOWER'
@@ -535,6 +537,8 @@ class MCOC:
                 break
             else:
                 raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
+        continue
+
         simple = preamble + '_SIMPLE'
 
         desc = []
