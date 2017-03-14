@@ -315,7 +315,7 @@ class MCOC:
                 await self.bot.say('DEBUG: Desc: '+ k)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.add_field(name=sigs[title], value='\n'.join(['• ' + k for k in sorted(simple)]))
+        em.add_field(name=sigs[title], value=sigs[simple])
 
         em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in sorted(desc)]))
 
@@ -521,15 +521,15 @@ class MCOC:
         if title+'_LOWER' in sigs:
             title = title+'_LOWER'
 
-        preambles ={'ID_UI_STAT_SIGNATURE_'.format(mcocsig),
-            'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
-            'ID_UI_STAT_SIG_{}'.format(mcocsig),
-            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig)}
+        preambles ={'ID_UI_STAT_SIGNATURE_',
+            'ID_UI_STAT_{}_SIGNATURE',
+            'ID_UI_STAT_SIG_{}',
+            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE',
+            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG',
+            'ID_UI_STAT_SIGNATURE_{}_SIG'}
 
         for x in preambles:
-            if x in sigs:
+            if x.format(mcocsig) in sigs:
                 preamble = x
                 if preamble+'_LOWER' in sigs:
                     preamble = preamble+'_LOWER'
@@ -538,12 +538,7 @@ class MCOC:
             else:
                 raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
 
-        simple[]
-        simple[0] = preamble + '_SIMPLE'
-        if simple[0] + '2' in sigs:
-            simple[1] = simple[0]+'2'
-            if simple+'3' in sigs:
-                simple[2] = simple[0]+'3'
+        simple = preamble + '_SIMPLE'
 
         desc = []
         if champ.mcocsig == 'CYCLOPS_90S':
