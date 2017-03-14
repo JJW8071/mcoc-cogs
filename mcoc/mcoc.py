@@ -526,6 +526,7 @@ class MCOC:
         title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
         title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig)
         title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig)
+        title5 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig)
         if title0 in sigs:
             title = title0
         elif title1 in sigs:
@@ -536,6 +537,8 @@ class MCOC:
             title = title3
         elif title4 in sigs:
             title = title4
+        elif title5 in sigs:
+            title = title5
         else :
             raise KeyError('Title key not found for {}'.format(mcocsig))
 
@@ -546,6 +549,7 @@ class MCOC:
         preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig)
         preamble2 = 'ID_UI_STAT_SIG_{}'.format(mcocsig)
         preamble3 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig)
+        preamble4 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig)
 
         if preamble0+'_SIMPLE' in sigs:
             preamble = preamble0
@@ -555,6 +559,8 @@ class MCOC:
             preamble = preamble2
         elif preamble3+'_SIMPLE' in sigs:
             preamble = preamble3
+        elif preamble4+'_SIMPLE' in sigs:
+            preamble = preamble4
         else:
             raise KeyError('Simple key not found for {}'.format(mcocsig))
         simple = preamble + '_SIMPLE'
