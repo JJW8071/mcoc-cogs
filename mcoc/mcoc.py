@@ -548,18 +548,18 @@ class MCOC:
         #     if simple[0] + '3' in sigs:
         #         simple.append(simple[0]+'3')
 
-        if champ.mcocsig == 'CYCLOPS_90S':
+        if mcocsig == 'CYCLOPS_90S':
             preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
-        elif champ.mcocsig == 'LOKI':
+        elif mcocsig == 'LOKI':
             desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
-        elif champ.mcocsig == 'DEADPOOL':
+        elif mcocsig == 'DEADPOOL':
             desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
-        elif champ.mcocsig == 'ULTRON':
+        elif mcocsig == 'ULTRON':
             desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
         else:
-            if champ.mcocsig == 'BEAST':
+            if mcocsig == 'BEAST':
                 preamble = 'ID_UI_STAT_SIGNATURE_LONG'
 
             suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','DESC_AO','DESC_B','DESC_C','DESC_D','DESC_E','_DESC_ALT','_DESC2','_DESC3'}
