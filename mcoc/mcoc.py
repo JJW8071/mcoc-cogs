@@ -521,10 +521,16 @@ class MCOC:
         if mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
 
-        titles={'SIGNATURE_{}_TITLE','ATTRIBUTE_{}_TITLE','{}_SIGNATURE_TITLE','SIG_{}_TITLE','ATTRIBUTE_{}_SIGNATURE_TITLE','SIGNATURE_FORMAT_{}_SIG_TITLE','SIGNATURE_{}_SIG_TITLE'}
+        titles={'SIGNATURE_{}_TITLE',
+            'ATTRIBUTE_{}_TITLE',
+            '{}_SIGNATURE_TITLE',
+            'SIG_{}_TITLE',
+            'ATTRIBUTE_{}_SIGNATURE_TITLE',
+            'SIGNATURE_FORMAT_{}_SIG_TITLE',
+            'SIGNATURE_{}_SIG_TITLE'}
         for x in titles:
             if 'ID_UI_STAT_'+x.format(mcocsig) in sigs:
-                title = 'ID_UI_STAT_'+x.format(mcosig)
+                title = 'ID_UI_STAT_'+x.format(mcocsig)
                 break
 
         if title is not 'undefined':
@@ -532,7 +538,7 @@ class MCOC:
                 title = title+'_LOWER'
             else:
                 title = title.capitalize()
-                
+
         # title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
         # title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig)
         # title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
