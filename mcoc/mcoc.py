@@ -502,23 +502,24 @@ class MCOC:
         if mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
 
-        titles={'ID_UI_STAT_SIGNATURE_{}_TITLE',
-            'ID_UI_STAT_ATTRIBUTE_{}_TITLE',
-            'ID_UI_STAT_{}_SIGNATURE_TITLE',
-            'ID_UI_STAT_SIG_{}_TITLE',
-            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE',
-            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE',
-            'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'}
+        titles={'ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+            'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
+            'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
+            'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
+            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
+            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
+            'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
+            }
 
         for x in titles:
-            if x.format(mcocsig) in sigs:
+            if x in sigs:
                 title = x
-                if title+'_LOWER' in sigs:
-                    title = title+'_LOWER'
-                    break
                 break
             else:
                 raise KeyError('DEBUG: Title not found for {}'.format(mcocsig))
+
+        if title+'_LOWER' in sigs:
+            title = title+'_LOWER'
 
         preambles ={'ID_UI_STAT_SIGNATURE_',
             'ID_UI_STAT_{}_SIGNATURE',
