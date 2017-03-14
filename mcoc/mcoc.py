@@ -543,10 +543,10 @@ class MCOC:
             raise KeyError('DEBUG - Preamble not found')
 
         simple.append(preamble + '_SIMPLE')
-        if simple[0] + '2' in sigs:
-            simple.append(simple[0]+'2')
-            if simple[0] + '3' in sigs:
-                simple.append(simple[0]+'3')
+        # if simple[0] + '2' in sigs:
+        #     simple.append(simple[0]+'2')
+        #     if simple[0] + '3' in sigs:
+        #         simple.append(simple[0]+'3')
 
         if champ.mcocsig == 'CYCLOPS_90S':
             preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
@@ -554,6 +554,8 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         elif champ.mcocsig == 'LOKI':
             desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
+        elif champ.mcocsig == 'DEADPOOL'
+            desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
         else:
             if champ.mcocsig == 'BEAST':
                 preamble = 'ID_UI_STAT_SIGNATURE_LONG'
