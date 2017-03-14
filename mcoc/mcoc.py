@@ -521,7 +521,7 @@ class MCOC:
         elif title+'_LOWER' in sigs:
             title = title+'_LOWER'
 
-        preambles ={'ID_UI_STAT_SIGNATURE_'.format(mcocsig),
+        preambles ={'ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
@@ -531,9 +531,10 @@ class MCOC:
         for x in preambles:
             if x+'_SIMPLE' in sigs:
                 preamble = x
+                break
 
         if preamble is 'undefined':
-                raise KeyError('DEBUG - Preamble not found: ' + x)
+            raise KeyError('DEBUG - Preamble not found: ' + )
 
         simple[0] = preamble + '_SIMPLE'
         if simple[0] + '2' in sigs:
