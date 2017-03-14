@@ -557,7 +557,7 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
-        return title, preamble, simple, desc
+        return title, simple, desc
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
