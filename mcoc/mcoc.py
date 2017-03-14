@@ -519,7 +519,6 @@ class MCOC:
                 break
             else:
                 raise KeyError('DEBUG: Title not found for {}'.format(mcocsig))
-        continue
 
         preambles ={'ID_UI_STAT_SIGNATURE_',
             'ID_UI_STAT_{}_SIGNATURE',
@@ -537,7 +536,6 @@ class MCOC:
                 break
             else:
                 raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
-        continue
 
         simple = preamble + '_SIMPLE'
 
