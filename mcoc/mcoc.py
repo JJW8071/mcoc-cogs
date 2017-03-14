@@ -305,7 +305,7 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title, preamble, simple, desc = self._get_mcoc_keys(champ, sigs)
+        title, simple, desc = self._get_mcoc_keys(champ, sigs)
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
@@ -322,25 +322,6 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
 
         await self.bot.say(embed=em)
-
-        # desc_str = preamble + '_DESC'
-        # desc_set = {key for key in sigs if key.startswith(desc_str)}
-        # desc_flat = {key for key in desc_set if key.endswith('_AO')}
-        # if title in sigs:
-        #     em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        # #     desc_final = desc_flat if desc_flat else desc_set
-        #     em.add_field(name=sigs[title], value=sigs[simple])
-        # #     em.add_field(name=sigs[title],
-        # #         value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
-        #     if dbg == 1:
-        #         em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
-        # #         if desc_set - desc_final:
-        # #             em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
-        # #         #print(champ, champ.get_avatar())
-        #     em.set_thumbnail(url=champ.get_avatar())
-        #     await self.bot.say(embed=em)
-        # else:
-        #     await self.bot.say('Cannot find any keys for ' + champ.full_name)
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
@@ -531,67 +512,36 @@ class MCOC:
         for x in titles:
             if 'ID_UI_STAT_'+x.format(mcocsig) in sigs:
                 title = 'ID_UI_STAT_'+x.format(mcocsig)
+                if title+'_LOWER' in sigs:
+                    title = title+'_LOWER'
+                else:
+                    title = title.capitalize()
                 break
-
-        if title is not 'undefined':
-            if title+'_LOWER' in sigs:
-                title = title+'_LOWER'
             else:
-                title = title.capitalize()
+                raise KeyError('DEBUG: Title not found for {}'.format(mcocsig))
 
-        # title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig)
-        # title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig)
-        # title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig)
-        # title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig)
-        # title4 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig)
-        # title5 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig)
-        # title6 = 'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig)
-        # if title0 in sigs:
-        #     title = title0
-        # elif title1 in sigs:
-        #     title = title1
-        # elif title2 in sigs:
-        #     title = title2
-        # elif title3 in sigs:
-        #     title = title3
-        # elif title4 in sigs:
-        #     title = title4
-        # elif title5 in sigs:
-        #     title = title5
-        # elif title6 in sigs:
-        #     title = title6
-        # else :
-        #     raise KeyError('Title key not found for {}'.format(mcocsig))
+        preambles ={'SIGNATURE_',
+            '{}_SIGNATURE',
+            'SIG_{}',
+            'ATTRIBUTE_{}_SIGNATURE',
+            'SIGNATURE_FORMAT_{}_SIG',
+            'SIGNATURE_{}_SIG'}
 
-        if title+'_LOWER' in sigs:
-            title = title+'_LOWER'
-
-        preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(mcocsig)
-        preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig)
-        preamble2 = 'ID_UI_STAT_SIG_{}'.format(mcocsig)
-        preamble3 = 'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig)
-        preamble4 = 'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig)
-        preamble5 = 'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig)
-
-        if preamble0+'_SIMPLE' in sigs:
-            preamble = preamble0
-        elif preamble1+'_SIMPLE' in sigs:
-            preamble = preamble1
-        elif preamble2+'_SIMPLE' in sigs:
-            preamble = preamble2
-        elif preamble3+'_SIMPLE' in sigs:
-            preamble = preamble3
-        elif preamble4+'_SIMPLE' in sigs:
-            preamble = preamble4
-        elif preamble5+'_SIMPLE' in sigs:
-            preamble = preamble5
-        else:
-            raise KeyError('Simple key not found for {}'.format(mcocsig))
+        for x in preambles:
+            if 'ID_UI_STAT_'+x.format(mcocsig) in sigs:
+                preamble = 'ID_UI_STAT_'+x.format(mcocsig)
+                if preamble+'_LOWER' in sigs:
+                    preamble = preamble+'_LOWER'
+                else:
+                    preamble = preamble.capitalize()
+                break
+            else:
+                raise KeyError('DEBUG: Preamble not found for {}'.format(mcocsig))
         simple = preamble + '_SIMPLE'
 
         desc = []
         if champ.mcocsig == 'CYCLOPS_90S':
-            title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
+            preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         else:
