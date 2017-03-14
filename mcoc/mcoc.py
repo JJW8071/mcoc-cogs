@@ -515,10 +515,11 @@ class MCOC:
         for x in titles:
             if x in sigs:
                 title = x
+                break
+            else:
+                raise KeyError('DEBUG - Title not found for: '+x)
 
-        if title is 'undefined':
-            raise KeyError('DEBUG - title not found')
-        elif title+'_LOWER' in sigs:
+        if title+'_LOWER' in sigs:
             title = title+'_LOWER'
 
         preambles ={'ID_UI_STAT_SIGNATURE_'.format(mcocsig),
@@ -531,8 +532,11 @@ class MCOC:
         for x in preambles:
             if x in sigs:
                 preamble = x
-
-        if preamble is 'undefined':
+                if preamble+'_LOWER' in sigs:
+                    preamble = preamble+'_LOWER'
+                    break
+                break
+            else:
                 raise KeyError('DEBUG - Preamble not found: ' + x)
 
         simple[0] = preamble + '_SIMPLE'
@@ -557,7 +561,7 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
-        return title, simple, desc
+        return title, preamble, simple, desc
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
