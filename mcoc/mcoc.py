@@ -561,10 +561,22 @@ class MCOC:
             if mcocsig == 'BEAST':
                 preamble = 'ID_UI_STAT_SIGNATURE_LONG'
 
-            suffix = {'_DESC','_DESC_NEW','_DESC_NEW_B','_DESC_B','_DESC_C','_DESC_D','_DESC_E','_DESC_ALT','_DESC2','_DESC3'}
+            suffix = {'_DESC','_DESC_B','_DESC_C','_DESC_D','_DESC_E','_DESC2','_DESC3'}
             for k in suffix:
                 if preamble + k in sigs:
-                    if preamble + k + '_AO' in sigs:
+                    if preamble + k + '_NEW' in sigs:
+                        k = k + '_NEW'
+                        if preamble + k + '_AO' in sigs:
+                            desc.append(preamble + k + '_AO')
+                        else desc.append(preamble + k)
+                        if preamble + k + '_B' in sigs:
+                            k = k + '_B'
+                            if preamble + k + '_AO' in sigs:
+                                desc.append(preamble + k + '_AO')
+                        else desc.append(preamble + k)
+                    elif preamble + k + '_ALT' in sigs
+                        desc.append(preamble + k + '_ALT')
+                    elif preamble + k + '_AO' in sigs
                         desc.append(preamble + k + '_AO')
                     else:
                         desc.append(preamble + k)
