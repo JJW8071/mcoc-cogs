@@ -545,7 +545,7 @@ class MCOC:
         #     if simple[0] + '3' in sigs:
         #         simple.append(simple[0]+'3')
 
-        if mcocsig == 'CYCLOPS_90S':
+        if champ.mcocsig == 'CYCLOPS_90S':
             preamble = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
