@@ -316,12 +316,12 @@ class MCOC:
                 await self.bot.say('DEBUG: Desc: '+ k)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.add_field(name=sigs[title], value='\n'.join(['• ' + sigs[k] for k in simple]))
-
+        if title_lower in sigs:
+            em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
+        else:
+            em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
         em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
-
         em.set_thumbnail(url=champ.get_avatar())
-
         await self.bot.say(embed=em)
 
     @commands.command()
@@ -523,7 +523,7 @@ class MCOC:
 
         if title is 'undefined':
             raise KeyError('DEBUG - title not found')
-        elif title+'_LOWER' in sigs:
+        elif title +'_LOWER' in sigs:
             title_lower = title+'_LOWER'
 
         preambles ={'ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
@@ -553,6 +553,7 @@ class MCOC:
         #         simple.append(simple[0]+'3')
 
         if champ.mcocsig == 'CYCLOPS_90S':
+            title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
             title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             simple = 'ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
