@@ -543,7 +543,7 @@ class MCOC:
         #     raise KeyError('DEBUG - Preamble not found')
         if preamble + '_SIMPLE_NEW' in sigs:
             simple.append(preamble + '_SIMPLE_NEW')
-        elif preamble + '_SIMPLE_NEW' in sigs:
+        elif preamble + '_SIMPLE' in sigs:
             simple.append(preamble + '_SIMPLE')
         else:
             raise KeyError('Signature SIMPLE cannot be found')
