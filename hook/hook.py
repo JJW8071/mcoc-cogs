@@ -29,15 +29,10 @@ class Hook:
         # creates user if doesn't exist
         self._create_user(user)
         #userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
-
-        champ_data = dataIO.load_json('data/hook/users/{}/champs.json'.format(user.id))
-        # if champ_data['prestige'] is not 0:
-        await self.bot.say('Prestige: {}'.format(champ_data['prestige']))
-        # else:
-        #     await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
+        userinfo = dataIO.load_json('data/hook/users/{}/champs.json'.format(user.id))
+        await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
     # handles user creation, adding new server, blocking
-
     def _create_user(self, user):
         if not os.path.exists(self.champs_file.format(user.id)):
             if not os.path.exists(self.data_dir.format(user.id)):
@@ -48,7 +43,6 @@ class Hook:
                 "fieldnames": [],
                 "champs": [],
                 "prestige": 0,
-                'max_prestige':0,
                 "top5": [],
                 "aq": [],
                 "awd": [],
@@ -76,13 +70,11 @@ class Hook:
             # max prestige calcs
             champ_list.sort(key=itemgetter('maxpi', 'Id'), reverse=True)
             maxpi = sum([champ['maxpi'] for champ in champ_list[:5]])/5
-            champ_data['max_prestige'] = maxpi
             max_champs = ['{0[Stars]}* {0[Id]}'.format(champ) for champ in champ_list[:5]]
 
             # prestige calcs
             champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
             prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
-            champ_data['prestige'] = prestige
             top_champs = ['{0[Stars]}* {0[Id]}'.format(champ) for champ in champ_list[:5]]
 
             em = discord.Embed(title="Updated Champions")
