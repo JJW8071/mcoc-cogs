@@ -555,7 +555,6 @@ class MCOC:
         if champ.mcocsig == 'CYCLOPS_90S':
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
             title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
-            simple.append('ID_UI_STAT_SIGNATURE_CYCLOPS_SIMPLE')
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         elif mcocsig == 'LOKI':
             desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
