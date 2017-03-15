@@ -48,6 +48,7 @@ class Hook:
                 "awd": [],
                 "awo": [],
                 "max5": [],
+                'maxpi': 0
             }
             dataIO.save_json(self.champs_file.format(user.id), champ_data)
 
@@ -79,7 +80,9 @@ class Hook:
 
             em = discord.Embed(title="Updated Champions")
             em.add_field(name='Prestige', value=prestige)
+            champ_data['prestige'] = prestige
             em.add_field(name='Max Prestige', value=maxpi, inline=True)
+            champ_data['maxpi'] = maxpi
             em.add_field(name='Top Champs', value='\n'.join(top_champs), inline=False)
             em.add_field(name='Max PI Champs', value='\n'.join(max_champs), inline=True)
 
