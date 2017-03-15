@@ -504,6 +504,8 @@ class MCOC:
 
         if mcocsig == 'COMICULTRON':
             mcocsig = 'ULTRON'
+        elif mcocsig == 'CYCLOPS_90S':
+            mcocsig = 'CYCLOPS'
 
         titles={'ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
@@ -536,8 +538,8 @@ class MCOC:
                 preamble = x
                 break
 
-        if preamble is 'undefined':
-            raise KeyError('DEBUG - Preamble not found')
+        # if preamble is 'undefined':
+        #     raise KeyError('DEBUG - Preamble not found')
 
         simple.append(preamble + '_SIMPLE')
         # if simple[0] + '2' in sigs:
