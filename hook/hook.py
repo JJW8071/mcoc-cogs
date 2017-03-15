@@ -30,7 +30,10 @@ class Hook:
         self._create_user(user)
         userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
 
-        await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
+        if userinfo['prestige'] is not 0:
+            await self.bot.say('Prestige: {}'.format(userinfo['prestige']))
+        else:
+            await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
     # handles user creation, adding new server, blocking
     def _create_user(self, user):
@@ -64,7 +67,7 @@ class Hook:
         if mcoc:
             missing = self.hook_prestige(champ_list)
             if missing:
-                await self.bot.send_message(channel, 'Missing hookid for champs: ' 
+                await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
 
             # max prestige calcs
@@ -117,7 +120,7 @@ class Hook:
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
-            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'], 
+            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'],
                     sig=cdict['Awakened'], star=cdict['Stars'], value=True)
             if cdict['Stars'] == 5:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
