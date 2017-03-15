@@ -590,6 +590,9 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
+        if champ.mcocsig == 'IRONMAN_SUPERIOR':
+            desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
+
         return title, title_lower, simple, desc
 
     def _prepare_aliases(self):
