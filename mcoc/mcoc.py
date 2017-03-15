@@ -316,10 +316,10 @@ class MCOC:
                 await self.bot.say('DEBUG: Desc: '+ k)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        if title_lower in sigs:
-            em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
-        else:
+        if title in sigs:
             em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
+        else:
+            em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
         em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -571,6 +571,8 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_C_AO')
             desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_D_AO')
             desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_E_AO')
+        elif mcocsig == 'GUILLOTINE':
+            desc.append('ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC')
             # desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_UPDATE')
         elif preamble + '_DESC_NEW' in sigs:
             for k in {'_DESC_NEW','_DESC_NEW_B'}:
