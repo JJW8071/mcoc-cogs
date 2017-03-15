@@ -28,10 +28,11 @@ class Hook:
         channel = ctx.message.channel
         # creates user if doesn't exist
         self._create_user(user)
-        userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
+        #userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
 
-        if userinfo['prestige'] is not 0:
-            await self.bot.say('Prestige: {}'.format(userinfo['prestige']))
+        champ_data = dataIO.load_json('data/hook/users/{}/champs.json'.format(user.id))
+        if champ_data['prestige'] is not 0:
+            await self.bot.say('Prestige: {}'.format(champ_data['prestige']))
         else:
             await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
