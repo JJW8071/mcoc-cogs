@@ -39,7 +39,7 @@ class Hook:
     # handles user creation, adding new server, blocking
 
     @commands.command(pass_context=True)
-    async def profile_delete(self, user : discord.Member=None):
+    async def profile_delete(self,ctx,* user : discord.Member=None):
         '''Deletes user profile'''
         if user is None:
             user = ctx.message.author
