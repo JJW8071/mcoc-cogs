@@ -38,14 +38,13 @@ class Hook:
 
     # handles user creation, adding new server, blocking
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, no_pm=True)
     async def profile_delete(self,ctx,* user : discord.Member=None):
         '''Deletes user profile'''
         if user is None:
             user = ctx.message.author
         channel = ctx.message.channel
-        filepath = 'data/hook/users/{}/champs.json'.format(user.id)
-        os.remove(filepath)
+        os.remove('data/hook/users/{}/champs.json'.format(user.id))
         await self.bot.say('{} profile deleted'.format(user.id))
 
 
