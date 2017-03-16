@@ -31,7 +31,15 @@ class Hook:
         #userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
         userinfo = dataIO.load_json('data/hook/users/{}/champs.json'.format(user.id))
         if userinfo['prestige'] is not 0:
-            await self.bot.say('Prestige : {}'.format(userinfo['prestige']))
+            em = discord.embed(title='{} Prestige:'.format(user.name),value='{}'.format(userinfo['prestige']))
+            aq = []
+            awd = []
+            awo = []
+            for k in userinfo['awd']:
+                champ = mcoc.alias_resolve(k)
+                awd.append('{}'.format(champ.full_name))
+            em.add_field(title='AWD:',value=join('\n'+ k for k in awd))
+            await self.bot.say(embed=em)
         else:
             await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
 
