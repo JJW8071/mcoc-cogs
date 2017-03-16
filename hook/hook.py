@@ -84,9 +84,7 @@ class Hook:
 
             em = discord.Embed(title="Updated Champions")
             em.add_field(name='Prestige', value=prestige)
-            champ_data['prestige'] = prestige
             em.add_field(name='Max Prestige', value=maxpi, inline=True)
-            champ_data['maxpi'] = maxpi
             em.add_field(name='Top Champs', value='\n'.join(top_champs), inline=False)
             em.add_field(name='Max PI Champs', value='\n'.join(max_champs), inline=True)
 
@@ -96,6 +94,8 @@ class Hook:
         champ_data['fieldnames'] = cr.fieldnames
         champ_data['champs'] = champ_list
         champ_data.update({'awd': [], 'awo': [], 'aq': []})
+        champ_data['maxpi'] = maxpi
+        champ_data['prestige'] = prestige
 
         for champ in champ_data['champs']:
             if champ['Role'] == 'alliance-war-defense':
