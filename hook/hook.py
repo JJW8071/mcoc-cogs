@@ -32,14 +32,23 @@ class Hook:
         #userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
         userinfo = dataIO.load_json('data/hook/users/{}/champs.json'.format(user.id))
         if userinfo['prestige'] is not 0:
-            em = discord.Embed(title='{} Prestige:'.format(user.name),value='{}'.format(userinfo['prestige']))
+            prestige = userinfo['prestige']
+            em = discord.Embed(title='{} Prestige:'.format(user.name),value=prestige)
             aq = []
             awd = []
             awo = []
             for k in userinfo['awd']:
                 champ = self.mcoc._resolve_alias(k)
                 awd.append('{}'.format(champ.full_name))
-            em.add_field(name='AWD:',value='\n'.join(k for k in awd))
+            for k in userinfo['awo']:
+                champ = self.mcoc._resolve_alias(k)
+                awo.append('{}'.format(champ.full_name))
+            for k in userinfo['aq']:
+                champ = self.mcoc._resolve_alias(k)
+                aq.append('{}'.format(champ.full_name))
+            em.add_field(name='AQ:',value='\n'.join(k for k in aq))
+            em.add_field(name='AW Offense:',value='\n'.join(k for k in awo))
+            em.add_field(name='AW Defense:',value='\n'.join(k for k in awd))
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
