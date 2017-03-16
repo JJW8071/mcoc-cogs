@@ -66,6 +66,7 @@ class Hook:
 
         mcoc = self.bot.get_cog('mcoc')
         if mcoc:
+            self.bot.say('DEBUG: cog mcoc found')
             missing = self.hook_prestige(champ_list)
             if missing:
                 await self.bot.send_message(channel, 'Missing hookid for champs: '
