@@ -19,7 +19,7 @@ class Hook:
         self.data_dir = 'data/hook/users/{}/'
         self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champions(?: \(\d+\))?.csv')
-        self.mcoc = self.get_cog('MCOC')
+        self.mcoc = self.bot.get_cog('MCOC')
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
