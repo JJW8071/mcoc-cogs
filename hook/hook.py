@@ -19,6 +19,7 @@ class Hook:
         self.data_dir = 'data/hook/users/{}/'
         self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champions(?: \(\d+\))?.csv')
+        self.mcoc = self.get_cog('MCOC')
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -36,7 +37,7 @@ class Hook:
             awd = []
             awo = []
             for k in userinfo['awd']:
-                champ = mcoc.alias_resolve(k)
+                champ = self.mcoc.alias_resolve(k)
                 awd.append('{}'.format(champ.full_name))
             em.add_field(title='AWD:',value=join('\n'+ k for k in awd))
             await self.bot.say(embed=em)
