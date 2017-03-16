@@ -64,7 +64,7 @@ class Hook:
         for row in cr:
             champ_list.append({k: parse_value(k, v) for k, v in row.items()})
 
-        mcoc = self.bot.get_cog('mcoc')
+        mcoc = self.bot.get_cog('MCOC')
         if mcoc:
             self.bot.say('DEBUG: cog mcoc found')
             missing = self.hook_prestige(champ_list)
