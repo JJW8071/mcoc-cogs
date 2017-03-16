@@ -39,7 +39,7 @@ class Hook:
             for k in userinfo['awd']:
                 champ = self.mcoc._resolve_alias(k)
                 awd.append('{}'.format(champ.full_name))
-            em.add_field(title='AWD:',value=join('\n'+ k for k in awd))
+            em.add_field(title='AWD:',value='\n'.join(k for k in awd))
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Temporary User Profile placeholder statement for user {}'.format(user))
