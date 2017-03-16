@@ -37,7 +37,7 @@ class Hook:
             awd = []
             awo = []
             for k in userinfo['awd']:
-                champ = self.mcoc.alias_resolve(k)
+                champ = self.mcoc._resolve_alias(k)
                 awd.append('{}'.format(champ.full_name))
             em.add_field(title='AWD:',value=join('\n'+ k for k in awd))
             await self.bot.say(embed=em)
