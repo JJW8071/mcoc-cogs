@@ -32,8 +32,7 @@ class Hook:
         #userinfo = fileIO("data/hook/users/{}/champs.json".format(user.id), "load")
         userinfo = dataIO.load_json('data/hook/users/{}/champs.json'.format(user.id))
         if userinfo['prestige'] is not 0:
-            prestige = userinfo['prestige']
-            em = discord.Embed(title='{} Prestige:'.format(user.name),value='{}'.format(prestige))
+            em = discord.Embed(title='{} Prestige:'.format(user.name),description='{}'.format(userinfo['prestige']))
             aq = []
             awd = []
             awo = []
