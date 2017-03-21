@@ -35,31 +35,32 @@ class Hook:
         await self.bot.say(embed=em)
 
 
-    @commands.group(pass_context=True, aliases=('teams',))
-    async def team(self, ctx):
-        if ctx.invoked_subcommand is None:
-            await self.bot.send_cmd_help(ctx)
-            return
-
-    @team.command(pass_context=True, name='awd')
-    async def _team_awd(self, ctx):
-        '''Return user AWD team'''
-        self.bot.say('DEBUG: team awd invoked: {}'.format(ctx))
-        user = ctx.message.author
-        message = ctx.message
-        if message is discord.Role:
-            self.bot.say('DEBUG: discord.Role identified')
-        elif message is discord.Member:
-            self.bot.say('DEBUG: discord.Member identified')
-            user = message
-            info = self.get_user_info(user.id)
-            em = discord.Embed(title='War Defense',description=user.name)
-            team = []
-            for k in info['awd']:
-                champ = self.mcocCog._resolve_alias(k)
-                team.append(champ.full_name)
-            em.add_field(name='AWD:',value=team)
-            self.bot.say(embed=em)
+    # @commands.group(pass_context=True, aliases=('teams',))
+    # async def team(self, ctx):
+    #     if ctx.invoked_subcommand is None:
+    #         await self.bot.send_cmd_help(ctx)
+    #         return
+    #
+    # @team.command(pass_context=True, name='awd')
+    # async def _team_awd(self, ctx):
+    #     '''Return user AWD team'''
+    #     channel = ctx.message.channel
+    #     self.bot.send_message(channel,'DEBUG: team awd invoked: {}'.format(ctx))
+    #     user = ctx.message.author
+    #     message = ctx.message
+    #     if message is discord.Role:
+    #         self.bot.say('DEBUG: discord.Role identified')
+    #     elif message is discord.Member:
+    #         self.bot.say('DEBUG: discord.Member identified')
+    #         user = message
+    #         info = self.get_user_info(user.id)
+    #         em = discord.Embed(title='War Defense',description=user.name)
+    #         team = []
+    #         for k in info['awd']:
+    #             champ = self.mcocCog._resolve_alias(k)
+    #             team.append(champ.full_name)
+    #         em.add_field(name='AWD:',value=team)
+    #         self.bot.say(embed=em)
 
     @commands.group(pass_context=True, aliases=('champs',))
     async def champ(self, ctx):
