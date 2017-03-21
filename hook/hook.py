@@ -36,15 +36,15 @@ class Hook:
 
 
     @commands.group(pass_context=True, aliases=('teams',))
-    async def team(self, ctx):
+    async def team(self, ctx, user : discord.Member=None, role : discord.Role=None):
         if ctx.invoked_subcommand is None:
-            await self.bot.send_cmd_help(ctx)
+            await self.bot.send_cmd_help(ctx, user)
             return
 
     @team.command(pass_context=True, name='awd')
-    async def _team_awd(self, ctx):
+    async def _team_awd(self, ctx, user, role):
         '''Return user AWD team'''
-        if ctx.message is None:
+        if user is None and role is None:
             user = ctx.message.author
             info = self.get_user_info(user.id)
             em = discord.Embed(title='War Defense',description=user.name)
