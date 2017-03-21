@@ -42,10 +42,15 @@ class Hook:
             return
 
     @team.command(pass_context=True, name='awd')
-    async def _team_awd(self, ctx, user, role):
+    async def _team_awd(self, ctx):
         '''Return user AWD team'''
-        if user is None and role is None:
-            user = ctx.message.author
+        user = ctx.message.author
+        message = ctx.message
+        if message is discord.Role:
+            self.bot.say('DEBUG: discord.Role identified')
+        if message is discord.Member:
+            self.bot.say('DEBUG: discord.Member identified')
+            user = message
             info = self.get_user_info(user.id)
             em = discord.Embed(title='War Defense',description=user.name)
             team = []
