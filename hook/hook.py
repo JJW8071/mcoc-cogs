@@ -43,12 +43,13 @@ class Hook:
 
     @team.command(pass_context=True, name='awd')
     async def _team_awd(self, ctx):
+        '''Return user AWD team'''
         if ctx.message is None:
             user = ctx.message.author
             info = self.get_user_info(user.id)
             em = discord.Embed(title='War Defense',description=user.name)
             team = []
-            for k in info['awd']
+            for k in info['awd']:
                 champ = self.mcocCog._resolve_alias(k)
                 team.append(champ.full_name)
             em.add_field(name='AWD:',value=team)
