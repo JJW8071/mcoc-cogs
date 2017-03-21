@@ -44,6 +44,7 @@ class Hook:
     @team.command(pass_context=True, name='awd')
     async def _team_awd(self, ctx):
         '''Return user AWD team'''
+        self.bot.say('DEBUG: team awd invoked: ' + ctx)
         user = ctx.message.author
         message = ctx.message
         if message is discord.Role:
