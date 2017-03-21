@@ -38,7 +38,7 @@ class Hook:
     @commands.group(pass_context=True, aliases=('teams',))
     async def team(self, ctx):
         if ctx.invoked_subcommand is None:
-            await self.bot.send_cmd_help(ctx, user)
+            await self.bot.send_cmd_help(ctx)
             return
 
     @team.command(pass_context=True, name='awd')
