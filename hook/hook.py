@@ -36,7 +36,7 @@ class Hook:
 
 
     @commands.group(pass_context=True, aliases=('teams',))
-    async def team(self, ctx, user : discord.Member=None, role : discord.Role=None):
+    async def team(self, ctx):
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx, user)
             return
@@ -48,7 +48,7 @@ class Hook:
         message = ctx.message
         if message is discord.Role:
             self.bot.say('DEBUG: discord.Role identified')
-        if message is discord.Member:
+        elif message is discord.Member:
             self.bot.say('DEBUG: discord.Member identified')
             user = message
             info = self.get_user_info(user.id)
