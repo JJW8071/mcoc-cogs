@@ -19,6 +19,7 @@ class Hook:
         self.data_dir = 'data/hook/users/{}/'
         self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
+        self.mcocCog = self.bot.get_cog('MCOC')
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -32,6 +33,26 @@ class Hook:
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
         await self.bot.say(embed=em)
+
+
+    @commands.group(pass_context=True, aliases=('teams',))
+    async def team(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await self.bot.send_cmd_help(ctx)
+            return
+
+    @team.command(pass_context=True, name='awd')
+    async def _team_awd(self, ctx):
+        if ctx.message is None:
+            user = ctx.message.author
+            info = self.get_user_info(user.id)
+            em = discord.Embed(title='War Defense',description=user.name)
+            team = []
+            for k in info['awd']
+                champ = self.mcocCog._resolve_alias(k)
+                team.append(champ.full_name)
+            em.add_field(name='AWD:',value=team)
+            self.bot.say(embed=em)
 
     @commands.group(pass_context=True, aliases=('champs',))
     async def champ(self, ctx):
@@ -59,7 +80,7 @@ class Hook:
         path, ext = os.path.splitext(self.champs_file.format(userid))
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
-            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'], 
+            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'],
                     extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             for row in info['champs']:
@@ -108,7 +129,7 @@ class Hook:
         if mcoc:
             missing = self.hook_prestige(mcoc, champ_list)
             if missing:
-                await self.bot.send_message(channel, 'Missing hookid for champs: ' 
+                await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
 
             # max prestige calcs
@@ -161,7 +182,7 @@ class Hook:
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
-            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'], 
+            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'],
                     sig=cdict['Awakened'], star=cdict['Stars'], value=True)
             if cdict['Stars'] == 5:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
