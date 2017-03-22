@@ -581,7 +581,7 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
         elif preamble + '_5STAR_DESC_MOD' in sigs:
-            desc.append(preablem+'_DESC_MOD')
+            desc.append(preamble+'_DESC_MOD')
         else:
             for k in {'_DESC','_DESC_B','_DESC2','_DESC3'}:
                 if preamble + k in sigs:
