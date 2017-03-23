@@ -303,7 +303,7 @@ class MCOC:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
     @commands.command()
-    async def sig_test(self, champ, star=4, sig=99)
+    async def sig_test(self, champ, star=4, sig=99):
         champ = self._resolve_alias(champ)
         key = '{}-{}-{}'.format(star,champ,sig)
         self.bot.say('DEBUG: key is {}'.format(key))
