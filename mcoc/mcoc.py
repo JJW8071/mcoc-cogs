@@ -305,8 +305,8 @@ class MCOC:
     @commands.command()
     async def sig_test(self, champ, star=4, sig=99):
         champ = self._resolve_alias(champ)
-        key = '{}-{}-{}'.format(star,champ,sig)
-        self.bot.say('DEBUG: key is {}'.format(key))
+        key = '{}-{}-{}'.format(star, champ, sig)
+        self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
     async def mcoc_sig(self, champ, siglvl=99, dbg=0):
