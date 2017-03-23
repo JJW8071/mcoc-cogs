@@ -24,7 +24,7 @@ data_files = {
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 0},
     'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
-                'local': 'data/mcoc/signatures.json', 'update_delta':1},
+                'local': 'data/mcoc/signatures.json', 'update_delta':0},
 ## prestige - strictly the export of mattkraft's prestige table
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/prestige.json', 'update_delta':0},
@@ -301,6 +301,12 @@ class MCOC:
         await self.bot.say(embed=em)
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
+
+    @commands.command()
+    async def sig_test(self, champ, star=4, sig=99)
+        champ = self._resolve_alias(champ)
+        key = '{}-{}-{}'.format(star,champ,sig)
+        self.bot.say('DEBUG: key is {}'.format(key))
 
     @commands.command()
     async def mcoc_sig(self, champ, siglvl=99, dbg=0):
