@@ -126,16 +126,16 @@ class MCOC:
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
 
-    @commands.command(pass_context = True)
-    async def flat(self, ctx, flatvalue, cr = 100):
+    @commands.command()
+    async def flat(self, flatvalue, cr = 100):
         '''Convert Flat value to Percentge
         flatvalue = MCOC flat value
         cr = Challenger Rating (default is 100)
         retuns Flat Value converted to Percentage'''
-        channel = ctx.message.channel
+        self.bot.say('DEBUG: at least I am responding')
         flat = int(flatvalue)
         p = str(round(flat/(5 * cr + 1500 + flat)*100, 2))
-        self.bot.send_message(channel, 'Flat value: {}\nPercentage: {}%'.format(flat, p))
+        self.bot.say('Flat value: {}\nPercentage: {}%'.format(flat, p))
         # em = discord.Embed(title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
         # em.add_field(name='Percentage:', value='{}'.format(p))
         # self.bot.say(embed=em)
