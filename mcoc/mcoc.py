@@ -131,7 +131,8 @@ class MCOC:
         '''Convert Flat value to Percentge
         flat = flat value
         cr = Challenger Rating (default is 100)'''
-        p = flat / (5 * cr + 1500 + flat)
+        adjustment = cr + 1500 + flat
+        p = flat / (5 * adjustment)
         em = discord.Embed(title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
         em.add_field(name='Percentag:', value='{}'.format(p))
         self.bot.say(embed=em)
