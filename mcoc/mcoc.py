@@ -127,7 +127,7 @@ class MCOC:
         # self._prepare_spotlight_data()
 
     @commands.command()
-    async def flat(self, flat, cr = 100)
+    async def flat(self, flat, cr = 100):
         '''Convert Flat value to Percentge
         flat = flat value
         cr = Challenger Rating (default is 100)'''
