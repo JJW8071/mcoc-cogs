@@ -129,12 +129,12 @@ class MCOC:
     @commands.command()
     async def flat(self, flat, cr = 100):
         '''Convert Flat value to Percentge
-        flat = flat value
-        cr = Challenger Rating (default is 100)'''
-        adjustment = cr + 1500 + flat
-        p = flat / (5 * adjustment)
+        flat = MCOC flat value
+        cr = Challenger Rating (default is 100)
+        retuns Flat Value converted to Percentage'''
+        p = int(flat) / (5 * cr + 1500 + int(flat))
         em = discord.Embed(title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
-        em.add_field(name='Percentag:', value='{}'.format(p))
+        em.add_field(name='Percentage:', value='{}'.format(p))
         self.bot.say(embed=em)
 
 
