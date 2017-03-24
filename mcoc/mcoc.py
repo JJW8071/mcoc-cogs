@@ -133,7 +133,7 @@ class MCOC:
         cr = Challenger Rating (default is 100)
         retuns Flat Value converted to Percentage'''
         channel = ctx.message.channel
-        p = round(int(flat)/(5 * int(cr) + 1500 + int(flat))*100, 2)
+        p = round(int(flat/(5 * cr + 1500 + flat)*100), 2)
         self.bot.send_message(channel, 'Flat value: {}\nPercentage: {}%'.format(flat, p))
         # em = discord.Embed(title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
         # em.add_field(name='Percentage:', value='{}'.format(p))
