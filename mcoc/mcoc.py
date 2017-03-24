@@ -134,7 +134,7 @@ class MCOC:
         retuns Flat Value converted to Percentage'''
         channel = ctx.message.channel
         flat = int(flatvalue)
-        p = round(flat/(5 * cr + 1500 + flat)*100, 2)
+        p = str(round(flat/(5 * cr + 1500 + flat)*100, 2))
         self.bot.send_message(channel, 'Flat value: {}\nPercentage: {}%'.format(flat, p))
         # em = discord.Embed(title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
         # em.add_field(name='Percentage:', value='{}'.format(p))
