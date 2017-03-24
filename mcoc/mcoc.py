@@ -127,6 +127,15 @@ class MCOC:
         # self._prepare_spotlight_data()
 
     @commands.command()
+    async def flat(self, flat, cr = 100)
+        '''Convert Flat value to Percentge'''
+        p = flat / (5 * cr + 1500 + flat)
+        em = discord.Embed(title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
+        em.add_field(name='Percentag:', value='{}'.format(p))
+        self.bot.say(embed=em)
+
+
+    @commands.command()
     async def mcoc_update(self, fname, force=False):
         if len(fname) > 3:
             for key in data_files.keys():
