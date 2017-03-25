@@ -142,7 +142,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def list_members(self, ctx, role : discord.role, *):
+    async def list_members(self, ctx, role : discord.role):
         server = ctx.message.server
         if role is discord.role:
             await self.bot.say('DBEUG: Discord Role detected')
