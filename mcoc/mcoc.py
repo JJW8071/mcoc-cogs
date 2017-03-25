@@ -132,7 +132,7 @@ class MCOC:
         flatvalue = MCOC flat value
         cr = Challenger Rating (default is 100)
         retuns Flat Value converted to Percentage'''
-        self.bot.say('DEBUG: at least I am responding')
+        await self.bot.say('DEBUG: at least I am responding')
         # flat = int(flatvalue)
         # denominator = 5 * cr + 1500 + flat
         # p = str(round(flat/denominator, 2))
