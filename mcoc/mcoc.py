@@ -133,7 +133,7 @@ class MCOC:
         cr = Challenger Rating (default is 100)
         retuns Flat Value converted to Percentage'''
         # await self.bot.say('DEBUG: at least I am responding')
-        flat = int(flatvalue)
+        flat = int(flatvalue)*100
         denominator = 5 * cr + 1500 + flat
         p = str(round(flat/denominator, 2))
         # self.bot.say('Flat value: {}\nPercentage: {}%'.format(flat, p))
@@ -142,11 +142,12 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def list_members(self, ctx, role : discord.role):
+    async def list_members(self, ctx, role):
         server = ctx.message.server
-        if role is discord.role:
+
+        if role.id in discord.role:
             await self.bot.say('DBEUG: Discord Role detected')
-            members = '\n'.join(k for k in role.members)
+            members = '\n'.join(k.full_name for k in role.members)
             await self.bot.say(members)
 
 
