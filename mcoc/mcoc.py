@@ -135,10 +135,10 @@ class MCOC:
         # await self.bot.say('DEBUG: at least I am responding')
         flat = int(flatvalue)
         denominator = 5 * cr + 1500 + flat
-        p = str(round(flat/denominator*100, 2))
+        p = str(round(flat/denominator, 2))
         # self.bot.say('Flat value: {}\nPercentage: {}%'.format(flat, p))
         em = discord.Embed(color=discord.Color.gold(),title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
-        em.add_field(name='Percentage:', value='{}%'.format(p))
+        em.add_field(name='Percentage: {}\%'.format(p))
         await self.bot.say(embed=em)
 
 
