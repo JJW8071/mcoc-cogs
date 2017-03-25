@@ -141,8 +141,14 @@ class MCOC:
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    # @commands.command(pass_context=True)
-    # async def
+    @commands.command(pass_context=True)
+    async def list_members(self, ctx, role : discord.role, *):
+        server = ctx.message.server
+        if role is discord.role:
+            await self.bot.say('DBEUG: Discord Role detected')
+                members = '\n'.join(k for k in role.members)
+                await self.bot.say(members)
+
 
     @commands.command()
     async def mcoc_update(self, fname, force=False):
