@@ -133,9 +133,9 @@ class MCOC:
         cr = Challenger Rating (default is 100)
         retuns Flat Value converted to Percentage'''
         # await self.bot.say('DEBUG: at least I am responding')
-        flat = int(flatvalue)*100
+        flat = int(flatvalue)
         denominator = 5 * cr + 1500 + flat
-        p = str(round(flat/denominator, 2))
+        p = str(round(100*flat/denominator, 2))
         # self.bot.say('Flat value: {}\nPercentage: {}%'.format(flat, p))
         em = discord.Embed(color=discord.Color.gold(),title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
         em.add_field(name='Percentage:', value='{}\%'.format(p))
