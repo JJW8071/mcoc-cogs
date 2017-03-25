@@ -141,6 +141,8 @@ class MCOC:
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
+    # @commands.command(pass_context=True)
+    # async def
 
     @commands.command()
     async def mcoc_update(self, fname, force=False):
