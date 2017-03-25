@@ -146,8 +146,8 @@ class MCOC:
         server = ctx.message.server
         if role is discord.role:
             await self.bot.say('DBEUG: Discord Role detected')
-                members = '\n'.join(k for k in role.members)
-                await self.bot.say(members)
+            members = '\n'.join(k for k in role.members)
+            await self.bot.say(members)
 
 
     @commands.command()
