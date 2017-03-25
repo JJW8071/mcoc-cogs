@@ -138,7 +138,7 @@ class MCOC:
         p = str(round(flat/denominator, 2))
         # self.bot.say('Flat value: {}\nPercentage: {}%'.format(flat, p))
         em = discord.Embed(color=discord.Color.gold(),title='Convert FlatValue to Percentage',description='FlatValue: {}'.format(flat))
-        em.add_field(name='Percentage: {}\%'.format(p))
+        em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
 
