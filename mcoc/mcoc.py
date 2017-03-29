@@ -133,7 +133,7 @@ class MCOC:
         cr = Challenger Rating (default is 100)
         retuns Flat Value converted to Percentage'''
         # await self.bot.say('DEBUG: at least I am responding')
-        flat = int(flatvalue)
+        flat = float(flatvalue)
         denominator = 5 * cr + 1500 + flat
         p = str(round(100*flat/denominator, 2))
         # self.bot.say('Flat value: {}\nPercentage: {}%'.format(flat, p))
@@ -149,7 +149,6 @@ class MCOC:
             await self.bot.say('DBEUG: Discord Role detected')
             members = '\n'.join(k.full_name for k in role.members)
             await self.bot.say(members)
-
 
     @commands.command()
     async def mcoc_update(self, fname, force=False):
