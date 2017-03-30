@@ -59,7 +59,6 @@ class Hook:
         path, ext = os.path.splitext(self.champs_file.format(userid))
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
-            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'], 
                     extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             for row in info['champs']:
@@ -108,7 +107,6 @@ class Hook:
         if mcoc:
             missing = self.hook_prestige(mcoc, champ_list)
             if missing:
-                await self.bot.send_message(channel, 'Missing hookid for champs: ' 
                         + ', '.join(missing))
 
             # max prestige calcs
@@ -161,7 +159,6 @@ class Hook:
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
-            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'], 
                     sig=cdict['Awakened'], star=cdict['Stars'], value=True)
             if cdict['Stars'] == 5:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
