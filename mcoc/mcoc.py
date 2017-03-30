@@ -23,9 +23,11 @@ data_files = {
                 'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 0},
+    'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
+                'local': 'data/mcoc/signatures.json', 'update_delta':0},
 ## prestige - strictly the export of mattkraft's prestige table
-    #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                #'local': 'data/mcoc/prestige.json'},
+    'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
+                'local': 'data/mcoc/prestige.json', 'update_delta':0},
     #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
                 #'local': 'data/mcoc/five-star-sig.json'},
     #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
@@ -115,6 +117,7 @@ class MCOC:
                 }
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
+        self.split_re = re.compile(', (?=\w+:)')
         self.verify_cache_remote_files(verbose=True)
         self._init()
 
@@ -123,6 +126,30 @@ class MCOC:
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
+
+    @commands.command()
+    async def flat(self, flat_val: int, chal_rating : int=100):
+        '''Convert Flat value to Percentge
+        flat_val = MCOC flat value
+        chal_rating = Challenger Rating (default is 100)
+        retuns Flat Value converted to Percentage'''
+        denom = 5 * chal_rating + 1500 + flat_val
+        p = round(100*flat_val/denom, 2)
+        em = discord.Embed(color=discord.Color.gold(),
+                title='Convert FlatValue to Percentage',
+                description='FlatValue: {}'.format(flat_val))
+        em.add_field(name='Percentage:', value='{}\%'.format(p))
+        await self.bot.say(embed=em)
+
+    @commands.command(pass_context=True)
+    async def list_members(self, ctx, role):
+        server = ctx.message.server
+
+        if role.id in discord.role:
+            await self.bot.say('DBEUG: Discord Role detected')
+            members = '\n'.join(k.full_name for k in role.members)
+            await self.bot.say(members)
+
 
     @commands.command()
     async def mcoc_update(self, fname, force=False):
@@ -300,132 +327,35 @@ class MCOC:
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
-    # @commands.command()
-    # async def mcoc_sig(self, champ):
-    #     '''Retrieve Champion Signature Ability from MCOC Files'''
-    #     signatures = load_kabam_json(kabam_bcg_stat_en)
-    #     champ = self._resolve_alias(champ)
-    #     basename = 'ID_UI_STAT_' + champ.mcocsig
-    #     settings = self.settings.copy()
-    #
-    #     if basename + 'TITLE_LOWER' in signatures:
-    #         await self.bot.say('I passed the first if: TITLE_LOWER')
-    #         sigtitle = signatures[basename + 'TITLE_LOWER']
-    #         desc_simple = signatures[basename + 'SIMPLE']
-    #         desc = ['placeholder', None, None, None, None]
-    #         #desc = ['placeholder','placeholder','placeholder','placeholder','placeholder']
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name, description=sigtitle)#, value=desc_simple)
-    #         em.set_thumbnail(url=champ.get_avatar())
-    #         if basename + 'DESC_AO' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_AO']
-    #             if basename + 'DESC_B_AO' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC_B_AO']
-    #                 if basename + 'DESC_C_AO' in signatures:
-    #                     desc[2] = signatures[basename + 'DESC_C_AO']
-    #                     if basename + 'DESC_D_AO' in signatures:
-    #                         desc[3] = signatures[basename + 'DESC_D_AO']
-    #                         if basename + 'DESC_E_AO' in signatures:
-    #                             desc[4] = signatures[basename + 'DESC_E_AO']
-    #         elif basename + 'DESC_NEW_AO' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_NEW_AO']
-    #             if basename + 'DESC_NEW_B_AO' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC_NEW_B_AO']
-    #         elif basename + 'DESC_90S' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_90S_AO']
-    #         elif basename + 'DESC_ALT' in signatures:
-    #             desc[0] = signatures[basename + 'DESC_ALT']
-    #         elif basename + 'DESC' in signatures:
-    #             desc[0] = signatures[basename + 'DESC']
-    #             if basename + 'DESC_B' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC_B']
-    #             elif basename + 'DESC2' in signatures:
-    #                 desc[1] = signatures[basename + 'DESC2']
-    #                 if basename + 'DESC3' in signatures:
-    #                     desc[2] = signatures[basename + 'DESC3']
-    #         em.add_field(name="",value=desc[0])
-    #         if desc[1] is not None:
-    #             em.add_field(name="",value=desc[1])
-    #             if desc[2] is not None:
-    #                 em.add_field(name="",value=desc[2])
-    #                 if desc[3] is not None:
-    #                     em.add_field(name="",value=desc[3])
-    #                     if desc[4] is not None:
-    #                         em.add_field(name="",value=desc[4])
-    #         await self.bot.say(embed=em)
-    #     else:
-    #         await self.bot.say('Yeah, no.  I couldn\'t find anything')
-    #     # this is where I'm working
+    @commands.command()
+    async def sig_test(self, champ, star=4, sig=99):
+        champ = self._resolve_alias(champ)
+        key = '{}-{}-{}'.format(star, champ, sig)
+        self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
     async def mcoc_sig(self, champ, siglvl=99, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
         champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
-        title0 ='ID_UI_STAT_SIGNATURE_{}_TITLE'.format(champ.mcocsig)
-        title1 = 'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(champ.mcocsig)
-        title2 = 'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(champ.mcocsig)
-        title3 = 'ID_UI_STAT_SIG_{}_TITLE'.format(champ.mcocsig)
-        title = 'undefined'
-        if title0 in sigs:
-            title = title0
-        elif title1 in sigs:
-            title = title1
-        elif title2 in sigs:
-            title = title2
-        elif title3 in sigs:
-            title = title3
-        else :
-            raise KeyError('Title key not found for {}'.format(champ.mcocsig))
+        title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
 
-        if title+'_LOWER' in sigs:
-            title = title+'_LOWER'
-        await self.bot.say('Title: '+title)
-        # title = 'ID_UI_STAT_SIGNATURE_{}_TITLE_LOWER'.format(champ.mcocjson)
-        preamble0 ='ID_UI_STAT_SIGNATURE_{}'.format(champ.mcocsig)
-        preamble1 = 'ID_UI_STAT_{}_SIGNATURE'.format(champ.mcocsig)
-        preamble2 = 'ID_UI_STAT_SIG_{}'.format(champ.mcocsig)
-        preamble = 'undefined'
+        if dbg == 1:
+            await self.bot.say('DEBUG: Title: '+ title)
+            await self.bot.say('DEBUG: title_lower: '+ title_lower)
+            for k in simple:
+                await self.bot.say('DEBUG: Simple: '+ k)
+            for k in desc:
+                await self.bot.say('DEBUG: Desc: '+ k)
 
-        if preamble0+'_SIMPLE' in sigs:
-            premable = preamble0
-        elif preamble1+'_SIMPLE' in sigs:
-            premable = preamble1
-        elif preamble2+'_SIMPLE' in sigs:
-            premable = preamble2
-        else:
-            raise KeyError('Simple key not found for {}'.format(champ.mcocsig))
-
-        simple = premable + '_SIMPLE'
-
-        #
-        # desc0 = preamble + '_DESC'
-        # desc1 = preamble + '_DESC_NEW'
-        # desc1 = preamble + '_DESC_NEW_B'
-        # descb = preambele + '_DESC_B'
-
-        desc_str = preamble + '_DESC'
-
-        #desc_str = 'ID_UI_STAT_SIGNATURE_{}_DESC'.format(champ.mcocsig)
-        #title = 'ID_UI_STAT_{}TITLE_LOWER'.format(champ.mcocsig)
-
-        desc_set = {key for key in sigs if key.startswith(desc_str)}
-        desc_flat = {key for key in desc_set if key.endswith('_AO')}
+        em = discord.Embed(color=champ.class_color, title=champ.full_name)
         if title in sigs:
-            em = discord.Embed(color=champ.class_color, title=champ.full_name)
-            desc_final = desc_flat if desc_flat else desc_set
-
-            #em.add_field(name=sigs[title], value=sigs[simple])
-            em.add_field(name=sigs[title],
-                value='\n'.join(['* ' + sigs[k] for k in sorted(desc_final)]))
-            if dbg == 1:
-                em.add_field(name='Keys Used', value='\n'.join(sorted(desc_final)))
-                if desc_set - desc_final:
-                    em.add_field(name='Residual Keys', value='\n'.join(desc_set-desc_final))
-                #print(champ, champ.get_avatar())
-            em.set_thumbnail(url=champ.get_avatar())
-            await self.bot.say(embed=em)
+            em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
         else:
-            await self.bot.say('Cannot find any keys for ' + champ.full_name)
+            em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
+        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def sig(self, champ, siglvl=None, dbg=0, *args):
@@ -597,6 +527,109 @@ class MCOC:
         else:
             await self.bot.say('DEBUG: process hook args')
 
+    def _get_mcoc_keys(self, champ, sigs):
+        mcocsig = champ.mcocsig
+        preamble = 'undefined'
+        title = 'undefined'
+        title_lower = 'undefined'
+        simple = []
+        desc = []
+
+        if mcocsig == 'COMICULTRON':
+            mcocsig = 'ULTRON'
+        elif mcocsig == 'CYCLOPS_90S':
+            mcocsig = 'CYCLOPS'
+
+        titles={'ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+            'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
+            'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
+            'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
+            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
+            'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
+            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
+            'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
+            }
+
+        for x in titles:
+            if x in sigs:
+                title = x
+
+        if title is 'undefined':
+            raise KeyError('DEBUG - title not found')
+        elif title +'_LOWER' in sigs:
+            title_lower = title+'_LOWER'
+
+        preambles ={'ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
+            'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
+            'ID_UI_STAT_SIG_{}'.format(mcocsig),
+            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
+            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
+            'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig)}
+
+        for x in preambles:
+            if x+'_SIMPLE' in sigs:
+                preamble = x
+                break
+
+
+        # if preamble is 'undefined':
+        #     raise KeyError('DEBUG - Preamble not found')
+        if preamble + '_SIMPLE_NEW' in sigs:
+            simple.append(preamble + '_SIMPLE_NEW')
+        elif preamble + '_SIMPLE' in sigs:
+            simple.append(preamble + '_SIMPLE')
+        else:
+            raise KeyError('Signature SIMPLE cannot be found')
+        # if simple[0] + '2' in sigs:
+        #     simple.append(simple[0]+'2')
+        #     if simple[0] + '3' in sigs:
+        #         simple.append(simple[0]+'3')
+
+        if champ.mcocsig == 'CYCLOPS_90S':
+            title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
+            title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
+            desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
+        elif mcocsig == 'LOKI':
+            desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
+        elif mcocsig == 'DEADPOOL':
+            desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
+        elif mcocsig == 'ULTRON':
+            desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
+        elif mcocsig == 'COMICULTRON':
+            desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
+        elif mcocsig == 'BEAST':
+            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_AO')
+            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_B_AO')
+            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_C_AO')
+            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_D_AO')
+            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_E_AO')
+        elif mcocsig == 'GUILLOTINE':
+            desc.append('ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC')
+            # desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_UPDATE')
+        elif preamble + '_DESC_NEW' in sigs:
+            for k in {'_DESC_NEW','_DESC_NEW_B'}:
+                if preamble + k in sigs:
+                    if preamble + k + '_AO' in sigs:
+                        desc.append(preamble + k + '_AO')
+                    else:
+                        desc.append(preamble + k)
+        elif preamble + '_5STAR_DESC_MOD' in sigs:
+            desc.append(preamble+'_DESC_MOD')
+        else:
+            for k in {'_DESC','_DESC_B'}:#,'_DESC2','_DESC3'}:
+                if preamble + k in sigs:
+                    if preamble + k + '_ALT' in sigs:
+                        desc.append(preamble + k + '_ALT')
+                    elif preamble + k + '_AO' in sigs:
+                        desc.append(preamble + k + '_AO')
+                    else:
+                        desc.append(preamble + k)
+
+        if champ.mcocsig == 'IRONMAN_SUPERIOR':
+            desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
+
+        return title, title_lower, simple, desc
+
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
         raw_data = dataIO.load_json(data_files['crossreference']['local'])
@@ -604,7 +637,7 @@ class MCOC:
         all_aliases = set()
         id_index = False
         for row in raw_data['feed']['entry']:
-            cells = row['content']['$t'].split(', ')
+            cells = self.split_re.split(row['content']['$t'])
             if id_index is False:
                 id_index = 0
                 for i in cells:
@@ -614,7 +647,11 @@ class MCOC:
             key_values = {}
             alias_set = set()
             for i in range(len(cells)):
-                k, v = cells[i].split(': ')
+                try:
+                    k, v = cells[i].split(': ')
+                except:
+                    print('DEBUG: ', i, cells[i])
+                    raise
                 key_values[k] = v
                 if i < id_index:
                     if v != 'n/a':
@@ -634,11 +671,14 @@ class MCOC:
             if getattr(champ, 'frogspawnid', None):
                 champ.update_frogspawn(champ_data.get(champ.frogspawnid))
 
-    def _resolve_alias(self, alias):
+    def _resolve_alias(self, alias, raise_err=True):
         for champ in self.champs:
             if champ.re_alias.fullmatch(alias):
                 return champ
-        raise KeyError("Champion for alias '{}' not found".format(alias))
+        if raise_err:
+            raise KeyError("Champion for alias '{}' not found".format(alias))
+        else:
+            return None
 
     def _resolve_mult_aliases(self, match_str):
         re_champ = re.compile(match_str)
@@ -650,13 +690,15 @@ class MCOC:
                     break
         return champs
 
+    def _google_json_content_split(self, row):
+            return dict([kv.split(': ') for kv in self.split_re.split(row['content']['$t'])])
+
     def _prepare_prestige_data(self):
         mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
-        split_re = re.compile(', (?=\w+:)')
         raw_data = dataIO.load_json(data_files['spotlight']['local'])
         champs = {}
         for row in raw_data['feed']['entry']:
-            raw_dict = dict([kv.split(': ') for kv in split_re.split(row['content']['$t'])])
+            raw_dict = self._google_json_content_split(row)
             champ_match = mattkraft_re.fullmatch(raw_dict['mattkraftid'])
             if champ_match:
                 champ_name = champ_match.group('champ')
@@ -850,7 +892,8 @@ class Champion:
     @staticmethod
     def _sig_header(str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
-        return hex_re.sub(r'**[ \1 ]**', str_data)
+        return hex_re.sub(r'**\1**', str_data)
+        # return hex_re.sub(r'**[ \1 ]**', str_data)
 
 def bound_lvl(siglvl, max_lvl=99):
     if isinstance(siglvl, list):
@@ -899,6 +942,13 @@ def load_kabam_json(file):
         data[d['k']] = d['v']
     return data
 
+def _truncate_text(self, text, max_length):
+    if len(text) > max_length:
+        if text.strip('$').isdigit():
+            text = int(text.strip('$'))
+            return "${:.2E}".format(text)
+        return text[:max_length-3] + "..."
+    return text
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
