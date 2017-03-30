@@ -33,6 +33,55 @@ class Hook:
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
         await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True)
+    async def clan_prestige(self, ctx, role : discord.Role, verbose=False):
+        server = ctx.message.server
+        width = 20
+        prestige = 0
+        cnt = 0
+        line_out = []
+        for member in server.members:
+            if role in member.roles:
+                champ_data = self.get_user_info(member.id)
+                prestige += champ_data['prestige']
+                cnt += 1
+                if verbose:
+                    line_out.append('{:{width}} p = {}'.format(
+                        member.name, champ_data['prestige'], width=width))
+        if verbose:
+            line_out.append('_' * (width + 11))
+        line_out.append('{0:{width}} p = {1}  from {2} members'.format(
+                role.name, prestige/cnt, cnt, width=width))
+        await self.bot.say('```{}```'.format('\n'.join(line_out)))
+
+
+    # @commands.group(pass_context=True, aliases=('teams',))
+    # async def team(self, ctx):
+    #     if ctx.invoked_subcommand is None:
+    #         await self.bot.send_cmd_help(ctx)
+    #         return
+    #
+    # @team.command(pass_context=True, name='awd')
+    # async def _team_awd(self, ctx):
+    #     '''Return user AWD team'''
+    #     channel = ctx.message.channel
+    #     self.bot.send_message(channel,'DEBUG: team awd invoked: {}'.format(ctx))
+    #     user = ctx.message.author
+    #     message = ctx.message
+    #     if message is discord.Role:
+    #         self.bot.say('DEBUG: discord.Role identified')
+    #     elif message is discord.Member:
+    #         self.bot.say('DEBUG: discord.Member identified')
+    #         user = message
+    #         info = self.get_user_info(user.id)
+    #         em = discord.Embed(title='War Defense',description=user.name)
+    #         team = []
+    #         for k in info['awd']:
+    #             champ = self.mcocCog._resolve_alias(k)
+    #             team.append(champ.full_name)
+    #         em.add_field(name='AWD:',value=team)
+    #         self.bot.say(embed=em)
+
     @commands.group(pass_context=True, aliases=('champs',))
     async def champ(self, ctx):
         if ctx.invoked_subcommand is None:
@@ -59,6 +108,7 @@ class Hook:
         path, ext = os.path.splitext(self.champs_file.format(userid))
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
+            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'],
                     extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             for row in info['champs']:
@@ -107,6 +157,7 @@ class Hook:
         if mcoc:
             missing = self.hook_prestige(mcoc, champ_list)
             if missing:
+                await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
 
             # max prestige calcs
@@ -159,6 +210,7 @@ class Hook:
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
+            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'],
                     sig=cdict['Awakened'], star=cdict['Stars'], value=True)
             if cdict['Stars'] == 5:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
