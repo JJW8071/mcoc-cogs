@@ -78,6 +78,26 @@ def alias_resolve(f):
         return f(self, *args, **kwargs)
     return wrapper
 
+class ChampConverter(commands.Converter):
+    async def convert(self):
+        bot = self.ctx.bot
+        mcoc = bot.get_cog('MCOC')
+        try:
+            champ = mcoc._resolve_alias(self.argument)
+        except KeyError:
+            champs = mcoc._resolve_mult_aliases('.*{}.*'.format(self.argument))
+            if len(champs) == 1:
+                await bot.say("'{}' was not exact but found close alternative".format(
+                        self.argument))
+                champ = champs[0]
+            else:
+                await bot.say("```Cannot resolve alias for '{}'```".format(
+                        self.argument))
+                raise commands.BadArgument("Cannot resolve alias for '{}'".format(
+                        self.argument))
+        return champ
+
+
 class MCOC:
     '''A Cog for Marvel's Contest of Champions'''
 
@@ -128,12 +148,9 @@ class MCOC:
         # self._prepare_spotlight_data()
 
     @commands.command()
-    async def flat(self, flat_val: float, chal_rating : int=100):
-        '''Convert Flat value to Percentge
-        flat_val = MCOC flat value
-        chal_rating = Challenger Rating (default is 100)
-        retuns Flat Value converted to Percentage'''
-        denom = 5 * chal_rating + 1500 + flat_val
+    async def flat(self, flat_val: float, challenger_rating : int=100):
+        '''Convert MCOC Flat value to Percentge'''
+        denom = 5 * challenger_rating + 1500 + flat_val
         p = round(100*flat_val/denom, 2)
         em = discord.Embed(color=discord.Color.gold(),
                 title='Convert FlatValue to Percentage',
@@ -205,11 +222,10 @@ class MCOC:
     async def streak(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['streak']))
 
-    @commands.command(pass_context=True)
-    async def lolmap(self, ctx):
+    @commands.command()
+    async def lolmap(self):
         '''Labrynth of Legends Map'''
-        channel=ctx.message.channel
-        await self.bot.send_file(channel, lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
+        await self.bot.upload(lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
 
     def verify_cache_remote_files(self, verbose=False, force_cache=False):
         if os.path.exists(file_checks_json):
@@ -264,35 +280,28 @@ class MCOC:
             print('Local file up-to-date:', local, now)
         return remote_check
 
-    @commands.command(pass_context=True)
-    async def phc(self,ctx):
+    @commands.command()
+    async def phc(self):
         '''Premium Hero Crystal Release Dates'''
-        channel=ctx.message.channel
-        await self.bot.send_file(channel, data_files['phc_jpg']['local'],
-                #title='PHC Release Dates')
+        await self.bot.upload(data_files['phc_jpg']['local'],
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
-    @commands.command(pass_context=True)
-    async def portrait(self, ctx, champ):
+    @commands.command()
+    async def portrait(self, champ : ChampConverter):
         '''View Champion Portraits'''
-        channel=ctx.message.channel
-        champ = self._resolve_alias(champ)
-        await self.bot.send_file(channel, champ.get_portrait(), content=champ.bold_name)
+        await self.bot.upload(champ.get_portrait(), content=champ.bold_name)
 
-    @commands.command(pass_context=True)
-    async def featured(self, ctx, champ):
+    @commands.command()
+    async def featured(self, champ : ChampConverter):
         '''View Champion Feature Images'''
-        channel=ctx.message.channel
-        champ = self._resolve_alias(champ)
-        await self.bot.send_file(channel, champ.get_featured(), content=champ.bold_name)
+        await self.bot.upload(champ.get_featured(), content=champ.bold_name)
 
-    @commands.command(pass_context=True)
-    async def warmap(self, ctx, maptype='ai', dbg=1):
+    @commands.command()
+    async def warmap(self, maptype='ai', dbg=1):
         '''Select a Warmap
         syntax: /warmap <left><right>
         Where <left> = [a, b, c, d, e]
         Where <right> = [f, g, g+, h, i]'''
-        channel = ctx.message.channel
         filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
         mapurl = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/warmaps/warmap_{}.png'.format(maptype.lower())
         maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
@@ -301,9 +310,7 @@ class MCOC:
         filepath = filepath_png.format(maptype.lower())
         if dbg == 0:
             if maptype in maps:
-                await self.bot.send_file(channel, filepath, content=mapTitle)
-                #em = discord.Embed(color=discord.Color.light_grey(),title=mapTitle).set_image(url=filepath)
-                #await self.bot.say(embed=em)
+                await self.bot.upload(filepath, content=mapTitle)
             else :
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
         elif dbg == 1:
@@ -316,9 +323,8 @@ class MCOC:
 
     #@alias_resolve
     @commands.command()
-    async def bio(self, champ, dbg=0):
+    async def bio(self, champ : ChampConverter, dbg=0):
         '''Retrieve the Bio of a Champion'''
-        champ = self._resolve_alias(champ)
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
@@ -328,15 +334,13 @@ class MCOC:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
     @commands.command()
-    async def sig_test(self, champ, star=4, sig=99):
-        champ = self._resolve_alias(champ)
+    async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
-    async def mcoc_sig(self, champ, siglvl=99, dbg=0):
+    async def mcoc_sig(self, champ : ChampConverter, siglvl=99, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
-        champ = self._resolve_alias(champ)
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
 
@@ -353,14 +357,14 @@ class MCOC:
             em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
         else:
             em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
-        em.add_field(name='Signature Level {}'.format(siglvl), value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
+        em.add_field(name='Signature Level {}'.format(siglvl), 
+                value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def sig(self, champ, siglvl=None, dbg=0, *args):
+    async def sig(self, champ : ChampConverter, siglvl=None, dbg=0, *args):
         '''Retrieve the Signature Ability of a Champion'''
-        champ = self._resolve_alias(champ)
         settings = self.settings.copy()
         if siglvl is not None:
             settings['siglvl'] = int(siglvl)
@@ -380,9 +384,8 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def abilities(self, champ):
+    async def abilities(self, champ : ChampConverter):
         '''Champion Abilities List'''
-        champ = self._resolve_alias(champ)
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
@@ -402,7 +405,7 @@ class MCOC:
 #    async def special(self, )
 
     @commands.command()
-    async def sigarray(self, champ, dbg=1, *args):
+    async def sigarray(self, champ : ChampConverter, dbg=1, *args):
         '''Retrieve the Signature Ability of a Champion at multiple levels'''
         champ = self._resolve_alias(champ)
         title, desc = champ.get_sigarray(**self.settings)
@@ -466,7 +469,7 @@ class MCOC:
             if (arg.startswith("'") and arg.endswith("'")) or (arg.startswith('"') and arg.endswith('"')) :
                 champs = self._resolve_mult_aliases(arg[1:-1])
             elif '*' in arg:
-                champs = self._resolve_mult_aliases('.*'.join(arg.split('*')))
+                champs = self._resolve_mult_aliases('.*'.join(re.split(r'\\?\*', arg)))
             else:
                 champs = (self._resolve_alias(arg),)
             for champ in champs:
