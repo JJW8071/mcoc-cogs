@@ -50,7 +50,7 @@ class Hook:
                         member.name, champ_data['prestige'], width=width))
                 elif verbose is 2:
                     line_out.append('{:{width}} p = {}'.format(
-                        member.nickname, champ_data['prestige'], width=width))
+                        member.display_name, champ_data['prestige'], width=width))
         if verbose > 0:
             line_out.append('_' * (width + 11))
         line_out.append('{0:{width}} p = {1}  from {2} members'.format(
