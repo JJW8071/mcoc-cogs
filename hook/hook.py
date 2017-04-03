@@ -34,7 +34,7 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def clan_prestige(self, ctx, role : discord.Role, verbose=1):
+    async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         server = ctx.message.server
         width = 20
         prestige = 0
@@ -45,10 +45,10 @@ class Hook:
                 champ_data = self.get_user_info(member.id)
                 prestige += champ_data['prestige']
                 cnt += 1
-                if verbose = 1:
+                if verbose is 1:
                     line_out.append('{:{width}} p = {}'.format(
                         member.name, champ_data['prestige'], width=width))
-                elif verbose = 2:
+                elif verbose is 2:
                     line_out.append('{:{width}} p = {}'.format(
                         member.nickname, champ_data['prestige'], width=width))
         if verbose > 0:
