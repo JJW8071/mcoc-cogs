@@ -363,7 +363,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role_query = ''):
+    async def role_roster(self, ctx, role_query = None):
         em = discord.Embed(title='Battlegroup',description='Rosters')
         server = ctx.message.server
         for role in server.roles:
@@ -395,7 +395,7 @@ class MCOC:
             em.add_field(name='BG1 has {}'.format(cnt), value=line_out)
             em.add_field(name='BG2 has {}'.format(cnt2), value=line_out2)
             em.add_field(name='BG3 has {}'.format(cnt3), value=line_out3)
-        else:
+        elif role_query is not None:
             line_out = ''
             for member in server.members:
                 if role_check in member.roles:
