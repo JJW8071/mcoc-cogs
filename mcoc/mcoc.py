@@ -363,13 +363,13 @@ class MCOC:
         await self.bot.say(embed=em)
 
         @commands.command(pass_context=True)
-        async def role_roster(self, ctx, role_check = None):
+        async def role_roster(self, ctx, role_check = ''):
             em = discord.Embed(title='Battlegroup',description='Rosters')
             server = ctx.message.server
             width = 20
             line_out = ''
             cnt = 0
-            if role_check is None:
+            if role_check is '':
                 line_out2 = ''
                 line_out3 = ''
                 cnt2 = 0
