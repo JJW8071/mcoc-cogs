@@ -404,7 +404,7 @@ class MCOC:
                     cnt += 1
                     line_out.append('{:{width}}\n'.format(
                         member.display_name, width=width))
-            em.add_field(name='{} has {}'.format(role_check, cnt), value=line_out)
+            em.add_field(name='{} has {}'.format(role_query, cnt), value=line_out)
         await self.bot.say(embed=em)
 
     @commands.command()
