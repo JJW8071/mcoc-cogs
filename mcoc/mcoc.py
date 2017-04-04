@@ -363,13 +363,13 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role_check = ''):
+    async def role_roster(self, ctx, role_check = None):
         em = discord.Embed(title='Battlegroup',description='Rosters')
         server = ctx.message.server
         width = 20
         line_out = ''
         cnt = 0
-        if role_check is '':
+        if role_check is None:
             line_out2 = ''
             line_out3 = ''
             cnt2 = 0
@@ -377,16 +377,13 @@ class MCOC:
             for member in server.members:
                 if 'bg1' in member.roles:
                     cnt += 1
-                    line_out.append('{:{width}}\n'.format(
-                        member.display_name, width=width))
+                    line_out.append('{}\n'.format(member.display_name))
                 elif 'bg2' in member.roles:
                     cnt2 += 1
-                    line_out2.append('{:{width}}\n'.format(
-                        member.display_name, width=width))
+                    line_out2.append('{}\n'.format(member.display_name))
                 elif 'bg3' in member.roles:
                     cnt3 += 1
-                    line_out2.append('{:{width}}\n'.format(
-                        member.display_name, width=width))
+                    line_out2.append('{}\n'.format(member.display_name))
             em.add_field(name='BG1 has {}'.format(cnt), value=line_out)
             em.add_field(name='BG2 has {}'.format(cnt2), value=line_out2)
             em.add_field(name='BG3 has {}'.format(cnt3), value=line_out3)
