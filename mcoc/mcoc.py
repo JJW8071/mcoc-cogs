@@ -366,10 +366,13 @@ class MCOC:
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
         if role is not None:
-            em = discord.Embed(title='Battlegroup',description='Rosters')
-            cnt, line_out = _get_roster(server, role)
-            em.add_field(name='{} members'.format(cnt), value=line_out)
-            await self.bot.say(embed=em)
+            if role in server.roles:
+                em = discord.Embed(title='Battlegroup',description='Rosters')
+                cnt, line_out = self.get_roster(server, role)
+                em.add_field(name='{} members'.format(cnt), value=line_out)
+                await self.bot.say(embed=em)
+            else
+                self.bot.say('Invalid Role')
 
     @commands.command()
     async def sig(self, champ : ChampConverter, siglvl=None, dbg=0, *args):
@@ -823,16 +826,14 @@ class Champion:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
 
-    def _get_roster(self, server, role : discord.Role)
-        if role in server.roles:
-            self.bot.say('DEBUG: Role found on server')
-            cnt = 0
-            line_out = []
-            for member in server.members:
-                if role in member.roles:
-                    cnt +=1
-                    line_out.append('{}\n'.format(member.display_name))
-            return cnt, line_out
+    def get_roster(self, server, role : discord.Role)
+        cnt = 0
+        line_out = []
+        for member in server.members:
+            if role in member.roles:
+                cnt +=1
+                line_out.append('{}\n'.format(member.display_name))
+        return cnt, line_out
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
