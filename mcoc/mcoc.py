@@ -376,6 +376,7 @@ class MCOC:
                 bg3 = role
             elif role.name is role_query:
                 role_check = role
+                self.bot.say('DEBUG: {} is {}'.format(role_query, role_check.id))
         line_out = ''
         cnt = 0
         if role_query is None:
