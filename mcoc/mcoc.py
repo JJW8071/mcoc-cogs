@@ -371,7 +371,7 @@ class MCOC:
                 cnt, line_out = self.get_roster(server, role)
                 em.add_field(name='{} members'.format(cnt), value=line_out)
                 await self.bot.say(embed=em)
-            else
+            else:
                 self.bot.say('Invalid Role')
 
     @commands.command()
