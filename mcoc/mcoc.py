@@ -20,14 +20,14 @@ data_files = {
     'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
                'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
+                'local': 'data/mcoc/spotlight_data.json', 'update_delta': 0},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
-                'local': 'data/mcoc/crossreference.json', 'update_delta': 0},
+                'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
     'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
-                'local': 'data/mcoc/signatures.json', 'update_delta':0},
+                'local': 'data/mcoc/signatures.json', 'update_delta': 1},
 ## prestige - strictly the export of mattkraft's prestige table
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/prestige.json', 'update_delta':0},
+                'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
                 #'local': 'data/mcoc/five-star-sig.json'},
     #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
@@ -627,32 +627,43 @@ class MCOC:
             simple.append(preamble + '_SIMPLE')
         else:
             raise KeyError('Signature SIMPLE cannot be found')
-        # if simple[0] + '2' in sigs:
-        #     simple.append(simple[0]+'2')
-        #     if simple[0] + '3' in sigs:
-        #         simple.append(simple[0]+'3')
+
+        champ_exceptions = {
+            #'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
+            'LOKI': ['ID_UI_STAT_SIGNATURE_LOKI_LONGDESC'],
+            'DEADPOOL': ['ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO'],
+            'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+            'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+            'BEAST': ['ID_UI_STAT_SIGNATURE_LONGDESC_AO',
+                    'ID_UI_STAT_SIGNATURE_LONGDESC_B_AO',
+                    'ID_UI_STAT_SIGNATURE_LONGDESC_C_AO',
+                    'ID_UI_STAT_SIGNATURE_LONGDESC_D_AO',
+                    'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
+            'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
+        } 
 
         if champ.mcocsig == 'CYCLOPS_90S':
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
             title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
-        elif mcocsig == 'LOKI':
-            desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
-        elif mcocsig == 'DEADPOOL':
-            desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
-        elif mcocsig == 'ULTRON':
-            desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
-        elif mcocsig == 'COMICULTRON':
-            desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
-        elif mcocsig == 'BEAST':
-            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_AO')
-            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_B_AO')
-            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_C_AO')
-            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_D_AO')
-            desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_E_AO')
-        elif mcocsig == 'GUILLOTINE':
-            desc.append('ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC')
-            # desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_UPDATE')
+        elif mcocsig in champ_exceptions:
+            desc.extend(champ_exceptions[mcocsig])
+        #elif mcocsig == 'LOKI':
+            #desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
+        #elif mcocsig == 'DEADPOOL':
+            #desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
+        #elif mcocsig == 'ULTRON':
+            #desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
+        #elif mcocsig == 'COMICULTRON':
+            #desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
+        #elif mcocsig == 'BEAST':
+            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_AO')
+            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_B_AO')
+            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_C_AO')
+            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_D_AO')
+            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_E_AO')
+        #elif mcocsig == 'GUILLOTINE':
+            #desc.append('ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC')
         elif preamble + '_DESC_NEW' in sigs:
             for k in {'_DESC_NEW','_DESC_NEW_B'}:
                 if preamble + k in sigs:
@@ -756,7 +767,7 @@ class MCOC:
             if champ_name not in champs:
                 champs[champ_name] = {}
                 champs[champ_name][4] = [None] * 5
-                champs[champ_name][5] = [None] * 4
+                champs[champ_name][5] = [None] * 5
             if champ_star == 5:
                 sig_len = 201
             else:
@@ -771,7 +782,11 @@ class MCOC:
                     except:
                         print(champ_name, k, v, len(sig))
                         raise
-            champs[champ_name][champ_star][champ_rank-1] = sig
+            try:
+                champs[champ_name][champ_star][champ_rank-1] = sig
+            except:
+                print(champ_name, champ_star, champ_rank, len(champs[champ_name]), len(champs[champ_name][champ_star]))
+                raise
         dataIO.save_json(prestige_data, champs)
         for champ in self.champs:
             if champ.mattkraftid in champs:
