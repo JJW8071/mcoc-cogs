@@ -826,14 +826,14 @@ class Champion:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
 
-    def get_roster(self, server, role : discord.Role)
+    def get_roster(self, server, role : discord.Role):
         cnt = 0
         line_out = []
         for member in server.members:
             if role in member.roles:
                 cnt +=1
                 line_out.append('{}\n'.format(member.display_name))
-        return cnt, line_out
+        return (cnt, line_out)
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
