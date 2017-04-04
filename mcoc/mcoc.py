@@ -357,10 +357,48 @@ class MCOC:
             em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
         else:
             em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
-        em.add_field(name='Signature Level {}'.format(siglvl), 
+        em.add_field(name='Signature Level {}'.format(siglvl),
                 value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+        @commands.command(pass_context=True)
+        async def role_roster(self, ctx, role_check = None):
+            em = discord.Embed(title='Battlegroup',description='Rosters')
+            server = ctx.message.server
+            width = 20
+            line_out = ''
+            cnt = 0
+            if role_check is None:
+                line_out2 = ''
+                line_out3 = ''
+                cnt2 = 0
+                cnt3 = 0
+                for member in server.members:
+                    if 'bg1' in member.roles:
+                        cnt += 1
+                        line_out.append('{:{width}}\n'.format(
+                            member.display_name, width=width))
+                    elif 'bg2' in member.roles:
+                        cnt2 += 1
+                        line_out2.append('{:{width}}\n'.format(
+                            member.display_name, width=width))
+                    elif 'bg3' in member.roles:
+                        cnt3 += 1
+                        line_out2.append('{:{width}}\n'.format(
+                            member.display_name, width=width))
+                em.add_field(name='BG1 has {}'.format(cnt), value=line_out)
+                em.add_field(name='BG2 has {}'.format(cnt2), value=line_out2)
+                em.add_field(name='BG3 has {}'.format(cnt3), value=line_out3)
+            else:
+                line_out = ''
+                for member in server.members:
+                    if role_check in member.roles:
+                        cnt += 1
+                        line_out.append('{:{width}}\n'.format(
+                            member.display_name, width=width))
+                em.add_field(name='{} has {}'.format(role_check, cnt), value=line_out)
+            await self.bot.say(embed=em)
 
     @commands.command()
     async def sig(self, champ : ChampConverter, siglvl=None, dbg=0, *args):
