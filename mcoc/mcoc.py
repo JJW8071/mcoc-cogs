@@ -363,46 +363,12 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role_query : discord.Role):
-        em = discord.Embed(title='Battlegroup',description='Rosters')
+    async def role_roster(self, ctx, role : discord.Role = None):
         server = ctx.message.server
-        role_check = ''
-        for role in server.roles:
-            if role.name is 'bg1':
-                bg1 = role
-            elif role.name is 'bg2':
-                bg2 = role
-            elif role.name is 'bg3':
-                bg3 = role
-            elif role.name is role_query:
-                role_check = role
-                self.bot.say('DEBUG: {} is {}'.format(role_query, role_check.id))
-        line_out = []
-        cnt = 0
-        if role_query is None:
-            line_out2 = []
-            line_out3 = []
-            cnt2 = 0
-            cnt3 = 0
-            for member in server.members:
-                if bg1 in member.roles:
-                    cnt += 1
-                    line_out.append('{}\n'.format(member.display_name))
-                elif bg2 in member.roles:
-                    cnt2 += 1
-                    line_out2.append('{}\n'.format(member.display_name))
-                elif bg3 in member.roles:
-                    cnt3 += 1
-                    line_out2.append('{}\n'.format(member.display_name))
-            em.add_field(name='BG1 has {}'.format(cnt), value=line_out)
-            em.add_field(name='BG2 has {}'.format(cnt2), value=line_out2)
-            em.add_field(name='BG3 has {}'.format(cnt3), value=line_out3)
-        else:
-            for member in server.members:
-                if role_check in member.roles:
-                    cnt += 1
-                    line_out.append('{}\n'.format(member.display_name))
-            em.add_field(name='{} has {}'.format(role_check.name, cnt), value=line_out)
+        if role is not None:
+            em = discord.Embed(title='Battlegroup',description='Rosters')
+            cnt, line_out = _get_roster(server, role)
+            em.add_field(name='{} members'.format(cnt), value=line_out)
         await self.bot.say(embed=em)
 
     @commands.command()
@@ -856,6 +822,17 @@ class Champion:
         if key not in bios:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
+
+    def _get_roster(self, server, role : discord.Role)
+        if role in server.roles:
+            self.bot.say('DEBUG: Role found on server')
+            cnt = 0
+            line_out = []
+            for member in server.members:
+                if role in member.roles:
+                    cnt +=1
+                    line_out.append('{}\n'.format(member.display_name))
+            return cnt, line_out
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
