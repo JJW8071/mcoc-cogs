@@ -20,7 +20,7 @@ class Hook:
         self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
-        self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} S{0[Awakened]:<2}'
+        self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
