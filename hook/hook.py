@@ -169,14 +169,14 @@ class Hook:
             # max prestige calcs
             champ_list.sort(key=itemgetter('maxpi', 'Id'), reverse=True)
             maxpi = sum([champ['maxpi'] for champ in champ_list[:5]])/5
-            max_champs = [self.champ_str.format(champ.full_name) for champ in champ_list[:5]]
+            max_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
             champ_data['maxpi'] = maxpi
             champ_data['max5'] = max_champs
 
             # prestige calcs
             champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
             prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
-            top_champs = [self.champ_str.format(champ.full_name) for champ in champ_list[:5]]
+            top_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
             champ_data['prestige'] = prestige
             champ_data['top5'] = top_champs
 
