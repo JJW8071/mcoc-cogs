@@ -367,7 +367,7 @@ class MCOC:
         server = ctx.message.server
         if role is not None:
             if role in server.roles:
-                em = discord.Embed(title='Battlegroup',description='Rosters')
+                em = discord.Embed(color=discord.Color.gold(),title='Role')
                 cnt, line_out = self.get_roster(server, role)
                 em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
                 await self.bot.say(embed=em)
