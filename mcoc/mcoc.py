@@ -402,8 +402,8 @@ class MCOC:
             for member in server.members:
                 if role_check in member.roles:
                     cnt += 1
-                    line_out.append('{}\n'.format(member.display_name)
-            em.add_field(name='{} has {}'.format(role_query, cnt), value=line_out)
+                    line_out.append('{}\n'.format(member.display_name))
+            em.add_field(name='{} has {}'.format(role_check.name, cnt), value=line_out)
         await self.bot.say(embed=em)
 
     @commands.command()
