@@ -369,7 +369,7 @@ class MCOC:
             if role in server.roles:
                 em = discord.Embed(title='Battlegroup',description='Rosters')
                 cnt, line_out = self.get_roster(server, role)
-                em.add_field(name='{} members'.format(cnt), value=line_out)
+                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
                 await self.bot.say(embed=em)
             else:
                 self.bot.say('Invalid Role')
@@ -655,14 +655,14 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
 
         return title, title_lower, simple, desc
-    
+
     def get_roster(self, server, role : discord.Role):
         cnt = 0
         line_out = []
         for member in server.members:
             if role in member.roles:
                 cnt +=1
-                line_out.append('{}\n'.format(member.display_name))
+                line_out.append(member.display_name)
         return (cnt, line_out)
 
     def _prepare_aliases(self):
