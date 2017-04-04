@@ -377,11 +377,11 @@ class MCOC:
             elif role.name is role_query:
                 role_check = role
                 self.bot.say('DEBUG: {} is {}'.format(role_query, role_check.id))
-        line_out = ''
+        line_out = []
         cnt = 0
         if role_query is None:
-            line_out2 = ''
-            line_out3 = ''
+            line_out2 = []
+            line_out3 = []
             cnt2 = 0
             cnt3 = 0
             for member in server.members:
@@ -640,7 +640,7 @@ class MCOC:
                     'ID_UI_STAT_SIGNATURE_LONGDESC_D_AO',
                     'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
             'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
-        } 
+        }
 
         if champ.mcocsig == 'CYCLOPS_90S':
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
