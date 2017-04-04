@@ -19,6 +19,8 @@ class Hook:
         self.data_dir = 'data/hook/users/{}/'
         self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
+        #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
+        self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} S{0[Awakened]:<2}'
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -163,17 +165,18 @@ class Hook:
                 await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
 
+
             # max prestige calcs
             champ_list.sort(key=itemgetter('maxpi', 'Id'), reverse=True)
             maxpi = sum([champ['maxpi'] for champ in champ_list[:5]])/5
-            max_champs = ['{0[Stars]}* {0[Id]}'.format(champ) for champ in champ_list[:5]]
+            max_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
             champ_data['maxpi'] = maxpi
             champ_data['max5'] = max_champs
 
             # prestige calcs
             champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
             prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
-            top_champs = ['{0[Stars]}* {0[Id]}'.format(champ) for champ in champ_list[:5]]
+            top_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
             champ_data['prestige'] = prestige
             champ_data['top5'] = top_champs
 
@@ -213,8 +216,12 @@ class Hook:
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
-            cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'],
-                    sig=cdict['Awakened'], star=cdict['Stars'], value=True)
+            try:
+                cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'],
+                        sig=cdict['Awakened'], star=cdict['Stars'], value=True)
+            except AttributeError:
+                missing.append(cdict['Id'])
+                continue
             if cdict['Stars'] == 5:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
             else:
