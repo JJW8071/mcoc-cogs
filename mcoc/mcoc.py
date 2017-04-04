@@ -385,20 +385,19 @@ class MCOC:
             cnt2 = 0
             cnt3 = 0
             for member in server.members:
-                if 'bg1' in member.roles:
+                if bg1 in member.roles:
                     cnt += 1
                     line_out.append('{}\n'.format(member.display_name))
-                elif 'bg2' in member.roles:
+                elif bg2 in member.roles:
                     cnt2 += 1
                     line_out2.append('{}\n'.format(member.display_name))
-                elif 'bg3' in member.roles:
+                elif bg3 in member.roles:
                     cnt3 += 1
                     line_out2.append('{}\n'.format(member.display_name))
             em.add_field(name='BG1 has {}'.format(cnt), value=line_out)
             em.add_field(name='BG2 has {}'.format(cnt2), value=line_out2)
             em.add_field(name='BG3 has {}'.format(cnt3), value=line_out3)
         else:
-            line_out = ''
             for member in server.members:
                 if role_check in member.roles:
                     cnt += 1
