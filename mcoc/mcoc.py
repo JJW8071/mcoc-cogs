@@ -363,7 +363,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role : discord.Role = None):
+    async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
         if role is not None:
             em = discord.Embed(title='Battlegroup',description='Rosters')
