@@ -371,7 +371,7 @@ class MCOC:
             if cnt > 0:
                 em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
             else:
-                em.add_field(name='{} members'.format(cnt), value= '')
+                em.add_field(name='{} members'.format(cnt), value='Summoner, be the first to join')
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Invalid Role')
