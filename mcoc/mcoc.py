@@ -160,7 +160,7 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def flat2(self, ctx, *, m):
+    async def flat2(self, ctx, *, m, challenger_rating : int = 100):
         m = ''.join(m)
         math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
             r'|randrange|True|False|if|and|or|else|is|acos|acosh|asin|asinh' +
@@ -169,7 +169,7 @@ class MCOC:
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
             r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
         flat_val = eval(''.join(math_filter))
-        challenger_rating = 100
+        # challenger_rating = 100
         denom = 5 * challenger_rating + 1500 + flat_val
         p = round(100*flat_val/denom, 2)
         em = discord.Embed(color=discord.Color.gold(),
