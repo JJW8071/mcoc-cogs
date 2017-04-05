@@ -366,13 +366,13 @@ class MCOC:
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
         if role.name is 'bg1':
-            chosen = discord.color.blue()
+            chosen = discord.Color.blue()
         elif role.name is 'bg2':
-            chosen = discord.color.purple()
+            chosen = discord.Color.purple()
         elif role.name is 'bg3':
-            chosen = discord.color.orange()
+            chosen = discord.Color.orange()
         else:
-            chose = discord.color.gold()
+            chosen = discord.Color.gold()
         if role in server.roles:
             cnt, line_out = self.get_roster(server, role)
             em = discord.Embed(color=chosen,title='{}'.format(role.name))
