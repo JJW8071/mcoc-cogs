@@ -365,9 +365,17 @@ class MCOC:
     @commands.command(pass_context=True)
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
+        if role.name is 'bg1':
+            chosen = discord.color.blue()
+        elif role.name is 'bg2':
+            chosen = discord.color.purple()
+        elif role.name is 'bg3':
+            chosen = discord.color.orange()
+        else:
+            chose = discord.color.gold()
         if role in server.roles:
             cnt, line_out = self.get_roster(server, role)
-            em = discord.Embed(color=discord.Color.gold(),title='{}'.format(role.name))
+            em = discord.Embed(color=chosen,title='{}'.format(role.name))
             em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
             await self.bot.say(embed=em)
         else:
