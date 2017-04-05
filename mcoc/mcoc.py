@@ -2,6 +2,7 @@ import re
 from datetime import datetime, timedelta
 from textwrap import wrap
 from math import log2
+from math import *
 import os
 import inspect
 import urllib
@@ -167,7 +168,10 @@ class MCOC:
             r'|expm1|fabs|factorial|floor|fmod|frexp|fsum|gamma|gcd|hypot|inf' +
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
             r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
-        _flat(self, eval(''.join(math_filter)), 100)
+        flat_value = eval(''.join(math_filter))
+        self.bot.say('DEBUG: FlatValue is {}'.format(flat_value))
+
+
 
 
 
