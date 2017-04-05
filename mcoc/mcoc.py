@@ -382,6 +382,8 @@ class MCOC:
     @commands.command(pass_context=True)
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
+        line_out = []
+        cnt = 0
         if role in server.roles:
             cnt, line_out = self.get_roster(server, role)
             em = discord.Embed(color=role.color,title='{}'.format(role.name))
