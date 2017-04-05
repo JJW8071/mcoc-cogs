@@ -168,12 +168,15 @@ class MCOC:
             r'|expm1|fabs|factorial|floor|fmod|frexp|fsum|gamma|gcd|hypot|inf' +
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
             r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
-        flat_value = eval(''.join(math_filter))
-        self._flat(flat_value, 100)
-        self.bot.send_message(ctx.message.server, 'DEBUG: FlatValue is {}'.format(flat_value))
-
-
-
+        flat_val = eval(''.join(math_filter))
+        challenger_rating = 100
+        denom = 5 * challenger_rating + 1500 + flat_val
+        p = round(100*flat_val/denom, 2)
+        em = discord.Embed(color=discord.Color.gold(),
+                title='Convert FlatValue to Percentage',
+                description='FlatValue: {}'.format(flat_val))
+        em.add_field(name='Percentage:', value='{}\%'.format(p))
+        await self.bot.say(embed=em)
 
 
     @commands.command(pass_context=True)
