@@ -365,11 +365,22 @@ class MCOC:
     @commands.command(pass_context=True)
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
-        if role is not None:
+        if role is None:
+            for rl in server.roles:
+                if rl.name is 'bg1':
+                    bg1 = rl
+                    self.bot.say('DEBUG: BG1 found')
+                elif rl.name is 'bg2':
+                    bg2 = rl
+                    self.bot.say('DEBUG: BG2 found')
+                elif rl.name is 'bg3':
+                    bg3 = rl
+                    self.bot.say('DEBUG: BG3 found')
+        elif role is not None:
             if role in server.roles:
-                em = discord.Embed(color=discord.Color.gold(),title='Role')
                 cnt, line_out = self.get_roster(server, role)
-                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
+                em = discord.Embed(color=discord.Color.gold(),title='{} members'.format(cnt))
+                em.add_field(name='', value='\n'.join(line_out))
                 await self.bot.say(embed=em)
             else:
                 self.bot.say('Invalid Role')
