@@ -160,7 +160,11 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def flat2(self, ctx, *, m):
+    async def flat2(self, ctx, *, m2):
+        '''Convert MCOC Flat value to Percentge'''
+        m, cr = m2.rsplit(' ',1)
+        await self.bot.say('DEBUG: m is {}'.format(m))
+        await self.bot.say('DEBUG: cr is {}'.format(cr))
         m = ''.join(m)
         math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
             r'|randrange|True|False|if|and|or|else|is|acos|acosh|asin|asinh' +
