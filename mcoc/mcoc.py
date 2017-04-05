@@ -369,7 +369,7 @@ class MCOC:
             cnt, line_out = self.get_roster(server, role)
             em = discord.Embed(color=role.color,title='{}'.format(role.name))
             if cnt > 0:
-                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
+                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out.sort()))
             else:
                 em.add_field(name='{} members'.format(cnt), value='Summoner, be the first to join')
             await self.bot.say(embed=em)
