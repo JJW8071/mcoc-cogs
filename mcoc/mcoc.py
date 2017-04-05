@@ -682,7 +682,7 @@ class MCOC:
             if role in member.roles:
                 cnt +=1
                 line_out.append(member.display_name)
-        line_out = line_out.sort()
+        # line_out = line_out.sort()
         return (cnt, line_out)
 
     def _prepare_aliases(self):
