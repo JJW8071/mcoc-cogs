@@ -365,11 +365,11 @@ class MCOC:
     @commands.command(pass_context=True)
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
-        if role.name is 'bg1':
+        if role.name == 'bg1':
             chosen = discord.Color.blue()
-        elif role.name is 'bg2':
+        elif role.name == 'bg2':
             chosen = discord.Color.purple()
-        elif role.name is 'bg3':
+        elif role.name == 'bg3':
             chosen = discord.Color.orange()
         else:
             chosen = discord.Color.gold()
