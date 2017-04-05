@@ -161,7 +161,8 @@ class MCOC:
 
     @commands.command(pass_context=True)
     async def flat2(self, ctx, *, m):
-        m, challenger_rating = float(m.split())
+        m, cr = m.rsplit(' ',1)
+        challenger_rating = float(cr)
         m = ''.join(m)
         math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
             r'|randrange|True|False|if|and|or|else|is|acos|acosh|asin|asinh' +
