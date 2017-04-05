@@ -169,7 +169,8 @@ class MCOC:
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
             r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
         flat_value = eval(''.join(math_filter))
-        self.bot.say('DEBUG: FlatValue is {}'.format(flat_value))
+        _flat(flat_value, 100)
+        self.bot.send_message(ctx.message.server, 'DEBUG: FlatValue is {}'.format(flat_value))
 
 
 
