@@ -382,13 +382,11 @@ class MCOC:
     @commands.command(pass_context=True)
     async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
-        line_out = []
-        cnt = 0
         if role in server.roles:
             cnt, line_out = self.get_roster(server, role)
             em = discord.Embed(color=role.color,title='{}'.format(role.name))
             if cnt > 0:
-                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out.sort()))
+                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
             else:
                 em.add_field(name='{} members'.format(cnt), value='Summoner, be the first to join')
             await self.bot.say(embed=em)
@@ -684,6 +682,7 @@ class MCOC:
             if role in member.roles:
                 cnt +=1
                 line_out.append(member.display_name)
+        line_out = line_out.sort()
         return (cnt, line_out)
 
     def _prepare_aliases(self):
