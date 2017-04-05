@@ -363,9 +363,8 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role = None):
+    async def role_roster(self, ctx, role : discord.Role):
         server = ctx.message.server
-
         if role is None:
             for rl in server.roles:
                 if rl.name is 'bg1':
@@ -378,9 +377,6 @@ class MCOC:
                     bg3 = rl
                     await self.bot.say('DEBUG: BG3 found')
         elif role is not None:
-            for x in server.roles:
-                if x.name is role:
-                    role = x
             if role in server.roles:
                 cnt, line_out = self.get_roster(server, role)
                 em = discord.Embed(color=discord.Color.gold(),title='{}'.format(role.name))
