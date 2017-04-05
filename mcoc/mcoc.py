@@ -363,8 +363,9 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role : discord.Role):
+    async def role_roster(self, ctx, role = None):
         server = ctx.message.server
+        
         if role is None:
             for rl in server.roles:
                 if rl.name is 'bg1':
