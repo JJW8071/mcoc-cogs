@@ -367,12 +367,12 @@ class MCOC:
         server = ctx.message.server
         if role in server.roles:
             cnt, line_out = self.get_roster(server, role)
+            em = discord.Embed(color=role.color,title='{}'.format(role.name))
             if cnt > 0:
-                em = discord.Embed(color=role.color,title='{}'.format(role.name))
                 em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
-                await self.bot.say(embed=em)
             else:
-                await self.bot.say('Summoner, there are no members of {}'.format(role.name))
+                em.add_field(name='{} members'.format(cnt), value= '')
+            await self.bot.say(embed=em)
         else:
             await self.bot.say('Invalid Role')
 
