@@ -378,6 +378,9 @@ class MCOC:
                     bg3 = rl
                     await self.bot.say('DEBUG: BG3 found')
         elif role is not None:
+            for x in server.roles:
+                if x.name is role:
+                    role = x
             if role in server.roles:
                 cnt, line_out = self.get_roster(server, role)
                 em = discord.Embed(color=discord.Color.gold(),title='{}'.format(role.name))
