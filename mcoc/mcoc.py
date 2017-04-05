@@ -147,8 +147,8 @@ class MCOC:
         self._prepare_prestige_data()
         # self._prepare_spotlight_data()
 
-    @commands.command()
-    async def flat(self, flat_val: float, challenger_rating : int=100):
+    @commands.command(name='flat')
+    async def _flat(self, flat_val: float, challenger_rating : int=100):
         '''Convert MCOC Flat value to Percentge'''
         denom = 5 * challenger_rating + 1500 + flat_val
         p = round(100*flat_val/denom, 2)
@@ -157,6 +157,19 @@ class MCOC:
                 description='FlatValue: {}'.format(flat_val))
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
+
+    @commands.command(pass_context=True)
+    async def flat2(self, ctx, *, m):
+        m = ''.join(m)
+        math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
+            r'|randrange|True|False|if|and|or|else|is|acos|acosh|asin|asinh' +
+            r'|atan|atan2|atanh|ceil|copysign|cos|cosh|degrees|e|erf|erfc|exp' +
+            r'|expm1|fabs|factorial|floor|fmod|frexp|fsum|gamma|gcd|hypot|inf' +
+            r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
+            r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
+        _flat(eval(''.join(math_filter)))
+        
+
 
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role):
