@@ -379,8 +379,8 @@ class MCOC:
         elif role is not None:
             if role in server.roles:
                 cnt, line_out = self.get_roster(server, role)
-                em = discord.Embed(color=discord.Color.gold(),title='{} members'.format(cnt))
-                em.add_field(name='', value='\n'.join(line_out))
+                em = discord.Embed(color=discord.Color.gold(),title='{}'.format(role.name))
+                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
                 await self.bot.say(embed=em)
             else:
                 self.bot.say('Invalid Role')
