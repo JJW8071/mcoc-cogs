@@ -167,8 +167,8 @@ class MCOC:
             r'|expm1|fabs|factorial|floor|fmod|frexp|fsum|gamma|gcd|hypot|inf' +
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
             r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
-        _flat(eval(''.join(math_filter)))
-        
+        _flat(self, eval(''.join(math_filter)), 100)
+
 
 
     @commands.command(pass_context=True)
