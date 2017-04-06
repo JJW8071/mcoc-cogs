@@ -362,8 +362,15 @@ class MCOC:
     @commands.command()
     async def mcoc_sig(self, champ : ChampConverter, siglvl=99, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
+        star = '4-'
+        mcocjson = champ.mcocjson
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
+        sigjson = dataIO.load_json(sig_data)
+        sig_stack = []
+        if star+mcocjson+'-0' in sigjson
+            self.bot.say('DEBUG: Eureaka! We\'ve done it')
+
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
