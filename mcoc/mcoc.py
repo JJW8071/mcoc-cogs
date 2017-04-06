@@ -363,10 +363,8 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
-        #
 
         if dbg == 1:
-            await self.bot.say('DEBUG: sig_datapoints = {}'.format(sig_datapoints))
             await self.bot.say('DEBUG: Title: '+ title)
             await self.bot.say('DEBUG: title_lower: '+ title_lower)
             for k in simple:
