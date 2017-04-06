@@ -161,7 +161,10 @@ class MCOC:
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
-        '''Convert MCOC Flat value to Percentge'''
+        '''Convert MCOC Flat Value to Percentge
+        Syntax:
+        /flat <flatvalue> [challenger rating 90 to 120]
+        '''
         if ' ' in m:
             m, cr = m.rsplit(' ',1)
             challenger_rating = int(cr)
@@ -178,7 +181,7 @@ class MCOC:
         denom = 5 * challenger_rating + 1500 + flat_val
         p = round(100*flat_val/denom, 2)
         em = discord.Embed(color=discord.Color.gold(),
-                title='FlatValue',
+                title='FlatValue:',
                 description='{}'.format(flat_val))
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
