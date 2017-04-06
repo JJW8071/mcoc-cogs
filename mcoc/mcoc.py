@@ -24,8 +24,10 @@ data_files = {
                 'local': 'data/mcoc/spotlight_data.json', 'update_delta': 0},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
-    'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
-                'local': 'data/mcoc/signatures.json', 'update_delta': 1},
+    # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
+    #             'local': 'data/mcoc/signatures.json', 'update_delta': 1},
+    'sig_data':{'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=799981914&single=true&output=csv',
+                'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
 ## prestige - strictly the export of mattkraft's prestige table
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
@@ -39,7 +41,7 @@ data_files = {
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
-
+sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='data/mcoc/portraits/portrait_'
 champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
@@ -146,7 +148,7 @@ class MCOC:
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
-        #self._prepare_signature_data()
+        self._prepare_signature_data()
         # self._prepare_spotlight_data()
 
     @commands.command(pass_context=True, name='flat')
@@ -361,7 +363,7 @@ class MCOC:
         '''Retrieve Champion Signature Ability from MCOC Files'''
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
-        sig_datapoints = champ.sig_datapoints
+        #
 
         if dbg == 1:
             await self.bot.say('DEBUG: sig_datapoints = {}'.format(sig_datapoints))
@@ -778,6 +780,8 @@ class MCOC:
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
 
+    def _prepare_signature_data(self):
+        self._csv_to_json(data_files['signatures']['local'], sig_data)
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -997,6 +1001,20 @@ def _truncate_text(self, text, max_length):
             return "${:.2E}".format(text)
         return text[:max_length-3] + "..."
     return text
+
+def _csv_to_json(self, filecsv, filejson):
+    csvfile = open(filescsv, 'r')
+    jsonfile = open(filejson, 'w')
+    reader = csv.reader(csvfile)
+    fieldnames = next(reader)
+    reader = csv.DictReader(csvfile, fieldnames)
+    for row in reader:
+        json.dump(row, jsonfile)
+        jsonfile.write('\n')
+    # dataIO.save_json(jsonfile)
+
+
+
 # Creation of lookup functions from a tuple through anonymous functions
 #for fname, docstr, link in MCOC.lookup_functions:
     #async def new_func(self):
