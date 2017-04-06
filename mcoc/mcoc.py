@@ -8,7 +8,7 @@ import inspect
 import urllib
 import requests
 import csv
-#import json
+import json
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
@@ -1003,14 +1003,14 @@ def _truncate_text(self, text, max_length):
 
 def _csv_to_json(filecsv, filejson):
     csvfile = open(filecsv, 'r')
-    jsonfile = dataIO.load_json(filejson)
+    jsonfile = open(filejson, 'w')
     reader = csv.reader(csvfile)
     fieldnames = next(reader)
     reader = csv.reader(csvfile, fieldnames)
     for row in reader:
         json.dump(row, jsonfile)
         jsonfile.write('\n')
-    dataIO.save_json(jsonfile)
+    # dataIO.save_json(jsonfile)
 
 
 
