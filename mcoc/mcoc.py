@@ -166,6 +166,7 @@ class MCOC:
             m, cr = m2.rsplit(' ',1)
             challenger_rating = int(cr)
         else:
+            m = m2
             challenger_rating = 100
         m = ''.join(m)
         math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
