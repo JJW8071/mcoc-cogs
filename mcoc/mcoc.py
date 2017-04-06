@@ -647,7 +647,7 @@ class MCOC:
             desc.append(preamble+'_DESC_MOD')
         else:
             for k in {'_DESC','_DESC_B'}:#,'_DESC2','_DESC3'}:
-                if k+'_UPDATED' in sigs:
+                if preamble + k+'_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
                     if preamble + k + '_ALT' in sigs:
