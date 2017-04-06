@@ -779,7 +779,7 @@ class MCOC:
                 champ.prestige_data = champs[champ.mattkraftid]
 
     def _prepare_signature_data(self):
-        _csv_to_json(data_files['signatures']['local'], sig_data)
+        _csv_to_json(data_files['sig_data']['local'], sig_data)
 
 def validate_attr(*expected_args):
     def decorator(func):
