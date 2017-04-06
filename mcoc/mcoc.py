@@ -146,18 +146,8 @@ class MCOC:
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
+        #self._prepare_signature_data()
         # self._prepare_spotlight_data()
-
-    # @commands.command(name='flat')
-    # async def _flat(self, flat_val: float, challenger_rating : int=100):
-    #     '''Convert MCOC Flat value to Percentge'''
-    #     denom = 5 * challenger_rating + 1500 + flat_val
-    #     p = round(100*flat_val/denom, 2)
-    #     em = discord.Embed(color=discord.Color.gold(),
-    #             title='Convert FlatValue to Percentage',
-    #             description='FlatValue: {}'.format(flat_val))
-    #     em.add_field(name='Percentage:', value='{}\%'.format(p))
-    #     await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
@@ -195,7 +185,6 @@ class MCOC:
             await self.bot.say('DBEUG: Discord Role detected')
             members = '\n'.join(k.full_name for k in role.members)
             await self.bot.say(members)
-
 
     @commands.command()
     async def mcoc_update(self, fname, force=False):
@@ -647,22 +636,6 @@ class MCOC:
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
-        #elif mcocsig == 'LOKI':
-            #desc.append('ID_UI_STAT_SIGNATURE_LOKI_LONGDESC')
-        #elif mcocsig == 'DEADPOOL':
-            #desc.append('ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO')
-        #elif mcocsig == 'ULTRON':
-            #desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
-        #elif mcocsig == 'COMICULTRON':
-            #desc.append('ID_UI_STAT_SIGNATURE_ULTRON_DESC')
-        #elif mcocsig == 'BEAST':
-            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_AO')
-            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_B_AO')
-            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_C_AO')
-            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_D_AO')
-            #desc.append('ID_UI_STAT_SIGNATURE_LONGDESC_E_AO')
-        #elif mcocsig == 'GUILLOTINE':
-            #desc.append('ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC')
         elif preamble + '_DESC_NEW' in sigs:
             for k in {'_DESC_NEW','_DESC_NEW_B'}:
                 if preamble + k in sigs:
@@ -674,6 +647,8 @@ class MCOC:
             desc.append(preamble+'_DESC_MOD')
         else:
             for k in {'_DESC','_DESC_B'}:#,'_DESC2','_DESC3'}:
+                if k+'_UPDATED' in sigs:
+                    k = k + '_UPDATED'
                 if preamble + k in sigs:
                     if preamble + k + '_ALT' in sigs:
                         desc.append(preamble + k + '_ALT')
