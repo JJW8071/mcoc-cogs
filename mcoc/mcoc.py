@@ -1000,7 +1000,7 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _csv_to_json(self, filecsv, filejson):
+def _csv_to_json(filecsv, filejson):
     csvfile = open(filescsv, 'r')
     jsonfile = open(filejson, 'w')
     reader = csv.reader(csvfile)
