@@ -178,8 +178,8 @@ class MCOC:
         denom = 5 * challenger_rating + 1500 + flat_val
         p = round(100*flat_val/denom, 2)
         em = discord.Embed(color=discord.Color.gold(),
-                title='Convert FlatValue to Percentage',
-                description='FlatValue: {}'.format(flat_val))
+                title='FlatValue',
+                description='{}'.format(flat_val))
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
