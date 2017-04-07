@@ -371,7 +371,6 @@ class MCOC:
         if star+mcocjson+'-0' in sigjson:
             self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
-
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
             await self.bot.say('DEBUG: title_lower: '+ title_lower)
@@ -1010,13 +1009,17 @@ def _truncate_text(self, text, max_length):
 
 def _csv_to_json(filecsv, filejson):
     csvfile = open(filecsv, 'r')
-    jsonfile = open(filejson, 'w')
-    reader = csv.reader(csvfile)
-    fieldnames = next(reader)
-    reader = csv.reader(csvfile, fieldnames)
-    for row in reader:
-        json.dump(row, jsonfile)
-        jsonfile.write('\n')
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    keys = next(reader)
+    out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
+    dataIO.save_json(filejson, out)
+
+
+
+    # reader = csv.DictReader(csvfile, fieldnames)
+    # for row in reader:
+    #     json.dump(row, jsonfile)
+    #     jsonfile.write('\n')
     # dataIO.save_json(jsonfile)
 
 
