@@ -149,7 +149,7 @@ class MCOC:
         self._prepare_aliases()
         self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
-        self._prepare_signature_data()
+        # self._prepare_signature_data()
         # self._prepare_spotlight_data()
 
     @commands.command(pass_context=True, name='flat')
@@ -785,8 +785,8 @@ class MCOC:
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
 
-    def _prepare_signature_data(self):
-        _csv_to_json(data_files['sig_data']['local'], sig_data)
+    # def _prepare_signature_data(self):
+    #     _csv_to_json(data_files['sig_data']['local'], sig_data)
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -1007,8 +1007,8 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _csv_to_json(filecsv, filejson):
-    csvfile = open(filecsv, 'r')
+# def _csv_to_json(filecsv, filejson):
+#     csvfile = open(filecsv, 'r')
     # reader = csv.reader(csvfile, delimiter=',', quotechar='"')
     # keys = next(reader)
     # # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
