@@ -19,18 +19,23 @@ from .utils.dataIO import dataIO
 
 
 data_files = {
-    # 'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
-    #            'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
+    'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
+               'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json', 'update_delta': 0},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
-    # # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
-    # #             'local': 'data/mcoc/signatures.json', 'update_delta': 1},
+    # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
+    #             'local': 'data/mcoc/signatures.json', 'update_delta': 1},
     'sig_data':{'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=799981914&single=true&output=csv',
                 'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
+## prestige - strictly the export of mattkraft's prestige table
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
+    #'five-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/3/public/values?alt=json',
+                #'local': 'data/mcoc/five-star-sig.json'},
+    #'four-star-sig': {'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/4/public/values?alt=json',
+                #'local': 'data/mcoc/five-star-sig.json'},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
@@ -110,9 +115,9 @@ class MCOC:
             'marvelsynergy': (
                 'Marvel Synergy Builder',
                 '<http://www.marvelsynergy.com/team-builder>'),
-            # 'frogspawn': (
-            #     'Champion Signature Abilities',
-            #     '<http://coc.frogspawn.de/champions>'),
+            'frogspawn': (
+                'Champion Signature Abilities',
+                '<http://coc.frogspawn.de/champions>'),
             'alsciende':(
                 'Alsciende Mastery Tool',
                 '<https://alsciende.github.io/masteries/v10.0.1/#>'),
@@ -137,15 +142,15 @@ class MCOC:
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
-        # self.verify_cache_remote_files(verbose=True)
+        self.verify_cache_remote_files(verbose=True)
         self._init()
 
     def _init(self):
         self._prepare_aliases()
+        self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
-        # self._prepare_signature_data()
+        self._prepare_signature_data()
         # self._prepare_spotlight_data()
-        # self._prepare_frogspawn_champ_data()
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
@@ -218,9 +223,9 @@ class MCOC:
     # async def hook(self):
     #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
 
-    # @commands.command(help=lookup_links['frogspawn'][0])
-    # async def frogspawn(self):
-    #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['frogspawn']))
+    @commands.command(help=lookup_links['frogspawn'][0])
+    async def frogspawn(self):
+        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['frogspawn']))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
@@ -398,26 +403,26 @@ class MCOC:
         else:
             await self.bot.say('Invalid Role')
 
-    # @commands.command()
-    # async def sig(self, champ : ChampConverter, siglvl=None, dbg=0, *args):
-    #     '''Retrieve the Signature Ability of a Champion'''
-    #     settings = self.settings.copy()
-    #     if siglvl is not None:
-    #         settings['siglvl'] = int(siglvl)
-    #     title, desc, siglvl = champ.get_sig(**settings)
-    #     if dbg == 0:
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-    #         em.add_field(name='Signature Level '+str(siglvl),  value=desc)
-    #     elif dbg == 1:
-    #         em = discord.Embed(color=champ.class_color, title='Signature Ability')
-    #         em.add_field(name='@ Level', value=siglvl)
-    #         em.add_field(name = champ.full_name, value=desc)
-    #     else:
-    #         em = discord.Embed(color=champ.class_color,
-    #             title=champ.full_name + ' Signature Ability')
-    #         em.add_field(name='Level '+str(siglvl),  value=desc)
-    #     em.set_thumbnail(url=champ.get_avatar())
-    #     await self.bot.say(embed=em)
+    @commands.command()
+    async def sig(self, champ : ChampConverter, siglvl=None, dbg=0, *args):
+        '''Retrieve the Signature Ability of a Champion'''
+        settings = self.settings.copy()
+        if siglvl is not None:
+            settings['siglvl'] = int(siglvl)
+        title, desc, siglvl = champ.get_sig(**settings)
+        if dbg == 0:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.add_field(name='Signature Level '+str(siglvl),  value=desc)
+        elif dbg == 1:
+            em = discord.Embed(color=champ.class_color, title='Signature Ability')
+            em.add_field(name='@ Level', value=siglvl)
+            em.add_field(name = champ.full_name, value=desc)
+        else:
+            em = discord.Embed(color=champ.class_color,
+                title=champ.full_name + ' Signature Ability')
+            em.add_field(name='Level '+str(siglvl),  value=desc)
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def abilities(self, champ : ChampConverter):
@@ -440,24 +445,24 @@ class MCOC:
 #    @commands.command()
 #    async def special(self, )
 
-    # @commands.command()
-    # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
-    #     '''Retrieve the Signature Ability of a Champion at multiple levels'''
-    #     champ = self._resolve_alias(champ)
-    #     title, desc = champ.get_sigarray(**self.settings)
-    #     if dbg == 0:
-    #         em = discord.Embed(color=champ.class_color, title=title,
-    #                 description=desc)
-    #     elif dbg == 1:
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-    #         em.add_field(name='Signature Ability Array', value=desc)
-    #     else:
-    #         em = discord.Embed(color=champ.class_color, title=title)
-    #         em.add_field(name='__SigLvl__', value='1\n20\n40')
-    #         em.add_field(name='__X__', value='1.0\n1.9\n2.1', inline=True)
-    #
-    #     em.set_thumbnail(url=champ.get_avatar())
-    #     await self.bot.say(embed=em)
+    @commands.command()
+    async def sigarray(self, champ : ChampConverter, dbg=1, *args):
+        '''Retrieve the Signature Ability of a Champion at multiple levels'''
+        champ = self._resolve_alias(champ)
+        title, desc = champ.get_sigarray(**self.settings)
+        if dbg == 0:
+            em = discord.Embed(color=champ.class_color, title=title,
+                    description=desc)
+        elif dbg == 1:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.add_field(name='Signature Ability Array', value=desc)
+        else:
+            em = discord.Embed(color=champ.class_color, title=title)
+            em.add_field(name='__SigLvl__', value='1\n20\n40')
+            em.add_field(name='__X__', value='1.0\n1.9\n2.1', inline=True)
+
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def prestige(self, *args):
@@ -711,11 +716,11 @@ class MCOC:
             champs.append(Champion(alias_set, **key_values))
         self.champs = champs
 
-    # def _prepare_frogspawn_champ_data(self):
-    #     champ_data = dataIO.load_json(data_files['frogspawn']['local'])
-    #     for champ in self.champs:
-    #         if getattr(champ, 'frogspawnid', None):
-    #             champ.update_frogspawn(champ_data.get(champ.frogspawnid))
+    def _prepare_frogspawn_champ_data(self):
+        champ_data = dataIO.load_json(data_files['frogspawn']['local'])
+        for champ in self.champs:
+            if getattr(champ, 'frogspawnid', None):
+                champ.update_frogspawn(champ_data.get(champ.frogspawnid))
 
     def _resolve_alias(self, alias, raise_err=True):
         for champ in self.champs:
@@ -780,8 +785,8 @@ class MCOC:
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
 
-    # def _prepare_signature_data(self):
-    #     _csv_to_json(data_files['sig_data']['local'], sig_data)
+    def _prepare_signature_data(self):
+        _csv_to_json(data_files['sig_data']['local'], sig_data)
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -800,7 +805,7 @@ class Champion:
     def __init__(self, alias_set, *args, debug=0, **kwargs):
         self.alias_set = alias_set
         self.re_alias = re.compile('|'.join(alias_set), re.I)
-        # self.frogspawn_data = None
+        self.frogspawn_data = None
         if debug:
             print(kwargs)
         for key, value in kwargs.items():
@@ -812,22 +817,22 @@ class Champion:
             [word.capitalize() for word in self.full_name.split(' ')]) + '**'
         self.class_color = class_color_codes[getattr(self, 'class', 'default')]
 
-    # def update_frogspawn(self, data):
-    #     self.frogspawn_data = data
+    def update_frogspawn(self, data):
+        self.frogspawn_data = data
 
-    # def getSigValue(self, siglvl, i=None):
-    #     '''Python port of siglvl interpolator from
-    #     http://coc.frogspawn.de/champions/js/functions.js'''
-    #     if i is None:
-    #         base = self.frogspawn_data['sb']
-    #         multi = self.frogspawn_data['sm']
-    #     else:
-    #         base = self.frogspawn_data['sb'][i]
-    #         multi = self.frogspawn_data['sm'][i]
-    #     if siglvl > 0 and base:
-    #         return round(base + log2(siglvl) * multi, 1)
-    #     else:
-    #         return '-'
+    def getSigValue(self, siglvl, i=None):
+        '''Python port of siglvl interpolator from
+        http://coc.frogspawn.de/champions/js/functions.js'''
+        if i is None:
+            base = self.frogspawn_data['sb']
+            multi = self.frogspawn_data['sm']
+        else:
+            base = self.frogspawn_data['sb'][i]
+            multi = self.frogspawn_data['sm'][i]
+        if siglvl > 0 and base:
+            return round(base + log2(siglvl) * multi, 1)
+        else:
+            return '-'
 
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
@@ -864,54 +869,54 @@ class Champion:
         specials = (s0, s1, s2, s0d, s1d, s2d)
         return specials
 
-    # @validate_attr('frogspawn')
-    # def get_sig(self, **kwargs):
-    #     sig_str = self._sig_header(self.frogspawn_data['sd'])
-    #     siglvl = bound_lvl(kwargs['siglvl'])
-    #     str_data = []
-    #     for i in range(len(self.frogspawn_data['sn'])):
-    #         if self.frogspawn_data['sn'][i] != 0:
-    #             str_data.append(self.frogspawn_data['sn'][i])
-    #         elif isinstance(self.frogspawn_data['sb'], list):
-    #             str_data.append(self.getSigValue(siglvl, i))
-    #         else:
-    #             str_data.append(self.getSigValue(siglvl))
-    #     return ('Signature Ability for {}'.format(
-    #             self.full_name.capitalize()), sig_str.format(*str_data), siglvl)
+    @validate_attr('frogspawn')
+    def get_sig(self, **kwargs):
+        sig_str = self._sig_header(self.frogspawn_data['sd'])
+        siglvl = bound_lvl(kwargs['siglvl'])
+        str_data = []
+        for i in range(len(self.frogspawn_data['sn'])):
+            if self.frogspawn_data['sn'][i] != 0:
+                str_data.append(self.frogspawn_data['sn'][i])
+            elif isinstance(self.frogspawn_data['sb'], list):
+                str_data.append(self.getSigValue(siglvl, i))
+            else:
+                str_data.append(self.getSigValue(siglvl))
+        return ('Signature Ability for {}'.format(
+                self.full_name.capitalize()), sig_str.format(*str_data), siglvl)
 
-    # @validate_attr('frogspawn')
-    # def get_sigarray(self, sigstep=20, width=10, inc_zero=False, **kwargs):
-    #     '''Retrieve the Signature Ability of a Champion at multiple levels'''
-    #     var_list = 'XYZABCDEF'
-    #     sig_str = self._sig_header(self.frogspawn_data['sd'])
-    #     str_data = []
-    #     sigstep_arr = bound_lvl(list(range(0, 101, sigstep)))
-    #     if inc_zero:
-    #         sigstep_arr.insert(1, 1)
-    #     else:
-    #         sigstep_arr[0] = 1
-    #     table_data = [[''] + sigstep_arr]
-    #     count = 0
-    #     for i in range(len(self.frogspawn_data['sn'])):
-    #         if self.frogspawn_data['sn'][i] != 0:
-    #             str_data.append(self.frogspawn_data['sn'][i])
-    #         elif '{' + str(i) + '}' in sig_str:
-    #             table_data.append([var_list[count]])
-    #             str_data.append(var_list[count])
-    #             for j in sigstep_arr:
-    #                 if isinstance(self.frogspawn_data['sb'], list):
-    #                     table_data[-1].append(self.getSigValue(j, i))
-    #                 else:
-    #                     table_data[-1].append(self.getSigValue(j))
-    #             count += 1
-    #         else:
-    #             # nothing to do if there is no valid sub in sig_str
-    #             #  but we need to make sure the length is correct for format
-    #             str_data.append('dummy')
-    #     title = 'Signature Ability for {} at multiple Sig Levels:'.format(
-    #             self.bold_name)
-    #     response = sig_str.format(*str_data) + tabulate(table_data, width=width)
-    #     return (title, response)
+    @validate_attr('frogspawn')
+    def get_sigarray(self, sigstep=20, width=10, inc_zero=False, **kwargs):
+        '''Retrieve the Signature Ability of a Champion at multiple levels'''
+        var_list = 'XYZABCDEF'
+        sig_str = self._sig_header(self.frogspawn_data['sd'])
+        str_data = []
+        sigstep_arr = bound_lvl(list(range(0, 101, sigstep)))
+        if inc_zero:
+            sigstep_arr.insert(1, 1)
+        else:
+            sigstep_arr[0] = 1
+        table_data = [[''] + sigstep_arr]
+        count = 0
+        for i in range(len(self.frogspawn_data['sn'])):
+            if self.frogspawn_data['sn'][i] != 0:
+                str_data.append(self.frogspawn_data['sn'][i])
+            elif '{' + str(i) + '}' in sig_str:
+                table_data.append([var_list[count]])
+                str_data.append(var_list[count])
+                for j in sigstep_arr:
+                    if isinstance(self.frogspawn_data['sb'], list):
+                        table_data[-1].append(self.getSigValue(j, i))
+                    else:
+                        table_data[-1].append(self.getSigValue(j))
+                count += 1
+            else:
+                # nothing to do if there is no valid sub in sig_str
+                #  but we need to make sure the length is correct for format
+                str_data.append('dummy')
+        title = 'Signature Ability for {} at multiple Sig Levels:'.format(
+                self.bold_name)
+        response = sig_str.format(*str_data) + tabulate(table_data, width=width)
+        return (title, response)
 
     @validate_attr('prestige')
     def get_prestige(self, *, rank, sig, star, value=False):
@@ -1002,16 +1007,16 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-# def _csv_to_json(filecsv, filejson):
-#     csvfile = open(filecsv, 'r')
-    # reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-    # keys = next(reader)
-    # # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
-    # out = []
-    # for prop in reader:
-    #     index, prop2 = prop.split(,1)
-    #     out.append({key: val for key, val in zip(keys, prop2)})
-    # dataIO.save_json(filejson, out)
+def _csv_to_json(filecsv, filejson):
+    csvfile = open(filecsv, 'r')
+    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    keys = next(reader)
+    # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
+    out = []
+    for prop in reader:
+        index, prop2 = prop.split(,1)
+        out.append({key: val for key, val in zip(keys, prop2)})
+    dataIO.save_json(filejson, out)
 
 
 
