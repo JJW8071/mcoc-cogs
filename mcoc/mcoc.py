@@ -142,10 +142,10 @@ class MCOC:
 
     def _init(self):
         self._prepare_aliases()
-        self._prepare_frogspawn_champ_data()
         self._prepare_prestige_data()
         # self._prepare_signature_data()
         # self._prepare_spotlight_data()
+        # self._prepare_frogspawn_champ_data()
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
