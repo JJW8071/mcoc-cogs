@@ -137,7 +137,7 @@ class MCOC:
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
-        self.verify_cache_remote_files(verbose=True)
+        # self.verify_cache_remote_files(verbose=True)
         self._init()
 
     def _init(self):
