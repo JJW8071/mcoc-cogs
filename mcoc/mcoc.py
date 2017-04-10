@@ -218,9 +218,9 @@ class MCOC:
     # async def hook(self):
     #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
 
-    @commands.command(help=lookup_links['frogspawn'][0])
-    async def frogspawn(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['frogspawn']))
+    # @commands.command(help=lookup_links['frogspawn'][0])
+    # async def frogspawn(self):
+    #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['frogspawn']))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
