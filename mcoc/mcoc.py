@@ -39,7 +39,9 @@ data_files = {
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
-    }
+
+self._check_file_req()
+
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='data/mcoc/portraits/portrait_'
@@ -889,9 +891,9 @@ def _csv_to_json(filecsv, filejson):
     #     jsonfile.write('\n')
     # dataIO.save_json(jsonfile)
 
-def _check_file_req(self)
+    def _check_file_req(self):
     for key in data_files:
-        local = self.data_files[key]['local']
+        local = data_files[key]['local']
         if not os.file.exists(local):
         # if not os.path.exists(local):
             dataIO.save_json(local)
