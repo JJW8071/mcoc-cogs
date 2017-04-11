@@ -892,7 +892,8 @@ def _csv_to_json(filecsv, filejson):
 def _check_file_req(self)
     for key in data_files:
         local = self.data_files[key]['local']
-        if not os.path.exists(local):
+        if not os.file.exists(local):
+        # if not os.path.exists(local):
             dataIO.save_json(local)
             await self.bot.say('File created: {}'.format(local))
     return
