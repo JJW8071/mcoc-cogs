@@ -889,13 +889,13 @@ def _csv_to_json(filecsv, filejson):
     #     jsonfile.write('\n')
     # dataIO.save_json(jsonfile)
 
-def _check_file_req()
+def _check_file_req(self)
     for key in data_files:
-        local = data_files[key]['local']
+        local = self.data_files[key]['local']
         if not os.path.exists(local):
             dataIO.save_json(local)
             await self.bot.say('File created: {}'.format(local))
-
+    return
 
 
 # Creation of lookup functions from a tuple through anonymous functions
