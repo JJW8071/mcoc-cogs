@@ -874,14 +874,14 @@ def _truncate_text(self, text, max_length):
 
 def _csv_to_json(filecsv, filejson):
     csvfile = open(filecsv, 'r')
-    reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-    keys = next(reader)
-    # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
-    out = []
-    for prop in reader:
-        index, prop2 = prop.split(,1)
-        out.append({key: val for key, val in zip(keys, prop2)})
-    dataIO.save_json(filejson, out)
+    # reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    # keys = next(reader)
+    # # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
+    # out = []
+    # for prop in reader:
+    #     index, prop2 = prop.split(' ',1)
+    #     out.append({key: val for key, val in zip(keys, prop2)})
+    # dataIO.save_json(filejson, out)
 
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
