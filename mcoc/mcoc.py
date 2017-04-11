@@ -121,7 +121,6 @@ class MCOC:
 
     def __init__(self, bot):
         self.bot = bot
-
         self.settings = {
                 'siglvl': 1,
                 'sigstep': 20,
@@ -884,13 +883,18 @@ def _csv_to_json(filecsv, filejson):
         out.append({key: val for key, val in zip(keys, prop2)})
     dataIO.save_json(filejson, out)
 
-
-
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
     #     json.dump(row, jsonfile)
     #     jsonfile.write('\n')
     # dataIO.save_json(jsonfile)
+
+def _check_file_req()
+    for key in data_files:
+        local = data_files[key]['local']
+        if not os.path.exists(local):
+            dataIO.save_json(local)
+            await self.bot.say('File created: {}'.format(local))
 
 
 
