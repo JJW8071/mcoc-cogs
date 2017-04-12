@@ -41,8 +41,6 @@ data_files = {
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
 }
 
-self._check_file_req()
-
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='data/mcoc/portraits/portrait_'
