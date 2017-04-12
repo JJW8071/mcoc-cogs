@@ -141,7 +141,7 @@ class MCOC:
         # self._prepare_spotlight_data()
 
 ####### TEMPORARY DIAGNOSTICS #####
-    @commands.command(pass_context=true, name='testcsv')
+    @commands.command(pass_context=True, name='testcsv')
     async def _testcsv(self, ctx, *, filein):
         # server = ctx.message.server
         self.bot.say('DEBUG: filein = {}'.format(filein))
