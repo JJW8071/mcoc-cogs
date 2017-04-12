@@ -137,9 +137,17 @@ class MCOC:
     def _init(self):
         self._prepare_aliases()
         self._prepare_prestige_data()
-        self._prepare_signature_data()
+        #self._prepare_signature_data()
         # self._prepare_spotlight_data()
 
+####### TEMPORARY DIAGNOSTICS #####
+    @commands.command(pass_context=true, name='testcsv')
+    async def _testcsv(self, ctx, *, filein):
+        # server = ctx.message.server
+        self.bot.say('DEBUG: filein = {}'.format(filein))
+        testpackage = _csv_to_json(filein)
+        self.bot.say('DEBUG: testpackage = \n{}'.format(testpackage))
+####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
         '''Convert MCOC Flat Value to Percentge
@@ -875,7 +883,9 @@ def _truncate_text(self, text, max_length):
 
 def _csv_to_json(filecsv, filejson):
     csvfile = open(filecsv, 'r')
-    # reader = csv.reader(csvfile, delimiter=',', quotechar='"')
+    reader = csv.reader(csvfile, delimiter='\n', quotechar='"')
+    firstline = next(reader)
+
     # keys = next(reader)
     # # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
     # out = []
@@ -883,7 +893,8 @@ def _csv_to_json(filecsv, filejson):
     #     index, prop2 = prop.split(' ',1)
     #     out.append({key: val for key, val in zip(keys, prop2)})
     # dataIO.save_json(filejson, out)
-
+    testpackage = firstline
+    return testpackage
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
     #     json.dump(row, jsonfile)
