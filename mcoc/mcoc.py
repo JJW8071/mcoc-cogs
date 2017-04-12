@@ -892,7 +892,7 @@ def _csv_to_json(filecsv, filejson):
     #     jsonfile.write('\n')
     # dataIO.save_json(jsonfile)
 
-    def _check_file_req(self):
+def _check_file_req(self):
     for key in data_files:
         local = data_files[key]['local']
         if not os.file.exists(local):
