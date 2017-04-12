@@ -360,8 +360,8 @@ class MCOC:
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
-        if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
-            self.bot.say('DEBUG: Eureaka! We\'ve done it')
+        # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
+        #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
