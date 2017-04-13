@@ -885,7 +885,8 @@ def _truncate_text(self, text, max_length):
 def _csv_to_json(filecsv, filejson = ''):
     csvfile = open(filecsv, 'r')
     reader = csv.reader(csvfile, delimiter='\n', quotechar='"')
-    firstline = next(reader)
+    firstline = next(reader).strip('[',']')
+
 
     # keys = next(reader)
     # # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
