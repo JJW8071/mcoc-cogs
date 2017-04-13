@@ -143,9 +143,9 @@ class MCOC:
     @commands.command(pass_context=True, name='testcsv')
     async def testcsv(self, ctx, *, filein, fileout):
         # server = ctx.message.server
-        self.bot.say('DEBUG: filein = {}'.format(filein))
+        await self.bot.say('DEBUG: filein = {}'.format(filein))
         testpackage = _csv_to_json(filein, fileout)
-        self.bot.say('DEBUG: testpackage = \n{}'.format(testpackage))
+        await self.bot.say('DEBUG: testpackage = \n{}'.format(testpackage))
 ####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
