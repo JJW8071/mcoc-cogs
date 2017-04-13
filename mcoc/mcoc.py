@@ -141,7 +141,7 @@ class MCOC:
 
 ####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='testcsv')
-    async def _testcsv(self, ctx, *, filein, fileout):
+    async def testcsv(self, ctx, *, filein, fileout):
         # server = ctx.message.server
         self.bot.say('DEBUG: filein = {}'.format(filein))
         testpackage = _csv_to_json(filein, fileout)
