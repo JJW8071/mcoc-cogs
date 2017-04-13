@@ -66,7 +66,6 @@ class_color_codes = {
 #   if message.attachments = champsions.csv
 #       store user champions.cons
 
-
 def alias_resolve(f):
     @wraps(f)
     def wrapper(self, *args, **kwargs):
@@ -142,10 +141,10 @@ class MCOC:
 
 ####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='testcsv')
-    async def _testcsv(self, ctx, *, filein):
+    async def _testcsv(self, ctx, *, filein, fileout):
         # server = ctx.message.server
         self.bot.say('DEBUG: filein = {}'.format(filein))
-        testpackage = _csv_to_json(filein)
+        testpackage = _csv_to_json(filein, fileout)
         self.bot.say('DEBUG: testpackage = \n{}'.format(testpackage))
 ####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='flat')
@@ -360,6 +359,7 @@ class MCOC:
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
+        # FIX CSV TO JSON first
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
