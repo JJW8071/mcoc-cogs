@@ -886,9 +886,15 @@ def _csv_to_json(filecsv, filejson = ''):
     csvfile = open(filecsv, 'r')
     reader = csv.reader(csvfile, delimiter='\n', quotechar='"')
     testpackage = []
-    firstline = next(reader)
-    secondline = str(next(reader))[2:-2]
-    index, keys = secondline.split(',',1)
+    firstline = str(next(reader))[2:-2]
+    index, keys = firstline.split(',',1)
+    out = []
+    for row in reader:
+        unique, values = str(row)[2:-2].split(',',1)
+        build = str(unique[0])[1:-1]+': {\n'
+        build = build + [{k: v for k, v in zip(keys,values)}]+'},'
+    # secondline = str(next(reader))[2:-2]
+
     # keys = next(reader)
     # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
     # out = []
@@ -896,8 +902,7 @@ def _csv_to_json(filecsv, filejson = ''):
     #     index, prop2 = prop.split(' ',1)
     #     out.append({key: val for key, val in zip(keys, prop2)})
     # dataIO.save_json(filejson, out)
-    testpackage.append(index)
-    testpackage.append(keys)
+    testpackage.append(build)
     return testpackage
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
