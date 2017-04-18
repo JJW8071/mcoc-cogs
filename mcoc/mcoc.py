@@ -146,7 +146,7 @@ class MCOC:
         # server = ctx.message.server
         await self.bot.say('DEBUG: filein = {}'.format(filein))
         testpackage = _csv_to_json(filein, fileout)
-        output = '\n'.join(testpackage)
+        output = '\n'.join(k for k in testpackage)
         await self.bot.say('DEBUG: testpackage = \n{}'.format(output))
 ####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='flat')
