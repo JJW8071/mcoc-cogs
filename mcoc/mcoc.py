@@ -887,7 +887,7 @@ def _csv_to_json(filecsv, filejson = ''):
     reader = csv.reader(csvfile, delimiter='\n', quotechar='"')
     testpackage = []
     firstline = next(reader)
-    secondline = str(next(reader))
+    secondline = str(next(reader))[4:-4]
     index, keys = secondline.split(',',1)
     # keys = next(reader)
     # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
