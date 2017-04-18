@@ -146,7 +146,8 @@ class MCOC:
         # server = ctx.message.server
         await self.bot.say('DEBUG: filein = {}'.format(filein))
         testpackage = _csv_to_json(filein, fileout)
-        await self.bot.say('DEBUG: testpackage = \n{}'.format(testpackage))
+        output = '\n'.join(testpackage)
+        await self.bot.say('DEBUG: testpackage = \n{}'.format(output))
 ####### TEMPORARY DIAGNOSTICS #####
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
@@ -885,8 +886,8 @@ def _truncate_text(self, text, max_length):
 def _csv_to_json(filecsv, filejson = ''):
     csvfile = open(filecsv, 'r')
     reader = csv.reader(csvfile, delimiter='\n', quotechar='"')
+    testpackage = []
     firstline = next(reader)
-    keys = csv.reader(firstline, delimiter=',')
     # keys = next(reader)
     # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
     # out = []
@@ -894,7 +895,7 @@ def _csv_to_json(filecsv, filejson = ''):
     #     index, prop2 = prop.split(' ',1)
     #     out.append({key: val for key, val in zip(keys, prop2)})
     # dataIO.save_json(filejson, out)
-    testpackage = keys
+    testpackage = testpackage.append(firstline)
     return testpackage
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
