@@ -158,9 +158,9 @@ class MCOC:
         r = 'none'
         c = 'none'
         for row in reader:
-            if row.uniqe is key
+            if row[uniqe] is key
                 await self.bot.say('DEBUG: unique found.')
-                value = row.sig99
+                value = row.['sig99']
                 await self.bot.say('DEBUG: sig99 is = ' + str(value))
 
         r, c = _search_csv(csvfile, key)
