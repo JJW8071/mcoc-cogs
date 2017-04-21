@@ -147,6 +147,10 @@ class MCOC:
         # self._prepare_spotlight_data()
         # self._prepare_frogspawn_champ_data()
 
+    @commands.command()
+    async def testcsv(self, csvfile, key):
+        _search_csv(csvefile, key)
+
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
         '''Convert MCOC Flat Value to Percentge
@@ -1001,6 +1005,17 @@ def _truncate_text(self, text, max_length):
             return "${:.2E}".format(text)
         return text[:max_length-3] + "..."
     return text
+
+
+def _search_csv(filecsv, key):
+    csvfile = open(filecsv, 'r')
+    reader = csv.reader(csvfile, delimiter=',',quotechar='"')
+    for row in reader2:
+        for field in row:
+            if field is key:
+                await self.bot.say('DEBUG: key found in row {}, field {}'.format(row,field))
+
+
 
 # def _csv_to_json(filecsv, filejson):
 #     csvfile = open(filecsv, 'r')
