@@ -152,20 +152,20 @@ class MCOC:
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar='"')
         fields = next(reader)
+        value = ''
         await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
-        # reader = csv.DictReader(csvfile, fieldnames)
-        # r = 'none'
-        # c = 'none'
-        # for row in reader2:
-        #     for field in row:
-        #         if field is key:
-        #             r = row
-        #             c = field
-        #             return r, c
-        #
-        # r, c = _search_csv(csvfile, key)
-        # if r is not 'none':
-        #     await self.bot.say('DBUG key found')
+        reader = csv.DictReader(csvfile, fieldnames)
+        r = 'none'
+        c = 'none'
+        for row in reader:
+            if row.uniqe is key
+                await self.bot.say('DEBUG: unique found.')
+                value = row.sig99
+                await self.bot.say('DEBUG: sig99 is = ' + str(value))
+
+        r, c = _search_csv(csvfile, key)
+        if r is not 'none':
+            await self.bot.say('DBUG key found')
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
