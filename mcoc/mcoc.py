@@ -148,7 +148,7 @@ class MCOC:
         # self._prepare_frogspawn_champ_data()
 
     @commands.command()
-    async def testcsv(self, key = '4-BLACKBOLT-0', uniqe = '''star-mcocjson-ability''', filecsv = 'data/mcoc/sig_data.csv'):
+    async def testcsv(self, key = '4-BLACKBOLT-0', uniqe = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar='"')
         fields = next(reader)
@@ -158,14 +158,11 @@ class MCOC:
         r = 'none'
         c = 'none'
         for row in reader:
-            if row[uniqe] is key
+            if row[uniqe] is key:
                 await self.bot.say('DEBUG: unique found.')
                 value = row.['sig99']
                 await self.bot.say('DEBUG: sig99 is = ' + str(value))
 
-        r, c = _search_csv(csvfile, key)
-        if r is not 'none':
-            await self.bot.say('DBUG key found')
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
