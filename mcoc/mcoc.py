@@ -148,10 +148,24 @@ class MCOC:
         # self._prepare_frogspawn_champ_data()
 
     @commands.command()
-    async def testcsv(self, csvfile, key):
-        r, c = _search_csv(csvfile, key)
-        if r is not 'none':
-            await self.bot.say('DBUG key found')
+    async def testcsv(self, key, uniqe = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
+        csvfile = open(filecsv, 'r')
+        reader = csv.reader(csvfile, delimiter=',',quotechar='"')
+        fieldnames = next(reader)
+        await self.bot.say('DEBUG: Fieldnames: {}'.format(fieldnames))
+        # reader = csv.DictReader(csvfile, fieldnames)
+        # r = 'none'
+        # c = 'none'
+        # for row in reader2:
+        #     for field in row:
+        #         if field is key:
+        #             r = row
+        #             c = field
+        #             return r, c
+        #
+        # r, c = _search_csv(csvfile, key)
+        # if r is not 'none':
+        #     await self.bot.say('DBUG key found')
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
@@ -1008,21 +1022,6 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-
-def _search_csv(filecsv, key):
-    csvfile = open(filecsv, 'r')
-    reader = csv.reader(csvfile, delimiter=',',quotechar='"')
-    fieldnames = next(reader)
-    await self.bot.say('DEBUG: Fieldnames: {}'.format(fieldnames))
-    reader2 = csv.DictReader(reader, fieldnames)
-    r = 'none'
-    c = 'none'
-    for row in reader2:
-        for field in row:
-            if field is key:
-                r = row
-                c = field
-                return r, c
 
 
 # def _csv_to_json(filecsv, filejson):
