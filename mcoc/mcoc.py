@@ -149,7 +149,7 @@ class MCOC:
 
     @commands.command()
     async def testcsv(self, csvfile, key):
-        r, c = _search_csv(csvefile, key)
+        r, c = _search_csv(csvfile, key)
         if r is not 'none':
             await self.bot.say('DBUG key found')
 
