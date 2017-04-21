@@ -1013,7 +1013,7 @@ def _search_csv(filecsv, key):
     csvfile = open(filecsv, 'r')
     reader = csv.reader(csvfile, delimiter=',',quotechar='"')
     fieldnames = next(reader)
-    reader2 = csv.DictReader(csvfile, fieldnames)
+    reader2 = csv.DictReader(reader, fieldnames)
     r = 'none'
     c = 'none'
     for row in reader2:
