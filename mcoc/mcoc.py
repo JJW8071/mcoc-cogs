@@ -151,8 +151,8 @@ class MCOC:
     async def testcsv(self, key, uniqe = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar='"')
-        fieldnames = next(reader)
-        await self.bot.say('DEBUG: Fieldnames: {}'.format(fieldnames))
+        fields = next(reader)
+        await self.bot.say('DEBUG: Fieldnames: ' + fields)
         # reader = csv.DictReader(csvfile, fieldnames)
         # r = 'none'
         # c = 'none'
