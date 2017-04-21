@@ -149,7 +149,9 @@ class MCOC:
 
     @commands.command()
     async def testcsv(self, csvfile, key):
-        _search_csv(csvefile, key)
+        r, c = _search_csv(csvefile, key)
+        if r is not 'none':
+            await self.bot.say('DBUG key found')
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
@@ -1010,11 +1012,14 @@ def _truncate_text(self, text, max_length):
 def _search_csv(filecsv, key):
     csvfile = open(filecsv, 'r')
     reader = csv.reader(csvfile, delimiter=',',quotechar='"')
+    r = 'none'
+    c = 'none'
     for row in reader2:
         for field in row:
             if field is key:
-                await self.bot.say('DEBUG: key found in row {}, field {}'.format(row,field))
-
+                r = row
+                c = field
+                return r, c
 
 
 # def _csv_to_json(filecsv, filejson):
