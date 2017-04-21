@@ -1014,7 +1014,7 @@ def _search_csv(filecsv, key):
     reader = csv.reader(csvfile, delimiter=',',quotechar='"')
     r = 'none'
     c = 'none'
-    for row in reader2:
+    for row in reader:
         for field in row:
             if field is key:
                 r = row
