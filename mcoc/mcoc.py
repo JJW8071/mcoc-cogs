@@ -154,7 +154,7 @@ class MCOC:
         fields = next(reader)
         value = ''
         await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
-        reader = csv.DictReader(csvfile, fieldnames)
+        reader = csv.DictReader(csvfile, fields)
 
         line = next(reader)
         await self.bot.say('DEBUG: line1: ' + str(line))
