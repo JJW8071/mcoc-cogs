@@ -1013,6 +1013,7 @@ def _search_csv(filecsv, key):
     csvfile = open(filecsv, 'r')
     reader = csv.reader(csvfile, delimiter=',',quotechar='"')
     fieldnames = next(reader)
+    await self.bot.say('DEBUG: Fieldnames: {}'.format(fieldnames))
     reader2 = csv.DictReader(reader, fieldnames)
     r = 'none'
     c = 'none'
