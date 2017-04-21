@@ -155,11 +155,14 @@ class MCOC:
         value = ''
         await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
         reader = csv.DictReader(csvfile, fieldnames)
-        for row in reader:
-            if row[uniqe] is key:
-                await self.bot.say('DEBUG: unique found.')
-                value = row['sig99']
-                await self.bot.say('DEBUG: sig99 is = ' + str(value))
+
+        line = next(reader)
+        await self.bot.say('DEBUG: line1: ' + str(line))
+        # for row in reader:
+        #     if row[uniqe] is key:
+        #         await self.bot.say('DEBUG: unique found.')
+        #         value = row['sig99']
+        #         await self.bot.say('DEBUG: sig99 is = ' + str(value))
 
 
     @commands.command(pass_context=True, name='flat')
