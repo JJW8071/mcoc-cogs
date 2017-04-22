@@ -148,20 +148,21 @@ class MCOC:
         # self._prepare_frogspawn_champ_data()
 
     @commands.command()
-    async def testcsv(self, key = '4-BLACKBOLT-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
+    async def testcsv(self, key = '4-ABOMINATION-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar="'")
         await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
-        await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
+        await self.bot.say('DEBUG: Line1 ' + str(next(reader)))
 
         reader2 = csv.DictReader(csvfile, fields)
 
         for row in reader2:
-            if row[unique] is key:
-                await self.bot.say('DEBUG: key found ')
+            for c in row:
+                if row[c] is key:
+                    await self.bot.say('DEBUG: Found ' + row[c])
 
 
-        await self.bot.say('DEBUG: testcsv function complete')    
+        await self.bot.say('DEBUG: testcsv function complete')
         # for row in reader:
         #     if row[uniqe] is key:
         #         await self.bot.say('DEBUG: unique found.')
