@@ -150,9 +150,9 @@ class MCOC:
     @commands.command()
     async def testcsv(self, key = '4-BLACKBOLT-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = open(filecsv, 'r')
-        reader = csv.reader(csvfile, delimiter=',',quotechar='"')
+        reader = csv.reader(csvfile, delimiter=',',quotechar="'")
         fields = next(reader)
-        # await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
+        await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
         reader2 = csv.DictReader(csvfile, fields)
 
         for row in reader2:
