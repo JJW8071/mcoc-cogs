@@ -158,8 +158,7 @@ class MCOC:
         for row in reader2:
             if row[unique] is key:
                 await self.bot.say('DEBUG: key found ')
-            else:
-                await self.bot.say('DEBUG: I did not find' + key)
+            
         # for row in reader:
         #     if row[uniqe] is key:
         #         await self.bot.say('DEBUG: unique found.')
