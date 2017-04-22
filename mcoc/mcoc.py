@@ -151,14 +151,17 @@ class MCOC:
     async def testcsv(self, key = '4-BLACKBOLT-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar="'")
-        fields = next(reader)
-        await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
+        await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
+        await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
+
         reader2 = csv.DictReader(csvfile, fields)
 
         for row in reader2:
             if row[unique] is key:
                 await self.bot.say('DEBUG: key found ')
-            
+
+
+        await self.bot.say('DEBUG: testcsv function complete')    
         # for row in reader:
         #     if row[uniqe] is key:
         #         await self.bot.say('DEBUG: unique found.')
