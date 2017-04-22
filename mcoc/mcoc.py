@@ -152,15 +152,14 @@ class MCOC:
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar='"')
         fields = next(reader)
-        value = ''
         # await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
-        reader = csv.DictReader(csvfile, fields)
+        reader2 = csv.DictReader(csvfile, fields)
 
-        line = reader[1]
+        line = reader2[1]
         keyword = line[unique]
         signature = line['sig99']
 
-        await self.bot.say('DEBUG: \nkeyword: {},\nsignature: {}'.format(keyword, signature))
+        await self.bot.say('DEBUG: signature: {}'.format(signature))
         # for row in reader:
         #     if row[uniqe] is key:
         #         await self.bot.say('DEBUG: unique found.')
