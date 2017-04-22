@@ -149,15 +149,16 @@ class MCOC:
 
     @commands.command()
     async def testcsv(self, key = '4-ABOMINATION-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
-        csvfile = open(filecsv, 'r')
-        reader = csv.reader(csvfile, delimiter=',')
-        await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
-        await self.bot.say('DEBUG: Line1 ' + str(next(reader)))
+        csvfile = csv.DictReader(open(filecsv, 'r'))
+        for row in csvfile:
+            if row[unique] is key:
+                await self.bot.say('DEBUG: Found it')
+        # reader = csv.reader(csvfile, delimiter=',')
+        # await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
+        # await self.bot.say('DEBUG: Line1 ' + str(next(reader)))
+        #
+        # reader2 = csv.DictReader(csvfile, fields)
 
-        reader2 = csv.DictReader(csvfile, fields)
-
-        testline = print(next(reader2))
-        await self.bot.say(testline)
         # for row in reader2:
         #     for c in row:
         #         if row[c] is key:
