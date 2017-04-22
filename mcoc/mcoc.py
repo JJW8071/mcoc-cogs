@@ -148,7 +148,7 @@ class MCOC:
         # self._prepare_frogspawn_champ_data()
 
     @commands.command()
-    async def testcsv(self, key = '4-BLACKBOLT-0', uniqe = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
+    async def testcsv(self, key = '4-BLACKBOLT-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = open(filecsv, 'r')
         reader = csv.reader(csvfile, delimiter=',',quotechar='"')
         fields = next(reader)
