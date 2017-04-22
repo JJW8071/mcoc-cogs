@@ -156,8 +156,8 @@ class MCOC:
         await self.bot.say('DEBUG: Fieldnames: ' + str(fields))
         reader = csv.DictReader(csvfile, fields)
 
-        line = next(reader)
-        await self.bot.say('DEBUG: line1: {}'.format(line['sig99']))
+        line = reader[1]
+        await self.bot.say('DEBUG: line1: {}'.join(line))
         # for row in reader:
         #     if row[uniqe] is key:
         #         await self.bot.say('DEBUG: unique found.')
