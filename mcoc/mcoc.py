@@ -1,6 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from textwrap import wrap
+from operator import attrgetter
 from math import log2
 from math import *
 import os
@@ -202,13 +203,20 @@ class MCOC:
 
 
     @commands.command(pass_context=True)
-    async def list_members(self, ctx, role):
+    async def list_members(self, ctx, role: discord.Role, use_alias=True):
         server = ctx.message.server
-
-        if role.id in discord.role:
-            await self.bot.say('DBEUG: Discord Role detected')
-            members = '\n'.join(k.full_name for k in role.members)
-            await self.bot.say(members)
+        members = []
+        for member in server.members:
+            if role in member.roles:
+                members.append(member)
+        members.sort(key=attrgetter('name'))
+        if use_alias:        
+            ret = '\n'.join([m.display_name for m in members])
+        else:
+            ret = '\n'.join([m.name for m in members])
+        em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)), 
+                description=ret, color=role.color)    
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def mcoc_update(self, fname, force=False):
