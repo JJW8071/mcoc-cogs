@@ -151,7 +151,7 @@ class MCOC:
         # self._prepare_frogspawn_champ_data()
 
     @commands.command()
-    async def testcsv(self, key = '4-ABOMINATION-0', col = 's99', filecsv = 'data/mcoc/sig_data.csv'):
+    async def testcsv(self, key = '4-ABOMINATION-0', col = 'sig99', filecsv = 'data/mcoc/sig_data.csv'):
         row = _get_csv_row(filecsv, key)
         if row is not None:
             print row
