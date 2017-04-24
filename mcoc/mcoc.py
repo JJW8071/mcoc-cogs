@@ -378,7 +378,7 @@ class MCOC:
         for x in {0, 1, 2, 3, 4, 5, 6}:
             lookup = star+mcocjson+'-{}'.format(x)
             sigkey = 'sig{}'+format(siglvl)
-            value = self._get_sig_value(lookup, sigkey)
+            value = self._get_csv_value('data/mcoc/sig_data.csv', mcocjson, lookup, sigkey)
             if value is not None:
                 print(x, lookup, value)
                 sig_stack.append(value)
@@ -687,16 +687,6 @@ class MCOC:
 
         return title, title_lower, simple, desc
 
-    async def _get_sig_value(self, key = '4-ABOMINATION-0', col = 'sig99', filecsv = 'data/mcoc/sig_data.csv'):
-        row = _get_csv_row(filecsv, key)
-        if row is not None:
-            print(row)
-            name = str(row['mcocjson'])
-            sig = str(row[col])
-            return sig
-        else:
-            return None
-
     def get_roster(self, server, role : discord.Role):
         cnt = 0
         line_out = []
@@ -967,15 +957,13 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-
-
-def _get_csv_row(filecsv, key, unique = 'star-mcocjson-ability'):
+def _get_csv_cell(filecsv, unique, key, col):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     for i, row in enumerate(csvfile):
         if i < 4:
             print(row['mcocjson'], row['star-mcocjson-ability'])
         if row[unique] == key:
-            return row
+            return str(row[col])
         else:
             return None
 
