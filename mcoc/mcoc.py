@@ -38,6 +38,8 @@ data_files = {
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
+
+sig_csv = None
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='data/mcoc/portraits/portrait_'
@@ -138,12 +140,13 @@ class MCOC:
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
-        self.verify_cache_remote_files(verbose=True)
+        # self.verify_cache_remote_files(verbose=True)
         self._init()
 
     def _init(self):
         self._prepare_aliases()
         self._prepare_prestige_data()
+        sig_csv = csv.DictReader(open('data/mcoc/sig_data.csv','rb'))
         # self._prepare_signature_data()
         # self._prepare_spotlight_data()
         # self._prepare_frogspawn_champ_data()
@@ -156,6 +159,7 @@ class MCOC:
                 print(row['mcocjson'], row['star-mcocjson-ability'])
             if row[unique] == key:
                 await self.bot.say('DEBUG: Found it')
+
         # reader = csv.reader(csvfile, delimiter=',')
         # await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
         # await self.bot.say('DEBUG: Line1 ' + str(next(reader)))
@@ -212,12 +216,12 @@ class MCOC:
             if role in member.roles:
                 members.append(member)
         members.sort(key=attrgetter('name'))
-        if use_alias:        
+        if use_alias:
             ret = '\n'.join([m.display_name for m in members])
         else:
             ret = '\n'.join([m.name for m in members])
-        em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)), 
-                description=ret, color=role.color)    
+        em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
+                description=ret, color=role.color)
         await self.bot.say(embed=em)
 
     @commands.command()
