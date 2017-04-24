@@ -385,7 +385,7 @@ class MCOC:
                 sig_stack.append(value)
                 n = x
 
-        print('sig_stack:', sig_stack)
+        print('sig_stack:', sig_stack[k] for k in sig_stack)
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
