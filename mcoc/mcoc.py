@@ -146,31 +146,22 @@ class MCOC:
     def _init(self):
         self._prepare_aliases()
         self._prepare_prestige_data()
-        sig_csv = csv.DictReader(open('data/mcoc/sig_data.csv','rb'))
         # self._prepare_signature_data()
         # self._prepare_spotlight_data()
         # self._prepare_frogspawn_champ_data()
 
     @commands.command()
-    async def testcsv(self, key = '4-ABOMINATION-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
+    async def testcsv(self, key = '4-ABOMINATION-0', col = 's99' filecsv = 'data/mcoc/sig_data.csv'):
+        row = self._get_csv_row(filecsv, key)
+        name = row['champ']
+        sig = row[col]
+        self.bot.say(name + ': ' + sig)
         # csvfile = csv.DictReader(open(filecsv, 'r'))
-        for i, row in enumerate(sig_csv):
-            if i < 4:
-                print(row['mcocjson'], row['star-mcocjson-ability'])
-            if row[unique] == key:
-                await self.bot.say('DEBUG: Found it')
-
-        # reader = csv.reader(csvfile, delimiter=',')
-        # await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
-        # await self.bot.say('DEBUG: Line1 ' + str(next(reader)))
-        #
-        # reader2 = csv.DictReader(csvfile, fields)
-
-        # for row in reader2:
-        #     for c in row:
-        #         if row[c] is key:
-        #             await self.bot.say('DEBUG: Found ' + row[c])
-
+        # for i, row in enumerate(csvfile):
+        #     if i < 4:
+        #         print(row['mcocjson'], row['star-mcocjson-ability'])
+        #     if row[unique] == key:
+        #         await self.bot.say('DEBUG: Found it')
 
         await self.bot.say('DEBUG: testcsv function complete')
         # for row in reader:
@@ -1044,16 +1035,14 @@ def _truncate_text(self, text, max_length):
 
 
 
-# def _csv_to_json(filecsv, filejson):
-#     csvfile = open(filecsv, 'r')
-    # reader = csv.reader(csvfile, delimiter=',', quotechar='"')
-    # keys = next(reader)
-    # # out = [{key: val for key, val in zip(keys, prop)} for prop in reader]
-    # out = []
-    # for prop in reader:
-    #     index, prop2 = prop.split(,1)
-    #     out.append({key: val for key, val in zip(keys, prop2)})
-    # dataIO.save_json(filejson, out)
+def _get_csv_row(self, csvfile, key):
+    csvfile = csv.DictReader(open(filecsv, 'r'))
+    for i, row in enumerate(csvfile):
+        if i < 4:
+            print(row['mcocjson'], row['star-mcocjson-ability'])
+        if row[unique] == key:
+            await self.bot.say('DEBUG: Found it')
+            return row
 
 
 
