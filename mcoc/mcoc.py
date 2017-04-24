@@ -154,6 +154,7 @@ class MCOC:
     async def testcsv(self, key = '4-ABOMINATION-0', col = 's99', filecsv = 'data/mcoc/sig_data.csv'):
         row = _get_csv_row(filecsv, key)
         if row is not None:
+            print row
             name = str(row['champ'])
             sig = str(row[col])
             await self.bot.say(name + ': ' + sig)
