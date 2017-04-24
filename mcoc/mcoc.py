@@ -383,8 +383,8 @@ class MCOC:
             if value is not None:
                 print(x, lookup, value)
                 sig_stack.append(value)
-            else:
-                break
+                n = x
+
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
