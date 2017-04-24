@@ -152,7 +152,7 @@ class MCOC:
 
     @commands.command()
     async def testcsv(self, key = '4-ABOMINATION-0', col = 's99' filecsv = 'data/mcoc/sig_data.csv'):
-        row = self._get_csv_row(filecsv, key)
+        row = _get_csv_row(filecsv, key)
         name = str(row['champ'])
         sig = str(row[col])
         await self.bot.say(name + ': ' + sig)
