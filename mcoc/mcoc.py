@@ -150,28 +150,6 @@ class MCOC:
         # self._prepare_spotlight_data()
         # self._prepare_frogspawn_champ_data()
 
-    @commands.command()
-    async def testcsv(self, key = '4-ABOMINATION-0', col = 'sig99', filecsv = 'data/mcoc/sig_data.csv'):
-        row = _get_csv_row(filecsv, key)
-        if row is not None:
-            print(row)
-            name = str(row['mcocjson'])
-            sig = str(row[col])
-            await self.bot.say(name + ': ' + sig)
-        # csvfile = csv.DictReader(open(filecsv, 'r'))
-        # for i, row in enumerate(csvfile):
-        #     if i < 4:
-        #         print(row['mcocjson'], row['star-mcocjson-ability'])
-        #     if row[unique] == key:
-        #         await self.bot.say('DEBUG: Found it')
-
-        await self.bot.say('DEBUG: testcsv function complete')
-        # for row in reader:
-        #     if row[uniqe] is key:
-        #         await self.bot.say('DEBUG: unique found.')
-        #         value = row['sig99']
-        #         await self.bot.say('DEBUG: sig99 is = ' + str(value))
-
 
     @commands.command(pass_context=True, name='flat')
     async def flat(self, ctx, *, m):
@@ -396,6 +374,16 @@ class MCOC:
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
+
+        for i, x in {'0','1','2','3','4','5','6','7'}:
+            lookup = star+mcocjson+x
+            sigkey = 'sig{}'+format(siglvl)
+            value = _get_sig_value(lookup, sigkey)
+            if value is not None:
+                print(lookup, value)
+                sig_stack.append(value)
+            else:
+                break
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
@@ -699,6 +687,16 @@ class MCOC:
 
         return title, title_lower, simple, desc
 
+    async def _get_sig_value(self, key = '4-ABOMINATION-0', col = 'sig99', filecsv = 'data/mcoc/sig_data.csv'):
+        row = _get_csv_row(filecsv, key)
+        if row is not None:
+            print(row)
+            name = str(row['mcocjson'])
+            sig = str(row[col])
+            return sig
+        else:
+            return None
+
     def get_roster(self, server, role : discord.Role):
         cnt = 0
         line_out = []
@@ -845,23 +843,6 @@ class Champion:
             [word.capitalize() for word in self.full_name.split(' ')]) + '**'
         self.class_color = class_color_codes[getattr(self, 'class', 'default')]
 
-    # def update_frogspawn(self, data):
-    #     self.frogspawn_data = data
-
-    # def getSigValue(self, siglvl, i=None):
-    #     '''Python port of siglvl interpolator from
-    #     http://coc.frogspawn.de/champions/js/functions.js'''
-    #     if i is None:
-    #         base = self.frogspawn_data['sb']
-    #         multi = self.frogspawn_data['sm']
-    #     else:
-    #         base = self.frogspawn_data['sb'][i]
-    #         multi = self.frogspawn_data['sm'][i]
-    #     if siglvl > 0 and base:
-    #         return round(base + log2(siglvl) * multi, 1)
-    #     else:
-    #         return '-'
-
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
         return '{}{}.png'.format(champ_avatar, self.mcocui)
@@ -896,55 +877,6 @@ class Champion:
         s2d = specials[prefix + desc + self.mcocjson + two]
         specials = (s0, s1, s2, s0d, s1d, s2d)
         return specials
-
-    # @validate_attr('frogspawn')
-    # def get_sig(self, **kwargs):
-    #     sig_str = self._sig_header(self.frogspawn_data['sd'])
-    #     siglvl = bound_lvl(kwargs['siglvl'])
-    #     str_data = []
-    #     for i in range(len(self.frogspawn_data['sn'])):
-    #         if self.frogspawn_data['sn'][i] != 0:
-    #             str_data.append(self.frogspawn_data['sn'][i])
-    #         elif isinstance(self.frogspawn_data['sb'], list):
-    #             str_data.append(self.getSigValue(siglvl, i))
-    #         else:
-    #             str_data.append(self.getSigValue(siglvl))
-    #     return ('Signature Ability for {}'.format(
-    #             self.full_name.capitalize()), sig_str.format(*str_data), siglvl)
-
-    # @validate_attr('frogspawn')
-    # def get_sigarray(self, sigstep=20, width=10, inc_zero=False, **kwargs):
-    #     '''Retrieve the Signature Ability of a Champion at multiple levels'''
-    #     var_list = 'XYZABCDEF'
-    #     sig_str = self._sig_header(self.frogspawn_data['sd'])
-    #     str_data = []
-    #     sigstep_arr = bound_lvl(list(range(0, 101, sigstep)))
-    #     if inc_zero:
-    #         sigstep_arr.insert(1, 1)
-    #     else:
-    #         sigstep_arr[0] = 1
-    #     table_data = [[''] + sigstep_arr]
-    #     count = 0
-    #     for i in range(len(self.frogspawn_data['sn'])):
-    #         if self.frogspawn_data['sn'][i] != 0:
-    #             str_data.append(self.frogspawn_data['sn'][i])
-    #         elif '{' + str(i) + '}' in sig_str:
-    #             table_data.append([var_list[count]])
-    #             str_data.append(var_list[count])
-    #             for j in sigstep_arr:
-    #                 if isinstance(self.frogspawn_data['sb'], list):
-    #                     table_data[-1].append(self.getSigValue(j, i))
-    #                 else:
-    #                     table_data[-1].append(self.getSigValue(j))
-    #             count += 1
-    #         else:
-    #             # nothing to do if there is no valid sub in sig_str
-    #             #  but we need to make sure the length is correct for format
-    #             str_data.append('dummy')
-    #     title = 'Signature Ability for {} at multiple Sig Levels:'.format(
-    #             self.bold_name)
-    #     response = sig_str.format(*str_data) + tabulate(table_data, width=width)
-    #     return (title, response)
 
     @validate_attr('prestige')
     def get_prestige(self, *, rank, sig, star, value=False):
