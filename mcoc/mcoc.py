@@ -154,8 +154,8 @@ class MCOC:
     async def testcsv(self, key = '4-ABOMINATION-0', col = 'sig99', filecsv = 'data/mcoc/sig_data.csv'):
         row = _get_csv_row(filecsv, key)
         if row is not None:
-            print row
-            name = str(row['mccojson'])
+            print(row)
+            name = str(row['mcocjson'])
             sig = str(row[col])
             await self.bot.say(name + ': ' + sig)
         # csvfile = csv.DictReader(open(filecsv, 'r'))
