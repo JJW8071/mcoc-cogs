@@ -153,9 +153,10 @@ class MCOC:
     @commands.command()
     async def testcsv(self, key = '4-ABOMINATION-0', col = 's99', filecsv = 'data/mcoc/sig_data.csv'):
         row = _get_csv_row(filecsv, key)
-        name = str(row['champ'])
-        sig = str(row[col])
-        await self.bot.say(name + ': ' + sig)
+        if row is not None:
+            name = str(row['champ'])
+            sig = str(row[col])
+            await self.bot.say(name + ': ' + sig)
         # csvfile = csv.DictReader(open(filecsv, 'r'))
         # for i, row in enumerate(csvfile):
         #     if i < 4:
@@ -1041,7 +1042,6 @@ def _get_csv_row(self, csvfile, key):
         if i < 4:
             print(row['mcocjson'], row['star-mcocjson-ability'])
         if row[unique] == key:
-            await self.bot.say('DEBUG: Found it')
             return row
 
 
