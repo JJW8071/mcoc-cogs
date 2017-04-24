@@ -23,7 +23,7 @@ data_files = {
     # 'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
     #            'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/spotlight_data.json', 'update_delta': 0},
+                'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
     # # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
@@ -138,7 +138,7 @@ class MCOC:
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
-        # self.verify_cache_remote_files(verbose=True)
+        self.verify_cache_remote_files(verbose=True)
         self._init()
 
     def _init(self):
@@ -151,8 +151,10 @@ class MCOC:
     @commands.command()
     async def testcsv(self, key = '4-ABOMINATION-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
         csvfile = csv.DictReader(open(filecsv, 'r'))
-        for row in csvfile:
-            if row[unique] is key:
+        for i, row in enumerate(csvfile):
+            if i < 4:
+                print(row['mcocjson'], row['star-mcocjson-ability'])
+            if row[unique] == key:
                 await self.bot.say('DEBUG: Found it')
         # reader = csv.reader(csvfile, delimiter=',')
         # await self.bot.say('DEBUG: Fieldnames: ' + str(next(reader)))
