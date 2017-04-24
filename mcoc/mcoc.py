@@ -381,9 +381,11 @@ class MCOC:
             print(key, col)
             value = _get_csv_cell('data/mcoc/sig_data.csv', key, col)
             if value is not None:
-                print(x, lookup, value)
+                print(x, key, value)
                 sig_stack.append(value)
                 n = x
+
+        print('sig_stack:', sig_stack)
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
