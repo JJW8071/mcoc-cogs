@@ -375,7 +375,7 @@ class MCOC:
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
 
-        for x in {0-7}:
+        for x in {0, 1, 2, 3, 4, 5, 6}:
             lookup = star+mcocjson+str(x)
             sigkey = 'sig{}'+format(siglvl)
             value = self._get_sig_value(lookup, sigkey)
