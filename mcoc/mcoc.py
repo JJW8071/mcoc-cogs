@@ -1036,7 +1036,7 @@ def _truncate_text(self, text, max_length):
 
 
 
-def _get_csv_row(filecsv, key, unique = 0):
+def _get_csv_row(filecsv, key, unique = 'star-mcocjson-ability'):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     for i, row in enumerate(csvfile):
         if i < 4:
