@@ -376,9 +376,9 @@ class MCOC:
         sig_stack = []
 
         for x in {0, 1, 2, 3, 4, 5, 6}:
-            lookup = star+mcocjson+'-{}'.format(x)
-            sigkey = 'sig{}'+format(siglvl)
-            value = _get_csv_cell('data/mcoc/sig_data.csv', mcocjson, lookup, sigkey)
+            key = star+mcocjson+'-{}'.format(x)
+            col = 'sig{}'+format(siglvl)
+            value = _get_csv_cell('data/mcoc/sig_data.csv', 'star-mcocjson-ability', key, sigkey)
             if value is not None:
                 print(x, lookup, value)
                 sig_stack.append(value)
@@ -961,8 +961,9 @@ def _get_csv_cell(filecsv, unique, key, col):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     for i, row in enumerate(csvfile):
         if i < 4:
-            print(row['mcocjson'], row['star-mcocjson-ability'])
+            print(i, row[unique], row[col])
         if row[unique] == key:
+            print(i, row[unique], row[col])
             return str(row[col])
         else:
             return None
