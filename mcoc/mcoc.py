@@ -155,7 +155,7 @@ class MCOC:
         row = _get_csv_row(filecsv, key)
         if row is not None:
             print row
-            name = str(row['champ'])
+            name = str(row['mccojson'])
             sig = str(row[col])
             await self.bot.say(name + ': ' + sig)
         # csvfile = csv.DictReader(open(filecsv, 'r'))
