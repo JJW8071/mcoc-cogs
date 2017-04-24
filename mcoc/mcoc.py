@@ -378,7 +378,7 @@ class MCOC:
         for x in {0, 1, 2, 3, 4, 5, 6}:
             lookup = star+mcocjson+'-{}'.format(x)
             sigkey = 'sig{}'+format(siglvl)
-            value = self._get_csv_value('data/mcoc/sig_data.csv', mcocjson, lookup, sigkey)
+            value = _get_csv_value('data/mcoc/sig_data.csv', mcocjson, lookup, sigkey)
             if value is not None:
                 print(x, lookup, value)
                 sig_stack.append(value)
