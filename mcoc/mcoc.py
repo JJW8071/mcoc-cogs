@@ -1041,7 +1041,7 @@ def _get_csv_row(filecsv, key):
     for i, row in enumerate(csvfile):
         if i < 4:
             print(row['mcocjson'], row['star-mcocjson-ability'])
-        if row[unique] == key:
+        if row[0] == key:
             return row
         else:
             return None
