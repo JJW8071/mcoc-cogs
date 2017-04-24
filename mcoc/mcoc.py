@@ -375,12 +375,12 @@ class MCOC:
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
 
-        for i, x in {'0','1','2','3','4','5','6','7'}:
-            lookup = star+mcocjson+x
+        for x in {0-7}:
+            lookup = star+mcocjson+str(x)
             sigkey = 'sig{}'+format(siglvl)
             value = _get_sig_value(lookup, sigkey)
             if value is not None:
-                print(lookup, value)
+                print(x, lookup, value)
                 sig_stack.append(value)
             else:
                 break
