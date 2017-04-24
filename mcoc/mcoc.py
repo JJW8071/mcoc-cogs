@@ -378,7 +378,7 @@ class MCOC:
         for x in {0, 1, 2, 3, 4, 5, 6}:
             key = star+mcocjson+'-{}'.format(x)
             col = 'sig{}'+format(siglvl)
-            value = _get_csv_cell('data/mcoc/sig_data.csv', 'star-mcocjson-ability', key, sigkey)
+            value = _get_csv_cell(sig_data['local'], key, sigkey)
             if value is not None:
                 print(x, lookup, value)
                 sig_stack.append(value)
@@ -957,7 +957,7 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _get_csv_cell(filecsv, unique, key, col):
+def _get_csv_cell(filecsv, key, col, unique='unique'):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     for i, row in enumerate(csvfile):
         if i < 4:
