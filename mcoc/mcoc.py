@@ -153,8 +153,8 @@ class MCOC:
 
     @commands.command()
     async def testcsv(self, key = '4-ABOMINATION-0', unique = 'star-mcocjson-ability', filecsv = 'data/mcoc/sig_data.csv'):
-        csvfile = csv.DictReader(open(filecsv, 'r'))
-        for i, row in enumerate(csvfile):
+        # csvfile = csv.DictReader(open(filecsv, 'r'))
+        for i, row in enumerate(sig_csv):
             if i < 4:
                 print(row['mcocjson'], row['star-mcocjson-ability'])
             if row[unique] == key:
