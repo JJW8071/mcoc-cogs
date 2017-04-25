@@ -959,21 +959,22 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _get_csv_cell(filecsv : str, key : str, col : str, unique : str):
+def _get_csv_cell(filecsv, key, col, unique):
     csvfile = csv.DictReader(open(filecsv))
     print('key: '+ key)
     # for i, row in enumerate(csvfile):
     #     if i == 0:
     #         print(row)
     for row in csvfile:
+        if key in row:
+            value = row[col]
+            print(value)
+            return value
         # elif i < 4:
         #     print('row ', i, row[unique], row[col])
-        if row['unique'] == key:
-            print('found: ' + row[col])
-            value = row[unique]
-        else:
-            print(row['unique'])
-            return None
+        # if row['unique'] == key:
+        #     print('found: ' + row[col])
+        #     value = row[unique]
 
 
 
