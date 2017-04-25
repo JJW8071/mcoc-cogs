@@ -379,7 +379,7 @@ class MCOC:
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             print('key: ', key)
             col = 'sig'+str(siglvl)
-            row = _get_csv_cell('data/mcoc/sig_data.csv', key, 'unique')
+            row = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique')
             value = str(row[col])
             print('sig:', value)
             # if value is not '':
