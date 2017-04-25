@@ -378,13 +378,14 @@ class MCOC:
         for x in {0, 1, 2}:
             key = star+mcocjson+'-{}'.format(x)
             col = 'sig'+str(siglvl)
-            row = enumerate(_get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique'))
-            print(row)
+            row = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
+
             value = row['sig99']
-            if value is not '':
-                print(x, key, value)
-                sig_stack.append(value)
-                n = x
+            print(value)
+            # if value is not '':
+            #     print(x, key, value)
+            #     sig_stack.append(value)
+            #     n = x
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
