@@ -379,7 +379,7 @@ class MCOC:
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
             # print('sig:', value)
-            if value == None:
+            if value == 'None':
                 continue
             else:
                 sig_stack.append(value)
