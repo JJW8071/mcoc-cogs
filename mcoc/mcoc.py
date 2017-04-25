@@ -962,9 +962,10 @@ def _truncate_text(self, text, max_length):
 def _get_csv_cell(filecsv : str, key : str, col : str, unique : str):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     print('looking for: '+ key)
-    for i, row in enumerate(csvfile):
-        if i == 0:
-            print(row)
+    # for i, row in enumerate(csvfile):
+    #     if i == 0:
+    #         print(row)
+    for row in csvfile:
         # elif i < 4:
         #     print('row ', i, row[unique], row[col])
         if row[unique] == key:
