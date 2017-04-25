@@ -375,18 +375,15 @@ class MCOC:
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
 
-        for x in {0, 1, 2, 3, 4, 5, 6}:
+        for x in {0, 1, 2}:
             key = star+mcocjson+'-{}'.format(x)
             col = 'sig{}'.format(siglvl)
-            print(key, col)
-            value = _get_csv_cell('data/mcoc/sig_data.csv', key, col)
+            value = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
             if value is not None:
                 print(x, key, value)
                 sig_stack.append(value)
                 n = x
 
-        blob = ', '.join([sig_stack[k] for k in sig_stack])
-        await self.bot.say('DEBUG: Sig values found: '+blob)
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
@@ -967,7 +964,6 @@ def _get_csv_cell(filecsv, key : str, col : str, unique = 'unique'):
         #     print(i, row[unique], row[col])
     for row in csvfile:
         if row[unique] == key:
-            print(row)
             print(row[col])
             return row[col]
         else:
