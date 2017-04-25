@@ -381,6 +381,8 @@ class MCOC:
             print('sig:', value)
             if value is not None:
                 sig_stack.append(value)
+            else:
+                continue
             # if value is not '':
             #     print(x, key, value)
             #     sig_stack.append(value)
@@ -388,8 +390,8 @@ class MCOC:
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
-        raw_sig = '\n'.join('• ' + Champion._sig_header([sigs[k] for k in desc]))
-
+        raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
+        print(raw_sig)
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
