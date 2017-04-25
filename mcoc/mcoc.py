@@ -377,14 +377,11 @@ class MCOC:
         for x in {0, 1, 2, 3, 4, 5, 6, 7}:
             # key = star+mcocjson+'-'+str(x)
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
-            print('key: ', key)
+            # print('key: ', key)
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
-            print('sig:', value)
-            if value is None:
-
-                break
-            else:
+            # print('sig:', value)
+            if value is not None:
                 sig_stack.append(value)
             # if value is not '':
             #     print(x, key, value)
@@ -394,7 +391,7 @@ class MCOC:
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
-        print(sig_stack[k] for k in sig_stack)
+        print([sig_stack[k] for k in sig_stack])
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
