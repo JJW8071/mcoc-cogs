@@ -960,15 +960,16 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _get_csv_cell(filecsv, key, col, unique = 'unique'):
+def _get_csv_cell(filecsv, key : str, col : str, unique = 'unique'):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     # for i, row in enumerate(csvfile):
         # if i < 4:
         #     print(i, row[unique], row[col])
     for row in csvfile:
         if row[unique] == key:
-            print(row[str(col)])
-            return row[str(col)]
+            print(row)
+            print(row[col])
+            return row[col]
         else:
             return None
 
