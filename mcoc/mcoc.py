@@ -378,7 +378,7 @@ class MCOC:
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
-            print('sig:', value)
+            # print('sig:', value)
             if value is not None:
                 sig_stack.append(value)
             else:
@@ -390,7 +390,9 @@ class MCOC:
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
+
         raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
+        print(sig_stack)
         print(raw_sig)
 
         if dbg == 1:
