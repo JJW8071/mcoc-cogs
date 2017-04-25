@@ -379,8 +379,8 @@ class MCOC:
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             print('key: ', key)
             col = 'sig'+str(siglvl)
-            row = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique')
-            value = str(row[col])
+            value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
+
             print('sig:', value)
             # if value is not '':
             #     print(x, key, value)
@@ -960,13 +960,15 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _get_csv_row(filecsv, key, unique):
+def _get_csv_row(filecsv, key, unique, col = 'sig99'):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     for i, row in enumerate(csvfile):
         # if i < 4:
         #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
-            return dict(row)
+            value = str(row[col])
+            return value
+            # return dict(row)
 
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
