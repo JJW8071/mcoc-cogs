@@ -386,7 +386,7 @@ class MCOC:
                 n = x
 
         blob = ', '.join([sig_stack[k] for k in sig_stack])
-        self.bot.say('DEBUG: Sig values found: '+blob)
+        await self.bot.say('DEBUG: Sig values found: '+blob)
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
 
