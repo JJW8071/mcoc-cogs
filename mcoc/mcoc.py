@@ -366,9 +366,8 @@ class MCOC:
         self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
-    async def mcoc_sig(self, champ : ChampConverter, siglvl=99, dbg=0):
+    async def mcoc_sig(self, champ : ChampConverter, siglvl=99, star = 4, dbg=0):
         '''Retrieve Champion Signature Ability from MCOC Files'''
-        star = '4-'
         mcocjson = champ.mcocjson
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
@@ -377,7 +376,7 @@ class MCOC:
 
         for x in {0, 1, 2}:
             # key = star+mcocjson+'-'+str(x)
-            key = '{}-{}-{}'.format(star, mcocjson, str(x))
+            key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             col = 'sig'+str(siglvl)
             value = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
             print('sig:', value)
