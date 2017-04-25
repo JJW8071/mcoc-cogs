@@ -967,7 +967,7 @@ def _get_csv_cell(filecsv, key : str, col : str, unique = 'unique'):
         #     print('row ', i, row[unique], row[col])
         if row[unique] == key:
             print('found: ' + row[col])
-            return row
+            return row[unique]
         else:
             return None
 
