@@ -375,12 +375,10 @@ class MCOC:
         sig_stack = []
 
         for x in {0, 1, 2, 3, 4, 5, 6, 7}:
-            # key = star+mcocjson+'-'+str(x)
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
-            # print('key: ', key)
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
-            # print('sig:', value)
+            print('sig:', value)
             if value is not None:
                 sig_stack.append(value)
             # if value is not '':
@@ -390,8 +388,8 @@ class MCOC:
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
+        raw_sig = '\n'.join('• ' + Champion._sig_header([sigs[k] for k in desc]))
 
-        print([sig_stack[k] for k in sig_stack])
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
@@ -400,6 +398,7 @@ class MCOC:
                 await self.bot.say('DEBUG: Simple: '+ k)
             for k in desc:
                 await self.bot.say('DEBUG: Desc: '+ k)
+                await self.bot.say('DEBUG: ' + raw_sig)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         if title in sigs:
