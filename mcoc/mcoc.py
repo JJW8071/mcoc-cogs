@@ -378,10 +378,10 @@ class MCOC:
         for x in {0, 1, 2}:
             key = star+mcocjson+'-{}'.format(x)
             col = 'sig'+str(siglvl)
-            row = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
+            row = enumerate(_get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique'))
             print(row)
             value = row['sig99']
-            if value is not None:
+            if value is not '':
                 print(x, key, value)
                 sig_stack.append(value)
                 n = x
