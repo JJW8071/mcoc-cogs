@@ -963,8 +963,8 @@ def _truncate_text(self, text, max_length):
 def _get_csv_row(filecsv, key, unique):
     csvfile = csv.DictReader(open(filecsv, 'r'))
     for i, row in enumerate(csvfile):
-        if i < 4:
-            print(row['mcocjson'], row['star-mcocjson-ability'])
+        # if i < 4:
+        #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
             return row
 
