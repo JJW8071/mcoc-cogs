@@ -961,17 +961,19 @@ def _truncate_text(self, text, max_length):
 
 def _get_csv_cell(filecsv : str, key : str, col : str, unique : str):
     csvfile = csv.DictReader(open(filecsv))
-    print('looking for: '+ key)
+    print('rows: '+str(len(csvfile)))
+    print('key: '+ key)
     # for i, row in enumerate(csvfile):
     #     if i == 0:
     #         print(row)
     for row in csvfile:
         # elif i < 4:
         #     print('row ', i, row[unique], row[col])
-        if row[unique] == key:
+        if row['unique'] == key:
             print('found: ' + row[col])
             value = row[unique]
         else:
+            print(row['unique'])
             return None
 
 
