@@ -376,7 +376,7 @@ class MCOC:
         sig_stack = []
 
         for x in {0, 1, 2}:
-            key = star+mcocjson+'-'str(x)
+            key = star+mcocjson+'-'+str(x)
             col = 'sig'+str(siglvl)
             value = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
 
