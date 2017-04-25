@@ -379,10 +379,10 @@ class MCOC:
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
             # print('sig:', value)
-            if value is not None:
-                sig_stack.append(value)
-            else:
+            if value == None:
                 continue
+            else:
+                sig_stack.append(value)
             # if value is not '':
             #     print(x, key, value)
             #     sig_stack.append(value)
