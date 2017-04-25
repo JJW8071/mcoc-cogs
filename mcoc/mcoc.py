@@ -394,7 +394,7 @@ class MCOC:
 
         raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
         print(raw_sig)
-        clean_sig = re.sub(r'\{[0-9]\}','\{\}',raw_sig)
+        clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
         print(clean_sig)
 
         if dbg == 1:
@@ -412,7 +412,7 @@ class MCOC:
         else:
             em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
         em.add_field(name='Signature Level {}'.format(siglvl),
-                value='\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc]))
+                value=clean_sig)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
