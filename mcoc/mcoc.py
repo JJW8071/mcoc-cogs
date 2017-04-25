@@ -378,7 +378,8 @@ class MCOC:
         for x in {0, 1, 2}:
             key = star+mcocjson+'-{}'.format(x)
             col = 'sig'+str(siglvl)
-            value = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
+            row = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
+            print(row)
             if value is not None:
                 print(x, key, value)
                 sig_stack.append(value)
@@ -964,7 +965,7 @@ def _get_csv_cell(filecsv, key : str, col : str, unique = 'unique'):
             print('row ', i, row[unique], row[col])
         if row[unique] == key:
             print(row[col])
-            return row[col]
+            return row
         else:
             return None
 
