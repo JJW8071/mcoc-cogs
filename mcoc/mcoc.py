@@ -390,10 +390,12 @@ class MCOC:
 
         # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
         #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
+        print(sig_stack)
 
         raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
-        print(sig_stack)
         print(raw_sig)
+        clean_sig = re.sub(r'\{[0-9]\}','\{\}')
+        pring(clean_sig)
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
