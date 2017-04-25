@@ -960,7 +960,7 @@ def _truncate_text(self, text, max_length):
     return text
 
 def _get_csv_cell(filecsv : str, key : str, col : str, unique : str):
-    csvfile = csv.DictReader(open(filecsv, 'r'))
+    csvfile = csv.DictReader(open(filecsv))
     print('looking for: '+ key)
     # for i, row in enumerate(csvfile):
     #     if i == 0:
