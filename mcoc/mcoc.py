@@ -377,7 +377,7 @@ class MCOC:
 
         for x in {0, 1, 2}:
             key = star+mcocjson+'-{}'.format(x)
-            col = 'sig{}'.format(siglvl)
+            col = 'sig'+str(siglvl)
             value = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
             if value is not None:
                 print(x, key, value)
