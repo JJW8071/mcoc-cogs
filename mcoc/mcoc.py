@@ -966,6 +966,7 @@ def _get_csv_row(filecsv, key, unique):
         # if i < 4:
         #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
+            print('row:', i, row[unique])
             return row
 
     # reader = csv.DictReader(csvfile, fieldnames)
