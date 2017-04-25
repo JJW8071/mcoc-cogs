@@ -374,11 +374,13 @@ class MCOC:
         sigjson = dataIO.load_json(sig_data)
         sig_stack = []
 
-        for x in {0, 1, 2}:
+        for x in {0, 1}:
             # key = star+mcocjson+'-'+str(x)
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
+            print('key: ', key)
             col = 'sig'+str(siglvl)
-            value = _get_csv_cell('data/mcoc/sig_data.csv', key, col, 'unique')
+            row = _get_csv_cell('data/mcoc/sig_data.csv', key, 'unique')
+            value = str(row[col])
             print('sig:', value)
             # if value is not '':
             #     print(x, key, value)
@@ -958,24 +960,13 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _get_csv_cell(filecsv, key, col, unique):
+def _get_csv_row(filecsv, key, unique):
     csvfile = csv.DictReader(open(filecsv, 'r'))
-    print('key: '+ key)
-    # for i, row in enumerate(csvfile):
-    #     if i == 0:
-    #         print(row)
-    for row in csvfile:
-        if key in row:
-            value = row[col]
-            print('value:', value)
-            return value
-        # elif i < 4:
-        #     print('row ', i, row[unique], row[col])
-        # if row['unique'] == key:
-        #     print('found: ' + row[col])
-        #     value = row[unique]
-
-
+    for i, row in enumerate(csvfile):
+        if i < 4:
+            print(row['mcocjson'], row['star-mcocjson-ability'])
+        if row[unique] == key:
+            return row
 
     # reader = csv.DictReader(csvfile, fieldnames)
     # for row in reader:
