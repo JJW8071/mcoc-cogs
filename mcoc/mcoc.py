@@ -382,7 +382,7 @@ class MCOC:
             if value == 'None':
                 continue
             else:
-                sig_stack.append(value)
+                sig_stack.append(value[1:-1])
             # if value is not '':
             #     print(x, key, value)
             #     sig_stack.append(value)
