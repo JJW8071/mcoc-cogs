@@ -42,10 +42,11 @@ data_files = {
 sig_csv = None
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
-champ_portraits='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
+# champ_portraits='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
 # champ_portraits='data/mcoc/portraits/portrait_'
 # champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
-champ_featured='https://github.com/JasonJW/mcoc-cogs/blob/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_'
+# champ_featured='https://github.com/JasonJW/mcoc-cogs/blob/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_'
+
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
 file_checks_json = 'data/mcoc/file_checks.json'
@@ -858,15 +859,18 @@ class Champion:
 
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
-        return '{}{}.png'.format(champ_avatar, self.mcocui)
-
+        # return '{}{}.png'.format(champ_avatar, self.mcocui)
+        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(champ_portraits, self.mcocui))
+        print(image)
+        return image
+        
     def get_portrait(self):
-        image = str('{}{}.png'.format(champ_portraits, self.mcocui))
+        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(champ_portraits, self.mcocui))
         print(image)
         return image
 
     def get_featured(self):
-        image = str('{}{}.png'.format(champ_featured, self.mcocui))
+        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_{}.png'.format(champ_featured, self.mcocui))
         print(image)
         return image
     #@validate_attr('frogspawn')
