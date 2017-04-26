@@ -379,7 +379,7 @@ class MCOC:
         #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
         terminus = 0
-        terminus = clean_sig.coung('{}')
+        terminus = clean_sig.count('{}')
         print(terminus)
 
         sig_stack = []
