@@ -667,6 +667,7 @@ class MCOC:
                     'ID_UI_STAT_SIGNATURE_LONGDESC_D_AO',
                     'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
             'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
+            'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
         }
 
         if champ.mcocsig == 'CYCLOPS_90S':
