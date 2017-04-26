@@ -318,13 +318,19 @@ class MCOC:
     @commands.command()
     async def portrait(self, champ : ChampConverter):
         '''View Champion Portraits'''
-        await self.bot.upload(champ.get_portrait(), content=champ.bold_name)
+        # await self.bot.upload(champ.get_portrait(), content=champ.bold_name)
+        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_image(url=champ.get_portrait())
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def featured(self, champ : ChampConverter):
         '''View Champion Feature Images'''
-        await self.bot.upload(champ.get_featured(), content=champ.bold_name)
-
+        # await self.bot.upload(champ.get_featured(), content=champ.bold_name)
+        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_image(url=champ.get_featured())
+        await self.bot.say(embed=em)
+        
     @commands.command()
     async def warmap(self, maptype='ai', dbg=1):
         '''Select a Warmap
