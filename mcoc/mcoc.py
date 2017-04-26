@@ -383,7 +383,7 @@ class MCOC:
 
         sig_stack = []
 
-        for x in range(0, terminus-1):
+        for x in range(0, terminus):
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
@@ -397,7 +397,7 @@ class MCOC:
 
         if terminus > 0:
             if len(sig_stack) == terminus:
-                print('Replacing {} with values')
+                print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
                 clean_sig = clean_sig.format(','.join(sig_stack))
 
         if dbg == 1:
