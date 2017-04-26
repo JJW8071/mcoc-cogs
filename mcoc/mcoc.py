@@ -371,9 +371,20 @@ class MCOC:
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         sigjson = dataIO.load_json(sig_data)
+
+        raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
+        print(raw_sig)
+        clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
+        # if sig_stack != '':
+        #     clean_sig = clean_sig.format(','.join(sig_stack))
+        print(clean_sig)
+        terminus = 0
+        terminus = clean_sig.coung('{}')
+        print(terminus)
+
         sig_stack = []
 
-        for x in {0, 1, 2, 3, 4, 5, 6, 7}:
+        for x in range(0, terminus):
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
@@ -392,12 +403,7 @@ class MCOC:
 
         print(sig_stack)
 
-        raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
-        print(raw_sig)
-        clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
-        # if sig_stack != '':
-        #     clean_sig = clean_sig.format(','.join(sig_stack))
-        print(clean_sig)
+
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
