@@ -378,8 +378,8 @@ class MCOC:
         # if sig_stack != '':
         #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
-        terminus = clean_sig.count('\{')
-        print(terminus)
+        terminus = clean_sig.count('}')
+        print('terminus:', terminus)
 
         sig_stack = []
 
