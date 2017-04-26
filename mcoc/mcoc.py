@@ -382,7 +382,7 @@ class MCOC:
             if value == 'None':
                 continue
             else:
-                sig_stack.append(value[1:-1])
+                sig_stack.append(value)
             # if value is not '':
             #     print(x, key, value)
             #     sig_stack.append(value)
@@ -396,7 +396,7 @@ class MCOC:
         print(raw_sig)
         clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
         if sig_stack is not None:
-            clean_sig = clean_sig.format(sig_stack)
+            clean_sig = clean_sig.format(join(sig_stack,', '))
         print(clean_sig)
 
         if dbg == 1:
