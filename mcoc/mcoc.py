@@ -392,7 +392,7 @@ class MCOC:
                 continue
             else:
                 sig_stack.append(value)
-        print('sig_stack: ' lent(sig_stack))
+        print('sig_stack: ', len(sig_stack))
         print(sig_stack)
 
         if terminus > 0:
