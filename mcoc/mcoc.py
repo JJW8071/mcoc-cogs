@@ -860,17 +860,17 @@ class Champion:
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
         # return '{}{}.png'.format(champ_avatar, self.mcocui)
-        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(champ_portraits, self.mcocui))
+        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(self.mcocui))
         print(image)
         return image
-        
+
     def get_portrait(self):
-        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(champ_portraits, self.mcocui))
+        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(self.mcocui))
         print(image)
         return image
 
     def get_featured(self):
-        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_{}.png'.format(champ_featured, self.mcocui))
+        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_{}.png'.format(self.mcocui))
         print(image)
         return image
     #@validate_attr('frogspawn')
