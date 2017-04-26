@@ -383,7 +383,7 @@ class MCOC:
 
         sig_stack = []
 
-        for x in range(0, terminus):
+        for x in range(0, terminus-1):
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
