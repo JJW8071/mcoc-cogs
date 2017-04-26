@@ -20,8 +20,6 @@ from .utils.dataIO import dataIO
 
 
 data_files = {
-    # 'frogspawn': {'remote': 'http://coc.frogspawn.de/champions/js/champ_data.json',
-    #            'local':'data/mcoc/frogspawn_data.json', 'update_delta': 1},
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
@@ -39,7 +37,6 @@ data_files = {
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
 
-sig_csv = None
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
 
@@ -410,6 +407,7 @@ class MCOC:
             for k in desc:
                 await self.bot.say('DEBUG: Desc: '+ k)
                 await self.bot.say('DEBUG: ' + raw_sig)
+                await self.bot.say('DEBUG: ' + ','.join(sig_stack))
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         if title in sigs:
