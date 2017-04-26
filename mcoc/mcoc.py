@@ -378,7 +378,6 @@ class MCOC:
         # if sig_stack != '':
         #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
-        terminus = 0
         terminus = clean_sig.count('{}')-1
         print(terminus)
 
@@ -394,7 +393,7 @@ class MCOC:
             else:
                 sig_stack.append(value)
         print(sig_stack)
-        
+
         if terminus > 0:
             clean_sig = clean_sig.format(','.join(sig_stack))
 
