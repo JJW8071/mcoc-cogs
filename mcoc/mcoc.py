@@ -402,7 +402,7 @@ class MCOC:
                 await self.bot.say('DEBUG: Simple: '+ k)
             for k in desc:
                 await self.bot.say('DEBUG: Desc: '+ k)
-                await self.bot.say('DEBUG: ' + raw_sig)
+                await self.bot.say('DEBUG: ' + Champion.sig_header(sigs[k]))
             await self.bot.say('DEBUG: ' + clean_sig)
             await self.bot.say('DEBUG: ' + ','.join(sig_stack))
 
