@@ -396,8 +396,8 @@ class MCOC:
         raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
         print(raw_sig)
         clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
-        if sig_stack != '':
-            clean_sig = clean_sig.format(','.join(sig_stack))
+        # if sig_stack != '':
+        #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
 
         if dbg == 1:
