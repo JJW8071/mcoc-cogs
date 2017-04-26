@@ -398,11 +398,8 @@ class MCOC:
         if terminus > 0:
             if len(sig_stack) == terminus:
                 print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
-                try:
-                    for value in sig_stack:
-                        clean_sig = clean_sig.format(value)
-                except KeyError:
-                    raise KeyError('I tried replacing '+str(terminus)+'x {} with ' + ','.join(sig_stack))
+                for value in sig_stack:
+                    clean_sig = clean_sig.replace('{}', value, 1)
 
 
         if dbg == 1:
