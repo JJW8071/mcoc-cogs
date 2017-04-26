@@ -378,12 +378,12 @@ class MCOC:
         # if sig_stack != '':
         #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
-        terminus = clean_sig.count('{}')
+        terminus = clean_sig.count('\{')
         print(terminus)
 
         sig_stack = []
 
-        for x in range(0, terminus-1):
+        for x in range(0, terminus):
             key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
             col = 'sig'+str(siglvl)
             value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
@@ -396,7 +396,6 @@ class MCOC:
 
         if terminus > 0:
             clean_sig = clean_sig.format(','.join(sig_stack))
-
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
