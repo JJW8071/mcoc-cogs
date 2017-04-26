@@ -395,13 +395,6 @@ class MCOC:
         print('sig_stack: ', len(sig_stack))
         print(sig_stack)
 
-        if terminus > 0:
-            if len(sig_stack) == terminus:
-                print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
-                for value in sig_stack:
-                    clean_sig = clean_sig.replace('{}', value, 1)
-
-
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
             await self.bot.say('DEBUG: title_lower: '+ title_lower)
@@ -412,6 +405,12 @@ class MCOC:
                 # await self.bot.say('DEBUG: ' + raw_sig)
             await self.bot.say('DEBUG: ' + clean_sig)
             await self.bot.say('DEBUG: ' + ','.join(sig_stack))
+
+        elif terminus > 0:
+            if len(sig_stack) == terminus:
+                print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
+                for value in sig_stack:
+                    clean_sig = clean_sig.replace('{}', value, 1)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         if title in sigs:
