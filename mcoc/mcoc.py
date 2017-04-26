@@ -392,10 +392,12 @@ class MCOC:
                 continue
             else:
                 sig_stack.append(value)
+        print('sig_stack: ' lent(sig_stack))
         print(sig_stack)
 
         if terminus > 0:
-            clean_sig = clean_sig.format(','.join(sig_stack))
+            if len(sig_stack) = terminus:
+                clean_sig = clean_sig.format(','.join(sig_stack))
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
