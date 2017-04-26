@@ -379,7 +379,7 @@ class MCOC:
         #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
         terminus = 0
-        terminus = clean_sig.count('{}')
+        terminus = clean_sig.count('{}')-1
         print(terminus)
 
         sig_stack = []
@@ -393,16 +393,10 @@ class MCOC:
                 continue
             else:
                 sig_stack.append(value)
-            # if value is not '':
-            #     print(x, key, value)
-            #     sig_stack.append(value)
-            #     n = x
-
-        # if star+mcocjson+'-0' in sigjson['star-mcocjson-ability']:
-        #     self.bot.say('DEBUG: Eureaka! We\'ve done it')
-
         print(sig_stack)
-
+        
+        if terminus > 0:
+            clean_sig = clean_sig.format(','.join(sig_stack))
 
 
         if dbg == 1:
