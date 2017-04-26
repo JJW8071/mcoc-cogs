@@ -45,7 +45,7 @@ prestige_data = 'data/mcoc/prestige_data.json'
 champ_portraits='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
 # champ_portraits='data/mcoc/portraits/portrait_'
 # champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
-champ_featured='https://github.com/JasonJW/mcoc-cogs/tree/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_'
+champ_featured='https://github.com/JasonJW/mcoc-cogs/blob/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_'
 lolmap_path='data/mcoc/maps/lolmap.png'
 champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
 file_checks_json = 'data/mcoc/file_checks.json'
@@ -330,7 +330,7 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
-        
+
     @commands.command()
     async def warmap(self, maptype='ai', dbg=1):
         '''Select a Warmap
@@ -861,11 +861,14 @@ class Champion:
         return '{}{}.png'.format(champ_avatar, self.mcocui)
 
     def get_portrait(self):
-        return '{}{}.png'.format(champ_portraits, self.mcocui)
+        image = str('{}{}.png'.format(champ_portraits, self.mcocui))
+        print(image)
+        return image
 
     def get_featured(self):
-        return '{}{}.png'.format(champ_featured, self.mcocui)
-
+        image = str('{}{}.png'.format(champ_featured, self.mcocui))
+        print(image)
+        return image
     #@validate_attr('frogspawn')
     def get_bio(self):
         #return self.frogspawn_data['bio']
