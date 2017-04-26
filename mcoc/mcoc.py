@@ -393,12 +393,12 @@ class MCOC:
             else:
                 sig_stack.append(value)
         print('sig_stack: ', len(sig_stack))
-        print(sig_stack)
+        # print(sig_stack)
 
         if terminus > 0:
             if len(sig_stack) == terminus:
                 print('Replacing {} with values')
-                clean_sig = clean_sig.format(','.join(sig_stack))
+                clean_sig = clean_sig.format(sig_stack)
 
         if dbg == 1:
             await self.bot.say('DEBUG: Title: '+ title)
