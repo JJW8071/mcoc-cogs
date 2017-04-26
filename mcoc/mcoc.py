@@ -398,8 +398,7 @@ class MCOC:
         if terminus > 0:
             if len(sig_stack) == terminus:
                 print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
-                try:
-                    clean_sig = clean_sig.format(join(sig_stack))
+                clean_sig = clean_sig.format(join(sig_stack))
 
 
         if dbg == 1:
