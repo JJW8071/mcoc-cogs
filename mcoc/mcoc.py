@@ -42,13 +42,9 @@ data_files = {
 sig_csv = None
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
-# champ_portraits='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
-# champ_portraits='data/mcoc/portraits/portrait_'
-# champ_featured='data/mcoc/uigacha/featured/GachaChasePrize_256x256_'
-# champ_featured='https://github.com/JasonJW/mcoc-cogs/blob/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_'
 
 lolmap_path='data/mcoc/maps/lolmap.png'
-champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
+# champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
 file_checks_json = 'data/mcoc/file_checks.json'
 
 ###### KEYS for MCOC JSON Data Extraction
@@ -319,15 +315,13 @@ class MCOC:
     @commands.command()
     async def portrait(self, champ : ChampConverter):
         '''View Champion Portraits'''
-        # await self.bot.upload(champ.get_portrait(), content=champ.bold_name)
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
-        em.set_image(url=champ.get_portrait())
+        em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     @commands.command()
     async def featured(self, champ : ChampConverter):
         '''View Champion Feature Images'''
-        # await self.bot.upload(champ.get_featured(), content=champ.bold_name)
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
@@ -364,7 +358,6 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
-        #em.set_thumbnail(url=champ.get_portrait())
         await self.bot.say(embed=em)
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
@@ -860,11 +853,6 @@ class Champion:
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
         # return '{}{}.png'.format(champ_avatar, self.mcocui)
-        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(self.mcocui))
-        print(image)
-        return image
-
-    def get_portrait(self):
         image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(self.mcocui))
         print(image)
         return image
