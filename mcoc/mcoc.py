@@ -372,7 +372,7 @@ class MCOC:
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         sigjson = dataIO.load_json(sig_data)
 
-        raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
+        raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc.sort()])
         print(raw_sig)
         clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
         # if sig_stack != '':
