@@ -656,7 +656,7 @@ class MCOC:
         elif preamble + '_SIMPLE' in sigs:
             simple.append(preamble + '_SIMPLE')
         else:
-            raise KeyError('Signature SIMPLE cannot be found')
+            raise KeyError('Signature SIMPLE cannot be found with: ' + preamble+'_SIMPLE')
 
         champ_exceptions = {
             #'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
@@ -677,6 +677,8 @@ class MCOC:
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
             title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
+        elif champ.mcocsig == 'IRONMAN':
+            preamble = 'ID_UI_STAT_SIGNATURE_IRONMAN'
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
@@ -700,8 +702,8 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
-        if champ.mcocsig == 'IRONMAN_SUPERIOR':
-            desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
+        # if champ.mcocsig == 'IRONMAN_SUPERIOR':
+        #     desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
         print(desc)
         return title, title_lower, simple, desc
 
