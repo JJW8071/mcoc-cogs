@@ -672,13 +672,13 @@ class MCOC:
             'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
         }
+        if champ.mcocsig == 'IRONMAN_SUPERIOR':
+            preamble = 'ID_UI_STAT_SIGNATURE_IRONMAN'
 
         if champ.mcocsig == 'CYCLOPS_90S':
             title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
             title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
-        elif champ.mcocsig == 'IRONMAN':
-            preamble = 'ID_UI_STAT_SIGNATURE_IRONMAN'
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
