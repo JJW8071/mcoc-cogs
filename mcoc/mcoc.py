@@ -365,16 +365,17 @@ class MCOC:
         self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
-    async def mcoc_sig(self, champ : ChampConverter, siglvl=99, star = 4, dbg=0):
+    async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
         '''Retrieve Champion Signature Ability from MCOC Files'''
         mcocjson = champ.mcocjson
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
-        sigjson = dataIO.load_json(sig_data)
+        #sigjson = dataIO.load_json(sig_data)
 
         raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
         print(raw_sig)
-        clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
+        clean_sig = raw_sig
+        #clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
         # if sig_stack != '':
         #     clean_sig = clean_sig.format(','.join(sig_stack))
         print(clean_sig)
@@ -384,27 +385,30 @@ class MCOC:
         sig_stack = []
 
         for x in range(0, terminus):
-            key = '{}-{}-{}'.format(str(star), mcocjson, str(x))
+            key = '{}-{}-{}'.format(star, mcocjson, x)
             col = 'sig'+str(siglvl)
-            value = str(_get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col))
+            value = _get_csv_row('data/mcoc/sig_data.csv', key, 'star-mcocjson-ability', col)
+            #value = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col)
             # print('sig:', value)
-            if value == 'None':
+            if value is None:
                 continue
             else:
                 sig_stack.append(value)
         print('sig_stack: ', len(sig_stack))
         print(sig_stack)
 
-        if dbg == 1:
-            await self.bot.say('DEBUG: Title: '+ title)
-            await self.bot.say('DEBUG: title_lower: '+ title_lower)
+        if dbg:
+            ret = ['** DEBUG **']
+            ret.append('Title: '+ title)
+            ret.append('title_lower: '+ title_lower)
             for k in simple:
-                await self.bot.say('DEBUG: Simple: '+ k)
+                ret.append('Simple: '+ k)
             for k in desc:
-                await self.bot.say('DEBUG: Desc: '+ k)
-                await self.bot.say('DEBUG: ' + Champion._sig_header(sigs[k]))
-            await self.bot.say('DEBUG: ' + clean_sig)
-            await self.bot.say('DEBUG: ' + ','.join(sig_stack))
+                ret.append('Desc: '+ k)
+                ret.append('    ' + Champion._sig_header(sigs[k]))
+            ret.append('    ' + clean_sig)
+            ret.append('    ' + ','.join(sig_stack))
+            await self.bot.say('```{}```'.format('\n'.join(ret)))
 
         elif terminus > 0:
             if len(sig_stack) == terminus:
@@ -609,15 +613,16 @@ class MCOC:
         preamble = 'undefined'
         title = 'undefined'
         title_lower = 'undefined'
+        print(mcocsig)
         simple = []
         desc = []
 
         if mcocsig == 'COMICULTRON':
-            mcocsig = 'ULTRON'
+            mcocsig = 'DRONE_TECH'
         elif mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
 
-        titles={'ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+        titles=('ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
@@ -625,7 +630,7 @@ class MCOC:
             'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
-            }
+            )
 
         for x in titles:
             if x in sigs:
@@ -633,21 +638,24 @@ class MCOC:
 
         if title is 'undefined':
             raise KeyError('DEBUG - title not found')
-        elif title +'_LOWER' in sigs:
-            title_lower = title+'_LOWER'
+        elif title + '_LOWER' in sigs:
+            title_lower = title + '_LOWER'
 
-        preambles ={'ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
+        if champ.mcocsig == 'COMICULTRON':
+            mcocsig = champ.mcocsig  # re-init for Ultron Classic
+
+        preambles =('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig)}
+            'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
+            )
 
         for x in preambles:
-            if x+'_SIMPLE' in sigs:
+            if x + '_SIMPLE' in sigs:
                 preamble = x
                 break
-
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
@@ -656,14 +664,18 @@ class MCOC:
         elif preamble + '_SIMPLE' in sigs:
             simple.append(preamble + '_SIMPLE')
         else:
-            raise KeyError('Signature SIMPLE cannot be found with: ' + preamble+'_SIMPLE')
 
         champ_exceptions = {
             #'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
+            'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
             'LOKI': ['ID_UI_STAT_SIGNATURE_LOKI_LONGDESC'],
             'DEADPOOL': ['ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO'],
             'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
             'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+            #'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+            #'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+            'IRONMAN_SUPERIOR': ['ID_UI_STAT_SIGNATURE_IRONMAN_DESC_AO',
+                    'ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO'],
             'BEAST': ['ID_UI_STAT_SIGNATURE_LONGDESC_AO',
                     'ID_UI_STAT_SIGNATURE_LONGDESC_B_AO',
                     'ID_UI_STAT_SIGNATURE_LONGDESC_C_AO',
@@ -672,14 +684,16 @@ class MCOC:
             'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
         }
-        if champ.mcocsig == 'IRONMAN_SUPERIOR':
-            preamble = 'ID_UI_STAT_SIGNATURE_IRONMAN'
+
+        #if champ.mcocsig == 'IRONMAN_SUPERIOR':
+        #    preamble = 'ID_UI_STAT_SIGNATURE_IRONMAN'
 
         if champ.mcocsig == 'CYCLOPS_90S':
-            title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
-            title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
+            #title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
+            #title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         elif mcocsig in champ_exceptions:
+        #if mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
             for k in ('_DESC_NEW','_DESC_NEW_B'):
@@ -692,7 +706,7 @@ class MCOC:
             desc.append(preamble+'_DESC_MOD')
         else:
             for k in ('_DESC','_DESC_B'):#,'_DESC2','_DESC3'}:
-                if preamble + k+'_UPDATED' in sigs:
+                if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
                     if preamble + k + '_ALT' in sigs:
@@ -702,7 +716,9 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
-        print(desc)
+        #if champ.mcocsig == 'IRONMAN_SUPERIOR':
+            #desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
+        #print(desc)
         return title, title_lower, simple, desc
 
     def get_roster(self, server, role : discord.Role):
@@ -854,14 +870,15 @@ class Champion:
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
         # return '{}{}.png'.format(champ_avatar, self.mcocui)
-        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(self.mcocui))
-        print(image)
+        image = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_{}.png'.format(self.mcocui)
+        #print(image)
         return image
 
     def get_featured(self):
-        image = str('https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_{}.png'.format(self.mcocui))
-        print(image)
+        image = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/uigacha/featured/GachaChasePrize_256x256_{}.png'.format(self.mcocui)
+        #print(image)
         return image
+
     #@validate_attr('frogspawn')
     def get_bio(self):
         #return self.frogspawn_data['bio']
@@ -982,7 +999,7 @@ def _get_csv_row(filecsv, key, unique, col = 'sig99'):
         # if i < 4:
         #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
-            value = str(row[col])
+            value = row[col]
             return value
             # return dict(row)
 
