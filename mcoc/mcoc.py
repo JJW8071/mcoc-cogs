@@ -664,6 +664,7 @@ class MCOC:
         elif preamble + '_SIMPLE' in sigs:
             simple.append(preamble + '_SIMPLE')
         else:
+            raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
 
         champ_exceptions = {
             #'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
