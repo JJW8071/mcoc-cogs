@@ -373,18 +373,18 @@ class MCOC:
         #sigjson = dataIO.load_json(sig_data)
 
         raw_sig = '\n'.join(['• ' + Champion._sig_header(sigs[k]) for k in desc])
-        print(raw_sig)
-        clean_sig = raw_sig
-        #clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
+        #print(raw_sig)
+        #clean_sig = raw_sig
+        clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
         # if sig_stack != '':
         #     clean_sig = clean_sig.format(','.join(sig_stack))
-        print(clean_sig)
+        #print(clean_sig)
         terminus = clean_sig.count('}')
         print('terminus:', terminus)
 
         sig_stack = []
 
-        for x in range(0, terminus):
+        for x in range(terminus):
             key = '{}-{}-{}'.format(star, mcocjson, x)
             col = 'sig'+str(siglvl)
             value = _get_csv_row('data/mcoc/sig_data.csv', key, 'star-mcocjson-ability', col)
@@ -394,8 +394,7 @@ class MCOC:
                 continue
             else:
                 sig_stack.append(value)
-        print('sig_stack: ', len(sig_stack))
-        print(sig_stack)
+        print('sig_stack: ', len(sig_stack), sig_stack)
 
         if dbg:
             ret = ['** DEBUG **']
@@ -410,11 +409,12 @@ class MCOC:
             ret.append('    ' + ','.join(sig_stack))
             await self.bot.say('```{}```'.format('\n'.join(ret)))
 
-        elif terminus > 0:
-            if len(sig_stack) == terminus:
-                print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
-                for value in sig_stack:
-                    clean_sig = clean_sig.replace('{}', value, 1)
+        #elif terminus > 0:
+        if len(sig_stack) == terminus:
+            clean_sig = clean_sig.format(*sig_stack)
+            #print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
+            #for value in sig_stack:
+                #clean_sig = clean_sig.replace('{}', value, 1)
 
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         if title in sigs:
@@ -613,7 +613,7 @@ class MCOC:
         preamble = 'undefined'
         title = 'undefined'
         title_lower = 'undefined'
-        print(mcocsig)
+        #print(mcocsig)
         simple = []
         desc = []
 
@@ -622,7 +622,7 @@ class MCOC:
         elif mcocsig == 'CYCLOPS_90S':
             mcocsig = 'CYCLOPS'
 
-        titles=('ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+        titles = ('ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
@@ -644,7 +644,7 @@ class MCOC:
         if champ.mcocsig == 'COMICULTRON':
             mcocsig = champ.mcocsig  # re-init for Ultron Classic
 
-        preambles =('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
+        preambles = ('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
@@ -717,8 +717,6 @@ class MCOC:
                     else:
                         desc.append(preamble + k)
 
-        #if champ.mcocsig == 'IRONMAN_SUPERIOR':
-            #desc.append('ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO')
         #print(desc)
         return title, title_lower, simple, desc
 
