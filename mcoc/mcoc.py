@@ -136,7 +136,7 @@ class MCOC:
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
-        # self.verify_cache_remote_files(verbose=True)
+        self.verify_cache_remote_files(verbose=True)
         self._init()
 
     def _init(self):
@@ -286,11 +286,12 @@ class MCOC:
             #print(check_marker, last_check, refresh_remote_check, local_dt)
             if refresh_remote_check:
                 response = requests.get(remote)
-                remote_dt = datetime.strptime(response.headers['Last-Modified'], strf_remote)
-                remote_check = now
-                if remote_dt < local_dt:
-                    # Remote file is older, so no need to transfer
-                    response = None
+                if 'Last-Modified' in response.headers:
+                    remote_dt = datetime.strptime(response.headers['Last-Modified'], strf_remote)
+                    remote_check = now
+                    if remote_dt < local_dt:
+                        # Remote file is older, so no need to transfer
+                        response = None
         else:
             response = requests.get(remote)
         if response:
@@ -387,8 +388,8 @@ class MCOC:
         for x in range(terminus):
             key = '{}-{}-{}'.format(star, mcocjson, x)
             col = 'sig'+str(siglvl)
-            value = _get_csv_row('data/mcoc/sig_data.csv', key, 'star-mcocjson-ability', col)
-            #value = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col)
+            #value = _get_csv_row('data/mcoc/sig_data.csv', key, 'star-mcocjson-ability', col)
+            value = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col)
             # print('sig:', value)
             if value is None:
                 continue
