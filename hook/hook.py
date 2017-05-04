@@ -33,19 +33,7 @@ class Hook:
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
-        await self.bot.say(embed=em)
-
-    @commands.command(pass_context=True, no_pm=True)
-    async def max(self,ctx, *, user : discord.Member=None):
-        """Displays a user profile."""
-        if user is None:
-            user = ctx.message.author
-        # creates user if doesn't exist
-        info = self.get_user_info(user.id)
-        em = discord.Embed(title="User Profile", description=user.name)
-        if info['max5']:
-            em.add_field(name='Prestige', value=info['prestige'])
-            em.add_field(name='Max Champs', value='\n'.join(info['top5']))
+            em.add_field(name='Max Champs', value='\n'.join(info['max5']))
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
