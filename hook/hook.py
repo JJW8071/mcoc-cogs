@@ -58,10 +58,10 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def teamset(self, ctx, user : discord.Member=None, *args)
+    async def teamset(self, ctx, *args)
         '''Set AQ, AW Offense or AW Defense'''
-        if user is None:
-            user = ctx.message.author
+        # if user is None:
+        user = ctx.message.author
         info = self.get_user_info(user.id)
         aq = False
         awo = False
