@@ -36,6 +36,22 @@ class Hook:
             em.add_field(name='Max Champs', value='\n'.join(info['max5']))
         await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True, no_pm=True)
+    async def team(self,ctx, *, user : discord.Member=None):
+        """Displays a user profile."""
+        if user is None:
+            user = ctx.message.author
+        # creates user if doesn't exist
+        info = self.get_user_info(user.id)
+        em = discord.Embed(title="User Profile", description=user.name)
+        if info['aq']:
+            em.add_field(name='AQ Champs', value='\n'.join(info['aq']))
+        if info['awo']:
+            em.add_field(name='AWO Champs', value='\n'.join(info['awo']))
+        if info['awd']:
+            em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
+        await self.bot.say(embed=em)
+
     @commands.command(pass_context=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         server = ctx.message.server
