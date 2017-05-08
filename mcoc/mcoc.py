@@ -371,12 +371,12 @@ class MCOC:
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight_csv']['local']):
         mattkraftid = champ.mattkraftid
         key = '{}-{}-{}'.format(star, mattkraftid, rank)
-        hp = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'health')
-        attack = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'attack')
-        critical = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'critical')
-        critdamage = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'critdamage')
-        armor = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'armor')
-        blockprof = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'blockprof')
+        hp = _get_csv_row(dataset, key, 'unique', 'health')
+        attack = _get_csv_row(dataset, key, 'unique', 'attack')
+        critical = _get_csv_row(dataset, key, 'unique', 'critical')
+        critdamage = _get_csv_row(dataset, key, 'unique', 'critdamage')
+        armor = _get_csv_row(dataset, key, 'unique', 'armor')
+        blockprof = _get_csv_row(dataset, key, 'unique', 'blockprof')
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name='Health',value=hp)
         em.add_field(name='Attack',value=attack)
