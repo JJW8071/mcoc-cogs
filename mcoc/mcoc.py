@@ -1019,12 +1019,16 @@ def _truncate_text(self, text, max_length):
 
 def _get_csv_row(filecsv, key, unique, col = 'sig99'):
     csvfile = csv.DictReader(open(filecsv, 'r'))
+    found = False
     for i, row in enumerate(csvfile):
         # if i < 4:
         #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
             value = row[col]
+            found = True
             return value
+    if found is False:
+        return None
             # return dict(row)
 
     # reader = csv.DictReader(csvfile, fieldnames)
