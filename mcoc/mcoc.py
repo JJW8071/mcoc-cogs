@@ -22,6 +22,8 @@ from .utils.dataIO import dataIO
 data_files = {
     'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
+    'spotlight_csv':{'remote': 'https://docs.google.com/spreadsheets/d/167XJZajHzuVBQ2MGV_tdbAK1B029yASj8NTyvMyxggI/pub?gid=0&single=true&output=csv',
+                'local': 'data/mcoc/spotlight_csv.csv', 'update_delta': 1},
     'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
                 'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
     # # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
@@ -364,6 +366,28 @@ class MCOC:
     async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
+
+    @commands.command()
+    async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight_csv']['local']):
+        mattkraftid = champ.mattkraftid
+        key = '{}-{}-{}'.format(star, mattkraftid, rank)
+        hp = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'health')
+        attack = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'attack')
+        critical = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'critical')
+        critdamage = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'critdamage')
+        armor = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'armor')
+        blockprof = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', 'blockprof')
+        em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        em.add_field(name='Health',value=hp)
+        em.add_field(name='Attack',value=attack)
+        em.add_field(name='Crit Rate',value=critical)
+        em.add_field(name='Crit Damage',value=critdamage)
+        em.add_field(name='Armor',value=armor)
+        em.add_field(name='Block Proficiency',value=blockprof)
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
+
+
 
     @commands.command()
     async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
