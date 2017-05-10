@@ -381,7 +381,7 @@ class MCOC:
         em.add_field(name='Crit Damage',value=critdamage)
         em.add_field(name='Armor',value=armor)
         em.add_field(name='Block Proficiency',value=blockprof)
-        em.add_field(name='Infopage',value='{}'.format(champ.infopage))
+        em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
