@@ -1023,9 +1023,8 @@ def _get_csv_row(filecsv, key, unique, col = 'sig99'):
         #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
             value = row[col]
-            break
             # return value
-    return "None"
+    return value
             # return dict(row)
 
     # reader = csv.DictReader(csvfile, fieldnames)
