@@ -23,12 +23,8 @@ from .utils.dataIO import dataIO
 data_files = {
     'spotlight': {'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/spotlight_data.csv', 'update_delta': 1},
-    #'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
-                #'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
     'crossreference': {'remote': 'https://docs.google.com/spreadsheets/d/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/pub?gid=0&single=true&output=csv',
-                'local': 'data/mcoc/crossreference.csv', 'update_delta': 0},
-    # # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
-    # #             'local': 'data/mcoc/signatures.json', 'update_delta': 1},
+                'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
     'sig_data':{'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=799981914&single=true&output=csv',
                 'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
@@ -200,22 +196,6 @@ class MCOC:
         em.add_field(name='Expected Chance', value='{}%'.format(compound))
         await self.bot.say(embed=em)
 
-    @commands.command(pass_context=True)
-    async def list_members(self, ctx, role: discord.Role, use_alias=True):
-        server = ctx.message.server
-        members = []
-        for member in server.members:
-            if role in member.roles:
-                members.append(member)
-        members.sort(key=attrgetter('name'))
-        if use_alias:
-            ret = '\n'.join([m.display_name for m in members])
-        else:
-            ret = '\n'.join([m.name for m in members])
-        em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
-                description=ret, color=role.color)
-        await self.bot.say(embed=em)
-
     @commands.command()
     async def mcoc_update(self, fname, force=False):
         if len(fname) > 3:
@@ -343,7 +323,7 @@ class MCOC:
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(aliases=['cs',])
+    @commands.command(aliases=['cacheg',])
     async def cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')

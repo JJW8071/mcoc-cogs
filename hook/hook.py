@@ -41,6 +41,22 @@ class Hook:
             em.add_field(name='Max Champs', value='\n'.join(info['max5']))
         await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True)
+    async def list_members(self, ctx, role: discord.Role, use_alias=True):
+        server = ctx.message.server
+        members = []
+        for member in server.members:
+            if role in member.roles:
+                members.append(member)
+        members.sort(key=attrgetter('name'))
+        if use_alias:
+            ret = '\n'.join([m.display_name for m in members])
+        else:
+            ret = '\n'.join([m.name for m in members])
+        em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
+                description=ret, color=role.color)
+        await self.bot.say(embed=em)
+
     @commands.command(pass_context=True, no_pm=True)
     async def team(self,ctx, *, user : discord.Member=None):
         """Displays a user profile."""
