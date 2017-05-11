@@ -128,9 +128,6 @@ class MCOC:
             'marvelsynergy': (
                 'Marvel Synergy Builder',
                 '<http://www.marvelsynergy.com/team-builder>'),
-            # 'frogspawn': (
-            #     'Champion Signature Abilities',
-            #     '<http://coc.frogspawn.de/champions>'),
             'alsciende':(
                 'Alsciende Mastery Tool',
                 '<https://alsciende.github.io/masteries/v10.0.1/#>'),
@@ -428,6 +425,29 @@ class MCOC:
     async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
+
+    @commands.command()
+    async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight_csv']['local']):
+        mattkraftid = champ.mattkraftid
+        key = '{}-{}-{}'.format(star, mattkraftid, rank)
+        hp = _get_csv_row(dataset, key, 'unique', 'health')
+        attack = _get_csv_row(dataset, key, 'unique', 'attack')
+        critical = _get_csv_row(dataset, key, 'unique', 'critical')
+        critdamage = _get_csv_row(dataset, key, 'unique', 'critdamage')
+        armor = _get_csv_row(dataset, key, 'unique', 'armor')
+        blockprof = _get_csv_row(dataset, key, 'unique', 'blockprof')
+        em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        em.add_field(name='Health',value=hp)
+        em.add_field(name='Attack',value=attack)
+        em.add_field(name='Crit Rate',value=critical)
+        em.add_field(name='Crit Damage',value=critdamage)
+        em.add_field(name='Armor',value=armor)
+        em.add_field(name='Block Proficiency',value=blockprof)
+        em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
+
+
 
     @commands.command()
     async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
@@ -1044,12 +1064,14 @@ def _truncate_text(self, text, max_length):
 
 def _get_csv_row(filecsv, key, unique, col = 'sig99'):
     csvfile = csv.DictReader(open(filecsv, 'r'))
+    value = 'None'
     for i, row in enumerate(csvfile):
         # if i < 4:
         #     print(row['mcocjson'], row[unique])
         if row[unique] == key:
             value = row[col]
-            return value
+            # return value
+    return value
             # return dict(row)
 
     # reader = csv.DictReader(csvfile, fieldnames)
