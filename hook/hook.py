@@ -21,6 +21,11 @@ class Hook:
         self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
+        try:
+            self.mcocCog = self.bot.get_cog('MCOC')
+        except KeyError:
+            raise KeyError('The MCOC Cog is not installed.')
+
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -33,7 +38,51 @@ class Hook:
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
+            em.add_field(name='Max Champs', value='\n'.join(info['max5']))
         await self.bot.say(embed=em)
+
+    @commands.command(pass_context=True, no_pm=True)
+    async def team(self,ctx, *, user : discord.Member=None):
+        """Displays a user profile."""
+        if user is None:
+            user = ctx.message.author
+        # creates user if doesn't exist
+        info = self.get_user_info(user.id)
+        em = discord.Embed(title="User Profile", description=user.name)
+        if info['aq']:
+            em.add_field(name='AQ Champs', value='\n'.join(info['aq']))
+        if info['awo']:
+            em.add_field(name='AWO Champs', value='\n'.join(info['awo']))
+        if info['awd']:
+            em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
+        await self.bot.say(embed=em)
+
+    # @commands.command(pass_context=True, no_pm=True)
+    # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
+    #     '''Set AQ, AW Offense or AW Defense'''
+    #     # if user is None:
+    #     #     user = ctx.message.author
+    #     user = ctx.message.author
+    #     info = self.get_user_info(user.id)
+    #     aq = False
+    #     awo = False
+    #     awd = False
+    #     champs = []
+    #     for arg in args:
+    #         if arg == 'aq':
+    #             aq = True
+    #         elif arg == 'awo':
+    #             awo = True
+    #         elif arg == 'awd':
+    #             awd = True
+    #         champ = self.mcocCog._resolve_alias(arg)
+    #         champs.append(str(champ.hookid))
+    #     if aq is True:
+    #         info['aq'] = champs
+    #     elif awo is True:
+    #         info['awo'] = champs
+    #     elif awd is True:
+    #         info['awd'] = champs
 
     @commands.command(pass_context=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
