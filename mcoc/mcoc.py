@@ -408,22 +408,18 @@ class MCOC:
 
     @commands.command()
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
-        mattkraftid = champ.mattkraftid
-        key = '{}-{}-{}'.format(star, mattkraftid, rank)
-        hp = _get_csv_row(dataset, key, 'unique', 'health')
-        attack = _get_csv_row(dataset, key, 'unique', 'attack')
-        critical = _get_csv_row(dataset, key, 'unique', 'critical')
-        critdamage = _get_csv_row(dataset, key, 'unique', 'critdamage')
-        armor = _get_csv_row(dataset, key, 'unique', 'armor')
-        blockprof = _get_csv_row(dataset, key, 'unique', 'blockprof')
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.add_field(name='Health',value=hp)
-        em.add_field(name='Attack',value=attack)
-        em.add_field(name='Crit Rate',value=critical)
-        em.add_field(name='Crit Damage',value=critdamage)
-        em.add_field(name='Armor',value=armor)
-        em.add_field(name='Block Proficiency',value=blockprof)
-        em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
+        key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+        data = get_csv_row(dataset, 'unique', key, default='x')
+        title = 'Base Attributes for {}* {} at r{}'.format(star, champ.full_name, rank)
+        em = discord.Embed(color=champ.class_color, title=title)
+        em.add_field(name='Health',value=data['health'])
+        em.add_field(name='Attack',value=data['attack'])
+        em.add_field(name='Crit Rate',value=data['critical'])
+        em.add_field(name='Crit Damage',value=data['critdamage'])
+        em.add_field(name='Armor',value=data['armor'])
+        em.add_field(name='Block Proficiency',value=data['blockprof'])
+        if champ.infopage:
+            em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -452,8 +448,7 @@ class MCOC:
         for x in range(terminus):
             key = '{}-{}-{}'.format(star, mcocjson, x)
             col = 'sig'+str(siglvl)
-            #value = _get_csv_row('data/mcoc/sig_data.csv', key, 'star-mcocjson-ability', col)
-            value = _get_csv_row('data/mcoc/sig_data.csv', key, 'unique', col)
+            value = get_csv_row('data/mcoc/sig_data.csv', 'unique', key)[col]
             # print('sig:', value)
             if value is None:
                 continue
@@ -1042,23 +1037,15 @@ def _truncate_text(self, text, max_length):
         return text[:max_length-3] + "..."
     return text
 
-def _get_csv_row(filecsv, key, unique, col = 'sig99'):
-    csvfile = csv.DictReader(open(filecsv, 'r'))
-    value = 'None'
-    for i, row in enumerate(csvfile):
-        # if i < 4:
-        #     print(row['mcocjson'], row[unique])
-        if row[unique] == key:
-            value = row[col]
-            # return value
-    return value
-            # return dict(row)
-
-    # reader = csv.DictReader(csvfile, fieldnames)
-    # for row in reader:
-    #     json.dump(row, jsonfile)
-    #     jsonfile.write('\n')
-    # dataIO.save_json(jsonfile)
+def get_csv_row(filecsv, column, match_val, default=None):
+    csvfile = load_csv(filecsv)
+    for row in csvfile:
+        if row[column] == match_val:
+            if default is not None: 
+                for k, v in row.items():
+                    if v == '':
+                        row[k] = default
+            return row
 
 def load_csv(filename):
     fp = open(filename)
