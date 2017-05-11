@@ -10,6 +10,7 @@ import urllib
 import requests
 import csv
 import json
+from gsheets import Sheets
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
@@ -20,10 +21,12 @@ from .utils.dataIO import dataIO
 
 
 data_files = {
-    'spotlight': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/spotlight_data.json', 'update_delta': 1},
-    'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
-                'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
+    'spotlight': {'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=0&single=true&output=csv',
+                'local': 'data/mcoc/spotlight_data.csv', 'update_delta': 1},
+    #'crossreference': {'remote': 'https://spreadsheets.google.com/feeds/list/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/1/public/values?alt=json',
+                #'local': 'data/mcoc/crossreference.json', 'update_delta': 1},
+    'crossreference': {'remote': 'https://docs.google.com/spreadsheets/d/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/pub?gid=0&single=true&output=csv',
+                'local': 'data/mcoc/crossreference.csv', 'update_delta': 0},
     # # 'signatures':{'remote':'https://spreadsheets.google.com/feeds/list/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/5/public/values?alt=json',
     # #             'local': 'data/mcoc/signatures.json', 'update_delta': 1},
     'sig_data':{'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=799981914&single=true&output=csv',
@@ -36,6 +39,22 @@ data_files = {
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
+
+gsheet_files = {
+    'signature': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
+            'local': 'data/mcoc/sig_test.csv',
+            'gid': 799981914,},
+            #'payload': 'pub?gid=799981914&single=true&output=csv'},
+    'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
+            'local': 'data/mcoc/spotlight_test.csv',
+            },
+            #'payload': 'pub?gid=0&single=true&output=csv'},
+    'crossreference': {'gkey': '1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk',
+            'local': 'data/mcoc/xref_test.csv', 
+            #'payload': 'export?format=csv'}
+            },
+            #'payload': 'pub?gid=0&single=true&output=csv'}
+}
 
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
@@ -146,9 +165,8 @@ class MCOC:
         # self._prepare_spotlight_data()
         # self._prepare_frogspawn_champ_data()
 
-
-    @commands.command(pass_context=True, name='flat')
-    async def flat(self, ctx, *, m):
+    @commands.command()
+    async def flat(self, *, m):
         '''Convert MCOC Flat Value to Percentge
         Syntax:
         /flat <flatvalue> [challenger rating 90 to 120]
@@ -159,8 +177,8 @@ class MCOC:
         else:
             challenger_rating = 100
         m = ''.join(m)
-        math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]|random|randint|choice'+
-            r'|randrange|True|False|if|and|or|else|is|acos|acosh|asin|asinh' +
+        math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]' +
+            r'|acos|acosh|asin|asinh' +
             r'|atan|atan2|atanh|ceil|copysign|cos|cosh|degrees|e|erf|erfc|exp' +
             r'|expm1|fabs|factorial|floor|fmod|frexp|fsum|gamma|gcd|hypot|inf' +
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
@@ -174,6 +192,16 @@ class MCOC:
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
+    @commands.command(aliases=['compf',])
+    async def compound_frac(self, base: float, exp: int):
+        if base > 1:
+            base = base / 100
+        compound = round((1 - (1 - base)**exp)*100, 2)
+        em = discord.Embed(color=discord.Color.gold(),
+            title="Compounded Fractions",
+            description='{}% compounded {} times'.format(base*100, exp))
+        em.add_field(name='Expected Chance', value='{}%'.format(compound))
+        await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
@@ -199,7 +227,7 @@ class MCOC:
                     fname = key
                     break
         if fname in data_files:
-            self.cache_remote_file(**data_files[fname], force_cache=force, verbose=True)
+            self.cache_remote_file(fname, force_cache=force, verbose=True)
         else:
             await self.bot.say('Valid options for 1st argument are one of (or initial portion of)\n\t'
                     + '\n\t'.join(data_files.keys()))
@@ -258,51 +286,87 @@ class MCOC:
                 file_checks = {}
         else:
             file_checks = {}
-        for key, val in data_files.items():
+        s = requests.Session()
+        for key in data_files.keys():
             if key in file_checks:
                 last_check = datetime(*file_checks.get(key))
             else:
                 last_check = None
-            remote_check = self.cache_remote_file(**val, verbose=verbose, last_check=last_check)
+            remote_check = self.cache_remote_file(key, s, verbose=verbose, 
+                    last_check=last_check)
             if remote_check:
                 file_checks[key] = remote_check.timetuple()[:6]
-            #print(key, remote_check)
         dataIO.save_json(file_checks_json, file_checks)
 
-    def cache_remote_file(self, remote=None, local=None, verbose=False,
-                update_delta=0, last_check=None, force_cache=False):
+    def cache_remote_file(self, key, session=None, verbose=False, last_check=None, 
+                force_cache=False):
+        if session is None:
+            session = requests.Session()
+        dargs = data_files[key]
         strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
         response = None
         remote_check = False
         now = datetime.now()
-        if os.path.exists(local) and not force_cache:
+        if os.path.exists(dargs['local']) and not force_cache:
             check_marker = None
             if last_check:
-                check_marker = now - timedelta(days=update_delta)
+                check_marker = now - timedelta(days=dargs['update_delta'])
                 refresh_remote_check = check_marker > last_check
             else:
                 refresh_remote_check = True
-            local_dt = datetime.fromtimestamp(os.path.getmtime(local))
+            local_dt = datetime.fromtimestamp(os.path.getmtime(dargs['local']))
             #print(check_marker, last_check, refresh_remote_check, local_dt)
             if refresh_remote_check:
-                response = requests.get(remote)
+                response = session.get(dargs['remote'])
                 if 'Last-Modified' in response.headers:
                     remote_dt = datetime.strptime(response.headers['Last-Modified'], strf_remote)
                     remote_check = now
                     if remote_dt < local_dt:
                         # Remote file is older, so no need to transfer
                         response = None
+                #else:
+                    #print('DEBUG: No Last-Modified header ', remote)
+                    #print('DEBUG: Date:  ', response.headers['Date'])
+                    #for k in response.headers:
+                        #print(k)
+                    #print(response.headers.keys())
         else:
-            response = requests.get(remote)
-        if response:
-            print('Caching remote contents to local file: ' + local)
-            fp = open(local, 'wb')
-            for chunk in response.iter_content():
-                fp.write(chunk)
+            response = session.get(dargs['remote'])
+        if response and response.status_code == requests.codes.ok:
+            print('Caching remote contents to local file: ' + dargs['local'])
+            with open(dargs['local'], 'wb') as fp:
+                for chunk in response.iter_content():
+                    fp.write(chunk)
             remote_check = now
+        elif response:
+            err_str = "HTTP error code {} while trying to retrieve {}".format(
+                    response.status_code, key)
+            print(err_str)
         elif verbose and remote_check:
-            print('Local file up-to-date:', local, now)
+            print('Local file up-to-date:', dargs['local'], now)
         return remote_check
+
+    @commands.command(aliases=['cs',])
+    async def cache_gsheets(self):
+        s = requests.Session()
+        #gs = Sheets.from_files('data/mcoc/client_secrets.json')
+        for k, v in gsheet_files.items():
+            #s = gs[v['gkey']]
+            #s.sheets[0].to_csv(v['local'])
+            #payload = {'format': 'csv', 'gid': v.get('gid', 0)}
+            payload = {'output': 'csv', 'single': 'true', 'gid': v.get('gid', 0)}
+            remote = 'https://docs.google.com/spreadsheets/d/{0}/pub'.format(v['gkey'])
+            #remote = 'https://docs.google.com/spreadsheets/d/{0[gkey]}/{0[payload]}'.format(v)
+            #response = s.get(remote)
+            response = s.get(remote, params=payload)
+            if response.status_code == requests.codes.ok:
+                with open(v['local'], 'wb') as fp:
+                    for chunk in response.iter_content():
+                        fp.write(chunk)
+            else:
+                err_str = "HTTP error code {} while trying to retrieve Google Sheet {}".format(
+                        response.statuse_code, k)
+                await self.bot.say(err_str)
 
     @commands.command()
     async def phc(self):
@@ -733,37 +797,22 @@ class MCOC:
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
-        raw_data = dataIO.load_json(data_files['crossreference']['local'])
+        raw_data = load_csv(data_files['crossreference']['local'])
         champs = []
         all_aliases = set()
-        id_index = False
-        for row in raw_data['feed']['entry']:
-            cells = self.split_re.split(row['content']['$t'])
-            if id_index is False:
-                id_index = 0
-                for i in cells:
-                    id_index += 1
-                    if i.startswith('champ:'):
-                        break
-            key_values = {}
+        id_index = raw_data.fieldnames.index('champ')
+        alias_index = raw_data.fieldnames[:id_index]
+        for row in raw_data:
             alias_set = set()
-            for i in range(len(cells)):
-                try:
-                    k, v = cells[i].split(': ')
-                except:
-                    print('DEBUG: ', i, cells[i])
-                    raise
-                key_values[k] = v
-                if i < id_index:
-                    if v != 'n/a':
-                        alias_set.add(v.lower())
+            for col in alias_index:
+                if row[col]:
+                    alias_set.add(row[col].lower())
             if all_aliases.isdisjoint(alias_set):
                 all_aliases.union(alias_set)
             else:
                 raise KeyError("There are aliases that conflict with previous aliases."
-                        + "  First occurance with champ {}.".format(key_values['champ']))
-            #champs.append(Champion(alias_set, **key_values, debug=len(champs)==0))
-            champs.append(Champion(alias_set, **key_values))
+                        + "  First occurance with champ {}.".format(row['champ']))
+            champs.append(Champion(alias_set, **row))
         self.champs = champs
 
     # def _prepare_frogspawn_champ_data(self):
@@ -796,7 +845,7 @@ class MCOC:
 
     def _prepare_prestige_data(self):
         mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
-        raw_data = dataIO.load_json(data_files['spotlight']['local'])
+        raw_data = dataIO.load_json(data_files['prestige']['local'])
         champs = {}
         for row in raw_data['feed']['entry']:
             raw_dict = self._google_json_content_split(row)
@@ -859,7 +908,7 @@ class Champion:
         if debug:
             print(kwargs)
         for key, value in kwargs.items():
-            if value == 'n/a':
+            if not value or value == 'n/a':
                 value = None
             setattr(self, key, value)
         self.full_name = self.champ
@@ -1008,6 +1057,10 @@ def _get_csv_row(filecsv, key, unique, col = 'sig99'):
     #     json.dump(row, jsonfile)
     #     jsonfile.write('\n')
     # dataIO.save_json(jsonfile)
+
+def load_csv(filename):
+    fp = open(filename)
+    return csv.DictReader(fp)    
 
 
 
