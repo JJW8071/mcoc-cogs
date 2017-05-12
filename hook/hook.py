@@ -102,6 +102,7 @@ class Hook:
 
     @commands.command(pass_context=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
+        '''Report Clan Prestige'''
         server = ctx.message.server
         width = 20
         prestige = 0
@@ -110,8 +111,9 @@ class Hook:
         for member in server.members:
             if role in member.roles:
                 champ_data = self.get_user_info(member.id)
-                prestige += champ_data['prestige']
-                cnt += 1
+                if champ_data['prestige'] > 0:
+                    prestige += champ_data['prestige']
+                    cnt += 1
                 if verbose is 1:
                     line_out.append('{:{width}} p = {}'.format(
                         member.name, champ_data['prestige'], width=width))
