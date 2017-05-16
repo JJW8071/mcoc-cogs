@@ -409,7 +409,7 @@ class MCOC:
         self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
-    async def _duel(self, champ : ChampConverter, dataset=data_files['duelist']['local'])
+    async def _duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
         # Will need some logic to search the CSV for the LEAST AVAILABLE champ
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duelkey = '4-{}-1'.format(champ.mattkraftid)
