@@ -414,7 +414,9 @@ class MCOC:
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duelkey = '4-{}-1'.format(champ.mattkraftid)
         data = str(get_csv_row(dataset, 'unique', duelkey, default='x'))
-        await self.bot.say('I found: ' + data)
+        target = data['user']
+        await self.bot.say('I found: ' + target)
+
 
     @commands.command()
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
