@@ -414,7 +414,7 @@ class MCOC:
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duelkey = '4-{}-1'.format(champ.mattkraftid)
         data = str(get_csv_row(dataset, 'unique', duelkey, default='x'))
-        target = data['user']
+        target = data['deliver']
         await self.bot.say('I found: ' + target)
 
 
