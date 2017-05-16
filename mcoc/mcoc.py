@@ -31,7 +31,7 @@ data_files = {
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
-    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?output=csv',
+    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=2031313154&single=true&output=csv',
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 0},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
@@ -1044,7 +1044,7 @@ def load_kabam_json(file):
     data = {}
     for d in raw_data['strings']:
         data[d['k']] = d['v']
-    return data
+        return data
 
 def _truncate_text(self, text, max_length):
     if len(text) > max_length:
