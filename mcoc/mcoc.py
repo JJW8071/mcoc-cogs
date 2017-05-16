@@ -416,8 +416,7 @@ class MCOC:
         for rank in range(5):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-            print(key)
-            data = get_csv_row(dataset, 'unique', key, 'x')
+            data = get_csv_row(dataset, 'unique', key, default='x')
             if data['username']:
                 target = data['username']
                 duels.append('{}: {}\n'.format(rank, target))
@@ -436,7 +435,7 @@ class MCOC:
         em.add_field(name='Crit Damage',value=data['critdamage'])
         em.add_field(name='Armor',value=data['armor'])
         em.add_field(name='Block Proficiency',value=data['blockprof'])
-        if champ.infopage:
+        if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
