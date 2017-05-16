@@ -412,10 +412,15 @@ class MCOC:
     async def _duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
         # Will need some logic to search the CSV for the LEAST AVAILABLE champ
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
-        duelkey = '4-{}-1'.format(champ.mattkraftid)
-        data = str(get_csv_row(dataset, 'unique', duelkey))
-        target = data['deliver']
-        await self.bot.say('I found: ' + target)
+        duels = []
+        for rank in range(5):
+            star = 4
+            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+            print key
+            data = get_csv_row(dataset, 'unique', key)
+            target = data['deliver']
+            duels.append('{}: {}\n'.format(rank, target))
+        print duels
 
 
     @commands.command()
