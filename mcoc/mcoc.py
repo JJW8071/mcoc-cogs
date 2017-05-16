@@ -31,6 +31,8 @@ data_files = {
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
+    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?output=csv',
+                'local': 'data/mcoc/duelist.csv', 'update_delta': 0},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
@@ -46,7 +48,7 @@ gsheet_files = {
             },
             #'payload': 'pub?gid=0&single=true&output=csv'},
     'crossreference': {'gkey': '1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk',
-            'local': 'data/mcoc/xref_test.csv', 
+            'local': 'data/mcoc/xref_test.csv',
             #'payload': 'export?format=csv'}
             },
             #'payload': 'pub?gid=0&single=true&output=csv'}
@@ -269,13 +271,13 @@ class MCOC:
                 last_check = datetime(*file_checks.get(key))
             else:
                 last_check = None
-            remote_check = self.cache_remote_file(key, s, verbose=verbose, 
+            remote_check = self.cache_remote_file(key, s, verbose=verbose,
                     last_check=last_check)
             if remote_check:
                 file_checks[key] = remote_check.timetuple()[:6]
         dataIO.save_json(file_checks_json, file_checks)
 
-    def cache_remote_file(self, key, session=None, verbose=False, last_check=None, 
+    def cache_remote_file(self, key, session=None, verbose=False, last_check=None,
                 force_cache=False):
         if session is None:
             session = requests.Session()
@@ -405,6 +407,14 @@ class MCOC:
     async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
+
+    @commands.command()
+    async def _duel(self, champ : ChampConverter, dataset=data_files['duelist']['local'])
+        # Will need some logic to search the CSV for the LEAST AVAILABLE champ
+        # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
+        duelkey = '4-{}-1'.format(champ.mattkraftid)
+        data = str(get_csv_row(dataset, 'unique', duelkey, default='x'))
+        await self.bot.say('I found: ' + data)
 
     @commands.command()
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
@@ -1041,7 +1051,7 @@ def get_csv_row(filecsv, column, match_val, default=None):
     csvfile = load_csv(filecsv)
     for row in csvfile:
         if row[column] == match_val:
-            if default is not None: 
+            if default is not None:
                 for k, v in row.items():
                     if v == '':
                         row[k] = default
@@ -1049,7 +1059,7 @@ def get_csv_row(filecsv, column, match_val, default=None):
 
 def load_csv(filename):
     fp = open(filename)
-    return csv.DictReader(fp)    
+    return csv.DictReader(fp)
 
 
 
