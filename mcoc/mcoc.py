@@ -419,8 +419,10 @@ class MCOC:
             data = get_csv_row(dataset, 'unique', key, default='x')
             if data is not None:
                 target = data['username']
-                duels.append('{}: {}\n'.format(rank, target))
-                print(target)
+                if target != 'none':
+                    duels.append('{}: {}\n'.format(key, target))
+                    print(target)
+        await self.bot.say('\n'.join(k for k in duels))
 
 
     @commands.command()
