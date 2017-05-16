@@ -418,8 +418,9 @@ class MCOC:
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
             print(key)
             data = get_csv_row(dataset, 'unique', key, 'x')
-            target = data['username']
-            duels.append('{}: {}\n'.format(rank, target))
+            if data['username']:
+                target = data['username']
+                duels.append('{}: {}\n'.format(rank, target))
         print(duels)
 
 
