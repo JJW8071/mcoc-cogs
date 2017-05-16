@@ -415,9 +415,9 @@ class MCOC:
         duels = []
         for rank in range(5):
             star = 4
-            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank, 'x')
+            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
             print(key)
-            data = get_csv_row(dataset, 'unique', key)
+            data = get_csv_row(dataset, 'unique', key, 'x')
             target = data['username']
             duels.append('{}: {}\n'.format(rank, target))
         print(duels)
