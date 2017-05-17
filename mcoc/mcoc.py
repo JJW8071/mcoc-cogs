@@ -437,7 +437,7 @@ class MCOC:
         if len(duels) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
         if len(spars) > 0:
-            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars))
+            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars, inline=False))
         if len(duels) + len(spars) > 0 :
             await self.bot.say(embed=em)
         else:
