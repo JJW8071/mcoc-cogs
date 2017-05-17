@@ -577,6 +577,7 @@ class MCOC:
         em2.add_field(name=specials[0], value=specials[3])
         em2.add_field(name=specials[1], value=specials[4])
         em2.add_field(name=specials[2], value=specials[5])
+        em2.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         await self.bot.say(embed=em2)
 
