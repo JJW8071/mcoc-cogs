@@ -399,6 +399,7 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
+        em.set_footer(text='MCOC Game Files', icon_url='https://corporate.kabam.com/wp-content/uploads/2015/11/KabamLogo_large.png')
         await self.bot.say(embed=em)
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
@@ -459,6 +460,7 @@ class MCOC:
         em.add_field(name='Block Proficiency',value=data['blockprof'])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
+        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url='https://i.imgur.com/QQsT29B.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
