@@ -399,7 +399,7 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='MCOC Game Files', icon_url='https://corporate.kabam.com/wp-content/uploads/2015/11/KabamLogo_large.png')
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
