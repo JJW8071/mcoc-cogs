@@ -409,7 +409,7 @@ class MCOC:
         self.bot.say('DEBUG: key is ' + key)
 
     @commands.command()
-    async def _duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
+    async def duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
         # Will need some logic to search the CSV for the LEAST AVAILABLE champ
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duels = []
@@ -437,7 +437,7 @@ class MCOC:
         if len(duels) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
         if len(spars) > 0:
-            em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
+            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars))
         if len(duels) + len(spars) > 0 :
             await self.bot.say(embed=em)
         else:
