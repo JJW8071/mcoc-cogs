@@ -437,7 +437,7 @@ class MCOC:
         if len(duels) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
         if len(spars) > 0:
-            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars))
+            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars), inline=False)
         if len(duels) + len(spars) > 0 :
             em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
             await self.bot.say(embed=em)
