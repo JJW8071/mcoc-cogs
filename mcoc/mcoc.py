@@ -422,8 +422,10 @@ class MCOC:
                 if target != 'none':
                     duels.append('{}: {}\n'.format(key, target))
                     print(target)
-        print(len(duels))
-        await self.bot.say('\n'.join(k for k in duels))
+        if len(duels) > 0:
+            await self.bot.say('\n'.join(k for k in duels))
+        else:
+            await self.bot.say('Could not find a target.')
 
 
     @commands.command()
