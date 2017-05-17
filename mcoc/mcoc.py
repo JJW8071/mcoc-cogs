@@ -413,17 +413,33 @@ class MCOC:
         # Will need some logic to search the CSV for the LEAST AVAILABLE champ
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duels = []
+        spars = []
+        em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets')
+        em.set_thumbnail(url=champ.get_avatar())
         for rank in range(5):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
             data = get_csv_row(dataset, 'unique', key, default='x')
             if data is not None:
                 target = data['username']
+                level = '{}/{}'.format(rank, rank*10)
                 if target != 'none':
-                    duels.append('{}: {}\n'.format(key, target))
-                    print(target)
+                    duels.append('★★★★  {} : {}'.format(level, target))
+        for rank in range(5):
+            star = 5
+            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+            data = get_csv_row(dataset, 'unique', key, default='x')
+            if data is not None:
+                target = data['username']
+                level = '{}/{}'.format(rank, 15+rank*10)
+                if target != 'none':
+                    spars.append('★★★★★ {} : {}'.format(level, target))
         if len(duels) > 0:
-            await self.bot.say('\n'.join(k for k in duels))
+            em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
+        if len(spars) > 0:
+            em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
+        if len(duels) + len(spars) > 0 :
+            await self.bot.say(embed=em)
         else:
             await self.bot.say('Could not find a target.')
 
