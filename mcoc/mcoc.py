@@ -969,6 +969,7 @@ class Champion:
         #return self.frogspawn_data['bio']
         bios = load_kabam_json(kabam_bio)
         key = 'ID_CHARACTER_BIOS_' + self.mcocjson
+        print(key)
         if key not in bios:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
