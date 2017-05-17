@@ -437,8 +437,9 @@ class MCOC:
         if len(duels) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
         if len(spars) > 0:
-            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars, inline=False))
+            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars))
         if len(duels) + len(spars) > 0 :
+            em.set_footer(text='Sourced from Community Spreadsheet', icon_url=Embed.Empty))
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Could not find a target.')
