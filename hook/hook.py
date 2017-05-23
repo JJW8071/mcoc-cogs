@@ -81,7 +81,7 @@ class Hook:
         # creates user if doesn't exist
         info = self.get_user_info(user.id)
         champ_list = info['champs']
-        em = discord.Embed(title="User Profile", description=user.name, color=discord.Color.gold)
+        em = discord.Embed(title="User Profile", description=user.name, color=discord.Color.gold())
         cosmic = []
         tech = []
         mutant = []
