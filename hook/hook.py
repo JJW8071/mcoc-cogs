@@ -110,32 +110,32 @@ class Hook:
 
         if dbg == 0:
             if len(cosmic) > 0:
-                em.add_field(name="Cosmic",value=cosmic)
+                em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
             if len(tech) > 0:
-                em.add_field(name="Tech", value=tech)
+                em.add_field(name="Tech", value='\n'.join(k for k in tech))
             if len(mutant) > 0:
-                em.add_field(name="Mutant", value=mutant)
+                em.add_field(name="Mutant", value='\n'.join(k for k in mutant))
             if len(skill) > 0:
-                em.add_field(name="Skill", value=skill)
+                em.add_field(name="Skill", value='\n'.join(k for k in skill))
             if len(science) > 0:
-                em.add_field(name="Science", value=science)
+                em.add_field(name="Science", value='\n'.join(k for k in science))
             if len(mystic) > 0:
-                em.add_field(name="Mystic", value=mystic)
+                em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
             await self.bot.say(embed=em)
-        #
-        # elif dbg == 1:
-        #     emcosmic = discord.Embed(title="Cosmic", description=cosmic, color=discord.Color(0x2799f7))
-        #     emtech = discord.Embed(title="Tech", description=tech, color=discord.Color(0x0033ff))
-        #     emmutant = discord.Embed(title="Mutant", description=mutant, color=discord.Color(0xffd400))
-        #     emskill = discord.Embed(title="Skill", description=skill, color=discord.Color(0xdb1200))
-        #     emscience = discord.Embed(title="Science", description=science, color=discord.Color(0x0b8c13))
-        #     emmystic = discord.Embed(title="Mystic", description=mystic, color=discord.Color(0x7f0da8))
-        #     await self.bot.say(embed=emcosmic)
-        #     await self.bot.say(embed=emtech)
-        #     await self.bot.say(embed=emmutant)
-        #     await self.bot.say(embed=em)
-        #     await self.bot.say(embed=em)
-        #     await self.bot.say(embed=em)
+
+        elif dbg == 1:
+            emcosmic = discord.Embed(title="Cosmic", description='\n'.join(k for k in cosmic), color=discord.Color(0x2799f7))
+            emtech = discord.Embed(title="Tech", description='\n'.join(k for k in tech), color=discord.Color(0x0033ff))
+            emmutant = discord.Embed(title="Mutant", description='\n'.join(k for k in mutant), color=discord.Color(0xffd400))
+            emskill = discord.Embed(title="Skill", description='\n'.join(k for k in skill), color=discord.Color(0xdb1200))
+            emscience = discord.Embed(title="Science", description='\n'.join(k for k in science), color=discord.Color(0x0b8c13))
+            emmystic = discord.Embed(title="Mystic", description='\n'.join(k for k in mystic), color=discord.Color(0x7f0da8))
+            await self.bot.say(embed=emcosmic)
+            await self.bot.say(embed=emtech)
+            await self.bot.say(embed=emmutant)
+            await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
 
 
     # @commands.command(pass_context=True, no_pm=True)
