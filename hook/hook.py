@@ -81,7 +81,7 @@ class Hook:
         # creates user if doesn't exist
         info = self.get_user_info(user.id)
         champ_list = info['champs']
-        em = discord.Embed(title="User Profile", description=user.name)
+        em = discord.Embed(title="User Profile", description=user.name, color=discord.Color.gold)
         cosmic = []
         tech = []
         mutant = []
@@ -90,7 +90,7 @@ class Hook:
         mystic = []
         unknown = []
 
-        champ_str = '{0[Stars]}★ {1} R{0[Rank]} s{0[Awakened]:<2}'
+        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} p{0[Prestige]}'
         for k in champ_list:
             champ = self.mcocCog._resolve_alias(k['Id'])
             package = champ_str.format(k, champ.full_name)
