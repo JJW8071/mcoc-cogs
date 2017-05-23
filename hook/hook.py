@@ -100,9 +100,9 @@ class Hook:
                 tech.append(package)
             elif champ.class_color == discord.Color(0xffd400):
                 mutant.append(package)
-            elif champ.class_color == discord.Color(0xdb1200):
-                science.append(package)
             elif champ.class_color == discord.Color(0x0b8c13):
+                science.append(package)
+            elif champ.class_color == discord.Color(0xdb1200):
                 skill.append(package)
             elif champ.class_color == discord.Color(0x7f0da8):
                 mystic.append(package)
