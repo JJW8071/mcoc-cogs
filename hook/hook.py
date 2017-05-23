@@ -74,7 +74,7 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self,ctx, *, user : discord.Member=None, dbg = 0):
+    async def roster(self,ctx, *, user : discord.Member=None, champ_class = 'all', dbg = 0):
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
@@ -92,7 +92,7 @@ class Hook:
 
         for k in champ_list:
             package = self.champ_str.format(k)
-            champ = self.mcocCog._resolve_alias(k)
+            champ = self.mcocCog._resolve_alias(k['Id'])
             if champ.class_color == discord.Color(0x2799f7):
                 cosmic.append(package)
             elif champ.class_color == discord.Color(0x0033ff):
@@ -122,20 +122,20 @@ class Hook:
             if len(mystic) > 0:
                 em.add_field(name="Mystic", value=mystic)
             await self.bot.say(embed=em)
-
-        elif dbg == 1:
-            emcosmic = discord.Embed(title="Cosmic", description=cosmic, color=discord.Color(0x2799f7))
-            emtech = discord.Embed(title="Tech", description=tech, color=discord.Color(0x0033ff))
-            emmutant = discord.Embed(title="Mutant", description=mutant, color=discord.Color(0xffd400))
-            emskill = discord.Embed(title="Skill", description=skill, color=discord.Color(0xdb1200))
-            emscience = discord.Embed(title="Science", description=science, color=discord.Color(0x0b8c13))
-            emmystic = discord.Embed(title="Mystic", description=mystic, color=discord.Color(0x7f0da8))
-            await self.bot.say(embed=emcosmic)
-            await self.bot.say(embed=emtech)
-            await self.bot.say(embed=emmutant)
-            await self.bot.say(embed=em)
-            await self.bot.say(embed=em)
-            await self.bot.say(embed=em)
+        #
+        # elif dbg == 1:
+        #     emcosmic = discord.Embed(title="Cosmic", description=cosmic, color=discord.Color(0x2799f7))
+        #     emtech = discord.Embed(title="Tech", description=tech, color=discord.Color(0x0033ff))
+        #     emmutant = discord.Embed(title="Mutant", description=mutant, color=discord.Color(0xffd400))
+        #     emskill = discord.Embed(title="Skill", description=skill, color=discord.Color(0xdb1200))
+        #     emscience = discord.Embed(title="Science", description=science, color=discord.Color(0x0b8c13))
+        #     emmystic = discord.Embed(title="Mystic", description=mystic, color=discord.Color(0x7f0da8))
+        #     await self.bot.say(embed=emcosmic)
+        #     await self.bot.say(embed=emtech)
+        #     await self.bot.say(embed=emmutant)
+        #     await self.bot.say(embed=em)
+        #     await self.bot.say(embed=em)
+        #     await self.bot.say(embed=em)
 
 
     # @commands.command(pass_context=True, no_pm=True)
