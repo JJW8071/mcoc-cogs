@@ -121,7 +121,7 @@ class Hook:
                 em.add_field(name="Science", value='\n'.join(k for k in science))
             if len(mystic) > 0:
                 em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
-            em.set_footer(text='hook/champions for Collector',url='https://assets-cdn.github.com/favicon.ico')
+            em.set_footer(text='hook/champions for Collector',url='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png')
             await self.bot.say(embed=em)
 
         elif dbg == 1:
