@@ -73,6 +73,73 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True, no_pm=True)
+    async def roster(self,ctx, *, user : discord.Member=None, dbg = 0):
+        """Displays a user profile."""
+        if user is None:
+            user = ctx.message.author
+        # creates user if doesn't exist
+        info = self.get_user_info(user.id)
+        champ_list = info['champs']
+        em = discord.Embed(title="User Profile", description=user.name, color=discord.Color.gold())
+        cosmic = []
+        tech = []
+        mutant = []
+        skill = []
+        science = []
+        mystic = []
+        unknown = []
+
+        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} p{0[Pi]} '
+        for k in champ_list:
+            champ = self.mcocCog._resolve_alias(k['Id'])
+            package = champ_str.format(k, champ.full_name)
+            if champ.class_color == discord.Color(0x2799f7):
+                cosmic.append(package)
+            elif champ.class_color == discord.Color(0x0033ff):
+                tech.append(package)
+            elif champ.class_color == discord.Color(0xffd400):
+                mutant.append(package)
+            elif champ.class_color == discord.Color(0x0b8c13):
+                science.append(package)
+            elif champ.class_color == discord.Color(0xdb1200):
+                skill.append(package)
+            elif champ.class_color == discord.Color(0x7f0da8):
+                mystic.append(package)
+            else:
+                unknown.append(package)
+
+        if dbg == 0:
+            if len(cosmic) > 0:
+                em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
+            if len(tech) > 0:
+                em.add_field(name="Tech", value='\n'.join(k for k in tech))
+            if len(mutant) > 0:
+                em.add_field(name="Mutant", value='\n'.join(k for k in mutant))
+            if len(skill) > 0:
+                em.add_field(name="Skill", value='\n'.join(k for k in skill))
+            if len(science) > 0:
+                em.add_field(name="Science", value='\n'.join(k for k in science))
+            if len(mystic) > 0:
+                em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
+            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+            await self.bot.say(embed=em)
+
+        elif dbg == 1:
+            emcosmic = discord.Embed(title="Cosmic", description='\n'.join(k for k in cosmic), color=discord.Color(0x2799f7))
+            emtech = discord.Embed(title="Tech", description='\n'.join(k for k in tech), color=discord.Color(0x0033ff))
+            emmutant = discord.Embed(title="Mutant", description='\n'.join(k for k in mutant), color=discord.Color(0xffd400))
+            emskill = discord.Embed(title="Skill", description='\n'.join(k for k in skill), color=discord.Color(0xdb1200))
+            emscience = discord.Embed(title="Science", description='\n'.join(k for k in science), color=discord.Color(0x0b8c13))
+            emmystic = discord.Embed(title="Mystic", description='\n'.join(k for k in mystic), color=discord.Color(0x7f0da8))
+            await self.bot.say(embed=emcosmic)
+            await self.bot.say(embed=emtech)
+            await self.bot.say(embed=emmutant)
+            await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
+
+
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
@@ -102,6 +169,7 @@ class Hook:
 
     @commands.command(pass_context=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
+        '''Report Clan Prestige'''
         server = ctx.message.server
         width = 20
         prestige = 0
@@ -110,8 +178,9 @@ class Hook:
         for member in server.members:
             if role in member.roles:
                 champ_data = self.get_user_info(member.id)
-                prestige += champ_data['prestige']
-                cnt += 1
+                if champ_data['prestige'] > 0:
+                    prestige += champ_data['prestige']
+                    cnt += 1
                 if verbose is 1:
                     line_out.append('{:{width}} p = {}'.format(
                         member.name, champ_data['prestige'], width=width))

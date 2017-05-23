@@ -1,7 +1,6 @@
 import re
 from datetime import datetime, timedelta
 from textwrap import wrap
-from operator import attrgetter
 from math import log2
 from math import *
 import os
@@ -25,12 +24,20 @@ data_files = {
                 'local': 'data/mcoc/spotlight_data.csv', 'update_delta': 1},
     'crossreference': {'remote': 'https://docs.google.com/spreadsheets/d/1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
-    'sig_data':{'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=799981914&single=true&output=csv',
+    'sig_data': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=799981914&single=true&format=csv',
                 'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
+    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=2031313154&single=true&output=csv',
+                'local': 'data/mcoc/duelist.csv', 'update_delta': 0},
+    #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1P-GeEOyod6WSGq8fUfSPZcvowthNdy-nXLKOhjrmUVI/pub?gid=0&single=true&output=csv',
+    'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
+                'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
+    #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=229525912&single=true&output=csv',
+    'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=229525912&format=csv',
+                'local': 'data/mcoc/effect_keys.csv', 'update_delta': 0},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
@@ -45,8 +52,15 @@ gsheet_files = {
             'local': 'data/mcoc/spotlight_test.csv',
             },
             #'payload': 'pub?gid=0&single=true&output=csv'},
+    #'sig_coeff': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
+    'sig_coeff': {'gkey': '1P-GeEOyod6WSGq8fUfSPZcvowthNdy-nXLKOhjrmUVI',
+            'local': 'data/mcoc/sig_co_test.csv',
+            'stub': 'export',
+            #'range': 'A1:N99',
+            #'gid': 696682690},
+            },
     'crossreference': {'gkey': '1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk',
-            'local': 'data/mcoc/xref_test.csv', 
+            'local': 'data/mcoc/xref_test.csv',
             #'payload': 'export?format=csv'}
             },
             #'payload': 'pub?gid=0&single=true&output=csv'}
@@ -158,6 +172,20 @@ class MCOC:
         # self._prepare_spotlight_data()
         # self._prepare_frogspawn_champ_data()
 
+    @staticmethod
+    def from_flat(flat, ch_rating):
+        denom = 5 * ch_rating + 1500 + flat
+        return round(100*flat/denom, 2)
+
+    @staticmethod
+    def to_flat(per, ch_rating):
+        num = (5 * ch_rating + 1500) * per
+        return round(num/(100-per), 2)
+
+    @commands.command()
+    async def p2f(self, per: float, ch_rating: int=100):
+        await self.bot.say(self.to_flat(per, ch_rating))
+
     @commands.command()
     async def flat(self, *, m):
         '''Convert MCOC Flat Value to Percentge
@@ -177,8 +205,7 @@ class MCOC:
             r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
             r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
         flat_val = eval(''.join(math_filter))
-        denom = 5 * challenger_rating + 1500 + flat_val
-        p = round(100*flat_val/denom, 2)
+        p = self.from_flat(flat_val, challenger_rating)
         em = discord.Embed(color=discord.Color.gold(),
                 title='FlatValue:',
                 description='{}'.format(flat_val))
@@ -269,13 +296,13 @@ class MCOC:
                 last_check = datetime(*file_checks.get(key))
             else:
                 last_check = None
-            remote_check = self.cache_remote_file(key, s, verbose=verbose, 
+            remote_check = self.cache_remote_file(key, s, verbose=verbose,
                     last_check=last_check)
             if remote_check:
                 file_checks[key] = remote_check.timetuple()[:6]
         dataIO.save_json(file_checks_json, file_checks)
 
-    def cache_remote_file(self, key, session=None, verbose=False, last_check=None, 
+    def cache_remote_file(self, key, session=None, verbose=False, last_check=None,
                 force_cache=False):
         if session is None:
             session = requests.Session()
@@ -331,9 +358,15 @@ class MCOC:
             #s = gs[v['gkey']]
             #s.sheets[0].to_csv(v['local'])
             #payload = {'format': 'csv', 'gid': v.get('gid', 0)}
-            payload = {'output': 'csv', 'single': 'true', 'gid': v.get('gid', 0)}
-            remote = 'https://docs.google.com/spreadsheets/d/{0}/pub'.format(v['gkey'])
-            #remote = 'https://docs.google.com/spreadsheets/d/{0[gkey]}/{0[payload]}'.format(v)
+            if 'payload' in k:
+                payload = {}
+                remote = 'https://docs.google.com/spreadsheets/d/{0[gkey]}/{0[payload]}'.format(v)
+            elif v.get('stub') == 'export':
+                payload = {'format': 'csv', 'gid': v.get('gid', 0)}
+                remote = 'https://docs.google.com/spreadsheets/d/{0[gkey]}/{0[stub]}'.format(v)
+            else:
+                payload = {'output': 'csv', 'single': 'true', 'gid': v.get('gid', 0)}
+                remote = 'https://docs.google.com/spreadsheets/d/{0}/pub'.format(v['gkey'])
             #response = s.get(remote)
             response = s.get(remote, params=payload)
             if response.status_code == requests.codes.ok:
@@ -344,6 +377,7 @@ class MCOC:
                 err_str = "HTTP error code {} while trying to retrieve Google Sheet {}".format(
                         response.statuse_code, k)
                 await self.bot.say(err_str)
+        await self.bot.say("Google Sheet retrieval complete")
 
     @commands.command()
     async def phc(self):
@@ -397,6 +431,7 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
         em.set_thumbnail(url=champ.get_avatar())
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
@@ -405,6 +440,43 @@ class MCOC:
     async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
+
+    @commands.command()
+    async def duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
+        # Will need some logic to search the CSV for the LEAST AVAILABLE champ
+        # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
+        duels = []
+        spars = []
+        em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets')
+        em.set_thumbnail(url=champ.get_avatar())
+        for rank in range(5):
+            star = 4
+            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+            data = get_csv_row(dataset, 'unique', key, default='x')
+            if data is not None:
+                target = data['username']
+                level = '{}/{}'.format(rank, rank*10)
+                if target != 'none':
+                    duels.append('★★★★  {} : {}'.format(level, target))
+        for rank in range(5):
+            star = 5
+            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+            data = get_csv_row(dataset, 'unique', key, default='x')
+            if data is not None:
+                target = data['username']
+                level = '{}/{}'.format(rank, 15+rank*10)
+                if target != 'none':
+                    spars.append('★★★★★ {} : {}'.format(level, target))
+        if len(duels) > 0:
+            em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
+        if len(spars) > 0:
+            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars), inline=False)
+        if len(duels) + len(spars) > 0 :
+            em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
+            await self.bot.say(embed=em)
+        else:
+            await self.bot.say('Could not find a target.')
+
 
     @commands.command()
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
@@ -418,12 +490,11 @@ class MCOC:
         em.add_field(name='Crit Damage',value=data['critdamage'])
         em.add_field(name='Armor',value=data['armor'])
         em.add_field(name='Block Proficiency',value=data['blockprof'])
-        if champ.infopage:
+        if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
+        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url='https://i.imgur.com/QQsT29B.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
-
-
 
     @commands.command()
     async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
@@ -448,12 +519,12 @@ class MCOC:
         for x in range(terminus):
             key = '{}-{}-{}'.format(star, mcocjson, x)
             col = 'sig'+str(siglvl)
-            value = get_csv_row('data/mcoc/sig_data.csv', 'unique', key)[col]
+            value = get_csv_row('data/mcoc/sig_data.csv', 'unique', key)
             # print('sig:', value)
             if value is None:
                 continue
             else:
-                sig_stack.append(value)
+                sig_stack.append(value[col])
         print('sig_stack: ', len(sig_stack), sig_stack)
 
         if dbg:
@@ -486,40 +557,52 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(pass_context=True)
-    async def role_roster(self, ctx, role : discord.Role):
-        server = ctx.message.server
-        if role in server.roles:
-            cnt, line_out = self.get_roster(server, role)
-            em = discord.Embed(color=role.color,title='{}'.format(role.name))
-            if cnt > 0:
-                em.add_field(name='{} members'.format(cnt), value='\n'.join(line_out))
-            else:
-                em.add_field(name='{} members'.format(cnt), value='Summoner, be the first to join')
-            await self.bot.say(embed=em)
+    @commands.command()
+    async def sig(self, champ : ChampConverter, siglvl: int=99, dbg=0, *args):
+        '''Retrieve the Signature Ability of a Champion'''
+        title, desc = await self.format_desc(champ, siglvl, dbg=dbg)
+        if dbg == 0:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.add_field(name='Signature Level {}'.format(siglvl),  value=desc)
+        elif dbg == 1:
+            em = discord.Embed(color=champ.class_color, title='Signature Ability')
+            em.add_field(name='@ Level', value=siglvl)
+            em.add_field(name = champ.full_name, value=desc)
         else:
-            await self.bot.say('Invalid Role')
+            em = discord.Embed(color=champ.class_color,
+                title=champ.full_name + ' Signature Ability')
+            em.add_field(name='Level '+str(siglvl),  value=desc)
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
 
-    # @commands.command()
-    # async def sig(self, champ : ChampConverter, siglvl=None, dbg=0, *args):
-    #     '''Retrieve the Signature Ability of a Champion'''
-    #     settings = self.settings.copy()
-    #     if siglvl is not None:
-    #         settings['siglvl'] = int(siglvl)
-    #     title, desc, siglvl = champ.get_sig(**settings)
-    #     if dbg == 0:
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-    #         em.add_field(name='Signature Level '+str(siglvl),  value=desc)
-    #     elif dbg == 1:
-    #         em = discord.Embed(color=champ.class_color, title='Signature Ability')
-    #         em.add_field(name='@ Level', value=siglvl)
-    #         em.add_field(name = champ.full_name, value=desc)
-    #     else:
-    #         em = discord.Embed(color=champ.class_color,
-    #             title=champ.full_name + ' Signature Ability')
-    #         em.add_field(name='Level '+str(siglvl),  value=desc)
-    #     em.set_thumbnail(url=champ.get_avatar())
-    #     await self.bot.say(embed=em)
+    async def format_desc(self, champ, siglvl, star=4, rank=5, dbg=False):
+        brkt_re = re.compile(r'{([0-9])}')
+        sigs = load_kabam_json(kabam_bcg_stat_en)
+        title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
+        coeff = get_csv_row(data_files['sig_coeff']['local'], 'CHAMP', champ.full_name)
+        ekey = get_csv_row(data_files['effect_keys']['local'], 'CHAMP', champ.full_name)
+        fdesc = []
+        for i, kabam_key in enumerate(desc):
+            kval = '• ' + Champion._sig_header(sigs[kabam_key])
+            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]:.2{{ftype[{0}-\1]}}}}'.format(i), kval))
+        if dbg:
+            await self.bot.say('```{}```'.format('\n'.join(fdesc)))
+        sig_calcs = {}
+        ftypes = {}
+        for i in range(6):
+            if not ekey['Location_{}'.format(i)]:
+                break
+            is_raw = ekey['Effect_{}'.format(i)] == 'raw'
+            m, b = float(coeff['ability_norm{}'.format(i)]), float(coeff['offset{}'.format(i)])
+            ckey = ekey['Location_{}'.format(i)]
+            print(m, b, log(siglvl), ekey['Location_{}'.format(i)])
+            sig_calcs[ckey] = m * log(siglvl) + b
+            if not is_raw:
+                sig_calcs[ckey] = sig_calcs[ckey] / 100
+            ftypes[ckey] = 'f' if is_raw else '%'
+        print(sig_calcs)
+        return title, '\n'.join(fdesc).format(d=sig_calcs, ftype=ftypes)
+
 
     @commands.command()
     async def abilities(self, champ : ChampConverter):
@@ -536,6 +619,7 @@ class MCOC:
         em2.add_field(name=specials[0], value=specials[3])
         em2.add_field(name=specials[1], value=specials[4])
         em2.add_field(name=specials[2], value=specials[5])
+        em2.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         await self.bot.say(embed=em2)
 
@@ -592,12 +676,6 @@ class MCOC:
                 em.add_field(**pres_dict)
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
-
-    def find_champ(self, champ_name, key):
-        for champ in self.champs:
-            if getattr(champ, key, '') == champ_name:
-                return champ
-        raise KeyError('No champion {} with key {}'.format(champ_name, key))
 
     @commands.command()
     async def champ_aliases(self, *args):
@@ -744,6 +822,7 @@ class MCOC:
                     'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
             'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
+            'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO']
         }
 
         #if champ.mcocsig == 'IRONMAN_SUPERIOR':
@@ -780,15 +859,6 @@ class MCOC:
         #print(desc)
         return title, title_lower, simple, desc
 
-    def get_roster(self, server, role : discord.Role):
-        cnt = 0
-        line_out = []
-        for member in server.members:
-            if role in member.roles:
-                cnt +=1
-                line_out.append(member.display_name)
-        # line_out = line_out.sort()
-        return (cnt, line_out)
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
@@ -809,12 +879,18 @@ class MCOC:
                         + "  First occurance with champ {}.".format(row['champ']))
             champs.append(Champion(alias_set, **row))
         self.champs = champs
+        #self.champs_by_name = {c.full_name: c for c in champs}
 
     # def _prepare_frogspawn_champ_data(self):
     #     champ_data = dataIO.load_json(data_files['frogspawn']['local'])
     #     for champ in self.champs:
     #         if getattr(champ, 'frogspawnid', None):
     #             champ.update_frogspawn(champ_data.get(champ.frogspawnid))
+
+    def champ_by_id(self, idname, name):
+        for champ in self.champs:
+            if getattr(champ, idname, None) == name:
+                return champ
 
     def _resolve_alias(self, alias, raise_err=True):
         for champ in self.champs:
@@ -879,8 +955,8 @@ class MCOC:
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
 
-    # def _prepare_signature_data(self):
-    #     _csv_to_json(data_files['sig_data']['local'], sig_data)
+    def _prepare_signature_data(self):
+        raw_data = load_csv(data_files['sig_coeff']['local'])
 
 def validate_attr(*expected_args):
     def decorator(func):
@@ -902,14 +978,17 @@ class Champion:
         # self.frogspawn_data = None
         if debug:
             print(kwargs)
+        self.klass = 'default'
         for key, value in kwargs.items():
             if not value or value == 'n/a':
                 value = None
+            if key == 'class':
+                key = 'klass'
             setattr(self, key, value)
         self.full_name = self.champ
         self.bold_name = '**' + ' '.join(
             [word.capitalize() for word in self.full_name.split(' ')]) + '**'
-        self.class_color = class_color_codes[getattr(self, 'class', 'default')]
+        self.class_color = class_color_codes[self.klass]
 
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
@@ -928,6 +1007,7 @@ class Champion:
         #return self.frogspawn_data['bio']
         bios = load_kabam_json(kabam_bio)
         key = 'ID_CHARACTER_BIOS_' + self.mcocjson
+        print(key)
         if key not in bios:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
@@ -1027,7 +1107,7 @@ def load_kabam_json(file):
     data = {}
     for d in raw_data['strings']:
         data[d['k']] = d['v']
-    return data
+        return data
 
 def _truncate_text(self, text, max_length):
     if len(text) > max_length:
@@ -1041,7 +1121,7 @@ def get_csv_row(filecsv, column, match_val, default=None):
     csvfile = load_csv(filecsv)
     for row in csvfile:
         if row[column] == match_val:
-            if default is not None: 
+            if default is not None:
                 for k, v in row.items():
                     if v == '':
                         row[k] = default
@@ -1049,7 +1129,7 @@ def get_csv_row(filecsv, column, match_val, default=None):
 
 def load_csv(filename):
     fp = open(filename)
-    return csv.DictReader(fp)    
+    return csv.DictReader(fp)
 
 
 
