@@ -74,7 +74,7 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self,ctx, *, user : discord.Member=None, champ_class = 'all', dbg = 0):
+    async def roster(self,ctx, *, user : discord.Member=None, dbg = 0):
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
@@ -121,6 +121,7 @@ class Hook:
                 em.add_field(name="Science", value='\n'.join(k for k in science))
             if len(mystic) > 0:
                 em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
+            em.set_footer(text='hook/champions for Collector',url='https://assets-cdn.github.com/favicon.ico')
             await self.bot.say(embed=em)
 
         elif dbg == 1:
