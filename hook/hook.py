@@ -73,6 +73,71 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True, no_pm=True)
+    async def roster(self,ctx, *, user : discord.Member=None, dbg = 0):
+        """Displays a user profile."""
+        if user is None:
+            user = ctx.message.author
+        # creates user if doesn't exist
+        info = self.get_user_info(user.id)
+        champ_list = info['champs']
+        em = discord.Embed(title="User Profile", description=user.name)
+        cosmic = []
+        tech = []
+        mutant = []
+        skill = []
+        science = []
+        mystic = []
+        unknown = []
+
+        for k in champ_list:
+            package = self.champ_str.format(k)
+            champ = self.mcocCog._resolve_alias(k)
+            if champ.class_color == discord.Color(0x2799f7):
+                cosmic.append(package)
+            elif champ.class_color == discord.Color(0x0033ff):
+                tech.append(package)
+            elif champ.class_color == discord.Color(0xffd400):
+                mutant.append(package)
+            elif champ.class_color == discord.Color(0xdb1200):
+                science.append(package)
+            elif champ.class_color == discord.Color(0x0b8c13):
+                skill.append(package)
+            elif champ.class_color == discord.Color(0x7f0da8):
+                mystic.append(package)
+            else:
+                unknown.append(package)
+
+        if dbg == 0:
+            if len(cosmic) > 0:
+                em.add_field(name="Cosmic",value=cosmic)
+            if len(tech) > 0:
+                em.add_field(name="Tech", value=tech)
+            if len(mutant) > 0:
+                em.add_field(name="Mutant", value=mutant)
+            if len(skill) > 0:
+                em.add_field(name="Skill", value=skill)
+            if len(science) > 0:
+                em.add_field(name="Science", value=science)
+            if len(mystic) > 0:
+                em.add_field(name="Mystic", value=mystic)
+            await self.bot.say(embed=em)
+
+        elif dbg == 1:
+            emcosmic = discord.Embed(title="Cosmic", description=cosmic, color=discord.Color(0x2799f7))
+            emtech = discord.Embed(title="Tech", description=tech, color=discord.Color(0x0033ff))
+            emmutant = discord.Embed(title="Mutant", description=mutant, color=discord.Color(0xffd400))
+            emskill = discord.Embed(title="Skill", description=skill, color=discord.Color(0xdb1200))
+            emscience = discord.Embed(title="Science", description=science, color=discord.Color(0x0b8c13))
+            emmystic = discord.Embed(title="Mystic", description=mystic, color=discord.Color(0x7f0da8))
+            await self.bot.say(embed=emcosmic)
+            await self.bot.say(embed=emtech)
+            await self.bot.say(embed=emmutant)
+            await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
+            await self.bot.say(embed=em)
+
+
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
