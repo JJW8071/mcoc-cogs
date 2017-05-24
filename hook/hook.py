@@ -74,7 +74,7 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self, ctx, user : discord.Member=None, class = 'all', dbg = 0):
+    async def roster(self, ctx, user : discord.Member=None, champclass = 'all', dbg = 0):
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
