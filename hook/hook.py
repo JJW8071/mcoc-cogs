@@ -125,7 +125,7 @@ class Hook:
                 piskill.append(prestige_str.format(k))
             elif champ.class_color == discord.Color(0x7f0da8):
                 mystic.append(package)
-                pimystc.append(prestige_str.format(k))
+                pimystic.append(prestige_str.format(k))
             else:
                 unknown.append(package)
 
