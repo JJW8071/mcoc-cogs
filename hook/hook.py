@@ -93,7 +93,7 @@ class Hook:
         champ_str = '{2}{0[Pi]} {0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} '
         for k in champ_list:
             champ = self.mcocCog._resolve_alias(k['Id'])
-            length = len(k['Pi'])
+            prestige = len(str(k['Pi']))
             if length == 3:
                 padd = '   '
             elif lenght == 4:
