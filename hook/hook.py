@@ -127,22 +127,22 @@ class Hook:
 
         if dbg == 0:
             if len(cosmic) > 0:
-                em.add_field(name="Prestige",value='\n'.join(k for k in picosmic))
+                em.add_field(name="Prestige",value='\n'.join(k for k in picosmic), inline=False)
                 em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic), inline=True)
             if len(tech) > 0:
-                em.add_field(name="Prestige", value='\n'.join(k for k in pitech))
+                em.add_field(name="Prestige", value='\n'.join(k for k in pitech), inline=False)
                 em.add_field(name="Tech", value='\n'.join(k for k in tech), inline=True)
             if len(mutant) > 0:
-                em.add_field(name="Prestige", value='\n'.join(k for k in pimutant))
+                em.add_field(name="Prestige", value='\n'.join(k for k in pimutant), inline=False)
                 em.add_field(name="Mutant", value='\n'.join(k for k in mutant), inline=True)
             if len(skill) > 0:
-                em.add_field(name="Prestige", value='\n'.join(k for k in piskill))
+                em.add_field(name="Prestige", value='\n'.join(k for k in piskill), inline=False)
                 em.add_field(name="Skill", value='\n'.join(k for k in skill), inline=True)
             if len(science) > 0:
-                em.add_field(name="Prestige", value='\n'.join(k for k in piscience))
+                em.add_field(name="Prestige", value='\n'.join(k for k in piscience), inline=False)
                 em.add_field(name="Science", value='\n'.join(k for k in science), inline=True)
             if len(mystic) > 0:
-                em.add_field(name="Prestige", value='\n'.join(k for k in pimystic))
+                em.add_field(name="Prestige", value='\n'.join(k for k in pimystic), inline=False)
                 em.add_field(name="Mystic", value='\n'.join(k for k in mystic), inline=True)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             await self.bot.say(embed=em)
