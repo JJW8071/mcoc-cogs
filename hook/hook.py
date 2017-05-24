@@ -93,8 +93,8 @@ class Hook:
         champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
 
         for k in champ_list:
-            champ = self.mcocCog._resolve_alias(k['Id'])
             print(k['Id'])
+            champ = self.mcocCog._resolve_alias(k['Id'])
             package = champ_str.format(k, champ.full_name)
             if champ.class_color == discord.Color(0x2799f7):
                 cosmic.append(package)
@@ -148,6 +148,7 @@ class Hook:
             em.add_field(name=champclass.title(),value='\n'.join(k for k in chosen))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
+
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
