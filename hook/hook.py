@@ -92,8 +92,8 @@ class Hook:
         picosmic = []
         pitech = []
         pimutant = []
-        science = []
-        pipiskill = []
+        piscience = []
+        piskill = []
         pimystic = []
         piunknown = []
 
