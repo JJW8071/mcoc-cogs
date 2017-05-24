@@ -137,13 +137,13 @@ class Hook:
                 color = discord.Color(0xffd400)
             elif champclass.lower() == 'skill':
                 chosen = skill
-                color = discord.Color(0x0b8c13)
+                color = discord.Color(0xdb1200)
             elif champclass.lower() == 'science':
                 chosen = science
-                color = discord.Color(0x7f0da8)
+                color = discord.Color(0x0b8c13)
             elif champclass.lower() == 'mystic':
                 chosen = mystic
-                color = discord.Color(0x2799f7)
+                color = discord.Color(0x7f0da8)
             em = discord.Embed(title="User", description=user.name, color=color)
             em.add_field(name=champclass,value='\n'.join(k for k in chosen))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
