@@ -74,7 +74,7 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self,ctx, *, user : discord.Member=None, dbg = 0):
+    async def roster(self,ctx, user : discord.Member=None, champclass = None):
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
@@ -90,7 +90,8 @@ class Hook:
         mystic = []
         unknown = []
 
-        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} p{0[Pi]} '
+        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
+
         for k in champ_list:
             champ = self.mcocCog._resolve_alias(k['Id'])
             print(k['Id'])
@@ -110,7 +111,8 @@ class Hook:
             else:
                 unknown.append(package)
 
-        if dbg == 0:
+        if champclass == None:
+            em = discord.Embed(title="User", description=user.name, color=discord.Color.gold())
             if len(cosmic) > 0:
                 em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
             if len(tech) > 0:
@@ -123,24 +125,29 @@ class Hook:
                 em.add_field(name="Science", value='\n'.join(k for k in science))
             if len(mystic) > 0:
                 em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
-            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            await self.bot.say(embed=em)
-
-        elif dbg == 1:
-            emcosmic = discord.Embed(title="Cosmic", description='\n'.join(k for k in cosmic), color=discord.Color(0x2799f7))
-            emtech = discord.Embed(title="Tech", description='\n'.join(k for k in tech), color=discord.Color(0x0033ff))
-            emmutant = discord.Embed(title="Mutant", description='\n'.join(k for k in mutant), color=discord.Color(0xffd400))
-            emskill = discord.Embed(title="Skill", description='\n'.join(k for k in skill), color=discord.Color(0xdb1200))
-            emscience = discord.Embed(title="Science", description='\n'.join(k for k in science), color=discord.Color(0x0b8c13))
-            emmystic = discord.Embed(title="Mystic", description='\n'.join(k for k in mystic), color=discord.Color(0x7f0da8))
-            await self.bot.say(embed=emcosmic)
-            await self.bot.say(embed=emtech)
-            await self.bot.say(embed=emmutant)
-            await self.bot.say(embed=em)
-            await self.bot.say(embed=em)
-            await self.bot.say(embed=em)
-
-
+        else:
+            if champclass.lower() == 'cosmic':
+                chosen = cosmic
+                color = discord.Color(0x2799f7)
+            elif champclass.lower() == 'tech':
+                chosen = tech
+                color = discord.Color(0x0033ff)
+            elif champclass.lower() == 'mutant':
+                chosen = mutant
+                color = discord.Color(0xffd400)
+            elif champclass.lower() == 'skill':
+                chosen = skill
+                color = discord.Color(0xdb1200)
+            elif champclass.lower() == 'science':
+                chosen = science
+                color = discord.Color(0x0b8c13)
+            elif champclass.lower() == 'mystic':
+                chosen = mystic
+                color = discord.Color(0x7f0da8)
+            em = discord.Embed(title="User", description=user.name, color=color)
+            em.add_field(name=champclass.title(),value='\n'.join(k for k in chosen))
+        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        await self.bot.say(embed=em)
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
