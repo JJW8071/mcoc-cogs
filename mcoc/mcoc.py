@@ -887,7 +887,13 @@ class MCOC:
     #     for champ in self.champs:
     #         if getattr(champ, 'frogspawnid', None):
     #             champ.update_frogspawn(champ_data.get(champ.frogspawnid))
-
+    
+    def find_champ(self, champ_name, key): 
+        for champ in self.champs: 
+            if getattr(champ, key, '') == champ_name: 
+                return champ 
+        raise KeyError('No champion {} with key {}'.format(champ_name, key)) 
+ 
     def champ_by_id(self, idname, name):
         for champ in self.champs:
             if getattr(champ, idname, None) == name:
