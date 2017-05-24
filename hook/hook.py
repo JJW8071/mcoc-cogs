@@ -96,7 +96,7 @@ class Hook:
             length = len(str(k['Pi']))
             if length == 3:
                 padd = '  '
-            elif lenght == 4:
+            elif length == 4:
                 padd = ' '
             else:
                 padd = ''
