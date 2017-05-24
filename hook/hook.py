@@ -112,6 +112,7 @@ class Hook:
                 unknown.append(package)
 
         if champclass == None:
+            em = discord.Embed(title="User", description=user.name, color=discord.Color.gold())
             if len(cosmic) > 0:
                 em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
             if len(tech) > 0:
@@ -127,16 +128,23 @@ class Hook:
         else:
             if champclass.lower() == 'cosmic':
                 chosen = cosmic
+                color = discord.Color(0x2799f7)
             elif champclass.lower() == 'tech':
                 chosen = tech
+                color = discord.Color(0x0033ff)
             elif champclass.lower() == 'mutant':
                 chosen = mutant
+                color = discord.Color(0xffd400)
             elif champclass.lower() == 'skill':
                 chosen = skill
+                color = discord.Color(0x0b8c13)
             elif champclass.lower() == 'science':
                 chosen = science
+                color = discord.Color(0x7f0da8)
             elif champclass.lower() == 'mystic':
                 chosen = mystic
+                color = discord.Color(0x2799f7)
+            em = discord.Embed(title="User", description=user.name, color=color)
             em.add_field(name=champclass,value='\n'.join(k for k in chosen))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)

@@ -447,7 +447,7 @@ class MCOC:
         # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duels = []
         spars = []
-        em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets')
+        em = discord.Embed(color=champ.class_color, title='')
         # em.set_thumbnail(url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         for rank in range(5):
@@ -469,9 +469,9 @@ class MCOC:
                 if target != 'none':
                     spars.append('★★★★★ {} : {}'.format(level, target))
         if len(duels) > 0:
-            em.add_field(name='Duel Targets', value='\n'.join(k for k in duels))
+            em.add_field(name='Duel Target', value='\n'.join(k for k in duels))
         if len(spars) > 0:
-            em.add_field(name='Sparring Targets', value='\n'.join(k for k in spars), inline=False)
+            em.add_field(name='Sparring Target', value='\n'.join(k for k in spars), inline=False)
         if len(duels) + len(spars) > 0 :
             em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
             await self.bot.say(embed=em)
