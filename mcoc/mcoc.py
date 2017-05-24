@@ -448,7 +448,8 @@ class MCOC:
         duels = []
         spars = []
         em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets')
-        em.set_thumbnail(url=champ.get_avatar())
+        # em.set_thumbnail(url=champ.get_avatar())
+        em.set_image(url=champ.get_featured())
         for rank in range(5):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
