@@ -146,18 +146,30 @@ class Hook:
             await self.bot.say(embed=em)
 
         elif dbg == 1:
-            emcosmic = discord.Embed(title="Prestige", description='\n'.join(k for k in picosmic), color=discord.Color(0x2799f7), inline=True)
-            emcosmic.add_field(name="Cosmic", value='\n'.join(k for k in cosmic), inline=True)
-            emtech = discord.Embed(title="Prestige", description='\n'.join(k for k in pitech), color=discord.Color(0x0033ff), inline=True)
-            emtech.add_field(name="Tech", value='\n'.join(k for k in tech), inline=True)
-            emmutant = discord.Embed(title="Prestige", description='\n'.join(k for k in pimutant), color=discord.Color(0xffd400), inline=True)
-            emmutant.add_field(name="Mutant", value='\n'.join(k for k in mutant), inline=True)
-            emskill = discord.Embed(title="Prestige", description='\n'.join(k for k in piskill), color=discord.Color(0xdb1200), inline=True)
-            emskill.add_field(name="Skill", value='\n'.join(k for k in skill), inline=True)
-            emscience = discord.Embed(title="Prestige", description='\n'.join(k for k in piscience), color=discord.Color(0x0b8c13), inline=True)
-            emscience.add_field(name="Science", value='\n'.join(k for k in science), inline=True)
-            emmystic = discord.Embed(title="Prestige", description='\n'.join(k for k in pimystic), color=discord.Color(0x7f0da8), inline=True)
-            emmystic.add_field(name="Mystic", value='\n'.join(k for k in mystic), inline=True)
+            emcosmic = discord.Embed(title="Cosmic", description='', color=discord.Color(0x2799f7))
+            emcosmic.add_field(name="Prestige", value='\n'.join(k for k in picosmic))
+            emcosmic.add_field(name="Champions", value='\n'.join(k for k in cosmic), inline=True)
+
+            emtech = discord.Embed(title="Tech", description='', color=discord.Color(0x0033ff))
+            emtech.add_field(name="Prestige", value='\n'.join(k for k in pitech))
+            emtech.add_field(name="Champions", value='\n'.join(k for k in tech), inline=True)
+
+            emmutant = discord.Embed(title="Mutant", description='', color=discord.Color(0xffd400))
+            emmutant.add_field(name="Prestige", value='\n'.join(k for k in pimutant))
+            emmutant.add_field(name="Champions", value='\n'.join(k for k in mutant), inline=True)
+
+            emskill = discord.Embed(title="Skill", description='', color=discord.Color(0xdb1200))
+            emskill.add_field(name="Prestige", value='\n'.join(k for k in piskill))
+            emskill.add_field(name="Champions", value='\n'.join(k for k in skill), inline=True)
+
+            emscience = discord.Embed(title="Science", description='', color=discord.Color(0x0b8c13))
+            emscience.add_field(name="Prestige", value='\n'.join(k for k in piscience))
+            emscience.add_field(name="Champions", value='\n'.join(k for k in science), inline=True)
+
+            emmystic = discord.Embed(title="Mystic", description='', color=discord.Color(0x7f0da8))
+            emmystic.add_field(name="Prestige", value='\n'.join(k for k in pimystic))
+            emmystic.add_field(name="Champions", value='\n'.join(k for k in mystic), inline=True)
+
             await self.bot.say(embed=emcosmic)
             await self.bot.say(embed=emtech)
             await self.bot.say(embed=emmutant)
