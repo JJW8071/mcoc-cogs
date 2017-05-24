@@ -1107,7 +1107,7 @@ def load_kabam_json(file):
     data = {}
     for d in raw_data['strings']:
         data[d['k']] = d['v']
-        return data
+    return data
 
 def _truncate_text(self, text, max_length):
     if len(text) > max_length:
