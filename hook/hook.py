@@ -145,7 +145,7 @@ class Hook:
                 chosen = mystic
                 color = discord.Color(0x7f0da8)
             em = discord.Embed(title="User", description=user.name, color=color)
-            em.add_field(name=champclass,value='\n'.join(k for k in chosen))
+            em.add_field(name=champclass.title(),value='\n'.join(k for k in chosen))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
     # @commands.command(pass_context=True, no_pm=True)
