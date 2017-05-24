@@ -90,11 +90,20 @@ class Hook:
         mystic = []
         unknown = []
 
-        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} p{0[Pi]} '
+        champ_str = '{2}{0[Pi]} {0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} '
         for k in champ_list:
             champ = self.mcocCog._resolve_alias(k['Id'])
+            length = len(k['Pi'])
+            if length == 3:
+                padd = '   '
+            elif lenght == 4:
+                padd = '  '
+            elif length == 5:
+                padd = ' '
+            else:
+                padd = ''
             print(k['Id'])
-            package = champ_str.format(k, champ.full_name)
+            package = champ_str.format(k, champ.full_name, padd)
             if champ.class_color == discord.Color(0x2799f7):
                 cosmic.append(package)
             elif champ.class_color == discord.Color(0x0033ff):
