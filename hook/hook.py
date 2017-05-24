@@ -94,7 +94,7 @@ class Hook:
 
         for k in champ_list:
             print(k['Id'])
-            champ = self.mcocCog._resolve_alias(k['Id'])
+            champ = self.mcocCog._resolve_alias(str(k['Id']))
             package = champ_str.format(k, champ.full_name)
             if champ.class_color == discord.Color(0x2799f7):
                 cosmic.append(package)
