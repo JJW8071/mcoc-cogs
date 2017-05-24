@@ -74,7 +74,7 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self,ctx, user : discord.Member=None, dbg = 0, champclass = 'all'):
+    async def roster(self,ctx, user : discord.Member=None, champclass = None):
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
@@ -89,20 +89,8 @@ class Hook:
         science = []
         mystic = []
         unknown = []
-        picosmic = []
-        pitech = []
-        pimutant = []
-        piscience = []
-        piskill = []
-        pimystic = []
-        piunknown = []
 
-
-        prestige_str = '{0[Pi]}'
-        if dbg == 1:
-            champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} '
-        elif dbg == 0:
-            champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} {0[Pi]} '
+        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} {0[Pi]} '
 
         for k in champ_list:
             champ = self.mcocCog._resolve_alias(k['Id'])
@@ -110,26 +98,20 @@ class Hook:
             package = champ_str.format(k, champ.full_name)
             if champ.class_color == discord.Color(0x2799f7):
                 cosmic.append(package)
-                picosmic.append(prestige_str.format(k))
             elif champ.class_color == discord.Color(0x0033ff):
                 tech.append(package)
-                pitech.append(prestige_str.format(k))
             elif champ.class_color == discord.Color(0xffd400):
                 mutant.append(package)
-                pimutant.append(prestige_str.format(k))
             elif champ.class_color == discord.Color(0x0b8c13):
                 science.append(package)
-                piscience.append(prestige_str.format(k))
             elif champ.class_color == discord.Color(0xdb1200):
                 skill.append(package)
-                piskill.append(prestige_str.format(k))
             elif champ.class_color == discord.Color(0x7f0da8):
                 mystic.append(package)
-                pimystic.append(prestige_str.format(k))
             else:
                 unknown.append(package)
 
-        if dbg == 0:
+        if champclass == None:
             if len(cosmic) > 0:
                 em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
             if len(tech) > 0:
@@ -142,42 +124,22 @@ class Hook:
                 em.add_field(name="Science", value='\n'.join(k for k in science))
             if len(mystic) > 0:
                 em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
-            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            await self.bot.say(embed=em)
-
-        elif dbg == 1:
-            emcosmic = discord.Embed(title="Cosmic", description='', color=discord.Color(0x2799f7))
-            emcosmic.add_field(name="Prestige", value='\n'.join(k for k in picosmic))
-            emcosmic.add_field(name="Champions", value='\n'.join(k for k in cosmic), inline=True)
-
-            emtech = discord.Embed(title="Tech", description='', color=discord.Color(0x0033ff))
-            emtech.add_field(name="Prestige", value='\n'.join(k for k in pitech))
-            emtech.add_field(name="Champions", value='\n'.join(k for k in tech), inline=True)
-
-            emmutant = discord.Embed(title="Mutant", description='', color=discord.Color(0xffd400))
-            emmutant.add_field(name="Prestige", value='\n'.join(k for k in pimutant))
-            emmutant.add_field(name="Champions", value='\n'.join(k for k in mutant), inline=True)
-
-            emskill = discord.Embed(title="Skill", description='', color=discord.Color(0xdb1200))
-            emskill.add_field(name="Prestige", value='\n'.join(k for k in piskill))
-            emskill.add_field(name="Champions", value='\n'.join(k for k in skill), inline=True)
-
-            emscience = discord.Embed(title="Science", description='', color=discord.Color(0x0b8c13))
-            emscience.add_field(name="Prestige", value='\n'.join(k for k in piscience))
-            emscience.add_field(name="Champions", value='\n'.join(k for k in science), inline=True)
-
-            emmystic = discord.Embed(title="Mystic", description='', color=discord.Color(0x7f0da8))
-            emmystic.add_field(name="Prestige", value='\n'.join(k for k in pimystic))
-            emmystic.add_field(name="Champions", value='\n'.join(k for k in mystic), inline=True)
-
-            await self.bot.say(embed=emcosmic)
-            await self.bot.say(embed=emtech)
-            await self.bot.say(embed=emmutant)
-            await self.bot.say(embed=emskill)
-            await self.bot.say(embed=emscience)
-            await self.bot.say(embed=emmystic)
-
-
+        else:
+            if champclass.lower() == 'cosmic':
+                chosen = cosmic
+            elif champclass.lower() == 'tech':
+                chosen = tech
+            elif champclass.lower() == 'mutant':
+                chosen = mutant
+            elif champclass.lower() == 'skill':
+                chosen = skill
+            elif champclass.lower() == 'science':
+                chosen = science
+            elif champclass.lower() == 'mystic':
+                chosen = mystic
+            em.add_field(name=champclass,value='\n'.join(k for k in chosen))
+        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        await self.bot.say(embed=em)
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
