@@ -57,7 +57,7 @@ class Hook:
             ret = '\n'.join([m.name for m in members])
         em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
                 description=ret, color=role.color)
-        delete_message(message)
+        message.delete_message()
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
