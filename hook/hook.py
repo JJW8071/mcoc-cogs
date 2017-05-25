@@ -45,7 +45,7 @@ class Hook:
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
         server = ctx.message.server
-        members = []
+        members = {}
         for member in server.members:
             if role in member.roles:
                 members.append(member)
