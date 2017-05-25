@@ -45,6 +45,7 @@ class Hook:
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
         server = ctx.message.server
+        message = ctx.message
         members = []
         for member in server.members:
             if role in member.roles:
@@ -56,6 +57,7 @@ class Hook:
             ret = '\n'.join([m.name for m in members])
         em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
                 description=ret, color=role.color)
+        delete_message(message)
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
