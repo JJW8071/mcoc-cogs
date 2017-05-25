@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from .mcoc import class_color_codes 
+from .mcoc import class_color_codes
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
@@ -49,9 +49,9 @@ class Hook:
         for member in server.members:
             if role in member.roles:
                 members.append(member)
-        members.sort(key=attrgetter('name'))
+        # members.sort(key=attrgetter('name'))
         if use_alias:
-            ret = '\n'.join([m.display_name for m in members])
+            ret = '\n'.join([m.display_name for m in sorted(members)])
         else:
             ret = '\n'.join([m.name for m in members])
         em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
@@ -85,7 +85,7 @@ class Hook:
         user_info = self.get_user_info(user.id)
 
         champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
-        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [], 
+        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],
                 'Science': [], 'Mystic': [], 'Default': []}
 
         if champclass and champclass not in classes:
