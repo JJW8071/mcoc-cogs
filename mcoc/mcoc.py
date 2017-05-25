@@ -31,7 +31,7 @@ data_files = {
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
     'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=2031313154&single=true&output=csv',
-                'local': 'data/mcoc/duelist.csv', 'update_delta': 0},
+                'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
     #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
                 #'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
     #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=229525912&format=csv',
@@ -890,13 +890,13 @@ class MCOC:
     #     for champ in self.champs:
     #         if getattr(champ, 'frogspawnid', None):
     #             champ.update_frogspawn(champ_data.get(champ.frogspawnid))
-    
-    def find_champ(self, champ_name, key): 
-        for champ in self.champs: 
-            if getattr(champ, key, '') == champ_name: 
-                return champ 
-        raise KeyError('No champion {} with key {}'.format(champ_name, key)) 
- 
+
+    def find_champ(self, champ_name, key):
+        for champ in self.champs:
+            if getattr(champ, key, '') == champ_name:
+                return champ
+        raise KeyError('No champion {} with key {}'.format(champ_name, key))
+
     def champ_by_id(self, idname, name):
         for champ in self.champs:
             if getattr(champ, idname, None) == name:
