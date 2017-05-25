@@ -51,7 +51,7 @@ class Hook:
                 members.append(member)
         # members.sort(key=attrgetter('name'))
         if use_alias:
-            ret = '\n'.join([m.display_name for m in sorted(members)])
+            ret = '\n'.join([m.display_name for m in members])
         else:
             ret = '\n'.join([m.name for m in members])
         em = discord.Embed(title='{0.name} Role - {1} member(s)'.format(role, len(members)),
