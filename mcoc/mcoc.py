@@ -32,16 +32,19 @@ data_files = {
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
     'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=2031313154&single=true&output=csv',
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 0},
-    #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1P-GeEOyod6WSGq8fUfSPZcvowthNdy-nXLKOhjrmUVI/pub?gid=0&single=true&output=csv',
     #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
                 #'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
-    #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/pub?gid=229525912&single=true&output=csv',
     #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=229525912&format=csv',
     #            'local': 'data/mcoc/effect_keys.csv', 'update_delta': 0},
 ### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
 ##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
 ##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
+
+local_files = {
+    'sig_coeff': 'data/mcoc/sig_coeff.csv',
+    'effect_keys': 'data/mcoc/effect_keys.csv',
+}
 
 gsheet_files = {
     'signature': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
@@ -580,8 +583,8 @@ class MCOC:
         brkt_re = re.compile(r'{([0-9])}')
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
-        coeff = get_csv_row(data_files['sig_coeff']['local'], 'CHAMP', champ.full_name)
-        ekey = get_csv_row(data_files['effect_keys']['local'], 'CHAMP', champ.full_name)
+        coeff = get_csv_row(local_files['sig_coeff'], 'CHAMP', champ.full_name)
+        ekey = get_csv_row(local_files['effect_keys'], 'CHAMP', champ.full_name)
         fdesc = []
         for i, kabam_key in enumerate(desc):
             kval = '• ' + Champion._sig_header(sigs[kabam_key])
@@ -962,8 +965,8 @@ class MCOC:
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
 
-    def _prepare_signature_data(self):
-        raw_data = load_csv(data_files['sig_coeff']['local'])
+    #def _prepare_signature_data(self):
+        #raw_data = load_csv(local_files['sig_coeff'])
 
 def validate_attr(*expected_args):
     def decorator(func):
