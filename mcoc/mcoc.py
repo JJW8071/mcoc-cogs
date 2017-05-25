@@ -30,7 +30,7 @@ data_files = {
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
-    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=2031313154&single=true&output=csv',
+    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=1266181139&single=true&output=csv',
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
     #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
                 #'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
@@ -446,8 +446,6 @@ class MCOC:
 
     @commands.command()
     async def duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
-        # Will need some logic to search the CSV for the LEAST AVAILABLE champ
-        # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duels = []
         spars = []
         em = discord.Embed(color=champ.class_color, title='')
