@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from .mcoc import class_color_codes 
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
@@ -78,76 +79,31 @@ class Hook:
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
-        # creates user if doesn't exist
-        info = self.get_user_info(user.id)
-        champ_list = info['champs']
-        em = discord.Embed(title="User Profile", description=user.name, color=discord.Color.gold())
-        cosmic = []
-        tech = []
-        mutant = []
-        skill = []
-        science = []
-        mystic = []
-        unknown = []
+        if champclass is not None:
+            champclass = champclass.lower().capitalize()
+
+        user_info = self.get_user_info(user.id)
 
         champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
+        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [], 
+                'Science': [], 'Mystic': [], 'Default': []}
 
-        for k in champ_list:
-            champ = self.mcocCog._resolve_alias(k['Id'])
-            print(k['Id'])
+        if champclass and champclass not in classes:
+            await self.bot.say("'{}' is not a valid class".format(champclass))
+            return
+        for k in user_info['champs']:
+            champ = self.mcocCog.find_champ(k['Id'], 'hookid')
             package = champ_str.format(k, champ.full_name)
-            if champ.class_color == discord.Color(0x2799f7):
-                cosmic.append(package)
-            elif champ.class_color == discord.Color(0x0033ff):
-                tech.append(package)
-            elif champ.class_color == discord.Color(0xffd400):
-                mutant.append(package)
-            elif champ.class_color == discord.Color(0x0b8c13):
-                science.append(package)
-            elif champ.class_color == discord.Color(0xdb1200):
-                skill.append(package)
-            elif champ.class_color == discord.Color(0x7f0da8):
-                mystic.append(package)
-            else:
-                unknown.append(package)
+            classes[champ.klass].append(package)
 
-        if champclass == None:
-            em = discord.Embed(title="User", description=user.name, color=discord.Color.gold())
-            if len(cosmic) > 0:
-                em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
-            if len(tech) > 0:
-                em.add_field(name="Tech", value='\n'.join(k for k in tech))
-            if len(mutant) > 0:
-                em.add_field(name="Mutant", value='\n'.join(k for k in mutant))
-            if len(skill) > 0:
-                em.add_field(name="Skill", value='\n'.join(k for k in skill))
-            if len(science) > 0:
-                em.add_field(name="Science", value='\n'.join(k for k in science))
-            if len(mystic) > 0:
-                em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
-        else:
-            if champclass.lower() == 'cosmic':
-                chosen = cosmic
-                color = discord.Color(0x2799f7)
-            elif champclass.lower() == 'tech':
-                chosen = tech
-                color = discord.Color(0x0033ff)
-            elif champclass.lower() == 'mutant':
-                chosen = mutant
-                color = discord.Color(0xffd400)
-            elif champclass.lower() == 'skill':
-                chosen = skill
-                color = discord.Color(0xdb1200)
-            elif champclass.lower() == 'science':
-                chosen = science
-                color = discord.Color(0x0b8c13)
-            elif champclass.lower() == 'mystic':
-                chosen = mystic
-                color = discord.Color(0x7f0da8)
-            em = discord.Embed(title="User", description=user.name, color=color)
-            em.add_field(name=champclass.title(),value='\n'.join(k for k in chosen))
+        color = class_color_codes[champclass] if champclass else discord.Color.gold()
+        em = discord.Embed(title="User", description=user.name, color=color)
+        for klass, class_champs in classes.items():
+            if class_champs and (champclass is None or champclass == klass):
+                em.add_field(name=klass, value='\n'.join(k for k in class_champs))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
+
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
