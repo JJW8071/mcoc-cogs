@@ -702,7 +702,7 @@ class MCOC:
         for champ, attrs in champs:
             glyph = star_glyph[attrs['star']]
             pres_dict = champ.get_prestige(**attrs)
-            pretty_value = '{} {} \n r{rank} s{sig}'.format(glyph, champ.full_name, attrs)
+            pretty_value = '{0} {1} \n r{2[rank]} s{2[sig]}'.format(glyph, champ.full_name, attrs)
             if pres_dict is None:
                 await self.bot.say("**WARNING** Champion Data for {}, {star}, rank {rank} does not exist".format(
                     champ.full_name, **attrs))
