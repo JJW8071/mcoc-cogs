@@ -23,7 +23,7 @@ class Hook:
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
         try:
-            self.mcocCog = self.bot.get_cog('MCOC')
+            self.bot.get_cog('MCOC')
         except KeyError:
             raise KeyError('The MCOC Cog is not installed.')
 
@@ -83,6 +83,7 @@ class Hook:
             champclass = champclass.lower().capitalize()
 
         user_info = self.get_user_info(user.id)
+        mcoc = self.bot.get_cog('MCOC')
 
         champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
         classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [], 
@@ -92,7 +93,7 @@ class Hook:
             await self.bot.say("'{}' is not a valid class".format(champclass))
             return
         for k in user_info['champs']:
-            champ = self.mcocCog.find_champ(k['Id'], 'hookid')
+            champ = mcoc.find_champ(k['Id'], 'hookid')
             package = champ_str.format(k, champ.full_name)
             classes[champ.klass].append(package)
 
