@@ -112,19 +112,28 @@ class ChampConverter(commands.Converter):
     async def convert(self):
         bot = self.ctx.bot
         mcoc = bot.get_cog('MCOC')
+        attrs = {'star': 4, 'rank': 5, 'sig': 99}
+        for m in mcoc.parse_re.finditer(self.argument):
+            attrs[m.lastgroup] = int(m.group(m.lastgroup))
+        remain = mcoc.parse_re.sub('', self.argument)
+        print(remain, attrs)
+        if not remain:
+            err_str = "No Champion remains from arg '{}'".format(self.argument)
+            await bot.say(err_str)
+            raise commands.BadArgument(err_str)
         try:
-            champ = mcoc._resolve_alias(self.argument)
+            champ = mcoc._resolve_alias(remain)
         except KeyError:
-            champs = mcoc._resolve_mult_aliases('.*{}.*'.format(self.argument))
+            champs = mcoc._resolve_mult_aliases('.*{}.*'.format(remain))
             if len(champs) == 1:
                 await bot.say("'{}' was not exact but found close alternative".format(
                         self.argument))
                 champ = champs[0]
             else:
-                await bot.say("```Cannot resolve alias for '{}'```".format(
-                        self.argument))
-                raise commands.BadArgument("Cannot resolve alias for '{}'".format(
-                        self.argument))
+                err_str = "Cannot resolve alias for '{}'".format(self.argument)
+                await bot.say(err_str)
+                raise commands.BadArgument(err_str)
+        champ.update_attrs(attrs)
         return champ
 
 
@@ -163,7 +172,7 @@ class MCOC:
                 'sig_inc_zero': False,
                 }
 
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[45])\\?\*)')
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
         self.verify_cache_remote_files(verbose=True)
         self._init()
@@ -560,52 +569,71 @@ class MCOC:
         await self.bot.say(embed=em)
 
     @commands.command()
-    async def sig(self, champ : ChampConverter, siglvl: int=99, dbg=0, *args):
+    async def sig(self, champ : ChampConverter, siglvl: int=None, dbg=False):
         '''Retrieve the Signature Ability of a Champion'''
-        title, desc = await self.format_desc(champ, siglvl, dbg=dbg)
-        if dbg == 0:
-            em = discord.Embed(color=champ.class_color, title=champ.full_name)
-            em.add_field(name='Signature Level {}'.format(siglvl),  value=desc)
-        elif dbg == 1:
-            em = discord.Embed(color=champ.class_color, title='Signature Ability')
-            em.add_field(name='@ Level', value=siglvl)
-            em.add_field(name = champ.full_name, value=desc)
-        else:
-            em = discord.Embed(color=champ.class_color,
-                title=champ.full_name + ' Signature Ability')
-            em.add_field(name='Level '+str(siglvl),  value=desc)
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+        if siglvl is not None:
+            champ.update_attrs({'sig': siglvl})
+        title, desc = await self.format_desc(champ, dbg=dbg)
+        if title is None:
+            return
+        em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        em.add_field(name=title, value=champ.get_star_str())
+        em.add_field(name='Signature Level {}'.format(champ.sig),  value=desc)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    async def format_desc(self, champ, siglvl, star=4, rank=5, dbg=False):
+    async def format_desc(self, champ, dbg=False):
         brkt_re = re.compile(r'{([0-9])}')
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         coeff = get_csv_row(local_files['sig_coeff'], 'CHAMP', champ.full_name)
         ekey = get_csv_row(local_files['effect_keys'], 'CHAMP', champ.full_name)
-        fdesc = []
-        for i, kabam_key in enumerate(desc):
-            kval = '• ' + Champion._sig_header(sigs[kabam_key])
-            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]:.2{{ftype[{0}-\1]}}}}'.format(i), kval))
-        if dbg:
-            await self.bot.say('```{}```'.format('\n'.join(fdesc)))
+        spotlight = get_csv_row(data_files['spotlight']['local'], 'unique', 
+                champ.get_unique())
+        if champ.sig == 0:
+            return sigs[title], '\n'.join([sigs[k] for k in simple])
         sig_calcs = {}
         ftypes = {}
         for i in range(6):
             if not ekey['Location_{}'.format(i)]:
                 break
-            is_raw = ekey['Effect_{}'.format(i)] == 'raw'
-            m, b = float(coeff['ability_norm{}'.format(i)]), float(coeff['offset{}'.format(i)])
+            effect = ekey['Effect_{}'.format(i)]
+            try:
+                m = float(coeff['ability_norm{}'.format(i)])
+                b = float(coeff['offset{}'.format(i)])
+            except:
+                await self.bot.say("Missing data for champion '{}'.  Try again later".format(champ.full_name))
+                champ.update_attrs({'sig': 0})
+                return sigs[title], '\n'.join([sigs[k] for k in simple])
+                #return None
             ckey = ekey['Location_{}'.format(i)]
-            print(m, b, log(siglvl), ekey['Location_{}'.format(i)])
-            sig_calcs[ckey] = m * log(siglvl) + b
-            if not is_raw:
-                sig_calcs[ckey] = sig_calcs[ckey] / 100
-            ftypes[ckey] = 'f' if is_raw else '%'
-        print(sig_calcs)
-        return title, '\n'.join(fdesc).format(d=sig_calcs, ftype=ftypes)
-
+            raw_str = '{:.2f}'
+            per_str = '{:.2f} ({:.2%})'
+            if effect == 'rating':
+                sig_calcs[ckey] = raw_str.format(m * champ.chlgr_rating + b)
+                continue
+            per_val = m * log(champ.sig) + b
+            if effect == 'flat':
+                sig_calcs[ckey] = per_str.format(
+                        self.to_flat(per_val, champ.chlgr_rating), per_val/100)
+            elif effect == 'attack':
+                sig_calcs[ckey] = per_str.format(
+                        int(spotlight['attack']) * per_val / 100, per_val/100)
+            elif effect == 'health':
+                sig_calcs[ckey] = per_str.format(
+                        int(spotlight['health']) * per_val / 100, per_val/100)
+            else:
+                if per_val.is_integer():
+                    sig_calcs[ckey] = '{:.0f}'.format(per_val)
+                else:
+                    sig_calcs[ckey] = raw_str.format(per_val)
+        fdesc = []
+        for i, kabam_key in enumerate(desc):
+            kval = '• ' + Champion._sig_header(sigs[kabam_key])
+            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i), kval))
+        if dbg:
+            await self.bot.say('```{}```'.format('\n'.join(fdesc)))
+        return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
 
     @commands.command()
     async def abilities(self, champ : ChampConverter):
@@ -890,12 +918,15 @@ class MCOC:
     #         if getattr(champ, 'frogspawnid', None):
     #             champ.update_frogspawn(champ_data.get(champ.frogspawnid))
 
-    def find_champ(self, champ_name, key):
-        for champ in self.champs:
-            if getattr(champ, key, '') == champ_name:
-                return champ
-        raise KeyError('No champion {} with key {}'.format(champ_name, key))
+    def get_champdict(self, key='full_name'):
+        return {getattr(champ, key): champ for champ in self.champs}
 
+    def find_champ(self, champ_name, key): 
+        for champ in self.champs: 
+            if getattr(champ, key, '') == champ_name: 
+                return champ 
+        raise KeyError('No champion {} with key {}'.format(champ_name, key)) 
+ 
     def champ_by_id(self, idname, name):
         for champ in self.champs:
             if getattr(champ, idname, None) == name:
@@ -994,10 +1025,37 @@ class Champion:
             if key == 'class':
                 key = 'klass'
             setattr(self, key, value)
+        self.update_attrs({'star': 4, 'rank': 5, 'sig': 99})
         self.full_name = self.champ
         self.bold_name = '**' + ' '.join(
             [word.capitalize() for word in self.full_name.split(' ')]) + '**'
         self.class_color = class_color_codes[self.klass]
+
+    def update_attrs(self, attrs):
+        for k in ('star', 'rank', 'sig'):
+            if k in attrs:
+                setattr(self, k, attrs[k])
+        if self.sig < 0:
+            self.sig = 0
+        if self.star < 1:
+            print('Star {} for Champ {} is too low.  Setting to 1'.format(
+                    self.star, self.full_name))
+            self.star = 1
+        if self.star > 5:
+            print('Star {} for Champ {} is too high.  Setting to 5'.format(
+                    self.star, self.full_name))
+            self.star = 5
+        if self.star == 5:
+            if self.rank > 5:
+                self.rank = 5
+            if self.sig > 200:
+                self.sig = 200
+        elif self.star < 5:
+            if self.rank > (self.star + 1):
+                self.rank = self.star + 1
+            if self.sig > 99:
+                self.sig = 99
+        self.chlgr_rating = self.get_chlgr_rating()
 
     def get_avatar(self):
         #print('{}{}.png'.format(champ_avatar, self.mcocui))
@@ -1020,6 +1078,25 @@ class Champion:
         if key not in bios:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
+
+    def get_star_str(self):
+        return '{} {}/{}'.format('★'*self.star, self.rank, 
+                self.get_max_lvl())
+
+    def get_unique(self):
+        return '{0.star}-{0.mattkraftid}-{0.rank}'.format(self)
+
+    def get_chlgr_rating(self):
+        if self.star == 1:
+            return self.rank * 10
+        else:
+            return (2 * self.star - 3 + self.rank) * 10
+
+    def get_max_lvl(self):
+        if self.star < 5:
+            return self.rank * 10
+        else:
+            return 15 + self.rank * 10
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
