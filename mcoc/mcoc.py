@@ -706,7 +706,7 @@ class MCOC:
                 level = level + 15
             ranklevel = '{}/{}'.format(attrs['rank'],level)
             pres_dict = champ.get_prestige(**attrs)
-            pretty_value = '{} \n{} \n{} sig {}\n{}'.format(champ.full_name, glyph, ranklevel, attrs['sig'], press_dict['name'])
+            pretty_value = '{} \n{} \n{} sig {}\n{}'.format(champ.full_name, glyph, ranklevel, attrs['sig'], pres_dict['name'])
             if pres_dict is None:
                 await self.bot.say("**WARNING** Champion Data for {}, {star}, rank {rank} does not exist".format(
                     champ.full_name, **attrs))
