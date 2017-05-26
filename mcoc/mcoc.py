@@ -700,7 +700,7 @@ class MCOC:
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
                 #description=tabulate(table_data, self.settings['table_width']))
         for champ, attrs in champs:
-            glyph = star_glyph[attrs.star]
+            glyph = star_glyph[attrs['star']]
             pres_dict = champ.get_prestige(**attrs)
             pretty_value = '{} {} \n r{rank} s{sig}'.format(glyph, champ.full_name, attrs)
             if pres_dict is None:
