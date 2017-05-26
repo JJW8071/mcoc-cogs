@@ -574,6 +574,7 @@ class MCOC:
             em = discord.Embed(color=champ.class_color,
                 title=champ.full_name + ' Signature Ability')
             em.add_field(name='Level '+str(siglvl),  value=desc)
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
