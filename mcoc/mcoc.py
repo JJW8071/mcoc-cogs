@@ -71,6 +71,7 @@ gsheet_files = {
 
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
+star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
 
 lolmap_path='data/mcoc/maps/lolmap.png'
 # champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
@@ -668,15 +669,18 @@ class MCOC:
         #sigstep_arr = bound_lvl(list(range(0, 101, self.settings['sigstep'])))
         #table_data = [[''] + sigstep_arr]
         #table_data.append(champ.get_prestige(5, sigstep_arr))
-        em = discord.Embed(color=discord.Color.magenta(), title='Debug', )
+        em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
                 #description=tabulate(table_data, self.settings['table_width']))
         for champ, attrs in champs:
+            glyph = star_glyph[attrs[star]]
             pres_dict = champ.get_prestige(**attrs)
+            pretty_value = '{} {} \n r{rank} s{sig}'.format(glyph, champ.full_name, attrs)
             if pres_dict is None:
-                await self.bot.say("**WARNING** Champion Data for {}, {star}*, rank {rank} does not exist".format(
+                await self.bot.say("**WARNING** Champion Data for {}, {star}, rank {rank} does not exist".format(
                     champ.full_name, **attrs))
             else:
-                em.add_field(**pres_dict)
+                # em.add_field(**pres_dict)
+                em.add_field(name=pres_dict['value'],value=pretty_value)
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
