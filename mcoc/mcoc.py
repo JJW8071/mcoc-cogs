@@ -589,7 +589,7 @@ class MCOC:
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         coeff = get_csv_row(local_files['sig_coeff'], 'CHAMP', champ.full_name)
         ekey = get_csv_row(local_files['effect_keys'], 'CHAMP', champ.full_name)
-        spotlight = get_csv_row(data_files['spotlight']['local'], 'unique', 
+        spotlight = get_csv_row(data_files['spotlight']['local'], 'unique',
                 champ.get_unique())
         if champ.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
@@ -925,12 +925,12 @@ class MCOC:
     def get_champdict(self, key='full_name'):
         return {getattr(champ, key): champ for champ in self.champs}
 
-    def find_champ(self, champ_name, key): 
-        for champ in self.champs: 
-            if getattr(champ, key, '') == champ_name: 
-                return champ 
-        raise KeyError('No champion {} with key {}'.format(champ_name, key)) 
- 
+    def find_champ(self, champ_name, key):
+        for champ in self.champs:
+            if getattr(champ, key, '') == champ_name:
+                return champ
+        raise KeyError('No champion {} with key {}'.format(champ_name, key))
+
     def champ_by_id(self, idname, name):
         for champ in self.champs:
             if getattr(champ, idname, None) == name:
@@ -1084,7 +1084,7 @@ class Champion:
         return bios[key]
 
     def get_star_str(self):
-        return '{} {}/{}'.format('★'*self.star, self.rank, 
+        return '{} {}/{}'.format('★'*self.star, self.rank,
                 self.get_max_lvl())
 
     def get_unique(self):
