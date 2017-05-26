@@ -701,9 +701,9 @@ class MCOC:
                 #description=tabulate(table_data, self.settings['table_width']))
         for champ, attrs in champs:
             glyph = star_glyph[attrs['star']]
-            level = int(attrs{'rank'}) * 10
+            level = attrs['rank'] * 10
             if attrs['star'] == 5:
-                level = int(level) + 15
+                level = level + 15
             pres_dict = champ.get_prestige(**attrs)
             pretty_value = '{0} \n{1} \n{rank}/{3} sig {sig}'.format(glyph, champ.full_name, **attrs, level)
             if pres_dict is None:
