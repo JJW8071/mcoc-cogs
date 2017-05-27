@@ -679,6 +679,12 @@ class MCOC:
 
     @commands.command()
     async def prestige(self, *args):
+        '''Prestige for champions
+        Use:
+        /prestige <star>champ<rank><sig> ... <star>champ<rank><sig>
+        Example:
+        /prestige 5*cwr2s2 cwr3 bws2
+        '''
         champs = []
         default = {'star': 4, 'rank': 5, 'sig': 0}
         for arg in args:
