@@ -30,8 +30,8 @@ data_files = {
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
-    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=2031313154&single=true&output=csv',
-                'local': 'data/mcoc/duelist.csv', 'update_delta': 0},
+    'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=1266181139&single=true&output=csv',
+                'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
     #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
                 #'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
     #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=229525912&format=csv',
@@ -455,8 +455,6 @@ class MCOC:
 
     @commands.command()
     async def duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
-        # Will need some logic to search the CSV for the LEAST AVAILABLE champ
-        # Will need some logic to search the CSV for the HIGHEST AVAILABLE champ
         duels = []
         spars = []
         em = discord.Embed(color=champ.class_color, title='')
@@ -575,6 +573,9 @@ class MCOC:
         '''Retrieve the Signature Ability of a Champion'''
         if siglvl is not None:
             champ.update_attrs({'sig': siglvl})
+        if champ.star == 5:
+            await self.bot.say("Sorry.  5* data for any champion is not currently available")
+            return
         title, desc = await self.format_desc(champ, dbg=dbg)
         if title is None:
             return
@@ -596,6 +597,7 @@ class MCOC:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
         sig_calcs = {}
         ftypes = {}
+        data_missing = False
         for i in range(6):
             if not ekey['Location_{}'.format(i)]:
                 break
@@ -610,6 +612,7 @@ class MCOC:
                 #return None
             ckey = ekey['Location_{}'.format(i)]
             raw_str = '{:.2f}'
+            raw_per_str = '{:.2%}'
             per_str = '{:.2f} ({:.2%})'
             if effect == 'rating':
                 sig_calcs[ckey] = raw_str.format(m * champ.chlgr_rating + b)
@@ -619,9 +622,17 @@ class MCOC:
                 sig_calcs[ckey] = per_str.format(
                         self.to_flat(per_val, champ.chlgr_rating), per_val/100)
             elif effect == 'attack':
+                if not spotlight['attack']:
+                    data_missing = True
+                    sig_calcs[ckey] = raw_per_str.format(per_val/100)
+                    continue
                 sig_calcs[ckey] = per_str.format(
                         int(spotlight['attack']) * per_val / 100, per_val/100)
             elif effect == 'health':
+                if not spotlight['health']:
+                    data_missing = True
+                    sig_calcs[ckey] = raw_per_str.format(per_val/100)
+                    continue
                 sig_calcs[ckey] = per_str.format(
                         int(spotlight['health']) * per_val / 100, per_val/100)
             else:
@@ -629,6 +640,9 @@ class MCOC:
                     sig_calcs[ckey] = '{:.0f}'.format(per_val)
                 else:
                     sig_calcs[ckey] = raw_str.format(per_val)
+        if data_missing:
+            await self.bot.say('Missing Attack/Health info for {} {}'.format(
+                    champ.full_name, champ.get_star_str()))
         fdesc = []
         for i, kabam_key in enumerate(desc):
             kval = '• ' + Champion._sig_header(sigs[kabam_key])
