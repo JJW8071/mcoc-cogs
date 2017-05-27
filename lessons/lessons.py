@@ -23,6 +23,11 @@ class Lessons:
                 'How to Magik',
                 'https://www.youtube.com/watch?v=zC47YeI1b8g',
                 '```Magik\'s L3 increases Attack 50% for every enemy buff Nullified.```\nWait until the target has stacked many buffs, then drop the L3.\nThis is excellent versus Venom and Groot'
+            ),
+            'hook': (
+                'How to Use Hook',
+                '<http://hook.github.io/champions>',
+                'Go to <>\n1) Enter 4★ and 5★ champions\n2) Set rank, level, and sig \n 3) Menu >> Export CSV >> champions.csv\n4) Upload champions.csv to #hooker \nCollector will chew up your file and you can use: \n```\\roster <class>\n\\profile\n\\team```',
             )
         }
 
@@ -36,6 +41,11 @@ class Lessons:
             'How to fight Cyclops',
             'https://www.youtube.com/watch?v=iRay5dQBRbs',
             'Watch Cyclops\' **head** during a L1 special.  When he prepares to fire a special Cyclops leans back, then leans forward. **Evade** as soon as his head shifts forward and the background darkens. If you evade too soon you will catch one of his beams.\nCyclops L2 includes a punch, a kick, and then the headshift for the blast.  '
+            ),
+            'yellowjacket':(
+            'How to fight Yellowjacket',
+            '',
+            ''
             )
         }
 

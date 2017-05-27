@@ -71,6 +71,7 @@ gsheet_files = {
 
 sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
+star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
 
 lolmap_path='data/mcoc/maps/lolmap.png'
 # champ_avatar='https://raw.github.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_'
@@ -591,7 +592,7 @@ class MCOC:
         title, title_lower, simple, desc = self._get_mcoc_keys(champ, sigs)
         coeff = get_csv_row(local_files['sig_coeff'], 'CHAMP', champ.full_name)
         ekey = get_csv_row(local_files['effect_keys'], 'CHAMP', champ.full_name)
-        spotlight = get_csv_row(data_files['spotlight']['local'], 'unique', 
+        spotlight = get_csv_row(data_files['spotlight']['local'], 'unique',
                 champ.get_unique())
         if champ.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
@@ -694,6 +695,12 @@ class MCOC:
 
     @commands.command()
     async def prestige(self, *args):
+        '''Prestige for champions
+        Use:
+        /prestige <star>champ<rank><sig> ... <star>champ<rank><sig>
+        Example:
+        /prestige 5*cwr2s2 cwr3 bws2
+        '''
         champs = []
         default = {'star': 4, 'rank': 5, 'sig': 0}
         for arg in args:
@@ -712,15 +719,22 @@ class MCOC:
         #sigstep_arr = bound_lvl(list(range(0, 101, self.settings['sigstep'])))
         #table_data = [[''] + sigstep_arr]
         #table_data.append(champ.get_prestige(5, sigstep_arr))
-        em = discord.Embed(color=discord.Color.magenta(), title='Debug', )
+        em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
                 #description=tabulate(table_data, self.settings['table_width']))
         for champ, attrs in champs:
+            glyph = star_glyph[attrs['star']]
+            level = attrs['rank'] * 10
+            if attrs['star'] == 5:
+                level = level + 15
+            ranklevel = '{}/{}'.format(attrs['rank'],level)
             pres_dict = champ.get_prestige(**attrs)
+            pretty_value = '{} \n{} {} sig {}\n{}'.format(pres_dict['name'], glyph, ranklevel, attrs['sig'], pres_dict['value'])
             if pres_dict is None:
-                await self.bot.say("**WARNING** Champion Data for {}, {star}*, rank {rank} does not exist".format(
+                await self.bot.say("**WARNING** Champion Data for {}, {star}, rank {rank} does not exist".format(
                     champ.full_name, **attrs))
             else:
-                em.add_field(**pres_dict)
+                # em.add_field(**pres_dict)
+                em.add_field(name=champ.full_name,value=pretty_value)
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -937,12 +951,12 @@ class MCOC:
     def get_champdict(self, key='full_name'):
         return {getattr(champ, key): champ for champ in self.champs}
 
-    def find_champ(self, champ_name, key): 
-        for champ in self.champs: 
-            if getattr(champ, key, '') == champ_name: 
-                return champ 
-        raise KeyError('No champion {} with key {}'.format(champ_name, key)) 
- 
+    def find_champ(self, champ_name, key):
+        for champ in self.champs:
+            if getattr(champ, key, '') == champ_name:
+                return champ
+        raise KeyError('No champion {} with key {}'.format(champ_name, key))
+
     def champ_by_id(self, idname, name):
         for champ in self.champs:
             if getattr(champ, idname, None) == name:
@@ -1096,7 +1110,7 @@ class Champion:
         return bios[key]
 
     def get_star_str(self):
-        return '{} {}/{}'.format('★'*self.star, self.rank, 
+        return '{} {}/{}'.format('★'*self.star, self.rank,
                 self.get_max_lvl())
 
     def get_unique(self):
