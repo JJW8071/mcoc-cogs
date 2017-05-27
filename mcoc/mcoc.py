@@ -706,13 +706,13 @@ class MCOC:
                 level = level + 15
             ranklevel = '{}/{}'.format(attrs['rank'],level)
             pres_dict = champ.get_prestige(**attrs)
-            pretty_value = '{} \n{} \n{} sig {}\n{}'.format(champ.full_name, glyph, ranklevel, attrs['sig'], pres_dict['name'])
+            pretty_value = '{} \n{} \n{} sig {}\n{}'.format(pres_dict['value'], glyph, ranklevel, attrs['sig'], pres_dict['name'])
             if pres_dict is None:
                 await self.bot.say("**WARNING** Champion Data for {}, {star}, rank {rank} does not exist".format(
                     champ.full_name, **attrs))
             else:
                 # em.add_field(**pres_dict)
-                em.add_field(name=pres_dict['value'],value=pretty_value)
+                em.add_field(name=champ.full_name,value=pretty_value)
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
