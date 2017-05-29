@@ -140,7 +140,6 @@ class ChampConverter(commands.Converter):
 
 class MCOC:
     '''A Cog for Marvel's Contest of Champions'''
-
     lookup_links = {
             'event': (
                 'Tiny MCoC Schedule',
@@ -236,7 +235,7 @@ class MCOC:
         em.add_field(name='Expected Chance', value='{}%'.format(compound))
         await self.bot.say(embed=em)
 
-    @commands.command()
+    @commands.command(aliases=['update_mcoc',])
     async def mcoc_update(self, fname, force=False):
         if len(fname) > 3:
             for key in data_files.keys():
@@ -253,8 +252,8 @@ class MCOC:
         self._init()
         await self.bot.say('Summoner, I have Collected the data')
 
-    @commands.command()
-    async def mcocset(self, setting, value):
+    @commands.command(aliases=['mcocset'])
+    async def _mcocset(self, setting, value):
         if setting in self.settings:
             self.settings[setting] = int(value)
 
@@ -265,14 +264,6 @@ class MCOC:
     @commands.command(help=lookup_links['spotlight'][0])
     async def spotlight(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
-
-    # @commands.command(help=lookup_links['hook'][0])
-    # async def hook(self):
-    #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
-
-    # @commands.command(help=lookup_links['frogspawn'][0])
-    # async def frogspawn(self):
-    #     await self.bot.say('**{}**\n{}'.format(*self.lookup_links['frogspawn']))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
@@ -363,8 +354,8 @@ class MCOC:
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(aliases=['cacheg',])
-    async def cache_gsheets(self):
+    @commands.command(aliases=['cacheg','cache_gsheets'])
+    async def _cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
         for k, v in gsheet_files.items():
@@ -399,17 +390,28 @@ class MCOC:
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
     @commands.command()
-    async def portrait(self, champ : ChampConverter):
-        '''View Champion Portraits'''
-        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
-        em.set_image(url=champ.get_avatar())
+    async def bio(self, champ : ChampConverter, dbg=0):
+        '''Retrieve Champion Biography'''
+        em = discord.Embed(color=champ.class_color, title=champ.full_name,
+                description=champ.get_bio())
+        em.set_thumbnail(url=champ.get_avatar())
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
+        if dbg == 1:
+            await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
     @commands.command()
     async def featured(self, champ : ChampConverter):
-        '''View Champion Feature Images'''
+        '''Retrieve Champion Feature Images'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_image(url=champ.get_featured())
+        await self.bot.say(embed=em)
+
+    @commands.command()
+    async def portrait(self, champ : ChampConverter):
+        '''Retrieve Champion Portrait'''
+        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     @commands.command()
@@ -438,24 +440,14 @@ class MCOC:
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
-    @commands.command()
-    async def bio(self, champ : ChampConverter, dbg=0):
-        '''Retrieve the Bio of a Champion'''
-        em = discord.Embed(color=champ.class_color, title=champ.full_name,
-                description=champ.get_bio())
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        await self.bot.say(embed=em)
-        if dbg == 1:
-            await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
-
-    @commands.command()
-    async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
+    @commands.command(aliases=['sig_test'])
+    async def _sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
 
-    @commands.command()
+    @commands.command(aliases=['spar','spars','duels'])
     async def duel(self, champ : ChampConverter, dataset=data_files['duelist']['local']):
+        '''Lookup Duel/Sparring Targets'''
         duels = []
         spars = []
         em = discord.Embed(color=champ.class_color, title='')
@@ -492,8 +484,10 @@ class MCOC:
             em.add_field(name='Target not found',value='Add one to the Community Spreadhseet!\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
         await self.bot.say(embed=em)
 
-    @commands.command()
+    @commands.command(aliases=['base_stats',])
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
+
+        '''Retrieve Champion Base Stats'''
         key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
         data = get_csv_row(dataset, 'unique', key, default='x')
         title = 'Base Attributes for {}* {} at r{}'.format(star, champ.full_name, rank)
@@ -573,7 +567,7 @@ class MCOC:
 
     @commands.command()
     async def sig(self, champ : ChampConverter, siglvl: int=None, dbg=False):
-        '''Retrieve the Signature Ability of a Champion'''
+        '''Retrieve the Champion Signature Ability'''
         if siglvl is not None:
             champ.update_attrs({'sig': siglvl})
         if champ.star == 5:
@@ -656,7 +650,7 @@ class MCOC:
 
     @commands.command()
     async def abilities(self, champ : ChampConverter):
-        '''Champion Abilities List'''
+        '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
@@ -697,7 +691,7 @@ class MCOC:
 
     @commands.command()
     async def prestige(self, *args):
-        '''Prestige for champions
+        '''Retrieve Champion Prestige
         Use:
         /prestige <star>champ<rank><sig> ... <star>champ<rank><sig>
         Example:
@@ -1277,8 +1271,4 @@ def load_csv(filename):
 
 
 def setup(bot):
-    # if hook is None:
-    #     raise RuntimeError('Please install mcoc-cogs hook')
-    # if clanmod is None:
-    #     raise RuntimeError('Please install mcoc-cogs clan_mod')
     bot.add_cog(MCOC(bot))
