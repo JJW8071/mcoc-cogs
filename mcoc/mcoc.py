@@ -461,6 +461,7 @@ class MCOC:
         em = discord.Embed(color=champ.class_color, title='')
         # em.set_thumbnail(url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
+        em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         for rank in range(5):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
@@ -487,12 +488,9 @@ class MCOC:
             em.add_field(name='Duel Target', value='\n'.join(k for k in duels))
         if len(spars) > 0:
             em.add_field(name='Sparring Target', value='\n'.join(k for k in spars), inline=False)
-        if len(duels) + len(spars) > 0 :
-            em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
-            await self.bot.say(embed=em)
         else:
-            await self.bot.say('Could not find a target. Add one to the Community Spreadhseet:\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
-
+            em.add_field(name='Target not found',value='Could not find a target. Add one to the Community Spreadhseet:\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
+        await self.bot.say(embed=em)
 
     @commands.command()
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
