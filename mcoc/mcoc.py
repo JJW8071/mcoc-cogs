@@ -462,7 +462,7 @@ class MCOC:
         # em.set_thumbnail(url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
-        for rank in range(5):
+        for rank in range(6):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
             data_array = get_csv_rows(dataset, 'unique', key, default='x')
@@ -473,7 +473,7 @@ class MCOC:
                 level = '{}/{}'.format(rank, rank*10)
                 if target != 'none':
                     duels.append('★★★★  {} : {}'.format(level, target))
-        for rank in range(5):
+        for rank in range(6):
             star = 5
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
             # data = get_csv_row(dataset, 'unique', key, default='x')
