@@ -491,7 +491,7 @@ class MCOC:
             em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
             await self.bot.say(embed=em)
         else:
-            await self.bot.say('Could not find a target.')
+            await self.bot.say('Could not find a target. Add one to the Community Spreadhseet:\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
 
 
     @commands.command()
