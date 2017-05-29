@@ -489,7 +489,7 @@ class MCOC:
         if len(spars) > 0:
             em.add_field(name='Sparring Target', value='\n'.join(k for k in spars), inline=False)
         else:
-            em.add_field(name='Target not found',value='Could not find a target. Add one to the Community Spreadhseet:\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
+            em.add_field(name='Target not found',value='Add one to the Community Spreadhseet!\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
         await self.bot.say(embed=em)
 
     @commands.command()
