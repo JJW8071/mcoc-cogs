@@ -467,22 +467,22 @@ class MCOC:
             data_array = get_csv_rows(dataset, 'unique', key, default='x')
             for data in data_array:
             # data = get_csv_row(dataset, 'unique', key, default='x')
-                if data is not None:
-                    target = data['username']
-                    level = '{}/{}'.format(rank, rank*10)
-                    if target != 'none':
-                        duels.append('★★★★  {} : {}'.format(level, target))
+                print(data)
+                target = data['username']
+                level = '{}/{}'.format(rank, rank*10)
+                if target != 'none':
+                    duels.append('★★★★  {} : {}'.format(level, target))
         for rank in range(5):
             star = 5
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
             # data = get_csv_row(dataset, 'unique', key, default='x')
             data_array = get_csv_rows(dataset, 'unique', key, default='x')
             for data in data_array:
-                if data is not None:
-                    target = data['username']
-                    level = '{}/{}'.format(rank, 15+rank*10)
-                    if target != 'none':
-                        spars.append('★★★★★ {} : {}'.format(level, target))
+                print(data)
+                target = data['username']
+                level = '{}/{}'.format(rank, 15+rank*10)
+                if target != 'none':
+                    spars.append('★★★★★ {} : {}'.format(level, target))
         if len(duels) > 0:
             em.add_field(name='Duel Target', value='\n'.join(k for k in duels))
         if len(spars) > 0:
