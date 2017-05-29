@@ -464,21 +464,25 @@ class MCOC:
         for rank in range(5):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-            data = get_csv_row(dataset, 'unique', key, default='x')
-            if data is not None:
-                target = data['username']
-                level = '{}/{}'.format(rank, rank*10)
-                if target != 'none':
-                    duels.append('★★★★  {} : {}'.format(level, target))
+            data_array = get_csv_rows(dataset, 'unique', key, default='x')
+            for data in data_array:
+            # data = get_csv_row(dataset, 'unique', key, default='x')
+                if data is not None:
+                    target = data['username']
+                    level = '{}/{}'.format(rank, rank*10)
+                    if target != 'none':
+                        duels.append('★★★★  {} : {}'.format(level, target))
         for rank in range(5):
             star = 5
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-            data = get_csv_row(dataset, 'unique', key, default='x')
-            if data is not None:
-                target = data['username']
-                level = '{}/{}'.format(rank, 15+rank*10)
-                if target != 'none':
-                    spars.append('★★★★★ {} : {}'.format(level, target))
+            # data = get_csv_row(dataset, 'unique', key, default='x')
+            data_array = get_csv_rows(dataset, 'unique', key, default='x')
+            for data in data_array:
+                if data is not None:
+                    target = data['username']
+                    level = '{}/{}'.format(rank, 15+rank*10)
+                    if target != 'none':
+                        spars.append('★★★★★ {} : {}'.format(level, target))
         if len(duels) > 0:
             em.add_field(name='Duel Target', value='\n'.join(k for k in duels))
         if len(spars) > 0:
@@ -1242,6 +1246,18 @@ def get_csv_row(filecsv, column, match_val, default=None):
                     if v == '':
                         row[k] = default
             return row
+
+def get_csv_rows(filecsv, column, match_val, default=None):
+    csvfile = load_csv(filecsv)
+    package =[]
+    for row in csvfile:
+        if row[column] == match_val:
+            if default is not None:
+                for k, v in row.items():
+                    if v == '':
+                        row[k] = default
+            package.append(row)
+    return package
 
 def load_csv(filename):
     fp = open(filename)
