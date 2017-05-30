@@ -354,8 +354,8 @@ class MCOC:
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(hidden=True)
-    async def cache_gsheets(self):
+    @commands.command(aliases='cache_gsheets',hidden=True)
+    async def _cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
         for k, v in gsheet_files.items():
