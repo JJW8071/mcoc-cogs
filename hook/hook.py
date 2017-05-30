@@ -12,6 +12,7 @@ import ast
 import csv
 import requests
 import re
+import asyncio
 
 class Hook:
 
