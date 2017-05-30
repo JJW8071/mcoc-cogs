@@ -224,7 +224,7 @@ class MCOC:
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['compf',],hidden=True)
+    @commands.command(aliases=['compf',])
     async def compound_frac(self, base: float, exp: int):
         if base > 1:
             base = base / 100
@@ -354,8 +354,8 @@ class MCOC:
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(aliases='cache_gsheets',hidden=True)
-    async def _cache_gsheets(self):
+    @commands.command(hidden=True)
+    async def cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
         for k, v in gsheet_files.items():
@@ -440,8 +440,8 @@ class MCOC:
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
-    @commands.command(aliases=['sig_test'],hidden=True)
-    async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
+    @commands.command(aliases=['sig_test'])
+    async def _sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
 
@@ -734,7 +734,7 @@ class MCOC:
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['champ_alias',])
+    @commands.command()
     async def champ_aliases(self, *args):
         '''Find Champion Aliases'''
         champs_matched = []
