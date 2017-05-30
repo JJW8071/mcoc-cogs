@@ -224,7 +224,7 @@ class MCOC:
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['compf',])
+    @commands.command(aliases=['compf',],hidden=True)
     async def compound_frac(self, base: float, exp: int):
         if base > 1:
             base = base / 100
@@ -355,7 +355,7 @@ class MCOC:
         return remote_check
 
     @commands.command(aliases=['cacheg','cache_gsheets'],hidden=True)
-    async def cache_gsheets(self):
+    async def _cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
         for k, v in gsheet_files.items():
@@ -734,7 +734,7 @@ class MCOC:
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command()
+    @commands.command(aliases=['champ_alias',])
     async def champ_aliases(self, *args):
         '''Find Champion Aliases'''
         champs_matched = []
