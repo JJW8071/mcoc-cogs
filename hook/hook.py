@@ -35,6 +35,7 @@ class Hook:
             user = ctx.message.author
         # creates user if doesn't exist
         info = self.get_user_info(user.id)
+        delete_message(ctx.message)
         em = discord.Embed(title="User Profile", description=user.name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
@@ -46,6 +47,7 @@ class Hook:
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
         server = ctx.message.server
         members = []
+        delete_message(ctx.message)
         for member in server.members:
             if role in member.roles:
                 members.append(member)
@@ -64,6 +66,7 @@ class Hook:
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
+        delete_message(ctx.message)
         info = self.get_user_info(user.id)
         em = discord.Embed(title="User Profile", description=user.name)
         if info['aq']:
@@ -136,6 +139,7 @@ class Hook:
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         '''Report Clan Prestige'''
         server = ctx.message.server
+        delete_message(ctx.message)
         width = 20
         prestige = 0
         cnt = 0
