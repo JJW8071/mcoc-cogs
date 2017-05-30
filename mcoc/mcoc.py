@@ -486,8 +486,8 @@ class MCOC:
 
     @commands.command(aliases=['base_stats',])
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
-
-        '''Retrieve Champion Base Stats'''
+        '''Retrieve Champion Base Stats
+        Health / Attack / Critical Rate / Critical Damage / Armor / Block Proficiency'''
         key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
         data = get_csv_row(dataset, 'unique', key, default='x')
         title = 'Base Attributes for {}* {} at r{}'.format(star, champ.full_name, rank)
