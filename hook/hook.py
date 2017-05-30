@@ -12,7 +12,6 @@ import ast
 import csv
 import requests
 import re
-import asyncio
 
 class Hook:
 
@@ -24,7 +23,7 @@ class Hook:
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
         try:
-            self.bot.get_cog('MCOC')
+            self.mcocCog = self.bot.get_cog('MCOC')
         except KeyError:
             raise KeyError('The MCOC Cog is not installed.')
 
@@ -36,7 +35,6 @@ class Hook:
             user = ctx.message.author
         # creates user if doesn't exist
         info = self.get_user_info(user.id)
-        ctx.message.delete_message()
         em = discord.Embed(title="User Profile", description=user.name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
@@ -48,7 +46,6 @@ class Hook:
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
         server = ctx.message.server
         members = []
-        ctx.message.delete_message()
         for member in server.members:
             if role in member.roles:
                 members.append(member)
@@ -67,7 +64,6 @@ class Hook:
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
-        ctx.message.delete_message()
         info = self.get_user_info(user.id)
         em = discord.Embed(title="User Profile", description=user.name)
         if info['aq']:
@@ -87,7 +83,6 @@ class Hook:
             champclass = champclass.lower().capitalize()
 
         user_info = self.get_user_info(user.id)
-        mcoc = self.bot.get_cog('MCOC')
 
         champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
         classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],
@@ -97,7 +92,7 @@ class Hook:
             await self.bot.say("'{}' is not a valid class".format(champclass))
             return
         for k in user_info['champs']:
-            champ = mcoc.find_champ(k['Id'], 'hookid')
+            champ = self.mcocCog.find_champ(k['Id'], 'hookid')
             package = champ_str.format(k, champ.full_name)
             classes[champ.klass].append(package)
 
@@ -105,7 +100,7 @@ class Hook:
         em = discord.Embed(title="User", description=user.name, color=color)
         for klass, class_champs in classes.items():
             if class_champs and (champclass is None or champclass == klass):
-                em.add_field(name=klass, value='\n'.join(k for k in class_champs))
+                em.add_field(name=klass+': {} ', value='\n'.join(k for k in class_champs))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
 
@@ -140,7 +135,6 @@ class Hook:
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         '''Report Clan Prestige'''
         server = ctx.message.server
-        ctx.message.delete_message()
         width = 20
         prestige = 0
         cnt = 0

@@ -44,7 +44,7 @@ class Lessons:
             ),
             'yellowjacket':(
             'How to fight Yellowjacket',
-            '',
+            'https://www.youtube.com/watch?v=IhJrGxEYXzY',
             ''
             )
         }

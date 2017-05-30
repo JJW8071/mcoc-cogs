@@ -235,7 +235,7 @@ class MCOC:
         em.add_field(name='Expected Chance', value='{}%'.format(compound))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['update_mcoc',])
+    @commands.command(aliases=['update_mcoc',],hidden=True)
     async def mcoc_update(self, fname, force=False):
         if len(fname) > 3:
             for key in data_files.keys():
@@ -252,8 +252,8 @@ class MCOC:
         self._init()
         await self.bot.say('Summoner, I have Collected the data')
 
-    @commands.command(aliases=['mcocset'])
-    async def _mcocset(self, setting, value):
+    @commands.command(hidden=True)
+    async def mcocset(self, setting, value):
         if setting in self.settings:
             self.settings[setting] = int(value)
 
@@ -354,8 +354,8 @@ class MCOC:
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(aliases=['cacheg','cache_gsheets'])
-    async def _cache_gsheets(self):
+    @commands.command(aliases=['cacheg','cache_gsheets'],hidden=True)
+    async def cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
         for k, v in gsheet_files.items():
@@ -440,8 +440,8 @@ class MCOC:
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
-    @commands.command(aliases=['sig_test'])
-    async def _sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
+    @commands.command(aliases=['sig_test'],hidden=True)
+    async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
 
@@ -484,7 +484,7 @@ class MCOC:
             em.add_field(name='Target not found',value='Add one to the Community Spreadhseet!\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['base_stats',])
+    @commands.command(aliases=['base_stats','ac'])
     async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
         '''Retrieve Champion Base Stats
         Health / Attack / Critical Rate / Critical Damage / Armor / Block Proficiency'''
@@ -571,7 +571,7 @@ class MCOC:
         if siglvl is not None:
             champ.update_attrs({'sig': siglvl})
         if champ.star == 5:
-            await self.bot.say("Sorry.  5* data for any champion is not currently available")
+            await self.bot.say("Sorry.  5{} data for any champion is not currently available".format(star_glyph[5]))
             return
         title, desc = await self.format_desc(champ, dbg=dbg)
         if title is None:
@@ -736,6 +736,7 @@ class MCOC:
 
     @commands.command()
     async def champ_aliases(self, *args):
+        '''Find Champion Aliases'''
         champs_matched = []
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         for arg in args:
