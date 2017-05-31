@@ -2,10 +2,10 @@ import discord
 from discord.ext import commands
 
 class mcoc_maps:
-    aq_map = {'aq5':{'map': 'aq5', 'maptitle':'5'},
-        'aq5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
-        'aq5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
-        'aq5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
+    aq_map = {'5':{'map': 'aq5', 'maptitle':'5'},
+        '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
+        '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
+        '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
 
     warmaps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
