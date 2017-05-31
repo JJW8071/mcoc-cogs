@@ -12,7 +12,7 @@ class mcoc_maps:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
 
-    mcoc = self.bot.get_cog('MCOC')
+    mcoc = bot.get_cog('MCOC')
     if mcoc is not None:
         icon_sdf = mcoc.icon_sdf
     # icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
