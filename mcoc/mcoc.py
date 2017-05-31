@@ -144,7 +144,7 @@ class ChampionFactory():
         re_str = re.compile(search_str)
         champs = []
         for champ in self.champions.values():
-            if reduce(or_, [re_str.search(alias) is not None 
+            if reduce(or_, [re_str.search(alias) is not None
                     for alias in champ.alias_set]):
                 champs.append(champ(attrs))
         return champs
@@ -554,7 +554,7 @@ class MCOC(ChampionFactory):
     async def champ_about(self, *, champ : ChampConverterRank):
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.get_verbose_str())
-        em = discord.Embed(color=champ.class_color, 
+        em = discord.Embed(color=champ.class_color,
                 title=champ.get_verbose_str(), description='Base Attributes')
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
@@ -644,6 +644,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=title, value=champ.get_star_str())
         em.add_field(name='Signature Level {}'.format(champ.sig),  value=desc)
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -950,7 +951,7 @@ class Champion:
     @validate_attr('prestige')
     def prestige(self):
         if self.prestige_data[self.star][self.rank-1] is None:
-            return 0 
+            return 0
         return self.prestige_data[self.star][self.rank-1][self.sig]
 
     @validate_attr('prestige')
@@ -1033,7 +1034,7 @@ class Champion:
                     self.full_name, self.get_star_str()))
         fdesc = []
         for i, kabam_key in enumerate(desc):
-            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i), 
+            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
                         self._sig_header(sigs[kabam_key])))
         if self.debug:
             await self.bot.say('```{}```'.format('\n'.join(fdesc)))
@@ -1159,7 +1160,7 @@ class Champion:
         return get_csv_row(local_files['effect_keys'], 'CHAMP', self.full_name)
 
     def get_spotlight(self, default=None):
-        return get_csv_row(data_files['spotlight']['local'], 'unique', 
+        return get_csv_row(data_files['spotlight']['local'], 'unique',
                 self.get_unique(), default=default)
 
     def get_aliases(self):
