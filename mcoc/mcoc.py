@@ -456,31 +456,6 @@ class MCOC(ChampionFactory):
         await self.bot.upload(data_files['phc_jpg']['local'],
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
-    @commands.command(aliases=['bio'])
-    async def champ_bio(self, champ : ChampConverter, dbg=0):
-        '''Retrieve Champion Biography'''
-        em = discord.Embed(color=champ.class_color, title=champ.full_name,
-                description=champ.get_bio())
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        await self.bot.say(embed=em)
-        if dbg == 1:
-            await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
-
-    @commands.command(aliases=['featured'])
-    async def champ_featured(self, champ : ChampConverter):
-        '''Retrieve Champion Feature Images'''
-        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
-        em.set_image(url=champ.get_featured())
-        await self.bot.say(embed=em)
-
-    @commands.command(aliases=['portrait',])
-    async def champ_portrait(self, champ : ChampConverter):
-        '''Retrieve Champion Portrait'''
-        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
-        em.set_image(url=champ.get_avatar())
-        await self.bot.say(embed=em)
-
     @commands.command()
     async def warmap(self, maptype='ai', dbg=1):
         '''Select a Warmap
@@ -506,9 +481,22 @@ class MCOC(ChampionFactory):
             else :
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
-    #@alias_resolve
-    @commands.command()
-    async def bio(self, *, champ : ChampConverter):
+    @commands.command(aliases=['featured'])
+    async def champ_featured(self, champ : ChampConverter):
+        '''Retrieve Champion Feature Images'''
+        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_image(url=champ.get_featured())
+        await self.bot.say(embed=em)
+
+    @commands.command(aliases=['portrait',])
+    async def champ_portrait(self, champ : ChampConverter):
+        '''Retrieve Champion Portrait'''
+        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_image(url=champ.get_avatar())
+        await self.bot.say(embed=em)
+
+    @commands.command(aliases=('bio',))
+    async def champ_bio(self, *, champ : ChampConverterDebug):
         '''Retrieve the Bio of a Champion'''
         try:
             bio_desc = await champ.get_bio()
@@ -521,16 +509,17 @@ class MCOC(ChampionFactory):
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
-    @commands.command()
-    async def duel(self, champ : ChampConverter):
-        dataset=data_files['duelist']['local']
+    @commands.command(aliases=('duel',))
+    async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
+        dataset=data_files['duelist']['local']
         duels = []
         spars = []
         em = discord.Embed(color=champ.class_color, title='')
         # em.set_thumbnail(url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
-        em.set_footer(text='Sourced from Community Spreadsheet', icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
+        em.set_footer(text='Sourced from Community Spreadsheet',
+                icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         for rank in range(6):
             star = 4
             key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
@@ -561,9 +550,8 @@ class MCOC(ChampionFactory):
             em.add_field(name='Target not found',value='Add one to the Community Spreadhseet!\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['base_stats','ac','about_champ'])
-    @commands.command(aliases=['champ_stat', 'champ_stats', 'cstat'])
-    async def about_champ(self, *, champ : ChampConverterRank):
+    @commands.command(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ'))
+    async def champ_about(self, *, champ : ChampConverterRank):
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.get_verbose_str())
         em = discord.Embed(color=champ.class_color, 
@@ -640,10 +628,9 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command()
-    async def sig(self, *, champ : ChampConverterSig):
-        '''Retrieve the Signature Ability of a Champion'''
     @commands.command(aliases=['sig','signature'])
+    async def champ_sig(self, *, champ : ChampConverterSig):
+        '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
             await self.bot.say("Sorry.  5{} data for any champion is not currently available".format(star_glyph[5]))
             return
@@ -660,7 +647,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['abilities','ca'])
+    @commands.command(aliases=['abilities',])
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
@@ -698,8 +685,9 @@ class MCOC(ChampionFactory):
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @commands.command()
-    async def prestige(self, *, champs : ChampConverterMult):
+    @commands.command(aliases=('prestige',))
+    async def champ_prestige(self, *, champs : ChampConverterMult):
+        '''Retrieve prestige data for champs'''
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
         for champ in champs:
             try:
@@ -710,7 +698,7 @@ class MCOC(ChampionFactory):
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command()
+    @commands.command(aliases=('calias',))
     async def champ_aliases(self, *args):
         '''Retrieve Champion Aliases'''
         champs_matched = []
