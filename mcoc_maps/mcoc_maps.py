@@ -16,15 +16,15 @@ class mcoc_maps:
         self.bot = bot
 
     @commands.command(pass_context=True, aliases=['warmap','aqmap'])
-    async def mmap(self, ctx, *, maptype):
+    async def mmap(self, ctx, *, maptype: str):
         '''Select a Map
         aq maps : aq5, aq5.1, aq5.2, aq5.3
             /map aq5
         war map syntax: /map <left><right>
              <left> = [a, b, c, d, e]
              <right> = [f, g, g+, h, i]'''
-        print(len(str(maptype)))
-        if len(str(maptype)) > 0:
+        print(len(maptype))
+        if len(maptype) > 0:
             if maptype in self.aq_map:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
