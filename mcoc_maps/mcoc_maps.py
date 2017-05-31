@@ -12,7 +12,7 @@ class Lessons:
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc_maps/data/maps/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/icon_sdf.png'
 
-    @commands.command(aliases='warmap','aqmap')
+    @commands.command(aliases=['warmap','aqmap'])
     async def mmap(self, maptype='ai'):
         '''Select a Map
         aq syntax: /map aq<num>[.1]
