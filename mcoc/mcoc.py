@@ -389,8 +389,8 @@ class MCOC:
         await self.bot.upload(data_files['phc_jpg']['local'],
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
-    @commands.command()
-    async def bio(self, champ : ChampConverter, dbg=0):
+    @commands.command(aliases=['bio'])
+    async def champ_bio(self, champ : ChampConverter, dbg=0):
         '''Retrieve Champion Biography'''
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=champ.get_bio())
@@ -400,15 +400,15 @@ class MCOC:
         if dbg == 1:
             await self.bot.say('DEBUG: {}'.format(champ.mcocjson))
 
-    @commands.command()
-    async def featured(self, champ : ChampConverter):
+    @commands.command(aliases=['featured'])
+    async def champ_featured(self, champ : ChampConverter):
         '''Retrieve Champion Feature Images'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
 
-    @commands.command()
-    async def portrait(self, champ : ChampConverter):
+    @commands.command(aliases=['portrait',])
+    async def champ_portrait(self, champ : ChampConverter):
         '''Retrieve Champion Portrait'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_image(url=champ.get_avatar())
@@ -484,8 +484,8 @@ class MCOC:
             em.add_field(name='Target not found',value='Add one to the Community Spreadhseet!\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['base_stats','ac'])
-    async def about_champ(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
+    @commands.command(aliases=['base_stats','ac','about_champ'])
+    async def champ_about(self, champ : ChampConverter, star: int=4, rank: int = 5, dataset=data_files['spotlight']['local']):
         '''Retrieve Champion Base Stats
         Health / Attack / Critical Rate / Critical Damage / Armor / Block Proficiency'''
         key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
@@ -504,7 +504,7 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command()
+    @commands.command(aliases=['msig',])
     async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
         '''Retrieve Champion Signature Ability from MCOC Files'''
         mcocjson = champ.mcocjson
@@ -565,8 +565,8 @@ class MCOC:
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command()
-    async def sig(self, champ : ChampConverter, siglvl: int=None, dbg=False):
+    @commands.command(aliases=['sig','signature'])
+    async def champ_sig(self, champ : ChampConverter, siglvl: int=None, dbg=False):
         '''Retrieve the Champion Signature Ability'''
         if siglvl is not None:
             champ.update_attrs({'sig': siglvl})
@@ -649,7 +649,7 @@ class MCOC:
         return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
 
     @commands.command()
-    async def abilities(self, champ : ChampConverter):
+    async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
@@ -689,8 +689,8 @@ class MCOC:
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @commands.command()
-    async def prestige(self, *args):
+    @commands.command(aliases='prestige')
+    async def champ_prestige(self, *args):
         '''Retrieve Champion Prestige
         Use:
         /prestige <star>champ<rank><sig> ... <star>champ<rank><sig>
@@ -753,7 +753,7 @@ class MCOC:
                     champs_matched.append(champ)
         await self.bot.say(embed=em)
 
-    @commands.command()
+    @commands.command(hidden=True)
     async def tst(self, key):
         files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
                  'sig': (kabam_bcg_stat_en, 'ID_UI_STAT_', 'mcocsig')}
