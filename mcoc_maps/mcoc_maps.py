@@ -12,6 +12,9 @@ class mcoc_maps:
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc_maps/data/maps/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/icon_sdf.png'
 
+    def __init__(self, bot):
+        self.bot = bot
+        
     @commands.command(aliases=['warmap','aqmap'])
     async def mmap(self, maptype):
         '''Select a Map
