@@ -10,16 +10,16 @@ class mcoc_maps:
     warmaps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc_maps/data/maps/'
-    icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/icon_sdf.png'
+    icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
 
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, aliases=['warmap','aqmap'])
+    @commands.command(pass_context=True, aliases=['warmap','aqmap','aq'])
     async def mmap(self, ctx, *, maptype: str):
         '''Select a Map
-        aq maps : aq5, aq5.1, aq5.2, aq5.3
-            /map aq5
+        aq maps : 5, 5.1, 5.2, 5.3
+            /aq 5
         war map syntax: /map <left><right>
              <left> = [a, b, c, d, e]
              <right> = [f, g, g+, h, i]'''

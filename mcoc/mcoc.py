@@ -79,7 +79,7 @@ star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★�
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
 remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/'
-icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/icon_sdf.png'
+icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
 
 ###### KEYS for MCOC JSON Data Extraction
 mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
