@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class mcocTools:
+class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
     lookup_links = {
             'event': (
@@ -28,12 +28,12 @@ class mcocTools:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(help=lookup_links['event'][0], aliases=['events','schedule'])
-    async def event(self):
+    @commands.command(help=lookup_links['event'][0], aliases=['events','schedule','event'])
+    async def tool_event(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
 
-    @commands.command(help=lookup_links['spotlight'][0])
-    async def spotlight(self):
+    @commands.command(help=lookup_links['spotlight'][0], aliases=['spotlight'])
+    async def tool_spotlight(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
@@ -59,4 +59,4 @@ class mcocTools:
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
 def setup(bot):
-    bot.add_cog(mcocTools(bot))
+    bot.add_cog(MCOCTools(bot))

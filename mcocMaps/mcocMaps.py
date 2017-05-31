@@ -1,9 +1,9 @@
 import discord
 from discord.ext import commands
 
-class mcocMaps:
+class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
-    
+
     aq_map = {'5':{'map': 'aq5', 'maptitle':'5'},
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
@@ -48,4 +48,4 @@ class mcocMaps:
             await self.bot.say(embed=em)
 
 def setup(bot):
-    bot.add_cog(mcocMaps(bot))
+    bot.add_cog(MCOCMaps(bot))

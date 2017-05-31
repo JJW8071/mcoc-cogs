@@ -242,12 +242,12 @@ class MCOC(ChampionFactory):
         self._prepare_aliases()
         self._prepare_prestige_data()
 
-    @commands.command(aliases=('p2f',))
+    @commands.command(aliases=('p2f',),hidden=True)
     async def per2flat(self, per: float, ch_rating: int=100):
         '''Convert Percentage to MCOC Flat Value'''
         await self.bot.say(to_flat(per, ch_rating))
 
-    @commands.command(aliases=('flat', 'f2p'))
+    @commands.command(aliases=('flat', 'f2p'),hidden=True)
     async def flat2per(self, *, m):
         '''Convert MCOC Flat Value to Percentge'''
         if ' ' in m:
@@ -270,7 +270,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['compf',])
+    @commands.command(aliases=['compf',],hidden=True)
     async def compound_frac(self, base: float, exp: int):
         if base > 1:
             base = base / 100
