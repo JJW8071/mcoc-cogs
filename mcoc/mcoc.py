@@ -79,6 +79,7 @@ star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★�
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
 remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/'
+icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/icon_sdf.png'
 
 ###### KEYS for MCOC JSON Data Extraction
 mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
@@ -460,30 +461,30 @@ class MCOC(ChampionFactory):
         await self.bot.upload(data_files['phc_jpg']['local'],
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
-    @commands.command()
-    async def warmap(self, maptype='ai', dbg=1):
-        '''Select a Warmap
-        syntax: /warmap <left><right>
-        Where <left> = [a, b, c, d, e]
-        Where <right> = [f, g, g+, h, i]'''
-        filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
-        mapurl = '{}warmaps/warmap_{}.png'.format(remote_data_basepath, maptype.lower())
-        maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
-                'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
-        mapTitle = 'Alliance War Map {}'.format(maptype.upper())
-        filepath = filepath_png.format(maptype.lower())
-        if dbg == 0:
-            if maptype in maps:
-                await self.bot.upload(filepath, content=mapTitle)
-            else :
-                raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
-        elif dbg == 1:
-            if maptype in maps:
-                em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
-                em.set_image(url=mapurl)
-                await self.bot.say(embed=em)
-            else :
-                raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
+    # @commands.command()
+    # async def warmap(self, maptype='ai', dbg=1):
+    #     '''Select a Warmap
+    #     syntax: /warmap <left><right>
+    #     Where <left> = [a, b, c, d, e]
+    #     Where <right> = [f, g, g+, h, i]'''
+    #     filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
+    #     mapurl = '{}warmaps/warmap_{}.png'.format(remote_data_basepath, maptype.lower())
+    #     maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
+    #             'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
+    #     mapTitle = 'Alliance War Map {}'.format(maptype.upper())
+    #     filepath = filepath_png.format(maptype.lower())
+    #     if dbg == 0:
+    #         if maptype in maps:
+    #             await self.bot.upload(filepath, content=mapTitle)
+    #         else :
+    #             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
+    #     elif dbg == 1:
+    #         if maptype in maps:
+    #             em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
+    #             em.set_image(url=mapurl)
+    #             await self.bot.say(embed=em)
+    #         else :
+    #             raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     @commands.command(aliases=['featured'])
     async def champ_featured(self, champ : ChampConverter):
@@ -570,7 +571,7 @@ class MCOC(ChampionFactory):
                 em.add_field(name=t, value=data[k])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
-        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url='https://i.imgur.com/QQsT29B.png')
+        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
