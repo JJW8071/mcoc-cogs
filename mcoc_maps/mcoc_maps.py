@@ -16,14 +16,14 @@ class mcoc_maps:
         self.bot = bot
 
     @commands.command(pass_context=True, aliases=['warmap','aqmap'])
-    async def mmap(self, ctx, *):
+    async def mmap(self, ctx):
         '''Select a Map
         aq maps : aq5, aq5.1, aq5.2, aq5.3
             /map aq5
         war map syntax: /map <left><right>
              <left> = [a, b, c, d, e]
              <right> = [f, g, g+, h, i]'''
-        args = ctx.message
+        args = ctx.message.split(' ')
         if len(args)==0:
             message = 'Select a Map\naq maps : aq5, aq5.1, aq5.2, aq5.3\n/map aq5\nwar map syntax: /map <left><right>\n<left> = [a, b, c, d, e]\n<right> = [f, g, g+, h, i]'
             await self.bot.say(message)
