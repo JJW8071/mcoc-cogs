@@ -24,7 +24,7 @@ class mcoc_maps:
              <left> = [a, b, c, d, e]
              <right> = [f, g, g+, h, i]'''
         args = ctx.message
-        if len(args)=0:
+        if len(args)==0:
             message = 'Select a Map\naq maps : aq5, aq5.1, aq5.2, aq5.3\n/map aq5\nwar map syntax: /map <left><right>\n<left> = [a, b, c, d, e]\n<right> = [f, g, g+, h, i]'
             await self.bot.say(message)
         else:
