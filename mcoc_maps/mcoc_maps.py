@@ -23,8 +23,8 @@ class mcoc_maps:
         war map syntax: /map <left><right>
              <left> = [a, b, c, d, e]
              <right> = [f, g, g+, h, i]'''
-
-        if len(maptype) > 0:
+        print(len(str(maptype)))
+        if len(str(maptype)) > 0:
             if maptype in self.aq_map:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
