@@ -440,8 +440,8 @@ class MCOC:
                 raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
 
     #@alias_resolve
-    @commands.command(aliases=['sig_test'])
-    async def _sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
+    @commands.command(hidden=True)
+    async def sig_test(self, champ : ChampConverter, star: int=4, sig: int=99):
         key = '{}-{}-{}'.format(star, champ, sig)
         self.bot.say('DEBUG: key is ' + key)
 
@@ -648,7 +648,7 @@ class MCOC:
             await self.bot.say('```{}```'.format('\n'.join(fdesc)))
         return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
 
-    @commands.command()
+    @commands.command(aliases=['abilities','ca'])
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
@@ -689,7 +689,7 @@ class MCOC:
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @commands.command(aliases='prestige')
+    @commands.command(aliases=['prestige','p'])
     async def champ_prestige(self, *args):
         '''Retrieve Champion Prestige
         Use:
@@ -736,7 +736,7 @@ class MCOC:
 
     @commands.command()
     async def champ_aliases(self, *args):
-        '''Find Champion Aliases'''
+        '''Retrieve Champion Aliases'''
         champs_matched = []
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         for arg in args:
