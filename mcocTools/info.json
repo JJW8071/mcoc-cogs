@@ -1,7 +1,7 @@
 {
     "AUTHOR" : "JJW",
-    "INSTALL_MSG" : "No other Cogs required",
-    "NAME" : "mcocMaps",
+    "INSTALL_MSG" : "MCOC Companion Cog",
+    "NAME" : "mcocTools",
     "SHORT" : "A Redbot Cog for Marvel's Contest of Champions",
-    "DESCRIPTION" : "AQ and Warmaps for Contest of Champions"
+    "DESCRIPTION" : "Useful Tools for Contest of Champions"
 }
