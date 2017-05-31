@@ -1,5 +1,6 @@
 import discord
 from discord.ext import commands
+from .mcoc import icon_sdf
 
 class mcoc_maps:
     aq_map = {'5':{'map': 'aq5', 'maptitle':'5'},
@@ -9,8 +10,10 @@ class mcoc_maps:
 
     warmaps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
-    basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc_maps/data/maps/'
-    icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+    basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
+
+
+    # icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
 
     def __init__(self, bot):
         self.bot = bot
