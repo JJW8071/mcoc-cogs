@@ -31,8 +31,8 @@ class mcoc_maps:
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
             elif maptype in self.warmaps:
-                mapurl = '{}{}.png'.format(self.basepath, self.maptype.lower())
-                mapTitle = 'Alliance War Map {}'.format(self.maptype.upper())
+                mapurl = '{}warmap_{}.png'.format(self.basepath, maptype.lower())
+                mapTitle = 'Alliance War Map {}'.format(maptype.upper())
                 em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
                 em.set_image(url=mapurl)
             else:
