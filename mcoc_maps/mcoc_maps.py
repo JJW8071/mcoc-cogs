@@ -27,18 +27,18 @@ class mcoc_maps:
             ex: /map ef'''
         if maptype is not None:
             if maptype in self.aq_map:
-                mapurl = '{}{}.png'.format(basepath, aq_map[maptype]['map'])
-                maptitle = 'Alliance Quest {}'.format(aq_map[maptype]['maptitle'])
+                mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
+                maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
             elif maptype in self.warmaps:
-                mapurl = '{}{}.png'.format(basepath, maptype.lower())
-                mapTitle = 'Alliance War Map {}'.format(maptype.upper())
+                mapurl = '{}{}.png'.format(self.basepath, self.maptype.lower())
+                mapTitle = 'Alliance War Map {}'.format(self.maptype.upper())
                 em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
                 em.set_image(url=mapurl)
             else:
                 em=discord.Embed(color=discord.Color.gold(),title='Apologies',desc='Summoner, I cannot find a suitable map.')
-                em.set_footer(text='Presented by [-SDF-]',icon_url=icon_sdf)
+                em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
             await self.bot.say(embed=em)
 
 def setup(bot):
