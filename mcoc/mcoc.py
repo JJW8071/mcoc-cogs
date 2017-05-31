@@ -319,6 +319,10 @@ class MCOC(ChampionFactory):
         self._init()
         await self.bot.say('Summoner, I have Collected the data')
 
+    async def say_user_error(self, msg):
+        em = discord.Embed(color=discord.Color.gold(), title=msg)
+        await self.bot.say(embed=em)
+
     @commands.command(hidden=True)
     async def mcocset(self, setting, value):
         if setting in self.settings:
@@ -501,7 +505,7 @@ class MCOC(ChampionFactory):
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
-            await self.bot.say("Cannot find bio for Champion '{}'".format(champ.full_name))
+            await self.say_user_error("Cannot find bio for Champion '{}'".format(champ.full_name))
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=bio_desc)
@@ -632,12 +636,12 @@ class MCOC(ChampionFactory):
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
-            await self.bot.say("Sorry.  5{} data for any champion is not currently available".format(star_glyph[5]))
+            await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph[1]))
             return
         try:
             title, desc = await champ.process_sig_description()
         except KeyError:
-            await self.bot.say("Cannot find sig for Champion '{}'".format(champ.full_name))
+            await champ.missing_sig_ad()
             return
         if title is None:
             return
@@ -965,6 +969,13 @@ class Champion:
                 raise
         return row
 
+    async def missing_sig_ad(self):
+        em = discord.Embed(color=self.class_color,
+                title='Signature Data is Missing')
+        em.add_field(name=self.full_name,
+                value='Contribute your data at http://discord.gg/wJqpYGS')
+        await self.bot.say(embed=em)
+
     async def process_sig_description(self):
         brkt_re = re.compile(r'{([0-9])}')
         sigs = load_kabam_json(kabam_bcg_stat_en)
@@ -980,6 +991,8 @@ class Champion:
         coeff = self.get_sig_coeff()
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
+        if coeff is None or ekey is None:
+            raise KeyError("Missing Sig data for {}".format(self.full_name))
         if self.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
         sig_calcs = {}
@@ -993,7 +1006,8 @@ class Champion:
                 m = float(coeff['ability_norm' + i])
                 b = float(coeff['offset' + i])
             except:
-                await self.bot.say("Missing data for champion '{}'.  Try again later".format(self.full_name))
+                #await self.bot.say("Missing data for champion '{}'.  Try again later".format(self.full_name))
+                await self.missing_sig_ad()
                 self.update_attrs({'sig': 0})
                 return sigs[title], '\n'.join([sigs[k] for k in simple])
                 #return None
@@ -1139,7 +1153,7 @@ class Champion:
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
         else:
-            for k in ('_DESC','_DESC_B'):#,'_DESC2','_DESC3'}:
+            for k in ('_DESC','_DESC_A','_DESC_B'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
