@@ -14,7 +14,7 @@ class mcoc_maps:
 
     def __init__(self, bot):
         self.bot = bot
-        
+
     @commands.command(aliases=['warmap','aqmap'])
     async def mmap(self, maptype):
         '''Select a Map
@@ -26,12 +26,12 @@ class mcoc_maps:
              Where <right> = [f, g, g+, h, i]
             ex: /map ef'''
         if maptype is not None:
-            if maptype in aq_map:
+            if maptype in self.aq_map:
                 mapurl = '{}{}.png'.format(basepath, aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(aq_map[maptype]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
-            elif maptype in warmaps:
+            elif maptype in self.warmaps:
                 mapurl = '{}{}.png'.format(basepath, maptype.lower())
                 mapTitle = 'Alliance War Map {}'.format(maptype.upper())
                 em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
