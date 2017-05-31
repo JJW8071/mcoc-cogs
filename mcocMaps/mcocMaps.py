@@ -12,13 +12,15 @@ class mcoc_maps:
                 'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
 
-    mcoc = bot.get_cog('MCOC')
-    if mcoc is not None:
-        icon_sdf = mcoc.icon_sdf
-    # icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+
 
     def __init__(self, bot):
         self.bot = bot
+        mcoc = self.bot.get_cog('MCOC')
+        if mcoc is not None:
+            icon_sdf = mcoc.icon_sdf
+        # icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+        
 
     @commands.command(pass_context=True, aliases=['warmap','aqmap','aq'])
     async def mmap(self, ctx, *, maptype: str):
