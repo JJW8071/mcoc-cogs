@@ -1,7 +1,7 @@
 import discord
 from discord.ext import commands
 
-class Lessons:
+class mcoc_maps:
     aq_map = {'aq5':{'map': 'aq5', 'maptitle':'5'},
         'aq5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         'aq5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
@@ -39,4 +39,4 @@ class Lessons:
             await self.bot.say(embed=em)
 
 def setup(bot):
-    bot.add_cog(Lessons(bot))
+    bot.add_cog(mcoc_maps(bot))
