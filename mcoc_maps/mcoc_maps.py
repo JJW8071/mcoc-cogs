@@ -13,7 +13,7 @@ class Lessons:
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/icon_sdf.png'
 
     @commands.command(aliases=['warmap','aqmap'])
-    async def mmap(self, maptype='ai'):
+    async def mmap(self, maptype):
         '''Select a Map
         aq syntax: /map aq<num>[.1]
             Where <num> = [1, 2, 3, 4, 5, 6]
@@ -22,21 +22,21 @@ class Lessons:
              Where <left> = [a, b, c, d, e]
              Where <right> = [f, g, g+, h, i]
             ex: /map ef'''
-
-        if maptype in aq_map:
-            mapurl = '{}{}.png'.format(basepath, aq_map[maptype]['map'])
-            maptitle = 'Alliance Quest {}'.format(aq_map[maptype]['maptitle'])
-            em = discord.Embed(color=discord.Color.gold(),title=maptitle)
-            em.set_image(url=mapurl)
-        elif maptype in warmaps:
-            mapurl = '{}{}.png'.format(basepath, maptype.lower())
-            mapTitle = 'Alliance War Map {}'.format(maptype.upper())
-            em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
-            em.set_image(url=mapurl)
-        else:
-            em=discord.Embed(color=discord.Color.gold(),title='Apologies',desc='Summoner, I cannot find a suitable map.')
-        em.set_footer(text='Presented by [-SDF-]',icon_url=icon_sdf)
-        await self.bot.say(embed=em)
+        if maptype is not None:
+            if maptype in aq_map:
+                mapurl = '{}{}.png'.format(basepath, aq_map[maptype]['map'])
+                maptitle = 'Alliance Quest {}'.format(aq_map[maptype]['maptitle'])
+                em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+                em.set_image(url=mapurl)
+            elif maptype in warmaps:
+                mapurl = '{}{}.png'.format(basepath, maptype.lower())
+                mapTitle = 'Alliance War Map {}'.format(maptype.upper())
+                em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
+                em.set_image(url=mapurl)
+            else:
+                em=discord.Embed(color=discord.Color.gold(),title='Apologies',desc='Summoner, I cannot find a suitable map.')
+                em.set_footer(text='Presented by [-SDF-]',icon_url=icon_sdf)
+            await self.bot.say(embed=em)
 
 def setup(bot):
     bot.add_cog(Lessons(bot))
