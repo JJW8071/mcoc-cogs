@@ -33,45 +33,45 @@ class MCOCTools:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(help=lookup_links['event'][0], aliases=['events','schedule','event'])
-    async def tool_event(self):
+    @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
+    async def event(self):
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
-        lookup = self.lookup_links['event']
-        desc = ''
-        em=discord.Embed(color=self.mcolor,title=lookup,description=desc)
-        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        lookup = *self.lookup_links['event']
+        etitle = lookup[0]
+        edesc = lookup[1]
+        em=discord.Embed(color=*self.mcolor,title=title,description=edesc)
+        em.set_footer(text='Presented by [-SDF-]',icon_url=*self.icon_sdf)
         await self.bot.say(embed=em)
 
-    @commands.command(help=lookup_links['spotlight'][0], aliases=['spotlight'])
-    async def tool_spotlight(self):
+    @commands.command(help=lookup_links['spotlight'][0],)
+    async def spotlight(self):
+        '''[-SDF-] Spotlight Dataset'''
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
+        '''Link to MarvelSynergy'''
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['marvelsynergy']))
 
     @commands.command(help=lookup_links['simulator'][0])
     async def simulator(self):
+        '''Pre-12.0 Mastery Simulator'''
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['simulator']))
 
     @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
     async def alsciende(self):
+        '''Alsciende's Mastery Modeling Tool'''
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
 
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
+        '''[-SDF-] Streak Chart'''
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['streak']))
 
     @commands.command(help=lookup_links['hook'][0])
     async def tool_hook(self):
+        '''hook/champions Link'''
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
-
-
-    def present(self, ptitle, plink, ppayload, pfooter):
-        em = discord.embed(color=discord.Color.gold(),title=ptitle,description=ppayload)
-
-
-
 
     @commands.command()
     async def phc(self):
