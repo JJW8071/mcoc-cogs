@@ -26,7 +26,7 @@ class MCOCTools:
                 'Alsciende Mastery Tool',
                 '<https://alsciende.github.io/masteries/v10.0.1/#>'
                 'by u/alsciende',
-                'https://assets-cdn.github.com/favicon.ico')),
+                'https://assets-cdn.github.com/favicon.ico'),
             'simulator': (
                 'Mastery Simulator',
                 '<http://simians.tk/msimSDF>'),
