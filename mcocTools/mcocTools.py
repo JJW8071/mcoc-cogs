@@ -39,6 +39,7 @@ class MCOCTools:
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
+        print(len(lookup))
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
         else:
@@ -49,9 +50,10 @@ class MCOCTools:
     async def event(self):
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
         lookup = self.lookup_links['event']
-        em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
-        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-        await self.bot.say(embed=em)
+        # em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
+        # em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        # await self.bot.say(embed=em)
+        await self.bot.say(embed=self.present(lookup))
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
