@@ -166,7 +166,7 @@ class ChampConverter(commands.Converter):
             if len(args) > 1 and args[-1].isdecimal():
                 attrs[self._bare_arg] = int(args[-1])
                 self.argument = args[0]
-        arg = ''.join(self.argument.split(' '))
+        arg = ''.join(self.argument.lower().split(' '))
         for m in self.parse_re.finditer(arg):
             attrs[m.lastgroup] = int(m.group(m.lastgroup))
         token = self.parse_re.sub('', arg)
@@ -209,7 +209,7 @@ class ChampConverterMult(ChampConverter):
         bot = self.ctx.bot
         champs = []
         default = {}
-        for arg in self.argument.split(' '):
+        for arg in self.argument.lower().split(' '):
             attrs = default.copy()
             for m in self.parse_re.finditer(arg):
                 attrs[m.lastgroup] = int(m.group(m.lastgroup))
