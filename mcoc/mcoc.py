@@ -475,6 +475,7 @@ class MCOC(ChampionFactory):
 
     @commands.command(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ'))
     async def champ_about(self, *, champ : ChampConverterRank):
+        '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.get_verbose_str())
         em = discord.Embed(color=champ.class_color,
