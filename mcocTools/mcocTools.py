@@ -36,8 +36,10 @@ class MCOCTools:
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule','event'])
     async def tool_event(self):
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
-        em=discord.Embed(color=mcolor,title=lookup_links['event'],description='')
-        em.set_footer(text='Presented by [-SDF-]',icon_url=icon_sdf)
+        lookup = self.lookup_links['event']
+        desc = ''
+        em=discord.Embed(color=self.mcolor,title=self.lookup,description=desc)
+        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
 
     @commands.command(help=lookup_links['spotlight'][0], aliases=['spotlight'])
