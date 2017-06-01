@@ -640,6 +640,13 @@ class MCOC(ChampionFactory):
                     champs_matched.append(champ)
         await self.bot.say(embed=em)
 
+    @commands.command()
+    async def phc(self):
+        '''Premium Hero Crystal Release Dates'''
+        await self.bot.upload(data_files['phc_jpg']['local'],
+                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
+
+
     @commands.command(hidden=True)
     async def tst(self, key):
         files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
@@ -681,16 +688,6 @@ class MCOC(ChampionFactory):
         await self.bot.say('Done')
 
 #My intention was to create a hook command group. If nothing is specified, then drop the URL
-    @commands.command()
-    async def hook(self, args=None):
-        if args is None:
-            hookTitle = 'Hook Roster Manager'
-            hookPayload = '<http://hook.github.io/champions>'
-            em = discord.Embed(color=discord.Color.gold(), title=hookTitle, description=hookPayload)
-            await self.bot.say(embed=em)
-        else:
-            await self.bot.say('DEBUG: process hook args')
-
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
