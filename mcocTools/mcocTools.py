@@ -6,7 +6,9 @@ class MCOCTools:
     lookup_links = {
             'event': (
                 'Tiny MCoC Schedule',
-                '<http://simians.tk/MCOC-Sched>'),
+                '<http://simians.tk/MCOC-Sched>',
+                'Josh Morris Schedule',
+                'https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'),
             'hook': (
                 'hook/champions',
                 '<http://hook.github.io/champions>',
@@ -35,7 +37,7 @@ class MCOCTools:
     def __init__(self, bot):
         self.bot = bot
 
-    def present(lookup)
+    def present(lookup):
         em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
