@@ -79,6 +79,7 @@ star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★�
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
 remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/'
+icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
 
 ###### KEYS for MCOC JSON Data Extraction
 mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
@@ -144,7 +145,7 @@ class ChampionFactory():
         re_str = re.compile(search_str)
         champs = []
         for champ in self.champions.values():
-            if reduce(or_, [re_str.search(alias) is not None 
+            if reduce(or_, [re_str.search(alias) is not None
                     for alias in champ.alias_set]):
                 champs.append(champ(attrs))
         return champs
@@ -222,28 +223,6 @@ class ChampConverterMult(ChampConverter):
 
 class MCOC(ChampionFactory):
     '''A Cog for Marvel's Contest of Champions'''
-    lookup_links = {
-            'event': (
-                'Tiny MCoC Schedule',
-                '<http://simians.tk/MCOC-Sched>'),
-            'spotlight': (
-                'MCoC Spotlight',
-                '<http://simians.tk/MCoCspotlight>'),
-            'marvelsynergy': (
-                'Marvel Synergy Builder',
-                '<http://www.marvelsynergy.com/team-builder>'),
-            'alsciende':(
-                'Alsciende Mastery Tool',
-                '<https://alsciende.github.io/masteries/v10.0.1/#>'),
-            'simulator': (
-                'Mastery Simulator',
-                '<http://simians.tk/msimSDF>'),
-            'streak': (
-                'Infinite Streak',
-                'http://simians.tk/-sdf-streak')
-                #'http://simians.tk/SDFstreak')
-    }
-
     def __init__(self, bot):
         self.bot = bot
 
@@ -263,12 +242,12 @@ class MCOC(ChampionFactory):
         self._prepare_aliases()
         self._prepare_prestige_data()
 
-    @commands.command(aliases=('p2f',))
+    @commands.command(aliases=('p2f',),hidden=True)
     async def per2flat(self, per: float, ch_rating: int=100):
         '''Convert Percentage to MCOC Flat Value'''
         await self.bot.say(to_flat(per, ch_rating))
 
-    @commands.command(aliases=('flat', 'f2p'))
+    @commands.command(aliases=('flat', 'f2p'),hidden=True)
     async def flat2per(self, *, m):
         '''Convert MCOC Flat Value to Percentge'''
         if ' ' in m:
@@ -291,7 +270,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['compf',])
+    @commands.command(aliases=['compf',],hidden=True)
     async def compound_frac(self, base: float, exp: int):
         if base > 1:
             base = base / 100
@@ -327,35 +306,6 @@ class MCOC(ChampionFactory):
     async def mcocset(self, setting, value):
         if setting in self.settings:
             self.settings[setting] = int(value)
-
-    @commands.command(help=lookup_links['event'][0], aliases=('events',))
-    async def event(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
-
-    @commands.command(help=lookup_links['spotlight'][0])
-    async def spotlight(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
-
-    @commands.command(help=lookup_links['marvelsynergy'][0])
-    async def marvelsynergy(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['marvelsynergy']))
-
-    @commands.command(help=lookup_links['simulator'][0])
-    async def simulator(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['simulator']))
-
-    @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
-    async def alsciende(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['alsciende']))
-
-    @commands.command(help=lookup_links['streak'][0])
-    async def streak(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['streak']))
-
-    @commands.command()
-    async def lolmap(self):
-        '''Labrynth of Legends Map'''
-        await self.bot.upload(lolmap_path, content='**LABYRINTH OF LEGENDS Map by Frogspawn**')
 
     def verify_cache_remote_files(self, verbose=False, force_cache=False):
         if os.path.exists(file_checks_json):
@@ -454,37 +404,6 @@ class MCOC(ChampionFactory):
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
 
-    @commands.command()
-    async def phc(self):
-        '''Premium Hero Crystal Release Dates'''
-        await self.bot.upload(data_files['phc_jpg']['local'],
-                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
-
-    @commands.command()
-    async def warmap(self, maptype='ai', dbg=1):
-        '''Select a Warmap
-        syntax: /warmap <left><right>
-        Where <left> = [a, b, c, d, e]
-        Where <right> = [f, g, g+, h, i]'''
-        filepath_png = 'data/mcoc/warmaps/warmap_{}.png'
-        mapurl = '{}warmaps/warmap_{}.png'.format(remote_data_basepath, maptype.lower())
-        maps = {'af','ag','ag+','ah','ai','bf','bg','bg+','bh','bi','cf','cg',
-                'cg+','ch','ci','df','dg','dg+','dh','ef','eg','eg+','eh','ei'}
-        mapTitle = 'Alliance War Map {}'.format(maptype.upper())
-        filepath = filepath_png.format(maptype.lower())
-        if dbg == 0:
-            if maptype in maps:
-                await self.bot.upload(filepath, content=mapTitle)
-            else :
-                raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
-        elif dbg == 1:
-            if maptype in maps:
-                em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
-                em.set_image(url=mapurl)
-                await self.bot.say(embed=em)
-            else :
-                raise KeyError('Summoner, I cannot find that map with arg <{}>'.format(maptype))
-
     @commands.command(aliases=['featured'])
     async def champ_featured(self, champ : ChampConverter):
         '''Retrieve Champion Feature Images'''
@@ -556,9 +475,10 @@ class MCOC(ChampionFactory):
 
     @commands.command(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ'))
     async def champ_about(self, *, champ : ChampConverterRank):
+        '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.get_verbose_str())
-        em = discord.Embed(color=champ.class_color, 
+        em = discord.Embed(color=champ.class_color,
                 title=champ.get_verbose_str(), description='Base Attributes')
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
@@ -570,67 +490,67 @@ class MCOC(ChampionFactory):
                 em.add_field(name=t, value=data[k])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
-        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url='https://i.imgur.com/QQsT29B.png')
+        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['msig',])
-    async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
-        '''Retrieve Champion Signature Ability from MCOC Files'''
-        mcocjson = champ.mcocjson
-        title, title_lower, simple, desc = champ.get_mcoc_keys()
-
-        raw_sig = '\n'.join([Champion._sig_header(sigs[k]) for k in desc])
-        #clean_sig = raw_sig
-        clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
-        # if sig_stack != '':
-        #     clean_sig = clean_sig.format(','.join(sig_stack))
-        #print(clean_sig)
-        terminus = clean_sig.count('}')
-        print('terminus:', terminus)
-
-        sig_stack = []
-
-        for x in range(terminus):
-            key = '{}-{}-{}'.format(star, mcocjson, x)
-            col = 'sig'+str(siglvl)
-            value = get_csv_row('data/mcoc/sig_data.csv', 'unique', key)
-            # print('sig:', value)
-            if value is None:
-                continue
-            else:
-                sig_stack.append(value[col])
-        print('sig_stack: ', len(sig_stack), sig_stack)
-
-        if dbg:
-            ret = ['** DEBUG **']
-            ret.append('Title: '+ title)
-            ret.append('title_lower: '+ title_lower)
-            for k in simple:
-                ret.append('Simple: '+ k)
-            for k in desc:
-                ret.append('Desc: '+ k)
-                ret.append('    ' + Champion._sig_header(sigs[k]))
-            ret.append('    ' + clean_sig)
-            ret.append('    ' + ','.join(sig_stack))
-            await self.bot.say('```{}```'.format('\n'.join(ret)))
-
-        #elif terminus > 0:
-        if len(sig_stack) == terminus:
-            clean_sig = clean_sig.format(*sig_stack)
-            #print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
-            #for value in sig_stack:
-                #clean_sig = clean_sig.replace('{}', value, 1)
-
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        if title in sigs:
-            em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
-        else:
-            em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
-        em.add_field(name='Signature Level {}'.format(siglvl),
-                value=clean_sig)
-        em.set_thumbnail(url=champ.get_avatar())
-        await self.bot.say(embed=em)
+    # @commands.command(aliases=['msig',])
+    # async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
+    #     '''Retrieve Champion Signature Ability from MCOC Files'''
+    #     mcocjson = champ.mcocjson
+    #     title, title_lower, simple, desc = champ.get_mcoc_keys()
+    #
+    #     raw_sig = '\n'.join([Champion._sig_header(sigs[k]) for k in desc])
+    #     #clean_sig = raw_sig
+    #     clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
+    #     # if sig_stack != '':
+    #     #     clean_sig = clean_sig.format(','.join(sig_stack))
+    #     #print(clean_sig)
+    #     terminus = clean_sig.count('}')
+    #     print('terminus:', terminus)
+    #
+    #     sig_stack = []
+    #
+    #     for x in range(terminus):
+    #         key = '{}-{}-{}'.format(star, mcocjson, x)
+    #         col = 'sig'+str(siglvl)
+    #         value = get_csv_row('data/mcoc/sig_data.csv', 'unique', key)
+    #         # print('sig:', value)
+    #         if value is None:
+    #             continue
+    #         else:
+    #             sig_stack.append(value[col])
+    #     print('sig_stack: ', len(sig_stack), sig_stack)
+    #
+    #     if dbg:
+    #         ret = ['** DEBUG **']
+    #         ret.append('Title: '+ title)
+    #         ret.append('title_lower: '+ title_lower)
+    #         for k in simple:
+    #             ret.append('Simple: '+ k)
+    #         for k in desc:
+    #             ret.append('Desc: '+ k)
+    #             ret.append('    ' + Champion._sig_header(sigs[k]))
+    #         ret.append('    ' + clean_sig)
+    #         ret.append('    ' + ','.join(sig_stack))
+    #         await self.bot.say('```{}```'.format('\n'.join(ret)))
+    #
+    #     #elif terminus > 0:
+    #     if len(sig_stack) == terminus:
+    #         clean_sig = clean_sig.format(*sig_stack)
+    #         #print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
+    #         #for value in sig_stack:
+    #             #clean_sig = clean_sig.replace('{}', value, 1)
+    #
+    #     em = discord.Embed(color=champ.class_color, title=champ.full_name)
+    #     if title in sigs:
+    #         em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
+    #     else:
+    #         em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
+    #     em.add_field(name='Signature Level {}'.format(siglvl),
+    #             value=clean_sig)
+    #     em.set_thumbnail(url=champ.get_avatar())
+    #     await self.bot.say(embed=em)
 
     @commands.command(aliases=['sig','signature'])
     async def champ_sig(self, *, champ : ChampConverterSig):
@@ -648,6 +568,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=title, value=champ.get_star_str())
         em.add_field(name='Signature Level {}'.format(champ.sig),  value=desc)
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -720,6 +641,13 @@ class MCOC(ChampionFactory):
                     champs_matched.append(champ)
         await self.bot.say(embed=em)
 
+    @commands.command()
+    async def phc(self):
+        '''Premium Hero Crystal Release Dates'''
+        await self.bot.upload(data_files['phc_jpg']['local'],
+                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
+
+
     @commands.command(hidden=True)
     async def tst(self, key):
         files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
@@ -761,16 +689,6 @@ class MCOC(ChampionFactory):
         await self.bot.say('Done')
 
 #My intention was to create a hook command group. If nothing is specified, then drop the URL
-    @commands.command()
-    async def hook(self, args=None):
-        if args is None:
-            hookTitle = 'Hook Roster Manager'
-            hookPayload = '<http://hook.github.io/champions>'
-            em = discord.Embed(color=discord.Color.gold(), title=hookTitle, description=hookPayload)
-            await self.bot.say(embed=em)
-        else:
-            await self.bot.say('DEBUG: process hook args')
-
 
     def _prepare_aliases(self):
         '''Create a python friendly data structure from the aliases json'''
@@ -954,7 +872,7 @@ class Champion:
     @validate_attr('prestige')
     def prestige(self):
         if self.prestige_data[self.star][self.rank-1] is None:
-            return 0 
+            return 0
         return self.prestige_data[self.star][self.rank-1][self.sig]
 
     @validate_attr('prestige')
@@ -1047,7 +965,7 @@ class Champion:
                     self.full_name, self.get_star_str()))
         fdesc = []
         for i, kabam_key in enumerate(desc):
-            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i), 
+            fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
                         self._sig_header(sigs[kabam_key])))
         if self.debug:
             await self.bot.say('```{}```'.format('\n'.join(fdesc)))
@@ -1173,7 +1091,7 @@ class Champion:
         return get_csv_row(local_files['effect_keys'], 'CHAMP', self.full_name)
 
     def get_spotlight(self, default=None):
-        return get_csv_row(data_files['spotlight']['local'], 'unique', 
+        return get_csv_row(data_files['spotlight']['local'], 'unique',
                 self.get_unique(), default=default)
 
     def get_aliases(self):

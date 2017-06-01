@@ -1,7 +1,7 @@
 {
-    "AUTHOR" : "JJW",
-    "INSTALL_MSG" : "",
+    "AUTHOR" : "JJW & DeltaSigma",
+    "INSTALL_MSG" : "Thanks for installing MCOC.",
     "NAME" : "mcoc",
     "SHORT" : "A Redbot Cog for Marvel's Contest of Champions",
-    "DESCRIPTION" : "[p]Event or Events for Tiny MCoC Schedule :)s"
+    "DESCRIPTION" : "MCOC is the core of a suite of tools designed for Marvel Contest of Champions."
 }
