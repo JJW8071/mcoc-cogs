@@ -7,6 +7,10 @@ class MCOCTools:
             'event': (
                 'Tiny MCoC Schedule',
                 '<http://simians.tk/MCOC-Sched>'),
+            'hook': (
+                'hook/champions',
+                '<http://hook.github.io/champions>'),
+            )
             'spotlight': (
                 'MCoC Spotlight',
                 '<http://simians.tk/MCoCspotlight>'),
@@ -24,14 +28,19 @@ class MCOCTools:
                 'http://simians.tk/-sdf-streak')
                 #'http://simians.tk/SDFstreak')
     }
+    mcolor = discord.Color.gold()
+    mfooter = (text='Presented by [-SDF-]',icon_url=icon_sdf)
 
     def __init__(self, bot):
         self.bot = bot
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule','event'])
     async def tool_event(self):
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
-
+        # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
+        em=discord.Embed(color=mcolor,title=self.lookup_links['event'],description='')
+        em.set_footer('Presented by [-SDF-]',icon_url=icon_sdf)
+        await self.bot.say(embed=em)
+        
     @commands.command(help=lookup_links['spotlight'][0], aliases=['spotlight'])
     async def tool_spotlight(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
@@ -51,6 +60,17 @@ class MCOCTools:
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
         await self.bot.say('**{}**\n{}'.format(*self.lookup_links['streak']))
+
+    @commands.command(help=lookup_links['hook'][0])
+    async def tool_hook(self):
+        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['hook']))
+
+
+    def present(self, ptitle, plink, ppayload, pfooter):
+        em = discord.embed(color=discord.Color.gold(),title=ptitle,description=ppayload)
+
+
+
 
     @commands.command()
     async def phc(self):
