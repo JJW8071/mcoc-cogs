@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from textwrap import wrap
-from collections import UserDict
+from collections import UserDict, defaultdict
 from operator import or_
 from functools import reduce
 from math import log2
@@ -436,41 +436,29 @@ class MCOC(ChampionFactory):
     async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
         dataset=data_files['duelist']['local']
-        duels = []
-        spars = []
+        targets = defaultdict(list)
+        names = {4: 'Duel', 5: 'Sparring'}
         em = discord.Embed(color=champ.class_color, title='')
-        # em.set_thumbnail(url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         em.set_footer(text='Sourced from Community Spreadsheet',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
-        for rank in range(6):
-            star = 4
-            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-            data_array = get_csv_rows(dataset, 'unique', key, default='x')
-            for data in data_array:
-            # data = get_csv_row(dataset, 'unique', key, default='x')
-                print(data)
-                target = data['username']
-                level = '{}/{}'.format(rank, rank*10)
-                if target != 'none':
-                    duels.append('★★★★  {} : {}'.format(level, target))
-        for rank in range(6):
-            star = 5
-            key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-            # data = get_csv_row(dataset, 'unique', key, default='x')
-            data_array = get_csv_rows(dataset, 'unique', key, default='x')
-            for data in data_array:
-                print(data)
-                target = data['username']
-                level = '{}/{}'.format(rank, 15+rank*10)
-                if target != 'none':
-                    spars.append('★★★★★ {} : {}'.format(level, target))
-        if len(duels) > 0:
-            em.add_field(name='Duel Target', value='\n'.join(k for k in duels))
-        if len(spars) > 0:
-            em.add_field(name='Sparring Target', value='\n'.join(k for k in spars), inline=False)
-        if len(duels) + len(spars) == 0:
-            em.add_field(name='Target not found',value='Add one to the Community Spreadhseet!\nDuel Targets: <http://simians.tk/mcocduel>\nSparring Targets: <http://simians.tk/mcocspar>')
+        target_found = False
+        for star in (4,5):
+            for rank in range(6):
+                champ.update_attrs({'star': star, 'rank': rank})
+                for data in get_csv_rows(dataset, 'unique', champ.get_unique()):
+                    if data['username'] != 'none':
+                        targets[star].append( '{} : {}'.format(
+                                champ.get_star_str(), data['username']))
+            if len(targets[star]) > 0:
+                target_found = True
+                em.add_field(name='{} Target'.format(names[star]), 
+                        value='\n'.join(k for k in targets[star]), inline=False)
+        if not target_found:
+            em.add_field(name='Target not found',
+                    value='\n'.join(['Add one to the Community Spreadhseet!',
+                            'Duel Targets: <http://simians.tk/mcocduel>',
+                            'Sparring Targets: <http://simians.tk/mcocspar>']))
         await self.bot.say(embed=em)
 
     @commands.command(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ'))
@@ -695,8 +683,8 @@ class MCOC(ChampionFactory):
         raw_data = load_csv(data_files['crossreference']['local'])
         champs = []
         all_aliases = set()
-        id_index = raw_data.fieldnames.index('champ')
-        alias_index = raw_data.fieldnames[:id_index]
+        id_index = raw_data.fieldnames.index('status')
+        alias_index = raw_data.fieldnames[:id_index-1]
         for row in raw_data:
             alias_set = set()
             for col in alias_index:
@@ -1047,7 +1035,8 @@ class Champion:
                     'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
             'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
-            'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO']
+            'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO'],
+            'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
         }
 
         #if champ.mcocsig == 'IRONMAN_SUPERIOR':
