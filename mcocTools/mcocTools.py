@@ -38,7 +38,7 @@ class MCOCTools:
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
         lookup = self.lookup_links['event']
         desc = ''
-        em=discord.Embed(color=self.mcolor,title=self.lookup,description=desc)
+        em=discord.Embed(color=self.mcolor,title=lookup,description=desc)
         em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
 
