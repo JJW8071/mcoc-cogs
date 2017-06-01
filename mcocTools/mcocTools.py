@@ -55,9 +55,11 @@ class MCOCTools:
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
-        '''[-SDF-] Spotlight Dataset'''
-        await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
-
+        # '''[-SDF-] Spotlight Dataset'''
+        # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
+        lookup = self.lookup_links['spotlight']
+        self.present(lookup)
+        
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
         '''Link to MarvelSynergy'''
