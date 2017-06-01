@@ -29,6 +29,7 @@ class MCOCTools:
     }
     mcolor = discord.Color.gold()
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+    mfooter = (text='Presented by [-SDF-]',icon_url=self.icon_sdf)
 
     def __init__(self, bot):
         self.bot = bot
@@ -39,8 +40,9 @@ class MCOCTools:
         lookup = self.lookup_links['event']
         etitle = lookup[0]
         edesc = lookup[1]
-        em=discord.Embed(color=self.mcolor,title=etitle,description=edesc)
-        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
+        # em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        em.set_footer(self.mfooter)
         await self.bot.say(embed=em)
 
     @commands.command(help=lookup_links['spotlight'][0],)
