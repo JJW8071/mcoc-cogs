@@ -18,8 +18,10 @@ class MCOCTools:
                 'MCoC Spotlight',
                 '<http://simians.tk/MCoCspotlight>'),
             'marvelsynergy': (
-                'Marvel Synergy Builder',
-                '<http://www.marvelsynergy.com/team-builder>'),
+                'Team Builder',
+                '<http://www.marvelsynergy.com/team-builder>',
+                'Marvel Synergy',
+                'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
                 'Alsciende Mastery Tool',
                 '<https://alsciende.github.io/masteries/v10.0.1/#>'),
@@ -77,7 +79,7 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
 
     @commands.command(help=lookup_links['hook'][0])
-    async def tool_hook(self):
+    async def hook(self):
         lookup = self.lookup_links['hook']
         await self.bot.say(embed=self.present(lookup))
 
