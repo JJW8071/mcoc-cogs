@@ -37,13 +37,13 @@ class MCOCTools:
     def __init__(self, bot):
         self.bot = bot
 
-    async def present(self, lookup):
+    def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
         else:
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-        await self.bot.say(embed=em)
+        return em
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
@@ -58,8 +58,8 @@ class MCOCTools:
         # '''[-SDF-] Spotlight Dataset'''
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['spotlight']))
         lookup = self.lookup_links['spotlight']
-        self.present(lookup)
-        
+        await self.bot.say(embed=self.present(lookup))
+
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
         '''Link to MarvelSynergy'''
