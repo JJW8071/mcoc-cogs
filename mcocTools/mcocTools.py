@@ -39,8 +39,8 @@ class MCOCTools:
         lookup = *self.lookup_links['event']
         etitle = lookup[0]
         edesc = lookup[1]
-        em=discord.Embed(color=discord.Color.gold(),title=title,description=edesc)
-        em.set_footer(text='Presented by [-SDF-]',icon_url=*self.icon_sdf)
+        em=discord.Embed(color=self.mcolor,title=title,description=edesc)
+        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
 
     @commands.command(help=lookup_links['spotlight'][0],)
