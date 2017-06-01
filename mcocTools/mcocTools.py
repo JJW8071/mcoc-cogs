@@ -36,7 +36,7 @@ class MCOCTools:
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
-        lookup = *self.lookup_links['event']
+        lookup = self.lookup_links['event']
         etitle = lookup[0]
         edesc = lookup[1]
         em=discord.Embed(color=self.mcolor,title=title,description=edesc)
