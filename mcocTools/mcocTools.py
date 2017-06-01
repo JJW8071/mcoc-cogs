@@ -9,7 +9,9 @@ class MCOCTools:
                 '<http://simians.tk/MCOC-Sched>'),
             'hook': (
                 'hook/champions',
-                '<http://hook.github.io/champions>'),
+                '<http://hook.github.io/champions>',
+                'hook/champions for Collector',
+                'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
                 'MCoC Spotlight',
                 '<http://simians.tk/MCoCspotlight>'),
@@ -29,20 +31,24 @@ class MCOCTools:
     }
     mcolor = discord.Color.gold()
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
-    mfooter = (text='Presented by [-SDF-]',icon_url=self.icon_sdf)
 
     def __init__(self, bot):
         self.bot = bot
+
+    def present(lookup)
+        em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
+        if len(lookup) > 2:
+            em.set_footer(text=lookup[2],icon_url=lookup[3])
+        else:
+            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        await self.bot.say(embed=em)
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
         # await self.bot.say('**{}**\n{}'.format(*self.lookup_links['event']))
         lookup = self.lookup_links['event']
-        etitle = lookup[0]
-        edesc = lookup[1]
         em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
-        # em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-        em.set_footer(self.mfooter)
+        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
 
     @commands.command(help=lookup_links['spotlight'][0],)
