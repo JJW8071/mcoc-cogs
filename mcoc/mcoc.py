@@ -609,7 +609,7 @@ class MCOC(ChampionFactory):
                     level += 15
                 ranklevel = '{}/{}'.format(champ.rank,level)
                 pretty_value = '{}\n{} {} sig {}\n'.format(champ.get_coded_str,star_glyph[int(champ.star)],ranklevel,champ.prestige.)
-                em.add_field(name=cham.full_name,value=pretty_value)
+                em.add_field(name=champ.full_name,value=pretty_value)
                 # em.add_field(name=champ.get_coded_str(), value=champ.prestige)
             except AttributeError:
                 await self.bot.say("**WARNING** Champion Data for "
