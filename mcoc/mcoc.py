@@ -920,6 +920,8 @@ class Champion:
             print('get_effect_keys returned None')
         if coeff is None or ekey is None:
             raise KeyError("Missing Sig data for {}".format(self.full_name))
+        else:
+            print('coeff and ekey check out')
         if self.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
         sig_calcs = {}
@@ -929,9 +931,12 @@ class Champion:
             if not ekey['Location_' + i]:
                 break
             effect = ekey['Effect_' + i]
+            print(effect)
             try:
                 m = float(coeff['ability_norm' + i])
+                print(m)
                 b = float(coeff['offset' + i])
+                print(b)
             except:
                 #await self.bot.say("Missing data for champion '{}'.  Try again later".format(self.full_name))
                 await self.missing_sig_ad()
