@@ -605,8 +605,7 @@ class MCOC(ChampionFactory):
         for champ in champs:
             try:
                 # em.add_field(name=champ.get_coded_str(), value=champ.prestige)
-                pvalue = champ.get_prestige_str()
-                em.add_field(name=champ.prestige,value=pvalue)
+                em.add_field(name=champ.prestige,value=champ.get_prestige_str())
             except AttributeError:
                 await self.bot.say("**WARNING** Champion Data for "
                     + "{} does not exist".format(champ.get_verbose_str()))
