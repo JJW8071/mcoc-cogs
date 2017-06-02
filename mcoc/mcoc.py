@@ -1166,6 +1166,7 @@ def _truncate_text(self, text, max_length):
     return text
 
 def get_csv_row(filecsv, column, match_val, default=None):
+    print(match_val)
     csvfile = load_csv(filecsv)
     for row in csvfile:
         if row[column] == match_val:
@@ -1176,6 +1177,7 @@ def get_csv_row(filecsv, column, match_val, default=None):
             return row
 
 def get_csv_rows(filecsv, column, match_val, default=None):
+    print(match_val)
     csvfile = load_csv(filecsv)
     package =[]
     for row in csvfile:
