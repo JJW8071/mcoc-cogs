@@ -1022,8 +1022,6 @@ class Champion:
             'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
             'LOKI': ['ID_UI_STAT_SIGNATURE_LOKI_LONGDESC'],
             'DEADPOOL': ['ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO'],
-            'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
-            'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
             #'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
             #'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
             'IRONMAN_SUPERIOR': ['ID_UI_STAT_SIGNATURE_IRONMAN_DESC_AO',
@@ -1039,15 +1037,9 @@ class Champion:
             'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
         }
 
-        #if champ.mcocsig == 'IRONMAN_SUPERIOR':
-        #    preamble = 'ID_UI_STAT_SIGNATURE_IRONMAN'
-
         if self.mcocsig == 'CYCLOPS_90S':
-            #title = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE'
-            #title_lower = 'ID_UI_STAT_SIGNATURE_CYCLOPS_TITLE_LOWER'
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
         elif mcocsig in champ_exceptions:
-        #if mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
             for k in ('_DESC_NEW','_DESC_NEW_B'):
