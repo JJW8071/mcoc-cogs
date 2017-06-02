@@ -27,8 +27,8 @@ data_files = {
                 'local': 'data/mcoc/spotlight_data.csv', 'update_delta': 1},
     'crossreference': {'remote': 'https://docs.google.com/spreadsheets/d/1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
-    'sig_data': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=799981914&single=true&format=csv',
-                'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
+    # 'sig_data': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=799981914&single=true&format=csv',
+    #             'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
@@ -72,7 +72,7 @@ gsheet_files = {
             #'payload': 'pub?gid=0&single=true&output=csv'}
 }
 
-sig_data = 'data/mcoc/sig_data.json'
+# sig_data = 'data/mcoc/sig_data.json'
 prestige_data = 'data/mcoc/prestige_data.json'
 star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
 
@@ -914,7 +914,11 @@ class Champion:
         coeff = self.get_sig_coeff()
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
-        if coeff is None or ekey is None:
+        if coeff is None:
+            print('get_sig_coeff returned None')
+        if ekey is None:
+            print('get_effect_keys returned None')
+        if coeff is None ekey is None:
             raise KeyError("Missing Sig data for {}".format(self.full_name))
         if self.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
