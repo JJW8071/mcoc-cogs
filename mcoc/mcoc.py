@@ -918,7 +918,7 @@ class Champion:
             print('get_sig_coeff returned None')
         if ekey is None:
             print('get_effect_keys returned None')
-        if coeff is None ekey is None:
+        if coeff is None or ekey is None:
             raise KeyError("Missing Sig data for {}".format(self.full_name))
         if self.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
