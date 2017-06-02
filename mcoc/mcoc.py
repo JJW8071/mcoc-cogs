@@ -604,13 +604,9 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
         for champ in champs:
             try:
-                level = int(champ.rank)*10
-                if int(champ.star) == 5:
-                    level += 15
-                ranklevel = '{}/{}'.format(champ.rank,level)
-                pretty_value = '{}\n{} {} sig {}\n'.format(champ.get_coded_str,star_glyph[int(champ.star)],ranklevel,champ.prestige.)
-                em.add_field(name=champ.full_name,value=pretty_value)
                 # em.add_field(name=champ.get_coded_str(), value=champ.prestige)
+                pvalue = champ.get_prestige_str()
+                em.add_field(name='{}'.format(champ.full_name),value=pvalue)
             except AttributeError:
                 await self.bot.say("**WARNING** Champion Data for "
                     + "{} does not exist".format(champ.get_verbose_str()))
@@ -827,6 +823,12 @@ class Champion:
 
     def get_verbose_str(self):
         return '{0.stars_str} {0.full_name} r{0.rank}'.format(self)
+
+    def get_prestige_str(self):
+        level = int({0.rank}.format(self))*10
+        if int(self.star) == 5:
+            level+=15
+        return = '{0.stars_str} {0.full_name}\n{0.rank}/{1} sig{0.sig}'.format(self)
 
     @property
     def stars_str(self):
