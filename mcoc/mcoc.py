@@ -446,10 +446,10 @@ class MCOC(ChampionFactory):
         for star in (4,5):
             for rank in range(6):
                 champ.update_attrs({'star': star, 'rank': rank})
-                for data in get_csv_rows(dataset, 'unique', champ.get_unique()):
+                for data in get_csv_rows(dataset, 'unique', champ.unique):
                     if data['username'] != 'none':
                         targets[star].append( '{} : {}'.format(
-                                champ.get_star_str(), data['username']))
+                                champ.star_str, data['username']))
             if len(targets[star]) > 0:
                 target_found = True
                 em.add_field(name='{} Target'.format(names[star]),
@@ -465,9 +465,9 @@ class MCOC(ChampionFactory):
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
-        title = 'Base Attributes for {}'.format(champ.get_verbose_str())
+        title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
-                title=champ.get_verbose_str(), description='Base Attributes')
+                title=champ.verbose_str, description='Base Attributes')
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         if champ.debug:
@@ -554,7 +554,7 @@ class MCOC(ChampionFactory):
         if title is None:
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.add_field(name=title, value=champ.get_star_str())
+        em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),  value=desc)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
@@ -604,11 +604,15 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
         for champ in champs:
             try:
-                # em.add_field(name=champ.get_coded_str(), value=champ.prestige)
-                em.add_field(name=champ.prestige,value=champ.get_prestige_str())
+                # em.add_field(name=champ.coded_str, value=champ.prestige)
+                #em.add_field(name=champ.star_name_str,
+                        #value='{0.rank_sig_str}\n{0.prestige}'.format(champ),
+                em.add_field(name=champ.full_name,
+                        value='{0.stars_str}\n{0.rank_sig_str}\n{0.prestige}'.format(champ),
+                        inline=False)
             except AttributeError:
                 await self.bot.say("**WARNING** Champion Data for "
-                    + "{} does not exist".format(champ.get_verbose_str()))
+                    + "{} does not exist".format(champ.verbose_str))
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -811,23 +815,30 @@ class Champion:
             await self.bot.say('```{}```'.format(dbg_str))
         return bios[key]
 
-    def get_star_str(self):
+    @property
+    def star_str(self):
         return '{0.stars_str} {0.rank}/{0.max_lvl}'.format(self)
 
-    def get_unique(self):
+    @property
+    def unique(self):
         return '{0.star}-{0.mattkraftid}-{0.rank}'.format(self)
 
-    def get_coded_str(self):
+    @property
+    def coded_str(self):
         return '{0.star}*{0.short}r{0.rank}s{0.sig}'.format(self)
 
-    def get_verbose_str(self):
+    @property
+    def verbose_str(self):
         return '{0.stars_str} {0.full_name} r{0.rank}'.format(self)
 
-    def get_prestige_str(self):
-        level = int({0.rank}.format(self))*10
-        if int(self.star) == 5:
-            level+=15
-        return = ('{0.stars_str} {0.full_name}\n{0.rank}/{1} sig{0.sig}'.format(self)
+    @property
+    def star_name_str(self):
+        return '{0.stars_str} {0.full_name}'.format(self)
+        #return '{0.star}★ {0.full_name}'.format(self)
+
+    @property
+    def rank_sig_str(self):
+        return '{0.rank}/{0.max_lvl} sig{0.sig}'.format(self)
 
     @property
     def stars_str(self):
@@ -957,7 +968,7 @@ class Champion:
 
         if data_missing:
             await self.bot.say('Missing Attack/Health info for {} {}'.format(
-                    self.full_name, self.get_star_str()))
+                    self.full_name, self.star_str))
         fdesc = []
         for i, kabam_key in enumerate(desc):
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
@@ -1080,7 +1091,7 @@ class Champion:
 
     def get_spotlight(self, default=None):
         return get_csv_row(data_files['spotlight']['local'], 'unique',
-                self.get_unique(), default=default)
+                self.unique, default=default)
 
     def get_aliases(self):
         return '```{}```'.format(', '.join(self.alias_set))
