@@ -606,7 +606,7 @@ class MCOC(ChampionFactory):
             try:
                 # em.add_field(name=champ.get_coded_str(), value=champ.prestige)
                 pvalue = champ.get_prestige_str()
-                em.add_field(name=champ[full_name],value=pvalue)
+                em.add_field(name=champ.prestige,value=pvalue)
             except AttributeError:
                 await self.bot.say("**WARNING** Champion Data for "
                     + "{} does not exist".format(champ.get_verbose_str()))
@@ -828,7 +828,7 @@ class Champion:
         level = int({0.rank}.format(self))*10
         if int(self.star) == 5:
             level+=15
-        return = '{0.stars_str} {0.full_name}\n{0.rank}/{1} sig{0.sig}'.format(self)
+        return = ('{0.stars_str} {0.full_name}\n{0.rank}/{1} sig{0.sig}'.format(self)
 
     @property
     def stars_str(self):
