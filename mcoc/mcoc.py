@@ -471,8 +471,10 @@ class MCOC(ChampionFactory):
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         if champ.debug:
-            em.add_field(name='Attrs', value='\n'.join(titles))
-            em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+            # em.add_field(name='Attrs', value='\n'.join(titles))
+            # em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+            value='\n'.join(t for t in titles, ' ', [data[k] for k in keys])
+            em.add_field(name='Base Stats', value=value)
         else:
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
