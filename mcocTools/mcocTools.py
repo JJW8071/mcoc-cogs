@@ -54,7 +54,7 @@ class MCOCTools:
     async def gold(self):
         package = '           PST      CST      EST\nJun 5    10:00    12:00    13:00\nJun 5    19:00    21:00    22:00\nJun 6     4:00     6:00     7:00\nJun 6    13:00    15:00    16:00\nJun 6    22:00     0:00     1:00\nJun 7     7:00     9:00    10:00\nJun 7    16:00    18:00    19:00\nJun 8     1:00     3:00     4:00\nJun 8    10:00    12:00    13:00\nJun 8    19:00    21:00    22:00\nJun 9     4:00     6:00     7:00\nJun 9    13:00    15:00    16:00\nJun 10   22:00     0:00     1:00\nJun 11    7:00     9:00    10:00\nJun 11   16:00    18:00    19:00\nJun 12    1:00     3:00     4:00'
         # await self.bot.say('```'+package+'```')
-        embed = discord.Embed(color=discord.Color.gold(),title='Gold Realm Schedule',description='```'+package+'```')
+        em = discord.Embed(color=discord.Color.gold(),title='Gold Realm Schedule',description='```'+package+'```')
         await self.bot.say(embed=em)
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
