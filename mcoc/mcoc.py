@@ -481,8 +481,8 @@ class MCOC(ChampionFactory):
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
         em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='+ 4'+star_glyph[1]+' & PHC', value=xref['add4subfeature'])
-        em.add_field(name='+ 5'+star_glyph[1], value=xref['add5subfeature'])
+        em.add_field(name='4'+star_glyph[1]+' & PHC Crystal', value=xref['add4subfeature'])
+        em.add_field(name='+ 5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
@@ -495,68 +495,11 @@ class MCOC(ChampionFactory):
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         em= discord.Embed(color=champ.class_color,title='Release Dates')
         em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='+ 4'+star_glyph[1]+' & PHC', value=xref['add4subfeature'])
-        em.add_field(name='+ 5'+star_glyph[1], value=xref['add5subfeature'])
+        em.add_field(name='4'+star_glyph[1]+' & PHC Crystal', value=xref['add4subfeature'])
+        em.add_field(name='+ 5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         await self.bot.say(embed=em)
-    # @commands.command(aliases=['msig',])
-    # async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
-    #     '''Retrieve Champion Signature Ability from MCOC Files'''
-    #     mcocjson = champ.mcocjson
-    #     title, title_lower, simple, desc = champ.get_mcoc_keys()
-    #
-    #     raw_sig = '\n'.join([Champion._sig_header(sigs[k]) for k in desc])
-    #     #clean_sig = raw_sig
-    #     clean_sig = re.sub(r'\{[0-9]\}','{}',raw_sig)
-    #     # if sig_stack != '':
-    #     #     clean_sig = clean_sig.format(','.join(sig_stack))
-    #     #print(clean_sig)
-    #     terminus = clean_sig.count('}')
-    #     print('terminus:', terminus)
-    #
-    #     sig_stack = []
-    #
-    #     for x in range(terminus):
-    #         key = '{}-{}-{}'.format(star, mcocjson, x)
-    #         col = 'sig'+str(siglvl)
-    #         value = get_csv_row('data/mcoc/sig_data.csv', 'unique', key)
-    #         # print('sig:', value)
-    #         if value is None:
-    #             continue
-    #         else:
-    #             sig_stack.append(value[col])
-    #     print('sig_stack: ', len(sig_stack), sig_stack)
-    #
-    #     if dbg:
-    #         ret = ['** DEBUG **']
-    #         ret.append('Title: '+ title)
-    #         ret.append('title_lower: '+ title_lower)
-    #         for k in simple:
-    #             ret.append('Simple: '+ k)
-    #         for k in desc:
-    #             ret.append('Desc: '+ k)
-    #             ret.append('    ' + Champion._sig_header(sigs[k]))
-    #         ret.append('    ' + clean_sig)
-    #         ret.append('    ' + ','.join(sig_stack))
-    #         await self.bot.say('```{}```'.format('\n'.join(ret)))
-    #
-    #     #elif terminus > 0:
-    #     if len(sig_stack) == terminus:
-    #         clean_sig = clean_sig.format(*sig_stack)
-    #         #print('Replacing ', terminus, 'x {} with values:', ','.join(sig_stack))
-    #         #for value in sig_stack:
-    #             #clean_sig = clean_sig.replace('{}', value, 1)
-    #
-    #     em = discord.Embed(color=champ.class_color, title=champ.full_name)
-    #     if title in sigs:
-    #         em.add_field(name=sigs[title], value='\n'.join([sigs[k] for k in simple]))
-    #     else:
-    #         em.add_field(name=sigs[title_lower], value='\n'.join([sigs[k] for k in simple]))
-    #     em.add_field(name='Signature Level {}'.format(siglvl),
-    #             value=clean_sig)
-    #     em.set_thumbnail(url=champ.get_avatar())
-    #     await self.bot.say(embed=em)
 
     @commands.command(aliases=['sig','signature'])
     async def champ_sig(self, *, champ : ChampConverterSig):
