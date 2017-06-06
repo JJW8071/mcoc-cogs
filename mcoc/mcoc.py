@@ -470,9 +470,13 @@ class MCOC(ChampionFactory):
                 title=champ.verbose_str, description='Base Attributes')
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
+        xref = get_csv_row(data_files['crossreference'],'champ',champ.full_name)
+
         if champ.debug:
             em.add_field(name='Attrs', value='\n'.join(titles))
             em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+            em.add_field(name='Added to PHC', value=xref['add4subfeature'])
+            em.add_field(name='Added to 5'+star_glyph[5], value=xref['add5subfeature'])
         else:
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
