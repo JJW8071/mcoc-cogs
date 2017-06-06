@@ -481,13 +481,22 @@ class MCOC(ChampionFactory):
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
         em.add_field(name='Released', value=xref['released'])
-        em.add_field(name='Added to PHC & '+star_glyph[4], value=xref['add4subfeature'])
+        em.add_field(name='Added to '+star_glyph[4]+' & PHC', value=xref['add4subfeature'])
         em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    @commands.command(aliases=['released',])
+    async def champ_released(self, *, champ : ChampConverter):
+        '''Retrieve Champion Release Date'''
+        xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+        em= discord.embed(color=champ.class_color,title='Release Dates')
+        em.add_field(name='Released', value=xref['released'])
+        em.add_field(name='Added to '+star_glyph[4]+' & PHC', value=xref['add4subfeature'])
+        em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
 
     # @commands.command(aliases=['msig',])
     # async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
