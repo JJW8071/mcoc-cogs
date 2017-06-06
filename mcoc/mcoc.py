@@ -481,8 +481,8 @@ class MCOC(ChampionFactory):
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
         em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='4'+star_glyph[1]+' & PHC Crystal', value=xref['add4subfeature'])
-        em.add_field(name='+ 5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
+        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
+        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
@@ -495,8 +495,8 @@ class MCOC(ChampionFactory):
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         em= discord.Embed(color=champ.class_color,title='Release Dates')
         em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='4'+star_glyph[1]+' & PHC Crystal', value=xref['add4subfeature'])
-        em.add_field(name='+ 5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
+        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
+        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         await self.bot.say(embed=em)
