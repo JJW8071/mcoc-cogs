@@ -1196,8 +1196,8 @@ def get_csv_rows(filecsv, column, match_val, default=None):
 def load_csv(filename):
     return csv.DictReader(open(filename))
 
-def padd_it(word,max)
-    loop = max-len(word)
+def padd_it(word,max : int):
+    loop = max-len(str(word))
     if loop > 0:
         padd = ''
         for i in loop:
