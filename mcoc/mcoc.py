@@ -493,7 +493,7 @@ class MCOC(ChampionFactory):
     async def champ_released(self, *, champ : ChampConverter):
         '''Retrieve Champion Release Date'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-        em= discord.embed(color=champ.class_color,title='Release Dates')
+        em= discord.Embed(color=champ.class_color,title='Release Dates')
         em.add_field(name='Released', value=xref['released'])
         em.add_field(name='Added to '+star_glyph[4]+' & PHC', value=xref['add4subfeature'])
         em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
