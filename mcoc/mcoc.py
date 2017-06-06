@@ -476,7 +476,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Attrs', value='\n'.join(titles))
             em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
             em.add_field(name='Added to PHC', value=xref['add4subfeature'])
-            em.add_field(name='Added to 5'+star_glyph[5], value=xref['add5subfeature'])
+            em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
         else:
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
@@ -1196,6 +1196,15 @@ def get_csv_rows(filecsv, column, match_val, default=None):
 def load_csv(filename):
     return csv.DictReader(open(filename))
 
+def padd_it(word,max)
+    loop = max-len(word)
+    if loop > 0:
+        padd = ''
+        for i in loop:
+            padd+=' '
+        return word+padd
+    else:
+        print('Padding would be negative.')
 
 
 # Creation of lookup functions from a tuple through anonymous functions
