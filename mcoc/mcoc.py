@@ -461,7 +461,7 @@ class MCOC(ChampionFactory):
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ'))
+    @commands.command(aliases=['about','cstat'])
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
