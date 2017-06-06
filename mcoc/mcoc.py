@@ -497,7 +497,9 @@ class MCOC(ChampionFactory):
         em.add_field(name='Released', value=xref['released'])
         em.add_field(name='Added to '+star_glyph[4]+' & PHC', value=xref['add4subfeature'])
         em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
-
+        em.set_thumbnail(url=champ.get_avatar())
+        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+        await self.bot.say(embed=em)
     # @commands.command(aliases=['msig',])
     # async def mcoc_sig(self, champ : ChampConverter, siglvl: int=99, star: int=4, dbg=False):
     #     '''Retrieve Champion Signature Ability from MCOC Files'''
