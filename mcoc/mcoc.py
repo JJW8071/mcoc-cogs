@@ -480,6 +480,9 @@ class MCOC(ChampionFactory):
         else:
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
+        em.add_field(name='Released', value=xref['released'])
+        em.add_field(name='Added to PHC & '+star_glyph[4], value=xref['add4subfeature'])
+        em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
