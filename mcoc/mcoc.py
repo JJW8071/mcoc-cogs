@@ -480,7 +480,7 @@ class MCOC(ChampionFactory):
         else:
             for t, k in zip(titles, keys):
                 em.add_field(name=t, value=data[k])
-        em.add_field(name='Released', value=xref['released'])
+        em.add_field(name='Feature Crystal', value=xref['released'])
         em.add_field(name='Added to '+star_glyph[4]+' & PHC', value=xref['add4subfeature'])
         em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
         if champ.infopage != 'none':
@@ -494,7 +494,7 @@ class MCOC(ChampionFactory):
         '''Retrieve Champion Release Date'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         em= discord.Embed(color=champ.class_color,title='Release Dates')
-        em.add_field(name='Released', value=xref['released'])
+        em.add_field(name='Feature Crystal', value=xref['released'])
         em.add_field(name='Added to '+star_glyph[4]+' & PHC', value=xref['add4subfeature'])
         em.add_field(name='Added to '+star_glyph[5], value=xref['add5subfeature'])
         em.set_thumbnail(url=champ.get_avatar())
