@@ -102,7 +102,7 @@ class MCOCTools:
 
 #### Mastery stuff###
 
-    @commands.group(pass_context=True, aliases=[]'masteries',])
+    @commands.group(pass_context=True, aliases=['masteries',])
     async def mastery(self, ctx):
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx)
