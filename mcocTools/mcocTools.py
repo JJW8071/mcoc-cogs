@@ -117,5 +117,9 @@ class MCOCTools:
     async def _cost(self,ctx):
         await self.bot.say('Dummy message for cost')
 
+    @mastery.command(pass_context=True, name='set')
+    async def _set(self,ctx):
+        await self.bot.say('Dummy message for set')
+
 def setup(bot):
     bot.add_cog(MCOCTools(bot))
