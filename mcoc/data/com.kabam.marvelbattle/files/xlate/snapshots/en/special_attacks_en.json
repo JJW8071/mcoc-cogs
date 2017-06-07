@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "d59ca47a8ccb5364f1a7ad0fd52e7cd690518962",
     "language": "en",
-    "string_count": 684,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1491510974
+    "hash": "420301fc38f956bd247c03c783a3b9102adcabcb",
+    "ts": 1495142352,
+    "string_count": 702
   },
   "strings": [
     {
@@ -190,6 +190,18 @@
     {
       "k": "ID_SPECIAL_ATTACK_CAPTAINMARVEL_2",
       "v": "Rocket Punch"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CARNAGE_0",
+      "v": "Frenzied Assault"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CARNAGE_1",
+      "v": "Rabid Onslaught"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CARNAGE_2",
+      "v": "Aberrant Soul"
     },
     {
       "k": "ID_SPECIAL_ATTACK_CIVILWARRIOR_0",
@@ -504,6 +516,18 @@
       "v": "Charging to maximum power levels, Captain Marvel releases concussive energy bursts from her hands."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_0",
+      "v": "Carnage hurls himself at his opponent, rending with limbs and tentacles alike."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_1",
+      "v": "Carnage uses his tentacles to suddenly propel himself towards his target while he strikes with his claws."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_2",
+      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him take the time to revel in the carnage he creates."
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CIVILWARRIOR_0",
       "v": "I have seen this war."
     },
@@ -641,7 +665,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DOCTORSTRANGE_1",
-      "v": "Dr. Strange orchestrates three Flames of the Faltines in a fiery symphony."
+      "v": "Doctor Strange orchestrates three Flames of the Faltines in a fiery symphony."
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DOCTORSTRANGE_2",
@@ -677,7 +701,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DRSTRANGE_1",
-      "v": "Dr. Strange orchestrates three Flames of the Faltines in a fiery symphony."
+      "v": "Doctor Strange orchestrates three Flames of the Faltines in a fiery symphony."
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DRSTRANGE_2",
@@ -689,7 +713,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DRSTRANGE_MARVELNOW_1",
-      "v": "Dr. Strange orchestrates three Flames of the Faltines in a fiery symphony."
+      "v": "Doctor Strange orchestrates three Flames of the Faltines in a fiery symphony."
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DRSTRANGE_MARVELNOW_2",
@@ -1224,6 +1248,18 @@
       "v": "The Punisher shows why you should never break the law. Ever."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_PUNISHER_2099_0",
+      "v": "A vicious pistol whip followed by a barrage of hot lead shows why Jake still relies on good old fashioned gun-powder."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_PUNISHER_2099_1",
+      "v": "A burst of fire from his assault rifle and a grenade to the face will disperse any target."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_PUNISHER_2099_2",
+      "v": "You have been found guilty of assaulting the Minister of Punishment. Your sentence: Disintegration."
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_QUAKE_0",
       "v": "Quake quickly compresses the ground, launching a wave of earth towards the opponent."
     },
@@ -1606,6 +1642,18 @@
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VISION_MOVIE_2",
       "v": "Vision phases through the ground to deliver a surprise uppercut, followed by a close-range microwave burst of solar energy."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_0",
+      "v": "Vulture launches the flight pack off his suit, directly at his opponent."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_1",
+      "v": "Vulture flares his engines directly into his opponent, blasting them with superheated jetwash."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_2",
+      "v": "Striking from the sky, Vulture hurls his opponent back, before employing an industrial laser, heavily modified with alien tech."
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_WARMACHINE_0",
@@ -2229,7 +2277,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_NEBULA_2",
-      "v": "Blades of Ichor"
+      "v": "Galaxy-Class Killer"
     },
     {
       "k": "ID_SPECIAL_ATTACK_NIGHTCRAWLER_0",
@@ -2278,6 +2326,18 @@
     {
       "k": "ID_SPECIAL_ATTACK_PUNISHER_2",
       "v": "Payback"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_PUNISHER_2099_0",
+      "v": "Excessive Force"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_PUNISHER_2099_1",
+      "v": "Crowd Control"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_PUNISHER_2099_2",
+      "v": "Final Deletion"
     },
     {
       "k": "ID_SPECIAL_ATTACK_QUAKE_0",
@@ -2662,6 +2722,18 @@
     {
       "k": "ID_SPECIAL_ATTACK_VISION_MOVIE_2",
       "v": "Physical Disruption"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VULTURE_0",
+      "v": "Wingpack Strike"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VULTURE_1",
+      "v": "Engine Flare"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VULTURE_2",
+      "v": "Hybrid Alien Technology"
     },
     {
       "k": "ID_SPECIAL_ATTACK_WARMACHINE_0",

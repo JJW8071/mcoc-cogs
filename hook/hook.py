@@ -1,9 +1,10 @@
 import discord
 from discord.ext import commands
+from .mcoc import class_color_codes
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
-from operator import itemgetter
+from operator import itemgetter, attrgetter
 from random import randint
 import time
 import os
@@ -14,18 +15,19 @@ import re
 
 class Hook:
 
+    attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star'}
+    alliance_map = {'alliance-war-defense': 'awd', 
+                    'alliance-war-attack': 'awo', 
+                    'alliance-quest': 'aq'}
+
     def __init__(self, bot):
         self.bot = bot
         self.data_dir = 'data/hook/users/{}/'
         self.champs_file = self.data_dir + 'champs.json'
-        self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
+        self.champ_re = re.compile(r'champ.*\.csv')
+        #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
-        try:
-            self.mcocCog = self.bot.get_cog('MCOC')
-        except KeyError:
-            raise KeyError('The MCOC Cog is not installed.')
-
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -48,7 +50,7 @@ class Hook:
         for member in server.members:
             if role in member.roles:
                 members.append(member)
-        members.sort(key=attrgetter('name'))
+        # members.sort(key=attrgetter('name'))
         if use_alias:
             ret = '\n'.join([m.display_name for m in members])
         else:
@@ -74,71 +76,36 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self,ctx, *, user : discord.Member=None, dbg = 0):
+    async def roster(self, ctx, user: discord.Member=None, champclass=None):
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
-        # creates user if doesn't exist
-        info = self.get_user_info(user.id)
-        champ_list = info['champs']
-        em = discord.Embed(title="User Profile", description=user.name, color=discord.Color.gold())
-        cosmic = []
-        tech = []
-        mutant = []
-        skill = []
-        science = []
-        mystic = []
-        unknown = []
+        if champclass is not None:
+            champclass = champclass.lower().capitalize()
 
-        champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} p{0[Pi]} '
-        for k in champ_list:
-            champ = self.mcocCog._resolve_alias(k['Id'])
-            package = champ_str.format(k, champ.full_name)
-            if champ.class_color == discord.Color(0x2799f7):
-                cosmic.append(package)
-            elif champ.class_color == discord.Color(0x0033ff):
-                tech.append(package)
-            elif champ.class_color == discord.Color(0xffd400):
-                mutant.append(package)
-            elif champ.class_color == discord.Color(0x0b8c13):
-                science.append(package)
-            elif champ.class_color == discord.Color(0xdb1200):
-                skill.append(package)
-            elif champ.class_color == discord.Color(0x7f0da8):
-                mystic.append(package)
-            else:
-                unknown.append(package)
+        user_info = self.get_user_info(user.id)
+        mcoc = self.bot.get_cog('MCOC')
 
-        if dbg == 0:
-            if len(cosmic) > 0:
-                em.add_field(name="Cosmic",value='\n'.join(k for k in cosmic))
-            if len(tech) > 0:
-                em.add_field(name="Tech", value='\n'.join(k for k in tech))
-            if len(mutant) > 0:
-                em.add_field(name="Mutant", value='\n'.join(k for k in mutant))
-            if len(skill) > 0:
-                em.add_field(name="Skill", value='\n'.join(k for k in skill))
-            if len(science) > 0:
-                em.add_field(name="Science", value='\n'.join(k for k in science))
-            if len(mystic) > 0:
-                em.add_field(name="Mystic", value='\n'.join(k for k in mystic))
-            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            await self.bot.say(embed=em)
+        #champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
+        champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
+        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [], 
+                'Science': [], 'Mystic': [], 'Default': []}
 
-        elif dbg == 1:
-            emcosmic = discord.Embed(title="Cosmic", description='\n'.join(k for k in cosmic), color=discord.Color(0x2799f7))
-            emtech = discord.Embed(title="Tech", description='\n'.join(k for k in tech), color=discord.Color(0x0033ff))
-            emmutant = discord.Embed(title="Mutant", description='\n'.join(k for k in mutant), color=discord.Color(0xffd400))
-            emskill = discord.Embed(title="Skill", description='\n'.join(k for k in skill), color=discord.Color(0xdb1200))
-            emscience = discord.Embed(title="Science", description='\n'.join(k for k in science), color=discord.Color(0x0b8c13))
-            emmystic = discord.Embed(title="Mystic", description='\n'.join(k for k in mystic), color=discord.Color(0x7f0da8))
-            await self.bot.say(embed=emcosmic)
-            await self.bot.say(embed=emtech)
-            await self.bot.say(embed=emmutant)
-            await self.bot.say(embed=em)
-            await self.bot.say(embed=em)
-            await self.bot.say(embed=em)
+        if champclass and champclass not in classes:
+            await self.bot.say("'{}' is not a valid class".format(champclass))
+            return
+        for k in user_info['champs']:
+            champ = self.get_champion(mcoc, k)
+            package = champ_str.format(champ, k)
+            classes[champ.klass].append(package)
 
+        color = class_color_codes[champclass] if champclass else discord.Color.gold()
+        em = discord.Embed(title="User", description=user.name, color=color)
+        for klass, class_champs in classes.items():
+            if class_champs and (champclass is None or champclass == klass):
+                em.add_field(name=klass, value='\n'.join(k for k in class_champs))
+        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        await self.bot.say(embed=em)
 
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
@@ -280,17 +247,21 @@ class Hook:
         self._create_user(userid)
         return dataIO.load_json(self.champs_file.format(userid))
 
+    def get_champion(self, mcoc, cdict):
+        champ_attr = {self.attr_map[k]: cdict[k] for k in self.attr_map.keys()}
+        return mcoc.get_champion(cdict['Id'], champ_attr)
+
     async def _parse_champions_csv(self, message, attachment):
         channel = message.channel
-        self._create_user(message.author.id)
+        userid = message.author.id
+        self._create_user(userid)
         response = requests.get(attachment['url'])
         cr = csv.DictReader(response.text.split('\n'), quoting=csv.QUOTE_NONE)
         champ_list = []
         for row in cr:
             champ_list.append({k: parse_value(k, v) for k, v in row.items()})
 
-        chfile = self.champs_file.format(message.author.id)
-        champ_data = dataIO.load_json(chfile)
+        champ_data = {}
 
         mcoc = self.bot.get_cog('MCOC')
         if mcoc:
@@ -298,7 +269,6 @@ class Hook:
             if missing:
                 await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
-
 
             # max prestige calcs
             champ_list.sort(key=itemgetter('maxpi', 'Id'), reverse=True)
@@ -322,17 +292,13 @@ class Hook:
 
         champ_data['fieldnames'] = cr.fieldnames
         champ_data['champs'] = champ_list
-        champ_data.update({'awd': [], 'awo': [], 'aq': []})
 
+        champ_data.update({v: [] for v in self.alliance_map.values()})
         for champ in champ_data['champs']:
-            if champ['Role'] == 'alliance-war-defense':
-                champ_data['awd'].append(champ['Id'])
-            elif champ['Role'] == 'alliance-war-attack':
-                champ_data['awo'].append(champ['Id'])
-            elif champ['Role'] == 'alliance-quest':
-                champ_data['aq'].append(champ['Id'])
+            if champ['Role'] in self.alliance_map:
+                champ_data[self.alliance_map[champ['Role']]].append(champ['Id'])
 
-        dataIO.save_json(chfile, champ_data)
+        dataIO.save_json(self.champs_file.format(userid), champ_data)
         if mcoc:
             await self.bot.send_message(channel, embed=em)
         else:
@@ -346,13 +312,12 @@ class Hook:
             if cdict['Stars'] < 4:
                 continue
             try:
-                champ_obj = mcoc.find_champ(cdict['Id'], 'hookid')
+                champ_obj = self.get_champion(mcoc, cdict)
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
             try:
-                cdict['Pi'] = champ_obj.get_prestige(rank=cdict['Rank'],
-                        sig=cdict['Awakened'], star=cdict['Stars'], value=True)
+                cdict['Pi'] = champ_obj.prestige
             except AttributeError:
                 missing.append(cdict['Id'])
                 continue
@@ -360,8 +325,8 @@ class Hook:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
             else:
                 maxrank = 5
-            cdict['maxpi'] = champ_obj.get_prestige(rank=maxrank,
-                    sig=cdict['Awakened'], star=cdict['Stars'], value=True)
+            champ_obj.update_attrs({'rank': maxrank})
+            cdict['maxpi'] = champ_obj.prestige
         return missing
 
     async def _on_attachment(self, msg):

@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "dff96137b3389bd7907704a459af3ac955d1a7f3",
     "language": "en",
-    "string_count": 2673,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1491604335
+    "hash": "ce91262f9f42ccb7aadfcbe247d139c9fa46e6e1",
+    "ts": 1495142354,
+    "string_count": 2743
   },
   "strings": [
     {
@@ -205,7 +205,7 @@
     },
     {
       "k": "ID_UI_ATTRIBUTE_RNRG_TOOLTIP",
-      "v": "Amount of additional damage reduced from Energy-based attacks."
+      "v": "[PLACEHOLDER]Energy Resistance simple tooltip"
     },
     {
       "k": "ID_UI_ATTRIBUTE_ROLE",
@@ -213,7 +213,7 @@
     },
     {
       "k": "ID_UI_ATTRIBUTE_RPHY_TOOLTIP",
-      "v": "Amount of additional damage reduced from Physical-based attacks."
+      "v": "[PLACEHOLDER]Physical Resistance simple tooltip"
     },
     {
       "k": "ID_UI_ATTRIBUTE_TITLE",
@@ -289,7 +289,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTIRBUTE_BONUS_HPLOST",
-      "v": "Damage increases by up to [16982bff]{1}%[-] based on lost Health."
+      "v": "Damage increases by up to [16982bff]{1}[-] based on lost Health."
     },
     {
       "k": "ID_UI_STAT_ATTIRBUTE_RECOIL",
@@ -585,7 +585,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ANG_WPNMTR_SP3",
-      "v": "Special 3 - Aptitude increasing the effect of all Fury, Armor and Precision Buffs by [16982bff]{1}[-]"
+      "v": "Special 3 - Aptitude increasing the effect of all Fury, Armor and Precision Buffs by [16982bff]{1}%[-]"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_APTITUDE_HUD",
@@ -928,6 +928,10 @@
       "v": "[b310e8]Enervation VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_BARRICADE_HUD",
+      "v": "BARRICADE"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_BEASTGENIUS_DESC",
       "v": "Despite his animal physique, Beast’s genius-level intellect combined with his fighting prowess enables him to quickly adapt to different combat situations."
     },
@@ -1169,7 +1173,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CABLE_SP3",
-      "v": "{0}% Chance to grant True Strike for [16982bff]{2}[-] seconds. This allows him to ignore Armor, Resistances, and Evasion."
+      "v": "{0}% Chance to gain True Strike for [16982bff]{2}[-] seconds, allowing this Champion to ignore Armor, Resistances, and Passive Evade effects."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CABLE_TOREGEN",
@@ -1194,6 +1198,74 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CABLE_TOTENTACLES_I_AO",
       "v": "{0}% Chance to Degen non-robotic opponents for up to {1} Direct Damage over {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_A",
+      "v": "The sight and smell of blood triggers Carnage’s bloodlust granting him up to [16982bff]+{1}%[-] increased Power Gain, while his Opponent is Bleeding."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_B",
+      "v": "The longer the Opponent is continuously Bleeding the greater the bonus, up to {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_SIMPLE",
+      "v": "The sight and smell of blood triggers Carnage’s bloodlust, sending him into a killing frenzy."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_TITLE",
+      "v": "BLOODLUST"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_TITLE_LOWER",
+      "v": "Bloodlust"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_TITLE_SHORT",
+      "v": "Bloodlust {0}"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_CRITBLD",
+      "v": "If the target is already Bleeding gain a {0}% Chance to Bleed dealing [16982bff]{1}[-] damage over {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC",
+      "v": "The Carnage Symbiote changes form creating weapons and armor which provide Passive bonuses based on Carnage’s current needs."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_ARMOR",
+      "v": "Struck: [16982bff]+{1}[-] Armor"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_BP",
+      "v": "Block: Bulwark [16982bff]+{1}[-] Block Prof"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_CRITD",
+      "v": "Heavy Attack: Cruelty [16982bff]+{1}[-] Critical Damage Rate"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_CRITR",
+      "v": "Light Attack: Precision [16982bff]+{1}[-] Critical Rate"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_FURY",
+      "v": "Medium Attack: Fury [16982bff]+{1}[-] Attack"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_PR",
+      "v": "Struck: Resist Physical [16982bff]+{1}[-] Physical Resistance"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBM_A",
+      "v": "Each time Carnage activates a Special Attack he begins to Mutate for {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBM_B",
+      "v": "Once his Mutation ends he copies current Symbiotic Creation as a Permanent Buff."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBM_C",
+      "v": "Maximum of {1} Permanent Buffs."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAUTERIZE",
@@ -1666,6 +1738,10 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CRITICAL_HUD",
       "v": "CRITICAL"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CRITTHRUBLOCKS",
+      "v": "This Champion can strike with Critical Hits even while the opponent is Blocking. Critical Hit based abilities will not trigger through a Block."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CYTTORAK",
@@ -2189,11 +2265,11 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_EVADE_MORALES",
-      "v": "Miles’ undeveloped Spider Senses grant him Evade {1} charges at the beginning of the fight. Each charge grants him a [16982bff]{0}%[-] chance to Evade incoming attacks at the cost of 1 charge."
+      "v": "Miles’ begins the fight with {1} Spider-Sense charges. Each charge grants him a Passive [16982bff]{0}%[-] chance to Evade incoming attacks at the cost of 1 charge."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_EVADE_MORALES_SP",
-      "v": "Whenever an opponent uses a Special Attack, Miles gains {1} charges of Evasion to help him better avoid imminent danger."
+      "v": "Whenever an opponent uses a Special Attack, Miles gains {1} charges of Spider-Sense to help him better avoid imminent danger."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_EVADE_ULTRON",
@@ -4501,7 +4577,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HYPCOSMICCHARGE",
-      "v": "Hyperion's Eternal physiology allows him to capture and store cosmic energy within his body, using a process similar to nuclear fusion converts it into energy."
+      "v": "Hyperion's Eternal physiology allows him to capture and store cosmic energy within his body, using a process similar to nuclear fusion."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HYPCOSMICCHARGEBUFFS",
@@ -4733,7 +4809,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_BLEED_AO",
-      "v": "Judgement of Spite: {0}% chance. \r\nSecondary: Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds."
+      "v": "Judgement of Spite: {0}% chance. \nSecondary: Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_DAMN",
@@ -4741,7 +4817,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_DAMN_AO",
-      "v": "Judgement of Guilt: {0}% chance. \r\nSecondary: Inflicts Damnation upon the opponent through the Penance Stare for {2} seconds, dealing [16982bff]{1}[-] Direct Damage. Opponent's under Damnation are also Power Locked, Heal Blocked and Fate Sealed."
+      "v": "Judgement of Guilt: {0}% chance. \nSecondary: Inflicts Damnation upon the opponent through the Penance Stare for {2} seconds, dealing [16982bff]{1}[-] Direct Damage. Opponent's under Damnation are also Power Locked, Heal Blocked and Fate Sealed."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_DAMN_HUD",
@@ -4777,7 +4853,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_LIFEST_AO",
-      "v": "Judgement of Malice: {0}% chance. \r\nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}[-] Health with each attack."
+      "v": "Judgement of Malice: {0}% chance. \nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}[-] Health with each attack."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_PWRDR",
@@ -5652,6 +5728,10 @@
       "v": "[b310e8]Phasing VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_PHOENIX_OVERLOAD_HUD",
+      "v": "OVERLOAD"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_PHYSICALRESIST_DD",
       "v": "The remarkable suit crafted by Mr. Potter can turn aside knives and gunfire, granting Daredevil {1}% Physical Resistance against all attacks."
     },
@@ -5789,7 +5869,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_POWERGAIN_DRSTRANGE_UI",
-      "v": "Dr. Strange receives {0}% less Power from Attacking and Defending, but gains {1}% Power every {2} seconds."
+      "v": "Doctor Strange receives {0}% less Power from Attacking and Defending, but gains {1}% Power every {2} seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_POWERGAIN_HPLOST",
@@ -6680,6 +6760,10 @@
       "v": "Shocks the opponent, dealing [16982bff]{1}[-] Energy Damage over {2} seconds. When the Shock expires, the opponent is Stunned for {0} seconds. This effect cannot interrupt Special Attacks."
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_SIPHONCHARGE_HUD",
+      "v": "SIPHON CHARGE"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_SOULHARVEST",
       "v": "[808080ff]Soul Harvest[-]"
     },
@@ -6969,7 +7053,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_STUN_KINGGROOT",
-      "v": "{0}% chance to Armor Break the target, reducing Armor by {1}% for {2} seconds. If King Groot has a Fury Buff, he consumes it to make the Armor Break permanent. [Max: 9 Stacks]"
+      "v": "{0}% chance to Armor Break the target, reducing Armor by [16982bff]{1}[-] for {2} seconds. If King Groot has a Fury Buff, he consumes it to make the Armor Break permanent. [Max: 9 Stacks]"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_STUN_SHOCK",
@@ -7042,6 +7126,10 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TENACITY_VII",
       "v": "[b310e8]Tenacity VII[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_THEMALFEEDBACK_HUD",
+      "v": "THERMAL FEEDBACK"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TITLE",
@@ -7264,6 +7352,18 @@
       "v": "Basic Attacks"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONNTBAUTO",
+      "v": "Nano-Tech - Automatic Effects"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONNTBCHARGE",
+      "v": "Nano-Tech - Charging"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONNTBOVER",
+      "v": "Nano-Tech - Overdrive"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONODDCOMBO",
       "v": "Odd Combo"
     },
@@ -7286,6 +7386,10 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPHOENIXFORCEPASSIVE",
       "v": "Phoenix Force - Passive"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPOWEREDARMOR",
+      "v": "Powered Armor - Buff"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPOWERLEVEL",
@@ -7350,6 +7454,10 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONTYPEXPIRY",
       "v": "Passive"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONVULTURECHARGE",
+      "v": "Chitarui Energy Core - Passive"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONYAKA",
@@ -7418,6 +7526,70 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VENOMBLAST_TCSK",
       "v": "Tech & Skill Champions: {0}% chance to Power Drain the opponent, removing {1}% of the opponent’s Max Power."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_DESC_A",
+      "v": "Vulture upgrades his suit to convert excess heat into power allowing him to start the fight at full Chitarui Energy and absorb any Incinerate Debuff applied to him, using it to fill his Chitarui Energy."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_DESC_B",
+      "v": "Additionally while the Opponent is Incinerated, Gain {1}% Power per Second."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_SIMPLE",
+      "v": "Vulture upgrades his suit to convert excess heat into power, keeping his Chitarui Energy Core at full power."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_TITLE",
+      "v": "THERMAL ABSORPTION"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_TITLE_LOWER",
+      "v": "Thermal Absorption"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_TITLE_SHORT",
+      "v": "Thermal Absorption {0}"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_PA_A",
+      "v": "Vulture has a permanent Armor Up Buff, increasing his Armor by {1} per point of Chitarui Energy."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_PA_B",
+      "v": "If this Buff is removed for any reason, it will refresh itself after {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_SP1_SIPHON",
+      "v": "{0}% Chance to apply a Siphon Charge Debuff, which Drains {1}% of all Power the opponent gains, converting it into Chitarui Energy."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_SP2_FEEDBACK",
+      "v": "{0}% Chance to apply a Thermal Feedback Debuff, which Burns {1}% of all Power the opponent gains, dealing Direct Damage based on the Power Burned."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_A",
+      "v": "Each time Vulture lands a Critical Hit his suit stores {1} Chitarui Energy for later use."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_B",
+      "v": "Vulture spends {1} Chitarui Energy, by Dashing Away from then immediately back towards his opponent."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_C",
+      "v": "If this dash attack is Blocked he gains a Decoy Buff, which causes the next attack against him that would otherwise hit to miss."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_CS_NOSTACKS",
+      "v": "If this dash attack is Blocked he gains a Decoy Buff, which causes the next attack against him that would otherwise hit to miss. Max: 1 Stack"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_D",
+      "v": "If it hits his opponent it Drains {1}% of their Current Power."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_E",
+      "v": "Vulture Evades all attacks while Dodging back. Dodging an attack this way consumes {0} Chitarui Energy and Incinerates the Opponent, dealing {1} Damage over {2} seconds. Max: 1 Stack"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_WEAKNESS_HUD",
@@ -7552,6 +7724,10 @@
       "v": "Aftershock Stun Accuracy goes up by [16982bff]{0}%[-] for every point in the Aftershock Scale."
     },
     {
+      "k": "ID_UI_STAT_FORMAT_ARMORBUFFSCONVERT",
+      "v": "{2} Armor Up Buff(s) are consumed to create one permanent Armor Up Buff, increasing Armor Rating by [16982bff]{1}[-]."
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_BLACKPANTHER_UNSTOPPABLE_DESC",
       "v": "Vibranium Armor absorbs the impact of enemy heavy attacks with a [16982bff]{0}%[-] chance when the Black Panther is not blocking."
     },
@@ -7566,6 +7742,10 @@
     {
       "k": "ID_UI_STAT_FORMAT_BPREGENERATION",
       "v": "Excessive build-up of fatigue-producing toxins activates Black Panther's superhuman healing. Enabling him to shrug off any Fatigue, Exhaustion or Weakness effects and Regenerate [16982bff]{1}%[-] of his max health over [16982bff]{2}[-] seconds."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_CIVWAR_REINFORCEDARMOR",
+      "v": "Civil Warrior's Mk. II suit grants him {1}% Poison and Bleed damage resistance for each stack of Armor Up active."
     },
     {
       "k": "ID_UI_STAT_FORMAT_DIZZINESS",
@@ -7629,11 +7809,87 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_POWERSTEAL_SIPHON",
-      "v": "Launching this attack siphons off the opponent’s Power meter and steals {1}% of their Max Power over {2} seconds."
+      "v": "Launching this attack siphons off the opponent’s Power meter and steals {1}% of their current Power over {2} seconds."
     },
     {
       "k": "ID_UI_STAT_FORMAT_POWERSTEAL_SIPHON_CUR",
       "v": "Launching this attack siphons off the opponent’s Power meter and steals {1}% of their current Power over {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_AUTOHB",
+      "v": "Opponent activates a Regeneration Buff - {1}% of the Battery is drained to infect the opponent with nano-inhibitors and Heal Block them for {2} seconds. This Debuff automatically reapplies itself if a Regeneration Buff is still active when it expires."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_AUTORGN",
+      "v": "Punisher drops below {0}% Health - the Battery is drained entirely, allowing Punisher to Regenerate [16982bff]{1}[-] Health over {2} seconds for each percent drained."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_AUTOSTN",
+      "v": "Punisher lands a Heavy Attack - {1}% of the Battery is drained to Stun the opponent for {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_AUTOTARGET",
+      "v": "All shots: Each round fired drains {0}% of the Battery to activate Auto-Targeting. Auto-Target rounds cannot trigger a Passive Evade and gain {1} additional Critical Rating."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CHRGEBUFF",
+      "v": "The Punisher momentarily switches his battery into Overcharge mode, gaining {1}% charge over {2} seconds."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CHRGEBUFF_HUD",
+      "v": "OVERCHARGE"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CH_A",
+      "v": "The Nano-Tech Battery begins the fight with {1}% of max charge."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CH_B",
+      "v": "Every {2} seconds, the Battery triggers a recharge."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CH_C",
+      "v": "If the opponent has 0 Buffs, the Battery recharges {1}%."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CH_D",
+      "v": "If the opponent has 1 Buff, the Battery recharges {1}%."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CH_E",
+      "v": "If the opponent has 2 or more Buffs, the Battery recharges {1}%."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_DISINT_A",
+      "v": "{0}% of the Battery is drained to Disintegrate the opponent, dealing [16982bff]{1}[-] Direct Damage over {2} seconds and reducing their Power Gain rate by 90%."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_DISINT_B",
+      "v": "If a Disintegrate Debuff is placed on the opponent, the remainder of the Battery is drained to increase the duration of the effect by {2} seconds for each {1}% of the Battery that remained."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_DISINT_HUD",
+      "v": "DISINTEGRATION"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_GRENADE",
+      "v": "Grenade Launcher: 100% chance to Armor Break, removing [16982bff]{1}[-] Armor Rating for {2} seconds. If the Battery has at least {0}% charge, it expends that amount to double the duration of the Armor Break Debuff."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_NAME",
+      "v": "[808080ff]Nano-Tech[-]"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_OVR_A",
+      "v": "When the Battery hits 100%, it immediately goes into Overdrive and continually drains. It also cannot recharge until it is drained entirely and switches back to recharge mode."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_OVR_B",
+      "v": "While in Overdrive: Punisher gains [16982bff]{1}[-] additional Attack Rating for each remaining percent in the Battery and his attacks cause his opponent to gain {0}% less Power."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_OVR_HUD",
+      "v": "OVERDRIVE"
     },
     {
       "k": "ID_UI_STAT_FORMAT_REFLECTIVEARMOR",
@@ -7865,7 +8121,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_BLACKBOLT_DESC_NEW_AO",
-      "v": "Combat tests Blackagar Boltagon's restraint. Each time he is struck by a Critical Hit, he has a chance to gain a permanent Cruelty or Fury Buff. Each time he strikes with his own Critical Hit he has a chacne to gain a Fury or Cruelty Buff for {2} seconds."
+      "v": "Combat tests Blackagar Boltagon's restraint. Each time he is struck by a Critical Hit, he has a chance to gain a permanent Cruelty or Fury Buff. Each time he strikes with his own Critical Hit, he has a chance to gain a Fury or Cruelty Buff for {2} seconds."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_BLACKBOLT_DESC_NEW_B",
@@ -8062,6 +8318,10 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_CIVILWARRIOR_DESC",
       "v": "An upgrade to Civil Warrior’s Arc Shield grants him {2} Armor Up charges at the start of the fight. Additionally, he receives [16982bff]{1}%[-] Special Damage resistance while Blocking."
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_CIVILWARRIOR_DESC_NEW",
+      "v": "An upgrade to Civil Warrior’s Arc Shield grants him {2} Armor Up charges at the start of the fight. Additionally, he receives [16982bff]{1}%[-] Special Damage resistance while Blocking. The Special Damage Resistance increases by {0}% when fighting Mutant Champions."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_CIVILWARRIOR_SHORT",
@@ -8665,7 +8925,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_DRSTRANGE_MN_SIMPLE",
-      "v": "Dr. Strange counters enemy beneficial effects, draining their power."
+      "v": "Doctor Strange counters enemy beneficial effects, draining their power."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_DRSTRANGE_MN_TITLE",
@@ -8833,7 +9093,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_DESC_AO",
-      "v": "Judgement of Corruption: {0}% chance. \r\nSecondary: Ghost Rider gains a burst of [16982bff]{1}[-] Attack for {2} seconds."
+      "v": "Judgement of Corruption: {0}% chance. \nSecondary: Ghost Rider gains a burst of [16982bff]{1}[-] Attack for {2} seconds."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_SHORT",
@@ -8873,7 +9133,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC",
-      "v": "The Souls of her ancestors empower Guillotine further, granting a {0}% chance to steal a [16982bff]{1}%[-] Health for every {2} Souls she possesses. Minimum [16982bff]{1}%[-] Health Steal."
+      "v": "The Souls of her ancestors empower Guillotine further, granting a {0}% chance to steal [16982bff]{1}%[-] of Damage done as Health for every {2} Souls she possesses. Minimum [16982bff]{1}%[-] Health Steal regardless of current Soul count."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC_B",
@@ -9722,6 +9982,26 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_PSYLOCKE_TITLE_LOWER",
       "v": "Psi-Feedback"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_DESC",
+      "v": "A last-minute upgrade to the Punisher’s arsenal allows him to begin each fight with an additional {1}% charge in his Nano-Tech Battery and also gains a new Nano-Tech Automatic Effect."
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_DESC_B",
+      "v": "Opponent hits max Power Meter - {1}% of the Battery is drained to drain {0}% of the opponent’s Power and Power Lock them for [16982bff]{2}[-] seconds."
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_SHORT",
+      "v": "Retribution 2099 {0}"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_SIMPLE",
+      "v": "Punisher upgrades his Nano-Tech Battery to start off with extra charge and gives it a new Automatic Effect to protect himself from his opponent’s ultimate attack."
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_TITLE",
+      "v": "RETRIBUTION 2099"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_PUNISHER_DESC",
