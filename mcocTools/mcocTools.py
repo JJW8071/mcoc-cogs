@@ -109,7 +109,8 @@ class MCOCTools:
             return
 
     @mastery.command(pass_context=True, name='cost')
-    async def _cost(self,ctx)
+    async def _cost(self,ctx):
+        await self.bot.say('Dummy message for cost')
 
 
 class masteryConverter(commands.Converter):
