@@ -1,8 +1,5 @@
 import discord
 from discord.ext import commands
-from .mcoc import data_files
-from .mcoc import get_csv_rows
-from .mcoc import get_csv_row
 
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
@@ -136,10 +133,11 @@ class masteryConverter(commands.Converter):
         return (await self.get_mastery(bot, token.title(), attrs))
 
     async def get_mastery(self, bot, token, attrs):
+        mcoc = bot.get_cog('MCOC')
         print('token: '+token)
         print(attrs)
-        dataset = data_files['masteries']['local']
-        masteries = get_csv_rows(dataset, 'Mastery', token)
+        dataset = mcoc.data_files['masteries']['local']
+        masteries = mcoc.get_csv_rows(dataset, 'Mastery', token)
         print('rows found: '+len(masteries))
         # mcoc = bot.get_cog('MCOC')
         # try:
