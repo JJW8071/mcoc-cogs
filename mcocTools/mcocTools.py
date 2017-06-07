@@ -1,6 +1,5 @@
 import discord
 import re
-import mcoc
 from discord.ext import commands
 
 class MCOCTools:
