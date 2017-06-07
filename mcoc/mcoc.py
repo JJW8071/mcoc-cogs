@@ -270,7 +270,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['compf',],hidden=True)
+    @commands.command(aliases=['compf','cfrac'],hidden=True)
     async def compound_frac(self, base: float, exp: int):
         if base > 1:
             base = base / 100
