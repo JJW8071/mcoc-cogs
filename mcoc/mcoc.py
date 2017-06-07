@@ -111,6 +111,10 @@ def to_flat(per, ch_rating):
     return round(num/(100-per), 2)
 
 class AliasDict(UserDict):
+    '''Custom dictionary that uses a tuple of aliases as key elements.  
+    Item addressing is handled either from the tuple as a whole or any 
+    element within the tuple key.
+    '''
     def __getitem__(self, key):
         if key in self.data:
             return self.data[key]
@@ -120,6 +124,9 @@ class AliasDict(UserDict):
         raise KeyError("Invalid Key '{}'".format(key))
 
 class ChampionFactory():
+    '''Creation and storage of the dynamically created Champion subclasses.
+    A new subclass is created for every champion defined.  Then objects are
+    created from user function calls off of the dynamic classes.'''
 
     champions = AliasDict()
 
@@ -140,10 +147,13 @@ class ChampionFactory():
         return champion
 
     def get_champion(self, name_id, attrs=None):
+        '''straight alias lookup followed by new champion object creation'''
         champ = self.champions[name_id]
         return champ(attrs)
 
     def search_champions(self, search_str, attrs=None):
+        '''searching through champion aliases and allowing partial matches.
+        Returns an array of new champion objects'''
         re_str = re.compile(search_str)
         champs = []
         for champ in self.champions.values():
@@ -154,6 +164,21 @@ class ChampionFactory():
 
 
 class ChampConverter(commands.Converter):
+    '''Argument Parsing class that geneartes Champion objects from user input'''
+
+    arg_help = '''
+    Specify a single champion with optional parameters of star, rank, or sig.
+    Champion names can be a number of aliases or partial aliases if no conflicts are found.
+
+    The optional arguments can be in any order, with or without spaces.
+        <digit>* specifies star <default: 4>
+        r<digit> specifies rank <default: 5>
+        s<digit> specifies signature level <default: 99>
+
+    Examples:
+        4* yj r4 s30  ->  4 star Yellowjacket rank 4/40 sig 30
+        r35*im        ->  5 star Ironman rank 3/45 sig 99
+        '''
 
     _bare_arg = None
     parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
@@ -196,17 +221,46 @@ class ChampConverter(commands.Converter):
 
 class ChampConverterSig(ChampConverter):
     _bare_arg = 'sig'
+    arg_help = ChampConverter.arg_help + '''
+    Bare Number argument for this function is sig level:
+        "yjr5s30" is equivalent to "yjr5 30"'''
 
 class ChampConverterRank(ChampConverter):
     _bare_arg = 'rank'
+    arg_help = ChampConverter.arg_help + '''
+    Bare Number argument for this function is rank:
+        "yjr5s30" is equivalent to "yjs30 5"'''
 
 class ChampConverterStar(ChampConverter):
     _bare_arg = 'star'
+    arg_help = ChampConverter.arg_help + '''
+    Bare Number argument for this function is star:
+        "5*yjr5s30" is equivalent to "yjr5s30 5"'''
 
 class ChampConverterDebug(ChampConverter):
     _bare_arg = 'debug'
 
 class ChampConverterMult(ChampConverter):
+
+    arg_help = '''
+    Specify multiple champions with optional parameters of star, rank, or sig.
+    Champion names can be a number of aliases or partial aliases if no conflicts are found.
+
+    The optional arguments can be in any order.
+        <digit>* specifies star <default: 4>
+        r<digit> specifies rank <default: 5>
+        s<digit> specifies signature level <default: 99>
+
+    If optional arguments are listed without a champion, it changes the default for all
+    remaining champions.  Arguments attached to a champion are local to that champion
+    only.
+
+    Examples:
+        s20 yj im        ->  4* Yellowjacket r5/50 sig 20, 4* Ironman r5/50 sig 20
+        r35*ims20 ims40  ->  5 star Ironman r3/45 sig 20, 4* Ironman r5/50 sig 40
+        r4s20 yj ims40 lc -> 4* Yellowjacket r4/40 sig 20, 4* Ironman r4/40 sig 40, 4* Luke Cage r4/40 sig 20
+        '''   
+
     async def convert(self):
         bot = self.ctx.bot
         champs = []
@@ -222,6 +276,18 @@ class ChampConverterMult(ChampConverter):
             else:
                 default.update(attrs)
         return champs
+
+def command_arg_help(help_type='single', **cmdkwargs):
+    def internal_func(f):
+        for param in inspect.signature(f).parameters.values():
+            if issubclass(param.annotation, commands.Converter):
+                arg_help = getattr(param.annotation, 'arg_help', '')
+                f.__doc__ = '{}\n{}'.format(f.__doc__, arg_help)
+        @wraps(f)
+        async def wrapper(*args, **kwargs):
+            return await f(*args, **kwargs)
+        return commands.command(**cmdkwargs)(wrapper)
+    return internal_func
 
 class MCOC(ChampionFactory):
     '''A Cog for Marvel's Contest of Champions'''
@@ -272,8 +338,9 @@ class MCOC(ChampionFactory):
         em.add_field(name='Percentage:', value='{}\%'.format(p))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['compf','cfrac'],hidden=True)
+    @commands.command(aliases=('compf','cfrac'), hidden=True)
     async def compound_frac(self, base: float, exp: int):
+        '''Calculate multiplicative compounded fractions'''
         if base > 1:
             base = base / 100
         compound = 1 - (1 - base)**exp
@@ -420,7 +487,7 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=('bio',))
+    @command_arg_help(aliases=('bio',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
         '''Retrieve the Bio of a Champion'''
         try:
@@ -434,7 +501,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=('duel',))
+    @command_arg_help(aliases=('duel',))
     async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
         dataset=data_files['duelist']['local']
@@ -463,7 +530,7 @@ class MCOC(ChampionFactory):
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['about','cstat'])
+    @command_arg_help(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ'))
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
@@ -503,7 +570,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['sig','signature'])
+    @command_arg_help(help_type='single', aliases=['sig','signature'])
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
@@ -523,7 +590,18 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['abilities',])
+    @command_arg_help(aliases=('infopage',))
+    async def champ_info(self, *, champ : ChampConverterDebug):
+        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
+        if champ.infopage == 'none':
+            em.add_field(name=champ.full_name, value='No URL found')
+        else:
+            em.add_field(name=champ.full_name, value=champ.infopage)
+        em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
+
+    @command_arg_help(aliases=('abilities',))
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
@@ -561,7 +639,7 @@ class MCOC(ChampionFactory):
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @commands.command(aliases=('prestige',))
+    @command_arg_help(aliases=('prestige',))
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
