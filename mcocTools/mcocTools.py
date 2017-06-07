@@ -99,6 +99,10 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
 
 #### Mastery stuff###
+class MCOCMastery:
+    masteryColor={'Offense': discord.Color.red(),
+            'Defense': discord.Color.blue(),
+            'Utility': discord.Color.green()}
 
     @commands.group(pass_context=True, aliases=['masteries',])
     async def mastery(self, ctx):
@@ -113,8 +117,7 @@ class MCOCTools:
 
 class masteryConverter(commands.Converter):
     _bare_arg = None
-    parse_re = re.compile(r'''(?:r(?P<rank>[1-5])
-                             |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
+    parse_re = re.compile(r'''(?:r(?P<rank>[1-9])|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
     tokens={'Vitality','Greater Vitality','Salve','Recovery','Energy Resistance','Physical Resistance','Block Proficiancy','Perfect Block','Stand Your Ground','Collar Tech','Serum Science','Willpower','Coagulate','Suture','Inequity','Resonate',
             'Strength','Greater Strength','Pierce','Lesser Precision','Precision','Lesser Cruelty','Cruelty','Courage','Extended Fury','Enhanced Fury','Pure Skill','Mutagenesis','Glass Canon','Recoil','Liquid Courage','Double Edge','Despair','DeepWounds','Unfazed','Assassin',
             'Wisdom','Intelligence','Limber','Parry','Stupefy','Petrify','Pacify','Dexterity','Pitance','Prosperity','Cosmic Awareness','Mystic Dispersion','Detect Cosmic','Detect Tech','Detect Mystic','Scouter Lens','Detect Mutant','Detect Science','Detect Skill'
