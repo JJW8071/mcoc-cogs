@@ -1,8 +1,6 @@
 import discord
+import re
 from discord.ext import commands
-from .mcoc import data_files
-from .mcoc import get_csv_rows
-from .mcoc import get_csv_row
 
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
@@ -101,60 +99,23 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
 
 #### Mastery stuff###
+# class MCOCMastery:
+    masteryColor={'Offense': discord.Color.red(),
+            'Defense': discord.Color.blue(),
+            'Utility': discord.Color.green()}
+    tokens={'Vitality','Greater Vitality','Salve','Recovery','Energy Resistance','Physical Resistance','Block Proficiancy','Perfect Block','Stand Your Ground','Collar Tech','Serum Science','Willpower','Coagulate','Suture','Inequity','Resonate',
+            'Strength','Greater Strength','Pierce','Lesser Precision','Precision','Lesser Cruelty','Cruelty','Courage','Extended Fury','Enhanced Fury','Pure Skill','Mutagenesis','Glass Canon','Recoil','Liquid Courage','Double Edge','Despair','DeepWounds','Unfazed','Assassin',
+            'Wisdom','Intelligence','Limber','Parry','Stupefy','Petrify','Pacify','Dexterity','Pitance','Prosperity','Cosmic Awareness','Mystic Dispersion','Detect Cosmic','Detect Tech','Detect Mystic','Scouter Lens','Detect Mutant','Detect Science','Detect Skill'}
 
-    @commands.group(pass_context=True, aliases=[]'masteries',])
+    @commands.group(pass_context=True, aliases=['masteries',])
     async def mastery(self, ctx):
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx)
             return
 
     @mastery.command(pass_context=True, name='cost')
-    async def _cost(self,ctx)
-
-
-class masteryConverter(commands.Converter):
-    _bare_arg = None
-    parse_re = re.compile(r'''(?:r(?P<rank>[1-5])
-                             |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
-    async def convert(self):
-        bot = self.ctx.bot
-        attrs = {}
-        if self._bare_arg:
-            args = self.argument.rsplit(' ', maxsplit=1)
-            if len(args) > 1 and args[-1].isdecimal():
-                attrs[self._bare_arg] = int(args[-1])
-                self.argument = args[0]
-        arg = ''.join(self.argument.lower().split(' '))
-        for m in self.parse_re.finditer(arg):
-            attrs[m.lastgroup] = int(m.group(m.lastgroup))
-        token = self.parse_re.sub('', arg)
-        if not token:
-            err_str = "No Mastery remains from arg '{}'".format(self.argument)
-            await bot.say(err_str)
-            raise commands.BadArgument(err_str)
-        return (await self.get_mastery(bot, token.title(), attrs))
-
-    async def get_mastery(self, bot, token, attrs):
-        print('token: '+token)
-        print(attrs)
-        dataset = data_files['masteries']['local']
-        masteries = get_csv_rows(dataset, 'Mastery', token)
-        print('rows found: '+len(masteries))
-        # mcoc = bot.get_cog('MCOC')
-        # try:
-        #     champ = mcoc.get_champion(token, attrs)
-        # except KeyError:
-        #     champs = mcoc.search_masteries('.*{}.*'.format(token), attrs)
-        #     if len(champs) == 1:
-        #         await bot.say("'{}' was not exact but found close alternative".format(
-        #                 token))
-        #         champ = champs[0]
-        #     else:
-        #         err_str = "Cannot resolve alias for '{}'".format(token)
-        #         await bot.say(err_str)
-        #         raise commands.BadArgument(err_str)
-        return champ
-
+    async def _cost(self,ctx):
+        await self.bot.say('Dummy message for cost')
 
 def setup(bot):
     bot.add_cog(MCOCTools(bot))
