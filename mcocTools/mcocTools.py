@@ -41,6 +41,7 @@ class MCOCTools:
 
     def __init__(self, bot):
         self.bot = bot
+        mcoc = self.bot.get_cog('MCOC')
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
@@ -115,11 +116,21 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
+        # args = ctx.split(' ')
+        #
+        # for arg in args:
+        #     # parse_re = re.compile(r'''(?:r(?P<rank>[0-9]))|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
+        #     if arg in tokens:
+        #         row = mcoc.csv_get_row(mcoc.data_files['masteries']['local'], 'MasteryExt', arg)
+
         await self.bot.say('Dummy message for cost')
 
     @mastery.command(pass_context=True, name='set')
     async def _set(self,ctx):
         await self.bot.say('Dummy message for set')
+
+
+
 
 def setup(bot):
     bot.add_cog(MCOCTools(bot))
