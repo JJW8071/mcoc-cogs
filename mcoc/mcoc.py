@@ -35,6 +35,8 @@ data_files = {
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
     'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=1266181139&single=true&output=csv',
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
+    'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
+                'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
                 #'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
     #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=229525912&format=csv',
