@@ -162,6 +162,9 @@ class MCOCTools:
     async def _set(self,ctx):
         await self.bot.say('Dummy message for set')
 
+def load_csv(filename):
+    return csv.DictReader(open(filename))
+
 def get_csv_row(filecsv, column, match_val, default=None):
     print(match_val)
     csvfile = load_csv(filecsv)
