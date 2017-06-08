@@ -126,7 +126,7 @@ class MCOCTools:
         #         'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
         # if mastery in cores:
         #     cost['uclass'][1]=cores[mastery]
-        for token in tokens:
+        for token in self.tokens:
             if token in ctx:
                 maxrank = rows[0]['Max Ranks']
                 category = rows[0]['Category']
