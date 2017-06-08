@@ -28,7 +28,7 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
-        self.champ_str2 = '{0[Stars]}★ {0.full_name} R{0[Rank]} s{0[Awakened]:<2}'
+        
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -283,7 +283,7 @@ class Hook:
             # prestige calcs
             champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
             prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
-            top_champs = [self.champ_str2.format(champ) for champ in champ_list[:5]]
+            top_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
             champ_data['prestige'] = prestige
             champ_data['top5'] = top_champs
 
