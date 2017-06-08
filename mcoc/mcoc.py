@@ -111,8 +111,8 @@ def to_flat(per, ch_rating):
     return round(num/(100-per), 2)
 
 class AliasDict(UserDict):
-    '''Custom dictionary that uses a tuple of aliases as key elements.  
-    Item addressing is handled either from the tuple as a whole or any 
+    '''Custom dictionary that uses a tuple of aliases as key elements.
+    Item addressing is handled either from the tuple as a whole or any
     element within the tuple key.
     '''
     def __getitem__(self, key):
@@ -259,7 +259,7 @@ class ChampConverterMult(ChampConverter):
         s20 yj im        ->  4* Yellowjacket r5/50 sig 20, 4* Ironman r5/50 sig 20
         r35*ims20 ims40  ->  5 star Ironman r3/45 sig 20, 4* Ironman r5/50 sig 40
         r4s20 yj ims40 lc -> 4* Yellowjacket r4/40 sig 20, 4* Ironman r4/40 sig 40, 4* Luke Cage r4/40 sig 20
-        '''   
+        '''
 
     async def convert(self):
         bot = self.ctx.bot
@@ -607,9 +607,14 @@ class MCOC(ChampionFactory):
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
-        em.add_field(name='Passive',value='placeholder')
-        em.add_field(name='All Attacks',value='placeholder')
-        em.add_field(name='When Attacked',value='placeholder')
+        # em.add_field(name='Passive',value='placeholder')
+        # em.add_field(name='All Attacks',value='placeholder')
+        # em.add_field(name='When Attacked',value='placeholder')
+        row=get_csv_row(data_files['crossreference']['local'])
+        abilites=row['abilities'].split(',')
+        hashtags=row['hastags'].split(',')
+        em.add_field(name='Abilities', value='\n'.join(abilities))
+        em.add_field(name='Hashtags', value='\n'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
         em2 = discord.Embed(color=champ.class_color,
         title=champ.full_name + ' Special Attacks')
