@@ -1,10 +1,11 @@
 import discord
 import re
+import .mcoc
 from discord.ext import commands
 
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
-    mcoc = self.bot.get_cog('MCOC')
+    mcoc = bot.get_cog('MCOC')
 
     lookup_links = {
             'event': (
@@ -43,7 +44,6 @@ class MCOCTools:
 
     def __init__(self, bot):
         self.bot = bot
-        mcoc = self.bot.get_cog('MCOC')
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
