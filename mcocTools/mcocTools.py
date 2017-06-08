@@ -135,10 +135,10 @@ class MCOCTools:
         unlock=[]
         rank=[]
         for i in {0, 1, 2, 3}:
-            if cost[i][0] > 0:
+            if cost[i][1] > 0:
                 unlock.append('{}x {}'.format(cost[i][1], cost[i][0])
-        for i in {4, 5}
-            if cost[i][0] > 0:
+        for i in {4, 5}:
+            if cost[i][1] > 0:
                 unlock.append('{}x {}'.format(cost[i][1], cost[i][0])
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
         em.add_field(name='Rank Cost',value='\n'.join(r for r in rank))
