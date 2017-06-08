@@ -28,6 +28,7 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
+        self.champ_str2 = '{0[Stars]}★ {0.full_name} R{0[Rank]} s{0[Awakened]:<2}'
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -39,16 +40,8 @@ class Hook:
         # creates user if doesn't exist
         info = self.get_user_info(user.id)
         em = discord.Embed(title="User Profile", description=user.name)
-        tops = []
-        maxes = []
-        # for i in info['top5']:
-        #     tops.append(mcoc.search_champions(i).full_name)
-        # for i in info['max5']:
-        #     tops.append(mcoc.search_champions(i).full_name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
-            # em.add_field(name='Top Champs', value='\n'.join(tops))
-            # em.add_field(name='Max Champs', value='\n'.join(maxes))
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
             em.add_field(name='Max Champs', value='\n'.join(info['max5']))
         await self.bot.say(embed=em)
@@ -290,7 +283,7 @@ class Hook:
             # prestige calcs
             champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
             prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
-            top_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
+            top_champs = [self.champ_str2.format(champ) for champ in champ_list[:5]]
             champ_data['prestige'] = prestige
             champ_data['top5'] = top_champs
 
