@@ -127,9 +127,9 @@ class MCOCTools:
             cost['uclass'][1]=cores[mastery]
         category = rows[0]['Category']
         for row in rows:
-            text.append(row['Text'].format(row[str(rank)])
+            text.append(row['Text'].format(row[str(rank)]))
         for c in cost:
-            c[0]=rows[0][c[0]+str(rank)]
+            c[1]=rows[0][c[0]+str(rank)]
 
         em=discord.Embed(color=masteryColor[category],title=mastery,description=' '.join(t for t in text))
         unlock=[]
