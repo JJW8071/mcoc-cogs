@@ -137,19 +137,23 @@ class MCOCTools:
         for c in {'ucarb','ustony','uclass','uunit',}:
             key = '{}{}'.format(c, rank)
             print(key)
-            price = int(rows[0][key])
+            price = rows[0][key]
             print(price)
-            if price > 0:
-                core = cost[c]
-                unlock.append('{0}x {1}'.format(price, core))
+            if price != '':
+                if int(price) > 0:
+                    core = cost[c]
+                    unlock.append('{0}x {1}'.format(price, core))
         for c in {'rgold','runit',}:
             key = '{}{}'.format(c, rank)
-            price = int(rows[0][key])
-            if price > 0:
-                core = cost[c]
-                rankcost.append('{0}x {1}'.format(price, core))
+            price = rows[0][key]
+            print(price)
+            if price != '':
+                if int(price) > 0:
+                    core = cost[c]
+                    rankcost.append('{0}x {1}'.format(price, core))
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
         em.add_field(name='Rank Cost',value='\n'.join(r for r in rankcost))
+        await self.bot.say(embed=em)
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
