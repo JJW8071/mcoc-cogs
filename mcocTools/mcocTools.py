@@ -114,6 +114,38 @@ class MCOCTools:
             await self.bot.send_cmd_help(ctx)
             return
 
+    @mastery.command(pass_context=True, aliases=['test'])
+    async def _test(self,ctx)
+        mastery='Resonate'
+        rank=3
+        rows = csv_get_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
+        text = {}
+        cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustoney': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
+        cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
+                'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
+        if mastery in cores:
+            cost['uclass'][1]=cores[mastery]
+        category = rows[0]['Category']
+        for row in rows:
+            text.append(row['Text'].format(row[str(rank)))
+        for c in cost:
+            c[0]=rows[0][c[0]+str(rank)]
+
+        em=discord.Embed(color=masteryColor[category],title=mastery,description=' '.join(t for t in text))
+        unlock=[]
+        rank=[]
+        for i in {0, 1, 2, 3}:
+            if cost[i][0] > 0:
+                unlock.append('{}x {}'.format(cost[i][1], cost[i][0])
+        for i in {4, 5}
+            if cost[i][0] > 0:
+                unlock.append('{}x {}'.format(cost[i][1], cost[i][0])
+        em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
+        em.add_field(name='Rank Cost',value='\n'.join(r for r in rank))
+
+
+
+
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
         # args = ctx.split(' ')
