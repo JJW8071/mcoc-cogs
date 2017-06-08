@@ -117,8 +117,7 @@ class MCOCTools:
     async def _test(self,ctx):
         mastery='Resonate'
         rank=3
-        mcoc = self.bot.get_cog('MCOC')
-        rows = mcoc.csv_get_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
+        rows = csv_get_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
         text = {}
         cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustony': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
         cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
@@ -164,6 +163,29 @@ class MCOCTools:
     async def _set(self,ctx):
         await self.bot.say('Dummy message for set')
 
+def get_csv_row(filecsv, column, match_val, default=None):
+    print(match_val)
+    csvfile = load_csv(filecsv)
+    for row in csvfile:
+        if row[column] == match_val:
+            if default is not None:
+                for k, v in row.items():
+                    if v == '':
+                        row[k] = default
+            return row
+
+def get_csv_rows(filecsv, column, match_val, default=None):
+    print(match_val)
+    csvfile = load_csv(filecsv)
+    package =[]
+    for row in csvfile:
+        if row[column] == match_val:
+            if default is not None:
+                for k, v in row.items():
+                    if v == '':
+                        row[k] = default
+            package.append(row)
+    return package
 
 
 
