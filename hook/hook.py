@@ -31,8 +31,8 @@ class Hook:
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
-        """Displays a user profile."""
         mcoc = self.bot.get_cog('MCOC')
+        """Displays a user profile."""
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
@@ -40,8 +40,8 @@ class Hook:
         em = discord.Embed(title="User Profile", description=user.name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
-            em.add_field(name='Top Champs', value='\n'.join(self.get_champion(mcoc, info['top5']).full_name))
-            em.add_field(name='Max Champs', value='\n'.join(self.get_champion(mcoc, info['max5']).full_name))
+            em.add_field(name='Top Champs', value='\n'.join(mcoc.search_champions(info['top5']).full_name))
+            em.add_field(name='Max Champs', value='\n'.join(mcoc.search_champions(info['max5']).full_name))
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
