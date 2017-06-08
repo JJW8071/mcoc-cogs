@@ -844,11 +844,13 @@ class Champion:
 
     def get_avatar(self):
         image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        print(image)
         return image
 
     def get_featured(self):
         image = '{}uigacha/featured/GachaChasePrize_256x256_{}.png'.format(
                     remote_data_basepath, self.mcocfeatured)
+        print(image)
         return image
 
     async def get_bio(self):
