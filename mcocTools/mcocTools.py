@@ -4,6 +4,8 @@ from discord.ext import commands
 
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
+    mcoc = self.bot.get_cog('MCOC')
+
     lookup_links = {
             'event': (
                 'Tiny MCoC Schedule',
