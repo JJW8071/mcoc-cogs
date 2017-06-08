@@ -127,6 +127,7 @@ class MCOCTools:
         if mastery in cores:
             cost['uclass'][1]=cores[mastery]
         category = rows[0]['Category']
+        print(category)
         for row in rows:
             text.append(row['Text'].format(row[str(rank)]))
 
