@@ -1,5 +1,6 @@
 import discord
 import re
+import csv
 from discord.ext import commands
 
 class MCOCTools:
@@ -38,6 +39,7 @@ class MCOCTools:
     }
     mcolor = discord.Color.gold()
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+    dataset = 'mcoc/data/masteries.csv'
 
     def __init__(self, bot):
         self.bot = bot
@@ -115,10 +117,9 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, aliases=['test'])
     async def _test(self,ctx):
-        mcoc = self.bot.get_cog('MCOC')
         mastery='Resonate'
         rank=3
-        rows = get_csv_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
+        rows = get_csv_rows(dataset,'Mastery',mastery)
         text = {}
         cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustony': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
         cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
