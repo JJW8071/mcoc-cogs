@@ -145,9 +145,6 @@ class MCOCTools:
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
         em.add_field(name='Rank Cost',value='\n'.join(r for r in rank))
 
-
-
-
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
         # args = ctx.split(' ')
@@ -163,29 +160,29 @@ class MCOCTools:
     async def _set(self,ctx):
         await self.bot.say('Dummy message for set')
 
-def get_csv_row(filecsv, column, match_val, default=None):
-    print(match_val)
-    csvfile = load_csv(filecsv)
-    for row in csvfile:
-        if row[column] == match_val:
-            if default is not None:
-                for k, v in row.items():
-                    if v == '':
-                        row[k] = default
-            return row
+    def get_csv_row(filecsv, column, match_val, default=None):
+        print(match_val)
+        csvfile = load_csv(filecsv)
+        for row in csvfile:
+            if row[column] == match_val:
+                if default is not None:
+                    for k, v in row.items():
+                        if v == '':
+                            row[k] = default
+                return row
 
-def get_csv_rows(filecsv, column, match_val, default=None):
-    print(match_val)
-    csvfile = load_csv(filecsv)
-    package =[]
-    for row in csvfile:
-        if row[column] == match_val:
-            if default is not None:
-                for k, v in row.items():
-                    if v == '':
-                        row[k] = default
-            package.append(row)
-    return package
+    def get_csv_rows(filecsv, column, match_val, default=None):
+        print(match_val)
+        csvfile = load_csv(filecsv)
+        package =[]
+        for row in csvfile:
+            if row[column] == match_val:
+                if default is not None:
+                    for k, v in row.items():
+                        if v == '':
+                            row[k] = default
+                package.append(row)
+        return package
 
 
 
