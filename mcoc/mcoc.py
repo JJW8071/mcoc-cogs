@@ -843,12 +843,12 @@ class Champion:
                 self.sig = 99
 
     def get_avatar(self):
-        image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocui)
+        image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
         return image
 
     def get_featured(self):
         image = '{}uigacha/featured/GachaChasePrize_256x256_{}.png'.format(
-                    remote_data_basepath, self.mcocui)
+                    remote_data_basepath, self.mcocfeatured)
         return image
 
     async def get_bio(self):
