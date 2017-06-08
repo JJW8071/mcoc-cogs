@@ -117,6 +117,7 @@ class MCOCTools:
 
     @mastery.command(pass_context=True,)
     async def test(self,ctx):
+        message = ctx.message.content
         # mastery='Resonate'
         # rank=3
         # rows = get_csv_rows(self.dataset,'Mastery',mastery)
@@ -127,7 +128,7 @@ class MCOCTools:
         # if mastery in cores:
         #     cost['uclass'][1]=cores[mastery]
         for token in self.tokens:
-            if token in ctx:
+            if token in message:
                 maxrank = rows[0]['Max Ranks']
                 category = rows[0]['Category']
 

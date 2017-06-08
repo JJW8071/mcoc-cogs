@@ -610,7 +610,7 @@ class MCOC(ChampionFactory):
         # em.add_field(name='Passive',value='placeholder')
         # em.add_field(name='All Attacks',value='placeholder')
         # em.add_field(name='When Attacked',value='placeholder')
-        row=get_csv_row(data_files['crossreference']['local'])
+        row=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilites=row['abilities'].split(',')
         hashtags=row['hastags'].split(',')
         em.add_field(name='Abilities', value='\n'.join(abilities))
