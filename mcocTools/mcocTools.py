@@ -135,10 +135,16 @@ class MCOCTools:
         rank=[]
         for c in {'ucarb','ustony','uclass','uunit',}:
             if cost[c][1] > 0:
-                unlock.append('{}x {}'.format(rows[0]['{}{}'.format(c, rank)], cost[c][1])
+                key = c + str(rank)
+                core = cost[c][1]
+                price = rows[0][key]
+                unlock.append('{0}x {1}'.format(price, core))
         for c in {'rgold','runit',}:
             if cost[c][1] > 0:
-                rank.append('{}x {}'.format(rows[0]['{}{}'.format(c, rank)], cost[c][1])
+                key = c + str(rank)
+                core = cost[c][1]
+                price = rows[0][key]
+                rank.append('{0}x {1}'.format(price, core))
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
         em.add_field(name='Rank Cost',value='\n'.join(r for r in rank))
 
