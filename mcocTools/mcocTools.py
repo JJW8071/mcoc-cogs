@@ -120,7 +120,7 @@ class MCOCTools:
         rank=3
         rows = csv_get_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
         text = {}
-        cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustoney': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
+        cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustony': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
         cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
                 'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
         if mastery in cores:
@@ -134,10 +134,10 @@ class MCOCTools:
         em=discord.Embed(color=masteryColor[category],title=mastery,description=' '.join(t for t in text))
         unlock=[]
         rank=[]
-        for i in {0, 1, 2, 3}:
+        for i in {'ucarb','ustony','uclass','uunit'}:
             if cost[i][1] > 0:
                 unlock.append('{}x {}'.format(cost[i][1], cost[i][0])
-        for i in {4, 5}:
+        for i in {'rgold','runit'}:
             if cost[i][1] > 0:
                 unlock.append('{}x {}'.format(cost[i][1], cost[i][0])
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
