@@ -117,21 +117,51 @@ class MCOCTools:
 
     @mastery.command(pass_context=True,)
     async def test(self,ctx):
-        mastery='Resonate'
-        rank=3
-        rows = get_csv_rows(self.dataset,'Mastery',mastery)
-        text = []
+        # mastery='Resonate'
+        # rank=3
+        # rows = get_csv_rows(self.dataset,'Mastery',mastery)
+        #  text = []
+        # cost = {'ucarb': 'Carbonadium Mastery Core', 'ustony': 'Stony Mastery Core', 'uclass': '', 'uunit': 'Units', 'rgold': 'Gold', 'runit': 'Units'}
+        # cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
+        #         'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
+        # if mastery in cores:
+        #     cost['uclass'][1]=cores[mastery]
+        for token in tokens:
+            if token in ctx:
+                maxrank = rows[0]['Max Ranks']
+                category = rows[0]['Category']
+
+                em=discord.Embed(color=self.masteryColor[category],title=mastery,description=' '.join(t for t in text))
+                # for r in maxrank:
+                    # unlock, rankcost = _get_cost(mastery, r)
+                unlock, rankcost = self._get_cost(mastery, maxrank)
+
+                em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
+                em.add_field(name='Rank Cost',value='\n'.join(r for r in rankcost))
+                await self.bot.say(embed=em)
+
+    @mastery.command(pass_context=True, name='cost')
+    async def _cost(self,ctx):
+        # args = ctx.split(' ')
+        #
+        # for arg in args:
+        #     # parse_re = re.compile(r'''(?:r(?P<rank>[0-9]))|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
+        #     if arg in tokens:
+        #         row = mcoc.csv_get_row(mcoc.data_files['masteries']['local'], 'MasteryExt', arg)
+
+        await self.bot.say('Dummy message for cost')
+
+    @mastery.command(pass_context=True, name='set')
+    async def _set(self,ctx):
+        await self.bot.say('Dummy message for set')
+
+    def _get_cost(self, mastery, rank):
+        row = csv_get_row(self.dataset,'Mastery',mastery)
         cost = {'ucarb': 'Carbonadium Mastery Core', 'ustony': 'Stony Mastery Core', 'uclass': '', 'uunit': 'Units', 'rgold': 'Gold', 'runit': 'Units'}
         cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
                 'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
         if mastery in cores:
             cost['uclass'][1]=cores[mastery]
-        category = rows[0]['Category']
-        print(category)
-        for row in rows:
-            text.append(row['Text'].format(row[str(rank)]))
-
-        em=discord.Embed(color=self.masteryColor[category],title=mastery,description=' '.join(t for t in text))
         unlock=[]
         rankcost=[]
         for c in {'ucarb','ustony','uclass','uunit',}:
@@ -151,24 +181,15 @@ class MCOCTools:
                 if int(price) > 0:
                     core = cost[c]
                     rankcost.append('{0}x {1}'.format(price, core))
-        em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
-        em.add_field(name='Rank Cost',value='\n'.join(r for r in rankcost))
-        await self.bot.say(embed=em)
 
-    @mastery.command(pass_context=True, name='cost')
-    async def _cost(self,ctx):
-        # args = ctx.split(' ')
-        #
-        # for arg in args:
-        #     # parse_re = re.compile(r'''(?:r(?P<rank>[0-9]))|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
-        #     if arg in tokens:
-        #         row = mcoc.csv_get_row(mcoc.data_files['masteries']['local'], 'MasteryExt', arg)
+        return unlock, rankcost
 
-        await self.bot.say('Dummy message for cost')
+    def _get_text(self, mastery, rank):
+        rows = csv_get_rows(self.dataset,'Mastery',mastery)
+        for row in rows:
+            text.append(row['Text'].format(row[str(rank)]))
+        return text
 
-    @mastery.command(pass_context=True, name='set')
-    async def _set(self,ctx):
-        await self.bot.say('Dummy message for set')
 
 def load_csv(filename):
     return csv.DictReader(open(filename))
