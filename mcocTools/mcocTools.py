@@ -133,7 +133,7 @@ class MCOCTools:
 
         em=discord.Embed(color=self.masteryColor[category],title=mastery,description=' '.join(t for t in text))
         unlock=[]
-        rank=[]
+        rankcost=[]
         for c in {'ucarb','ustony','uclass','uunit',}:
             key = '{}{}'.format(c, rank)
             print(key)
@@ -147,9 +147,9 @@ class MCOCTools:
             price = int(rows[0][key])
             if price > 0:
                 core = cost[c]
-                rank.append('{0}x {1}'.format(price, core))
+                rankcost.append('{0}x {1}'.format(price, core))
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
-        em.add_field(name='Rank Cost',value='\n'.join(r for r in rank))
+        em.add_field(name='Rank Cost',value='\n'.join(r for r in rankcost))
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
