@@ -559,16 +559,17 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @commands.command(aliases=['released',])
-    async def champ_released(self, *, champ : ChampConverter):
+    async def champ_released(self, *, champs : ChampConverterMult):
         '''Retrieve Champion Release Date'''
-        xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-        em= discord.Embed(color=champ.class_color,title='Release Dates')
-        em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
-        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
-        await self.bot.say(embed=em)
+        for champ in champs:
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            em= discord.Embed(color=champ.class_color,title='Release Dates')
+            em.add_field(name='Feature Crystal', value=xref['released'])
+            em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
+            em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
+            em.set_thumbnail(url=champ.get_avatar())
+            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            await self.bot.say(embed=em)
 
     @command_arg_help(help_type='single', aliases=['sig','signature'])
     async def champ_sig(self, *, champ : ChampConverterSig):
