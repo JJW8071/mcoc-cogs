@@ -40,8 +40,8 @@ class Hook:
         em = discord.Embed(title="User Profile", description=user.name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
-            em.add_field(name='Top Champs', value='\n'.join(mcoc.search_champions(info['top5']).full_name))
-            em.add_field(name='Max Champs', value='\n'.join(mcoc.search_champions(info['max5']).full_name))
+            em.add_field(name='Top Champs', value='\n'.join(mcoc.search_champions(i for i in info['top5']).full_name))
+            em.add_field(name='Max Champs', value='\n'.join(mcoc.search_champions(i for i in info['max5']).full_name))
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
