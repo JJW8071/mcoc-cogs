@@ -135,13 +135,13 @@ class MCOCTools:
         unlock=[]
         rank=[]
         for c in {'ucarb','ustony','uclass','uunit',}:
-            if cost[c][1] > 0:
+            if cost[c][1] != 0:
                 key = c + str(rank)
                 core = cost[c][1]
                 price = rows[0][key]
                 unlock.append('{0}x {1}'.format(price, core))
         for c in {'rgold','runit',}:
-            if cost[c][1] > 0:
+            if cost[c][1] != 0:
                 key = c + str(rank)
                 core = cost[c][1]
                 price = rows[0][key]
