@@ -128,6 +128,7 @@ class MCOCTools:
         # if mastery in cores:
         #     cost['uclass'][1]=cores[mastery]
         for token in self.tokens:
+            print(token+' found')
             if token in message:
                 maxrank = rows[0]['Max Ranks']
                 category = rows[0]['Category']
