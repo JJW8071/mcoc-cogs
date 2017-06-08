@@ -121,7 +121,7 @@ class MCOCTools:
         rank=3
         rows = get_csv_rows(self.dataset,'Mastery',mastery)
         text = []
-        cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustony': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
+        cost = {'ucarb': 'Carbonadium Mastery Core', 'ustony': 'Stony Mastery Core', 'uclass': '', 'uunit': 'Units', 'rgold': 'Gold', 'runit': 'Units'}
         cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
                 'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
         if mastery in cores:
@@ -137,13 +137,13 @@ class MCOCTools:
         for c in {'ucarb','ustony','uclass','uunit',}:
             if cost[c][1] != 0:
                 key = c + str(rank)
-                core = cost[c][1]
+                core = cost[c]
                 price = rows[0][key]
                 unlock.append('{0}x {1}'.format(price, core))
         for c in {'rgold','runit',}:
             if cost[c][1] != 0:
                 key = c + str(rank)
-                core = cost[c][1]
+                core = cost[c]
                 price = rows[0][key]
                 rank.append('{0}x {1}'.format(price, core))
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
