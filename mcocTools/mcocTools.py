@@ -129,16 +129,16 @@ class MCOCTools:
         category = rows[0]['Category']
         for row in rows:
             text.append(row['Text'].format(row[str(rank)]))
-        
+
         em=discord.Embed(color=masteryColor[category],title=mastery,description=' '.join(t for t in text))
         unlock=[]
         rank=[]
-        for c in {'ucarb','ustony','uclass','uunit'}:
-            if cost[i][1] > 0:
-                unlock.append('{}x {}'.format(rows[0]['{}{}'.format(c, rank)], cost[i][1])
-        for c in {'rgold','runit'}:
-            if cost[i][1] > 0:
-                rank.append('{}x {}'.format(rows[0]['{}{}'.format(c, rank)], cost[i][1])
+        for c in {'ucarb','ustony','uclass','uunit',}:
+            if cost[c][1] > 0:
+                unlock.append('{}x {}'.format(rows[0]['{}{}'.format(c, rank)], cost[c][1])
+        for c in {'rgold','runit',}:
+            if cost[c][1] > 0:
+                rank.append('{}x {}'.format(rows[0]['{}{}'.format(c, rank)], cost[c][1])
         em.add_field(name='Unlock Cost',value='\n'.join(u for u in unlock))
         em.add_field(name='Rank Cost',value='\n'.join(r for r in rank))
 
