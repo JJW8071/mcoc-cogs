@@ -16,8 +16,8 @@ import re
 class Hook:
 
     attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star'}
-    alliance_map = {'alliance-war-defense': 'awd', 
-                    'alliance-war-attack': 'awo', 
+    alliance_map = {'alliance-war-defense': 'awd',
+                    'alliance-war-attack': 'awo',
                     'alliance-quest': 'aq'}
 
     def __init__(self, bot):
@@ -39,8 +39,8 @@ class Hook:
         em = discord.Embed(title="User Profile", description=user.name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
-            em.add_field(name='Top Champs', value='\n'.join(info['top5']))
-            em.add_field(name='Max Champs', value='\n'.join(info['max5']))
+            em.add_field(name='Top Champs', value='\n'.join(self.get_champion(info['top5']).full_name))
+            em.add_field(name='Max Champs', value='\n'.join(self.get_champion(info['max5']).full_name))
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
@@ -88,7 +88,7 @@ class Hook:
 
         #champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
         champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
-        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [], 
+        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],
                 'Science': [], 'Mystic': [], 'Default': []}
 
         if champclass and champclass not in classes:
