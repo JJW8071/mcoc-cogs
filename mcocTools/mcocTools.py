@@ -118,7 +118,7 @@ class MCOCTools:
     async def _test(self,ctx):
         mastery='Resonate'
         rank=3
-        rows = csv_get_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
+        rows = mcoc.csv_get_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
         text = {}
         cost = {'ucarb': {0, 'Carbonadium Mastery Core'}, 'ustony': {0,'Stony Mastery Core'}, 'uclass': {0,''}, 'uunit': {0, 'Units'}, 'rgold': {0,'Gold'}, 'runit': {0,'Units'}}
         cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
