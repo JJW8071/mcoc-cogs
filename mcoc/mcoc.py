@@ -617,14 +617,14 @@ class MCOC(ChampionFactory):
         em.add_field(name='Abilities', value='\n'.join(abilities))
         em.add_field(name='Hashtags', value='\n#'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
-        em2 = discord.Embed(color=champ.class_color,
-        title=champ.full_name + ' Special Attacks')
-        em2.add_field(name=specials[0], value=specials[3])
-        em2.add_field(name=specials[1], value=specials[4])
-        em2.add_field(name=specials[2], value=specials[5])
-        em2.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+        # em2 = discord.Embed(color=champ.class_color,
+        # title=champ.full_name + ' Special Attacks')
+        # em2.add_field(name=specials[0], value=specials[3])
+        # em2.add_field(name=specials[1], value=specials[4])
+        # em2.add_field(name=specials[2], value=specials[5])
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
-        await self.bot.say(embed=em2)
+        # await self.bot.say(embed=em2)
 
     # @commands.command()
     # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
