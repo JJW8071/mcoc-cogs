@@ -115,8 +115,8 @@ class MCOCTools:
             await self.bot.send_cmd_help(ctx)
             return
 
-    @mastery.command(pass_context=True, aliases=['test'])
-    async def _test(self,ctx):
+    @mastery.command(pass_context=True,)
+    async def test(self,ctx):
         mastery='Resonate'
         rank=3
         rows = get_csv_rows(self.dataset,'Mastery',mastery)
@@ -131,7 +131,7 @@ class MCOCTools:
         for row in rows:
             text.append(row['Text'].format(row[str(rank)]))
 
-        em=discord.Embed(color=masteryColor[category],title=mastery,description=' '.join(t for t in text))
+        em=discord.Embed(color=self.masteryColor[category],title=mastery,description=' '.join(t for t in text))
         unlock=[]
         rank=[]
         for c in {'ucarb','ustony','uclass','uunit',}:
