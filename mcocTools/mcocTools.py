@@ -115,6 +115,7 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, aliases=['test'])
     async def _test(self,ctx):
+        mcoc = self.bot.get_cog('MCOC')
         mastery='Resonate'
         rank=3
         rows = get_csv_rows(mcoc.data_files['masteries']['local'],'Mastery',mastery)
