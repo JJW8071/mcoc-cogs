@@ -32,16 +32,25 @@ class Hook:
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
         mcoc = self.bot.get_cog('MCOC')
+
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
         info = self.get_user_info(user.id)
         em = discord.Embed(title="User Profile", description=user.name)
+        tops = []
+        maxes = []
+        # for i in info['top5']:
+        #     tops.append(mcoc.search_champions(i).full_name)
+        # for i in info['max5']:
+        #     tops.append(mcoc.search_champions(i).full_name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
-            em.add_field(name='Top Champs', value='\n'.join(mcoc.search_champions(i for i in info['top5']).full_name))
-            em.add_field(name='Max Champs', value='\n'.join(mcoc.search_champions(i for i in info['max5']).full_name))
+            # em.add_field(name='Top Champs', value='\n'.join(tops))
+            # em.add_field(name='Max Champs', value='\n'.join(maxes))
+            em.add_field(name='Top Champs', value='\n'.join(info['top5']))
+            em.add_field(name='Max Champs', value='\n'.join(info['max5']))
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
