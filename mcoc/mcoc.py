@@ -553,7 +553,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
             stats=[]
-            for t, k in zip(titles, keys):
+            for t, k in titles, keys:
                 # em.add_field(name=t, value=data[k])
                 stats.append('{}{}'.format(paddit(t,9),paddit(data[k],7,'front')))
             package='\n'.join(s for s in stats)
