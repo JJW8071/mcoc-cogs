@@ -571,7 +571,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
         elif state == 's':
             em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
+            em.add_field(name='Featured 5'+star_glyph[1]+' Chance (SubFeature pool)', value=xref['5chance'], inline=False)
         elif state == 'f':
             em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
             em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
