@@ -555,7 +555,7 @@ class MCOC(ChampionFactory):
             stats=[]
             for t, k in zip(titles, keys):
                 # em.add_field(name=t, value=data[k])
-                stats.append('{}:{}'.format(padd_it(t,16),paddit(data[k],7,'front')))
+                stats.append('{}:{}'.format(paddit(t,16),paddit(data[k],7,'front')))
             package='\n'.join(s for s in stats)
             em.add_field(name='Base Stats',value='```'+package+'```')
         em.add_field(name='Feature Crystal', value=xref['released'])
@@ -1260,7 +1260,7 @@ def get_csv_rows(filecsv, column, match_val, default=None):
 def load_csv(filename):
     return csv.DictReader(open(filename))
 
-def padd_it(word,max : int,opt='back'):
+def paddit(word,max : int,opt='back'):
     loop = max-len(str(word))
     if loop > 0:
         padd = ''
