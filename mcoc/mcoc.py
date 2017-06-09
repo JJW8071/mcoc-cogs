@@ -552,8 +552,11 @@ class MCOC(ChampionFactory):
             em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
+            sats=[]
             for t, k in zip(titles, keys):
-                em.add_field(name=t, value=data[k])
+                # em.add_field(name=t, value=data[k])
+                stats.append('{}:{}'.format(padd_it(t,9),paddit(data[k],6))
+            em.add_field(name='Base Stats',value='```'+stats+'```')
         em.add_field(name='Feature Crystal', value=xref['released'])
         em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'])
         em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'])
@@ -1256,13 +1259,16 @@ def get_csv_rows(filecsv, column, match_val, default=None):
 def load_csv(filename):
     return csv.DictReader(open(filename))
 
-def padd_it(word,max : int):
+def padd_it(word,max : int,opt='back'):
     loop = max-len(str(word))
     if loop > 0:
         padd = ''
         for i in loop:
             padd+=' '
-        return word+padd
+        if opt =='back':
+            return word+padd
+        else:
+            return padd+word
     else:
         print('Padding would be negative.')
 
