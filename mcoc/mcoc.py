@@ -2,7 +2,7 @@ import re
 from datetime import datetime, timedelta
 from textwrap import wrap
 from collections import UserDict, defaultdict
-from operator import or_, and_
+from operator import or_
 from functools import reduce
 from math import log2
 from math import *
@@ -138,8 +138,6 @@ class ChampionFactory():
             if not value or value == 'n/a':
                 kwargs[key] = None
         kwargs['full_name'] = kwargs['champ']
-        if not kwargs['champ']:
-            print(kwargs)
         kwargs['bold_name'] = '**' + ' '.join(
                 [word.capitalize() for word in kwargs['full_name'].split(' ')]
                 ) + '**'
@@ -554,7 +552,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
-            sats=[]
+            stats=[]
             for t, k in zip(titles, keys):
                 # em.add_field(name=t, value=data[k])
                 stats.append('{}:{}'.format(padd_it(t,9),paddit(data[k],6)))
@@ -759,8 +757,6 @@ class MCOC(ChampionFactory):
         id_index = raw_data.fieldnames.index('status')
         alias_index = raw_data.fieldnames[:id_index-1]
         for row in raw_data:
-            if reduce(and_, [not i for i in row.values()]):
-                continue    # empty row check
             alias_set = set()
             for col in alias_index:
                 if row[col]:
