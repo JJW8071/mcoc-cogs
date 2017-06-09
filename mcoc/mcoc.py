@@ -1264,7 +1264,7 @@ def padd_it(word,max : int,opt='back'):
     loop = max-len(str(word))
     if loop > 0:
         padd = ''
-        for i <= loop:
+        while i <= loop:
             padd+=' '
             i+=1
         if opt =='back':
