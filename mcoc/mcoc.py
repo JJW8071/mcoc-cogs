@@ -139,7 +139,7 @@ class ChampionFactory():
                 kwargs[key] = None
         kwargs['full_name'] = kwargs['champ']
         kwargs['bold_name'] = '**' + ' '.join(
-                [word.capitalize() for word in kwargs['full_name'].split(' ')]
+                [word.capitalize() for word in str(kwargs['full_name']).split(' ')]
                 ) + '**'
         kwargs['class_color'] = class_color_codes[kwargs['klass']]
         champion = type(kwargs['mattkraftid'], (Champion,), kwargs)
