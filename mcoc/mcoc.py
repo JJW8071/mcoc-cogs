@@ -553,9 +553,10 @@ class MCOC(ChampionFactory):
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
             stats=[]
+
             for i in range(0,len(titles)):
                 # em.add_field(name=t, value=data[k])
-                stats.append('{0}|{1}'.format(paddit(titles[i],9),paddit(data[keys[i]],7,'front')))
+                stats.append('{0}|{1}'.format(paddit(titles[i],11),paddit(data[keys[i]],7,'front')))
             package='\n'.join(s for s in stats)
             em.add_field(name='Base Stats',value='```'+package+'```')
         em.add_field(name='Feature Crystal', value=xref['released'], inline=False)
