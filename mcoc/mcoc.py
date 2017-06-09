@@ -555,7 +555,7 @@ class MCOC(ChampionFactory):
             stats=[]
             for t, k in titles, keys:
                 # em.add_field(name=t, value=data[k])
-                stats.append('{}{}'.format(paddit(t,9),paddit(data[k],7,'front')))
+                stats.append('{0}|{1}'.format(paddit(t,9),paddit(data[k],7,'front')))
             package='\n'.join(s for s in stats)
             em.add_field(name='Base Stats',value='```'+package+'```')
         em.add_field(name='Feature Crystal', value=xref['released'])
