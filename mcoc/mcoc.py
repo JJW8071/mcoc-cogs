@@ -111,8 +111,8 @@ def to_flat(per, ch_rating):
     return round(num/(100-per), 2)
 
 class AliasDict(UserDict):
-    '''Custom dictionary that uses a tuple of aliases as key elements.  
-    Item addressing is handled either from the tuple as a whole or any 
+    '''Custom dictionary that uses a tuple of aliases as key elements.
+    Item addressing is handled either from the tuple as a whole or any
     element within the tuple key.
     '''
     def __getitem__(self, key):
@@ -259,7 +259,7 @@ class ChampConverterMult(ChampConverter):
         s20 yj im        ->  4* Yellowjacket r5/50 sig 20, 4* Ironman r5/50 sig 20
         r35*ims20 ims40  ->  5 star Ironman r3/45 sig 20, 4* Ironman r5/50 sig 40
         r4s20 yj ims40 lc -> 4* Yellowjacket r4/40 sig 20, 4* Ironman r4/40 sig 40, 4* Luke Cage r4/40 sig 20
-        '''   
+        '''
 
     async def convert(self):
         bot = self.ctx.bot
@@ -277,12 +277,18 @@ class ChampConverterMult(ChampConverter):
                 default.update(attrs)
         return champs
 
-def command_arg_help(help_type='single', **cmdkwargs):
+def command_arg_help(**cmdkwargs):
     def internal_func(f):
+        helps = []
         for param in inspect.signature(f).parameters.values():
             if issubclass(param.annotation, commands.Converter):
-                arg_help = getattr(param.annotation, 'arg_help', '')
-                f.__doc__ = '{}\n{}'.format(f.__doc__, arg_help)
+                arg_help = getattr(param.annotation, 'arg_help')
+                if arg_help is not None:
+                    helps.append(arg_help)
+        if helps:
+            if f.__doc__:
+                helps.insert(0, f.__doc__)
+            f.__doc__ = '\n'.join(helps)
         @wraps(f)
         async def wrapper(*args, **kwargs):
             return await f(*args, **kwargs)
@@ -559,18 +565,19 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @commands.command(aliases=['released',])
-    async def champ_released(self, *, champ : ChampConverter):
+    async def champ_released(self, *, champs : ChampConverterMult):
         '''Retrieve Champion Release Date'''
-        xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-        em= discord.Embed(color=champ.class_color,title='Release Dates')
-        em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
-        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
-        await self.bot.say(embed=em)
+        for champ in champs:
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            em= discord.Embed(color=champ.class_color,title='Release Dates')
+            em.add_field(name='Feature Crystal', value=xref['released'])
+            em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
+            em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
+            em.set_thumbnail(url=champ.get_avatar())
+            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            await self.bot.say(embed=em)
 
-    @command_arg_help(help_type='single', aliases=['sig','signature'])
+    @command_arg_help(aliases=['sig','signature'])
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
@@ -607,18 +614,23 @@ class MCOC(ChampionFactory):
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
-        em.add_field(name='Passive',value='placeholder')
-        em.add_field(name='All Attacks',value='placeholder')
-        em.add_field(name='When Attacked',value='placeholder')
+        # em.add_field(name='Passive',value='placeholder')
+        # em.add_field(name='All Attacks',value='placeholder')
+        # em.add_field(name='When Attacked',value='placeholder')
+        row=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+        abilities=row['abilities'].split(', ')
+        hashtags=row['hastags'].split(' #')
+        em.add_field(name='Abilities', value='\n'.join(abilities))
+        em.add_field(name='Hashtags', value='\n#'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
-        em2 = discord.Embed(color=champ.class_color,
-        title=champ.full_name + ' Special Attacks')
-        em2.add_field(name=specials[0], value=specials[3])
-        em2.add_field(name=specials[1], value=specials[4])
-        em2.add_field(name=specials[2], value=specials[5])
-        em2.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+        # em2 = discord.Embed(color=champ.class_color,
+        # title=champ.full_name + ' Special Attacks')
+        # em2.add_field(name=specials[0], value=specials[3])
+        # em2.add_field(name=specials[1], value=specials[4])
+        # em2.add_field(name=specials[2], value=specials[5])
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
-        await self.bot.say(embed=em2)
+        # await self.bot.say(embed=em2)
 
     # @commands.command()
     # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
@@ -838,12 +850,14 @@ class Champion:
                 self.sig = 99
 
     def get_avatar(self):
-        image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocui)
+        image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        print(image)
         return image
 
     def get_featured(self):
         image = '{}uigacha/featured/GachaChasePrize_256x256_{}.png'.format(
-                    remote_data_basepath, self.mcocui)
+                    remote_data_basepath, self.mcocfeatured)
+        print(image)
         return image
 
     async def get_bio(self):
