@@ -563,18 +563,18 @@ class MCOC(ChampionFactory):
             package='\n'.join(s for s in stats)
             em.add_field(name='Base Stats',value='```'+package+'```')
         em.add_field(name='Feature Crystal', value=xref['released'], inline=False)
-        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'])
-        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'])
+        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'], inline=False)
+        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'], inline=False)
         state = xref['f/s/b']
         if state == 'b':
-            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
-            em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'])
+            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
+            em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
         elif state == 's':
-            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'])
+            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
+            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
         elif state == 'f':
-            em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'])
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'])
+            em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
+            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
