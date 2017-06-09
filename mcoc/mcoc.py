@@ -556,7 +556,7 @@ class MCOC(ChampionFactory):
             for t, k in zip(titles, keys):
                 # em.add_field(name=t, value=data[k])
                 stats.append('{}:{}'.format(padd_it(t,9),paddit(data[k],6))
-            em.add_field(name='Base Stats',value='```'+stats+'```')
+            em.add_field(name='Base Stats',value='```{}```'.format(join(s for s in stats))
         em.add_field(name='Feature Crystal', value=xref['released'])
         em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'])
         em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'])
