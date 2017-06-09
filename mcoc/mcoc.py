@@ -277,12 +277,18 @@ class ChampConverterMult(ChampConverter):
                 default.update(attrs)
         return champs
 
-def command_arg_help(help_type='single', **cmdkwargs):
+def command_arg_help(**cmdkwargs):
     def internal_func(f):
+        helps = []
         for param in inspect.signature(f).parameters.values():
             if issubclass(param.annotation, commands.Converter):
-                arg_help = getattr(param.annotation, 'arg_help', '')
-                f.__doc__ = '{}\n{}'.format(f.__doc__, arg_help)
+                arg_help = getattr(param.annotation, 'arg_help')
+                if arg_help is not None:
+                    helps.append(arg_help)
+        if helps:
+            if f.__doc__:
+                helps.insert(0, f.__doc__)
+            f.__doc__ = '\n'.join(helps)
         @wraps(f)
         async def wrapper(*args, **kwargs):
             return await f(*args, **kwargs)
@@ -571,7 +577,7 @@ class MCOC(ChampionFactory):
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
-    @command_arg_help(help_type='single', aliases=['sig','signature'])
+    @command_arg_help(aliases=['sig','signature'])
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
