@@ -567,15 +567,15 @@ class MCOC(ChampionFactory):
         em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'], inline=False)
         state = xref['f/s/b']
         if state == 'b':
-            em.add_field(name='Status',value='5'+star_glyph[1]+'Basic Pool')
+            em.add_field(name='Status',value='5'+star_glyph[1]+' Basic Pool & 4'+star_glyph[1]+' Basic Pool')
             em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
             em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
         elif state == 's':
-            em.add_field(name='Status',value='5'+star_glyph[1]+'SubFeature Pool')
+            em.add_field(name='Status',value='5'+star_glyph[1]+' SubFeature Pool & 4'+star_glyph[1]+' Basic Pool')
             em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
             em.add_field(name='Featured 5'+star_glyph[1]+' Chance (SubFeature pool)', value=xref['5chance'], inline=False)
         elif state == 'f':
-            em.add_field(name='Status',value='5'+star_glyph[1]+'Feature Pool')
+            em.add_field(name='Status',value='5'+star_glyph[1]+' Feature Pool & 4'+star_glyph[1]+' Feature Pool')
             em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
             em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
         if champ.infopage != 'none':
