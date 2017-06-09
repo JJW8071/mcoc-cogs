@@ -16,8 +16,8 @@ import re
 class Hook:
 
     attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star'}
-    alliance_map = {'alliance-war-defense': 'awd', 
-                    'alliance-war-attack': 'awo', 
+    alliance_map = {'alliance-war-defense': 'awd',
+                    'alliance-war-attack': 'awo',
                     'alliance-quest': 'aq'}
 
     def __init__(self, bot):
@@ -28,9 +28,12 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
+        
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
+        mcoc = self.bot.get_cog('MCOC')
+
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
@@ -88,7 +91,7 @@ class Hook:
 
         #champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
         champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
-        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [], 
+        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],
                 'Science': [], 'Mystic': [], 'Default': []}
 
         if champclass and champclass not in classes:
