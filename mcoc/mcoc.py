@@ -545,7 +545,7 @@ class MCOC(ChampionFactory):
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
                 title=champ.verbose_str, description='Base Attributes')
-        titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
+        titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
@@ -554,12 +554,9 @@ class MCOC(ChampionFactory):
             em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
-            sats=[]
-            for t, k in zip(titles, keys):
-                # em.add_field(name=t, value=data[k])
-                stats.append('{}:{}'.format(padd_it(t,9),paddit(data[k],6)))
-            package='\n'.join(s for s in stats)
-            em.add_field(name='Base Stats',value='```'+package+'```')
+            stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+            em.add_field(name='Base Stats', 
+                value=tabulate(stats, width=11, rotate=False, header_sep=False))
         em.add_field(name='Feature Crystal', value=xref['released'])
         em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'])
         em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'])
@@ -1199,10 +1196,10 @@ def bound_lvl(siglvl, max_lvl=99):
             ret = 0
     return ret
 
-def tabulate(table_data, width, do_rotate=True, header_sep=True):
+def tabulate(table_data, width, rotate=True, header_sep=True):
     rows = []
     cells_in_row = None
-    for i in rotate(table_data, rotate):
+    for i in iter_rows(table_data, rotate):
         if cells_in_row is None:
             cells_in_row = len(i)
         elif cells_in_row != len(i):
@@ -1212,15 +1209,16 @@ def tabulate(table_data, width, do_rotate=True, header_sep=True):
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return '```' + '\n'.join(rows) + '```'
 
-def rotate(array, do_rotate):
-    if not do_rotate:
+def iter_rows(array, rotate):
+    if not rotate:
         for i in array:
             yield i
-    for j in range(len(array[0])):
-        row = []
-        for i in range(len(array)):
-            row.append(array[i][j])
-        yield row
+    else:
+        for j in range(len(array[0])):
+            row = []
+            for i in range(len(array)):
+                row.append(array[i][j])
+            yield row
 
 def load_kabam_json(file):
     raw_data = dataIO.load_json(file)
