@@ -555,8 +555,8 @@ class MCOC(ChampionFactory):
             stats=[]
             maxlength = 0
             for i in range(0,len(titles)):
-                if len(i) > maxlength:
-                    maxlength = len(i)+1
+                if len(titles[i]) > maxlength:
+                    maxlength = len(titles[i])+1
             for i in range(0,len(titles)):
                 # em.add_field(name=t, value=data[k])
                 stats.append('{0}|{1}'.format(paddit(titles[i],maxlength),paddit(data[keys[i]],7,'front')))
