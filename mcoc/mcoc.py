@@ -631,7 +631,7 @@ class MCOC(ChampionFactory):
     @command_arg_help(aliases=('abilities',))
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
-        specials = champ.get_special_attacks()
+        # specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
         # em.add_field(name='Passive',value='placeholder')
