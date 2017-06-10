@@ -106,7 +106,7 @@ class Hook:
         em = discord.Embed(title="User", description=user.name, color=color)
         for klass, class_champs in classes.items():
             if class_champs and (champclass is None or champclass == klass):
-                em.add_field(name=klass, value='\n'.join(k for k in class_champs))
+                em.add_field(name=klass, value='\n'.join(k for k in class_champs),inline=False)
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
 
@@ -355,19 +355,6 @@ def parse_value(key, value):
         return ast.literal_eval(value)
     except Exception:
         return value
-
-def paddit(word,max : int,opt='back'):
-    loop = max-len(str(word))
-    if loop > 0:
-        padd = ''
-        for i in range(0, loop):
-            padd+=' '
-        if opt =='back':
-            return word+padd
-        else:
-            return padd+word
-    else:
-        print('Padding would be negative.')
 
 #-------------- setup -------------
 def check_folders():
