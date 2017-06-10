@@ -128,7 +128,7 @@ class Hook:
 
         for k in user_info['champs']:
             champ = self.get_champion(mcoc, k)
-            classes[champ.klass].append(champ_str.format(champ, paddit(k['Pi'],6,'front'), mcoc.paddit(champ.full_name,nameLength)))
+            classes[champ.klass].append(champ_str.format(champ, mcoc.paddit(k['Pi'],6,'front'), mcoc.paddit(champ.full_name,nameLength)))
 
         if champclass is not None:
             champclass = champclass.lower().capitalize()
