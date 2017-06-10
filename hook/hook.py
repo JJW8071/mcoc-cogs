@@ -137,7 +137,8 @@ class Hook:
         if champclass is None:
             for k, klist in classes:
                 if len(klist)>0:
-                    em=discord.Embed(color=class_color_codes[k],title=klass,description='\n'.join(l for l in klist))
+                    color = class_color_codes[champclass]
+                    em=discord.Embed(color=color,title=klass,description='\n'.join(l for l in klist))
                     if k == 'Mystic':
                         # em.set_thumbnail(url=classurl)
                         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
