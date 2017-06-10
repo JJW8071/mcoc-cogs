@@ -132,7 +132,8 @@ class Hook:
                 return
             else:
                 klist = classes[champclass]
-                embed=discord.Embed(color=class_color_codes[champclass],title=champclass,description='\n'.join(k for k in klist))
+                package = '\n'.join(k for k in klist)
+                em=discord.Embed(color=class_color_codes[champclass],title=champclass,description='```{}```'.format(package))
                 em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
                 await self.bot.say(embed=em)
         else:
