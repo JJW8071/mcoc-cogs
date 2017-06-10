@@ -115,39 +115,32 @@ class Hook:
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
-        if champclass is not None:
-            champclass = champclass.lower().capitalize()
-
         user_info = self.get_user_info(user.id)
         mcoc = self.bot.get_cog('MCOC')
 
         #champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
         champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
-        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],
-                'Science': [], 'Mystic': [], 'Default': []}
-
-        if champclass and champclass not in classes:
-            await self.bot.say("'{}' is not a valid class".format(champclass))
-            return
+        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],'Science': [], 'Mystic': [], 'Default': []}
         for k in user_info['champs']:
             champ = self.get_champion(mcoc, k)
-            package = champ_str.format(champ, k)
-            classes[champ.klass].append(package)
+            classes[champ.klass].append(champ_str.format(champ, k))
 
         if champclass is not None:
-            for k, klist in classes.items():
-                if len(klist)>0:
-                    color = class_color_codes[champclass]
-                    em=discord.Embed(color=color,title=klass,description='\n'.join(l for l in klist))
-                    if k == 'Mystic':
-                        # em.set_thumbnail(url=classurl)
-                        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-                    await self.bot.say(embed=em)
-        elif champclass in classes:
-            klist = classes[champclass]
-            em=discord.Embed(color=class_color_codes[clampclass],title=champclass,description='\n'.join(l for l in klist))
-            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            await self.bot.say(embed=em)
+            champclass = champclass.lower().capitalize()
+            if champclass and champclass not in classes:
+                await self.bot.say("'{}' is not a valid class".format(champclass))
+                return
+            else:
+                klist = classes[champclass]
+                embed=discord.Embed(color=class_color_codes[champclass],title=champclass,description='\n'.join(k for k in klist))
+                em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+                await self.bot.say(embed=em)
+        else:
+            await self.bot.say('champclass is none')
+
+
+
+
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
     #     '''Set AQ, AW Offense or AW Defense'''
