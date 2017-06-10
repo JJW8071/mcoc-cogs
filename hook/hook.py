@@ -118,12 +118,17 @@ class Hook:
         user_info = self.get_user_info(user.id)
         mcoc = self.bot.get_cog('MCOC')
 
+        nameLength = 0
+        for k in user_info['champs']:
+            if len(k) > nameLength:
+                nameLength = len(k) + 1
         #champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
-        champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
+        champ_str = '{0.star}★ {2} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
         classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],'Science': [], 'Mystic': [], 'Default': []}
+
         for k in user_info['champs']:
             champ = self.get_champion(mcoc, k)
-            classes[champ.klass].append(champ_str.format(champ, k))
+            classes[champ.klass].append(champ_str.format(champ, paddit(k,6,'front'), mcoc.paddit(champ.full_name,nameLength)))
 
         if champclass is not None:
             champclass = champclass.lower().capitalize()
