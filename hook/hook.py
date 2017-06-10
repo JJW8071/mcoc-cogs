@@ -134,7 +134,7 @@ class Hook:
             package = champ_str.format(champ, k)
             classes[champ.klass].append(package)
 
-        if champclass is None:
+        if champclass is not None:
             for k, klist in classes:
                 if len(klist)>0:
                     color = class_color_codes[champclass]
