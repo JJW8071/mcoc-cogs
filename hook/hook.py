@@ -135,7 +135,7 @@ class Hook:
             classes[champ.klass].append(package)
 
         if champclass is not None:
-            for k, klist in classes:
+            for k, klist in classes.items():
                 if len(klist)>0:
                     color = class_color_codes[champclass]
                     em=discord.Embed(color=color,title=klass,description='\n'.join(l for l in klist))
