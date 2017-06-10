@@ -128,7 +128,7 @@ class Hook:
 
         for k in user_info['champs']:
             champ = self.get_champion(mcoc, k)
-            classes[champ.klass].append(champ_str.format(champ, self.mcoc.paddit(k['Pi'],6,'front'), self.mcoc.paddit(champ.full_name,nameLength)))
+            classes[champ.klass].append(champ_str.format(champ, paddit(k['Pi'],6,'front'), paddit(champ.full_name,nameLength)))
 
         if champclass is not None:
             champclass = champclass.lower().capitalize()
@@ -392,6 +392,18 @@ def parse_value(key, value):
     except Exception:
         return value
 
+def paddit(word,max : int,opt='back'):
+    loop = max-len(str(word))
+    if loop > 0:
+        padd = ''
+        for i in range(0, loop):
+            padd+=' '
+        if opt =='back':
+            return word+padd
+        else:
+            return padd+word
+    else:
+        print('Padding would be negative.')
 
 #-------------- setup -------------
 def check_folders():
