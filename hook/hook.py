@@ -105,8 +105,7 @@ class Hook:
         color = class_color_codes[champclass] if champclass else discord.Color.gold()
         # em = discord.Embed(title="User", description=user.name, color=color)
         for klass, class_champs in classes.items():
-            # if class_champs and (champclass is None or champclass == klass):
-            if class_champs:
+            if class_champs and (champclass is None or champclass == klass):
                 em=discord.Embed(title=klass, description='\n'.join(k for k in class_champs), color==class_color_codes[champclass])
                 em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
                 await self.bot.say(embed=em)
