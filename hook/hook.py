@@ -28,7 +28,7 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
-        
+
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -103,12 +103,14 @@ class Hook:
             classes[champ.klass].append(package)
 
         color = class_color_codes[champclass] if champclass else discord.Color.gold()
-        em = discord.Embed(title="User", description=user.name, color=color)
+        # em = discord.Embed(title="User", description=user.name, color=color)
         for klass, class_champs in classes.items():
             if class_champs and (champclass is None or champclass == klass):
-                em.add_field(name=klass, value='\n'.join(k for k in class_champs))
-        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-        await self.bot.say(embed=em)
+                em=discord.Embed(title=klass, description='\n'.join(k for k in class_champs), color==class_color_codes[champclass])
+                em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+                await self.bot.say(embed=em)
+                # em.add_field(name=klass, value='\n'.join(k for k in class_champs))
+        # await self.bot.say(embed=em)
 
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
