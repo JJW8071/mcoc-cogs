@@ -19,7 +19,7 @@ from functools import wraps
 import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
-
+from .utils import chat_formatting as chat
 
 
 data_files = {
@@ -134,16 +134,24 @@ class ChampionFactory():
         kwargs['bot'] = bot
         kwargs['alias_set'] = alias_set
         kwargs['klass'] = kwargs.pop('class', 'default')
+
+        kwargs['full_name'] = kwargs['champ']
+        kwargs['bold_name'] = chat.bold(' '.join(
+                [word.capitalize() for word in kwargs['full_name'].split(' ')]))
+        kwargs['class_color'] = class_color_codes[kwargs['klass']]
+
+        kwargs['class_tags'] = {'#' + kwargs['klass'].lower()}
+        for a in kwargs['abilities'].split(','):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        for a in kwargs['hashtags'].split('#'):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        if kwargs['class_tags']:
+            kwargs['class_tags'].difference_update({'#'})
+
         for key, value in kwargs.items():
             if not value or value == 'n/a':
                 kwargs[key] = None
-        kwargs['full_name'] = kwargs['champ']
-        if not kwargs['champ']:
-            print(kwargs)
-        kwargs['bold_name'] = '**' + ' '.join(
-                [word.capitalize() for word in kwargs['full_name'].split(' ')]
-                ) + '**'
-        kwargs['class_color'] = class_color_codes[kwargs['klass']]
+
         champion = type(kwargs['mattkraftid'], (Champion,), kwargs)
         self.champions[tuple(alias_set)] = champion
         return champion
@@ -508,6 +516,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
+        await self.bot.say(champ.class_tags.union(champ.tags))
 
     @command_arg_help(aliases=('duel',))
     async def champ_duel(self, champ : ChampConverter):
@@ -754,7 +763,7 @@ class MCOC(ChampionFactory):
         champs = []
         all_aliases = set()
         id_index = raw_data.fieldnames.index('status')
-        alias_index = raw_data.fieldnames[:id_index-1]
+        alias_index = raw_data.fieldnames[:id_index]
         for row in raw_data:
             if reduce(and_, [not i for i in row.values()]):
                 continue    # empty row check
@@ -830,15 +839,21 @@ def validate_attr(*expected_args):
 
 class Champion:
 
+    base_tags = {'#cr{}'.format(i) for i in range(10, 130, 10)}
+    base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
+    base_tags.update({'#awake', '#notawake'})
+
     def __init__(self, attrs=None):
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
         default = {'star': 4, 'rank': 5, 'sig': 99}
         default.update(attrs)
+        self.tags = set()
         self.update_attrs(default)
 
     def update_attrs(self, attrs):
+        self.tags.difference_update(self.base_tags)
         for k in ('star', 'rank', 'sig'):
             if k in attrs:
                 setattr(self, k, attrs[k])
@@ -862,6 +877,12 @@ class Champion:
                 self.rank = self.star + 1
             if self.sig > 99:
                 self.sig = 99
+        self.tags.add('#cr{}'.format(self.chlgr_rating))
+        self.tags.add('#{}star'.format(self.star))
+        if self.sig == 0:
+            self.tags.add('#notawake')
+        else:
+            self.tags.add('#awake')
 
     def get_avatar(self):
         image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
@@ -877,11 +898,11 @@ class Champion:
     async def get_bio(self):
         bios = load_kabam_json(kabam_bio)
         key = 'ID_CHARACTER_BIOS_' + self.mcocjson
-        if key not in bios:
-            raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         if self.debug:
             dbg_str = 'BIO:  ' + key
             await self.bot.say('```{}```'.format(dbg_str))
+        if key not in bios:
+            raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
 
     @property
@@ -927,6 +948,10 @@ class Champion:
         else:
             return 15 + self.rank * 10
 
+    @property
+    def all_tags(self):
+        return self.tags.union(self.class_tags)
+
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
         prefix = 'ID_SPECIAL_ATTACK_'
@@ -946,7 +971,10 @@ class Champion:
     @property
     @validate_attr('prestige')
     def prestige(self):
-        if self.prestige_data[self.star][self.rank-1] is None:
+        try:
+            if self.prestige_data[self.star][self.rank-1] is None:
+                return 0
+        except KeyError:
             return 0
         return self.prestige_data[self.star][self.rank-1][self.sig]
 
@@ -979,7 +1007,7 @@ class Champion:
             dbg_str.append('  ' + ', '.join(desc))
             dbg_str.append('Description Text:  ')
             dbg_str.extend(['  ' + self._sig_header(sigs[d]) for d in desc])
-            await self.bot.say('```{}```'.format('\n'.join(dbg_str)))
+            await self.bot.say(chat.box('\n'.join(dbg_str)))
         coeff = self.get_sig_coeff()
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
@@ -1052,7 +1080,7 @@ class Champion:
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
                         self._sig_header(sigs[kabam_key])))
         if self.debug:
-            await self.bot.say('```{}```'.format('\n'.join(fdesc)))
+            await self.bot.say(chat.box('\n'.join(fdesc)))
         return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
 
     def get_mcoc_keys(self):
@@ -1207,7 +1235,7 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
         rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
     if header_sep:
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
-    return '```' + '\n'.join(rows) + '```'
+    return chat.box('\n'.join(rows))
 
 def iter_rows(array, rotate):
     if not rotate:
