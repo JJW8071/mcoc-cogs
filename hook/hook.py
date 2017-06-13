@@ -5,6 +5,8 @@ from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
 from operator import itemgetter, attrgetter
+from collections import OrderedDict
+from functools import reduce
 from random import randint
 import time
 import os
@@ -12,6 +14,24 @@ import ast
 import csv
 import requests
 import re
+
+class HashtagUserConverter(commands.Converter):
+    async def convert(self):
+        tags = set()
+        user = None
+        for arg in self.argument.split():
+            if arg.startswith('#'):
+                tags.add(arg.lower())
+            elif user is None:
+                user = commands.UserConverter(self.ctx, arg).convert()
+            else:
+                err_msg = "There can only be 1 user argument.  All others should be '#'"
+                await self.ctx.bot.say(err_msg)
+                raise commands.BadArgument(err_msg)
+        if user is None:
+            user = self.ctx.message.author
+        return {'tags': tags, 'user': user}
+
 
 class Hook:
 
@@ -28,17 +48,15 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
-
+        
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
-        mcoc = self.bot.get_cog('MCOC')
-
         """Displays a user profile."""
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
-        info = self.get_user_info(user.id)
+        info = self.load_champ_data(user)
         em = discord.Embed(title="User Profile", description=user.name)
         if info['top5']:
             em.add_field(name='Prestige', value=info['prestige'])
@@ -68,7 +86,7 @@ class Hook:
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
-        info = self.get_user_info(user.id)
+        info = self.load_champ_data(user)
         em = discord.Embed(title="User Profile", description=user.name)
         if info['aq']:
             em.add_field(name='AQ Champs', value='\n'.join(info['aq']))
@@ -79,37 +97,57 @@ class Hook:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def roster(self, ctx, user: discord.Member=None, champclass=None):
+    async def roster(self, ctx, *, hargs=''):
+    #async def roster(self, ctx, *, hargs: HashtagUserConverter):
         """Displays a user profile."""
-        if user is None:
-            user = ctx.message.author
-        if champclass is not None:
-            champclass = champclass.lower().capitalize()
-
-        user_info = self.get_user_info(user.id)
-        mcoc = self.bot.get_cog('MCOC')
-
-        #champ_str = '{0[Stars]}★ {1} r{0[Rank]} s{0[Awakened]:<2} [ {0[Pi]} ]'
-        champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {1[Pi]} ]'
-        classes = {'Cosmic': [], 'Tech':[], 'Mutant': [], 'Skill': [],
-                'Science': [], 'Mystic': [], 'Default': []}
-
-        if champclass and champclass not in classes:
-            await self.bot.say("'{}' is not a valid class".format(champclass))
+        print(hargs)
+        hargs = await HashtagUserConverter(ctx, hargs).convert()
+        data = self.load_champ_data(hargs['user'])
+        all_champs = [self.get_champion(k) for k in data['champs']]
+        all_champ_tags = reduce(set.union, [c.all_tags for c in all_champs])
+        residual_tags = hargs['tags'] - all_champ_tags
+        if residual_tags:
+            em = discord.Embed(title='Unused tags', description=' '.join(residual_tags))
+            await self.bot.say(embed=em)
+        filtered = set()
+        for c in all_champs:
+            if hargs['tags'].issubset(c.all_tags):
+                filtered.add(c)
+        if not filtered:
+            em = discord.Embed(title='User', description=hargs['user'].name,
+                    color=discord.Color.gold())
+            em.add_field(name='Tags used filtered to an empty roster', 
+                    value=' '.join(hargs['tags']))
+            await self.bot.say(embed=em)
             return
-        for k in user_info['champs']:
-            champ = self.get_champion(mcoc, k)
-            package = champ_str.format(champ, k)
-            classes[champ.klass].append(package)
 
-        color = class_color_codes[champclass] if champclass else discord.Color.gold()
-        em = discord.Embed(title="User", description=user.name, color=color)
-        for klass, class_champs in classes.items():
-            if class_champs and (champclass is None or champclass == klass):
-                em.add_field(name=klass, value='\n'.join(k for k in class_champs),inline=False)
+        color = None
+        for champ in filtered:
+            if color is None:
+                color = champ.class_color
+            elif color != champ.class_color:
+                color = discord.Color.gold()
+                break
+
+        champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
+        classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
+                'Science', 'Mystic', 'Default')])
+
+        em = discord.Embed(title="User", description=hargs['user'].name, color=color)
+        if len(filtered) < 10:
+            strs = [champ_str.format(champ) for champ in 
+                    sorted(filtered, key=attrgetter('prestige'), reverse=True)]
+            em.add_field(name='Filtered Roster', value='\n'.join(strs))
+        else:
+            for champ in filtered:
+                classes[champ.klass].append(champ)
+            for klass, champs in classes.items():
+                if champs:
+                    strs = [champ_str.format(champ) for champ in 
+                            sorted(champs, key=attrgetter('prestige'), reverse=True)]
+                    em.add_field(name=klass, value='\n'.join(strs))
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
-
 
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
@@ -117,7 +155,7 @@ class Hook:
     #     # if user is None:
     #     #     user = ctx.message.author
     #     user = ctx.message.author
-    #     info = self.get_user_info(user.id)
+    #     info = self.get_user_info(user)
     #     aq = False
     #     awo = False
     #     awd = False
@@ -148,7 +186,7 @@ class Hook:
         line_out = []
         for member in server.members:
             if role in member.roles:
-                champ_data = self.get_user_info(member.id)
+                champ_data = self.load_champ_data(member)
                 if champ_data['prestige'] > 0:
                     prestige += champ_data['prestige']
                     cnt += 1
@@ -183,7 +221,7 @@ class Hook:
     #     elif message is discord.Member:
     #         self.bot.say('DEBUG: discord.Member identified')
     #         user = message
-    #         info = self.get_user_info(user.id)
+    #         info = self.load_champ_data(user)
     #         em = discord.Embed(title='War Defense',description=user.name)
     #         team = []
     #         for k in info['awd']:
@@ -212,10 +250,10 @@ class Hook:
 
     @champ.command(pass_context=True, name='export')
     async def _champ_export(self, ctx):
-        userid = ctx.message.author.id
-        info = self.get_user_info(userid)
+        user = ctx.message.author
+        info = self.load_champ_data(user)
         rand = randint(1000, 9999)
-        path, ext = os.path.splitext(self.champs_file.format(userid))
+        path, ext = os.path.splitext(self.champs_file.format(user.id))
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
             writer = csv.DictWriter(fp, fieldnames=info['fieldnames'],
@@ -223,16 +261,16 @@ class Hook:
             writer.writeheader()
             for row in info['champs']:
                 writer.writerow(row)
-        filename = self.data_dir.format(userid) + '/champions.csv'
+        filename = self.data_dir.format(user.id) + '/champions.csv'
         os.replace(tmp_file, filename)
         await self.bot.upload(filename)
         os.remove(filename)
 
     # handles user creation, adding new server, blocking
-    def _create_user(self, userid):
-        if not os.path.exists(self.champs_file.format(userid)):
-            if not os.path.exists(self.data_dir.format(userid)):
-                os.makedirs(self.data_dir.format(userid))
+    def _create_user(self, user):
+        if not os.path.exists(self.champs_file.format(user.id)):
+            if not os.path.exists(self.data_dir.format(user.id)):
+                os.makedirs(self.data_dir.format(user.id))
             champ_data = {
                 "clan": None,
                 "battlegroup": None,
@@ -245,20 +283,24 @@ class Hook:
                 "awo": [],
                 "max5": [],
             }
-            dataIO.save_json(self.champs_file.format(userid), champ_data)
+            self.save_champ_data(user, data)
 
-    def get_user_info(self, userid):
-        self._create_user(userid)
-        return dataIO.load_json(self.champs_file.format(userid))
+    def load_champ_data(self, user):
+        self._create_user(user)
+        return dataIO.load_json(self.champs_file.format(user.id))
 
-    def get_champion(self, mcoc, cdict):
+    def save_champ_data(user, data):
+        dataIO.save_json(self.champs_file.format(user.id), champ)
+
+    def get_champion(self, cdict):
+        mcoc = self.bot.get_cog('MCOC')
         champ_attr = {self.attr_map[k]: cdict[k] for k in self.attr_map.keys()}
         return mcoc.get_champion(cdict['Id'], champ_attr)
 
     async def _parse_champions_csv(self, message, attachment):
         channel = message.channel
-        userid = message.author.id
-        self._create_user(userid)
+        user = message.author
+        self._create_user(user)
         response = requests.get(attachment['url'])
         cr = csv.DictReader(response.text.split('\n'), quoting=csv.QUOTE_NONE)
         champ_list = []
@@ -269,7 +311,7 @@ class Hook:
 
         mcoc = self.bot.get_cog('MCOC')
         if mcoc:
-            missing = self.hook_prestige(mcoc, champ_list)
+            missing = self.hook_prestige(champ_list)
             if missing:
                 await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
@@ -302,13 +344,13 @@ class Hook:
             if champ['Role'] in self.alliance_map:
                 champ_data[self.alliance_map[champ['Role']]].append(champ['Id'])
 
-        dataIO.save_json(self.champs_file.format(userid), champ_data)
+        self.save_champ_data(user, champ_data)
         if mcoc:
             await self.bot.send_message(channel, embed=em)
         else:
             await self.bot.send_message(channel, 'Updated Champion Information')
 
-    def hook_prestige(self, mcoc, roster):
+    def hook_prestige(self, roster):
         '''Careful.  This modifies the array of dicts in place.'''
         missing = []
         for cdict in roster:
@@ -316,7 +358,7 @@ class Hook:
             if cdict['Stars'] < 4:
                 continue
             try:
-                champ_obj = self.get_champion(mcoc, cdict)
+                champ_obj = self.get_champion(cdict)
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
@@ -355,6 +397,7 @@ def parse_value(key, value):
         return ast.literal_eval(value)
     except Exception:
         return value
+
 
 #-------------- setup -------------
 def check_folders():

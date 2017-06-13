@@ -2,7 +2,7 @@ import re
 from datetime import datetime, timedelta
 from textwrap import wrap
 from collections import UserDict, defaultdict
-from operator import or_
+from operator import or_, and_
 from functools import reduce
 from math import log2
 from math import *
@@ -19,7 +19,7 @@ from functools import wraps
 import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
-
+from .utils import chat_formatting as chat
 
 
 data_files = {
@@ -134,14 +134,24 @@ class ChampionFactory():
         kwargs['bot'] = bot
         kwargs['alias_set'] = alias_set
         kwargs['klass'] = kwargs.pop('class', 'default')
+
+        kwargs['full_name'] = kwargs['champ']
+        kwargs['bold_name'] = chat.bold(' '.join(
+                [word.capitalize() for word in kwargs['full_name'].split(' ')]))
+        kwargs['class_color'] = class_color_codes[kwargs['klass']]
+
+        kwargs['class_tags'] = {'#' + kwargs['klass'].lower()}
+        for a in kwargs['abilities'].split(','):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        for a in kwargs['hashtags'].split('#'):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        if kwargs['class_tags']:
+            kwargs['class_tags'].difference_update({'#'})
+
         for key, value in kwargs.items():
             if not value or value == 'n/a':
                 kwargs[key] = None
-        kwargs['full_name'] = kwargs['champ']
-        kwargs['bold_name'] = '**' + ' '.join(
-                [word.capitalize() for word in kwargs['full_name'].split(' ')]
-                ) + '**'
-        kwargs['class_color'] = class_color_codes[kwargs['klass']]
+
         champion = type(kwargs['mattkraftid'], (Champion,), kwargs)
         self.champions[tuple(alias_set)] = champion
         return champion
@@ -506,6 +516,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
+        await self.bot.say(champ.class_tags.union(champ.tags))
 
     @command_arg_help(aliases=('duel',))
     async def champ_duel(self, champ : ChampConverter):
@@ -543,7 +554,7 @@ class MCOC(ChampionFactory):
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
                 title=champ.verbose_str, description='Base Attributes')
-        titles = ('Health', 'Attack', 'Crit Rate', 'Crit Damage', 'Armor', 'Block Prof')
+        titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
@@ -552,32 +563,22 @@ class MCOC(ChampionFactory):
             em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
-            stats=[]
-            maxlength = 0
-            for i in range(0,len(titles)):
-                if len(titles[i]) > maxlength:
-                    maxlength = len(titles[i])+1
-            for i in range(0,len(titles)):
-                # em.add_field(name=t, value=data[k])
-                stats.append('{0}|{1}'.format(paddit(titles[i],maxlength),paddit(data[keys[i]],7,'front')))
-            package='\n'.join(s for s in stats)
-            em.add_field(name='Base Stats',value='```'+package+'```')
-        em.add_field(name='Feature Crystal', value=xref['released'], inline=False)
-        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'], inline=False)
-        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'], inline=False)
+            stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+            em.add_field(name='Base Stats', 
+                value=tabulate(stats, width=11, rotate=False, header_sep=False))
+        em.add_field(name='Feature Crystal', value=xref['released'])
+        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'])
+        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'])
         state = xref['f/s/b']
         if state == 'b':
-            em.add_field(name='Status',value='5'+star_glyph[1]+' Basic Pool & 4'+star_glyph[1]+' Basic Pool')
-            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
-            em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
+            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
+            em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'])
         elif state == 's':
-            em.add_field(name='Status',value='5'+star_glyph[1]+' SubFeature Pool & 4'+star_glyph[1]+' Basic Pool')
-            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance (SubFeature pool)', value=xref['5chance'], inline=False)
+            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
+            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'])
         elif state == 'f':
-            em.add_field(name='Status',value='5'+star_glyph[1]+' Feature Pool & 4'+star_glyph[1]+' Feature Pool')
-            em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['4chance'], inline=False)
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'], inline=False)
+            em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'])
+            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'])
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
@@ -631,7 +632,7 @@ class MCOC(ChampionFactory):
     @command_arg_help(aliases=('abilities',))
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
-        # specials = champ.get_special_attacks()
+        specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color,
         title=champ.full_name + 'Abilities')
         # em.add_field(name='Passive',value='placeholder')
@@ -639,7 +640,7 @@ class MCOC(ChampionFactory):
         # em.add_field(name='When Attacked',value='placeholder')
         row=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=row['abilities'].split(', ')
-        hashtags=row['hashtags'].split(' #')
+        hashtags=row['hastags'].split(' #')
         em.add_field(name='Abilities', value='\n'.join(abilities))
         em.add_field(name='Hashtags', value='\n#'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
@@ -762,8 +763,10 @@ class MCOC(ChampionFactory):
         champs = []
         all_aliases = set()
         id_index = raw_data.fieldnames.index('status')
-        alias_index = raw_data.fieldnames[:id_index-1]
+        alias_index = raw_data.fieldnames[:id_index]
         for row in raw_data:
+            if reduce(and_, [not i for i in row.values()]):
+                continue    # empty row check
             alias_set = set()
             for col in alias_index:
                 if row[col]:
@@ -836,15 +839,21 @@ def validate_attr(*expected_args):
 
 class Champion:
 
+    base_tags = {'#cr{}'.format(i) for i in range(10, 130, 10)}
+    base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
+    base_tags.update({'#awake', '#notawake'})
+
     def __init__(self, attrs=None):
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
         default = {'star': 4, 'rank': 5, 'sig': 99}
         default.update(attrs)
+        self.tags = set()
         self.update_attrs(default)
 
     def update_attrs(self, attrs):
+        self.tags.difference_update(self.base_tags)
         for k in ('star', 'rank', 'sig'):
             if k in attrs:
                 setattr(self, k, attrs[k])
@@ -868,6 +877,12 @@ class Champion:
                 self.rank = self.star + 1
             if self.sig > 99:
                 self.sig = 99
+        self.tags.add('#cr{}'.format(self.chlgr_rating))
+        self.tags.add('#{}star'.format(self.star))
+        if self.sig == 0:
+            self.tags.add('#notawake')
+        else:
+            self.tags.add('#awake')
 
     def get_avatar(self):
         image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
@@ -883,11 +898,11 @@ class Champion:
     async def get_bio(self):
         bios = load_kabam_json(kabam_bio)
         key = 'ID_CHARACTER_BIOS_' + self.mcocjson
-        if key not in bios:
-            raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         if self.debug:
             dbg_str = 'BIO:  ' + key
             await self.bot.say('```{}```'.format(dbg_str))
+        if key not in bios:
+            raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bios[key]
 
     @property
@@ -933,6 +948,10 @@ class Champion:
         else:
             return 15 + self.rank * 10
 
+    @property
+    def all_tags(self):
+        return self.tags.union(self.class_tags)
+
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
         prefix = 'ID_SPECIAL_ATTACK_'
@@ -952,7 +971,10 @@ class Champion:
     @property
     @validate_attr('prestige')
     def prestige(self):
-        if self.prestige_data[self.star][self.rank-1] is None:
+        try:
+            if self.prestige_data[self.star][self.rank-1] is None:
+                return 0
+        except KeyError:
             return 0
         return self.prestige_data[self.star][self.rank-1][self.sig]
 
@@ -985,7 +1007,7 @@ class Champion:
             dbg_str.append('  ' + ', '.join(desc))
             dbg_str.append('Description Text:  ')
             dbg_str.extend(['  ' + self._sig_header(sigs[d]) for d in desc])
-            await self.bot.say('```{}```'.format('\n'.join(dbg_str)))
+            await self.bot.say(chat.box('\n'.join(dbg_str)))
         coeff = self.get_sig_coeff()
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
@@ -1058,7 +1080,7 @@ class Champion:
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
                         self._sig_header(sigs[kabam_key])))
         if self.debug:
-            await self.bot.say('```{}```'.format('\n'.join(fdesc)))
+            await self.bot.say(chat.box('\n'.join(fdesc)))
         return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
 
     def get_mcoc_keys(self):
@@ -1202,10 +1224,10 @@ def bound_lvl(siglvl, max_lvl=99):
             ret = 0
     return ret
 
-def tabulate(table_data, width, do_rotate=True, header_sep=True):
+def tabulate(table_data, width, rotate=True, header_sep=True):
     rows = []
     cells_in_row = None
-    for i in rotate(table_data, rotate):
+    for i in iter_rows(table_data, rotate):
         if cells_in_row is None:
             cells_in_row = len(i)
         elif cells_in_row != len(i):
@@ -1213,17 +1235,18 @@ def tabulate(table_data, width, do_rotate=True, header_sep=True):
         rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
     if header_sep:
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
-    return '```' + '\n'.join(rows) + '```'
+    return chat.box('\n'.join(rows))
 
-def rotate(array, do_rotate):
-    if not do_rotate:
+def iter_rows(array, rotate):
+    if not rotate:
         for i in array:
             yield i
-    for j in range(len(array[0])):
-        row = []
-        for i in range(len(array)):
-            row.append(array[i][j])
-        yield row
+    else:
+        for j in range(len(array[0])):
+            row = []
+            for i in range(len(array)):
+                row.append(array[i][j])
+            yield row
 
 def load_kabam_json(file):
     raw_data = dataIO.load_json(file)
@@ -1267,11 +1290,11 @@ def get_csv_rows(filecsv, column, match_val, default=None):
 def load_csv(filename):
     return csv.DictReader(open(filename))
 
-def paddit(word,max : int,opt='back'):
+def padd_it(word,max : int,opt='back'):
     loop = max-len(str(word))
     if loop > 0:
         padd = ''
-        for i in range(0, loop):
+        for i in loop:
             padd+=' '
         if opt =='back':
             return word+padd
