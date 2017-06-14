@@ -289,8 +289,8 @@ class Hook:
         self._create_user(user)
         return dataIO.load_json(self.champs_file.format(user.id))
 
-    def save_champ_data(user, data):
-        dataIO.save_json(self.champs_file.format(user.id), champ)
+    def save_champ_data(self, user, data):
+        dataIO.save_json(self.champs_file.format(user.id), data)
 
     def get_champion(self, cdict):
         mcoc = self.bot.get_cog('MCOC')
