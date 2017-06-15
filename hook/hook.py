@@ -48,7 +48,7 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
-        
+
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -116,7 +116,7 @@ class Hook:
         if not filtered:
             em = discord.Embed(title='User', description=hargs['user'].name,
                     color=discord.Color.gold())
-            em.add_field(name='Tags used filtered to an empty roster', 
+            em.add_field(name='Tags used filtered to an empty roster',
                     value=' '.join(hargs['tags']))
             await self.bot.say(embed=em)
             return
@@ -135,17 +135,17 @@ class Hook:
 
         em = discord.Embed(title="User", description=hargs['user'].name, color=color)
         if len(filtered) < 10:
-            strs = [champ_str.format(champ) for champ in 
+            strs = [champ_str.format(champ) for champ in
                     sorted(filtered, key=attrgetter('prestige'), reverse=True)]
-            em.add_field(name='Filtered Roster', value='\n'.join(strs))
+            em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
         else:
             for champ in filtered:
                 classes[champ.klass].append(champ)
             for klass, champs in classes.items():
                 if champs:
-                    strs = [champ_str.format(champ) for champ in 
+                    strs = [champ_str.format(champ) for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
-                    em.add_field(name=klass, value='\n'.join(strs))
+                    em.add_field(name=klass, value='\n'.join(strs), inline=False)
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
 
