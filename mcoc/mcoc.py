@@ -1234,7 +1234,7 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
             cells_in_row = len(i)
         elif cells_in_row != len(i):
             raise IndexError("Array is not uniform")
-        rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
+        rows.append('|'.join(['{:^{width}>}']*len(i)).format(*i, width=width))
     if header_sep:
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return chat.box('\n'.join(rows))
