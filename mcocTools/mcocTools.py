@@ -144,6 +144,9 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
+        message = ctx.message.content
+        await self.bot.say('message: '+message)
+
         # args = ctx.split(' ')
         #
         # for arg in args:
@@ -151,7 +154,7 @@ class MCOCTools:
         #     if arg in tokens:
         #         row = mcoc.csv_get_row(mcoc.data_files['masteries']['local'], 'MasteryExt', arg)
 
-        await self.bot.say('Dummy message for cost')
+        # await self.bot.say('Dummy message for cost')
 
     @mastery.command(pass_context=True, name='set')
     async def _set(self,ctx):
