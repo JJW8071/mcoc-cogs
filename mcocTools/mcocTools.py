@@ -144,8 +144,10 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
-        message = ctx.message.content
-        await self.bot.say('message: '+message)
+        message = ctx.message.content.split(' ')
+        for t in self.tokens:
+            if t in message:
+                await self.bot.say('process: '+t)
 
         # args = ctx.split(' ')
         #
