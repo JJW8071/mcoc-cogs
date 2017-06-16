@@ -148,9 +148,12 @@ class MCOCTools:
         stack = []
         predicates = {'Greater','Lesser','Block','Perfect','Stand','Collar','Detect','Serum','Extended','Enhanced','Pure','Glass','Liquid','Double','Scouter','Cosmic','Tech',}
         for i in range(0,len(message)):
-            if '{} {}'.format(message[i],message[i+1]) in self.tokens:
-                stack.append('{} {}'.format(message[i],message[i+1]))
-                i+=1
+            if i+1 < len(message):
+                if '{} {}'.format(message[i],message[i+1]) in self.tokens:
+                    stack.append('{} {}'.format(message[i],message[i+1]))
+                    i+=1
+                elif message[i] in self.tokens:
+                    stack.append(message[i])
             elif message[i] in self.tokens:
                 stack.append(message[i])
         await self.bot.say('\n'.join(stack))
