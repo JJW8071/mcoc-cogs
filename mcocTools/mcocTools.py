@@ -105,7 +105,7 @@ class MCOCTools:
     masteryColor={'Offense': discord.Color.red(),
             'Defense': discord.Color.blue(),
             'Utility': discord.Color.green()}
-    tokens={'Vitality','Greater Vitality','Salve','Recovery','Energy Resistance','Physical Resistance','Block Proficiancy','Perfect Block','Stand Your Ground','Collar Tech','Serum Science','Willpower','Coagulate','Suture','Inequity','Resonate',
+    tokens={'Vitality','Greater Vitality','Salve','Recovery','Energy Resistance','Physical Resistance','Block Proficiency','Perfect Block','Stand Your Ground','Collar Tech','Serum Science','Willpower','Coagulate','Suture','Inequity','Resonate',
             'Strength','Greater Strength','Pierce','Lesser Precision','Precision','Lesser Cruelty','Cruelty','Courage','Extended Fury','Enhanced Fury','Pure Skill','Mutagenesis','Glass Canon','Recoil','Liquid Courage','Double Edge','Despair','DeepWounds','Unfazed','Assassin',
             'Wisdom','Intelligence','Limber','Parry','Stupefy','Petrify','Pacify','Dexterity','Pitance','Prosperity','Cosmic Awareness','Mystic Dispersion','Detect Cosmic','Detect Tech','Detect Mystic','Scouter Lens','Detect Mutant','Detect Science','Detect Skill'}
 
@@ -144,10 +144,16 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
-        message = ctx.message.content
-        for t in self.tokens:
-            if t in message:
-                await self.bot.say('process: '+t)
+        message = ctx.message.content.split(' ')
+        stack = []
+        predicates = {'Greater','Lesser','Block','Perfect','Stand','Collar','Detect','Serum','Extended','Enhanced','Pure','Glass','Liquid','Double','Scouter','Cosmic','Tech',}
+        for i in range(0,len(message)):
+            if '{} {}'.format(message[i],message[i+1]) in self.tokens:
+                stack.append('{} {}'.format(message[i],message[i+1]))
+                i+=1
+            elif message[i] in self.tokens:
+                stack.append(message[i])
+        await self.bot.say('\n'.join(stack))
 
         # args = ctx.split(' ')
         #
