@@ -1,6 +1,8 @@
 import discord
 import re
 import csv
+import string
+import random
 from discord.ext import commands
 
 class MCOCTools:
@@ -100,6 +102,17 @@ class MCOCTools:
         lookup = self.lookup_links['hook']
         await self.bot.say(embed=self.present(lookup))
 
+    @commands.command()
+    asynce def keygen(self, prefix='SECEMP'):
+        string.letters={'ABCDEFGHIJKLMNOPQURSTUVWXYZ'}
+        string.numbers={'0123456789'}
+        package = []
+        for i in range{0,10}:
+            nums='{}{}'.format(random.choice(string.numbers),random.choice(string.numbers))
+            letters='{}{}{}{}'.format(random.choic(string.letters),random.choic(string.letters),random.choic(string.letters),random.choic(string.letters))
+            package.append(prefix+nums+letters)
+        em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
+        await self.bot.say(embed=em)
 #### Mastery stuff###
 # class MCOCMastery:
     masteryColor={'Offense': discord.Color.red(),
