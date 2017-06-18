@@ -157,20 +157,20 @@ class MCOCTools:
 
     @mastery.command(pass_context=True, name='cost')
     async def _cost(self,ctx):
-        message = ctx.message.content.split(' ')
-        stack = []
-        for i in range(0,len(message)-1):
-            if i+1 < len(message):
-                test='{} {}'.format(message[i],message[i+1])
-                if test in self.tokens:
-                    stack.append(test)
-                    i=i+2
-                elif message[i] in self.tokens:
-                    stack.append(message[i])
-            else:
-                if message[i] in self.tokens:
-                    stack.append(message[i])
-        await self.bot.say('\n'.join(stack))
+        # message = ctx.message.content.split(' ')
+        # stack = []
+        # for i in range(0,len(message)-1):
+        #     if i+1 < len(message):
+        #         test='{} {}'.format(message[i],message[i+1])
+        #         if test in self.tokens:
+        #             stack.append(test)
+        #             i=i+2
+        #         elif message[i] in self.tokens:
+        #             stack.append(message[i])
+        #     else:
+        #         if message[i] in self.tokens:
+        #             stack.append(message[i])
+        # await self.bot.say('\n'.join(stack))
 
         # args = ctx.split(' ')
         #
