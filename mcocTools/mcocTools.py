@@ -107,7 +107,7 @@ class MCOCTools:
         package = []
         for i in range(0,9):
             lets='{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(letters),random.choice(letters))
-            package.append(prefix+nums+lets)
+            package.append(prefix+lets)
         em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
         await self.bot.say(embed=em)
 #### Mastery stuff###
