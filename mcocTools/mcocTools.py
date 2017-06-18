@@ -103,11 +103,11 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
 
     @commands.command()
-    asynce def keygen(self, prefix='SECEMP'):
+    async def keygen(self, prefix='SECEMP'):
         string.letters={'ABCDEFGHIJKLMNOPQURSTUVWXYZ'}
         string.numbers={'0123456789'}
         package = []
-        for i in range{0,10}:
+        for i in range{0,9}:
             nums='{}{}'.format(random.choice(string.numbers),random.choice(string.numbers))
             letters='{}{}{}{}'.format(random.choic(string.letters),random.choic(string.letters),random.choic(string.letters),random.choic(string.letters))
             package.append(prefix+nums+letters)
