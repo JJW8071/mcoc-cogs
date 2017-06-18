@@ -102,12 +102,10 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
 
     @commands.command()
-    async def keygen(self, prefix='SECEMP'):
+    async def keygen(self, prefix='SECEMP99'):
         letters='ABCDEFGHIJKLMNOPQURSTUVWXYZ'
-        numbers='0123456789'
         package = []
         for i in range(0,9):
-            nums='{}{}'.format(random.choice(numbers),random.choice(numbers))
             lets='{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(letters),random.choice(letters))
             package.append(prefix+nums+lets)
         em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
