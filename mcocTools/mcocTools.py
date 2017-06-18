@@ -161,11 +161,15 @@ class MCOCTools:
         stack = []
         for i in range(0,len(message)):
             if i+1 < len(message):
-                if '{} {}'.format(message[i],message[i+1]) in self.tokens:
-                    stack.append('{} {}'.format(message[i],message[i+1]))
-                    i+=2
-            if message[i] in self.tokens:
-                stack.append(message[i])
+                test='{} {}'.format(message[i],message[i+1])
+                if test in self.tokens:
+                    stack.append(test)
+                    i=i+2
+                elif message[i] in self.tokens:
+                    stack.append(message[i])
+            else:
+                if message[i] in self.tokens:
+                    stack.append(message[i])
         await self.bot.say('\n'.join(stack))
 
         # args = ctx.split(' ')
