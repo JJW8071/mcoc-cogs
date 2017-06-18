@@ -160,10 +160,11 @@ class MCOCTools:
         message = ctx.message.content.split(' ')
         stack = []
         for i in range(0,len(message)):
-            if i+1 < len(message) and '{} {}'.format(message[i],message[i+1]) in self.tokens:
+            if i+1 < len(message):
+                if '{} {}'.format(message[i],message[i+1]) in self.tokens:
                 stack.append('{} {}'.format(message[i],message[i+1]))
-                i+=1
-            elif message[i] in self.tokens:
+                i+=2
+            if message[i] in self.tokens:
                 stack.append(message[i])
         await self.bot.say('\n'.join(stack))
 
