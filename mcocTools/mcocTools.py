@@ -160,7 +160,7 @@ class MCOCTools:
         message = ctx.message.content.split(' ')
         stack = []
         for i in range(0,len(message)-1):
-            if i+1 <= len(message):
+            if i+1 < len(message):
                 test='{} {}'.format(message[i],message[i+1])
                 if test in self.tokens:
                     stack.append(test)
