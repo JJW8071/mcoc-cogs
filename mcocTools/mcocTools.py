@@ -1,7 +1,6 @@
 import discord
 import re
 import csv
-import string
 import random
 from discord.ext import commands
 
@@ -104,13 +103,13 @@ class MCOCTools:
 
     @commands.command()
     async def keygen(self, prefix='SECEMP'):
-        string.letters={'ABCDEFGHIJKLMNOPQURSTUVWXYZ'}
-        string.numbers={'0123456789'}
+        letters='ABCDEFGHIJKLMNOPQURSTUVWXYZ'
+        numbers='0123456789'
         package = []
         for i in range(0,9):
-            nums='{}{}'.format(random.choice(string.numbers),random.choice(string.numbers))
-            letters='{}{}{}{}'.format(random.choic(string.letters),random.choic(string.letters),random.choic(string.letters),random.choic(string.letters))
-            package.append(prefix+nums+letters)
+            nums='{}{}'.format(random.choice(numbers),random.choice(numbers))
+            lets='{}{}{}{}'.format(random.choic(letters),random.choic(letters),random.choic(letters),random.choic(letters))
+            package.append(prefix+nums+lets)
         em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
         await self.bot.say(embed=em)
 #### Mastery stuff###
