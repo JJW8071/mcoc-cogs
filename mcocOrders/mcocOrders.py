@@ -17,8 +17,8 @@ class MCOCOrders:
             await self.bot.send_cmd_help(ctx)
             return
 
-    @orders.group(pass_context=True, aliases=['set',])
-    async def _set(self, ctx):
+    @orders.group(pass_context=True)
+    async def set(self, ctx):
         await self.bot.say("Dummy message for the _set command")
 
 
