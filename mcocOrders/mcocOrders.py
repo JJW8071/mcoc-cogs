@@ -4,7 +4,7 @@ import csv
 import random
 from discord.ext import commands
 
- class MCOCOrders:
+class MCOCOrders:
     '''Tools for Marvel Contest of Champions'''
 
     def __init__(self, bot):
