@@ -11,8 +11,8 @@ class MCOCOrders:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.group(pass_context=True, aliases=('orders','order'))
-    async def _orders(self, ctx):
+    @commands.group(pass_context=True, aliases=('order',))
+    async def orders(self, ctx):
         if ctx.invoked_subcommand is None:
             await self.bot.send_cmd_help(ctx)
             return
