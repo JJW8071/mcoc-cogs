@@ -17,17 +17,33 @@ class MCOCOrders:
 
     @commands.group(pass_context=True, aliases=('order',))
     async def orders(self, ctx):
+        await self.bot.send_cmd_help(ctx)
+        return
+
+    @orders.group(pass_context=True, aliases=('setup','set'))
+    async def _set(self, ctx):
         server = ctx.message.server
         if ctx.invoked_subcommand is None:
             if not os.path.exists(self.data_dir.format(server.id)):
                 create_server(server)
                 await self.bot.say('A storage file has been generated for this server')
-            await self.bot.send_cmd_help(ctx)
-            return
-
-    @orders.group(pass_context=True)
-    async def set(self, ctx):
         await self.bot.say("Dummy message for the set command")
+
+    def create_server(self, server):
+        if not os.path.exists(self.data_dir.format(server.id)):
+            os.makedirs(self.data_dir.format(server.id))
+            orders_data = {
+            'user': None,
+            'aw' : None,
+            'aq1': {'tier1':None,'tier2':None},
+            'aq2': {'tier1':None,'tier2':None,'tier3':None},
+            'aq3': {'tier1':None,'tier2':None,'tier3':None},
+            'aq4': {'tier1':None,'tier2':None,'tier3':None},
+            'aq5': {'tier1':None,'tier2':None,'tier3':None},
+            'aq6': {'tier1':None,'tier2':None,'tier3':None},
+            }
+            self.save_champ_data(user, data)
+        return
 
 def tabulate(table_data, width, rotate=True, header_sep=True):
     rows = []
@@ -42,21 +58,7 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return chat.box('\n'.join(rows))
 
-def create_server(self, server):
-    if not os.path.exists(self.server.format(server.id)):
-        if not os.path.exists(self.data_dir.format(server.id)):
-            os.makedirs(self.data_dir.format(server.id))
-            orders_data = {
-            'user': None,
-            'aw' : None,
-            'aq1': {'tier1':None,'tier2':None},
-            'aq2': {'tier1':None,'tier2':None,'tier3':None},
-            'aq3': {'tier1':None,'tier2':None,'tier3':None},
-            'aq4': {'tier1':None,'tier2':None,'tier3':None},
-            'aq5': {'tier1':None,'tier2':None,'tier3':None},
-            'aq6': {'tier1':None,'tier2':None,'tier3':None},
-            }
-            self.save_champ_data(user, data)
+
 
 def setup(bot):
     bot.add_cog(MCOCOrders(bot))
