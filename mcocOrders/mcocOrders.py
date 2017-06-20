@@ -19,7 +19,7 @@ class MCOCOrders:
 
     @orders.group(pass_context=True)
     async def set(self, ctx):
-        await self.bot.say("Dummy message for the _set command")
+        await self.bot.say("Dummy message for the set command")
 
 
 
