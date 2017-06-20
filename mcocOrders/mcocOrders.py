@@ -11,9 +11,30 @@ class MCOCOrders:
     def __init__(self, bot):
         self.bot = bot
 
+    def _create_server(self, server):
+        if not os.path.exists(self.server.format(server.id)):
+            if not os.path.exists(self.data_dir.format(server.id)):
+                os.makedirs(self.data_dir.format(server.id))
+            orders_data = {
+                'user': None,
+                'aw' : None,
+                'aq1': {'tier1':None,'tier2':None}
+                'aq2': {'tier1':None,'tier2':None,'tier3':None}
+                'aq3': {'tier1':None,'tier2':None,'tier3':None}
+                'aq4': {'tier1':None,'tier2':None,'tier3':None}
+                'aq5': {'tier1':None,'tier2':None,'tier3':None}
+                'aq6': {'tier1':None,'tier2':None,'tier3':None}
+            }
+            self.save_champ_data(user, data)
+
+
     @commands.group(pass_context=True, aliases=('order',))
     async def orders(self, ctx):
         if ctx.invoked_subcommand is None:
+            server = ctx.message.server
+            if not os.path.exists(self.server.format(server.id)):
+                _create_server(server)
+                await self.bot.say('A storage file has been generated for this server')
             await self.bot.send_cmd_help(ctx)
             return
 
