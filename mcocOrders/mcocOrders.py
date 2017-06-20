@@ -2,6 +2,7 @@ import discord
 import re
 import csv
 import random
+import os
 from discord.ext import commands
 
 class MCOCOrders:
