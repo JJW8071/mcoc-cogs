@@ -182,36 +182,36 @@ class MCOCTools:
     async def _set(self,ctx):
         await self.bot.say('Dummy message for set')
 
-    def _get_cost(self, mastery):
-        row = csv_get_row(self.dataset,'Mastery',mastery)
-        cost = {'ucarb': 'Carbonadium Mastery Core', 'ustony': 'Stony Mastery Core', 'uclass': '', 'uunit': 'Units', 'rgold': 'Gold', 'runit': 'Units'}
-        cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
-                'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
-        if mastery in cores:
-            classcore=cores[mastery]
-        unlockcost=[]
-        rankcost=[]
-        maxranks=row['maxranks']
-        carbcost=row['ucarb'].split(',')
-        stonycost=row['ustony'].split(',')
-        classcost=row['uclass'].split(',')
-        unitcost=row['uunit'].split(',')
-        if len(carbcost) > 0:
-            unlockcost.append({'ucarb':{carbcost,'Carbonadium Mastery Core'})
-        if len(stonycost) > 0:
-            unlockcost.append({'ustony':{stonycost,'Stony Mastery Core'})
-        if len(classcost) > 0:
-            unlockcost.append({'uclass':{classcost,classcore})
-        if len(unitcost) > 0:
-            unlockcost.append({'uunit':{unitcost,'Units'})
-        goldrank=row['rgold'].split(',')
-        unitrank=row['runit'].split(',')
-        if len(goldrank) > 0:
-            rankcost.append({'rgold':{goldrank,'Gold'})
-        if len(unitrank) > 0:
-            unlockcost.append({'runit':{unitrank,'Units'})
-
-        return unlockcost, rankcost
+    # def _get_cost(self, mastery):
+    #     row = csv_get_row(self.dataset,'Mastery',mastery)
+    #     cost = {'ucarb': 'Carbonadium Mastery Core', 'ustony': 'Stony Mastery Core', 'uclass': '', 'uunit': 'Units', 'rgold': 'Gold', 'runit': 'Units'}
+    #     cores = {'Collar Tech': 'Tech Core', 'Serum Science': 'Mastery Serum', 'Mutagenesis': 'Mastery Core X', 'Pure Skill': 'Mastery Core of Apptitude', 'Cosmic Awareness':'Cosmic Mastery Core', 'Mystic Dispersion': 'Mystical Mastery Core',
+    #             'Detect Tech': 'Tech Core', 'Detect Science': 'Mastery Serum', 'Detect Mutant': 'Mastery Core X', 'Detect Skill': 'Mastery Core of Apptitude', 'Detect Cosmic':'Cosmic Mastery Core', 'Detect Mystic': 'Mystical Mastery Core',}
+        # if mastery in cores:
+        #     classcore=cores[mastery]
+        # unlockcost=[]
+        # rankcost=[]
+        # maxranks=row['maxranks']
+        # carbcost=row['ucarb'].split(',')
+        # stonycost=row['ustony'].split(',')
+        # classcost=row['uclass'].split(',')
+        # unitcost=row['uunit'].split(',')
+        # if len(carbcost) > 0:
+        #     unlockcost.append({'ucarb':{carbcost,'Carbonadium Mastery Core'})
+        # if len(stonycost) > 0:
+        #     unlockcost.append({'ustony':{stonycost,'Stony Mastery Core'})
+        # if len(classcost) > 0:
+        #     unlockcost.append({'uclass':{classcost,classcore})
+        # if len(unitcost) > 0:
+        #     unlockcost.append({'uunit':{unitcost,'Units'})
+        # goldrank=row['rgold'].split(',')
+        # unitrank=row['runit'].split(',')
+        # if len(goldrank) > 0:
+        #     rankcost.append({'rgold':{goldrank,'Gold'})
+        # if len(unitrank) > 0:
+        #     unlockcost.append({'runit':{unitrank,'Units'})
+        #
+        # return unlockcost, rankcost
 
 
     def _get_text(self, mastery, rank):
