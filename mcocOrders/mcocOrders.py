@@ -4,9 +4,8 @@ import csv
 import random
 from discord.ext import commands
 
-class MCOCOrders:
+ class MCOCOrders:
     '''Tools for Marvel Contest of Champions'''
-
 
     def __init__(self, bot):
         self.bot = bot
@@ -18,12 +17,12 @@ class MCOCOrders:
             orders_data = {
                 'user': None,
                 'aw' : None,
-                'aq1': {'tier1':None,'tier2':None}
-                'aq2': {'tier1':None,'tier2':None,'tier3':None}
-                'aq3': {'tier1':None,'tier2':None,'tier3':None}
-                'aq4': {'tier1':None,'tier2':None,'tier3':None}
-                'aq5': {'tier1':None,'tier2':None,'tier3':None}
-                'aq6': {'tier1':None,'tier2':None,'tier3':None}
+                'aq1': {'tier1':None,'tier2':None},
+                'aq2': {'tier1':None,'tier2':None,'tier3':None},
+                'aq3': {'tier1':None,'tier2':None,'tier3':None},
+                'aq4': {'tier1':None,'tier2':None,'tier3':None},
+                'aq5': {'tier1':None,'tier2':None,'tier3':None},
+                'aq6': {'tier1':None,'tier2':None,'tier3':None},
             }
             self.save_champ_data(user, data)
 
