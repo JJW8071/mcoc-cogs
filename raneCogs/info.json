@@ -1,0 +1,7 @@
+{
+    "AUTHOR" : "RaneMartin8",
+    "INSTALL_MSG" : "Thanks for installing my Cog!",
+    "NAME" : "getSynergies ",
+    "SHORT" : "A Redbot Cog for Marvel's Contest of Champions",
+    "DESCRIPTION" : "Fetches Synergy data from hook/champions"
+}
