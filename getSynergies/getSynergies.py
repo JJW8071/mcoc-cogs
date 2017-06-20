@@ -9,7 +9,7 @@ import pprint
 
 
 class getSynergies:
-    """This is a cog."""
+    """This is a cog by RaneMartin."""
 
     def __init__(self, bot):
         self.bot = bot
