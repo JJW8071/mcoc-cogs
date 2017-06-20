@@ -9,6 +9,8 @@ from discord.ext import commands
 
     def __init__(self, bot):
         self.bot = bot
+        self.data_dir = 'data/mcocOrders/servers/{}/'
+
 
     def _create_server(self, server):
         if not os.path.exists(self.server.format(server.id)):
