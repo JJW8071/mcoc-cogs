@@ -34,7 +34,7 @@ class MCOCOrders:
     async def orders(self, ctx):
         server = ctx.message.server
         if ctx.invoked_subcommand is None:
-            if not os.path.exists(self.server.format(server.id)):
+            if not os.path.exists(self.data_dir.format(server.id)):
                 _create_server(server)
                 await self.bot.say('A storage file has been generated for this server')
             await self.bot.send_cmd_help(ctx)
