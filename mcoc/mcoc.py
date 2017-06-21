@@ -596,8 +596,14 @@ class MCOC(ChampionFactory):
             em= discord.Embed(color=champ.class_color,title='Release Dates')
             em.add_field(name='Feature Crystal', value=xref['released'], inline=False)
             em.add_field(name='Basic 4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'], inline=False)
+            em.add_field(name='Chance', value=xref['4chance'],inline=True)
+
             em.add_field(name='Featured 5'+star_glyph[1]+' Crystal', value=xref['5subfeature'], inline=False)
+            em.add_field(name='Chance', value=xref['5chance'],inline=True)
+
             em.add_field(name='Basic 5'+star_glyph[1]+' Crystal', value=xref['5basic'], inline=False)
+            em.add_field(name='Chance', value=xref['5chance'],inline=True)
+
             em.set_thumbnail(url=champ.get_avatar())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
