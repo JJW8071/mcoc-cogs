@@ -21,12 +21,13 @@ class MCOCOrders:
         return
 
     @orders.group(pass_context=True, aliases=('setup','set'))
-    async def _set(self, ctx):
+    async def Set(self, ctx):
         server = ctx.message.server
+        if not os.path.exists(self.data_dir.format(server.id)):
+            create_server(server)
+            await self.bot.say('A storage file has been generated for this server')
         if ctx.invoked_subcommand is None:
-            if not os.path.exists(self.data_dir.format(server.id)):
-                create_server(server)
-                await self.bot.say('A storage file has been generated for this server')
+            await self.bot.send_cmd_help(ctx)
         await self.bot.say("Dummy message for the set command")
 
     def create_server(self, server):
