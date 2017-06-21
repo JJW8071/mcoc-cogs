@@ -19,7 +19,7 @@ class MCOCTools:
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
                 'MCoC Spotlight',
-                '<http://simians.tk/MCoCspotlight>\n**MCOC Spotlight Discord**\n<https://discord.gg/wJqpYGS>'),
+                '<http://simians.tk/MCoCspotlight>\n \nMCOC Spotlight Discord\n<https://discord.gg/wJqpYGS>'),
             'marvelsynergy': (
                 'Team Builder',
                 '<http://www.marvelsynergy.com/team-builder>',
