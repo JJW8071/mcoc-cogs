@@ -283,7 +283,7 @@ class Hook:
                 "awo": [],
                 "max5": [],
             }
-            self.save_champ_data(user, data)
+            self.save_champ_data(user, champ_data)
 
     def load_champ_data(self, user):
         self._create_user(user)
