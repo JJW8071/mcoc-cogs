@@ -592,6 +592,8 @@ class MCOC(ChampionFactory):
         '''Retrieve Champion Release Date'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            em = discord.Embed(color=champ.class_color,
+                    title=champ.verbose_str, description='Base Attributes')
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
             em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
             em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],inline=False)
