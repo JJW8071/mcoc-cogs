@@ -67,7 +67,7 @@ class MCOCTools:
     #     await self.bot.say(embed=em)
 
     @commands.command(manage_server=True,pass_context=True,aliases=('collectorsetup'))
-    async def setup(self,ctx):
+    async def checkserver(self,ctx):
         server = ctx.message.server
         # 1 ) Check permissions
         # 2 ) Check roles
