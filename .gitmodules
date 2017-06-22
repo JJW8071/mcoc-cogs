@@ -1,0 +1,3 @@
+[submodule "PaddoCogs"]
+	path = PaddoCogs
+	url = https://github.com/JasonJW/PaddoCogs
