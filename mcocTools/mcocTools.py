@@ -76,12 +76,14 @@ class MCOCTools:
         roles = server.roles
         for r in roles:
             rolenames.append(r.name)
-
-        for i in {'bg1','bg2','bg3','officers'}:
+        required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%\Act4','LEGEND','Summoner'}
+        for i in required_roles:
             if i not in rolenames:
                 await self.bot.say('Setup Error: add role {}'.format(i))
+
+        role_hierarchy = server.role_hierarchy
+        print(role_hierarchy)
         await self.bot.say('collectorsetup complete')
-        # role_hierarchy = server.role_hierarchy
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
