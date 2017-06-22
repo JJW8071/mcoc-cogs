@@ -66,6 +66,22 @@ class MCOCTools:
     #     em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
     #     await self.bot.say(embed=em)
 
+    @commands.command(manage_server=True,pass_context=True,aliases=('collectorsetup'))
+    async def setup(self,ctx):
+        server = ctx.message.server
+        # 1 ) Check permissions
+        # 2 ) Check roles
+        # 3 ) Check role order
+        rolenames = []
+        roles = server.roles
+        for r in roles:
+            rolenames.append(i.name)
+
+        for i in {'bg1','bg2','bg3','officers'}:
+            if i not in rolenames:
+                await self.bot.say('Setup Error: add role {}'.format(i))
+        # role_hierarchy = server.role_hierarchy
+
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
         lookup = self.lookup_links['event']
@@ -219,24 +235,6 @@ class MCOCTools:
         for row in rows:
             text.append(row['Text'].format(row[str(rank)]))
         return text
-
-    @commands.command(manage_server=True,pass_context=True,aliases=('collectorsetup'))
-    async def setup(self,ctx):
-        server = ctx.message.server
-        # 1 ) Check permissions
-        # 2 ) Check roles
-        # 3 ) Check role order
-        rolenames = []
-        roles = server.roles
-        for r in roles:
-            rolenames.append(i.name)
-
-        for i in {'bg1','bg2','bg3','officers'}:
-            if i not in rolenames:
-                await self.bot.say('Setup Error: add role {}'.format(i))
-        role_hierarchy=server.role_hierarchy
-
-
 
 
 def load_csv(filename):
