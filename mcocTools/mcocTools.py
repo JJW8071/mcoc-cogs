@@ -220,6 +220,24 @@ class MCOCTools:
             text.append(row['Text'].format(row[str(rank)]))
         return text
 
+    @commands.command(manage_server=True,pass_context=True,aliases=('collectorsetup'))
+    async def setup(self,ctx):
+        server = ctx.message.server
+        # 1 ) Check permissions
+        # 2 ) Check roles
+        # 3 ) Check role order
+        rolenames = []
+        roles = server.roles
+        for r in roles:
+            rolenames.append(i.name)
+
+        for i in {'bg1','bg2','bg3','officers'}:
+            if i not in rolenames:
+                await self.bot.say('Setup Error: add role {}'.format(i))
+        role_hierarchy=server.role_hierarchy
+
+
+
 
 def load_csv(filename):
     return csv.DictReader(open(filename))
