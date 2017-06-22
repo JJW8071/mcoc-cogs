@@ -3,6 +3,7 @@ from random import choice, shuffle
 import aiohttp
 import functools
 import asyncio
+import discord
 
 try:
     from imgurpython import ImgurClient
