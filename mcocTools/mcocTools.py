@@ -75,7 +75,7 @@ class MCOCTools:
         rolenames = []
         roles = server.roles
         for r in roles:
-            rolenames.append(i.name)
+            rolenames.append(r.name)
 
         for i in {'bg1','bg2','bg3','officers'}:
             if i not in rolenames:
