@@ -1,7 +1,7 @@
 {
-    "AUTHOR" : "DeltaSigma",
-    "INSTALL_MSG" : "Thanks for installing DeltaSigma's Hook",
-    "NAME" : "hook",
-    "SHORT" : "Hook integration for Marvel Contest of Champions",
-    "DESCRIPTION" : "Hook integration for Marvel Contest of Champions."
+    "AUTHOR" : "Twentysix26",
+    "INSTALL_MSG" : "Testing image embeds",
+    "NAME" : "imageembed",
+    "SHORT" : "imageembed",
+    "DESCRIPTION" : "imagemebed"
 }
