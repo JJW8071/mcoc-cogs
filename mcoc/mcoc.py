@@ -583,6 +583,8 @@ class MCOC(ChampionFactory):
         #     em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
+        else:
+            em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
