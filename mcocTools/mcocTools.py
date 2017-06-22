@@ -38,7 +38,7 @@ class MCOCTools:
                 'http://simians.tk/-sdf-streak')
                 #'http://simians.tk/SDFstreak')
     }
-    mcolor = discord.Color.gold()
+    mcolor = discord.Color.red()
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
     dataset = 'data/mcoc/masteries.csv'
 
@@ -65,6 +65,25 @@ class MCOCTools:
     #     em = discord.Embed(color=discord.Color.gold(),title='Gold Realm Schedule',description=package)
     #     em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
     #     await self.bot.say(embed=em)
+
+    @commands.command(manage_server=True,pass_context=True)
+    async def collectorsetup(self,ctx):
+        server = ctx.message.server
+        # 1 ) Check permissions
+        # 2 ) Check roles
+        # 3 ) Check role order
+        rolenames = []
+        roles = server.roles
+        for r in roles:
+            rolenames.append(r.name)
+        required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%\Act4','LEGEND','Summoner'}
+        for i in required_roles:
+            if i not in rolenames:
+                await self.bot.say('Setup Error: add role {}'.format(i))
+
+        role_hierarchy = server.role_hierarchy
+        print(role_hierarchy)
+        await self.bot.say('collectorsetup complete')
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
