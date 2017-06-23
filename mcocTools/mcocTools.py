@@ -93,7 +93,7 @@ class MCOCTools:
         await self.bot.say('collectorsetup complete')
 
     @commands.command(pass_context=True,aliases={'collector','infocollector'})
-    async aboutcollector(self,ctx)
+    async aboutcollector(self,ctx):
         """Shows info about Collector"""
         author_repo = "https://github.com/Twentysix26"
         red_repo = author_repo + "/Red-DiscordBot"
