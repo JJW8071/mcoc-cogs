@@ -133,7 +133,7 @@ class MCOCTools:
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
-        embed.add_field(name="About Red", value=about, inline=False)
+        embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name="The Collector Dev Team",value=devteam,inline=False)
         embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
                          "{} days ago!)".format(days_since))
