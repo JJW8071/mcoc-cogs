@@ -48,7 +48,10 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
         self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
-        
+       
+    @commands.command(pass_context=True)
+    async def reset_roles(self, ctx):
+        pass 
 
     @commands.command(pass_context=True, no_pm=True)
     async def profile(self,ctx, *, user : discord.Member=None):
@@ -100,9 +103,11 @@ class Hook:
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagUserConverter):
         """Displays a user profile."""
-        print(hargs)
         hargs = await HashtagUserConverter(ctx, hargs).convert()
         data = self.load_champ_data(hargs['user'])
+        if not data['champs']:
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            return
         all_champs = [self.get_champion(k) for k in data['champs']]
         all_champ_tags = reduce(set.union, [c.all_tags for c in all_champs])
         residual_tags = hargs['tags'] - all_champ_tags
@@ -129,7 +134,7 @@ class Hook:
                 color = discord.Color.gold()
                 break
 
-        champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
+        champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
@@ -283,7 +288,7 @@ class Hook:
                 "awo": [],
                 "max5": [],
             }
-            self.save_champ_data(user, data)
+            self.save_champ_data(user, champ_data)
 
     def load_champ_data(self, user):
         self._create_user(user)

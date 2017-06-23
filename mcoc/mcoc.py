@@ -326,12 +326,12 @@ class MCOC(ChampionFactory):
         self._prepare_aliases()
         self._prepare_prestige_data()
 
-    @commands.command(aliases=('p2f',),hidden=True)
+    @commands.command(aliases=('p2f',), hidden=True)
     async def per2flat(self, per: float, ch_rating: int=100):
         '''Convert Percentage to MCOC Flat Value'''
         await self.bot.say(to_flat(per, ch_rating))
 
-    @commands.command(aliases=('flat', 'f2p'),hidden=True)
+    @commands.command(aliases=('flat', 'f2p'), hidden=True)
     async def flat2per(self, *, m):
         '''Convert MCOC Flat Value to Percentge'''
         if ' ' in m:
@@ -565,10 +565,12 @@ class MCOC(ChampionFactory):
         else:
             stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
             em.add_field(name='Base Stats', 
-                value=tabulate(stats, width=11, rotate=False, header_sep=False))
-        em.add_field(name='Feature Crystal', value=xref['released'])
-        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'])
-        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'])
+                value=tabulate(stats, width=11, rotate=False, header_sep=False), inline=False)
+        em.add_field(name='Feature Crystal', value=xref['released'], inline=False)
+        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', 
+                value=xref['4basic'], inline=False)
+        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],
+                inline=False)
         state = xref['f/s/b']
         if state == 'b':
             em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
@@ -932,7 +934,14 @@ class Champion:
 
     @property
     def stars_str(self):
-        return '★' * self.star
+        return self.star_char * self.star
+
+    @property
+    def star_char(self):
+        if self.sig:
+            return '★'
+        else:
+            return '☆'
 
     @property
     def chlgr_rating(self):
@@ -1224,7 +1233,7 @@ def bound_lvl(siglvl, max_lvl=99):
             ret = 0
     return ret
 
-def tabulate(table_data, width, rotate=True, header_sep=True):
+def tabulate(table_data, width, rotate=True, header_sep=True, align_out=True):
     rows = []
     cells_in_row = None
     for i in iter_rows(table_data, rotate):
@@ -1232,7 +1241,13 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
             cells_in_row = len(i)
         elif cells_in_row != len(i):
             raise IndexError("Array is not uniform")
-        rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
+        if align_out:
+            fstr = '{:<{width}}'
+            if len(i) > 1:
+                fstr += '|' + '|'.join(['{:>{width}}']*(len(i)-1))
+            rows.append(fstr.format(*i, width=width))
+        else:
+            rows.append('|'.join(['{:^{width}}']*len(i)).format(*i, width=width))
     if header_sep:
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return chat.box('\n'.join(rows))
