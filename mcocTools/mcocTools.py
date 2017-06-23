@@ -21,7 +21,7 @@ class MCOCTools:
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
                 'MCoC Spotlight',
-                '<http://simians.tk/MCoCspotlight>\n \nMCOC Spotlight Discord\n<https://discord.gg/wJqpYGS>'),
+                '<http://simians.tk/MCoCspotlight>\nIf you would like to donate prestige, signatures or stats, join us at [MCOC Spotlight Discord](https://discord.gg/wJqpYGS)'),
             'marvelsynergy': (
                 'Team Builder',
                 '<http://www.marvelsynergy.com/team-builder>',
@@ -133,7 +133,7 @@ class MCOCTools:
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
-        embed.add_field(name="About Red", value=about, inline=False)
+        embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name="The Collector Dev Team",value=devteam,inline=False)
         embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
                          "{} days ago!)".format(days_since))
