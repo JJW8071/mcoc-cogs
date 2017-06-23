@@ -2,6 +2,8 @@ import discord
 import re
 import csv
 import random
+import os
+import datetime
 from discord.ext import commands
 
 class MCOCTools:
