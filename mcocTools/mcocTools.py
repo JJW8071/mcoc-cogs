@@ -127,7 +127,7 @@ class MCOCTools:
             "creates content for everyone to enjoy. [Join us today]({}) "
             "and help us improve!\n\n"
             "".format(red_repo, author_repo, server_url))
-        devteam = ("DeltaSigma#8530\nJJW#8071\nranemartin8#1636")
+        devteam = ("[DeltaSigma#8530](@148622879817334784)\n[JJW#8071](@124984294035816448)\n[ranemartin8#1636](@245589956012146688)")
 
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
