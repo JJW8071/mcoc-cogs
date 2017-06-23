@@ -100,9 +100,11 @@ class Hook:
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagUserConverter):
         """Displays a user profile."""
-        print(hargs)
         hargs = await HashtagUserConverter(ctx, hargs).convert()
         data = self.load_champ_data(hargs['user'])
+        if not data['champs']:
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            return
         all_champs = [self.get_champion(k) for k in data['champs']]
         all_champ_tags = reduce(set.union, [c.all_tags for c in all_champs])
         residual_tags = hargs['tags'] - all_champ_tags
@@ -129,7 +131,7 @@ class Hook:
                 color = discord.Color.gold()
                 break
 
-        champ_str = '{0.star}★ {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
+        champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
