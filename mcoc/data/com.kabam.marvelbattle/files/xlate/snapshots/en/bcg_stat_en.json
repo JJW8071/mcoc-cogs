@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
+    "hash": "ce91262f9f42ccb7aadfcbe247d139c9fa46e6e1",
     "language": "en",
+    "string_count": 2743,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "hash": "ce91262f9f42ccb7aadfcbe247d139c9fa46e6e1",
-    "ts": 1495142354,
-    "string_count": 2743
+    "ts": 1495142354
   },
   "strings": [
     {

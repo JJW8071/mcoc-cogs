@@ -31,6 +31,8 @@ data_files = {
     #             'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
     'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 'local': 'data/mcoc/prestige.json', 'update_delta': 1},
+    'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc/pub?gid=2008047498&single=true&output=csv',
+                'local': 'data/mcoc/prestige.csv', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
     'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=1266181139&single=true&output=csv',
@@ -564,25 +566,25 @@ class MCOC(ChampionFactory):
             em.add_field(name='Added to PHC', value=xref['4basic'])
         else:
             stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
-            em.add_field(name='Base Stats', 
-                value=tabulate(stats, width=11, rotate=False, header_sep=False), inline=False)
-        em.add_field(name='Feature Crystal', value=xref['released'], inline=False)
-        em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', 
-                value=xref['4basic'], inline=False)
-        em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],
-                inline=False)
-        state = xref['f/s/b']
-        if state == 'b':
-            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
-            em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'])
-        elif state == 's':
-            em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'])
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'])
-        elif state == 'f':
-            em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'])
-            em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'])
+            em.add_field(name='Base Stats',
+                value=tabulate(stats, width=11, rotate=False, header_sep=False))
+        # em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
+        # em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
+        # em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],inline=False)
+        # state = xref['f/s/b']
+        # if state == 'b':
+        #     em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
+        #     em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+        # elif state == 's':
+        #     em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
+        #     em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+        # elif state == 'f':
+        #     em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+        #     em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
         if champ.infopage != 'none':
-            em.add_field(name='Infopage',value='<{}>'.format(champ.infopage))
+            em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
+        else:
+            em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -592,10 +594,21 @@ class MCOC(ChampionFactory):
         '''Retrieve Champion Release Date'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-            em= discord.Embed(color=champ.class_color,title='Release Dates')
-            em.add_field(name='Feature Crystal', value=xref['released'])
-            em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['add4subfeature'])
-            em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['add5subfeature'])
+            em = discord.Embed(color=champ.class_color,
+                    title=champ.verbose_str, description='Base Attributes')
+            em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
+            em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
+            em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],inline=False)
+            state = xref['f/s/b']
+            if state == 'b':
+                em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
+                em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+            elif state == 's':
+                em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
+                em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+            elif state == 'f':
+                em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+                em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
             em.set_thumbnail(url=champ.get_avatar())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
@@ -642,7 +655,7 @@ class MCOC(ChampionFactory):
         # em.add_field(name='When Attacked',value='placeholder')
         row=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=row['abilities'].split(', ')
-        hashtags=row['hastags'].split(' #')
+        hashtags=row['hashtags'].split(' #')
         em.add_field(name='Abilities', value='\n'.join(abilities))
         em.add_field(name='Hashtags', value='\n#'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())

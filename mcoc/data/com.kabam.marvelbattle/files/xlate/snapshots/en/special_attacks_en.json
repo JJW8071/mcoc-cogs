@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
+    "hash": "420301fc38f956bd247c03c783a3b9102adcabcb",
     "language": "en",
+    "string_count": 702,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "hash": "420301fc38f956bd247c03c783a3b9102adcabcb",
-    "ts": 1495142352,
-    "string_count": 702
+    "ts": 1495142352
   },
   "strings": [
     {
