@@ -1080,14 +1080,14 @@ class Champion:
                     sig_calcs[ckey] = raw_per_str.format(per_val/100)
                     continue
                 sig_calcs[ckey] = per_str.format(
-                        int(spotlight['attack']) * per_val / 100, per_val/100)
+                        int(spotlight['attack'].replace(',','')) * per_val / 100, per_val/100)
             elif effect == 'health':
                 if not spotlight['health']:
                     data_missing = True
                     sig_calcs[ckey] = raw_per_str.format(per_val/100)
                     continue
                 sig_calcs[ckey] = per_str.format(
-                        int(spotlight['health']) * per_val / 100, per_val/100)
+                        int(spotlight['health'].replace(',','')) * per_val / 100, per_val/100)
             else:
                 if per_val.is_integer():
                     sig_calcs[ckey] = '{:.0f}'.format(per_val)
