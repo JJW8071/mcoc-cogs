@@ -68,12 +68,19 @@ class MCOCTools:
 
     @commands.command(manage_server=True,pass_context=True)
     async def collectorsetup(self,ctx):
+        '''Server Setup Guide
+        ### IN DEVELOPMENT - PRE ALPHA ###
+        '''
         server = ctx.message.server
         # 1 ) Check permissions
+        # Manage Messages required for Cleanup
+        # Manage Server required for Role Creation / Deletion
+        # Manage Roles required for Role assignment / removal
         # 2 ) Check roles
         # 3 ) Check role order
         rolenames = []
         roles = server.roles
+
         for r in roles:
             rolenames.append(r.name)
         required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%\Act4','LEGEND','Summoner'}
@@ -84,6 +91,56 @@ class MCOCTools:
         role_hierarchy = server.role_hierarchy
         print(role_hierarchy)
         await self.bot.say('collectorsetup complete')
+
+    @commands.command(pass_context=True,aliases={'collector','infocollector'})
+    async aboutcollector(self,ctx)
+        """Shows info about Collector"""
+        author_repo = "https://github.com/Twentysix26"
+        red_repo = author_repo + "/Red-DiscordBot"
+        server_url = "https://discord.gg/wJqpYGS"
+        dpy_repo = "https://github.com/Rapptz/discord.py"
+        python_url = "https://www.python.org/"
+        since = datetime.datetime(2016, 1, 2, 0, 0)
+        days_since = (datetime.datetime.utcnow() - since).days
+        dpy_version = "[{}]({})".format(discord.__version__, dpy_repo)
+        py_version = "[{}.{}.{}]({})".format(*os.sys.version_info[:3],
+                                             python_url)
+
+        owner_set = self.bot.settings.owner is not None
+        owner = self.bot.settings.owner if owner_set else None
+        if owner:
+            owner = discord.utils.get(self.bot.get_all_members(), id=owner)
+            if not owner:
+                try:
+                    owner = await self.bot.get_user_info(self.bot.settings.owner)
+                except:
+                    owner = None
+        if not owner:
+            owner = "Unknown"
+
+        about = (
+            "Collector is an instance of [Red, an open source Discord bot]({}) "
+            "created by [Twentysix]({}) and improved by many.\n\n"
+            "The Collector Dev Team is backed by a passionate community who contributes and "
+            "creates content for everyone to enjoy. [Join us today]({}) "
+            "and help us improve!\n\n"
+            "".format(red_repo, author_repo, server_url))
+        devteam = ("DeltaSigma#8530\nJJW#8071\nranemartin8#1636")
+
+        embed = discord.Embed(colour=discord.Colour.red())
+        embed.add_field(name="Instance owned by", value=str(owner))
+        embed.add_field(name="Python", value=py_version)
+        embed.add_field(name="discord.py", value=dpy_version)
+        embed.add_field(name="About Red", value=about, inline=False)
+        embed.add_field(name="The Collector Dev Team",value=devteam,inline=False)
+        embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
+                         "{} days ago!)".format(days_since))
+
+        try:
+            await self.bot.say(embed=embed)
+        except discord.HTTPException:
+            await self.bot.say("I need the `Embed links` permission "
+                               "to send this")
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
