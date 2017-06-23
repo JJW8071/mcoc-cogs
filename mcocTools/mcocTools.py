@@ -10,8 +10,8 @@ class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
     lookup_links = {
             'event': (
-                'Tiny MCoC Schedule',
-                '<http://simians.tk/MCOC-Sched>',
+                '',
+                '[Tiny MCoC Schedule](http://simians.tk/MCOC-Sched)',
                 'Josh Morris Schedule',
                 'https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'),
             'hook': (
@@ -23,8 +23,8 @@ class MCOCTools:
                 '',
                 '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at [MCOC Spotlight Discord](https://discord.gg/wJqpYGS)'),
             'marvelsynergy': (
-                'Team Builder',
-                '<http://www.marvelsynergy.com/team-builder>',
+                '',
+                '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
                 'Marvel Synergy',
                 'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
@@ -33,8 +33,8 @@ class MCOCTools:
                 'by u/alsciende',
                 'https://assets-cdn.github.com/favicon.ico'),
             'simulator': (
-                'Mastery Simulator',
-                '<http://simians.tk/msimSDF>'),
+                '',
+                '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
             'streak': (
                 'Infinite Streak',
                 'http://simians.tk/-sdf-streak')
