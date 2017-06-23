@@ -15,8 +15,8 @@ class MCOCTools:
                 'Josh Morris Schedule',
                 'https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'),
             'hook': (
-                'hook/champions',
-                '<http://hook.github.io/champions>',
+            '[hook/Champions by gabriel](http://hook.github.io/champions)',
+                '',
                 'hook/champions for Collector',
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
