@@ -20,8 +20,8 @@ class MCOCTools:
                 'hook/champions for Collector',
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
-                'MCoC Spotlight',
-                '<http://simians.tk/MCoCspotlight>\nIf you would like to donate prestige, signatures or stats, join us at [MCOC Spotlight Discord](https://discord.gg/wJqpYGS)'),
+                '',
+                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at [MCOC Spotlight Discord](https://discord.gg/wJqpYGS)'),
             'marvelsynergy': (
                 'Team Builder',
                 '<http://www.marvelsynergy.com/team-builder>',
