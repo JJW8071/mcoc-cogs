@@ -99,7 +99,7 @@ class MCOCTools:
         role_hierarchy = server.role_hierarchy
         roleorder = ['Role Order: ']
         for role in role_hierarchy:
-            roleorder.append('{}'.format(role.name)
+            roleorder.append('{}'.format(role.name))
         await self.bot.say('\n'.join(roleorder))
         print(role_hierarchy)
         await self.bot.say('collectorsetup complete')
