@@ -86,9 +86,14 @@ class MCOCTools:
         for r in roles:
             rolenames.append(r.name)
         required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%\Act4','LEGEND','Summoner'}
+        stageone=['Roles Required for Guild Setup:']
         for i in required_roles:
-            if i not in rolenames:
-                await self.bot.say('Setup Error: add role {}'.format(i))
+            if i in rolenames:
+                stageone.append(':white_check_mark: {}'.format(i))
+            else:
+                stageone.append('negative_squared_cross_mark' {}.format(i))
+        await self.bot.say('\n'.join(stageone))
+                # await self.bot.say('Setup Error: add role {}'.format(i))
 
         role_hierarchy = server.role_hierarchy
         print(role_hierarchy)
