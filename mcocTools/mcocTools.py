@@ -91,7 +91,7 @@ class MCOCTools:
             if i in rolenames:
                 stageone.append(':white_check_mark: {}'.format(i))
             else:
-                stageone.append('negative_squared_cross_mark' {}.format(i))
+                stageone.append(':negative_squared_cross_mark: {}' {}.format(i))
         await self.bot.say('\n'.join(stageone))
                 # await self.bot.say('Setup Error: add role {}'.format(i))
 
