@@ -69,7 +69,7 @@ class MCOCTools:
     #     await self.bot.say(embed=em)
 
     @commands.command(manage_server=True,pass_context=True)
-    async def collectorsetup(self,ctx):
+    async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
         ### IN DEVELOPMENT - PRE ALPHA ###
         '''
@@ -85,7 +85,7 @@ class MCOCTools:
 
         for r in roles:
             rolenames.append(r.name)
-        required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%\Act4','LEGEND','Summoner'}
+        required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%Act4','100\%LOL','LEGEND','Summoner'}
         stageone=['Roles Required for Guild Setup:',]
         for i in required_roles:
             if i in rolenames:
@@ -93,9 +93,14 @@ class MCOCTools:
             else:
                 stageone.append(':negative_squared_cross_mark: {}'.format(i))
         await self.bot.say('\n'.join(stageone))
+
                 # await self.bot.say('Setup Error: add role {}'.format(i))
 
         role_hierarchy = server.role_hierarchy
+        roleorder = ['Role Order: ']
+        for i in range (0,len(role_hierarchy)-1):
+            roleorder.append('{} {}'.format(i,role_hierarchy[i].name)
+        await self.bot.say('\n'.join(roleorder))
         print(role_hierarchy)
         await self.bot.say('collectorsetup complete')
 
