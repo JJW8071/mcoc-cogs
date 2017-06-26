@@ -101,7 +101,7 @@ class MCOCTools:
         i = 1
         for role in role_hierarchy:
             roleorder.append('{} {}'.format(i,role.name)
-            i+=1
+            i = i + 1
         await self.bot.say('\n'.join(roleorder))
         print(role_hierarchy)
         await self.bot.say('collectorsetup complete')
