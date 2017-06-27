@@ -105,6 +105,10 @@ class Hook:
         if not data['champs']:
             await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
             return
+        elif data['champs'] == []:
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            return
+    
         all_champs = [self.get_champion(k) for k in data['champs']]
         all_champ_tags = reduce(set.union, [c.all_tags for c in all_champs])
         residual_tags = hargs['tags'] - all_champ_tags
