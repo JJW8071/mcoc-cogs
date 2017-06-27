@@ -515,9 +515,9 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=bio_desc)
+        em.add_field(name='hashtags',value=','.join(champ.class_tags.union(champ.tags)))
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        em.add_field(name='hashtags',champ.class_tags.union(champ.tags))
         await self.bot.say(embed=em)
         # await self.bot.say(champ.class_tags.union(champ.tags))
 
