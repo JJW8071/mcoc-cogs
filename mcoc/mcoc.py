@@ -462,7 +462,7 @@ class MCOC(ChampionFactory):
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(hidden=True)
+    @commands.command(hidden=True,aliases=['gcache','cacheg'])
     async def cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
