@@ -96,6 +96,28 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
+    def setup_hook(self, author):
+        emcolor=discord.Color.red()
+        em1 = '1. On the hook/champions webiste, enter your 4★ & 5★ champions.\nhook/champions website: <http://hook.github.io/champions>'
+        em2 = '2. Set the [rank], [level], and [signature level] for your champions.  Disregard the Power Index.  Collector will recalcualte.'
+        em3 = '3. [Optional] Set the champions in your Alliance Quest, Alliance War Defense, and Alliance War Offense teams.'
+        em4 = '4. [Android | PC Browser] Using the upper right-hand menu, Export CSV.  This will download a file [champions.csv]'
+        em5 = '4. [iOS] If you are using iOS, you have an extra step. Using the upper right-hand menu, Export CSV.\nThis produces a webpage with the content of the CSV.\nCopy the text of the entire page.\nUse the **goodReader** app (Apple Store) create a file [champions.csv] and paste the content of your clipboard.'
+        em6 ='https://cdn.discordapp.com/attachments/324676145490427904/329060454833979392/unknown.png'
+        em7 = '5. In DISCORD, upload your [champions.csv] file here, or in an appropriate channel on your server.'
+        # em1=discord.Embed(color=emcolor,title='hook/Champions setup instructions',description='')
+        # em1.add_field(name='Step 1: hook tool',value=em1d)
+        # em1.add_field(name='Step 2: set rank, level, sig',value=em2d)
+        # em1.add_field(name='Step 3: set teams',value=emd3d)
+        # em1.add_field(name='Step 4: Export',value=emd4d)
+        await self.bot.send_message(author, em1)
+        await self.bot.send_message(author, em2)
+        await self.bot.send_message(author, em3)
+        await self.bot.send_message(author, em4)
+        await self.bot.send_message(author, em5)
+        await self.bot.send_message(author, em6)
+        await self.bot.send_message(author, em7)
+
     @commands.command(pass_context=True, no_pm=True)
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagUserConverter):
@@ -103,8 +125,10 @@ class Hook:
         hargs = await HashtagUserConverter(ctx, hargs).convert()
         data = self.load_champ_data(hargs['user'])
         if not data['champs']:
-            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
+            setup_hook(author)
             return
+
         all_champs = [self.get_champion(k) for k in data['champs']]
         all_champ_tags = reduce(set.union, [c.all_tags for c in all_champs])
         residual_tags = hargs['tags'] - all_champ_tags
