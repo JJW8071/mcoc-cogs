@@ -107,7 +107,7 @@ class Hook:
         em1=discord.Embed(color=emcolor,title='hook/Champions setup instructions',description='')
         em1.add_field(name='Step 1: hook tool',value=em1d)
         em1.add_field(name='Step 2: set rank, level, sig',value=em2d)
-        em1.add_field(name='Step 3: set teams')
+        em1.add_field(name='Step 3: set teams',value=emd3d)
         em1.add_field(name='Step 4: Export',value=emd4d)
         em1.set_image(url='https://cdn.discordapp.com/attachments/324676145490427904/329060454833979392/unknown.png')
         em2=discord.Embed(color=discord.Color.blue(),title='',description='')
@@ -118,6 +118,7 @@ class Hook:
         await self.bot.send_message(author, embed=em1)
         await self.bot.send_message(author, embed=em2)
         await self.bot.send_message(author, embed=em3)
+
 
     @commands.command(pass_context=True, no_pm=True)
     async def roster(self, ctx, *, hargs=''):
