@@ -96,7 +96,7 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
-    # def setup_hook(self, author):
+    def setup_hook(self, author):
     #     emcolor=discord.Color.red()
         # em1 = '1. On the hook/champions webiste, enter your 4★ & 5★ champions.\nhook/champions website: <http://hook.github.io/champions>'
         # em2 = '2. Set the [rank], [level], and [signature level] for your champions.  Disregard the Power Index.  Collector will recalcualte.'
@@ -110,7 +110,7 @@ class Hook:
         # em1.add_field(name='Step 2: set rank, level, sig',value=em2d)
         # em1.add_field(name='Step 3: set teams',value=emd3d)
         # em1.add_field(name='Step 4: Export',value=emd4d)
-        # await self.bot.send_message(author, 'test')
+        await self.bot.send_message(author, 'test')
         # await self.bot.send_message(author, em2)
         # await self.bot.send_message(author, em3)
         # await self.bot.send_message(author, em4)
@@ -126,9 +126,9 @@ class Hook:
         data = self.load_champ_data(hargs['user'])
         author = ctx.message.author
         if not data['champs']:
-            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
-            # await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
-            # setup_hook(author)
+            # await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
+            setup_hook(author)
             return
 
         all_champs = [self.get_champion(k) for k in data['champs']]
