@@ -124,6 +124,7 @@ class Hook:
         """Displays a user profile."""
         hargs = await HashtagUserConverter(ctx, hargs).convert()
         data = self.load_champ_data(hargs['user'])
+        author = ctx.message.author
         if not data['champs']:
             await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
             setup_hook(author)
