@@ -103,7 +103,9 @@ class Hook:
         hargs = await HashtagUserConverter(ctx, hargs).convert()
         data = self.load_champ_data(hargs['user'])
         if not data['champs']:
-            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
+            author = ctx.message.author
+            await self.bot.send_message(author,'hook/Champions setup')
             return
         elif data['champs'] == []:
             await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
