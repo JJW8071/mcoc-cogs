@@ -96,8 +96,7 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
-    @commands.command(hidden=True)
-    async def setup_hook(self, author):
+    def setup_hook(self, author):
         emcolor=discord.Color.red()
         em1d = '1. On the hook/champions webiste, enter your 4★ & 5★ champions.\nhook/champions website: <http://hook.github.io/champions>'
         emd2d = '2. Set the [rank], [level], and [signature level] for your champions.  Disregard the Power Index.  Collector will recalcualte.'
