@@ -96,6 +96,10 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
+    @commands.command(hidden=True)
+    async def setup_hook(self, author)
+        await self.bot.send_message(author,'hook/Champions setup instructions')
+
     @commands.command(pass_context=True, no_pm=True)
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagUserConverter):
@@ -104,13 +108,7 @@ class Hook:
         data = self.load_champ_data(hargs['user'])
         if not data['champs']:
             await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
-            author = ctx.message.author
-            await self.bot.send_message(author,'hook/Champions setup')
-            return
-        elif data['champs'] == []:
-            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
-            author = ctx.message.author
-            await self.bot.send_message(author,'hook/Champions setup')
+            setup_hook(author)
             return
 
         all_champs = [self.get_champion(k) for k in data['champs']]
