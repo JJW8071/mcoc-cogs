@@ -14,6 +14,11 @@ class MCOCTools:
                 '[Tiny MCoC Schedule](http://simians.tk/MCOC-Sched)',
                 'Josh Morris Schedule',
                 'https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'),
+            'rttl':(
+                '',
+                '[Road to the Labyrinth Opponent List](https://drive.google.com/file/d/0B4ozoShtX2kFcDV4R3lQb1hnVnc/view)',
+                'by Regal Empire {OG Wolvz}',
+                'http://svgur.com/s/48'),
             'hook': (
                 '',
                 '[hook/Champions by gabriel](http://hook.github.io/champions)',
@@ -163,6 +168,11 @@ class MCOCTools:
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
         lookup = self.lookup_links['spotlight']
+        await self.bot.say(embed=self.present(lookup))
+
+    @commands.command(help=lookup_links['rttl'][0],)
+    async def rttl(self):
+        lookup = self.lookup_links['rttl']
         await self.bot.say(embed=self.present(lookup))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
