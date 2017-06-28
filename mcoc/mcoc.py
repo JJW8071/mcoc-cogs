@@ -10,6 +10,7 @@ import os
 import inspect
 import urllib
 import requests
+import aiohttp
 import csv
 import json
 from gsheets import Sheets
@@ -29,8 +30,8 @@ data_files = {
                 'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
     # 'sig_data': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=799981914&single=true&format=csv',
     #             'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
-    'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                'local': 'data/mcoc/prestige.json', 'update_delta': 1},
+    #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
+                #'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc/pub?gid=2008047498&single=true&output=csv',
                 'local': 'data/mcoc/prestige.csv', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
@@ -798,41 +799,39 @@ class MCOC(ChampionFactory):
 
     def _prepare_prestige_data(self):
         mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
-        raw_data = dataIO.load_json(data_files['prestige']['local'])
-        champs = {}
-        for row in raw_data['feed']['entry']:
-            raw_dict = self._google_json_content_split(row)
-            champ_match = mattkraft_re.fullmatch(raw_dict['mattkraftid'])
-            if champ_match:
-                champ_name = champ_match.group('champ')
-                champ_star = int(champ_match.group('star'))
-                champ_rank = int(champ_match.group('rank'))
-            else:
-                continue
-            if champ_name not in champs:
-                champs[champ_name] = {}
-                champs[champ_name][4] = [None] * 5
-                champs[champ_name][5] = [None] * 5
-            if champ_star == 5:
-                sig_len = 201
-            else:
-                sig_len = 100
-            key_values = {}
-            sig = [0] * sig_len
-            for k, v in raw_dict.items():
-                if k.startswith('sig'):
+        #raw_data = load_csv(data_files['prestigeCSV']['local'])
+        with open(data_files['prestigeCSV']['local'], newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            champs = {}
+            for row in reader:
+                #raw_dict = self._google_json_content_split(row)
+                champ_match = mattkraft_re.fullmatch(row.pop(0))
+                if champ_match:
+                    champ_name = champ_match.group('champ')
+                    champ_star = int(champ_match.group('star'))
+                    champ_rank = int(champ_match.group('rank'))
+                else:
+                    continue
+                if champ_name not in champs:
+                    champs[champ_name] = {}
+                    champs[champ_name][4] = [None] * 5
+                    champs[champ_name][5] = [None] * 5
+                key_values = {}
+                sig_len = 201 if champ_star == 5 else 100
+                sig = [0] * sig_len
+                for i, v in enumerate(row):
                     try:
-                        if (int(k[3:]) < sig_len) and v != '#N/A':
-                            sig[int(k[3:])] = int(v)
+                        if v and i < sig_len:
+                            sig[i] = int(v)
                     except:
-                        print(champ_name, k, v, len(sig))
+                        print(champ_name, i, v, len(sig))
                         raise
-            try:
-                champs[champ_name][champ_star][champ_rank-1] = sig
-            except:
-                print(champ_name, champ_star, champ_rank, len(champs[champ_name]), len(champs[champ_name][champ_star]))
-                raise
-        dataIO.save_json(prestige_data, champs)
+                try:
+                    champs[champ_name][champ_star][champ_rank-1] = sig
+                except:
+                    print(champ_name, champ_star, champ_rank, len(champs[champ_name]), len(champs[champ_name][champ_star]))
+                    raise
+        #dataIO.save_json(prestige_data, champs)
         for champ in self.champions.values():
             if champ.mattkraftid in champs:
                 champ.prestige_data = champs[champ.mattkraftid]
