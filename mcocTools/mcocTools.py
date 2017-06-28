@@ -165,7 +165,6 @@ class MCOCTools:
         x = 'event'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
@@ -173,13 +172,11 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
 
-
     @commands.command(help=lookup_links['rttl'][0],)
     async def rttl(self):
         x = 'rttl'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
@@ -187,13 +184,11 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
 
-
     @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
     async def simulator(self):
         x = 'simulator'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-
 
     @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
     async def alsciende(self):
@@ -201,20 +196,17 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
 
-
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
         x='streak'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
 
-
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
         x = 'hook'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-
 
     @commands.command()
     async def keygen(self, prefix='SECEMP99'):
