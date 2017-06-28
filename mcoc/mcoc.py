@@ -519,7 +519,6 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
-        # await self.bot.say(champ.class_tags.union(champ.tags))
 
     @command_arg_help(aliases=('duel',))
     async def champ_duel(self, champ : ChampConverter):
