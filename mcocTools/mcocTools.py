@@ -162,43 +162,59 @@ class MCOCTools:
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
-        lookup = self.lookup_links['event']
+        x = 'event'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
-        lookup = self.lookup_links['spotlight']
+        x = 'spotlight'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['rttl'][0],)
     async def rttl(self):
-        lookup = self.lookup_links['rttl']
+        x = 'rttl'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
-        lookup = self.lookup_links['marvelsynergy']
+        x = 'marvelsynergy'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
     async def simulator(self):
-        lookup = self.lookup_links['simulator']
+        x = 'simulator'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
     async def alsciende(self):
-        lookup = self.lookup_links['alsciende']
+        x = 'alsciende'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
-        lookup = self.lookup_links['streak']
+        x='streak'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
-        lookup = self.lookup_links['hook']
+        x = 'hook'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('[iOS dumblink]({})'.format(lookup_links[x][3]))
 
     @commands.command()
     async def keygen(self, prefix='SECEMP99'):
