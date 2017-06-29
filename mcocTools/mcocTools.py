@@ -10,30 +10,35 @@ class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
     lookup_links = {
             'event': (
-                '',
+                '<http://simians.tk/MCOC-Sched>',
                 '[Tiny MCoC Schedule](http://simians.tk/MCOC-Sched)',
                 'Josh Morris Schedule',
                 'https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'),
+            'rttl':(
+                '<https://drive.google.com/file/d/0B4ozoShtX2kFcDV4R3lQb1hnVnc/view>',
+                '[Road to the Labyrinth Opponent List](https://drive.google.com/file/d/0B4ozoShtX2kFcDV4R3lQb1hnVnc/view)',
+                'by Regal Empire {OG Wolvz}',
+                'http://svgur.com/s/48'),
             'hook': (
-                '',
+                '<http://hook.github.io/champions>',
                 '[hook/Champions by gabriel](http://hook.github.io/champions)',
                 'hook/champions for Collector',
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
-                '',
+                '<http://simians.tk/MCoCspotlight>',
                 '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[MCOC Spotlight on Discord](https://discord.gg/wJqpYGS)'),
             'marvelsynergy': (
-                '',
+                'http://www.marvelsynergy.com/team-builder>',
                 '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
                 'Marvel Synergy',
                 'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
-                'Alsciende Mastery Tool',
                 '<https://alsciende.github.io/masteries/v10.0.1/#>',
+                '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v10.0.1/#)',
                 'by u/alsciende',
                 'https://assets-cdn.github.com/favicon.ico'),
             'simulator': (
-                '',
+                '<http://simians.tk/msimSDF>',
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
             'streak': (
                 'Infinite Streak',
@@ -48,7 +53,7 @@ class MCOCTools:
         self.bot = bot
 
     def present(self, lookup):
-        em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
+        em=discord.Embed(color=self.mcolor,title='',description=lookup[1])
         print(len(lookup))
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
@@ -69,7 +74,7 @@ class MCOCTools:
     #     await self.bot.say(embed=em)
 
     @commands.command(manage_server=True,pass_context=True)
-    async def collectorsetup(self,ctx):
+    async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
         ### IN DEVELOPMENT - PRE ALPHA ###
         '''
@@ -85,12 +90,22 @@ class MCOCTools:
 
         for r in roles:
             rolenames.append(r.name)
-        required_roles={'bg1','bg2','bg3','officers','ROL','RTL','LOL','100\%\Act4','LEGEND','Summoner'}
+        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100\%LOL','LOL','RTL','ROL','100\%Act4','Summoner'}
+        stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         for i in required_roles:
-            if i not in rolenames:
-                await self.bot.say('Setup Error: add role {}'.format(i))
+            if i in rolenames:
+                stageone.append(':white_check_mark: {}'.format(i))
+            else:
+                stageone.append(':negative_squared_cross_mark: {}'.format(i))
+        await self.bot.say('\n'.join(stageone))
+
+                # await self.bot.say('Setup Error: add role {}'.format(i))
 
         role_hierarchy = server.role_hierarchy
+        roleorder = ['Setup Conditions 2:\nRole Order: ']
+        for role in role_hierarchy:
+            roleorder.append('{}'.format(role.name))
+        await self.bot.say('\n'.join(roleorder))
         print(role_hierarchy)
         await self.bot.say('collectorsetup complete')
 
@@ -147,38 +162,59 @@ class MCOCTools:
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
-        lookup = self.lookup_links['event']
+        x = 'event'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
-        lookup = self.lookup_links['spotlight']
+        x = 'spotlight'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+
+    @commands.command(help=lookup_links['rttl'][0],)
+    async def rttl(self):
+        x = 'rttl'
+        lookup = self.lookup_links[x]
+        await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
-        lookup = self.lookup_links['marvelsynergy']
+        x = 'marvelsynergy'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
     async def simulator(self):
-        lookup = self.lookup_links['simulator']
+        x = 'simulator'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
     async def alsciende(self):
-        lookup = self.lookup_links['alsciende']
+        x = 'alsciende'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
-        lookup = self.lookup_links['streak']
+        x='streak'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
-        lookup = self.lookup_links['hook']
+        x = 'hook'
+        lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
+        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command()
     async def keygen(self, prefix='SECEMP99'):

@@ -463,7 +463,7 @@ class MCOC(ChampionFactory):
             print('Local file up-to-date:', dargs['local'], now)
         return remote_check
 
-    @commands.command(hidden=True)
+    @commands.command(hidden=True,aliases=['gcache','cacheg'])
     async def cache_gsheets(self):
         s = requests.Session()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
@@ -516,10 +516,10 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=bio_desc)
+        em.add_field(name='hashtags',value=', '.join(champ.class_tags.union(champ.tags)))
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
-        await self.bot.say(champ.class_tags.union(champ.tags))
 
     @command_arg_help(aliases=('duel',))
     async def champ_duel(self, champ : ChampConverter):
@@ -586,6 +586,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
             em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
+        em.add_field(name='hashtags',value=', '.join(champ.class_tags.union(champ.tags)))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
