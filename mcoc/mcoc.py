@@ -585,6 +585,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
             em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
+        em.add_field(name='hashtags',value=', '.join(champ.class_tags.union(champ.tags)))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
