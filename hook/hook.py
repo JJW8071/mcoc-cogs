@@ -126,9 +126,10 @@ class Hook:
         data = self.load_champ_data(hargs['user'])
         author = ctx.message.author
         if not data['champs']:
-            # await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
-            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
-            setup_hook(author)
+            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            await self.bot.say('<http://hook.github.io/champions>')
+            # await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
+            # setup_hook(author)
             return
 
         all_champs = [self.get_champion(k) for k in data['champs']]
