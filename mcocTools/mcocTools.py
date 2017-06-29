@@ -53,7 +53,7 @@ class MCOCTools:
         self.bot = bot
 
     def present(self, lookup):
-        em=discord.Embed(color=self.mcolor,title=lookup[0],description=lookup[1])
+        em=discord.Embed(color=self.mcolor,title='',description=lookup[1])
         print(len(lookup))
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
