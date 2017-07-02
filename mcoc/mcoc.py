@@ -7,10 +7,11 @@ from functools import reduce
 from math import log2
 from math import *
 import os
+import time
 import inspect
 import urllib
-import requests
 import aiohttp
+import logging
 import csv
 import json
 from gsheets import Sheets
@@ -21,6 +22,9 @@ import discord
 from discord.ext import commands
 from .utils.dataIO import dataIO
 from .utils import chat_formatting as chat
+
+logger = logging.getLogger('red.mcoc')
+logger.setLevel(logging.INFO)
 
 
 data_files = {
@@ -113,69 +117,6 @@ def to_flat(per, ch_rating):
     num = (5 * ch_rating + 1500) * per
     return round(num/(100-per), 2)
 
-class AliasDict(UserDict):
-    '''Custom dictionary that uses a tuple of aliases as key elements.
-    Item addressing is handled either from the tuple as a whole or any
-    element within the tuple key.
-    '''
-    def __getitem__(self, key):
-        if key in self.data:
-            return self.data[key]
-        for k in self.data.keys():
-            if key in k:
-                return self.data[k]
-        raise KeyError("Invalid Key '{}'".format(key))
-
-class ChampionFactory():
-    '''Creation and storage of the dynamically created Champion subclasses.
-    A new subclass is created for every champion defined.  Then objects are
-    created from user function calls off of the dynamic classes.'''
-
-    champions = AliasDict()
-
-    def create_champion_class(self, bot, alias_set, **kwargs):
-        kwargs['bot'] = bot
-        kwargs['alias_set'] = alias_set
-        kwargs['klass'] = kwargs.pop('class', 'default')
-
-        kwargs['full_name'] = kwargs['champ']
-        kwargs['bold_name'] = chat.bold(' '.join(
-                [word.capitalize() for word in kwargs['full_name'].split(' ')]))
-        kwargs['class_color'] = class_color_codes[kwargs['klass']]
-
-        kwargs['class_tags'] = {'#' + kwargs['klass'].lower()}
-        for a in kwargs['abilities'].split(','):
-            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
-        for a in kwargs['hashtags'].split('#'):
-            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
-        if kwargs['class_tags']:
-            kwargs['class_tags'].difference_update({'#'})
-
-        for key, value in kwargs.items():
-            if not value or value == 'n/a':
-                kwargs[key] = None
-
-        champion = type(kwargs['mattkraftid'], (Champion,), kwargs)
-        self.champions[tuple(alias_set)] = champion
-        return champion
-
-    def get_champion(self, name_id, attrs=None):
-        '''straight alias lookup followed by new champion object creation'''
-        champ = self.champions[name_id]
-        return champ(attrs)
-
-    def search_champions(self, search_str, attrs=None):
-        '''searching through champion aliases and allowing partial matches.
-        Returns an array of new champion objects'''
-        re_str = re.compile(search_str)
-        champs = []
-        for champ in self.champions.values():
-            if reduce(or_, [re_str.search(alias) is not None
-                    for alias in champ.alias_set]):
-                champs.append(champ(attrs))
-        return champs
-
-
 class ChampConverter(commands.Converter):
     '''Argument Parsing class that geneartes Champion objects from user input'''
 
@@ -219,9 +160,9 @@ class ChampConverter(commands.Converter):
     async def get_champion(self, bot, token, attrs):
         mcoc = bot.get_cog('MCOC')
         try:
-            champ = mcoc.get_champion(token, attrs)
+            champ = await mcoc.get_champion(token, attrs)
         except KeyError:
-            champs = mcoc.search_champions('.*{}.*'.format(token), attrs)
+            champs = await mcoc.search_champions('.*{}.*'.format(token), attrs)
             if len(champs) == 1:
                 await bot.say("'{}' was not exact but found close alternative".format(
                         token))
@@ -290,6 +231,211 @@ class ChampConverterMult(ChampConverter):
                 default.update(attrs)
         return champs
 
+class AliasDict(UserDict):
+    '''Custom dictionary that uses a tuple of aliases as key elements.
+    Item addressing is handled either from the tuple as a whole or any
+    element within the tuple key.
+    '''
+    def __getitem__(self, key):
+        if key in self.data:
+            return self.data[key]
+        for k in self.data.keys():
+            if key in k:
+                return self.data[k]
+        raise KeyError("Invalid Key '{}'".format(key))
+
+class ChampionFactory():
+    '''Creation and storage of the dynamically created Champion subclasses.
+    A new subclass is created for every champion defined.  Then objects are
+    created from user function calls off of the dynamic classes.'''
+
+    def __init__(self, *args, **kwargs):
+        self.cooldown_delta = 5 * 60
+        self.cooldown = time.time() - self.cooldown_delta - 1
+        self.needs_init = True
+        super().__init__(*args, **kwargs)
+        logger.debug('ChampionFactory Init')
+
+    async def update_local(self):
+        now = time.time()
+        if now - self.cooldown_delta < self.cooldown:
+            return
+        self.cooldown = now
+        is_updated = await self.verify_cache_remote_files()
+        if is_updated or self.needs_init:
+            logger.info('Preparing data structures')
+            self._prepare_aliases()
+            self._prepare_prestige_data()
+            self.needs_init = False
+
+    def create_champion_class(self, bot, alias_set, **kwargs):
+        kwargs['bot'] = bot
+        kwargs['alias_set'] = alias_set
+        kwargs['klass'] = kwargs.pop('class', 'default')
+
+        kwargs['full_name'] = kwargs['champ']
+        kwargs['bold_name'] = chat.bold(' '.join(
+                [word.capitalize() for word in kwargs['full_name'].split(' ')]))
+        kwargs['class_color'] = class_color_codes[kwargs['klass']]
+
+        kwargs['class_tags'] = {'#' + kwargs['klass'].lower()}
+        for a in kwargs['abilities'].split(','):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        for a in kwargs['hashtags'].split('#'):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        if kwargs['class_tags']:
+            kwargs['class_tags'].difference_update({'#'})
+
+        for key, value in kwargs.items():
+            if not value or value == 'n/a':
+                kwargs[key] = None
+
+        champion = type(kwargs['mattkraftid'], (Champion,), kwargs)
+        self.champions[tuple(alias_set)] = champion
+        logger.debug('Creating Champion class {}'.format(kwargs['mattkraftid']))
+        return champion
+
+    async def get_champion(self, name_id, attrs=None):
+        '''straight alias lookup followed by new champion object creation'''
+        await self.update_local()
+        champ = self.champions[name_id]
+        return champ(attrs)
+
+    async def search_champions(self, search_str, attrs=None):
+        '''searching through champion aliases and allowing partial matches.
+        Returns an array of new champion objects'''
+        await self.update_local()
+        re_str = re.compile(search_str)
+        champs = []
+        for champ in self.champions.values():
+            if reduce(or_, [re_str.search(alias) is not None
+                    for alias in champ.alias_set]):
+                champs.append(champ(attrs))
+        return champs
+
+    async def verify_cache_remote_files(self, verbose=False, force_cache=False):
+        logger.info('Check remote files')
+        if os.path.exists(file_checks_json):
+            try:
+                file_checks = dataIO.load_json(file_checks_json)
+            except:
+                file_checks = {}
+        else:
+            file_checks = {}
+        async with aiohttp.ClientSession() as s:
+            is_updated = False
+            for key in data_files.keys():
+                if key in file_checks:
+                    last_check = datetime(*file_checks.get(key))
+                else:
+                    last_check = None
+                remote_check = await self.cache_remote_file(key, s, verbose=verbose,
+                        last_check=last_check)
+                if remote_check:
+                    is_updated = True
+                    file_checks[key] = remote_check.timetuple()[:6]
+        dataIO.save_json(file_checks_json, file_checks)
+        return is_updated
+
+    async def cache_remote_file(self, key, session, verbose=False, last_check=None,
+                force_cache=False):
+        dargs = data_files[key]
+        strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
+        response = None
+        remote_check = False
+        now = datetime.now()
+        if os.path.exists(dargs['local']) and not force_cache:
+            if last_check:
+                check_marker = now - timedelta(days=dargs['update_delta'])
+                refresh_remote_check = check_marker > last_check
+            else:
+                refresh_remote_check = True
+            local_dt = datetime.fromtimestamp(os.path.getmtime(dargs['local']))
+            if refresh_remote_check:
+                response = await session.get(dargs['remote'])
+                if 'Last-Modified' in response.headers:
+                    remote_dt = datetime.strptime(response.headers['Last-Modified'], strf_remote)
+                    remote_check = now
+                    if remote_dt < local_dt:
+                        # Remote file is older, so no need to transfer
+                        response = None
+        else:
+            response = await session.get(dargs['remote'])
+        if response and response.status == 200:
+            logger.info('Caching remote contents to local file: ' + dargs['local'])
+            with open(dargs['local'], 'wb') as fp:
+                fp.write(await response.read())
+            remote_check = now
+            await response.release()
+        elif response:
+            err_str = "HTTP error code {} while trying to retrieve {}".format(
+                    response.status_code, key)
+            logger.error(err_str)
+            await response.release()
+        elif verbose and remote_check:
+            logger.info('Local file up-to-date:', dargs['local'], now)
+        return remote_check
+
+    def _prepare_aliases(self):
+        '''Create a python friendly data structure from the aliases json'''
+        logger.debug('Preparing aliases')
+        self.champions = AliasDict()
+        raw_data = load_csv(data_files['crossreference']['local'])
+        champs = []
+        all_aliases = set()
+        id_index = raw_data.fieldnames.index('status')
+        alias_index = raw_data.fieldnames[:id_index]
+        for row in raw_data:
+            if reduce(and_, [not i for i in row.values()]):
+                continue    # empty row check
+            alias_set = set()
+            for col in alias_index:
+                if row[col]:
+                    alias_set.add(row[col].lower())
+            if all_aliases.isdisjoint(alias_set):
+                all_aliases.union(alias_set)
+            else:
+                raise KeyError("There are aliases that conflict with previous aliases."
+                        + "  First occurance with champ {}.".format(row['champ']))
+            self.create_champion_class(self.bot, alias_set, **row)
+
+    def _prepare_prestige_data(self):
+        logger.debug('Preparing prestige')
+        mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
+        with open(data_files['prestigeCSV']['local'], newline='') as csvfile:
+            reader = csv.reader(csvfile)
+            champs = {}
+            for row in reader:
+                champ_match = mattkraft_re.fullmatch(row.pop(0))
+                if champ_match:
+                    name = champ_match.group('champ')
+                    star = int(champ_match.group('star'))
+                    rank = int(champ_match.group('rank'))
+                else:
+                    continue
+                if name not in champs:
+                    champs[name] = {}
+                    champs[name][4] = [None] * 5
+                    champs[name][5] = [None] * 5
+                key_values = {}
+                sig_len = 201 if star == 5 else 100
+                sig = [0] * sig_len
+                for i, v in enumerate(row):
+                    try:
+                        if v and i < sig_len:
+                            sig[i] = int(v)
+                    except:
+                        print(name, i, v, len(sig))
+                        raise
+                try:
+                    champs[name][star][rank-1] = sig
+                except:
+                    print(name, star, rank, len(champs[name]), len(champs[name][star]))
+                    raise
+        for champ in self.champions.values():
+            if champ.mattkraftid in champs:
+                champ.prestige_data = champs[champ.mattkraftid]
+
 def command_arg_help(**cmdkwargs):
     def internal_func(f):
         helps = []
@@ -310,6 +456,7 @@ def command_arg_help(**cmdkwargs):
 
 class MCOC(ChampionFactory):
     '''A Cog for Marvel's Contest of Champions'''
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -322,12 +469,14 @@ class MCOC(ChampionFactory):
 
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
-        self.verify_cache_remote_files(verbose=True)
-        self._init()
+        logger.info("MCOC Init")
+        super().__init__()
+        #self.verify_cache_remote_files(verbose=True)
+        #self._init()
 
-    def _init(self):
-        self._prepare_aliases()
-        self._prepare_prestige_data()
+    #def _init(self):
+        #self._prepare_aliases()
+        #self._prepare_prestige_data()
 
     @commands.command(aliases=('p2f',), hidden=True)
     async def per2flat(self, per: float, ch_rating: int=100):
@@ -369,7 +518,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Expected Chance', value='{:.2%}'.format(compound))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['update_mcoc',],hidden=True)
+    @commands.command(aliases=('update_mcoc',), hidden=True)
     async def mcoc_update(self, fname, force=False):
         if len(fname) > 3:
             for key in data_files.keys():
@@ -377,7 +526,8 @@ class MCOC(ChampionFactory):
                     fname = key
                     break
         if fname in data_files:
-            self.cache_remote_file(fname, force_cache=force, verbose=True)
+            async with aiohttp.ClientSession() as s:
+                await self.cache_remote_file(fname, s, force_cache=force, verbose=True)
         else:
             await self.bot.say('Valid options for 1st argument are one of (or initial portion of)\n\t'
                     + '\n\t'.join(data_files.keys()))
@@ -395,77 +545,9 @@ class MCOC(ChampionFactory):
         if setting in self.settings:
             self.settings[setting] = int(value)
 
-    def verify_cache_remote_files(self, verbose=False, force_cache=False):
-        if os.path.exists(file_checks_json):
-            try:
-                file_checks = dataIO.load_json(file_checks_json)
-            except:
-                file_checks = {}
-        else:
-            file_checks = {}
-        s = requests.Session()
-        for key in data_files.keys():
-            if key in file_checks:
-                last_check = datetime(*file_checks.get(key))
-            else:
-                last_check = None
-            remote_check = self.cache_remote_file(key, s, verbose=verbose,
-                    last_check=last_check)
-            if remote_check:
-                file_checks[key] = remote_check.timetuple()[:6]
-        dataIO.save_json(file_checks_json, file_checks)
-
-    def cache_remote_file(self, key, session=None, verbose=False, last_check=None,
-                force_cache=False):
-        if session is None:
-            session = requests.Session()
-        dargs = data_files[key]
-        strf_remote = '%a, %d %b %Y %H:%M:%S %Z'
-        response = None
-        remote_check = False
-        now = datetime.now()
-        if os.path.exists(dargs['local']) and not force_cache:
-            check_marker = None
-            if last_check:
-                check_marker = now - timedelta(days=dargs['update_delta'])
-                refresh_remote_check = check_marker > last_check
-            else:
-                refresh_remote_check = True
-            local_dt = datetime.fromtimestamp(os.path.getmtime(dargs['local']))
-            #print(check_marker, last_check, refresh_remote_check, local_dt)
-            if refresh_remote_check:
-                response = session.get(dargs['remote'])
-                if 'Last-Modified' in response.headers:
-                    remote_dt = datetime.strptime(response.headers['Last-Modified'], strf_remote)
-                    remote_check = now
-                    if remote_dt < local_dt:
-                        # Remote file is older, so no need to transfer
-                        response = None
-                #else:
-                    #print('DEBUG: No Last-Modified header ', remote)
-                    #print('DEBUG: Date:  ', response.headers['Date'])
-                    #for k in response.headers:
-                        #print(k)
-                    #print(response.headers.keys())
-        else:
-            response = session.get(dargs['remote'])
-        if response and response.status_code == requests.codes.ok:
-            print('Caching remote contents to local file: ' + dargs['local'])
-            with open(dargs['local'], 'wb') as fp:
-                for chunk in response.iter_content():
-                    fp.write(chunk)
-            remote_check = now
-        elif response:
-            err_str = "HTTP error code {} while trying to retrieve {}".format(
-                    response.status_code, key)
-            print(err_str)
-        elif verbose and remote_check:
-            print('Local file up-to-date:', dargs['local'], now)
-        return remote_check
-
-    @commands.command(hidden=True,aliases=['gcache','cacheg'])
+    @commands.command(hidden=True)
     async def cache_gsheets(self):
-        s = requests.Session()
+        s = await aiohttp.ClientSession()
         #gs = Sheets.from_files('data/mcoc/client_secrets.json')
         for k, v in gsheet_files.items():
             #s = gs[v['gkey']]
@@ -481,14 +563,13 @@ class MCOC(ChampionFactory):
                 payload = {'output': 'csv', 'single': 'true', 'gid': v.get('gid', 0)}
                 remote = 'https://docs.google.com/spreadsheets/d/{0}/pub'.format(v['gkey'])
             #response = s.get(remote)
-            response = s.get(remote, params=payload)
-            if response.status_code == requests.codes.ok:
+            response = await s.get(remote, params=payload)
+            if response.status == 200:
                 with open(v['local'], 'wb') as fp:
-                    for chunk in response.iter_content():
-                        fp.write(chunk)
+                    fp.write(await response.read())
             else:
                 err_str = "HTTP error code {} while trying to retrieve Google Sheet {}".format(
-                        response.statuse_code, k)
+                        response.status, k)
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
 
@@ -506,9 +587,12 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
+    #@commands.command(pass_context=True, aliases=['bio',])
     @command_arg_help(aliases=('bio',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
+    #async def champ_bio(self, ctx, *, champ):
         '''Retrieve the Bio of a Champion'''
+        #champ = await ChampConverter(ctx, champ).convert()
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
@@ -714,11 +798,11 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         for arg in args:
             if (arg.startswith("'") and arg.endswith("'")) or (arg.startswith('"') and arg.endswith('"')) :
-                champs = self.search_champions(arg[1:-1])
+                champs = await self.search_champions(arg[1:-1])
             elif '*' in arg:
-                champs = self.search_champions('.*'.join(re.split(r'\\?\*', arg)))
+                champs = await self.search_champions('.*'.join(re.split(r'\\?\*', arg)))
             else:
-                champs = (self.get_champion(arg),)
+                champs = (await self.get_champion(arg),)
             for champ in champs:
                 if champ not in champs_matched:
                     em.add_field(name=champ.full_name, value=champ.get_aliases())
@@ -774,69 +858,6 @@ class MCOC(ChampionFactory):
 
 #My intention was to create a hook command group. If nothing is specified, then drop the URL
 
-    def _prepare_aliases(self):
-        '''Create a python friendly data structure from the aliases json'''
-        raw_data = load_csv(data_files['crossreference']['local'])
-        champs = []
-        all_aliases = set()
-        id_index = raw_data.fieldnames.index('status')
-        alias_index = raw_data.fieldnames[:id_index]
-        for row in raw_data:
-            if reduce(and_, [not i for i in row.values()]):
-                continue    # empty row check
-            alias_set = set()
-            for col in alias_index:
-                if row[col]:
-                    alias_set.add(row[col].lower())
-            if all_aliases.isdisjoint(alias_set):
-                all_aliases.union(alias_set)
-            else:
-                raise KeyError("There are aliases that conflict with previous aliases."
-                        + "  First occurance with champ {}.".format(row['champ']))
-            self.create_champion_class(self.bot, alias_set, **row)
-
-    def _google_json_content_split(self, row):
-            return dict([kv.split(': ') for kv in self.split_re.split(row['content']['$t'])])
-
-    def _prepare_prestige_data(self):
-        mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
-        #raw_data = load_csv(data_files['prestigeCSV']['local'])
-        with open(data_files['prestigeCSV']['local'], newline='') as csvfile:
-            reader = csv.reader(csvfile)
-            champs = {}
-            for row in reader:
-                #raw_dict = self._google_json_content_split(row)
-                champ_match = mattkraft_re.fullmatch(row.pop(0))
-                if champ_match:
-                    champ_name = champ_match.group('champ')
-                    champ_star = int(champ_match.group('star'))
-                    champ_rank = int(champ_match.group('rank'))
-                else:
-                    continue
-                if champ_name not in champs:
-                    champs[champ_name] = {}
-                    champs[champ_name][4] = [None] * 5
-                    champs[champ_name][5] = [None] * 5
-                key_values = {}
-                sig_len = 201 if champ_star == 5 else 100
-                sig = [0] * sig_len
-                for i, v in enumerate(row):
-                    try:
-                        if v and i < sig_len:
-                            sig[i] = int(v)
-                    except:
-                        print(champ_name, i, v, len(sig))
-                        raise
-                try:
-                    champs[champ_name][champ_star][champ_rank-1] = sig
-                except:
-                    print(champ_name, champ_star, champ_rank, len(champs[champ_name]), len(champs[champ_name][champ_star]))
-                    raise
-        #dataIO.save_json(prestige_data, champs)
-        for champ in self.champions.values():
-            if champ.mattkraftid in champs:
-                champ.prestige_data = champs[champ.mattkraftid]
-
     #def _prepare_signature_data(self):
         #raw_data = load_csv(local_files['sig_coeff'])
 
@@ -875,11 +896,11 @@ class Champion:
         if self.sig < 0:
             self.sig = 0
         if self.star < 1:
-            print('Star {} for Champ {} is too low.  Setting to 1'.format(
+            logger.warn('Star {} for Champ {} is too low.  Setting to 1'.format(
                     self.star, self.full_name))
             self.star = 1
         if self.star > 5:
-            print('Star {} for Champ {} is too high.  Setting to 5'.format(
+            logger.warn('Star {} for Champ {} is too high.  Setting to 5'.format(
                     self.star, self.full_name))
             self.star = 5
         if self.star == 5:
@@ -901,13 +922,13 @@ class Champion:
 
     def get_avatar(self):
         image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
-        print(image)
+        logger.debug(image)
         return image
 
     def get_featured(self):
         image = '{}uigacha/featured/GachaChasePrize_256x256_{}.png'.format(
                     remote_data_basepath, self.mcocfeatured)
-        print(image)
+        logger.debug(image)
         return image
 
     async def get_bio(self):
@@ -1007,7 +1028,7 @@ class Champion:
             try:
                 row.append(self.prestige_data[star][rank-1][sig])
             except:
-                print(rank, sig, self.prestige_data)
+                logger.error(rank, sig, self.prestige_data)
                 raise
         return row
 
@@ -1034,13 +1055,13 @@ class Champion:
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
         if coeff is None:
-            print('get_sig_coeff returned None')
+            logger.warn('get_sig_coeff returned None')
         if ekey is None:
-            print('get_effect_keys returned None')
+            logger.warn('get_effect_keys returned None')
         if coeff is None or ekey is None:
             raise KeyError("Missing Sig data for {}".format(self.full_name))
         else:
-            print('coeff and ekey check out')
+            logger.debug('coeff and ekey check out')
         if self.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
         sig_calcs = {}
@@ -1050,12 +1071,9 @@ class Champion:
             if not ekey['Location_' + i]:
                 break
             effect = ekey['Effect_' + i]
-            print(effect)
             try:
                 m = float(coeff['ability_norm' + i])
-                print(m)
                 b = float(coeff['offset' + i])
-                print(b)
             except:
                 #await self.bot.say("Missing data for champion '{}'.  Try again later".format(self.full_name))
                 await self.missing_sig_ad()
@@ -1292,7 +1310,7 @@ def _truncate_text(self, text, max_length):
     return text
 
 def get_csv_row(filecsv, column, match_val, default=None):
-    print(match_val)
+    logger.debug(match_val)
     csvfile = load_csv(filecsv)
     for row in csvfile:
         if row[column] == match_val:
@@ -1303,7 +1321,7 @@ def get_csv_row(filecsv, column, match_val, default=None):
             return row
 
 def get_csv_rows(filecsv, column, match_val, default=None):
-    print(match_val)
+    logger.debug(match_val)
     csvfile = load_csv(filecsv)
     package =[]
     for row in csvfile:
@@ -1329,7 +1347,7 @@ def padd_it(word,max : int,opt='back'):
         else:
             return padd+word
     else:
-        print('Padding would be negative.')
+        logger.warn('Padding would be negative.')
 
 
 # Creation of lookup functions from a tuple through anonymous functions
