@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from .mcoc import class_color_codes
+from .mcoc import class_color_codes, ChampConverter, ChampConverterMult
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
@@ -8,11 +8,12 @@ from operator import itemgetter, attrgetter
 from collections import OrderedDict
 from functools import reduce
 from random import randint
+import shutil
 import time
 import os
 import ast
 import csv
-import requests
+import aiohttp
 import re
 
 class HashtagUserConverter(commands.Converter):
@@ -123,23 +124,17 @@ class Hook:
     #async def roster(self, ctx, *, hargs: HashtagUserConverter):
         """Displays a user profile."""
         hargs = await HashtagUserConverter(ctx, hargs).convert()
-        data = self.load_champ_data(hargs['user'])
-        author = ctx.message.author
+        data = await self.load_champions(hargs['user'])
         if not data['champs']:
             await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
-            await self.bot.say('<http://hook.github.io/champions>')
-            # await self.bot.say('No Champions found in your roster.  Please upload a csv file first.  I am sending you hook/Champions setup instructions.')
-            # setup_hook(author)
             return
-
-        all_champs = [self.get_champion(k) for k in data['champs']]
-        all_champ_tags = reduce(set.union, [c.all_tags for c in all_champs])
+        all_champ_tags = reduce(set.union, [c.all_tags for c in data['champs']])
         residual_tags = hargs['tags'] - all_champ_tags
         if residual_tags:
             em = discord.Embed(title='Unused tags', description=' '.join(residual_tags))
             await self.bot.say(embed=em)
         filtered = set()
-        for c in all_champs:
+        for c in data['champs']:
             if hargs['tags'].issubset(c.all_tags):
                 filtered.add(c)
         if not filtered:
@@ -314,6 +309,14 @@ class Hook:
             }
             self.save_champ_data(user, champ_data)
 
+    async def load_champions(self, user):
+        data = self.load_champ_data(user)
+        cobjs = []
+        for k in data['champs']:
+            cobjs.append(await self.get_champion(k))
+        data['champs'] = cobjs
+        return data
+
     def load_champ_data(self, user):
         self._create_user(user)
         return dataIO.load_json(self.champs_file.format(user.id))
@@ -321,17 +324,22 @@ class Hook:
     def save_champ_data(self, user, data):
         dataIO.save_json(self.champs_file.format(user.id), data)
 
-    def get_champion(self, cdict):
+    async def get_champion(self, cdict):
         mcoc = self.bot.get_cog('MCOC')
         champ_attr = {self.attr_map[k]: cdict[k] for k in self.attr_map.keys()}
-        return mcoc.get_champion(cdict['Id'], champ_attr)
+        return await mcoc.get_champion(cdict['Id'], champ_attr)
 
     async def _parse_champions_csv(self, message, attachment):
         channel = message.channel
         user = message.author
         self._create_user(user)
-        response = requests.get(attachment['url'])
-        cr = csv.DictReader(response.text.split('\n'), quoting=csv.QUOTE_NONE)
+        async with aiohttp.ClientSession() as session:
+            async with session.get(attachment['url']) as response:
+                file_txt = await response.text()
+        print(file_txt)
+        #dialect = csv.Sniffer().sniff(file_txt[:1024])
+        cr = csv.DictReader(file_txt.split('\n'), #dialect, 
+                quoting=csv.QUOTE_NONE)
         champ_list = []
         for row in cr:
             champ_list.append({k: parse_value(k, v) for k, v in row.items()})
@@ -340,7 +348,7 @@ class Hook:
 
         mcoc = self.bot.get_cog('MCOC')
         if mcoc:
-            missing = self.hook_prestige(champ_list)
+            missing = await self.hook_prestige(champ_list)
             if missing:
                 await self.bot.send_message(channel, 'Missing hookid for champs: '
                         + ', '.join(missing))
@@ -379,7 +387,7 @@ class Hook:
         else:
             await self.bot.send_message(channel, 'Updated Champion Information')
 
-    def hook_prestige(self, roster):
+    async def hook_prestige(self, roster):
         '''Careful.  This modifies the array of dicts in place.'''
         missing = []
         for cdict in roster:
@@ -387,21 +395,22 @@ class Hook:
             if cdict['Stars'] < 4:
                 continue
             try:
-                champ_obj = self.get_champion(cdict)
+                champ = await self.get_champion(cdict)
             except KeyError:
                 missing.append(cdict['Id'])
                 continue
             try:
-                cdict['Pi'] = champ_obj.prestige
+                cdict['Pi'] = champ.prestige
             except AttributeError:
                 missing.append(cdict['Id'])
+                cdict['Pi'] = 0
                 continue
             if cdict['Stars'] == 5:
                 maxrank = 3 if cdict['Rank'] < 4 else 4
             else:
                 maxrank = 5
-            champ_obj.update_attrs({'rank': maxrank})
-            cdict['maxpi'] = champ_obj.prestige
+            champ.update_attrs({'rank': maxrank})
+            cdict['maxpi'] = champ.prestige
         return missing
 
     async def _on_attachment(self, msg):
