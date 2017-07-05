@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "ce91262f9f42ccb7aadfcbe247d139c9fa46e6e1",
+    "hash": "2d86010fbe87da7718f26a772413c2da4a5bc74b",
     "language": "en",
-    "string_count": 2743,
+    "string_count": 2773,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1495142354
+    "ts": 1497309980
   },
   "strings": [
     {
@@ -205,7 +205,8 @@
     },
     {
       "k": "ID_UI_ATTRIBUTE_RNRG_TOOLTIP",
-      "v": "[PLACEHOLDER]Energy Resistance simple tooltip"
+      "v": "[PLACEHOLDER]Energy Resistance simple tooltip",
+      "vn": 16
     },
     {
       "k": "ID_UI_ATTRIBUTE_ROLE",
@@ -213,7 +214,8 @@
     },
     {
       "k": "ID_UI_ATTRIBUTE_RPHY_TOOLTIP",
-      "v": "[PLACEHOLDER]Physical Resistance simple tooltip"
+      "v": "[PLACEHOLDER]Physical Resistance simple tooltip",
+      "vn": 16
     },
     {
       "k": "ID_UI_ATTRIBUTE_TITLE",
@@ -517,7 +519,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_AMMO_INC",
-      "v": "Incendiary - Winter Soldier Incinerates the opponent, dealing {1} Energy Damage over {2} seconds. This also removes Perfect Block Chance and reduces Block Proficiency by 50%."
+      "v": "\r\nIncendiary - Winter Soldier Incinerates the opponent, dealing {1} Energy Damage over {2} seconds. This also removes Perfect Block Chance and reduces Block Proficiency by 50%."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_AMMO_INC_HUD",
@@ -953,31 +955,31 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_I",
-      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block"
+      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_II",
-      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block, Power Drain"
+      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block, Power Drain"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_III",
-      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block, Power Drain, Poison"
+      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block, Power Drain, Poison"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_IV",
-      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block, Power Drain, Poison, Armor Break"
+      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block, Power Drain, Poison, Armor Break"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_V",
-      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block, Power Drain, Poison, Armor Break, Power Lock"
+      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block, Power Drain, Poison, Armor Break, Power Lock"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_VI",
-      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block, Power Drain, Poison, Armor Break, Power Lock, Shock"
+      "v": "The super-charged B.F.G. fires outs a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block, Power Drain, Poison, Armor Break, Power Lock, Shock"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BFG_VII",
-      "v": "The super-charged B.F.G. fires out a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \nPossible Effects: Heal Block, Power Drain, Poison, Armor Break, Power Lock, Shock, Weakness"
+      "v": "The super-charged B.F.G. fires out a barrage of strange bullets to cause different effects. Each effect has a {0}% chance to activate. \r\nPossible Effects: Heal Block, Power Drain, Poison, Armor Break, Power Lock, Shock, Weakness"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BLACKPANTHER_UNSTOPPABLE_TITLE",
@@ -1205,7 +1207,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_B",
-      "v": "The longer the Opponent is continuously Bleeding the greater the bonus, up to {2} seconds."
+      "v": "The longer the Opponent has been continuously Bleeding the greater the bonus, reaching the maximum after {2} seconds.",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_SIMPLE",
@@ -1237,7 +1240,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_BP",
-      "v": "Block: Bulwark [16982bff]+{1}[-] Block Prof"
+      "v": "Block: Bulwark [16982bff]+{1}[-] Block Proficiency",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC_CRITD",
@@ -2081,7 +2085,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ELEMENTGUN_AIR_AO",
-      "v": "AIR: Shocks the opponent, dealing [16982bff]{1}%[-] Energy Damage over {2} seconds."
+      "v": "AIR: Shocks the opponent, dealing [16982bff]{1}[-] Energy Damage over {2} seconds.",
+      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ELEMENTGUN_EARTH",
@@ -4805,15 +4810,15 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_BLEED",
-      "v": "Judgement of Spite: {0}% chance. \nSecondary: Inflicts Bleed, dealing [16982bff]{1}%[-] of your Attack as Direct Damage over [16982bff]{2}[-] seconds."
+      "v": "Judgement of Spite: {0}% chance. \r\nSecondary: Inflicts Bleed, dealing [16982bff]{1}%[-] of your Attack as Direct Damage over [16982bff]{2}[-] seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_BLEED_AO",
-      "v": "Judgement of Spite: {0}% chance. \nSecondary: Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds."
+      "v": "Judgement of Spite: {0}% chance. \r\nSecondary: Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_DAMN",
-      "v": "Judgement of Guilt: {0}% chance. \nSecondary: Inflicts Damnation upon the opponent through the Penance Stare for {2} seconds, dealing [16982bff]{1}%[-] of Ghost Rider’s Attack as direct damage. Opponent’s under Damnation are also Power Locked, Heal Blocked and Fate Sealed."
+      "v": "Judgement of Guilt: {0}% chance. \r\nSecondary: Inflicts Damnation upon the opponent through the Penance Stare for {2} seconds, dealing [16982bff]{1}%[-] of Ghost Rider’s Attack as direct damage. Opponent’s under Damnation are also Power Locked, Heal Blocked and Fate Sealed."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_DAMN_AO",
@@ -4829,7 +4834,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_FATESE",
-      "v": "Judgement of Pride: {0}% chance. \nSecondary: Fate Seals the opponent, Nullifying all Buffs for [16982bff]{2}[-] seconds."
+      "v": "Judgement of Pride: {0}% chance. \r\nSecondary: Fate Seals the opponent, Nullifying all Buffs for [16982bff]{2}[-] seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_I",
@@ -4849,15 +4854,15 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_LIFEST",
-      "v": "Judgement of Malice: {0}% chance. \nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}%[-] Health with each attack."
+      "v": "Judgement of Malice: {0}% chance. \r\nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}%[-] Health with each attack."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_LIFEST_AO",
-      "v": "Judgement of Malice: {0}% chance. \nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}[-] Health with each attack."
+      "v": "Judgement of Malice: {0}% chance. \r\nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}[-] Health with each attack."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_PWRDR",
-      "v": "Judgement of Anger: {0}% chance. \nSecondary: Drains [16982bff]{1}%[-] of the opponent’s max Power over {2} seconds."
+      "v": "Judgement of Anger: {0}% chance. \r\nSecondary: Drains [16982bff]{1}%[-] of the opponent’s max Power over {2} seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_RESET",
@@ -4973,7 +4978,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_LAB_MSTR",
-      "v": "Enigmatic: At the start of the fight, Maestro changes his class abilities depending on his Opponent.\n[852bb8]vs. MYSTIC[-] - Applies different Debuffs depending on specific actions taken by Maestro and his Opponents.\n[25a4cd]vs. COSMIC[-] - Nullify on Specials.\n[2a52cd]vs. TECH[-] - Receives random Buffs throughout the fight.\n[ffc033]vs. MUTANT[-] - Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.\n[c52828]vs. SKILL[-] - Reduces Opponent Effect Accuracy when attacked.\n[429b17]vs. SCIENCE[-] - Shrugs off Debuffs."
+      "v": "Enigmatic: At the start of the fight, Maestro changes his class abilities depending on his Opponent.\r\n[852bb8]vs. MYSTIC[-] - Applies different Debuffs depending on specific actions taken by Maestro and his Opponents.\r\n[25a4cd]vs. COSMIC[-] - Nullify on Specials.\r\n[2a52cd]vs. TECH[-] - Receives random Buffs throughout the fight.\r\n[ffc033]vs. MUTANT[-] - Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.\r\n[c52828]vs. SKILL[-] - Reduces Opponent Effect Accuracy when attacked.\r\n[429b17]vs. SCIENCE[-] - Shrugs off Debuffs."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_LAB_RCKT",
@@ -7457,7 +7462,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONVULTURECHARGE",
-      "v": "Chitarui Energy Core - Passive"
+      "v": "Chitarui Energy Core - Passive",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONYAKA",
@@ -7466,6 +7472,14 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_PSYCHARGES",
       "v": "Psi-Charges"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMACKTALK",
+      "v": "Smack-Talk"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_STARKAI",
+      "v": "Stark Tech AI"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_WELLTIMEDBLOCK",
@@ -7533,23 +7547,28 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_DESC_B",
-      "v": "Additionally while the Opponent is Incinerated, Gain {1}% Power per Second."
+      "v": "Additionally, while the Opponent is Incinerated, Gain {1}% Power per Second.",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_SIMPLE",
-      "v": "Vulture upgrades his suit to convert excess heat into power, keeping his Chitarui Energy Core at full power."
+      "v": "Vulture upgrades his suit to convert excess heat into power, keeping his Chitarui Energy Core at full power.",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_TITLE",
-      "v": "THERMAL ABSORPTION"
+      "v": "THERMAL ABSORPTION",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_TITLE_LOWER",
-      "v": "Thermal Absorption"
+      "v": "Thermal Absorption",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_TITLE_SHORT",
-      "v": "Thermal Absorption {0}"
+      "v": "Thermal Absorption {0}",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_PA_A",
@@ -7561,11 +7580,11 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_SP1_SIPHON",
-      "v": "{0}% Chance to apply a Siphon Charge Debuff, which Drains {1}% of all Power the opponent gains, converting it into Chitarui Energy."
+      "v": "{0}% Chance to apply a Siphon Charge Debuff, which Drains {1}% of all Power the opponent gains, converting it into Chitauri Energy. This effect lasts for {2} seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_SP2_FEEDBACK",
-      "v": "{0}% Chance to apply a Thermal Feedback Debuff, which Burns {1}% of all Power the opponent gains, dealing Direct Damage based on the Power Burned."
+      "v": "{0}% Chance to apply a Thermal Feedback Debuff, which Burns {1}% of all Power the opponent gains, dealing Direct Damage based on the Power Burned. This effect lasts for {2} seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_A",
@@ -7573,19 +7592,23 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_B",
-      "v": "Vulture spends {1} Chitarui Energy, by Dashing Away from then immediately back towards his opponent."
+      "v": "Vulture spends {1} Chitauri Energy, by Dashing Away from then immediately back towards his opponent triggering a Raptor Strike."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_C",
-      "v": "If this dash attack is Blocked he gains a Decoy Buff, which causes the next attack against him that would otherwise hit to miss."
+      "v": "If the Raptor Strike attack is Blocked he gains a Decoy Buff, which causes the next attack against him that would otherwise hit, to miss."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_CS_NOSTACKS",
       "v": "If this dash attack is Blocked he gains a Decoy Buff, which causes the next attack against him that would otherwise hit to miss. Max: 1 Stack"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_C_NOSTACKS",
+      "v": "If the Raptor Strike attack is Blocked he gains a Decoy Buff, which causes the next attack against him that would otherwise hit to miss. Max: 1 Stack"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_D",
-      "v": "If it hits his opponent it Drains {1}% of their Current Power."
+      "v": "If the Raptor Strike hits his opponent it Drains {1}% of their Current Power."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_E",
@@ -7745,7 +7768,8 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_CIVWAR_REINFORCEDARMOR",
-      "v": "Civil Warrior's Mk. II suit grants him {1}% Poison and Bleed damage resistance for each stack of Armor Up active."
+      "v": "Civil Warrior's Mk. II suit grants him {1}% Poison and Bleed damage resistance for each stack of Armor Up active. This does not function while fighting Cosmic champions.",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_DIZZINESS",
@@ -7829,7 +7853,7 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_AUTOTARGET",
-      "v": "All shots: Each round fired drains {0}% of the Battery to activate Auto-Targeting. Auto-Target rounds cannot trigger a Passive Evade and gain {1} additional Critical Rating."
+      "v": "{0}% of the Battery is drained to activate Auto-Targeting. Auto-Target attacks cannot trigger a Passive Evade and gain [16982bff]{1}[-] additional Critical Rating."
     },
     {
       "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_CHRGEBUFF",
@@ -7912,6 +7936,10 @@
       "v": "Replicated Buffs stay active as long as Rogue keeps touching the opponent, after which all Buffs on her will be Nullified."
     },
     {
+      "k": "ID_UI_STAT_FORMAT_ROGUEBUFF3",
+      "v": "Replicated Buffs stay active as long as Rogue keeps touching the opponent, after which all Replicated Buffs on her will be Nullified."
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_ROGUEBUFFRESET",
       "v": "She is able to hold the opponent’s Buffs for [16982bff]{2}[-] more seconds."
     },
@@ -7934,6 +7962,106 @@
     {
       "k": "ID_UI_STAT_FORMAT_SP3BUFFS",
       "v": "Activates {2} Buff per type that was Replicated during the fight. Buffs stay active as long as Rogue keeps touching the opponent. Opponents can not activate those Buffs as long as Rogue holds them."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_AI",
+      "v": "Against Special Attacks the Stark AI warns Spider-Man of incoming danger and increases his Evade chance by a flat +{1}%.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_AI_B",
+      "v": "If Spider-Man is struck by a Cosmic Champion or is struck by a Heavy Attack the Stark AI shuts down for {2} seconds while it Reboots and is completely inactive during that time.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_AI_HUD",
+      "v": "A.I. ONLINE",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_AI_REBOOT",
+      "v": "A.I. REBOOTING",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_DRAIN",
+      "v": "An EMP webshot drains {1}% of the opponent’s Power Meter. Cooldown: {2} seconds.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_ENSNARE",
+      "v": "{0}% chance to Ensnare the opponent for {2} seconds. Ensnared Champions suffer {1}% reduced Ability Accuracy and cannot trigger Passive Evade effects.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_ENSNARE_HUD",
+      "v": "ENSNARED",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_ENSNARE_SHORT",
+      "v": "[808080ff]Ensnare[-]",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_EVADE",
+      "v": "Spider-Man’s burgeoning Spider-Sense grants him a Passive {0}% chance to Evade an incoming attack.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SHOCK",
+      "v": "Electric webshots have a {0}% chance to Shock the opponent, dealing [16982bff]{1}[-] Energy Damage over {2} seconds. These Shock effects are overcharged and deal double damage to Robot Champions.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_ATK",
+      "v": "Each charge of Poise grants [16982bff]{1}[-] Attack rating.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_EVADE",
+      "v": "Each time Spider-Man Evades an attack or uses the Dexterity Mastery, he gains a charge of Poise. Cooldown: {2} Seconds.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_HUD",
+      "v": "POISE",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_IDLE",
+      "v": "Allowing Spider-Man to idle for {2} seconds allows him to smack-talk his opponent and refresh an active Taunt.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_IDLE_B",
+      "v": "Dodging back and allowing Spider-Man to idle for {2} seconds allows him to smack-talk his opponent and refresh an active Taunt.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_SHORT",
+      "v": "[808080ff]Poise[-]",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_TAUNT",
+      "v": "If Spider-Man lands {1} uninterrupted attacks, he converts a Poise charge into a Taunt Debuff on the opponent for {2} seconds. Taunt lasts {0}% longer against Villain champions.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_TAUNT_B",
+      "v": "Opponents that are Taunted have their Attack reduced by {1}% and have a {0}% higher chance to activate a Special Attack.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_TAUNT_HUD",
+      "v": "TAUNT",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_STUN",
+      "v": "{0}% chance to Stun the opponent for {2} seconds. The chance is increased by {1}% if the Stark AI is active.",
+      "vn": 14
     },
     {
       "k": "ID_UI_STAT_FORMAT_STATICSHOCK_UPD",
@@ -8322,6 +8450,10 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_CIVILWARRIOR_DESC_NEW",
       "v": "An upgrade to Civil Warrior’s Arc Shield grants him {2} Armor Up charges at the start of the fight. Additionally, he receives [16982bff]{1}%[-] Special Damage resistance while Blocking. The Special Damage Resistance increases by {0}% when fighting Mutant Champions."
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_CIVILWARRIOR_DESC_NEW2",
+      "v": "An upgrade to Civil Warrior’s Arc Shield grants him 2 Armor Up charges at the start of the fight, each increasing Armor Rating by [16982bff]{1}[-] for {2} seconds. Additionally, he receives [16982bff]{0}%[-] Special Damage resistance while Blocking. +30% when fighting Mutant Champions."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_CIVILWARRIOR_SHORT",
@@ -9089,11 +9221,11 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_DESC",
-      "v": "Judgement of Corruption: {0}% chance. \nSecondary: Ghost Rider gains a burst of [16982bff]{1}%[-] Attack for {2} seconds."
+      "v": "Judgement of Corruption: {0}% chance. \r\nSecondary: Ghost Rider gains a burst of [16982bff]{1}%[-] Attack for {2} seconds."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_DESC_AO",
-      "v": "Judgement of Corruption: {0}% chance. \nSecondary: Ghost Rider gains a burst of [16982bff]{1}[-] Attack for {2} seconds."
+      "v": "Judgement of Corruption: {0}% chance. \r\nSecondary: Ghost Rider gains a burst of [16982bff]{1}[-] Attack for {2} seconds."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_SHORT",
@@ -9625,7 +9757,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_LONGDESC",
-      "v": "While in [d957ff]Freestyle[-] combat form, performing a Medium hit followed by a Light, Light, Light and Medium combo inflicts Direct damage per blow for up to [16982bff]{1}%[-] of your Attack based on Signature level. Successfully completing the combo increases Beast’s Critical chance by 25% for {2} seconds.\n\nWhile in [28e3bf]Acrobatic[-] combat form, Blocking an attack followed by a Medium, Light, Light, Medium combo Regenerates up to [16982bff]{0}%[-] of Beast’s maximum Health per move, based on Signature level. Additionally on Combo Success, opponents get 50% less Power when getting hit and attacking for {2} seconds.\n\nWhen unsuccessfully performing a combo, there will be a {2} second delay before you can start a new combo."
+      "v": "While in [d957ff]Freestyle[-] combat form, performing a Medium hit followed by a Light, Light, Light and Medium combo inflicts Direct damage per blow for up to [16982bff]{1}%[-] of your Attack based on Signature level. Successfully completing the combo increases Beast’s Critical chance by 25% for {2} seconds.\r\n\r\nWhile in [28e3bf]Acrobatic[-] combat form, Blocking an attack followed by a Medium, Light, Light, Medium combo Regenerates up to [16982bff]{0}%[-] of Beast’s maximum Health per move, based on Signature level. Additionally on Combo Success, opponents get 50% less Power when getting hit and attacking for {2} seconds.\r\n\r\nWhen unsuccessfully performing a combo, there will be a {2} second delay before you can start a new combo."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_LONGDESC_AO",
@@ -9665,7 +9797,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_LONGDESC_UPDATE",
-      "v": "While in [d957ff]Freestyle[-] combat form, performing a Medium hit followed by a Light, Light, Light and Medium combo inflicts Direct damage per blow for up to [16982bff]{1}%[-] of your Attack based on Signature level. Successfully completing the combo increases Beast’s Critical chance by 25% for {2} seconds.\n\nWhile in [28e3bf]Acrobatic[-] combat form, Blocking an attack followed by a Medium, Light, Light, Medium combo Regenerates up to [16982bff]{0}%[-] of Beast’s maximum Health per move, based on Signature level. Additionally on Combo Success, opponents get 50% less Power when getting hit, and Beast has an extra 5% chance to evade physical hits for {2} seconds.\n\nWhen unsuccessfully performing a combo, there will be a {2} second delay before you can start a new combo."
+      "v": "While in [d957ff]Freestyle[-] combat form, performing a Medium hit followed by a Light, Light, Light and Medium combo inflicts Direct damage per blow for up to [16982bff]{1}%[-] of your Attack based on Signature level. Successfully completing the combo increases Beast’s Critical chance by 25% for {2} seconds.\r\n\r\nWhile in [28e3bf]Acrobatic[-] combat form, Blocking an attack followed by a Medium, Light, Light, Medium combo Regenerates up to [16982bff]{0}%[-] of Beast’s maximum Health per move, based on Signature level. Additionally on Combo Success, opponents get 50% less Power when getting hit, and Beast has an extra 5% chance to evade physical hits for {2} seconds.\r\n\r\nWhen unsuccessfully performing a combo, there will be a {2} second delay before you can start a new combo."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_LUKECAGE_DESC",
@@ -9713,19 +9845,19 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_5STAR_DESC",
-      "v": "After filling a bar of Power, Magik has a 25% chance to enter a state of Limbo, dealing {1}% Attack as Energy Damage per second for {2} seconds. Any damage taken during this period is rewound when the effect expires. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\n\nBased on current Signature Level, chances are increased by [16982bff]{0}%[-]."
+      "v": "After filling a bar of Power, Magik has a 25% chance to enter a state of Limbo, dealing {1}% Attack as Energy Damage per second for {2} seconds. Any damage taken during this period is rewound when the effect expires. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\r\n\r\nBased on current Signature Level, chances are increased by [16982bff]{0}%[-]."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_5STAR_DESC_MOD",
-      "v": "After filling a bar of Power, Magik has a 25% chance to enter a state of Limbo for {2} seconds. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\n\nBased on current Signature Level, chances are multiplied by [16982bff]{0}%[-]."
+      "v": "After filling a bar of Power, Magik has a 25% chance to enter a state of Limbo for {2} seconds. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\r\n\r\nBased on current Signature Level, chances are multiplied by [16982bff]{0}%[-]."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_DESC",
-      "v": "After filling a bar of Power, Magik has a 20% chance to enter a state of Limbo, dealing {1}% Attack as Energy Damage per second for {2} seconds. Any damage taken during this period is rewound when the effect expires. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\n\nBased on current Signature Level, chances are increased by [16982bff]{0}%[-]."
+      "v": "After filling a bar of Power, Magik has a 20% chance to enter a state of Limbo, dealing {1}% Attack as Energy Damage per second for {2} seconds. Any damage taken during this period is rewound when the effect expires. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\r\n\r\nBased on current Signature Level, chances are increased by [16982bff]{0}%[-]."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_DESC_MOD",
-      "v": "After filling a bar of Power, Magik has a 20% chance to enter a state of Limbo for {2} seconds. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\n\nBased on current Signature Level, chances are multiplied by [16982bff]{0}%[-]."
+      "v": "After filling a bar of Power, Magik has a 20% chance to enter a state of Limbo for {2} seconds. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\r\n\r\nBased on current Signature Level, chances are multiplied by [16982bff]{0}%[-]."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_HUD",
@@ -10268,6 +10400,31 @@
       "v": "Enhanced Weave"
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_SPIDERMANMCU_DESC",
+      "v": "Great Power (Above 50% Health) - Spider-Man’s Taunts last {2} seconds longer and each charge of Poise grants him an additional [16982bff]{1}[-] Critical Rating.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SPIDERMANMCU_DESC_B",
+      "v": "Great Responsibility (Below 50% Health) - Spider-Man’s chance to Evade an attack increases by a flat +{0}% and each charge of Poise grants him [16982bff]{1}[-] additional Block Proficiency.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SPIDERMANMCU_SHORT",
+      "v": "Hero's Mantra {0}",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SPIDERMANMCU_SIMPLE",
+      "v": "The experience of the Contest drives home both parts of Spider-Man's mantra, empowering his Evade, Poise and Taunt abilities.",
+      "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SPIDERMANMCU_TITLE",
+      "v": "HERO'S MANTRA",
+      "vn": 14
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_SPIDERMAN_BLACK_DESC",
       "v": "The strange alien Symbiote grants Spider-Man enhanced Spider Senses whenever he activates a special attack, granting [16982bff]{0}%[-] Evasion for {2} seconds."
     },
@@ -10533,7 +10690,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_ULTRON_DESC",
-      "v": "Energy attacks only serve Ultron, who converts [16982bff]{1}%[-] of the damage into both Power and Health."
+      "v": "Energy-based attacks only serve Ultron, who converts [16982bff]{1}%[-] of the damage into both Power and Health. Does not work against Damage Over Time effects."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_ULTRON_DESC2",
@@ -10633,7 +10790,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_DESC",
-      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\n01001111 01010000"
+      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\r\n01001111 01010000"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_HUD",
@@ -10665,7 +10822,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_MOVIE_DESC",
-      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\n01001111 01010000"
+      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\r\n01001111 01010000"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_MOVIE_HUD",
@@ -10753,7 +10910,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VOODOO_DESC",
-      "v": "Brother Daniel will possess either Doctor Voodoo or his opponent moving between them based on Doctor Voodoo's combo meter when he uses a Special Attack.\nCombo Even: Doctor Voodoo is possessed gaining 100% increased Ability Accuracy and [16982bff]{1}%[-] increased Buff Duration.\nOdd Combo: Opponent is possesed gaining 50% decreased Ability Accuracy and [16982bff]{1}%[-] increased Debuff Duration."
+      "v": "Brother Daniel will possess either Doctor Voodoo or his opponent moving between them based on Doctor Voodoo's combo meter when he uses a Special Attack.\r\nCombo Even: Doctor Voodoo is possessed gaining 100% increased Ability Accuracy and [16982bff]{1}%[-] increased Buff Duration.\r\nOdd Combo: Opponent is possesed gaining 50% decreased Ability Accuracy and [16982bff]{1}%[-] increased Debuff Duration."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VOODOO_SHORT",
