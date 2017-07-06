@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
+    "hash": "b6c6025d9a458ea208e87491a37009625d6b01ec",
     "language": "en",
+    "string_count": 115,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "hash": "e6b3d21c2a2fdf60e4cfb8a55473381f728c7995",
-    "ts": 1495142353,
-    "string_count": 113
+    "ts": 1497309981
   },
   "strings": [
     {
@@ -213,7 +213,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_IRONMAN",
-      "v": "Genius. Billionaire. Playboy. Philanthropist. Tony Stark may be a visionary, but he didn't realize his life-saving invention would transform him into Iron Man! In his sleek suit, Stark can fly, shoot repulsor rays, and access an array of cutting edge technology to combat the enemies of the Avengers."
+      "v": "Genius. Billionaire. Playboy. Philanthropist. Tony Stark may be a visionary, but he didn't realize his life-saving invention would transform him into Iron Man! In his sleek suit, Stark can fly, shoot repulsor rays, and access an array of cutting edge technology to combat the enemies of the Avengers"
     },
     {
       "k": "ID_CHARACTER_BIOS_IRONMAN_SUPERIOR",
@@ -360,6 +360,11 @@
       "v": "In an alternate reality where Peter Parker died while protecting his friends and family, teenager Miles Morales was bitten by a genetically enhanced spider and discovered that he now possessed the same powers as his fallen idol. With the world mourning the loss of one of their greatest heroes, Miles decided to take on the mantle of Spider-Man. Miles knows that with great power must come great responsibility, but can he live up to the legacy set before him?"
     },
     {
+      "k": "ID_CHARACTER_BIOS_SPIDERMAN_MOVIE",
+      "v": "Most kids Peter Parker’s age rush home after school to play video games or do homework, but not for New York’s friendly neighborhood Spider-Man. Donning his new suit with high-tech web shooters and some awesome upgrades courtesy of Tony Stark, Peter protects his home city of Queens. But a new threat has risen from the ashes caused by the Battle of New York, and Parker must look beyond his own desires and understand the true meaning of great responsibility.",
+      "vn": 14
+    },
+    {
       "k": "ID_CHARACTER_BIOS_STARLORD",
       "v": "Hey, what's going on? Oh, you're on Earth? Wow, bummer city. I mean, I grew up on Earth, and it's cool and all, but...space, man, is the place. I got ships, I got my Element Gun, I got the babes...I rule. Down there, I was a loser. Up here, I am the Legendary Star-Lord!"
     },
@@ -429,7 +434,13 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_VULTURE",
-      "v": "When a failed business opportunity left him desperate, Adrian Toomes became a black market power-player by scavenging the advanced tech and alien weapons left behind from previous Super Hero battles. From these scraps and leftovers, Toomes built himself a massive winged vehicle, and retrofitted the rest into incredible weapons that he sells. Now seeking further profits and power, the Vulture has set his sights on even more advanced technology."
+      "v": "When a failed business opportunity left him desperate, Adrian Toomes became a black market power-player by scavenging the advanced tech and alien weapons left behind from previous Super Hero battles. From these scraps and leftovers, Toomes built himself a massive winged vehicle and retrofitted the rest into incredible weapons that he sells. Now seeking further profits and power, the Vulture has set his sights on even more advanced technology.",
+      "vn": 14
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_VULTURE_MOVIE",
+      "v": "When a failed business opportunity left him desperate, Adrian Toomes became a black market power-player by scavenging the advanced tech and alien weapons left behind from previous Super Hero battles. From these scraps and leftovers, Toomes built himself a massive winged vehicle and retrofitted the rest into incredible weapons that he sells. Now seeking further profits and power, the Vulture has set his sights on even more advanced technology.",
+      "vn": 14
     },
     {
       "k": "ID_CHARACTER_BIOS_WARMACHINE",
