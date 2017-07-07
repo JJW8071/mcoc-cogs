@@ -533,7 +533,7 @@ class MCOC(ChampionFactory):
                     + '\n\t'.join(data_files.keys()))
             return
 
-        self._init()
+        # self._init()
         await self.bot.say('Summoner, I have Collected the data')
 
     async def say_user_error(self, msg):
