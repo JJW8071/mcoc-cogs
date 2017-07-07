@@ -16,6 +16,16 @@ import csv
 import aiohttp
 import re
 
+### Monkey Patch of JSONEnconder
+from json import JSONEncoder
+
+def _default(self, obj):
+    return getattr(obj.__class__, "to_json", _default.default)(obj)
+
+_default.default = JSONEncoder().default  # Save unmodified default.
+JSONEncoder.default = _default # replacemente
+### Done with patch
+
 class HashtagUserConverter(commands.Converter):
     async def convert(self):
         tags = set()
@@ -36,7 +46,7 @@ class HashtagUserConverter(commands.Converter):
 
 class Hook:
 
-    attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star'}
+    attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star', 'Role': 'quest_role'}
     alliance_map = {'alliance-war-defense': 'awd',
                     'alliance-war-attack': 'awo',
                     'alliance-quest': 'aq'}
@@ -119,7 +129,7 @@ class Hook:
         # await self.bot.send_message(author, em6)
         # await self.bot.send_message(author, em7)
 
-    @commands.command(pass_context=True, no_pm=True)
+    @commands.group(pass_context=True, invoke_without_command=True)
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagUserConverter):
         """Displays a user profile."""
@@ -172,6 +182,42 @@ class Hook:
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
+
+    #@commands.group(pass_context=True, aliases=('champs',))
+    #async def champ(self, ctx):
+        #if ctx.invoked_subcommand is None:
+            #await self.bot.send_cmd_help(ctx)
+            #return
+
+    @roster.command(pass_context=True, name='import')
+    async def _champ_import(self, ctx):
+        if not ctx.message.attachments:
+            await self.bot.say('This command can only be used when uploading files')
+            return
+        for atch in ctx.message.attachments:
+            if atch['filename'].endswith('.csv'):
+                await self._parse_champions_csv(ctx.message, atch)
+            else:
+                await self.bot.say("Cannot import '{}'.".format(atch)
+                        + "  File must end in .csv and come from a Hook export")
+
+    @roster.command(pass_context=True, name='export')
+    async def _champ_export(self, ctx):
+        user = ctx.message.author
+        info = self.load_champ_data(user)
+        rand = randint(1000, 9999)
+        path, ext = os.path.splitext(self.champs_file.format(user.id))
+        tmp_file = '{}-{}.tmp'.format(path, rand)
+        with open(tmp_file, 'w') as fp:
+            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'],
+                    extrasaction='ignore', lineterminator='\n')
+            writer.writeheader()
+            for row in info['champs']:
+                writer.writerow(row)
+        filename = self.data_dir.format(user.id) + '/champions.csv'
+        os.replace(tmp_file, filename)
+        await self.bot.upload(filename)
+        os.remove(filename)
 
     # @commands.command(pass_context=True, no_pm=True)
     # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
@@ -254,42 +300,6 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    @commands.group(pass_context=True, aliases=('champs',))
-    async def champ(self, ctx):
-        if ctx.invoked_subcommand is None:
-            await self.bot.send_cmd_help(ctx)
-            return
-
-    @champ.command(pass_context=True, name='import')
-    async def _champ_import(self, ctx):
-        if not ctx.message.attachments:
-            await self.bot.say('This command can only be used when uploading files')
-            return
-        for atch in ctx.message.attachments:
-            if atch['filename'].endswith('.csv'):
-                await self._parse_champions_csv(ctx.message, atch)
-            else:
-                await self.bot.say("Cannot import '{}'.".format(atch)
-                        + "  File must end in .csv and come from a Hook export")
-
-    @champ.command(pass_context=True, name='export')
-    async def _champ_export(self, ctx):
-        user = ctx.message.author
-        info = self.load_champ_data(user)
-        rand = randint(1000, 9999)
-        path, ext = os.path.splitext(self.champs_file.format(user.id))
-        tmp_file = '{}-{}.tmp'.format(path, rand)
-        with open(tmp_file, 'w') as fp:
-            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'],
-                    extrasaction='ignore', lineterminator='\n')
-            writer.writeheader()
-            for row in info['champs']:
-                writer.writerow(row)
-        filename = self.data_dir.format(user.id) + '/champions.csv'
-        os.replace(tmp_file, filename)
-        await self.bot.upload(filename)
-        os.remove(filename)
-
     # handles user creation, adding new server, blocking
     def _create_user(self, user):
         if not os.path.exists(self.champs_file.format(user.id)):
@@ -298,7 +308,7 @@ class Hook:
             champ_data = {
                 "clan": None,
                 "battlegroup": None,
-                "fieldnames": [],
+                "fieldnames": ["Id", "Stars", "Rank", "Level", "Awakened", "Pi", "Role"],
                 "champs": [],
                 "prestige": 0,
                 "top5": [],
@@ -326,7 +336,7 @@ class Hook:
 
     async def get_champion(self, cdict):
         mcoc = self.bot.get_cog('MCOC')
-        champ_attr = {self.attr_map[k]: cdict[k] for k in self.attr_map.keys()}
+        champ_attr = {v: cdict[k] for k,v in self.attr_map.items()}
         return await mcoc.get_champion(cdict['Id'], champ_attr)
 
     async def _parse_champions_csv(self, message, attachment):
@@ -336,7 +346,6 @@ class Hook:
         async with aiohttp.ClientSession() as session:
             async with session.get(attachment['url']) as response:
                 file_txt = await response.text()
-        print(file_txt)
         #dialect = csv.Sniffer().sniff(file_txt[:1024])
         cr = csv.DictReader(file_txt.split('\n'), #dialect, 
                 quoting=csv.QUOTE_NONE)
@@ -405,12 +414,7 @@ class Hook:
                 missing.append(cdict['Id'])
                 cdict['Pi'] = 0
                 continue
-            if cdict['Stars'] == 5:
-                maxrank = 3 if cdict['Rank'] < 4 else 4
-            else:
-                maxrank = 5
-            champ.update_attrs({'rank': maxrank})
-            cdict['maxpi'] = champ.prestige
+            cdict['maxpi'] = champ.max_prestige
         return missing
 
     async def _on_attachment(self, msg):
