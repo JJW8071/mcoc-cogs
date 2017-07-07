@@ -16,7 +16,7 @@
    height="642.32141"
    viewBox="0 0 743.57141 642.32141"
    sodipodi:docname="warmap.svg"
-   inkscape:export-filename="C:\Users\jason.SDI\Documents\mcoc-cogs\mcocMaps\data\warmap_ei.png"
+   inkscape:export-filename="C:\Users\jason.SDI\Documents\mcoc-cogs\mcocMaps\data\warmap_dg+.png"
    inkscape:export-xdpi="150"
    inkscape:export-ydpi="150">
   <metadata
@@ -49,12 +49,12 @@
      showguides="false"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.24"
-     inkscape:cx="434.4943"
-     inkscape:cy="326.60436"
+     inkscape:cx="348.20398"
+     inkscape:cy="262.08823"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer14">
+     inkscape:current-layer="layer13">
     <sodipodi:guide
        position="379,109.98574"
        orientation="1,0"
@@ -221,15 +221,15 @@
      id="layer3"
      inkscape:label="base"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <rect
-       style="display:inline;opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:#8d5fd3;stroke-width:2.7781558;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="display:inline;opacity:1;fill:#1a1a1a;fill-opacity:1;stroke:none;stroke-width:2.7781558;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="rect4231"
-       width="740.79327"
-       height="639.54327"
-       x="1.3890779"
-       y="1.3890827"
+       width="743.57141"
+       height="642.32141"
+       x="0"
+       y="2.265625e-006"
        inkscape:export-xdpi="300"
        inkscape:export-ydpi="300" />
   </g>
@@ -238,7 +238,7 @@
      id="layer15"
      inkscape:label="watermark"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <text
        xml:space="preserve"
@@ -312,22 +312,12 @@
          x="-345.17874"
          y="1012.2482"
          id="tspan4862">FORCE [-SDF-] SIMIAN DEFENSE FORCE </tspan></text>
-    <rect
-       transform="translate(0,-1.1328125e-6)"
-       inkscape:export-ydpi="300"
-       inkscape:export-xdpi="300"
-       y="1.3890827"
-       x="1.3890779"
-       height="639.54327"
-       width="740.79327"
-       id="rect4775"
-       style="display:inline;opacity:1;fill:none;fill-opacity:1;stroke:#8d5fd3;stroke-width:2.7781558;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer14"
      inkscape:label="ai"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      style="display:inline">
     <flowRoot
        xml:space="preserve"
@@ -397,14 +387,14 @@
          y="613.51672"
          x="673.04688"
          sodipodi:role="line"
-         id="tspan4790">56%</tspan></text>
+         id="tspan4790">46%</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer13"
      inkscape:label="Track I"
-     style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     style="display:none"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#d40000;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -513,8 +503,8 @@
      inkscape:groupmode="layer"
      id="layer12"
      inkscape:label="Track H"
-     style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     style="display:none"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="fill:none;fill-rule:evenodd;stroke:#5f8dd3;stroke-width:4.59044647;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -703,13 +693,19 @@
          id="tspan4722"
          x="608.18188"
          y="182.65735">50</tspan></text>
+    <circle
+       r="13.77134"
+       cy="565.23706"
+       cx="422.46506"
+       id="circle4442"
+       style="display:inline;fill:#d7e3f4;stroke:#5f8dd3;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer11"
      inkscape:label="Track G+"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#5f8dd3;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -799,8 +795,8 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Track A"
-     style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     style="display:none"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#ff2ad4;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -932,8 +928,8 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Track B"
-     style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     style="display:none"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#8d5fd3;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1058,13 +1054,19 @@
          x="266.6774"
          y="524.46942"
          style="font-size:14.34514618px">1</tspan></text>
+    <circle
+       r="13.77134"
+       cy="565.23706"
+       cx="318.76404"
+       id="circle4444"
+       style="display:inline;fill:#e5d5ff;stroke:#8d5fd3;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer10"
      inkscape:label="Track G"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#ffdd55;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1104,7 +1106,7 @@
     <circle
        style="display:inline;fill:#fff6d5;stroke:#ffdd55;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3346-10"
-       cx="420.79575"
+       cx="422.46506"
        cy="470.599"
        r="13.77134" />
     <text
@@ -1123,11 +1125,11 @@
        sodipodi:linespacing="125%"
        id="text4652"
        y="475.80331"
-       x="416.14478"
+       x="417.81409"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.34514618px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="475.80331"
-         x="416.14478"
+         x="417.81409"
          id="tspan4654"
          sodipodi:role="line">6</tspan></text>
     <text
@@ -1191,7 +1193,7 @@
      id="layer7"
      inkscape:label="Track D"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#aade87;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1236,7 +1238,7 @@
     <circle
        r="13.77134"
        cy="470.599"
-       cx="320.08066"
+       cx="318.76404"
        id="circle4976"
        style="display:inline;fill:#e5ffd5;fill-opacity:1;stroke:#aade87;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
     <circle
@@ -1254,13 +1256,13 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.34514618px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="315.59781"
+       x="314.28119"
        y="475.81381"
        id="text4532"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4534"
-         x="315.59781"
+         x="314.28119"
          y="475.81381">4</tspan></text>
     <text
        xml:space="preserve"
@@ -1322,8 +1324,8 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Track C"
-     style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     style="display:none"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#5fbcd3;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1333,7 +1335,7 @@
     <circle
        style="display:inline;fill:#d5f6ff;stroke:#5fbcd3;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3346-7"
-       cx="320.08066"
+       cx="318.76404"
        cy="470.599"
        r="13.77134" />
     <circle
@@ -1412,11 +1414,11 @@
        sodipodi:linespacing="125%"
        id="text4484"
        y="475.81381"
-       x="315.59781"
+       x="314.28119"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.34514618px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="475.81381"
-         x="315.59781"
+         x="314.28119"
          id="tspan4486"
          sodipodi:role="line">4</tspan></text>
     <text
@@ -1499,7 +1501,7 @@
     <circle
        style="display:inline;fill:#d5f6ff;fill-opacity:1;stroke:#5fbcd3;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="circle4579"
-       cx="320.08066"
+       cx="318.76404"
        cy="470.599"
        r="13.77134" />
     <circle
@@ -1512,11 +1514,11 @@
        sodipodi:linespacing="125%"
        id="text4583"
        y="475.81381"
-       x="315.59781"
+       x="314.28119"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:14.34514618px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          y="475.81381"
-         x="315.59781"
+         x="314.28119"
          id="tspan4585"
          sodipodi:role="line">4</tspan></text>
     <text
@@ -1536,7 +1538,7 @@
      id="layer9"
      inkscape:label="Track EF"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#ff80e5;stroke-width:4.59044647;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -1564,7 +1566,7 @@
     <circle
        style="display:inline;fill:#f4d7ee;stroke:#ff80e5;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3346-106-04-7"
-       cx="420.79575"
+       cx="422.46506"
        cy="324.43127"
        r="13.77134" />
     <path
@@ -1588,13 +1590,13 @@
     <circle
        style="display:inline;opacity:0.98999999;fill:#f4d7ee;stroke:#ff80e5;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3346-106-04-6"
-       cx="420.79575"
+       cx="422.46506"
        cy="223.71611"
        r="13.77134" />
     <circle
        style="display:inline;fill:#fff6d5;stroke:#c87137;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3346-106-04-4"
-       cx="320.08066"
+       cx="318.76404"
        cy="324.43127"
        r="13.77134" />
     <circle
@@ -1606,7 +1608,7 @@
     <circle
        style="display:inline;opacity:0.98999999;fill:#fff6d5;stroke:#c87137;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"
        id="path3346-106-04-8"
-       cx="320.08066"
+       cx="318.76404"
        cy="223.71611"
        r="13.77134" />
     <circle
@@ -1618,37 +1620,37 @@
     <circle
        r="13.77134"
        cy="273.84152"
-       cx="420.79575"
+       cx="422.46506"
        id="circle4794"
        style="display:inline;fill:#f4d7ee;stroke:#ff80e5;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40.16640854px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#ff80e5;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="408.58902"
+       x="409.2168"
        y="366.27301"
        id="text4926"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4928"
-         x="408.58902"
+         x="409.2168"
          y="366.27301"
          style="fill:#ff80e5">F</tspan></text>
     <circle
        r="13.77134"
        cy="273.84152"
-       cx="320.08066"
+       cx="318.76404"
        id="circle4792"
        style="display:inline;fill:#fff6d5;stroke:#c87137;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none" />
     <text
        xml:space="preserve"
        style="font-style:normal;font-variant:normal;font-weight:normal;font-stretch:normal;font-size:40.16640854px;line-height:125%;font-family:sans-serif;-inkscape-font-specification:'sans-serif, Normal';text-align:start;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:start;display:inline;fill:#c87137;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="308.26712"
+       x="305.22162"
        y="366.27301"
        id="text4922"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4924"
-         x="308.26712"
+         x="305.22162"
          y="366.27301"
          style="fill:#c87137">E</tspan></text>
     <text
@@ -1751,13 +1753,19 @@
          id="tspan4632"
          x="362.55447"
          y="182.66435">49</tspan></text>
+    <circle
+       r="13.77134"
+       cy="565.23706"
+       cx="371.47815"
+       id="circle4446"
+       style="display:inline;fill:#e5ffd5;fill-opacity:1;stroke:#aae687;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer1"
      inkscape:label="Layer 1"
      style="display:inline"
-     transform="translate(0,-1.1328125e-6)"
+     transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <circle
        style="fill:#00ffff;stroke:#ffffff;stroke-width:3.44283509;stroke-miterlimit:4;stroke-dasharray:none"

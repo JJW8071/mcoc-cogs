@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "420301fc38f956bd247c03c783a3b9102adcabcb",
+    "hash": "1feff59bb728d6ef6ab4f18da6f998b9dea8a878",
     "language": "en",
-    "string_count": 702,
+    "string_count": 708,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1495142352
+    "ts": 1496684775
   },
   "strings": [
     {
@@ -1416,6 +1416,21 @@
       "v": "With a barrage of strikes, Morales does his best to earn the Spider-Man mantle."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SPIDERMAN_MOVIE_0",
+      "v": "Uppercut. Place webs. Launch self at criminal. No problem. Just like back in Queens...but what about the name?",
+      "vn": 14
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SPIDERMAN_MOVIE_1",
+      "v": "Electric webshots! Thwip thwip, zap, sizzle!",
+      "vn": 14
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SPIDERMAN_MOVIE_2",
+      "v": "Awesome entrance. Check. Blast the opponent with web shots. Got it. Launch opponent into wall. Nailed it. Strike amazing hero pose...good enough.",
+      "vn": 14
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_STARLORD_0",
       "v": "What makes a kick to the face better? Rockets, and a little pelvic sorcery."
     },
@@ -1644,16 +1659,19 @@
       "v": "Vision phases through the ground to deliver a surprise uppercut, followed by a close-range microwave burst of solar energy."
     },
     {
-      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_0",
-      "v": "Vulture launches the flight pack off his suit, directly at his opponent."
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_MOVIE_0",
+      "v": "Vulture launches the flight pack off his suit directly at his opponent.",
+      "vn": 14
     },
     {
-      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_1",
-      "v": "Vulture flares his engines directly into his opponent, blasting them with superheated jetwash."
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_MOVIE_1",
+      "v": "Vulture flares his engines directly into his opponent, blasting them with superheated jetwash.",
+      "vn": 14
     },
     {
-      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_2",
-      "v": "Striking from the sky, Vulture hurls his opponent back, before employing an industrial laser, heavily modified with alien tech."
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_MOVIE_2",
+      "v": "Striking from the sky, Vulture hurls his opponent back, before employing an industrial laser heavily modified with alien tech.",
+      "vn": 14
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_WARMACHINE_0",
@@ -2496,6 +2514,20 @@
       "v": "Flurry of Blows"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_SPIDERMAN_MOVIE_0",
+      "v": "Spider Strike",
+      "vn": 14
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SPIDERMAN_MOVIE_1",
+      "v": "Stick & Shock",
+      "vn": 14
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SPIDERMAN_MOVIE_2",
+      "v": "Whatever a Spider Can..."
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_STARLORD_0",
       "v": "Rocket Kick"
     },
@@ -2724,16 +2756,19 @@
       "v": "Physical Disruption"
     },
     {
-      "k": "ID_SPECIAL_ATTACK_VULTURE_0",
-      "v": "Wingpack Strike"
+      "k": "ID_SPECIAL_ATTACK_VULTURE_MOVIE_0",
+      "v": "Wingpack Strike",
+      "vn": 14
     },
     {
-      "k": "ID_SPECIAL_ATTACK_VULTURE_1",
-      "v": "Engine Flare"
+      "k": "ID_SPECIAL_ATTACK_VULTURE_MOVIE_1",
+      "v": "Engine Flare",
+      "vn": 14
     },
     {
-      "k": "ID_SPECIAL_ATTACK_VULTURE_2",
-      "v": "Hybrid Alien Technology"
+      "k": "ID_SPECIAL_ATTACK_VULTURE_MOVIE_2",
+      "v": "Hybrid Alien Technology",
+      "vn": 14
     },
     {
       "k": "ID_SPECIAL_ATTACK_WARMACHINE_0",
