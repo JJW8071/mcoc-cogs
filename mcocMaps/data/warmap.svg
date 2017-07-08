@@ -16,7 +16,7 @@
    height="642.32141"
    viewBox="0 0 743.57141 642.32141"
    sodipodi:docname="warmap.svg"
-   inkscape:export-filename="C:\Users\jason.SDI\Documents\mcoc-cogs\mcocMaps\data\warmap_ei.png"
+   inkscape:export-filename="C:\Users\jason.SDI\Documents\mcoc-cogs\mcocMaps\data\warmap_dg+.png"
    inkscape:export-xdpi="150"
    inkscape:export-ydpi="150">
   <metadata
@@ -49,12 +49,12 @@
      showguides="false"
      inkscape:guide-bbox="true"
      inkscape:zoom="1.24"
-     inkscape:cx="328.84914"
+     inkscape:cx="348.20398"
      inkscape:cy="262.08823"
      inkscape:window-x="-8"
      inkscape:window-y="-8"
      inkscape:window-maximized="1"
-     inkscape:current-layer="layer3">
+     inkscape:current-layer="layer13">
     <sodipodi:guide
        position="379,109.98574"
        orientation="1,0"
@@ -387,13 +387,13 @@
          y="613.51672"
          x="673.04688"
          sodipodi:role="line"
-         id="tspan4790">56%</tspan></text>
+         id="tspan4790">46%</tspan></text>
   </g>
   <g
      inkscape:groupmode="layer"
      id="layer13"
      inkscape:label="Track I"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
@@ -503,7 +503,7 @@
      inkscape:groupmode="layer"
      id="layer12"
      inkscape:label="Track H"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
@@ -795,7 +795,7 @@
      inkscape:groupmode="layer"
      id="layer4"
      inkscape:label="Track A"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
@@ -928,7 +928,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="Track B"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
@@ -1324,7 +1324,7 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="Track C"
-     style="display:inline"
+     style="display:none"
      transform="translate(0,-2.265625e-6)"
      sodipodi:insensitive="true">
     <path
