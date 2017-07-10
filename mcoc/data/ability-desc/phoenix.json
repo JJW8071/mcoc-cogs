@@ -1,0 +1,39 @@
+["Phoenix",
+  "4":{
+    "header":"Phoenix Force - Passive",
+    "desc":["Fury Buffs increase Attack by 141.35."]
+  },{
+    "header":"Empowered - 5 or more Fury Buffs",
+    "desc":["All attacks gain 100% chance to Incinerate the opponent, dealing 104.7% Energy Damage over 6 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it's active.",
+      "Heavy Attacks gain 100% chance to Armor Break, reducing Armor Rating by 666.67 for 10 seconds."]
+  },{
+    "header":"Overloaded - 11 Fury Buffs",
+    "desc":["On entering Overload all Phoenix Force charges are immediately consumed, and the Phoenix begins to consume Fury Buffs periodically.",
+      "Att attacks have a 25% chance to Stun Incinerated targets.",
+      "Offensive and Defensive Power Gain is reduced by 80%.",
+      "On reaching 0 Fury Charges the Phoenix stops Overloading and generates 1 PHoenix Force charge."]
+  },{
+    "header":"Heavy Attacks",
+    "desc":["100% chance to gain a Phoenix Force Buff."]
+  },{
+    "header":"Special Attack 1",
+    "desc":["Gain 10% Power for each Phoenix Force charge, consuming all but 1 of them.",
+      "Consumes up to 1 Fury Buffs, increasing Special Damage by 10% per Fury consumed."]
+  },{
+    "header":"Special Attack 2",
+    "desc":["Gain 3 additional stacks of Pheonix Force.",
+      "Consumes up to 4 Fury Buffs, increasing Special Damage by 10% per Fury consumed."]
+  },{
+    "header":"Special Attack 3",
+    "desc":["This attack consumes all of the Phoenix's Fury Buffs, granting up to a 240% damage bonus based on the number of Fury Buffs consumed."]
+  },
+  "5":{
+    "header":"Header",
+    "desc":["Description",
+      "Description"]
+  },{
+    "header":"Header",
+    "desc":["Description",
+      "Description"]
+  },
+  ]

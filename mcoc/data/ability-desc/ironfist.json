@@ -1,0 +1,26 @@
+["Iron Fist",
+  "4":{
+    "header":"Critical Hits",
+    "desc":[
+      "The sheer force of a Critical Hit has a 55% chance to break the target's Armor and apply 439.02 Armor Rating reduction for 5 seconds."]
+  },{
+    "header":"All Attacks",
+    "desc":[
+      "8% chance to boost Critical Rating by 1076.92 for 6 seconds."]
+  },{
+    "header":"Heavy Attacks",
+    "desc":[
+      "The Iron Fist delivers a powerful Chi strike, disrupting the flow of energy and Nullifying 1 Cruelty, Fury, and Precision Buff."]
+  },
+  "5":{
+    "header":"Header",
+    "desc":[
+      "Description",
+      "Description"]
+  },{
+    "header":"Header",
+    "desc":[
+      "Description",
+      "Description"]
+  },
+  ]

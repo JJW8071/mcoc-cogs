@@ -1,0 +1,29 @@
+["Rocket Raccoon",
+  "4":{
+    "header":"Special Attack 1",
+    "desc":["100% chance to increase Critical Damage Rating by 1636.36 for 9 seconds"]
+  },{
+    "header":"Special Attack 2",
+    "desc":["100% chance to inflict Bleed, dealing 2608.7 Direct Damage over 4 seconds.",
+      "100% chance to Armor Break, removing an enemy Armor Up and applying 2444.45 Armor Rating reduction for 6 seconds."]
+  },{
+    "header":"Special Attack 3",
+    "desc":["100% chance to inflict Bleed, dealing 2608.7 Direct Damage over 4 seconds.",
+      "100% chance to Armor Break, removing an enemy Armor Up and applying 2444.45 Armor Rating reduction for 6 seconds."]
+  },{
+    "header":"Passive",
+    "desc":["Built from \"recovered\"alient technology, Rocket's shield system charges anytime he Dodges back and holds Block for at least 1.50 seconeds. Each shield loses power as it is used in combat."]
+  },{
+    "header":"Passive",
+    "desc":["Kinetic Shield: 4 charges of Physical Resistance, each providing 439.02 Resistance.",
+    "Shell Shield: 4 charges of Armor Up, each providing 298.85 Armor Rating.",
+    "Emergency Shield: 3 charges of Special Attack resistance, each providing 20% Resistance."]
+  },
+  "5":{
+    "header":"Header",
+    "desc":["Description","Description"]
+  },{
+    "header":"Header",
+    "desc":["Description","Description"]
+  },
+  ]
