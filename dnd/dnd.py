@@ -53,4 +53,4 @@ class DND:
 
 
 def setup(bot):
-    bot.add_cog(Mycog(bot))
+    bot.add_cog(DND(bot))
