@@ -30,7 +30,7 @@ class DND:
 
     @dnd.command()
     async def monsters(self, ctx, *, hargs):
-        """Lookup monsters"""
+        """Lookup Monsters"""
         baseurl = self.baseurl+'monsters'
         #Your code will go here
         await self.bot.say("Lookup Monsters initiated.")
