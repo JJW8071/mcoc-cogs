@@ -1,0 +1,27 @@
+["Drax",
+  "4":{
+    "header":"All Attacks",
+    "desc":["12% chance for Fury, increasing your Attack by 579.5 for 6.50 seconds."]
+  },{
+    "header":"Special Attacks",
+    "desc":["100% chance for Fury, increasing your Attack by 347.7 for 8 seconds."]
+  },{
+    "header":"Special Attack 2",
+    "desc":["40% chance for Fury, increasing your Attack by 347.7 for 8 seconds."]
+  },{
+    "header":"Special Attack 3",
+    "desc":["100% chance to inflict Bleed, dealing 2549.8 Direct Damage over 5.50 seconds."]
+  },{
+    "header":"Critical Hits",
+    "desc":["Critical Hits lacerate opponents with a 40% chance, inflicting 1159 bleed damage over 5 seconds."]
+  },
+  "5":{
+    "header":"Header",
+    "desc":["Description",
+      "Description"]
+  },{
+    "header":"Header",
+    "desc":["Description",
+      "Description"]
+  },
+  ]
