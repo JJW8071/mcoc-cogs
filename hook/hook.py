@@ -1,6 +1,6 @@
 import discord
 from discord.ext import commands
-from .mcoc import class_color_codes, ChampConverter, ChampConverterMult
+from .mcoc import class_color_codes, ChampConverter, ChampConverterMult, QuietUserError
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
@@ -10,14 +10,15 @@ from functools import reduce
 from random import randint
 import shutil
 import time
+import types
 import os
 import ast
 import csv
 import aiohttp
 import re
 
-### Monkey Patch of JSONEnconder
-from json import JSONEncoder
+### Monkey Patch of JSONEncoder
+from json import JSONEncoder, dump, dumps
 
 def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
@@ -25,8 +26,14 @@ def _default(self, obj):
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
 ### Done with patch
+#class CustomEncoder(JSONEncoder):
+#    def default(self, obj):
+#        return getattr(obj.__class__, "to_json", JSONEncoder.default)(obj)
 
-class HashtagUserConverter(commands.Converter):
+class MissingRosterError(QuietUserError):
+    pass
+
+class HashtagRosterConverter(commands.Converter):
     async def convert(self):
         tags = set()
         user = None
@@ -41,38 +48,229 @@ class HashtagUserConverter(commands.Converter):
                 raise commands.BadArgument(err_msg)
         if user is None:
             user = self.ctx.message.author
-        return {'tags': tags, 'user': user}
+        chmp_rstr = ChampionRoster(self.ctx.bot, user)
+        await chmp_rstr.load_champions()
+        if not chmp_rstr:
+            await self.ctx.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            raise MissingRosterError('No Roster found for {}'.format(user.name))
+        return types.SimpleNamespace(tags=tags, user=user, roster=chmp_rstr)
 
+class RosterConverter(commands.Converter):
+    async def convert(self):
+        user = None
+        if self.argument:
+            user = commands.UserConverter(self.ctx, self.argument).convert()
+        if user is None:
+            user = self.ctx.message.author
+        chmp_rstr = ChampionRoster(self.ctx.bot, user)
+        await chmp_rstr.load_champions()
+        return chmp_rstr
 
-class Hook:
+class ChampionRoster:
 
+    data_dir = 'data/hook/users/{}/'
+    champs_file = data_dir + 'champs.json'
+    #champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]' 
     attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star', 'Role': 'quest_role'}
     alliance_map = {'alliance-war-defense': 'awd',
                     'alliance-war-attack': 'awo',
                     'alliance-quest': 'aq'}
 
+    def __init__(self, bot, user):
+        self.bot = bot
+        self.user = user
+        self.roster = {}
+        self._create_user()
+        self._cache = {}
+        #self.load_champions()
+
+    def __len__(self):
+        return len(self.roster)
+
+    # handles user creation, adding new server, blocking
+    def _create_user(self):
+        if not os.path.exists(self.champs_file.format(self.user.id)):
+            if not os.path.exists(self.data_dir.format(self.user.id)):
+                os.makedirs(self.data_dir.format(self.user.id))
+            champ_data = {
+                #"clan": None,
+                #"battlegroup": None,
+                "fieldnames": ["Id", "Stars", "Rank", "Level", "Awakened", "Pi", "Role"],
+                "roster": [],
+                "prestige": 0,
+                "top5": [],
+                "aq": [],
+                "awd": [],
+                "awo": [],
+                "max5": [],
+            }
+            dataIO.save_json(self.champs_file.format(self.user.id), champ_data)
+            #self.save_champ_data(champ_data)
+
+    async def load_champions(self):
+        data = self.load_champ_data()
+        self.roster = {}
+        name = 'roster' if 'roster' in data else 'champs'
+        for k in data[name]:
+            champ = await self.get_champion(k)
+            self.roster[champ.immutable_id] = champ
+
+    def load_champ_data(self):
+        return dataIO.load_json(self.champs_file.format(self.user.id))
+
+    def save_champ_data(self):
+        #print(dumps(self, cls=CustomEncoder))
+        #with open(self.champs_file.format(self.user.id), 'w') as fp:
+            #dump(self, fp, indent=2, cls=CustomEncoder)
+        dataIO.save_json(self.champs_file.format(self.user.id), self)
+
+    def to_json(self):
+        translate = ['fieldnames', 'prestige', 'max_prestige', 'top5',
+                     'max5']
+        pack = {i: getattr(self, i) for i in translate}
+        pack['roster'] = list(self.roster.values())
+        return pack
+        #return {i: getattr(self, i) for i in translate}
+
+    async def get_champion(self, cdict):
+        mcoc = self.bot.get_cog('MCOC')
+        champ_attr = {v: cdict[k] for k,v in self.attr_map.items()}
+        return await mcoc.get_champion(cdict['Id'], champ_attr)
+
+    async def filter_champs(self, tags):
+        residual_tags = tags - self.all_tags
+        if residual_tags:
+            em = discord.Embed(title='Unused tags', description=' '.join(residual_tags))
+            await self.bot.say(embed=em)
+        filtered = set()
+        for c in self.roster.values():
+            if tags.issubset(c.all_tags):
+                filtered.add(c)
+        return filtered
+
+    @property
+    def all_tags(self):
+        return reduce(set.union, [c.all_tags for c in self.roster.values()])
+
+    @property
+    def prestige(self):
+        return self._get_five('prestige')[0]
+
+    @property
+    def top5(self):
+        return self._get_five('prestige')[1]
+
+    @property
+    def max_prestige(self):
+        return self._get_five('max_prestige')[0]
+
+    @property
+    def max5(self):
+        return self._get_five('max_prestige')[1]
+
+    def _get_five(self, key):
+        if self._cache.get(key, None) is None:
+            champs = sorted(self.roster.values(), key=attrgetter(key),
+                        reverse=True)
+            prestige = sum([getattr(champ, key) for champ in champs[:5]])/5
+            champs_str = [champ.verbose_prestige_str for champ in champs[:5]]
+            self._cache[key] = (prestige, champs_str)
+        return self._cache[key]
+
+    async def parse_champions_csv(self, channel, attachment):
+        async with aiohttp.ClientSession() as session:
+            async with session.get(attachment['url']) as response:
+                file_txt = await response.text()
+        #dialect = csv.Sniffer().sniff(file_txt[:1024])
+        cr = csv.DictReader(file_txt.split('\n'), #dialect, 
+                quoting=csv.QUOTE_NONE)
+        missing = []
+        dupes = []
+        for row in cr:
+            champ_csv = {k: parse_value(v) for k, v in row.items()}
+            try:
+                champ = await self.get_champion(champ_csv)
+            except KeyError:
+                missing.append(champ_csv['Id'])
+                continue
+            if champ.immutable_id in self.roster:
+                dupes.append(champ)
+            self.roster[champ.immutable_id] = champ
+
+        if missing:
+            await self.bot.send_message(channel, 'Missing hookid for champs: '
+                    + ', '.join(self.missing))
+        if dupes:
+            await self.bot.send_message(channel, 
+                    'WARNING: Multiple instances of champs in file.  '
+                    + 'Overloading:\n\t'.format(
+                    ', '.join([c.star_name_str for c in dupes])))
+
+        em = discord.Embed(title="Updated Champions")
+        em.add_field(name='Prestige', value=self.prestige)
+        em.add_field(name='Max Prestige', value=self.max_prestige, inline=True)
+        em.add_field(name='Top Champs', value='\n'.join(self.top5), inline=False)
+        em.add_field(name='Max PI Champs', value='\n'.join(self.max5), inline=True)
+
+        self.fieldnames = cr.fieldnames
+
+        #champ_data.update({v: [] for v in self.alliance_map.values()})
+        #for champ in champ_data['champs']:
+        #    if champ['Role'] in self.alliance_map:
+        #        champ_data[self.alliance_map[champ['Role']]].append(champ['Id'])
+
+        self.save_champ_data()
+        #if mcoc:
+        await self.bot.send_message(channel, embed=em)
+        #else:
+        #    await self.bot.send_message(channel, 'Updated Champion Information')
+
+    async def hook_prestige(self, roster):
+        '''Careful.  This modifies the array of dicts in place.'''
+        missing = []
+        for cdict in roster:
+            cdict['maxpi'] = 0
+            if cdict['Stars'] < 4:
+                continue
+            try:
+                champ = await self.get_champion(cdict)
+            except KeyError:
+                missing.append(cdict['Id'])
+                continue
+            try:
+                cdict['Pi'] = champ.prestige
+            except AttributeError:
+                missing.append(cdict['Id'])
+                cdict['Pi'] = 0
+                continue
+            cdict['maxpi'] = champ.max_prestige
+        return missing
+
+
+class Hook:
+
     def __init__(self, bot):
         self.bot = bot
-        self.data_dir = 'data/hook/users/{}/'
-        self.champs_file = self.data_dir + 'champs.json'
         self.champ_re = re.compile(r'champ.*\.csv')
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
-        self.champ_str = '{0[Stars]}★ {0[Id]} R{0[Rank]} s{0[Awakened]:<2}'
 
 
-    @commands.command(pass_context=True, no_pm=True)
-    async def profile(self,ctx, *, user : discord.Member=None):
+    @commands.command(pass_context=True)
+    #async def profile(self, roster: RosterConverter):
+    async def profile(self, ctx, roster=''):
         """Displays a user profile."""
-        if user is None:
-            user = ctx.message.author
-        # creates user if doesn't exist
-        info = self.load_champ_data(user)
-        em = discord.Embed(title="User Profile", description=user.name)
-        if info['top5']:
-            em.add_field(name='Prestige', value=info['prestige'])
-            em.add_field(name='Top Champs', value='\n'.join(info['top5']))
-            em.add_field(name='Max Champs', value='\n'.join(info['max5']))
+        roster = await RosterConverter(ctx, roster).convert()
+        em = discord.Embed(title="User Profile", description=roster.user.name)
+        if roster:
+            em.add_field(name='Prestige', value=roster.prestige)
+            em.add_field(name='Max Prestige', value=roster.max_prestige, inline=True)
+            em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
+            em.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
+        else:
+            em.add_field(name='Missing Roster', 
+                    value='Load up a "champ*.csv" file from Hook to import your roster')
+            em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
@@ -131,27 +329,15 @@ class Hook:
 
     @commands.group(pass_context=True, invoke_without_command=True)
     async def roster(self, ctx, *, hargs=''):
-    #async def roster(self, ctx, *, hargs: HashtagUserConverter):
+    #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
         """Displays a user profile."""
-        hargs = await HashtagUserConverter(ctx, hargs).convert()
-        data = await self.load_champions(hargs['user'])
-        if not data['champs']:
-            await self.bot.say('No Champions found in your roster.  Please upload a csv file first.')
-            return
-        all_champ_tags = reduce(set.union, [c.all_tags for c in data['champs']])
-        residual_tags = hargs['tags'] - all_champ_tags
-        if residual_tags:
-            em = discord.Embed(title='Unused tags', description=' '.join(residual_tags))
-            await self.bot.say(embed=em)
-        filtered = set()
-        for c in data['champs']:
-            if hargs['tags'].issubset(c.all_tags):
-                filtered.add(c)
+        hargs = await HashtagRosterConverter(ctx, hargs).convert()
+        filtered = await hargs.roster.filter_champs(hargs.tags)
         if not filtered:
-            em = discord.Embed(title='User', description=hargs['user'].name,
+            em = discord.Embed(title='User', description=hargs.user.name,
                     color=discord.Color.gold())
             em.add_field(name='Tags used filtered to an empty roster',
-                    value=' '.join(hargs['tags']))
+                    value=' '.join(hargs.tags))
             await self.bot.say(embed=em)
             return
 
@@ -163,13 +349,13 @@ class Hook:
                 color = discord.Color.gold()
                 break
 
-        champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
+        #champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        em = discord.Embed(title="User", description=hargs['user'].name, color=color)
+        em = discord.Embed(title="User", description=hargs.user.name, color=color)
         if len(filtered) < 10:
-            strs = [champ_str.format(champ) for champ in
+            strs = [champ.verbose_prestige_str for champ in
                     sorted(filtered, key=attrgetter('prestige'), reverse=True)]
             em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
         else:
@@ -177,32 +363,31 @@ class Hook:
                 classes[champ.klass].append(champ)
             for klass, champs in classes.items():
                 if champs:
-                    strs = [champ_str.format(champ) for champ in
+                    strs = [champ.verbose_prestige_str for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.say(embed=em)
 
-    #@commands.group(pass_context=True, aliases=('champs',))
-    #async def champ(self, ctx):
-        #if ctx.invoked_subcommand is None:
-            #await self.bot.send_cmd_help(ctx)
-            #return
+    @roster.command(pass_context=True, name='update')
+    async def _roster_update(self, ctx, *, champs: ChampConverterMult):
+        pass
 
     @roster.command(pass_context=True, name='import')
-    async def _champ_import(self, ctx):
+    async def _roster_import(self, ctx):
         if not ctx.message.attachments:
             await self.bot.say('This command can only be used when uploading files')
             return
         for atch in ctx.message.attachments:
             if atch['filename'].endswith('.csv'):
-                await self._parse_champions_csv(ctx.message, atch)
+                roster = ChampionRoster(self.bot, ctx.message.author)
+                await roster.parse_champions_csv(ctx.message.channel, atch)
             else:
                 await self.bot.say("Cannot import '{}'.".format(atch)
                         + "  File must end in .csv and come from a Hook export")
 
     @roster.command(pass_context=True, name='export')
-    async def _champ_export(self, ctx):
+    async def _roster_export(self, ctx):
         user = ctx.message.author
         info = self.load_champ_data(user)
         rand = randint(1000, 9999)
@@ -300,122 +485,6 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    # handles user creation, adding new server, blocking
-    def _create_user(self, user):
-        if not os.path.exists(self.champs_file.format(user.id)):
-            if not os.path.exists(self.data_dir.format(user.id)):
-                os.makedirs(self.data_dir.format(user.id))
-            champ_data = {
-                "clan": None,
-                "battlegroup": None,
-                "fieldnames": ["Id", "Stars", "Rank", "Level", "Awakened", "Pi", "Role"],
-                "champs": [],
-                "prestige": 0,
-                "top5": [],
-                "aq": [],
-                "awd": [],
-                "awo": [],
-                "max5": [],
-            }
-            self.save_champ_data(user, champ_data)
-
-    async def load_champions(self, user):
-        data = self.load_champ_data(user)
-        cobjs = []
-        for k in data['champs']:
-            cobjs.append(await self.get_champion(k))
-        data['champs'] = cobjs
-        return data
-
-    def load_champ_data(self, user):
-        self._create_user(user)
-        return dataIO.load_json(self.champs_file.format(user.id))
-
-    def save_champ_data(self, user, data):
-        dataIO.save_json(self.champs_file.format(user.id), data)
-
-    async def get_champion(self, cdict):
-        mcoc = self.bot.get_cog('MCOC')
-        champ_attr = {v: cdict[k] for k,v in self.attr_map.items()}
-        return await mcoc.get_champion(cdict['Id'], champ_attr)
-
-    async def _parse_champions_csv(self, message, attachment):
-        channel = message.channel
-        user = message.author
-        self._create_user(user)
-        async with aiohttp.ClientSession() as session:
-            async with session.get(attachment['url']) as response:
-                file_txt = await response.text()
-        #dialect = csv.Sniffer().sniff(file_txt[:1024])
-        cr = csv.DictReader(file_txt.split('\n'), #dialect, 
-                quoting=csv.QUOTE_NONE)
-        champ_list = []
-        for row in cr:
-            champ_list.append({k: parse_value(k, v) for k, v in row.items()})
-
-        champ_data = {}
-
-        mcoc = self.bot.get_cog('MCOC')
-        if mcoc:
-            missing = await self.hook_prestige(champ_list)
-            if missing:
-                await self.bot.send_message(channel, 'Missing hookid for champs: '
-                        + ', '.join(missing))
-
-            # max prestige calcs
-            champ_list.sort(key=itemgetter('maxpi', 'Id'), reverse=True)
-            maxpi = sum([champ['maxpi'] for champ in champ_list[:5]])/5
-            max_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
-            champ_data['maxpi'] = maxpi
-            champ_data['max5'] = max_champs
-
-            # prestige calcs
-            champ_list.sort(key=itemgetter('Pi', 'Id'), reverse=True)
-            prestige = sum([champ['Pi'] for champ in champ_list[:5]])/5
-            top_champs = [self.champ_str.format(champ) for champ in champ_list[:5]]
-            champ_data['prestige'] = prestige
-            champ_data['top5'] = top_champs
-
-            em = discord.Embed(title="Updated Champions")
-            em.add_field(name='Prestige', value=prestige)
-            em.add_field(name='Max Prestige', value=maxpi, inline=True)
-            em.add_field(name='Top Champs', value='\n'.join(top_champs), inline=False)
-            em.add_field(name='Max PI Champs', value='\n'.join(max_champs), inline=True)
-
-        champ_data['fieldnames'] = cr.fieldnames
-        champ_data['champs'] = champ_list
-
-        champ_data.update({v: [] for v in self.alliance_map.values()})
-        for champ in champ_data['champs']:
-            if champ['Role'] in self.alliance_map:
-                champ_data[self.alliance_map[champ['Role']]].append(champ['Id'])
-
-        self.save_champ_data(user, champ_data)
-        if mcoc:
-            await self.bot.send_message(channel, embed=em)
-        else:
-            await self.bot.send_message(channel, 'Updated Champion Information')
-
-    async def hook_prestige(self, roster):
-        '''Careful.  This modifies the array of dicts in place.'''
-        missing = []
-        for cdict in roster:
-            cdict['maxpi'] = 0
-            if cdict['Stars'] < 4:
-                continue
-            try:
-                champ = await self.get_champion(cdict)
-            except KeyError:
-                missing.append(cdict['Id'])
-                continue
-            try:
-                cdict['Pi'] = champ.prestige
-            except AttributeError:
-                missing.append(cdict['Id'])
-                cdict['Pi'] = 0
-                continue
-            cdict['maxpi'] = champ.max_prestige
-        return missing
 
     async def _on_attachment(self, msg):
         channel = msg.channel
@@ -429,12 +498,13 @@ class Hook:
                 reply = await self.bot.wait_for_message(30, channel=channel,
                         author=msg.author, content='yes')
                 if reply:
-                    await self._parse_champions_csv(msg, attachment)
+                    roster = ChampionRoster(self.bot, msg.author)
+                    await roster.parse_champions_csv(msg.channel, attachment)
                 else:
                     await self.bot.send_message(channel, "Did not import")
 
 
-def parse_value(key, value):
+def parse_value(value):
     try:
         return ast.literal_eval(value)
     except Exception:
