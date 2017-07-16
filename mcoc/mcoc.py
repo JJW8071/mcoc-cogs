@@ -81,8 +81,6 @@ gsheet_files = {
             #'payload': 'pub?gid=0&single=true&output=csv'}
 }
 
-# sig_data = 'data/mcoc/sig_data.json'
-prestige_data = 'data/mcoc/prestige_data.json'
 star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
 
 lolmap_path='data/mcoc/maps/lolmap.png'
@@ -270,6 +268,12 @@ class ChampionFactory():
         super().__init__(*args, **kwargs)
         logger.debug('ChampionFactory Init')
 
+    def init(self):
+        logger.info('Preparing data structures')
+        self._prepare_aliases()
+        self._prepare_prestige_data()
+        self.needs_init = False
+
     async def update_local(self):
         now = time.time()
         if now - self.cooldown_delta < self.cooldown:
@@ -277,10 +281,7 @@ class ChampionFactory():
         self.cooldown = now
         is_updated = await self.verify_cache_remote_files()
         if is_updated or self.needs_init:
-            logger.info('Preparing data structures')
-            self._prepare_aliases()
-            self._prepare_prestige_data()
-            self.needs_init = False
+            self.init()
 
     def create_champion_class(self, bot, alias_set, **kwargs):
         kwargs['bot'] = bot
@@ -312,8 +313,7 @@ class ChampionFactory():
     async def get_champion(self, name_id, attrs=None):
         '''straight alias lookup followed by new champion object creation'''
         await self.update_local()
-        champ = self.champions[name_id]
-        return champ(attrs)
+        return self.champions[name_id](attrs)
 
     async def search_champions(self, search_str, attrs=None):
         '''searching through champion aliases and allowing partial matches.
@@ -376,7 +376,7 @@ class ChampionFactory():
         else:
             response = await session.get(dargs['remote'])
         if response and response.status == 200:
-            logger.info('Caching remote contents to local file: ' + dargs['local'])
+            logger.info('Caching ' + dargs['local'])
             with open(dargs['local'], 'wb') as fp:
                 fp.write(await response.read())
             remote_check = now
@@ -418,20 +418,19 @@ class ChampionFactory():
         mattkraft_re = re.compile(r'(?P<star>\d)-(?P<champ>.+)-(?P<rank>\d)')
         with open(data_files['prestigeCSV']['local'], newline='') as csvfile:
             reader = csv.reader(csvfile)
-            champs = {}
             for row in reader:
                 champ_match = mattkraft_re.fullmatch(row.pop(0))
-                if champ_match:
-                    name = champ_match.group('champ')
-                    star = int(champ_match.group('star'))
-                    rank = int(champ_match.group('rank'))
-                else:
+                if not champ_match:
                     continue
-                if name not in champs:
-                    champs[name] = {}
-                    champs[name][4] = [None] * 5
-                    champs[name][5] = [None] * 5
-                key_values = {}
+                name = champ_match.group('champ')
+                star = int(champ_match.group('star'))
+                rank = int(champ_match.group('rank'))
+
+                champ = self.champions.get(name)
+                if not champ:
+                    logger.info('Skipping ' + name)
+                    continue
+
                 sig_len = 201 if star == 5 else 100
                 sig = [0] * sig_len
                 for i, v in enumerate(row):
@@ -441,15 +440,14 @@ class ChampionFactory():
                     except:
                         print(name, i, v, len(sig))
                         raise
+                if not hasattr(champ, 'prestige_data'):
+                    champ.prestige_data = {4: [None] * 5, 5: [None] * 5}
                 try:
-                    champs[name][star][rank-1] = sig
+                    champ.prestige_data[star][rank-1] = sig
                 except:
                     print(name, star, rank, len(champ.prestige_data),
                             len(champ.prestige_data[star]))
                     raise
-        for champ in self.champions.values():
-            if champ.mattkraftid in champs:
-                champ.prestige_data = champs[champ.mattkraftid]
 
 def command_arg_help(**cmdkwargs):
     def internal_func(f):
@@ -486,12 +484,6 @@ class MCOC(ChampionFactory):
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
         super().__init__()
-        #self.verify_cache_remote_files(verbose=True)
-        #self._init()
-
-    #def _init(self):
-        #self._prepare_aliases()
-        #self._prepare_prestige_data()
 
     @commands.command(aliases=('p2f',), hidden=True)
     async def per2flat(self, per: float, ch_rating: int=100):
@@ -548,7 +540,7 @@ class MCOC(ChampionFactory):
                     + '\n\t'.join(data_files.keys()))
             return
 
-        self._init()
+        self.init()
         await self.bot.say('Summoner, I have Collected the data')
 
     async def say_user_error(self, msg):
@@ -615,7 +607,8 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=bio_desc)
-        em.add_field(name='hashtags',value=', '.join(champ.class_tags.union(champ.tags)))
+        em.add_field(name='hashtags',
+                value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
@@ -892,15 +885,28 @@ class Champion:
 
     base_tags = {'#cr{}'.format(i) for i in range(10, 130, 10)}
     base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
-    base_tags.update({'#awake', '#notawake'})
+    base_tags.update({'#awake', '#sig0'})
 
     def __init__(self, attrs=None):
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
+
         default = {'star': 4, 'rank': 5, 'sig': 99}
+        self._star = attrs.pop('star', default.pop('star'))
+        if self._star < 1:
+            logger.warn('Star {} for Champ {} is too low.  Setting to 1'.format(
+                    self._star, self.full_name))
+            self._star = 1
+        if self._star > 5:
+            logger.warn('Star {} for Champ {} is too high.  Setting to 5'.format(
+                    self._star, self.full_name))
+            self._star = 5
+
+        for k,v in attrs.items():
+            if k not in default:
+                setattr(self, k, v)
         default.update(attrs)
-        self._star = default.pop('star')
         self.tags = set()
         self.update_attrs(default)
 
@@ -911,14 +917,6 @@ class Champion:
                 setattr(self, k, attrs[k])
         if self.sig < 0:
             self.sig = 0
-        if self.star < 1:
-            logger.warn('Star {} for Champ {} is too low.  Setting to 1'.format(
-                    self.star, self.full_name))
-            self.star = 1
-        if self.star > 5:
-            logger.warn('Star {} for Champ {} is too high.  Setting to 5'.format(
-                    self.star, self.full_name))
-            self.star = 5
         if self.star == 5:
             if self.rank > 5:
                 self.rank = 5
@@ -932,7 +930,7 @@ class Champion:
         self.tags.add('#cr{}'.format(self.chlgr_rating))
         self.tags.add('#{}star'.format(self.star))
         if self.sig == 0:
-            self.tags.add('#notawake')
+            self.tags.add('#sig0')
         else:
             self.tags.add('#awake')
 
@@ -1101,17 +1099,15 @@ class Champion:
             dbg_str.append('Description Text:  ')
             dbg_str.extend(['  ' + self._sig_header(sigs[d]) for d in desc])
             await self.bot.say(chat.box('\n'.join(dbg_str)))
+
         coeff = self.get_sig_coeff()
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
-        if coeff is None:
-            logger.warn('get_sig_coeff returned None')
-        if ekey is None:
-            logger.warn('get_effect_keys returned None')
         if coeff is None or ekey is None:
             raise KeyError("Missing Sig data for {}".format(self.full_name))
         else:
             logger.debug('coeff and ekey check out')
+
         if self.sig == 0:
             return sigs[title], '\n'.join([sigs[k] for k in simple])
         sig_calcs = {}
@@ -1125,11 +1121,9 @@ class Champion:
                 m = float(coeff['ability_norm' + i])
                 b = float(coeff['offset' + i])
             except:
-                #await self.bot.say("Missing data for champion '{}'.  Try again later".format(self.full_name))
                 await self.missing_sig_ad()
                 self.update_attrs({'sig': 0})
                 return sigs[title], '\n'.join([sigs[k] for k in simple])
-                #return None
             ckey = ekey['Location_' + i]
             raw_str = '{:.2f}'
             raw_per_str = '{:.2%}'
