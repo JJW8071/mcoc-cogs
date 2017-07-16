@@ -36,7 +36,7 @@ data_files = {
     #             'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
     #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
                 #'local': 'data/mcoc/prestige.json', 'update_delta': 1},
-    'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc/pub?gid=2008047498&single=true&output=csv',
+    'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=1346864636&single=true&output=csv',
                 'local': 'data/mcoc/prestige.csv', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
@@ -444,7 +444,8 @@ class ChampionFactory():
                 try:
                     champs[name][star][rank-1] = sig
                 except:
-                    print(name, star, rank, len(champs[name]), len(champs[name][star]))
+                    print(name, star, rank, len(champ.prestige_data),
+                            len(champ.prestige_data[star]))
                     raise
         for champ in self.champions.values():
             if champ.mattkraftid in champs:
@@ -1021,6 +1022,15 @@ class Champion:
     @property
     def all_tags(self):
         return self.tags.union(self.class_tags)
+
+    def to_json(self):
+        translate = {'sig': 'Awakened', 'hookid': 'Id', 'max_lvl': 'Level',
+                    'prestige': 'Pi', 'rank': 'Rank', 'star': 'Stars',
+                    'quest_role': 'Role', 'max_prestige': 'maxpi'}
+        pack = {}
+        for attr, hook_key in translate.items():
+            pack[hook_key] = getattr(self, attr)
+        return pack
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)

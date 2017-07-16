@@ -1,0 +1,19 @@
+["Captain Marvel",
+  "4":{
+    "header":"All Attacks",
+    "desc": ["11% chance for Fury, increasing your Attack by 667.16 for 6.50 seconds."]
+  },{
+    "header": "Special Attack 1",
+    "desc": ["This attack deals True Damage, ignoring all of the opponent's Armor."]
+  },{
+    "header": "Passive",
+    "desc": ["Advanced Kree physiology provies full immunity to the Poisons of the Battlerealm."]
+  },
+  "5":{
+    "header":"Header",
+    "desc":["Description","Description"]
+  },{
+    "header":"Header",
+    "desc":["Description","Description"]
+  }
+]
