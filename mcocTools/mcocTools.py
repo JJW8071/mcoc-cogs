@@ -130,7 +130,7 @@ class MCOCTools:
                 for i in required_roles:
                     if i not in rolenames:
                         try:
-                            await discord.Client.create_role(server,name=i, mentionable=roles_fields[i][0], color=roles_fields[i][1])
+                            await self.bot.create_role(server,name=i, mentionable=roles_fields[i][0], color=roles_fields[i][1])
                         except:
                             await self.bot.say('Could not create role: {}'.format(i))
 
