@@ -97,24 +97,32 @@ class MCOCTools:
                     'bg3':{True, discord.Color.orange(), },}
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         em=discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol',description='')
+        message0 = await self.bot.say(em)
         for i in required_roles:
             if i in rolenames:
                 stageone.append(':white_check_mark: {}'.format(i))
             else:
                 stageone.append(':negative_squared_cross_mark: {}'.format(i))
                 phase_one = False
-        em.add_field(name='Phase One: Roles',value='\n'.join(stageone))
+        pages = chat.pagify('\n'.join(stageone))
+        messages = []
+        for page in pages:
+            em = discord.Embed(color=discord.Color.gold(),title='',description=page)
+            messages[page] = await.self.bot.say(embed=em1)
         # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
+            em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
             em.add_field(name='Corrective Action', value='Roles are missing. Do you want me to create missing Roles?\nIf yes, click the 🆗 reaction')
-            em.add_field(name='',value='This Corrective Action requires the __Collector Role__ have the **Manage Roles** permission.')
             message = await self.bot.say(embed=em)
             await self.bot.add_reaction(message, "🆗")
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗'])
-            if react is None:
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗','❌'])
+            if react is None or react.reaction.emoji == "❌":
                 try:
                     try:
-                        await self.bot.clear_reactions(message)
+                        await self.bot.delete_message(message)
+                        for message in messages:
+                            await self.bot.delete(message)
+                        # await self.bot.clear_reactions(message)
                     except:
                         await self.bot.remove_reaction(message, "🆗", self.bot.user)
                 except:
