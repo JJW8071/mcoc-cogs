@@ -73,7 +73,7 @@ class MCOCTools:
     #     em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
     #     await self.bot.say(embed=em)
 
-    @commands.command(manage_server=True,pass_context=True)
+    @commands.command(manage_server=True, manage_roles=True, pass_context=True)
     async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
         ### IN DEVELOPMENT - PRE ALPHA ###
@@ -91,6 +91,10 @@ class MCOCTools:
         for r in roles:
             rolenames.append(r.name)
         required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner'}
+        roles_fields={'officers': {True, discord.Color.silver(),},
+                    'bg1':{True, discord.Color.blue(), },
+                    'bg2':{True, discord.Color.purple(), },
+                    'bg3':{True, discord.Color.orange(), },}
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         em=discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol',description='')
         for i in required_roles:
@@ -102,10 +106,8 @@ class MCOCTools:
         em.add_field(name='Phase One: Roles',value='\n'.join(stageone))
         # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
-            em.add_field(name='Corrective Action', value='Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
+            em.add_field(name='Corrective Action', value='Roles are out of Order. Do you want me to create missing Roles?\nIf yes, click the 🆗 reaction')
             message = await self.bot.say(embed=em)
-            # message = await self.bot.say('Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
-            # message = await self.bot.send_message(ctx.message.channel, 'Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
             await self.bot.add_reaction(message, "🆗")
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗'])
             if react is None:
@@ -119,6 +121,13 @@ class MCOCTools:
                 return None
             elif react.reaction.emoji == "🆗":
                 await self.bot.say('Activate Role Order Correction')
+                for i in required_roles:
+                    if i not in rolenames:
+                        try:
+                            await discord.Client.create_role(server,name=i, mentionable=roles_fields[i][0], color=roles_fields[i][1])
+                        except:
+                            await self.bot.say('Could not create role: {}'.format(i))
+
             # await self.bot.say('Roles are out of Order.\nCorrect order and rerun ``/collectorsetup``')
 
                 # await self.bot.say('Setup Error: add role {}'.format(i))
