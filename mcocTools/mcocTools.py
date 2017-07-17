@@ -112,8 +112,8 @@ class MCOCTools:
             em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
             em.add_field(name='Corrective Action', value='Roles are missing. Do you want me to create missing Roles?\nIf yes, click the 🆗 reaction')
             message = await self.bot.say(embed=em)
-            await self.bot.add_reaction(message, "🆗")
             await self.bot.add_reaction(message,'❌')
+            await self.bot.add_reaction(message, "🆗")
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(15),emoji=['❌','🆗',])
             if react is None or react.reaction.emoji == "❌":
                 try:
