@@ -100,21 +100,21 @@ class MCOCTools:
                 phase_one = False
         await self.bot.say('\n'.join(stageone))
         if phase_one == False:
-            try:
-                message = await self.bot.send_message(ctx.message.channel, 'Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
-                await self.bot.add_reaction(message, "🆗")
-                react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗'])
-                if react is None:
+            message = await self.bot.say('Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
+            # message = await self.bot.send_message(ctx.message.channel, 'Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
+            await self.bot.add_reaction(message, "🆗")
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗'])
+            if react is None:
+                try:
                     try:
-                        try:
-                            await self.bot.clear_reactions(message)
-                        except:
-                            await self.bot.remove_reaction(message, "🆗", self.bot.user)
+                        await self.bot.clear_reactions(message)
                     except:
-                        pass
-                    return None
-                elif react.reaction.emoji == "🆗":
-                    await self.bot.say('Activate Role Order Correction')
+                        await self.bot.remove_reaction(message, "🆗", self.bot.user)
+                except:
+                    pass
+                return None
+            elif react.reaction.emoji == "🆗":
+                await self.bot.say('Activate Role Order Correction')
             # await self.bot.say('Roles are out of Order.\nCorrect order and rerun ``/collectorsetup``')
 
                 # await self.bot.say('Setup Error: add role {}'.format(i))
