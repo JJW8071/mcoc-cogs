@@ -113,7 +113,7 @@ class MCOCTools:
                     except:
                         pass
                     return None
-                if react.reaction.emoji == "🆗"
+                elif react.reaction.emoji == "🆗":
                     await self.bot.say('Activate Role Order Correction')
             # await self.bot.say('Roles are out of Order.\nCorrect order and rerun ``/collectorsetup``')
 
