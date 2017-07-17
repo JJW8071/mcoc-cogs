@@ -100,9 +100,9 @@ class MCOCTools:
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         em=discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol',description='')
         for i in required_roles:
-            if i in rolenames:
-                stageone.append(':white_check_mark: {}'.format(i))
-            else:
+            if i not in rolenames:
+                # stageone.append(':white_check_mark: {}'.format(i))
+            # else:
                 stageone.append('❌ {}'.format(i))
                 phase_one = False
         em.add_field(name='',value='\n'.join(stageone))
