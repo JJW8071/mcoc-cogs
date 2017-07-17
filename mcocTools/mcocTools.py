@@ -91,7 +91,7 @@ class MCOCTools:
         for r in roles:
             rolenames.append(r.name)
         required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner'}
-        roles_fields={'officers': {True, discord.Color.silver(),},
+        roles_fields={'officers': {True, discord.Color.white(),},
                     'bg1':{True, discord.Color.blue(), },
                     'bg2':{True, discord.Color.purple(), },
                     'bg3':{True, discord.Color.orange(), },}
