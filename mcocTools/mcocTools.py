@@ -92,15 +92,19 @@ class MCOCTools:
             rolenames.append(r.name)
         required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner'}
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
+        em=discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol',description='')
         for i in required_roles:
             if i in rolenames:
                 stageone.append(':white_check_mark: {}'.format(i))
             else:
                 stageone.append(':negative_squared_cross_mark: {}'.format(i))
                 phase_one = False
-        await self.bot.say('\n'.join(stageone))
+        em.add_field(name='Phase One: Roles',value=('n'.join(stageone))
+        # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
-            message = await self.bot.say('Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
+            em.add_field(name='Corrective Action', value='Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
+            message = await self.bot.say(embed=em)
+            # message = await self.bot.say('Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
             # message = await self.bot.send_message(ctx.message.channel, 'Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
             await self.bot.add_reaction(message, "🆗")
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗'])
