@@ -99,7 +99,7 @@ class MCOCTools:
             else:
                 stageone.append(':negative_squared_cross_mark: {}'.format(i))
                 phase_one = False
-        em.add_field(name='Phase One: Roles',value=('n'.join(stageone))
+        em.add_field(name='Phase One: Roles',value='n'.join(stageone))
         # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
             em.add_field(name='Corrective Action', value='Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
