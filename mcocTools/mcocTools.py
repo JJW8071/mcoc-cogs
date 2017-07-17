@@ -99,7 +99,7 @@ class MCOCTools:
                 stageone.append(':negative_squared_cross_mark: {}'.format(i))
                 phase_one = False
         await self.bot.say('\n'.join(stageone))
-        if phase_one = False:
+        if phase_one == False:
             try:
                 message = await self.bot.send_message(ctx.message.channel, 'Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
                 await self.bot.add_reaction(message, "🆗")
