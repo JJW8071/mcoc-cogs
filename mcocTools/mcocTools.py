@@ -125,8 +125,8 @@ class MCOCTools:
                     try:
                         await self.bot.delete_message(message)
                         await self.bot.delete_message(message0)
-                        for page in pages:
-                            await self.bot.delete(messages[page])
+                        for message in messages:
+                            await self.bot.delete_message(message)
                         # await self.bot.clear_reactions(message)
                     except:
                         await self.bot.remove_reaction(message, "🆗", self.bot.user)
