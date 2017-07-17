@@ -77,7 +77,8 @@ class MCOCTools:
     @commands.command(manage_server=True, manage_roles=True, pass_context=True)
     async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
-        ### IN DEVELOPMENT - PRE ALPHA ###
+        ### IN DEVELOPMENT - ALPHA ###
+        As in, don't do this at home.
         '''
         server = ctx.message.server
         # 1 ) Check permissions
