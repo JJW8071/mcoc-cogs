@@ -87,46 +87,27 @@ class MCOCTools:
         # 3 ) Check role order
         rolenames = []
         roles = server.roles
-        phase_one = True
+
         for r in roles:
             rolenames.append(r.name)
-        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner'}
+        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100\%LOL','LOL','RTL','ROL','100\%Act4','Summoner'}
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         for i in required_roles:
             if i in rolenames:
                 stageone.append(':white_check_mark: {}'.format(i))
             else:
                 stageone.append(':negative_squared_cross_mark: {}'.format(i))
-                phase_one = False
         await self.bot.say('\n'.join(stageone))
-        if phase_one = False:
-            try:
-                message = await self.bot.send_message(ctx.message.channel, 'Roles are out of Order. Do you want me to fix the role order?\nIf yes, click the 🆗 reaction')
-                await self.bot.add_reaction(message, "🆗")
-                react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(30),emoji=['🆗'])
-                if react is None:
-                    try:
-                        try:
-                            await self.bot.clear_reactions(message)
-                        except:
-                            await self.bot.remove_reaction(message, "🆗", self.bot.user)
-                    except:
-                        pass
-                    return None
-                if react.reaction.emoji == "🆗"
-                    await self.bot.say('Activate Role Order Correction')
-            # await self.bot.say('Roles are out of Order.\nCorrect order and rerun ``/collectorsetup``')
 
                 # await self.bot.say('Setup Error: add role {}'.format(i))
 
-        # role_hierarchy = server.role_hierarchy
-        # roleorder = ['Setup Conditions 2:\nRole Order: ']
-        # for role in role_hierarchy:
-        #
-        #     # roleorder.append('{}'.format(role.name))
-        # await self.bot.say('\n'.join(roleorder))
-        # print(role_hierarchy)
-        # await self.bot.say('collectorsetup complete')
+        role_hierarchy = server.role_hierarchy
+        roleorder = ['Setup Conditions 2:\nRole Order: ']
+        for role in role_hierarchy:
+            roleorder.append('{}'.format(role.name))
+        await self.bot.say('\n'.join(roleorder))
+        print(role_hierarchy)
+        await self.bot.say('collectorsetup complete')
 
     @commands.command(pass_context=True,aliases={'collector','infocollector'})
     async def aboutcollector(self,ctx):
