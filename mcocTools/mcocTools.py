@@ -108,7 +108,8 @@ class MCOCTools:
         messages = []
         for page in pages:
             em = discord.Embed(color=discord.Color.gold(),title='',description=page)
-            messages[page] = await.self.bot.say(embed=em1)
+            message = await self.bot.say(embed=em1)
+            messages.append(message)
         # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
             em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
