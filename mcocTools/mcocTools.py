@@ -99,19 +99,18 @@ class MCOCTools:
                     'bg3':{True, discord.Color.orange(), },}
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         em=discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol',description='')
-        message0 = await self.bot.say(embed=em)
         for i in required_roles:
             if i in rolenames:
                 stageone.append(':white_check_mark: {}'.format(i))
             else:
-                stageone.append(':negative_squared_cross_mark: {}'.format(i))
+                stageone.append('❌ {}'.format(i))
                 phase_one = False
-        pages = chat.pagify('\n'.join(stageone))
-        messages = []
-        for page in pages:
-            em = discord.Embed(color=discord.Color.gold(),title='',description=page)
-            message = await self.bot.say(embed=em)
-            messages.append(message)
+        em.add_field(name='',value='\n'.join(stageone))
+        message0 = await self.bot.say(embed=em)
+        # for page in pages:
+        #     em = discord.Embed(color=discord.Color.gold(),title='',description=page)
+        #     message = await self.bot.say(embed=em)
+        #     messages.append(message)
         # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
             em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
@@ -125,8 +124,6 @@ class MCOCTools:
                     try:
                         await self.bot.delete_message(message)
                         await self.bot.delete_message(message0)
-                        for message in messages:
-                            await self.bot.delete_message(messages[message])
                         # await self.bot.clear_reactions(message)
                     except:
                         await self.bot.remove_reaction(message, "🆗", self.bot.user)
