@@ -110,7 +110,7 @@ class MCOCTools:
         messages = []
         for page in pages:
             em = discord.Embed(color=discord.Color.gold(),title='',description=page)
-            message = await self.bot.say(embed=em1)
+            message = await self.bot.say(embed=em)
             messages.append(message)
         # await self.bot.say('\n'.join(stageone))
         if phase_one == False:
