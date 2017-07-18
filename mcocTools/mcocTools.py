@@ -321,7 +321,7 @@ class MCOCTools:
 
 
 
-    async def setup_phase_one( ctx):
+    async def setup_phase_one(self, ctx):
         '''Check Server ROLES'''
         server = ctx.message.server
         rolenames = []
