@@ -343,8 +343,8 @@ class MCOCTools:
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         for i in required_roles:
             if i not in rolenames:
-                # stageone.append(':white_check_mark: {}'.format(i))
-            # else:
+                stageone.append('☑️ {}'.format(i))
+            else:
                 stageone.append('❌ {}'.format(i))
                 phase_one = False
         desc = '\n'.join(stageone)
