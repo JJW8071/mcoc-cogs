@@ -323,9 +323,12 @@ class MCOCTools:
 
     async def setup_phase_one(self, ctx):
         '''Check Server ROLES'''
+        repeat_phase = self.phase_one(ctx)
+        next_phase = self.phase_two(ctx)
+
+        roles = server.roles
         server = ctx.message.server
         rolenames = []
-        roles = server.roles
         phase_one = True
         for r in roles:
             rolenames.append(r.name)
@@ -351,6 +354,7 @@ class MCOCTools:
             message = await self.bot.send_message(ctx.message.channel, embed=em)
             await self.bot.add_reaction(message,'🔁')
             await self.bot.add_reaction(message,'❌')
+            await self.bot.add_reaction(message, '➡')
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁'])
             if react is None or react.reaction.emoji == "❌":
                 try:
@@ -360,9 +364,21 @@ class MCOCTools:
                 return None
             elif react.reaction.emoji == '🔁':
                 await self.bot.delete_message(message)
-                return await self.phase_one(ctx)
+                return await repeat_phase
+            elif react.reaction.emoji == '➡':
+                await self.bot.delete_message(message)
+                return await next_phase
         elif phase_one == True:
             return True
+
+    async def phase_two(ctx):
+        '''Check Role Permissions'''
+        message = await self.bot.say('initiate phase two')
+        prev_phase = self.phase_one(ctx)
+        repeat = self.phase_two(ctx)
+        next_phase = self.phase_three(ctx)
+        roles = server.roles
+        server = ctx.message.server
 
 
 def load_csv(filename):
