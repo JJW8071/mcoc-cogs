@@ -323,8 +323,8 @@ class MCOCTools:
 
     async def setup_phase_one(self, ctx):
         '''Check Server ROLES'''
-        repeat_phase = self.setup_phase_one(ctx)
-        next_phase = self.setup_phase_two(ctx)
+        repeat_phase = await self.setup_phase_one(ctx)
+        next_phase = await self.setup_phase_two(ctx)
 
         roles = server.roles
         server = ctx.message.server
@@ -364,19 +364,19 @@ class MCOCTools:
                 return None
             elif react.reaction.emoji == '🔁':
                 await self.bot.delete_message(message)
-                return await repeat_phase
+                return repeat_phase
             elif react.reaction.emoji == '➡':
                 await self.bot.delete_message(message)
-                return await next_phase
+                return next_phase
         elif phase_one == True:
             return True
 
     async def setup_phase_two(ctx):
         '''Check Role Permissions'''
         message = await self.bot.say('initiate phase two')
-        prev_phase = self.setup_phase_one(ctx)
-        repeat = self.setup_phase_two(ctx)
-        next_phase = self.setup_phase_three(ctx)
+        prev_phase =await self.setup_phase_one(ctx)
+        repeat_phase = await self.setup_phase_two(ctx)
+        next_phase = await self.setup_phase_three(ctx)
         roles = server.roles
         server = ctx.message.server
 
