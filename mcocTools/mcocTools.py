@@ -345,18 +345,14 @@ def setup_phase_one(ctx):
     desc = '\n'.join(stageone)
     if phase_one == False:
         em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol',description=desc)
-        # message0 = await self.bot.say(embed=em)
-        # em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
         em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
-        message = await self.bot.say(embed=em)
+        message = await self.bot.send_message(ctx.message.channel, embed=em)
         await self.bot.add_reaction(message,'🔁')
         await self.bot.add_reaction(message,'❌')
-        # await self.bot.add_reaction(message, "🆗")
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁'])
         if react is None or react.reaction.emoji == "❌":
             try:
                 await self.bot.delete_message(message)
-                # await self.bot.delete_message(message0)
             except:
                 pass
             return None
