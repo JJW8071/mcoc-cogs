@@ -372,14 +372,21 @@ class MCOCTools:
             await setup_phase_two
 
     async def setup_phase_two(self, ctx):
-        '''Check Role Permissions'''
+        '''Check Role ORDER'''
         message = await self.bot.say('initiate phase two')
         # prev_phase =await self.setup_phase_one(ctx)
         # repeat_phase = await self.setup_phase_two(ctx)
         # next_phase = await self.setup_phase_three(ctx)
         server = ctx.message.server
         roles = server.roles
-        rolenames = []
+        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
+        em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
+        for r in roles:
+            if r.name =='Collector':
+                collector = r
+        else:
+            await self.bot.say('Collector ROLE not found')
+        em.add_field(title='Position',value='{}'.format(collector.position))
         phase = True
         phase = False
         desc = 'filler text'
