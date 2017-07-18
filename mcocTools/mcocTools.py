@@ -342,7 +342,7 @@ class MCOCTools:
                     }
         stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
         for i in required_roles:
-            if i not in rolenames:
+            if i in rolenames:
                 stageone.append('☑️ {}'.format(i))
             else:
                 stageone.append('❌ {}'.format(i))
