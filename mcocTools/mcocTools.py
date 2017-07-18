@@ -369,7 +369,7 @@ class MCOCTools:
                 await self.bot.delete_message(message)
                 return next_phase
         elif phase_one == True:
-            return True
+            await setup_phase_two
 
     async def setup_phase_two(ctx):
         '''Check Role Permissions'''
