@@ -714,7 +714,7 @@ class MCOC(ChampionFactory):
             await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph[1]))
             return
         try:
-            title, desc = await champ.process_sig_description()
+            title, desc, sig_calcs = await champ.process_sig_description()
         except KeyError:
             await champ.missing_sig_ad()
             return
@@ -722,10 +722,59 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=title, value=champ.star_str)
-        em.add_field(name='Signature Level {}'.format(champ.sig),  value=desc)
+        em.add_field(name='Signature Level {}'.format(champ.sig), 
+                value=desc.format(d=sig_calcs))
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    @commands.command(hidden=True)
+    async def dump_sigs(self):
+        with open('sig_data_4star.json', encoding='utf-8', mode="w") as fp:
+            #jenc = json.JSONEncoder(indent='\t', sort_keys=True)
+            reader = load_csv(local_files['effect_keys'])
+            dump = {}
+            for c, row in enumerate(reader):
+                #if c < 75 or c > 90:
+                    #continue
+                champ = await self.get_champion(row['CHAMP'].lower())
+                item = {'name': champ.full_name, 'sig_data': []}
+                for i in range(1, 100):
+                    champ.update_attrs({'sig': i})
+                    try:
+                        title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
+                    except KeyError:
+                        break
+                    if sig_calcs is None:
+                        break
+                    if i == 1:
+                        item['title'] = title
+                        item['description'] = desc
+                        item['star_rank'] = champ.star_str
+                    item['sig_data'].append(sig_calcs)
+                if not item['sig_data']:
+                    continue
+                #fp.write(jenc.encode(item))
+                dump[champ.mattkraftid] = item
+                print(champ.full_name)
+            json.dump(dump, fp, indent='\t', sort_keys=True)
+        await self.bot.say('Hopefully dumped')
+
+    @commands.command(hidden=True)
+    async def json_sig(self, *, champ : ChampConverterSig):
+        if champ.star != 4 or champ.rank != 5:
+            await self.bot.say('This function only checks 4* rank5 champs')
+            return
+        jfile = dataIO.load_json('sig_data_4star.json')
+        title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
+        jsig = jfile[champ.mattkraftid]
+        em = discord.Embed(title='Check for {}'.format(champ.full_name))
+        em.add_field(name=jsig['title'], 
+                value=jsig['description'].format(d=jsig['sig_data'][champ.sig-1]))
+        await self.bot.say(embed=em)
+        assert title == jsig['title']
+        assert desc == jsig['description']
+        assert sig_calcs == jsig['sig_data'][champ.sig-1]
 
     @command_arg_help(aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
@@ -1087,7 +1136,7 @@ class Champion:
                 value='Contribute your data at http://discord.gg/wJqpYGS')
         await self.bot.say(embed=em)
 
-    async def process_sig_description(self):
+    async def process_sig_description(self, quiet=False):
         brkt_re = re.compile(r'{([0-9])}')
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self.get_mcoc_keys()
@@ -1109,7 +1158,7 @@ class Champion:
             logger.debug('coeff and ekey check out')
 
         if self.sig == 0:
-            return sigs[title], '\n'.join([sigs[k] for k in simple])
+            return sigs[title], '\n'.join([sigs[k] for k in simple]), None
         sig_calcs = {}
         ftypes = {}
         data_missing = False
@@ -1121,9 +1170,10 @@ class Champion:
                 m = float(coeff['ability_norm' + i])
                 b = float(coeff['offset' + i])
             except:
-                await self.missing_sig_ad()
+                if not quiet:
+                    await self.missing_sig_ad()
                 self.update_attrs({'sig': 0})
-                return sigs[title], '\n'.join([sigs[k] for k in simple])
+                return sigs[title], '\n'.join([sigs[k] for k in simple]), None
             ckey = ekey['Location_' + i]
             raw_str = '{:.2f}'
             raw_per_str = '{:.2%}'
@@ -1165,7 +1215,7 @@ class Champion:
                         self._sig_header(sigs[kabam_key])))
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
-        return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
+        return sigs[title], '\n'.join(fdesc), sig_calcs
 
     def get_mcoc_keys(self):
         sigs = load_kabam_json(kabam_bcg_stat_en)
