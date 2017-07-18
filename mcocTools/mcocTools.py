@@ -319,7 +319,8 @@ class MCOCTools:
 
 
 
-def setup_phase_one(ctx)
+def setup_phase_one(ctx):
+    '''Check Server ROLES'''
     server = ctx.message.server
     rolenames = []
     roles = server.roles
