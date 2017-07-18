@@ -326,8 +326,8 @@ class MCOCTools:
         # repeat_phase = await self.setup_phase_one(ctx)
         # next_phase = await self.setup_phase_two(ctx)
 
-        roles = server.roles
         server = ctx.message.server
+        roles = server.roles
         rolenames = []
         phase_one = True
         for r in roles:
