@@ -329,7 +329,7 @@ class MCOCTools:
         server = ctx.message.server
         roles = server.roles
         rolenames = []
-        phase_one = True
+        phase = True
         for r in roles:
             rolenames.append(r.name)
         required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
@@ -346,10 +346,10 @@ class MCOCTools:
                 stageone.append('☑️ {}'.format(i))
             else:
                 stageone.append('❌ {}'.format(i))
-                phase_one = False
+                phase = False
         desc = '\n'.join(stageone)
-        if phase_one == False:
-            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol',description=desc)
+        if phase == False:
+            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [1]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
             message = await self.bot.send_message(ctx.message.channel, embed=em)
             await self.bot.add_reaction(message,'🔁')
@@ -368,7 +368,7 @@ class MCOCTools:
             elif react.reaction.emoji == '➡':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_two(ctx)
-        elif phase_one == True:
+        elif phase == True:
             await setup_phase_two
 
     async def setup_phase_two(self, ctx):
@@ -377,8 +377,41 @@ class MCOCTools:
         # prev_phase =await self.setup_phase_one(ctx)
         # repeat_phase = await self.setup_phase_two(ctx)
         # next_phase = await self.setup_phase_three(ctx)
-        roles = server.roles
         server = ctx.message.server
+        roles = server.roles
+        rolenames = []
+        phase = True
+        phase = False
+        if phase == False:
+            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
+            em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
+            message = await self.bot.send_message(ctx.message.channel, embed=em)
+            await self.bot.add_reaction(message,'⬅')
+            await self.bot.add_reaction(message,'🔁')
+            await self.bot.add_reaction(message,'❌')
+            await self.bot.add_reaction(message, '➡')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁','➡'])
+            if react is None or react.reaction.emoji == "❌":
+                try:
+                    await self.bot.delete_message(message)
+                except:
+                    pass
+                return None
+            elif react.reaction.emoji == '🔁':
+                await self.bot.delete_message(message)
+                return await self.setup_phase_two(ctx)
+            elif react.reaction.emoji == '➡':
+                await self.bot.delete_message(message)
+                return await self.setup_phase_three(ctx)
+            elif react.reaction.emoji == '⬅':
+                await self.bot.delete_message(message)
+                return await self.setup_phase_one(ctx)
+        elif phase == True:
+            await setup_phase_three
+
+    async def setup_phase_three(self, ctx):
+        '''Check Role Permissions'''
+        message = await self.bot.say('initiate phase three')
 
 
 def load_csv(filename):
