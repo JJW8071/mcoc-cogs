@@ -355,7 +355,7 @@ class MCOCTools:
             await self.bot.add_reaction(message,'🔁')
             await self.bot.add_reaction(message,'❌')
             await self.bot.add_reaction(message, '➡')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁'])
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁','➡'])
             if react is None or react.reaction.emoji == "❌":
                 try:
                     await self.bot.delete_message(message)
