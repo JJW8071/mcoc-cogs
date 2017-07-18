@@ -307,14 +307,12 @@ class MCOCTools:
         '''
         # 1) Check Roles present
         # 2) Check Role Permissions
+        # 3) Check Role Order
         # Manage Messages required for Cleanup
         # Manage Server required for Role Creation / Deletion
         # Manage Roles required for Role assignment / removal
         # 2 ) Check roles
         # 3 ) Check role order
-        if 'Collector' not in ctx.message.server.roles:
-            await self.bot.say('Collecor Role not present')
-
         check1 = await self.setup_phase_one(ctx)
         if check1:
             await self.bot.say(embed=discord.Embed(color=discord.color.red(),
