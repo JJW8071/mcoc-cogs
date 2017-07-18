@@ -299,11 +299,11 @@ class MCOCTools:
             text.append(row['Text'].format(row[str(rank)]))
         return text
 
-    @commands.command(manage_server=True, manage_roles=True, pass_context=True)
+    @checks.admin_or_permissions(manage_server=True, manage_roles=True)
+    @commands.command(pass_context=True)
     async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
-        ### IN DEVELOPMENT - ALPHA ###
-        As in, don't do this at home.
+        Collector Role Requires admin
         '''
         # 1) Check Roles present
         # 2) Check Role Permissions
