@@ -371,7 +371,7 @@ class MCOCTools:
         elif phase_one == True:
             await setup_phase_two
 
-    async def setup_phase_two(ctx):
+    async def setup_phase_two(self, ctx):
         '''Check Role Permissions'''
         message = await self.bot.say('initiate phase two')
         # prev_phase =await self.setup_phase_one(ctx)
