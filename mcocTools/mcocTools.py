@@ -312,7 +312,7 @@ class MCOCTools:
         # Manage Roles required for Role assignment / removal
         # 2 ) Check roles
         # 3 ) Check role order
-        if 'Collector' not in server.roles:
+        if 'Collector' not in ctx.message.server.roles:
             await self.bot.say('Collecor Role not present')
 
         check1 = await self.setup_phase_one(ctx)
