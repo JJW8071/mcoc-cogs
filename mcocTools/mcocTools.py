@@ -74,85 +74,6 @@ class MCOCTools:
     #     em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
     #     await self.bot.say(embed=em)
 
-    @commands.command(manage_server=True, manage_roles=True, pass_context=True)
-    async def collectorsetup(self,ctx,*args):
-        '''Server Setup Guide
-        ### IN DEVELOPMENT - ALPHA ###
-        As in, don't do this at home.
-        '''
-        server = ctx.message.server
-        # 1 ) Check permissions
-        # Manage Messages required for Cleanup
-        # Manage Server required for Role Creation / Deletion
-        # Manage Roles required for Role assignment / removal
-        # 2 ) Check roles
-        # 3 ) Check role order
-        rolenames = []
-        roles = server.roles
-        phase_one = True
-        for r in roles:
-            rolenames.append(r.name)
-        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
-        roles_fields={'officers': {True, discord.Color.lighter_grey(),},
-                    'bg1':{True, discord.Color.blue(), },
-                    'bg2':{True, discord.Color.purple(), },
-                    'bg3':{True, discord.Color.orange(), },
-                    'TestRole1':{True, discord.Color.default(), },
-                    'TestRole2':{True, discord.Color.light_grey()},
-                    }
-        stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
-        for i in required_roles:
-            if i not in rolenames:
-                # stageone.append(':white_check_mark: {}'.format(i))
-            # else:
-                stageone.append('❌ {}'.format(i))
-                phase_one = False
-        desc = '\n'.join(stageone)
-        if phase_one == False:
-            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol',description=desc)
-            # message0 = await self.bot.say(embed=em)
-            # em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
-            em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
-            message = await self.bot.say(embed=em)
-            await self.bot.add_reaction(message,'🔁')
-            await self.bot.add_reaction(message,'❌')
-            # await self.bot.add_reaction(message, "🆗")
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁'])
-            if react is None or react.reaction.emoji == "❌":
-                try:
-                    await self.bot.delete_message(message)
-                    # await self.bot.delete_message(message0)
-                except:
-                    pass
-                return None
-            elif react.reaction.emoji == '🔁':
-                await self.bot.delete_message(message)
-                return await self.collectorsetup(ctx, args)
-
-                # await self.bog.delete_message(message0)
-            # elif react.reaction.emoji == "🆗":
-            #     await self.bot.say('Activate Role Order Correction')
-            #     for i in required_roles:
-            #         if i not in rolenames:
-            #             try:
-            #                 # await self.bot.create_role(server,name=i, mentionable=roles_fields[i][0], color=roles_fields[i][1])
-            #                 await self.bot.create_role(server, name=i, color=roles_fields[i][1], permissions=discord.Permissions(permissions=0), hoist=False)
-            #             except:
-            #                 await self.bot.say('Could not create role: {}'.format(i))
-
-            # await self.bot.say('Roles are out of Order.\nCorrect order and rerun ``/collectorsetup``')
-
-                # await self.bot.say('Setup Error: add role {}'.format(i))
-
-        # role_hierarchy = server.role_hierarchy
-        # roleorder = ['Setup Conditions 2:\nRole Order: ']
-        # for role in role_hierarchy:
-        #
-        #     # roleorder.append('{}'.format(role.name))
-        # await self.bot.say('\n'.join(roleorder))
-        # print(role_hierarchy)
-        # await self.bot.say('collectorsetup complete')
-
     @commands.command(pass_context=True,aliases={'collector','infocollector'})
     async def aboutcollector(self,ctx):
         """Shows info about Collector"""
@@ -372,12 +293,77 @@ class MCOCTools:
         #
         # return unlockcost, rankcost
 
-
     def _get_text(self, mastery, rank):
         rows = csv_get_rows(self.dataset,'Mastery',mastery)
         for row in rows:
             text.append(row['Text'].format(row[str(rank)]))
         return text
+
+    @commands.command(manage_server=True, manage_roles=True, pass_context=True)
+    async def collectorsetup(self,ctx,*args):
+        '''Server Setup Guide
+        ### IN DEVELOPMENT - ALPHA ###
+        As in, don't do this at home.
+        '''
+        # 1 ) Check permissions
+        # Manage Messages required for Cleanup
+        # Manage Server required for Role Creation / Deletion
+        # Manage Roles required for Role assignment / removal
+        # 2 ) Check roles
+        # 3 ) Check role order
+        check1 = await setup_phase_one(ctx)
+        if check1:
+            await self.bot.say(embed=discord.Embed(color=discord.color.red(),
+                                title='Collector Setup Protocol',
+                                description='☑ setup_phase_one '))
+
+
+
+def setup_phase_one(ctx)
+    server = ctx.message.server
+    rolenames = []
+    roles = server.roles
+    phase_one = True
+    for r in roles:
+        rolenames.append(r.name)
+    required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
+    roles_fields={'officers': {True, discord.Color.lighter_grey(),},
+                'bg1':{True, discord.Color.blue(), },
+                'bg2':{True, discord.Color.purple(), },
+                'bg3':{True, discord.Color.orange(), },
+                'TestRole1':{True, discord.Color.default(), },
+                'TestRole2':{True, discord.Color.light_grey()},
+                }
+    stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
+    for i in required_roles:
+        if i not in rolenames:
+            # stageone.append(':white_check_mark: {}'.format(i))
+        # else:
+            stageone.append('❌ {}'.format(i))
+            phase_one = False
+    desc = '\n'.join(stageone)
+    if phase_one == False:
+        em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol',description=desc)
+        # message0 = await self.bot.say(embed=em)
+        # em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
+        em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
+        message = await self.bot.say(embed=em)
+        await self.bot.add_reaction(message,'🔁')
+        await self.bot.add_reaction(message,'❌')
+        # await self.bot.add_reaction(message, "🆗")
+        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁'])
+        if react is None or react.reaction.emoji == "❌":
+            try:
+                await self.bot.delete_message(message)
+                # await self.bot.delete_message(message0)
+            except:
+                pass
+            return None
+        elif react.reaction.emoji == '🔁':
+            await self.bot.delete_message(message)
+            return await phase_one(ctx)
+    elif phase_one == True:
+        return True
 
 
 def load_csv(filename):
