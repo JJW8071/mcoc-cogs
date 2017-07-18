@@ -382,6 +382,7 @@ class MCOCTools:
         rolenames = []
         phase = True
         phase = False
+        desc = 'filler text'
         if phase == False:
             em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
