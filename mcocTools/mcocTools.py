@@ -109,25 +109,25 @@ class MCOCTools:
                 phase_one = False
         desc = '\n'.join(stageone)
         if phase_one == False:
-            em=discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol',description=desc)
-            message0 = await self.bot.say(embed=em)
-            em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
-            em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\nRerun test 🔁\nCancel setup ❌')
+            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol',description=desc)
+            # message0 = await self.bot.say(embed=em)
+            # em = discord.Embed(color=discord.Color.gold(),title='Server Setup Protocol', description='Stage 1: Roles')
+            em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
             message = await self.bot.say(embed=em)
+            await self.bot.add_reaction(message,'🔁')
             await self.bot.add_reaction(message,'❌')
             # await self.bot.add_reaction(message, "🆗")
-            await self.bot.add_reaction(message,'🔁')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author,timeout=int(120),emoji=['❌','🆗','🔁'])
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁'])
             if react is None or react.reaction.emoji == "❌":
                 try:
                     await self.bot.delete_message(message)
-                    await self.bot.delete_message(message0)
+                    # await self.bot.delete_message(message0)
                 except:
                     pass
                 return None
-            elif react == '🔁':
+            elif react.reaction.emoji == '🔁':
                 await self.bot.delete_message(message)
-                await self.bog.delete_message(message0)
+                # await self.bog.delete_message(message0)
             # elif react.reaction.emoji == "🆗":
             #     await self.bot.say('Activate Role Order Correction')
             #     for i in required_roles:
