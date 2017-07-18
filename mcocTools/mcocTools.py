@@ -323,8 +323,8 @@ class MCOCTools:
 
     async def setup_phase_one(self, ctx):
         '''Check Server ROLES'''
-        repeat_phase = self.phase_one(ctx)
-        next_phase = self.phase_two(ctx)
+        repeat_phase = self.setup_phase_one(ctx)
+        next_phase = self.setup_phase_two(ctx)
 
         roles = server.roles
         server = ctx.message.server
@@ -371,12 +371,12 @@ class MCOCTools:
         elif phase_one == True:
             return True
 
-    async def phase_two(ctx):
+    async def setup_phase_two(ctx):
         '''Check Role Permissions'''
         message = await self.bot.say('initiate phase two')
-        prev_phase = self.phase_one(ctx)
-        repeat = self.phase_two(ctx)
-        next_phase = self.phase_three(ctx)
+        prev_phase = self.setup_phase_one(ctx)
+        repeat = self.setup_phase_two(ctx)
+        next_phase = self.setup_phase_three(ctx)
         roles = server.roles
         server = ctx.message.server
 
