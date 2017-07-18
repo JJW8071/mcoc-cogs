@@ -127,6 +127,8 @@ class MCOCTools:
                 return None
             elif react.reaction.emoji == '🔁':
                 await self.bot.delete_message(message)
+                return await self.collectorsetup(ctx, args)
+
                 # await self.bog.delete_message(message0)
             # elif react.reaction.emoji == "🆗":
             #     await self.bot.say('Activate Role Order Correction')
