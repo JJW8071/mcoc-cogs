@@ -360,7 +360,7 @@ class MCOCTools:
                 return None
             elif react.reaction.emoji == '🔁':
                 await self.bot.delete_message(message)
-                return await phase_one(ctx)
+                return await self.phase_one(ctx)
         elif phase_one == True:
             return True
 
