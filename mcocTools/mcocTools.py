@@ -311,7 +311,7 @@ class MCOCTools:
         # Manage Roles required for Role assignment / removal
         # 2 ) Check roles
         # 3 ) Check role order
-        check1 = await setup_phase_one(ctx)
+        check1 = await setup_phase_one(self, ctx)
         if check1:
             await self.bot.say(embed=discord.Embed(color=discord.color.red(),
                                 title='Collector Setup Protocol',
@@ -319,7 +319,7 @@ class MCOCTools:
 
 
 
-def setup_phase_one(ctx):
+def setup_phase_one(self, ctx):
     '''Check Server ROLES'''
     server = ctx.message.server
     rolenames = []
