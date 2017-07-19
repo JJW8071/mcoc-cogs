@@ -301,7 +301,7 @@ class MCOCTools:
         return text
 
     @checks.admin_or_permissions(manage_server=True, manage_roles=True)
-    @commands.command(pass_context=True)
+    @commands.command(name='setup', pass_context=True)
     async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
         Collector Role Requires admin
@@ -396,7 +396,7 @@ class MCOCTools:
         phase = False
         desc = 'filler text'
         if phase == False:
-            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
+            # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
             message = await self.bot.send_message(ctx.message.channel, embed=em)
             await self.bot.add_reaction(message,'⬅')
