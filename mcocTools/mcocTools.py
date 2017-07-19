@@ -384,11 +384,11 @@ class MCOCTools:
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
         positions = []
         for r in roles:
-            positions.append('{} = {}'.join(r.position, r.name))
+            positions.append('{} = {}'.format(r.position, r.name))
         em.add_field(name='Position',value='\n'.join(positions))
         order = []
         for r in range(0,len(required_roles)-1):
-            order.append('{} = {}'.join(r+1, required_roles[r]))
+            order.append('{} = {}'.format(r+1, required_roles[r]))
         em.add_field(name='Correct order', value ='\n'.join(order) )
         phase = True
         phase = False
