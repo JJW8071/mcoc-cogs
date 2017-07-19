@@ -385,12 +385,12 @@ class MCOCTools:
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        em.add_field(name='Position',value='\n'.join(positions))
+        em.add_field(name='Position',value='\n'.join(positions.sorted(reverse=True))
         order = []
-        c=1
+        c=len(required_roles)
         for r in required_roles:
             order.append('{} = {}'.format(c, r))
-            c+=1
+            c-=1
         em.add_field(name='Correct order', value ='\n'.join(order) )
         phase = True
         phase = False
