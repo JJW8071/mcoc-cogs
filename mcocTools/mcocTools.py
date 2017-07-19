@@ -385,7 +385,7 @@ class MCOCTools:
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        positions = positions.sort(reversed=True))
+        positions = positions.sort(reverse=True))
         em.add_field(name='Position',value='\n'.join(positions))
         order = []
         c=len(required_roles)
