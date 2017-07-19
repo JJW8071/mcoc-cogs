@@ -380,7 +380,7 @@ class MCOCTools:
         # next_phase = await self.setup_phase_three(ctx)
         server = ctx.message.server
         roles = server.roles
-        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
+        required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2')
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
         positions = []
         for r in roles:
