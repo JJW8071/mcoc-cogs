@@ -382,9 +382,14 @@ class MCOCTools:
         roles = server.roles
         required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
-        # for r in roles:
-
-        em.add_field(name='Position',value='\n{} is {}'.format(join(r.position, r.name for r in roles)))
+        positions = []
+        for r in roles:
+            positions.append('{} = {}'.join(r.position, r.name))
+        em.add_field(name='Position',value='\n'.join(positions))
+        order = []
+        for r in range(0,len(required_roles)-1)
+            order.append('{} = {}'.join(r+1, required_roles[r]))
+        em.add_field(name='Correct order', value ='\n'.join(order) )
         phase = True
         phase = False
         desc = 'filler text'
