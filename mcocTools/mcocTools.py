@@ -387,7 +387,7 @@ class MCOCTools:
                 collector = r
         else:
             await self.bot.say('Collector ROLE not found')
-        em.add_field(title='Position',value='{}'.format(collector.position))
+        em.add_field(name='Position',value='{}'.format(collector.position))
         phase = True
         phase = False
         desc = 'filler text'
