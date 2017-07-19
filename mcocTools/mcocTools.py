@@ -389,7 +389,7 @@ class MCOCTools:
         order = []
         c=1
         for r in required_roles:
-            order.append('{} = {}'.format(c, required_roles[r]))
+            order.append('{} = {}'.format(c, r))
             c+=1
         em.add_field(name='Correct order', value ='\n'.join(order) )
         phase = True
