@@ -935,14 +935,15 @@ class Champion:
     base_tags = {'#cr{}'.format(i) for i in range(10, 130, 10)}
     base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
     base_tags.update({'#awake', '#sig0'})
+    dupe_levels = {2: 1, 3: 8, 4: 20, 5: 20}
 
     def __init__(self, attrs=None):
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
 
-        default = {'star': 4, 'rank': 5, 'sig': 99}
-        self._star = attrs.pop('star', default.pop('star'))
+        self._default = {'rank': 5, 'sig': 99}
+        self._star = attrs.pop('star', 4)
         if self._star < 1:
             logger.warn('Star {} for Champ {} is too low.  Setting to 1'.format(
                     self._star, self.full_name))
@@ -953,11 +954,10 @@ class Champion:
             self._star = 5
 
         for k,v in attrs.items():
-            if k not in default:
+            if k not in self._default:
                 setattr(self, k, v)
-        default.update(attrs)
         self.tags = set()
-        self.update_attrs(default)
+        self.update_attrs(attrs)
 
     def __eq__(self, other):
         return self.immutable_id == other.immutable_id \
@@ -968,25 +968,31 @@ class Champion:
         self.tags.difference_update(self.base_tags)
         for k in ('rank', 'sig'):
             if k in attrs:
-                setattr(self, k, attrs[k])
+                setattr(self, '_' + k, attrs[k])
         if self.sig < 0:
-            self.sig = 0
+            self._sig = 0
         if self.star == 5:
             if self.rank > 5:
-                self.rank = 5
+                self._rank = 5
             if self.sig > 200:
-                self.sig = 200
+                self._sig = 200
         elif self.star < 5:
             if self.rank > (self.star + 1):
-                self.rank = self.star + 1
+                self._rank = self.star + 1
             if self.sig > 99:
-                self.sig = 99
+                self._sig = 99
         self.tags.add('#cr{}'.format(self.chlgr_rating))
         self.tags.add('#{}star'.format(self.star))
         if self.sig == 0:
             self.tags.add('#sig0')
         else:
             self.tags.add('#awake')
+
+    def update_default(self, attrs):
+        self._default.update(attrs)
+
+    def inc_dupe(self):
+        self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
         image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
@@ -1012,6 +1018,17 @@ class Champion:
     @property
     def star(self):
         return self._star
+
+    @property
+    def rank(self):
+        return getattr(self, '_rank', self._default['rank'])
+
+    @property
+    def sig(self):
+        return getattr(self, '_sig', self._default['sig'])
+
+    def is_defined(self, attr):
+        return hasattr(self, '_' + attr)
 
     @property
     def immutable_id(self):
