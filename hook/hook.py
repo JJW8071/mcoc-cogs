@@ -244,6 +244,14 @@ class ChampionRoster:
         #else:
         #    await self.bot.send_message(channel, 'Updated Champion Information')
 
+    def set_defaults_of(self, champs):
+        for champ in champs:
+            iid = champ.immutable_id
+            if iid not in self.roster:
+                continue
+            champ.update_default({'rank': self.roster[iid].rank, 
+                    'sig': self.roster[iid].sig})
+
     def update(self, champs):
         track = {'new': set(), 'modified': set(), 'unchanged': set()}
         self._cache = {}
@@ -252,6 +260,11 @@ class ChampionRoster:
             if iid not in self.roster:
                 track['new'].add(champ.verbose_prestige_str)
             else:
+                #attrs = {}
+                #for attr in ('rank', 'sig'):
+                    #if not champ.is_defined(attr):
+                        #attrs[attr] = getattr(self.roster[iid], attr)
+                #champ.update_attrs(attrs)
                 if champ == self.roster[iid]:
                     track['unchanged'].add(champ.verbose_prestige_str)
                 else:
@@ -403,6 +416,10 @@ class Hook:
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
+        roster.set_defaults_of(champs)
+        await self._update(roster, champs)
+
+    async def _update(self, roster, champs):
         track = roster.update(champs)
         em = discord.Embed(title='Champion Update for {}'.format(roster.user.name),
                 color=discord.Color.gold())
@@ -411,6 +428,15 @@ class Hook:
                 em.add_field(name='{} Champions'.format(k.capitalize()),
                         value='\n'.join(sorted(track[k])), inline=False)
         await self.bot.say(embed=em)
+
+    @roster.command(pass_context=True, name='dupe')
+    async def _roster_dupe(self, ctx, *, champs: ChampConverterMult):
+        roster = ChampionRoster(ctx.bot, ctx.message.author)
+        await roster.load_champions()
+        roster.set_defaults_of(champs)
+        for champ in champs:
+            champ.inc_dupe()
+        await self._update(roster, champs)
 
     @roster.command(pass_context=True, name='delete', aliases=('del',))
     async def _roster_del(self, ctx, *, champs: ChampConverterMult):
@@ -493,16 +519,17 @@ class Hook:
         line_out = []
         for member in server.members:
             if role in member.roles:
-                champ_data = self.load_champ_data(member)
-                if champ_data['prestige'] > 0:
-                    prestige += champ_data['prestige']
+                roster = ChampionRoster(self.bot, member)
+                await roster.load_champions()
+                if roster.prestige > 0:
+                    prestige += roster.prestige
                     cnt += 1
                 if verbose is 1:
                     line_out.append('{:{width}} p = {}'.format(
-                        member.name, champ_data['prestige'], width=width))
+                        member.name, roster.prestige, width=width))
                 elif verbose is 2:
                     line_out.append('{:{width}} p = {}'.format(
-                        member.display_name, champ_data['prestige'], width=width))
+                        member.display_name, roster.prestige, width=width))
         if verbose > 0:
             line_out.append('_' * (width + 11))
         line_out.append('{0:{width}} p = {1}  from {2} members'.format(
