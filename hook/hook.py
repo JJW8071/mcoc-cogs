@@ -55,21 +55,27 @@ class HashtagRosterConverter(commands.Converter):
             raise MissingRosterError('No Roster found for {}'.format(user.name))
         return types.SimpleNamespace(tags=tags, user=user, roster=chmp_rstr)
 
-class RosterConverter(commands.Converter):
+class RosterUserConverter(commands.Converter):
     async def convert(self):
         user = None
         if self.argument:
             user = commands.UserConverter(self.ctx, self.argument).convert()
-        if user is None:
+        else:
             user = self.ctx.message.author
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         return chmp_rstr
 
+class RosterConverter(commands.Converter):
+    async def convert(self):
+        chmp_rstr = ChampionRoster(self.ctx.bot, self.ctx.message.author)
+        await chmp_rstr.load_champions()
+        return chmp_rstr
+
 class ChampionRoster:
 
-    data_dir = 'data/hook/users/{}/'
-    champs_file = data_dir + 'champs.json'
+    _data_dir = 'data/hook/users/{}/'
+    _champs_file = _data_dir + 'champs.json'
     #champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]' 
     attr_map = {'Rank': 'rank', 'Awakened': 'sig', 'Stars': 'star', 'Role': 'quest_role'}
     alliance_map = {'alliance-war-defense': 'awd',
@@ -87,11 +93,14 @@ class ChampionRoster:
     def __len__(self):
         return len(self.roster)
 
+    def __contains__(self, item):
+        return item in self.roster
+
     # handles user creation, adding new server, blocking
     def _create_user(self):
-        if not os.path.exists(self.champs_file.format(self.user.id)):
-            if not os.path.exists(self.data_dir.format(self.user.id)):
-                os.makedirs(self.data_dir.format(self.user.id))
+        if not os.path.exists(self.champs_file):
+            if not os.path.exists(self.data_dir):
+                os.makedirs(self.data_dir)
             champ_data = {
                 #"clan": None,
                 #"battlegroup": None,
@@ -104,7 +113,7 @@ class ChampionRoster:
                 "awo": [],
                 "max5": [],
             }
-            dataIO.save_json(self.champs_file.format(self.user.id), champ_data)
+            dataIO.save_json(self.champs_file, champ_data)
             #self.save_champ_data(champ_data)
 
     async def load_champions(self):
@@ -116,13 +125,15 @@ class ChampionRoster:
             self.roster[champ.immutable_id] = champ
 
     def load_champ_data(self):
-        return dataIO.load_json(self.champs_file.format(self.user.id))
+        data = dataIO.load_json(self.champs_file)
+        self.fieldnames = data['fieldnames']
+        return data
 
     def save_champ_data(self):
         #print(dumps(self, cls=CustomEncoder))
         #with open(self.champs_file.format(self.user.id), 'w') as fp:
             #dump(self, fp, indent=2, cls=CustomEncoder)
-        dataIO.save_json(self.champs_file.format(self.user.id), self)
+        dataIO.save_json(self.champs_file, self)
 
     def to_json(self):
         translate = ['fieldnames', 'prestige', 'max_prestige', 'top5',
@@ -131,6 +142,14 @@ class ChampionRoster:
         pack['roster'] = list(self.roster.values())
         return pack
         #return {i: getattr(self, i) for i in translate}
+
+    @property
+    def data_dir(self):
+        return self._data_dir.format(self.user.id)
+
+    @property
+    def champs_file(self):
+        return self._champs_file.format(self.user.id)
 
     async def get_champion(self, cdict):
         mcoc = self.bot.get_cog('MCOC')
@@ -145,8 +164,8 @@ class ChampionRoster:
         filtered = set()
         for c in self.roster.values():
             if tags.issubset(c.all_tags):
-                filtered.add(c)
-        return filtered
+                filtered.add(c.immutable_id)
+        return [self.roster[iid] for iid in filtered]
 
     @property
     def all_tags(self):
@@ -225,26 +244,37 @@ class ChampionRoster:
         #else:
         #    await self.bot.send_message(channel, 'Updated Champion Information')
 
-    async def hook_prestige(self, roster):
-        '''Careful.  This modifies the array of dicts in place.'''
-        missing = []
-        for cdict in roster:
-            cdict['maxpi'] = 0
-            if cdict['Stars'] < 4:
-                continue
-            try:
-                champ = await self.get_champion(cdict)
-            except KeyError:
-                missing.append(cdict['Id'])
-                continue
-            try:
-                cdict['Pi'] = champ.prestige
-            except AttributeError:
-                missing.append(cdict['Id'])
-                cdict['Pi'] = 0
-                continue
-            cdict['maxpi'] = champ.max_prestige
-        return missing
+    def update(self, champs):
+        track = {'new': set(), 'modified': set(), 'unchanged': set()}
+        self._cache = {}
+        for champ in champs:
+            iid = champ.immutable_id
+            if iid not in self.roster:
+                track['new'].add(champ.verbose_prestige_str)
+            else:
+                if champ == self.roster[iid]:
+                    track['unchanged'].add(champ.verbose_prestige_str)
+                else:
+                    mstr = '{} {} -> {} [ {} ]'.format(champ.star_name_str,
+                        self.roster[iid].rank_sig_str, champ.rank_sig_str, 
+                        champ.prestige)
+                    track['modified'].add(mstr)
+            self.roster[iid] = champ
+        self.save_champ_data()
+        return track
+
+    def delete(self, champs):
+        track = {'deleted': set(), 'non-existant': set()}
+        self._cache = {}
+        for champ in champs:
+            iid = champ.immutable_id
+            if iid not in self.roster:
+                track['non-existant'].add(champ.star_name_str)
+            else:
+                track['deleted'].add(champ.star_name_str)
+                self.roster.pop(iid)
+        self.save_champ_data()
+        return track
 
 
 class Hook:
@@ -257,10 +287,10 @@ class Hook:
 
 
     @commands.command(pass_context=True)
-    #async def profile(self, roster: RosterConverter):
+    #async def profile(self, roster: RosterUserConverter):
     async def profile(self, ctx, roster=''):
         """Displays a user profile."""
-        roster = await RosterConverter(ctx, roster).convert()
+        roster = await RosterUserConverter(ctx, roster).convert()
         em = discord.Embed(title="User Profile", description=roster.user.name)
         if roster:
             em.add_field(name='Prestige', value=roster.prestige)
@@ -371,7 +401,29 @@ class Hook:
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
-        pass
+        roster = ChampionRoster(ctx.bot, ctx.message.author)
+        await roster.load_champions()
+        track = roster.update(champs)
+        em = discord.Embed(title='Champion Update for {}'.format(roster.user.name),
+                color=discord.Color.gold())
+        for k in ('new', 'modified', 'unchanged'):
+            if track[k]:
+                em.add_field(name='{} Champions'.format(k.capitalize()),
+                        value='\n'.join(sorted(track[k])), inline=False)
+        await self.bot.say(embed=em)
+
+    @roster.command(pass_context=True, name='delete', aliases=('del',))
+    async def _roster_del(self, ctx, *, champs: ChampConverterMult):
+        roster = ChampionRoster(ctx.bot, ctx.message.author)
+        await roster.load_champions()
+        track = roster.delete(champs)
+        em = discord.Embed(title='Champion Deletion for {}'.format(roster.user.name),
+                color=discord.Color.gold())
+        for k in ('deleted', 'non-existant'):
+            if track[k]:
+                em.add_field(name='{} Champions'.format(k.capitalize()),
+                        value='\n'.join(sorted(track[k])), inline=False)
+        await self.bot.say(embed=em)
 
     @roster.command(pass_context=True, name='import')
     async def _roster_import(self, ctx):
@@ -388,18 +440,18 @@ class Hook:
 
     @roster.command(pass_context=True, name='export')
     async def _roster_export(self, ctx):
-        user = ctx.message.author
-        info = self.load_champ_data(user)
+        roster = ChampionRoster(ctx.bot, ctx.message.author)
+        await roster.load_champions()
         rand = randint(1000, 9999)
-        path, ext = os.path.splitext(self.champs_file.format(user.id))
+        path, ext = os.path.split(roster.champs_file)
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
-            writer = csv.DictWriter(fp, fieldnames=info['fieldnames'],
+            writer = csv.DictWriter(fp, fieldnames=roster.fieldnames,
                     extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
-            for row in info['champs']:
-                writer.writerow(row)
-        filename = self.data_dir.format(user.id) + '/champions.csv'
+            for champ in roster.roster.values():
+                writer.writerow(champ.to_json())
+        filename = roster.data_dir + '/champions.csv'
         os.replace(tmp_file, filename)
         await self.bot.upload(filename)
         os.remove(filename)

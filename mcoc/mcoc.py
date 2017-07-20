@@ -959,6 +959,11 @@ class Champion:
         self.tags = set()
         self.update_attrs(default)
 
+    def __eq__(self, other):
+        return self.immutable_id == other.immutable_id \
+                and self.rank == other.rank \
+                and self.sig == other.sig
+
     def update_attrs(self, attrs):
         self.tags.difference_update(self.base_tags)
         for k in ('rank', 'sig'):
@@ -1030,12 +1035,12 @@ class Champion:
 
     @property
     def star_name_str(self):
-        return '{0.stars_str} {0.full_name}'.format(self)
+        return '{0.star}{0.star_char} {0.full_name}'.format(self)
         #return '{0.star}★ {0.full_name}'.format(self)
 
     @property
     def rank_sig_str(self):
-        return '{0.rank}/{0.max_lvl} sig{0.sig}'.format(self)
+        return '{0.rank}/{0.max_lvl} sig{0.sig:<2}'.format(self)
 
     @property
     def verbose_prestige_str(self):
@@ -1076,7 +1081,7 @@ class Champion:
                     'quest_role': 'Role', 'max_prestige': 'maxpi'}
         pack = {}
         for attr, hook_key in translate.items():
-            pack[hook_key] = getattr(self, attr)
+            pack[hook_key] = getattr(self, attr, '')
         return pack
 
     def get_special_attacks(self):
