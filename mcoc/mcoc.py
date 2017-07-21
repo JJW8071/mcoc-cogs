@@ -115,6 +115,12 @@ def to_flat(per, ch_rating):
     num = (5 * ch_rating + 1500) * per
     return round(num/(100-per), 2)
 
+class QuietUserError(commands.UserInputError):
+    pass
+
+class AmbiguousArgError(QuietUserError):
+    pass
+
 class ChampConverter(commands.Converter):
     '''Argument Parsing class that geneartes Champion objects from user input'''
 
@@ -165,6 +171,14 @@ class ChampConverter(commands.Converter):
                 await bot.say("'{}' was not exact but found close alternative".format(
                         token))
                 champ = champs[0]
+            elif len(champs) > 1:
+                em = discord.Embed(title='Ambiguous Argument "{}"'.format(token),
+                        description='Resolved to multiple possible champs')
+                for champ in champs:
+                    em.add_field(name=champ.full_name, inline=False,
+                            value=chat.box(', '.join(champ.alias_set)))
+                await bot.say(embed=em)
+                raise AmbiguousArgError('Multiple matches for arg "{}"'.format(token))
             else:
                 err_str = "Cannot resolve alias for '{}'".format(token)
                 await bot.say(err_str)
@@ -369,7 +383,7 @@ class ChampionFactory():
             await response.release()
         elif response:
             err_str = "HTTP error code {} while trying to retrieve {}".format(
-                    response.status_code, key)
+                    response.status, key)
             logger.error(err_str)
             await response.release()
         elif verbose and remote_check:
@@ -580,12 +594,12 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(pass_context=True, aliases=('bio',))
-    #@command_arg_help(aliases=('bio',))
-    #async def champ_bio(self, *, champ : ChampConverterDebug):
-    async def champ_bio(self, ctx, *, champ):
+    #@commands.command(pass_context=True, aliases=['bio',])
+    @command_arg_help(aliases=('bio',))
+    async def champ_bio(self, *, champ : ChampConverterDebug):
+    #async def champ_bio(self, ctx, *, champ):
         '''Retrieve the Bio of a Champion'''
-        champ = await ChampConverter(ctx, champ).convert()
+        #champ = await ChampConverter(ctx, champ).convert()
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
@@ -700,7 +714,7 @@ class MCOC(ChampionFactory):
             await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph[1]))
             return
         try:
-            title, desc = await champ.process_sig_description()
+            title, desc, sig_calcs = await champ.process_sig_description()
         except KeyError:
             await champ.missing_sig_ad()
             return
@@ -708,10 +722,59 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=title, value=champ.star_str)
-        em.add_field(name='Signature Level {}'.format(champ.sig),  value=desc)
+        em.add_field(name='Signature Level {}'.format(champ.sig), 
+                value=desc.format(d=sig_calcs))
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    @commands.command(hidden=True)
+    async def dump_sigs(self):
+        with open('sig_data_4star.json', encoding='utf-8', mode="w") as fp:
+            #jenc = json.JSONEncoder(indent='\t', sort_keys=True)
+            reader = load_csv(local_files['effect_keys'])
+            dump = {}
+            for c, row in enumerate(reader):
+                #if c < 75 or c > 90:
+                    #continue
+                champ = await self.get_champion(row['CHAMP'].lower())
+                item = {'name': champ.full_name, 'sig_data': []}
+                for i in range(1, 100):
+                    champ.update_attrs({'sig': i})
+                    try:
+                        title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
+                    except KeyError:
+                        break
+                    if sig_calcs is None:
+                        break
+                    if i == 1:
+                        item['title'] = title
+                        item['description'] = desc
+                        item['star_rank'] = champ.star_str
+                    item['sig_data'].append(sig_calcs)
+                if not item['sig_data']:
+                    continue
+                #fp.write(jenc.encode(item))
+                dump[champ.mattkraftid] = item
+                print(champ.full_name)
+            json.dump(dump, fp, indent='\t', sort_keys=True)
+        await self.bot.say('Hopefully dumped')
+
+    @commands.command(hidden=True)
+    async def json_sig(self, *, champ : ChampConverterSig):
+        if champ.star != 4 or champ.rank != 5:
+            await self.bot.say('This function only checks 4* rank5 champs')
+            return
+        jfile = dataIO.load_json('sig_data_4star.json')
+        title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
+        jsig = jfile[champ.mattkraftid]
+        em = discord.Embed(title='Check for {}'.format(champ.full_name))
+        em.add_field(name=jsig['title'], 
+                value=jsig['description'].format(d=jsig['sig_data'][champ.sig-1]))
+        await self.bot.say(embed=em)
+        assert title == jsig['title']
+        assert desc == jsig['description']
+        assert sig_calcs == jsig['sig_data'][champ.sig-1]
 
     @command_arg_help(aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
@@ -872,14 +935,16 @@ class Champion:
     base_tags = {'#cr{}'.format(i) for i in range(10, 130, 10)}
     base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
     base_tags.update({'#awake', '#sig0'})
+    dupe_levels = {2: 1, 3: 8, 4: 20, 5: 20}
+    default_stars = {i: {'rank': i+1, 'sig': 99} for i in range(1,5)}
+    default_stars[5] = {'rank': 3, 'sig': 200}
 
     def __init__(self, attrs=None):
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
 
-        default = {'star': 4, 'rank': 5, 'sig': 99}
-        self._star = attrs.pop('star', default.pop('star'))
+        self._star = attrs.pop('star', 4)
         if self._star < 1:
             logger.warn('Star {} for Champ {} is too low.  Setting to 1'.format(
                     self._star, self.full_name))
@@ -888,37 +953,50 @@ class Champion:
             logger.warn('Star {} for Champ {} is too high.  Setting to 5'.format(
                     self._star, self.full_name))
             self._star = 5
+        self._default = self.default_stars[self._star].copy()
 
         for k,v in attrs.items():
-            if k not in default:
+            if k not in self._default:
                 setattr(self, k, v)
-        default.update(attrs)
         self.tags = set()
-        self.update_attrs(default)
+        self.update_attrs(attrs)
+
+    def __eq__(self, other):
+        return self.immutable_id == other.immutable_id \
+                and self.rank == other.rank \
+                and self.sig == other.sig
 
     def update_attrs(self, attrs):
         self.tags.difference_update(self.base_tags)
         for k in ('rank', 'sig'):
             if k in attrs:
-                setattr(self, k, attrs[k])
+                setattr(self, '_' + k, attrs[k])
         if self.sig < 0:
-            self.sig = 0
+            self._sig = 0
+        if self.rank < 1:
+            self._rank = 1
         if self.star == 5:
             if self.rank > 5:
-                self.rank = 5
+                self._rank = 5
             if self.sig > 200:
-                self.sig = 200
+                self._sig = 200
         elif self.star < 5:
             if self.rank > (self.star + 1):
-                self.rank = self.star + 1
+                self._rank = self.star + 1
             if self.sig > 99:
-                self.sig = 99
+                self._sig = 99
         self.tags.add('#cr{}'.format(self.chlgr_rating))
         self.tags.add('#{}star'.format(self.star))
         if self.sig == 0:
             self.tags.add('#sig0')
         else:
             self.tags.add('#awake')
+
+    def update_default(self, attrs):
+        self._default.update(attrs)
+
+    def inc_dupe(self):
+        self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
         image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
@@ -946,6 +1024,17 @@ class Champion:
         return self._star
 
     @property
+    def rank(self):
+        return getattr(self, '_rank', self._default['rank'])
+
+    @property
+    def sig(self):
+        return getattr(self, '_sig', self._default['sig'])
+
+    def is_defined(self, attr):
+        return hasattr(self, '_' + attr)
+
+    @property
     def immutable_id(self):
         return (type(self), self.star)
 
@@ -967,12 +1056,16 @@ class Champion:
 
     @property
     def star_name_str(self):
-        return '{0.stars_str} {0.full_name}'.format(self)
+        return '{0.star}{0.star_char} {0.full_name}'.format(self)
         #return '{0.star}★ {0.full_name}'.format(self)
 
     @property
     def rank_sig_str(self):
-        return '{0.rank}/{0.max_lvl} sig{0.sig}'.format(self)
+        return '{0.rank}/{0.max_lvl} sig{0.sig:<2}'.format(self)
+
+    @property
+    def verbose_prestige_str(self):
+        return '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self)
 
     @property
     def stars_str(self):
@@ -1009,7 +1102,7 @@ class Champion:
                     'quest_role': 'Role', 'max_prestige': 'maxpi'}
         pack = {}
         for attr, hook_key in translate.items():
-            pack[hook_key] = getattr(self, attr)
+            pack[hook_key] = getattr(self, attr, '')
         return pack
 
     def get_special_attacks(self):
@@ -1039,16 +1132,17 @@ class Champion:
         return self.prestige_data[self.star][self.rank-1][self.sig]
 
     @property
+    @validate_attr('prestige')
     def max_prestige(self):
-        rank = self.rank
+        cur_rank = self.rank
         if self.star == 5:
-            if rank != 4:
-                self.update_attrs({'rank': 3})
+            rank = 3 if cur_rank < 4 else 4
         else:
-            self.update_attrs({'rank': self.star + 1})
-        pi = self.prestige
+            rank = self.star + 1
         self.update_attrs({'rank': rank})
-        return pi
+        maxp = self.prestige
+        self.update_attrs({'rank': cur_rank})
+        return maxp
 
     @validate_attr('prestige')
     def get_prestige_arr(self, rank, sig_arr, star=4):
@@ -1068,7 +1162,7 @@ class Champion:
                 value='Contribute your data at http://discord.gg/wJqpYGS')
         await self.bot.say(embed=em)
 
-    async def process_sig_description(self):
+    async def process_sig_description(self, quiet=False):
         brkt_re = re.compile(r'{([0-9])}')
         sigs = load_kabam_json(kabam_bcg_stat_en)
         title, title_lower, simple, desc = self.get_mcoc_keys()
@@ -1090,7 +1184,7 @@ class Champion:
             logger.debug('coeff and ekey check out')
 
         if self.sig == 0:
-            return sigs[title], '\n'.join([sigs[k] for k in simple])
+            return sigs[title], '\n'.join([sigs[k] for k in simple]), None
         sig_calcs = {}
         ftypes = {}
         data_missing = False
@@ -1102,9 +1196,10 @@ class Champion:
                 m = float(coeff['ability_norm' + i])
                 b = float(coeff['offset' + i])
             except:
-                await self.missing_sig_ad()
+                if not quiet:
+                    await self.missing_sig_ad()
                 self.update_attrs({'sig': 0})
-                return sigs[title], '\n'.join([sigs[k] for k in simple])
+                return sigs[title], '\n'.join([sigs[k] for k in simple]), None
             ckey = ekey['Location_' + i]
             raw_str = '{:.2f}'
             raw_per_str = '{:.2%}'
@@ -1146,7 +1241,7 @@ class Champion:
                         self._sig_header(sigs[kabam_key])))
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
-        return sigs[title], '\n'.join(fdesc).format(d=sig_calcs)
+        return sigs[title], '\n'.join(fdesc), sig_calcs
 
     def get_mcoc_keys(self):
         sigs = load_kabam_json(kabam_bcg_stat_en)
@@ -1389,4 +1484,12 @@ def padd_it(word,max : int,opt='back'):
 
 
 def setup(bot):
+    if not hasattr(bot, '_command_error_orig'):
+        bot._command_error_orig = bot.on_command_error
+        @bot.event
+        async def on_command_error(error, ctx):
+            if isinstance(error, QuietUserError):
+                bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+            else:
+                await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
