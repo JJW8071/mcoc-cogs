@@ -309,7 +309,7 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choices=False):
+    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
         print('list len = {}'.format(len(embed_list)))
@@ -320,7 +320,8 @@ class Hook:
             if length > 5:
                 await self.bot.add_reaction(message, "⏪")
             await self.bot.add_reaction(message, "⬅")
-            await self.bot.add_reaction(message,"⏺")
+            if choice is True:
+                await self.bot.add_reaction(message,"⏺")
             await self.bot.add_reaction(message, "❌")
             await self.bot.add_reaction(message, "➡")
             if length > 5:
@@ -336,8 +337,7 @@ class Hook:
                     await self.bot.remove_reaction(message,"⏪", self.bot.user) #rewind
                     await self.bot.remove_reaction(message, "⬅", self.bot.user) #previous_page
                     await self.bot.remove_reaction(message, "❌", self.bot.user) # Cancel
-                    if choices is True:
-                        await self.bot.remove_reaction(message,"⏺",self.bot.user) #choose
+                    await self.bot.remove_reaction(message,"⏺",self.bot.user) #choose
                     await self.bot.remove_reaction(message, "➡", self.bot.user) #next_page
                     await self.bot.remove_reaction(message,"⏩", self.bot.user) # fast_forward
             except:
@@ -358,7 +358,7 @@ class Hook:
                 next_page = (page + 5) % len(embed_list)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react == "⏺": #choose
-                if choices is True:
+                if choice is True:
                     await self.bot.say(SELECTION.format(category+' '))
                     answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
                     if answer is not None:
