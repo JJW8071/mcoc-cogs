@@ -341,8 +341,9 @@ class Hook:
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             await self.bot.say(embed=em)
 
-    @commands.command(pass_context=True)
-    async def list_members(self, ctx, role: discord.Role, use_alias=True):
+    @commands.command(pass_context=True, aliases=('list_members','role_roster','list_users'))
+    async def users_by_role(self, ctx, role: discord.Role, use_alias=True):
+        '''Embed a list of server users by Role'''
         server = ctx.message.server
         members = []
         for member in server.members:
@@ -359,7 +360,8 @@ class Hook:
 
     @commands.command(pass_context=True, no_pm=True)
     async def team(self,ctx, *, user : discord.Member=None):
-        """Displays a user profile."""
+        """Displays a user's AQ/AWO/AWD teams.
+        Teams are set in hook/champions"""
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
@@ -398,7 +400,9 @@ class Hook:
     @commands.group(pass_context=True, invoke_without_command=True)
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
-        """Displays a user profile."""
+        """Displays a user roster with tag filtering
+        ex.
+        /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         filtered = await hargs.roster.filter_champs(hargs.tags)
         if not filtered:
