@@ -318,9 +318,9 @@ class Hook:
         """Displays a user profile."""
         pkg = ctx.message.content
         if pkg is None:
-            author = ctx.message.author
+            author = discrod.User(ctx.message.author)
         else:
-            author = ctx.message.content
+            author = discord.User(ctx.message.content)
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
             embeds = []
