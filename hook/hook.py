@@ -624,8 +624,8 @@ class Hook:
             message = await self.bot.edit_message(message, embed=em)
 
         react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
-        if react.message.author == self.bot.user:
-            react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
+        # if react.reaction.me == self.bot.user:
+        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
         if react is None:
             try:
                 try:
