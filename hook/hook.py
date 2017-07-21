@@ -72,7 +72,7 @@ class Hook:
         em0 = discord.Embed(title='User Profile {}'.format(user.name), description='In-Game name: ')
         em0.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         if info['top5']:
-            em = em1
+            em = em0
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
             embeds.add(em)
