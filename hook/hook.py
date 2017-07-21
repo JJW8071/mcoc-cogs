@@ -316,11 +316,6 @@ class Hook:
     #async def profile(self, roster: RosterUserConverter):
     async def profile(self, ctx, roster=''):
         """Displays a user profile."""
-        pkg = ctx.message.content
-        if pkg is None:
-            author = discrod.User(ctx.message.author)
-        else:
-            author = discord.User(ctx.message.content)
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
             embeds = []
@@ -337,9 +332,9 @@ class Hook:
             await self.pages_menu(ctx, embed_list=embeds)
         else:
             try:
-                em = discord.Embed(title='{} [????]'.format(author.name))
+                em = discord.Embed(title='{} [????]'.format(roster.user.name))
             except:
-                em = discord.Embed(title='{} [????]'.format(author))
+                em = discord.Embed(title='{} [????]'.format(roster))
             em.add_field(name='Missing Roster',
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
