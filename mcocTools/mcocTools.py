@@ -4,7 +4,9 @@ import csv
 import random
 import os
 import datetime
+from operator import itemgetter, attrgetter
 from .utils import chat_formatting as chat
+from cogs.utils import checks
 from discord.ext import commands
 
 class MCOCTools:
@@ -42,8 +44,8 @@ class MCOCTools:
                 '<http://simians.tk/msimSDF>',
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
             'streak': (
-                'Infinite Streak',
-                'http://simians.tk/-sdf-streak')
+                'http://simians.tk/-sdf-streak'
+                '[Infinite Streak](http://simians.tk/-sdf-streak)'),
                 #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
@@ -182,11 +184,14 @@ class MCOCTools:
         await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command()
-    async def keygen(self, prefix='SECEMP99'):
+    async def keygen(self, prefix='SDCC17'):
+        '''SDCC Code Generator
+        No warranty :)'''
         letters='ABCDEFGHIJKLMNOPQURSTUVWXYZ'
+        numbers='0123456789'
         package = []
         for i in range(0,9):
-            lets='{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(letters),random.choice(letters))
+            lets='{}{}{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(numbers),random.choice(numbers),random.choice(letters),random.choice(letters))
             package.append(prefix+lets)
         em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
         await self.bot.say(embed=em)
@@ -299,11 +304,11 @@ class MCOCTools:
             text.append(row['Text'].format(row[str(rank)]))
         return text
 
-    @commands.command(manage_server=True, manage_roles=True, pass_context=True)
+    @checks.admin_or_permissions(manage_server=True, manage_roles=True)
+    @commands.command(name='setup', pass_context=True)
     async def collectorsetup(self,ctx,*args):
         '''Server Setup Guide
-        ### IN DEVELOPMENT - ALPHA ###
-        As in, don't do this at home.
+        Collector Role Requires admin
         '''
         # 1) Check Roles present
         # 2) Check Role Permissions
@@ -372,19 +377,31 @@ class MCOCTools:
             await setup_phase_two
 
     async def setup_phase_two(self, ctx):
-        '''Check Role Permissions'''
+        '''Check Role ORDER'''
         message = await self.bot.say('initiate phase two')
         # prev_phase =await self.setup_phase_one(ctx)
         # repeat_phase = await self.setup_phase_two(ctx)
         # next_phase = await self.setup_phase_three(ctx)
         server = ctx.message.server
         roles = server.roles
-        rolenames = []
+        required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2')
+        em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
+        positions = []
+        roles2 = sorted(roles, key=getattr(roles, 'positions'))
+        for r in roles2:
+            positions.append('{} = {}'.format(r.position, r.name))
+        em.add_field(name='Position',value='\n'.join(positions))
+        order = []
+        c=len(required_roles)
+        for r in required_roles:
+            order.append('{} = {}'.format(c, r))
+            c-=1
+        em.add_field(name='Correct order', value ='\n'.join(order) )
         phase = True
         phase = False
         desc = 'filler text'
         if phase == False:
-            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
+            # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
             message = await self.bot.send_message(ctx.message.channel, embed=em)
             await self.bot.add_reaction(message,'⬅')
