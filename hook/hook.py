@@ -355,19 +355,23 @@ class Hook:
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react == "⏪": #rewind
                 next_page = (page - 5) % len(embed_list)
+                await self.bot.remove_reaction(message, '⏪', ctx.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react == "⏩": # fast_forward
                 next_page = (page + 5) % len(embed_list)
+                await self.bot.remove_reaction(message, '⬅', ctx.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react == "⏺": #choose
                 if choice is True:
-                    await self.bot.say(SELECTION.format(category+' '))
+                    await self.bot.remove_reaction(message, '⏩', ctx.message.author)
+                    prompt = await self.bot.say(SELECTION.format(category+' '))
                     answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
                     if answer is not None:
-                        await self.bot.say('Process choice : {}'.format(answer.content.lower().strip()))
+                        await self.bot.delete_message(prompt)
+                        prompt = await self.bot.say('Process choice : {}'.format(answer.content.lower().strip()))
                         url = '{}{}/{}'.format(BASEURL,category,answer.content.lower().strip())
-
                         await self._process_item(ctx, url=url, category=category)
+                        await self.bot.delete_message(prompt)
                 else:
                     pass
             else:
