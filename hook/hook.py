@@ -316,7 +316,11 @@ class Hook:
     #async def profile(self, roster: RosterUserConverter):
     async def profile(self, ctx, roster=''):
         """Displays a user profile."""
-        author = ctx.message.author
+        pkg = ctx.message.content
+        if pkg is None:
+            author = ctx.message.author
+        else
+            author = ctx.message.content
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
             embeds = []
