@@ -319,7 +319,7 @@ class Hook:
         pkg = ctx.message.content
         if pkg is None:
             author = ctx.message.author
-        else
+        else:
             author = ctx.message.content
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
