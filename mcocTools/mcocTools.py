@@ -4,6 +4,7 @@ import csv
 import random
 import os
 import datetime
+import attrgetter
 from .utils import chat_formatting as chat
 from cogs.utils import checks
 from discord.ext import commands
@@ -43,8 +44,8 @@ class MCOCTools:
                 '<http://simians.tk/msimSDF>',
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
             'streak': (
-                'Infinite Streak',
-                'http://simians.tk/-sdf-streak')
+                'http://simians.tk/-sdf-streak'
+                '[Infinite Streak](http://simians.tk/-sdf-streak)',
                 #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
@@ -385,8 +386,8 @@ class MCOCTools:
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        positions = sorted(positions, reverse=True)
-        em.add_field(name='Position',value='\n'.join(positions))
+        # positions = sorted(positions, reverse=True)
+        em.add_field(name='Position',value='\n'.join(sorted(roles, key=attrgetter('position'))))
         order = []
         c=len(required_roles)
         for r in required_roles:
