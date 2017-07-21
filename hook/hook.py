@@ -313,15 +313,18 @@ class Hook:
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
         print('list len = {}'.format(len(embed_list)))
+        length = len(embed_list)
         em = embed_list[page]
         if not message:
             message = await self.bot.say(embed=em)
-            await self.bot.add_reaction(message, "⏪")
+            if length > 5:
+                await self.bot.add_reaction(message, "⏪")
             await self.bot.add_reaction(message, "⬅")
             await self.bot.add_reaction(message,"⏺")
             await self.bot.add_reaction(message, "❌")
             await self.bot.add_reaction(message, "➡")
-            await self.bot.add_reaction(message, "⏩")
+            if length > 5:
+                await self.bot.add_reaction(message, "⏩")
         else:
             message = await self.bot.edit_message(message, embed=em)
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
