@@ -329,12 +329,14 @@ class Hook:
             em2.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
             embeds.append(em2)
+            await self.pages_menu(ctx, embed_list=embeds, choice=false)
         else:
+            em = discord.Embed(title='{} [????]'.format(ctx.mesage.author.name))
             em.add_field(name='Missing Roster',
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
-        # await self.bot.say(embed=em)
-        await self.pages_menu(ctx, embed_list=embeds, choice=false)
+            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+            await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
