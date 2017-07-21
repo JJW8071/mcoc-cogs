@@ -75,12 +75,12 @@ class Hook:
             em = em0
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
-            embeds.add(em)
+            embeds.append(em)
         if info['max5']:
             em = em0
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Max Champs', value='\n'.join(info['max5']))
-            embeds.add(em)
+            embeds.append(em)
         await self.pages_menu(ctx, embed_list=embeds)
         # await self.bot.say(embed=em)
 
