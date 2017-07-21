@@ -936,13 +936,14 @@ class Champion:
     base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
     base_tags.update({'#awake', '#sig0'})
     dupe_levels = {2: 1, 3: 8, 4: 20, 5: 20}
+    default_stars = {i: {'rank': i+1, 'sig': 99} for i in range(1,5)}
+    default_stars[5] = {'rank': 3, 'sig': 200}
 
     def __init__(self, attrs=None):
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
 
-        self._default = {'rank': 5, 'sig': 99}
         self._star = attrs.pop('star', 4)
         if self._star < 1:
             logger.warn('Star {} for Champ {} is too low.  Setting to 1'.format(
@@ -952,6 +953,7 @@ class Champion:
             logger.warn('Star {} for Champ {} is too high.  Setting to 5'.format(
                     self._star, self.full_name))
             self._star = 5
+        self._default = self.default_stars[self._star].copy()
 
         for k,v in attrs.items():
             if k not in self._default:
@@ -971,6 +973,8 @@ class Champion:
                 setattr(self, '_' + k, attrs[k])
         if self.sig < 0:
             self._sig = 0
+        if self.rank < 1:
+            self._rank = 1
         if self.star == 5:
             if self.rank > 5:
                 self._rank = 5
