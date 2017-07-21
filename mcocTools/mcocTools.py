@@ -45,7 +45,7 @@ class MCOCTools:
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
             'streak': (
                 'http://simians.tk/-sdf-streak'
-                '[Infinite Streak](http://simians.tk/-sdf-streak)',
+                '[Infinite Streak](http://simians.tk/-sdf-streak)'),
                 #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
