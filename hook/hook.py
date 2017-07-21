@@ -70,13 +70,13 @@ class Hook:
         info = self.load_champ_data(user)
         embeds = []
         if info['top5']:
-            em = discord.Embed(color=discord.Color.gold(),title='User Profile {} [{}]'.format(user.name,info['prestige']), description='In-Game name: ')
+            em = discord.Embed(color=discord.Color.gold(),title='{} [{}]'.format(user.name,info['prestige']), description='In-Game name: ')
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             # em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
             embeds.append(em)
         if info['max5']:
-            em = discord.Embed(color=discord.Color.gold(),title='User Profile {} [{}]'.format(user.name, info['maxpi']), description='In-Game name: ')
+            em = discord.Embed(color=discord.Color.gold(),title='{} [{}]'.format(user.name, info['maxpi']), description='In-Game name: ')
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             # em.add_field(name='Prestige', value=info['maxpi'])
             em.add_field(name='Max Champs', value='\n'.join(info['max5']))
