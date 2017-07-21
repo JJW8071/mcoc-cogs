@@ -81,6 +81,7 @@ class ChampionRoster:
     alliance_map = {'alliance-war-defense': 'awd',
                     'alliance-war-attack': 'awo',
                     'alliance-quest': 'aq'}
+    update_str = '{0.star_name_str} {1} -> {0.rank_sig_str} [ {0.prestige} ]'
 
     def __init__(self, bot, user):
         self.bot = bot
@@ -94,6 +95,8 @@ class ChampionRoster:
         return len(self.roster)
 
     def __contains__(self, item):
+        if hasattr(item, 'immutable_id'):
+            return item.immutable_id in self.roster
         return item in self.roster
 
     # handles user creation, adding new server, blocking
@@ -248,11 +251,13 @@ class ChampionRoster:
         for champ in champs:
             iid = champ.immutable_id
             if iid not in self.roster:
-                continue
-            champ.update_default({'rank': self.roster[iid].rank, 
-                    'sig': self.roster[iid].sig})
+                champ.update_default({'rank': 1, 'sig': 0})
+            else:
+                champ.update_default({'rank': self.roster[iid].rank, 
+                        'sig': self.roster[iid].sig})
 
     def update(self, champs):
+        self.set_defaults_of(champs)
         track = {'new': set(), 'modified': set(), 'unchanged': set()}
         self._cache = {}
         for champ in champs:
@@ -260,19 +265,27 @@ class ChampionRoster:
             if iid not in self.roster:
                 track['new'].add(champ.verbose_prestige_str)
             else:
-                #attrs = {}
-                #for attr in ('rank', 'sig'):
-                    #if not champ.is_defined(attr):
-                        #attrs[attr] = getattr(self.roster[iid], attr)
-                #champ.update_attrs(attrs)
                 if champ == self.roster[iid]:
                     track['unchanged'].add(champ.verbose_prestige_str)
                 else:
-                    mstr = '{} {} -> {} [ {} ]'.format(champ.star_name_str,
-                        self.roster[iid].rank_sig_str, champ.rank_sig_str, 
-                        champ.prestige)
-                    track['modified'].add(mstr)
+                    track['modified'].add(self.update_str.format(champ, 
+                            self.roster[iid].rank_sig_str))
             self.roster[iid] = champ
+        self.save_champ_data()
+        return track
+
+    def inc_dupe(self, champs):
+        self.set_defaults_of(champs)
+        track = {'modified': set(), 'missing': set()}
+        self._cache = {}
+        for champ in champs:
+            iid = champ.immutable_id
+            if iid in self.roster:
+                old_str = self.roster[iid].rank_sig_str
+                self.roster[iid].inc_dupe()
+                track['modified'].add(self.update_str.format(self.roster[iid], old_str))
+            else:
+                track['missing'].add(champ.star_name_str)
         self.save_champ_data()
         return track
 
@@ -414,9 +427,17 @@ class Hook:
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
+        '''Update your roster using the standard command line syntax.
+
+        Defaults for champions you specify are the current values in your roster.
+        If it is a new champ, defaults are 4*, rank 1, sig 0.
+
+        This means that 
+        /roster update some_champs20
+        would just set some_champ's sig to 20 but keep it's rank the same.
+        '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
-        roster.set_defaults_of(champs)
         await self._update(roster, champs)
 
     async def _update(self, roster, champs):
@@ -431,12 +452,18 @@ class Hook:
 
     @roster.command(pass_context=True, name='dupe')
     async def _roster_dupe(self, ctx, *, champs: ChampConverterMult):
+        '''Update your roster by incrementing your champs by the duped sig level, i.e. 20 for a 4*.
+        '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
-        roster.set_defaults_of(champs)
-        for champ in champs:
-            champ.inc_dupe()
-        await self._update(roster, champs)
+        track = roster.inc_dupe(champs)
+        em = discord.Embed(title='Champion Dupe Update for {}'.format(roster.user.name),
+                color=discord.Color.gold())
+        for k in ('modified', 'missing'):
+            if track[k]:
+                em.add_field(name='{} Champions'.format(k.capitalize()),
+                        value='\n'.join(sorted(track[k])), inline=False)
+        await self.bot.say(embed=em)
 
     @roster.command(pass_context=True, name='delete', aliases=('del',))
     async def _roster_del(self, ctx, *, champs: ChampConverterMult):
