@@ -320,16 +320,16 @@ class Hook:
         if roster:
             embeds = []
             em = discord.Embed(title='{} [{}]'.format(roster.user.name, roster.prestige))
-            em.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
+            # em.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
             embeds.append(em)
             em2 = discord.Embed(title='{} [{}]'.format(roster.user.name, roster.max_prestige))
-            em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
+            # em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em2.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
             embeds.append(em2)
-            await self.pages_menu(ctx, embed_list=embeds, choice=false)
+            await self.pages_menu(ctx, embed_list=embeds)
         else:
             em = discord.Embed(title='{} [????]'.format(ctx.mesage.author.name))
             em.add_field(name='Missing Roster',
