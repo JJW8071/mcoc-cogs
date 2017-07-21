@@ -334,7 +334,7 @@ class Hook:
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
         # await self.bot.say(embed=em)
-        await self.pages_menu(embed_list=embeds)
+        await self.pages_menu(ctx, embed_list=embeds, choice=false)
 
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
