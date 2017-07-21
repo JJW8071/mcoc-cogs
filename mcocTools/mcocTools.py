@@ -384,7 +384,7 @@ class MCOCTools:
         required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2')
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
         positions = []
-        roles2 = sorted(roles, key=getattr('positions'))
+        roles2 = sorted(roles, key=getattr(roles, 'positions'))
         for r in roles2:
             positions.append('{} = {}'.format(r.position, r.name))
         em.add_field(name='Position',value='\n'.join(positions))
