@@ -68,12 +68,21 @@ class Hook:
             user = ctx.message.author
         # creates user if doesn't exist
         info = self.load_champ_data(user)
-        em = discord.Embed(title="User Profile", description=user.name)
+        embeds = []
+        em0 = discord.Embed(title='User Profile {}'.format(user.name), description='In-Game name: ')
+        em0.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         if info['top5']:
+            em = em1
             em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Top Champs', value='\n'.join(info['top5']))
+            embeds.add(em)
+        if info['max5']:
+            em = em0
+            em.add_field(name='Prestige', value=info['prestige'])
             em.add_field(name='Max Champs', value='\n'.join(info['max5']))
-        await self.bot.say(embed=em)
+            embeds.add(em)
+        await self.pages_menu(ctx, embed_list=embeds)
+        # await self.bot.say(embed=em)
 
     @commands.command(pass_context=True)
     async def list_members(self, ctx, role: discord.Role, use_alias=True):
@@ -300,6 +309,68 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
+    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choices=False):
+        """menu control logic for this taken from
+           https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
+        print('list len = {}'.format(len(embed_list)))
+        em = embed_list[page]
+        if not message:
+            message = await self.bot.say(embed=em)
+            await self.bot.add_reaction(message, "⏪")
+            await self.bot.add_reaction(message, "⬅")
+            await self.bot.add_reaction(message,"⏺")
+            await self.bot.add_reaction(message, "❌")
+            await self.bot.add_reaction(message, "➡")
+            await self.bot.add_reaction(message, "⏩")
+        else:
+            message = await self.bot.edit_message(message, embed=em)
+        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
+        if react is None:
+            try:
+                try:
+                    await self.bot.clear_reactions(message)
+                except:
+                    await self.bot.remove_reaction(message,"⏪", self.bot.user) #rewind
+                    await self.bot.remove_reaction(message, "⬅", self.bot.user) #previous_page
+                    await self.bot.remove_reaction(message, "❌", self.bot.user) # Cancel
+                    if choices is True:
+                        await self.bot.remove_reaction(message,"⏺",self.bot.user) #choose
+                    await self.bot.remove_reaction(message, "➡", self.bot.user) #next_page
+                    await self.bot.remove_reaction(message,"⏩", self.bot.user) # fast_forward
+            except:
+                pass
+            return None
+        elif react is not None:
+            react = react.reaction.emoji
+            if react == "➡": #next_page
+                next_page = (page + 1) % len(embed_list)
+                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+            elif react == "⬅": #previous_page
+                next_page = (page - 1) % len(embed_list)
+                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+            elif react == "⏪": #rewind
+                next_page = (page - 5) % len(embed_list)
+                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+            elif react == "⏩": # fast_forward
+                next_page = (page + 5) % len(embed_list)
+                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+            elif react == "⏺": #choose
+                if choices is True:
+                    await self.bot.say(SELECTION.format(category+' '))
+                    answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
+                    if answer is not None:
+                        await self.bot.say('Process choice : {}'.format(answer.content.lower().strip()))
+                        url = '{}{}/{}'.format(BASEURL,category,answer.content.lower().strip())
+
+                        await self._process_item(ctx, url=url, category=category)
+                else:
+                    pass
+            else:
+                try:
+                    return await self.bot.delete_message(message)
+                except:
+                    pass
+
     # handles user creation, adding new server, blocking
     def _create_user(self, user):
         if not os.path.exists(self.champs_file.format(user.id)):
@@ -347,7 +418,7 @@ class Hook:
             async with session.get(attachment['url']) as response:
                 file_txt = await response.text()
         #dialect = csv.Sniffer().sniff(file_txt[:1024])
-        cr = csv.DictReader(file_txt.split('\n'), #dialect, 
+        cr = csv.DictReader(file_txt.split('\n'), #dialect,
                 quoting=csv.QUOTE_NONE)
         champ_list = []
         for row in cr:
