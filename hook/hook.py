@@ -347,9 +347,11 @@ class Hook:
             react = react.reaction.emoji
             if react == "➡": #next_page
                 next_page = (page + 1) % len(embed_list)
+                await self.bot.remove_reaction(react.reaction.message, '➡', react.reaction.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react == "⬅": #previous_page
                 next_page = (page - 1) % len(embed_list)
+                await self.bot.remove_reaction(react.reaction.message, '⬅', react.reaction.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react == "⏪": #rewind
                 next_page = (page - 5) % len(embed_list)
