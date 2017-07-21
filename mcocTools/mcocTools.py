@@ -182,11 +182,14 @@ class MCOCTools:
         await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command()
-    async def keygen(self, prefix='SECEMP99'):
+    async def keygen(self, prefix='SDCC17'):
+        '''SDCC Code Generator
+        No warranty :)'''
         letters='ABCDEFGHIJKLMNOPQURSTUVWXYZ'
+        numbers='0123456789'
         package = []
         for i in range(0,9):
-            lets='{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(letters),random.choice(letters))
+            lets='{}{}{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(numbers),random.choice(numbers),random.choice(letters),random.choice(letters))
             package.append(prefix+lets)
         em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
         await self.bot.say(embed=em)
