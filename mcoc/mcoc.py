@@ -701,7 +701,7 @@ class MCOC(ChampionFactory):
                 em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
                 em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
             elif state == 'f':
-                em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+                em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
                 em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
             em.set_thumbnail(url=champ.get_avatar())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
@@ -722,7 +722,7 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.add_field(name=title, value=champ.star_str)
-        em.add_field(name='Signature Level {}'.format(champ.sig), 
+        em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
@@ -769,7 +769,7 @@ class MCOC(ChampionFactory):
         title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
         jsig = jfile[champ.mattkraftid]
         em = discord.Embed(title='Check for {}'.format(champ.full_name))
-        em.add_field(name=jsig['title'], 
+        em.add_field(name=jsig['title'],
                 value=jsig['description'].format(d=jsig['sig_data'][champ.sig-1]))
         await self.bot.say(embed=em)
         assert title == jsig['title']

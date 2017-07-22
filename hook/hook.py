@@ -16,7 +16,7 @@ import ast
 import csv
 import aiohttp
 import re
-
+import asyncio
 ### Monkey Patch of JSONEncoder
 from json import JSONEncoder, dump, dumps
 
@@ -341,8 +341,9 @@ class Hook:
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             await self.bot.say(embed=em)
 
-    @commands.command(pass_context=True)
-    async def list_members(self, ctx, role: discord.Role, use_alias=True):
+    @commands.command(pass_context=True, aliases=('list_members','role_roster','list_users'))
+    async def users_by_role(self, ctx, role: discord.Role, use_alias=True):
+        '''Embed a list of server users by Role'''
         server = ctx.message.server
         members = []
         for member in server.members:
@@ -359,7 +360,8 @@ class Hook:
 
     @commands.command(pass_context=True, no_pm=True)
     async def team(self,ctx, *, user : discord.Member=None):
-        """Displays a user profile."""
+        """Displays a user's AQ/AWO/AWD teams.
+        Teams are set in hook/champions"""
         if user is None:
             user = ctx.message.author
         # creates user if doesn't exist
@@ -398,7 +400,9 @@ class Hook:
     @commands.group(pass_context=True, invoke_without_command=True)
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
-        """Displays a user profile."""
+        """Displays a user roster with tag filtering
+        ex.
+        /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         filtered = await hargs.roster.filter_champs(hargs.tags)
         if not filtered:
@@ -622,7 +626,11 @@ class Hook:
                 await self.bot.add_reaction(message, "⏩")
         else:
             message = await self.bot.edit_message(message, embed=em)
+        await asyncio.sleep(1)
+
         react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
+        # if react.reaction.me == self.bot.user:
+        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
         if react is None:
             try:
                 try:
@@ -638,26 +646,26 @@ class Hook:
                 pass
             return None
         elif react is not None:
-            react = react.reaction.emoji
-            if react == "➡": #next_page
+            # react = react.reaction.emoji
+            if react.reaction.emoji == "➡": #next_page
                 next_page = (page + 1) % len(embed_list)
-                await self.bot.remove_reaction(message, '➡', ctx.message.author)
+                # await self.bot.remove_reaction(message, '➡', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react == "⬅": #previous_page
+            elif react.reaction.emoji == "⬅": #previous_page
                 next_page = (page - 1) % len(embed_list)
-                await self.bot.remove_reaction(message, '⬅', ctx.message.author)
+                # await self.bot.remove_reaction(message, '⬅', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react == "⏪": #rewind
+            elif react.reaction.emoji == "⏪": #rewind
                 next_page = (page - 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '⏪', ctx.message.author)
+                # await self.bot.remove_reaction(message, '⏪', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react == "⏩": # fast_forward
+            elif react.reaction.emoji == "⏩": # fast_forward
                 next_page = (page + 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '⬅', ctx.message.author)
+                # await self.bot.remove_reaction(message, '⬅', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react == "⏺": #choose
+            elif react.reaction.emoji == "⏺": #choose
                 if choice is True:
-                    await self.bot.remove_reaction(message, '⏩', ctx.message.author)
+                    # await self.bot.remove_reaction(message, '⏩', react.reaction.message.author)
                     prompt = await self.bot.say(SELECTION.format(category+' '))
                     answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
                     if answer is not None:
