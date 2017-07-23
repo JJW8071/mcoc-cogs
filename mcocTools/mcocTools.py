@@ -398,7 +398,7 @@ class MCOCTools:
             j = i+1
             if required_roles[j] > required_roles[i]:
                 phase = False
-                perm_order.append('{} should be above {}'.format(required_roles[i],required_roles[j]))
+                # perm_order.append('{} should be above {}'.format(required_roles[i],required_roles[j]))
         if phase == False:
             # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
