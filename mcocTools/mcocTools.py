@@ -383,12 +383,12 @@ class MCOCTools:
         # repeat_phase = await self.setup_phase_two(ctx)
         # next_phase = await self.setup_phase_three(ctx)
         server = ctx.message.server
-        roles = server.roles
+        roles = sorted(server.roles, key=lambda roles:roles.position, revers=True)
         required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2')
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
         positions = []
-        roles2 = sorted(roles, key=getattr(roles, 'positions'))
-        for r in roles2:
+        # roles2 = sorted(roles, key=getattr(roles, 'positions'))
+        for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
         em.add_field(name='Position',value='\n'.join(positions))
         order = []
