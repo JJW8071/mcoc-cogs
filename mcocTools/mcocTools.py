@@ -402,6 +402,7 @@ class MCOCTools:
         if phase == False:
             # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
+            em.add_field(name='',value='\n'.join(perm_order))
             message = await self.bot.send_message(ctx.message.channel, embed=em)
             await self.bot.add_reaction(message,'⬅')
             await self.bot.add_reaction(message,'🔁')
