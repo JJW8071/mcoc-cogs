@@ -319,7 +319,7 @@ class Hook:
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
             embeds = []
-            em = discord.Embed(color=discord.Color.gold(),title='{} [{}]'.format(roster.user.name, roster.prestige))
+            em = discord.Embed(color=discord.Color.gold(),title='[{}] {}'.format(roster.prestige, roster.user.name))
             # em.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
@@ -332,9 +332,9 @@ class Hook:
             await self.pages_menu(ctx, embed_list=embeds)
         else:
             try:
-                em = discord.Embed(color=discord.Color.green(),title='{} [????]'.format(roster.user.name))
+                em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(roster))
             except:
-                em = discord.Embed(color=discord.Color.green(),title='{} [????]'.format(roster))
+                em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(roster.user.name))
             em.add_field(name='Missing Roster',
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
