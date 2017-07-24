@@ -324,7 +324,7 @@ class Hook:
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
             embeds.append(em)
-            em2 = discord.Embed(color=discord.Color.red(),title='{} [{}]'.format(roster.user.name, roster.max_prestige))
+            em2 = discord.Embed(color=discord.Color.red(),title='[{}] {}'.format(roster.max_prestige, roster.user.name))
             # em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em2.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
