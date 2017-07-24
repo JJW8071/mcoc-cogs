@@ -56,8 +56,8 @@ class HashtagRosterConverter(commands.Converter):
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            await self.bot.say(embed=em)
-            raise MissingRosterError('No Roster found for {}'.format(user.name))
+            await self.ctx.bot.say(embed=em)
+            # raise MissingRosterError('No Roster found for {}'.format(user.name))
         return types.SimpleNamespace(tags=tags, user=user, roster=chmp_rstr)
 
 class RosterUserConverter(commands.Converter):
