@@ -51,7 +51,12 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            await self.ctx.bot.say('No Champions found in your roster.  Please upload a csv file first.')
+            em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
+            em.add_field(name='Missing Roster',
+                    value='Load up a "champ*.csv" file from Hook to import your roster')
+            em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
+            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+            await self.bot.say(embed=em)
             raise MissingRosterError('No Roster found for {}'.format(user.name))
         return types.SimpleNamespace(tags=tags, user=user, roster=chmp_rstr)
 
