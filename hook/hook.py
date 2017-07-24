@@ -405,6 +405,7 @@ class Hook:
         /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         filtered = await hargs.roster.filter_champs(hargs.tags)
+        embeds = []
         if not filtered:
             em = discord.Embed(title='User', description=hargs.user.name,
                     color=discord.Color.gold())
@@ -425,11 +426,14 @@ class Hook:
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        em = discord.Embed(title="User", description=hargs.user.name, color=color)
         if len(filtered) < 10:
+            em = discord.Embed(title='', description=hargs.user.name, color=color)
+            em.set_author(name=roster.user.name,icon_url=roster.user.default_avatar_url)
+            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             strs = [champ.verbose_prestige_str for champ in
                     sorted(filtered, key=attrgetter('prestige'), reverse=True)]
             em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
+            embeds.append(em)
         else:
             for champ in filtered:
                 classes[champ.klass].append(champ)
@@ -437,9 +441,13 @@ class Hook:
                 if champs:
                     strs = [champ.verbose_prestige_str for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
+                    em = discord.Embed(title="User", description=hargs.user.name, color=color)
+                    em.set_author(name=roster.user.name,icon_url=roster.user.default_avatar_url)
+                    em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
-        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-        await self.bot.say(embed=em)
+                    embeds.append(em)
+        # await self.bot.say(embed=em)
+        await self.bot.menu_pages(embed_list=embeds)
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
