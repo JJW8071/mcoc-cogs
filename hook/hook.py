@@ -324,22 +324,24 @@ class Hook:
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
             embeds = []
-            em = discord.Embed(color=discord.Color.gold(),title='[{}] {}'.format(roster.prestige, roster.user.name))
-            # em.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
+            em = discord.Embed(color=discord.Color.gold(),title='[{}]'.format(roster.prestige))
+            em.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
             embeds.append(em)
-            em2 = discord.Embed(color=discord.Color.red(),title='[{}] {}'.format(roster.max_prestige, roster.user.name))
-            # em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
+            em2 = discord.Embed(color=discord.Color.red(),title='[{}]'.format(roster.max_prestige))
+            em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em2.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
             embeds.append(em2)
             await self.pages_menu(ctx, embed_list=embeds)
         else:
             try:
-                em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(roster.user.name))
+                em = discord.Embed(color=discord.Color.green(),title='[????]')
+                em.set_author(name = roster.user.name,icon_url=roster.user.avatar_url)
             except:
-                em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(ctx.message.author))
+                em = discord.Embed(color=discord.Color.green(),title='[????]')
+                em.set_author(name=ctx.message.author, icon_url=ctx.message.author.avatar_url))
             em.add_field(name='Missing Roster',
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
@@ -440,17 +442,19 @@ class Hook:
             em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
             embeds.append(em)
         else:
+            i = 1
             for champ in filtered:
                 classes[champ.klass].append(champ)
             for klass, champs in classes.items():
                 if champs:
                     strs = [champ.verbose_prestige_str for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
-                    em = discord.Embed(title='', color=class_color_codes[klass])
+                    em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
                     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
                     embeds.append(em)
+                    i+=1
         # await self.bot.say(embed=em)
         await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
