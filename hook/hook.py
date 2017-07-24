@@ -617,41 +617,41 @@ class Hook:
             message = await self.bot.say(embed=em)
             if length > 5:
                 await self.bot.add_reaction(message, "⏪")
-            await self.bot.add_reaction(message, "⬅")
+            await self.bot.add_reaction(message, "◀")
             if choice is True:
                 await self.bot.add_reaction(message,"⏺")
             await self.bot.add_reaction(message, "❌")
-            await self.bot.add_reaction(message, "➡")
+            await self.bot.add_reaction(message, "▶")
             if length > 5:
                 await self.bot.add_reaction(message, "⏩")
         else:
             message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
+        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["▶", "◀", "❌", "⏪", "⏩","⏺"])
         # if react.reaction.me == self.bot.user:
-        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["➡", "⬅", "❌", "⏪", "⏩","⏺"])
+        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=["▶", "◀", "❌", "⏪", "⏩","⏺"])
         if react is None:
             try:
                 try:
                     await self.bot.clear_reactions(message)
                 except:
                     await self.bot.remove_reaction(message,"⏪", self.bot.user) #rewind
-                    await self.bot.remove_reaction(message, "⬅", self.bot.user) #previous_page
+                    await self.bot.remove_reaction(message, "◀", self.bot.user) #previous_page
                     await self.bot.remove_reaction(message, "❌", self.bot.user) # Cancel
                     await self.bot.remove_reaction(message,"⏺",self.bot.user) #choose
-                    await self.bot.remove_reaction(message, "➡", self.bot.user) #next_page
+                    await self.bot.remove_reaction(message, "▶", self.bot.user) #next_page
                     await self.bot.remove_reaction(message,"⏩", self.bot.user) # fast_forward
             except:
                 pass
             return None
         elif react is not None:
             # react = react.reaction.emoji
-            if react.reaction.emoji == "➡": #next_page
+            if react.reaction.emoji == "▶": #next_page
                 next_page = (page + 1) % len(embed_list)
-                # await self.bot.remove_reaction(message, '➡', react.reaction.message.author)
+                # await self.bot.remove_reaction(message, '▶', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == "⬅": #previous_page
+            elif react.reaction.emoji == "◀": #previous_page
                 next_page = (page - 1) % len(embed_list)
                 # await self.bot.remove_reaction(message, '⬅', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
