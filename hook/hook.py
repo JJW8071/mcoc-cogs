@@ -447,7 +447,7 @@ class Hook:
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
                     embeds.append(em)
         # await self.bot.say(embed=em)
-        await self.pages_menu(ctx=ctx, embed_list=embeds)
+        await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
