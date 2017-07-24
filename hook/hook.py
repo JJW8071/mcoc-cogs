@@ -619,7 +619,7 @@ class Hook:
                 await self.bot.add_reaction(message, '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}')
             await self.bot.add_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}')
             if choice is True:
-                await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+                await self.bot.add_reaction(message,'\N{SQUARED OK}')
             await self.bot.add_reaction(message, '\N{CROSS MARK}')
             await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
             if length > 5:
@@ -628,9 +628,9 @@ class Hook:
             message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}'])
+        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{SQUARED OK}'])
         # if react.reaction.me == self.bot.user:
-        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}'])
+        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{SQUARED OK}'])
         if react is None:
             try:
                 try:
@@ -639,7 +639,7 @@ class Hook:
                     await self.bot.remove_reaction(message,'\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', self.bot.user) #rewind
                     await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}', self.bot.user) #previous_page
                     await self.bot.remove_reaction(message, '\N{CROSS MARK}', self.bot.user) # Cancel
-                    await self.bot.remove_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}',self.bot.user) #choose
+                    await self.bot.remove_reaction(message,'\N{SQUARED OK}',self.bot.user) #choose
                     await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}', self.bot.user) #next_page
                     await self.bot.remove_reaction(message,'\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}', self.bot.user) # fast_forward
             except:
@@ -663,7 +663,7 @@ class Hook:
                 next_page = (page + 5) % len(embed_list)
                 # await self.bot.remove_reaction(message, '⬅', react.reaction.message.author)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}': #choose
+            elif react.reaction.emoji == '\N{SQUARED OK}': #choose
                 if choice is True:
                     # await self.bot.remove_reaction(message, '⏩', react.reaction.message.author)
                     prompt = await self.bot.say(SELECTION.format(category+' '))
