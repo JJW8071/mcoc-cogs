@@ -357,20 +357,20 @@ class MCOCTools:
             em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [1]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
             message = await self.bot.send_message(ctx.message.channel, embed=em)
-            await self.bot.add_reaction(message,'🔁')
-            await self.bot.add_reaction(message,'❌')
-            await self.bot.add_reaction(message, '➡')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁','➡'])
-            if react is None or react.reaction.emoji == "❌":
+            await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+            await self.bot.add_reaction(message,'\N{CROSS MARK}')
+            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
+            if react is None or react.reaction.emoji == '\N{CROSS MARK}':
                 try:
                     await self.bot.delete_message(message)
                 except:
                     pass
                 return None
-            elif react.reaction.emoji == '🔁':
+            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_one(ctx)
-            elif react.reaction.emoji == '➡':
+            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_two(ctx)
         elif phase == True:
@@ -404,24 +404,24 @@ class MCOCTools:
             # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
             message = await self.bot.send_message(ctx.message.channel, embed=em)
-            await self.bot.add_reaction(message,'⬅')
-            await self.bot.add_reaction(message,'🔁')
-            await self.bot.add_reaction(message,'❌')
-            await self.bot.add_reaction(message, '➡')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁','➡'])
-            if react is None or react.reaction.emoji == "❌":
+            await self.bot.add_reaction(message,'\N{BLACK LEFT-POINTING TRIANGLE}')
+            await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+            await self.bot.add_reaction(message,'\N{CROSS MARK}')
+            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
+            if react is None or react.reaction.emoji == '\N{CROSS MARK}':
                 try:
                     await self.bot.delete_message(message)
                 except:
                     pass
                 return None
-            elif react.reaction.emoji == '🔁':
+            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_two(ctx)
-            elif react.reaction.emoji == '➡':
+            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_three(ctx)
-            elif react.reaction.emoji == '⬅':
+            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_one(ctx)
         elif phase == True:
