@@ -441,7 +441,7 @@ class Hook:
                 if champs:
                     strs = [champ.verbose_prestige_str for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
-                    em = discord.Embed(title="User", description=hargs.user.name, color=self.class_color_codes[klass])
+                    em = discord.Embed(title="User", description=hargs.user.name, color=class_color_codes[klass])
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.default_avatar_url)
                     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
