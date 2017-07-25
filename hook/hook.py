@@ -452,7 +452,7 @@ class Hook:
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
                     # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
                     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-                    em.add_field(name=klass, value='\n %<{}> '.format(KLASS_EMOJI[klass]).join(strs), inline=False)
+                    em.add_field(name=klass, value='\n <{}> '.format(KLASS_EMOJI[klass]).join(strs), inline=False)
                     embeds.append(em)
                     i+=1
         # await self.bot.say(embed=em)
