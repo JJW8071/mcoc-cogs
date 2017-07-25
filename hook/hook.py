@@ -324,24 +324,20 @@ class Hook:
         roster = await RosterUserConverter(ctx, roster).convert()
         if roster:
             embeds = []
-            em = discord.Embed(color=discord.Color.gold(),title='[{}]'.format(roster.prestige))
-            em.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
+            em = discord.Embed(color=discord.Color.gold(),title='{}'.format(roster.prestige))
+            em.set_author(name=roster.user.name, icon_url=roster.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
             embeds.append(em)
-            em2 = discord.Embed(color=discord.Color.red(),title='[{}]'.format(roster.max_prestige))
+            em2 = discord.Embed(color=discord.Color.red(),title='{}'.format(roster.max_prestige))
             em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
             em2.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
             embeds.append(em2)
             await self.pages_menu(ctx, embed_list=embeds)
         else:
-            # try:
-            em = discord.Embed(color=discord.Color.green(),title='[????]')
+            em = discord.Embed(color=discord.Color.green(),title='????')
             em.set_author(name = roster.user.name,icon_url=roster.user.avatar_url)
-            # except:
-            #     em = discord.Embed(color=discord.Color.green(),title='[????]')
-            #     em.set_author(name=ctx.message.author, icon_url=ctx.message.author.avatar_url))
             em.add_field(name='Missing Roster',
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
