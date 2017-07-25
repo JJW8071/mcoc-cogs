@@ -386,7 +386,7 @@ class MCOCTools:
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        em.add_field(name='Position',value=chat.box('\n'.join(positions)))
+        em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
         said.append(await self.bot.say(embed=em))
         order = []
         c=len(required_roles)-1
@@ -394,7 +394,7 @@ class MCOCTools:
             order.append('{} = {}'.format(c, r))
             c-=1
         em = discord.Embed(color=discord.Color.red(), title='',description='')
-        em.add_field(name='Correct order', value =chat.box('\n'.join(order)))
+        em.add_field(name='Correct Role Positions', value =chat.box('\n'.join(order)),inline=False)
         perm_order = []
         phase = True
         for i in range(0,len(required_roles)-2):
