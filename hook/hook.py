@@ -621,56 +621,57 @@ class Hook:
         if not message:
             message = await self.bot.say(embed=em)
             if length > 5:
-                await self.bot.add_reaction(message, '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}')
-            await self.bot.add_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}')
+                await self.bot.add_reaction(message, '⏪')
+            await self.bot.add_reaction(message, '◀')
             if choice is True:
-                await self.bot.add_reaction(message,'\N{SQUARED OK}')
-            await self.bot.add_reaction(message, '\N{CROSS MARK}')
-            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+                await self.bot.add_reaction(message,'🆗')
+            await self.bot.add_reaction(message, '❌')
+            await self.bot.add_reaction(message, '▶')
             if length > 5:
-                await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}')
+                await self.bot.add_reaction(message, '⏩')
         else:
             message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{SQUARED OK}'])
+        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         # if react.reaction.me == self.bot.user:
-        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{SQUARED OK}'])
+        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         if react is None:
             try:
                 try:
                     await self.bot.clear_reactions(message)
                 except:
-                    await self.bot.remove_reaction(message,'\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', self.bot.user) #rewind
-                    await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}', self.bot.user) #previous_page
-                    await self.bot.remove_reaction(message, '\N{CROSS MARK}', self.bot.user) # Cancel
-                    await self.bot.remove_reaction(message,'\N{SQUARED OK}',self.bot.user) #choose
-                    await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}', self.bot.user) #next_page
-                    await self.bot.remove_reaction(message,'\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}', self.bot.user) # fast_forward
+                    await self.bot.remove_reaction(message,'⏪', self.bot.user) #rewind
+                    await self.bot.remove_reaction(message, '◀', self.bot.user) #previous_page
+                    await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+                    await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+                    await self.bot.remove_reaction(message, '▶', self.bot.user) #next_page
+                    await self.bot.remove_reaction(message,'⏩', self.bot.user) # fast_forward
             except:
                 pass
             return None
         elif react is not None:
             # react = react.reaction.emoji
-            if react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}': #next_page
+            if react.reaction.emoji == '▶': #next_page
                 next_page = (page + 1) % len(embed_list)
-                # await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}', react.user)
+                # await self.bot.remove_reaction(message, '▶', react.user)
+                await react.user.remove_reaction(message, '▶', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}': #previous_page
+            elif react.reaction.emoji == '◀': #previous_page
                 next_page = (page - 1) % len(embed_list)
-                # await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}', react.user)
+                # await self.bot.remove_reaction(message, '◀', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}': #rewind
+            elif react.reaction.emoji == '⏪': #rewind
                 next_page = (page - 5) % len(embed_list)
-                # await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}'', react.user)
+                # await self.bot.remove_reaction(message, '⏪'', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}': # fast_forward
+            elif react.reaction.emoji == '⏩': # fast_forward
                 next_page = (page + 5) % len(embed_list)
-                # await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}', react.user)
+                # await self.bot.remove_reaction(message, '⏩', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{SQUARED OK}': #choose
+            elif react.reaction.emoji == '🆗': #choose
                 if choice is True:
-                    # await self.bot.remove_reaction(message, '\N{SQUARED OK}', react.user)
+                    # await self.bot.remove_reaction(message, '🆗', react.user)
                     prompt = await self.bot.say(SELECTION.format(category+' '))
                     answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
                     if answer is not None:
