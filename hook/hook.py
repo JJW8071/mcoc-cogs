@@ -410,8 +410,6 @@ class Hook:
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        info = self.load_champ_data(hargs.user)
-
         strs = [champ.verbose_prestige_str for champ in sorted(filtered, key=attrgetter('prestige'), reverse=True)]
         pages = chat.pagify(text='\n'.join(strs), page_length=1000)
         for page in pages:
