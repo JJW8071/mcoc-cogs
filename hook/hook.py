@@ -437,7 +437,7 @@ class Hook:
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            em.add_field(name='Filtered Roster', value=page ,inline=False)
+            em.add_field(name='{}'.format(roster.user.prestige), value=page ,inline=False)
             embeds.append(em)
 
 
