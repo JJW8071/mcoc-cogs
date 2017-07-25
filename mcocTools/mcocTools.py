@@ -381,17 +381,20 @@ class MCOCTools:
         server = ctx.message.server
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner', 'everyone')
+        said = []
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        em.add_field(name='Position',value='\n'.join(positions))
+        em.add_field(name='Position',value=chat.box('\n'.join(positions)))
+        said.append(await self.bot.say(embed=em))
         order = []
         c=len(required_roles)-1
         for r in required_roles:
             order.append('{} = {}'.format(c, r))
             c-=1
-        em.add_field(name='Correct order', value ='\n'.join(order) )
+        em = discord.Embed(color=discord.Color.red(), title='',description='')
+        em.add_field(name='Correct order', value =chat.box('\n'.join(order)))
         perm_order = []
         phase = True
         for i in range(0,len(required_roles)-2):
@@ -404,6 +407,7 @@ class MCOCTools:
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
             # em.add_field(name='',value='\n'.join(perm_order))
             message = await self.bot.send_message(ctx.message.channel, embed=em)
+            said.append(message)
             await self.bot.add_reaction(message,'\N{BLACK LEFT-POINTING TRIANGLE}')
             await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
             await self.bot.add_reaction(message,'\N{CROSS MARK}')
@@ -411,18 +415,22 @@ class MCOCTools:
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
             if react is None or react.reaction.emoji == '\N{CROSS MARK}':
                 try:
-                    await self.bot.delete_message(message)
+                    for message in said:
+                        await self.bot.delete_message(message)
                 except:
                     pass
                 return None
             elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
-                await self.bot.delete_message(message)
+                for message in said:
+                    await self.bot.delete_message(message)
                 return await self.setup_phase_two(ctx)
             elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
-                await self.bot.delete_message(message)
+                for message in said:
+                    await self.bot.delete_message(message)
                 return await self.setup_phase_three(ctx)
             elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
-                await self.bot.delete_message(message)
+                for message in said:
+                    await self.bot.delete_message(message)
                 return await self.setup_phase_one(ctx)
         elif phase == True:
             await setup_phase_three
