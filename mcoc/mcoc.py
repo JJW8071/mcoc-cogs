@@ -1065,12 +1065,12 @@ class Champion:
     def rank_sig_str(self):
         return '{0.rank}/{0.max_lvl} sig{0.sig:<2}'.format(self)
 
-    @property
-    def verbose_prestige_str(self):
-        return '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self)
+    # @property
+    # def verbose_prestige_str(self):
+    #     return '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self)
 
     @property
-    def verbose_prestige_str2(self):
+    def verbose_prestige_str(self):
         return '{1} {0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self, KLASS_EMOJI[self.klass.title()])
 
 

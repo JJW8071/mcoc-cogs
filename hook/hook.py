@@ -434,7 +434,7 @@ class Hook:
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            strs = [champ.verbose_prestige_str2 for champ in
+            strs = [champ.verbose_prestige_str for champ in
                     sorted(filtered, key=attrgetter('prestige'), reverse=True)]
             em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
             embeds.append(em)
@@ -444,7 +444,7 @@ class Hook:
                 classes[champ.klass].append(champ)
             for klass, champs in classes.items():
                 if champs:
-                    strs = [champ.verbose_prestige_str2 for champ in
+                    strs = [champ.verbose_prestige_str for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
                     em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
