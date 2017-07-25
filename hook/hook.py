@@ -23,6 +23,7 @@ from json import JSONEncoder, dump, dumps
 def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
 
+KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
 ### Done with patch
@@ -447,6 +448,7 @@ class Hook:
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
                     em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
+                    em.set_thumbnail(url=KLASS_ICON.format(klass))
                     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
                     em.add_field(name=klass, value='\n'.join(strs), inline=False)
                     embeds.append(em)
