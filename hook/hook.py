@@ -24,6 +24,8 @@ def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
 
 KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
+KLASS_EMOJI={'Skill':':skill:339469261028196353','Cosmic':':cosmic:339469261057556480','Mystic':':mystic:339469261053493248','Science':':science:339469261103955978',
+    'Mutant':':mutant:339469261128859648','Tech':':tech:339469261099630593'}
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
 ### Done with patch
@@ -450,7 +452,7 @@ class Hook:
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
                     # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
                     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-                    em.add_field(name=klass, value='\n:{}: '.format(klass.lower()).join(strs), inline=False)
+                    em.add_field(name=klass, value='\n {} '.format(KLASS_EMOJI[klass]).join(strs), inline=False)
                     embeds.append(em)
                     i+=1
         # await self.bot.say(embed=em)
