@@ -4,6 +4,7 @@ from .mcoc import class_color_codes, ChampConverter, ChampConverterMult, QuietUs
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
+from .utils import chat_formatting as chat
 from operator import itemgetter, attrgetter
 from collections import OrderedDict
 from functools import reduce
@@ -430,29 +431,39 @@ class Hook:
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        if len(filtered) < 20:
+        strs = [champ.verbose_prestige_str for champ in sorted(filtered, key=attrgetter('prestige'), reverse=True)]
+        pages = chat.pagify(text='\n'.join(strs), page_length=1800)
+        for page in pages:
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            strs = [champ.verbose_prestige_str for champ in
-                    sorted(filtered, key=attrgetter('prestige'), reverse=True)]
-            em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
+            em.add_field(name='Filtered Roster', value=page ,inline=False)
             embeds.append(em)
-        else:
-            i = 1
-            for champ in filtered:
-                classes[champ.klass].append(champ)
-            for klass, champs in classes.items():
-                if champs:
-                    strs = [champ.verbose_prestige_str for champ in
-                            sorted(champs, key=attrgetter('prestige'), reverse=True)]
-                    em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
-                    em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-                    # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
-                    em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-                    em.add_field(name=klass, value='\n'.join(strs), inline=False)
-                    embeds.append(em)
-                    i+=1
+
+
+        # if len(filtered) < 20:
+        #     em = discord.Embed(title='', color=color)
+        #     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
+        #     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        #     strs = [champ.verbose_prestige_str for champ in
+        #             sorted(filtered, key=attrgetter('prestige'), reverse=True)]
+        #     em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
+        #     embeds.append(em)
+        # else:
+        #     i = 1
+        #     for champ in filtered:
+        #         classes[champ.klass].append(champ)
+        #     for klass, champs in classes.items():
+        #         if champs:
+        #             strs = [champ.verbose_prestige_str for champ in
+        #                     sorted(champs, key=attrgetter('prestige'), reverse=True)]
+        #             em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
+        #             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
+        #             # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
+        #             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        #             em.add_field(name=klass, value='\n'.join(strs), inline=False)
+        #             embeds.append(em)
+        #             i+=1
         # await self.bot.say(embed=em)
         await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
