@@ -82,9 +82,12 @@ gsheet_files = {
 }
 
 star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
-KLASS_EMOJI={'Skill':'<:skill:339469261028196353>','Cosmic':'<:cosmic:339469261057556480>','Mystic':'<:mystic:339469261053493248>','Science':'<:science:339469261103955978>',
-    'Mutant':'<:mutant:339469261128859648>','Tech':'<:tech:339469261099630593>','All':'<:all:339469261028196352>'}
-
+# KLASS_EMOJI={'Skill':'<:skill:339469261028196353>','Cosmic':'<:cosmic:339469261057556480>','Mystic':'<:mystic:339469261053493248>','Science':'<:science:339469261103955978>',
+#     'Mutant':'<:mutant:339469261128859648>','Tech':'<:tech:339469261099630593>','All':'<:all:339469261028196352>'}
+KLASS_EMOJI={'All':'<:all2:339511715920084993>','Cosmic':'<:cosmic2:339511716104896512>',
+    'Tech':'<:tech2:339511716197171200>','Mutant':'<:mutant2:339511716201365514>',
+    'Skill':'<:skill2:339511716549230592>','Science':'<:science2:339511716029267969>',
+    'Mystic':'<:mystic2:339511716150771712>'}
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
 remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/'
