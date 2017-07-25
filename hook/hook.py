@@ -622,11 +622,13 @@ class Hook:
             message = await self.bot.say(embed=em)
             if length > 5:
                 await self.bot.add_reaction(message, '⏪')
-            await self.bot.add_reaction(message, '◀')
+            if length > 1:
+                await self.bot.add_reaction(message, '◀')
             if choice is True:
                 await self.bot.add_reaction(message,'🆗')
             await self.bot.add_reaction(message, '❌')
-            await self.bot.add_reaction(message, '▶')
+            if length > 1:
+                await self.bot.add_reaction(message, '▶')
             if length > 5:
                 await self.bot.add_reaction(message, '⏩')
         else:
