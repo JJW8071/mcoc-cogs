@@ -411,7 +411,7 @@ class Hook:
                 'Science', 'Mystic', 'Default')])
 
         strs = [champ.verbose_prestige_str for champ in sorted(filtered, key=attrgetter('prestige'), reverse=True)]
-        pages = chat.pagify(text='\n'.join(strs), page_length=1250)
+        pages = chat.pagify(text='\n'.join(strs), page_length=1000)
         for page in pages:
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
