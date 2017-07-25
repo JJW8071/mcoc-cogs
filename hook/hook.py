@@ -655,7 +655,7 @@ class Hook:
             if react.reaction.emoji == '▶': #next_page
                 next_page = (page + 1) % len(embed_list)
                 # await self.bot.remove_reaction(message, '▶', react.user)
-                await react.user.remove_reaction(message, '▶', react.user)
+                await self.bot.remove_reaction(message, '▶', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '◀': #previous_page
                 next_page = (page - 1) % len(embed_list)
