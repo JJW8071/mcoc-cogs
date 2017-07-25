@@ -82,6 +82,8 @@ gsheet_files = {
 }
 
 star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
+KLASS_EMOJI={'Skill':':skill:339469261028196353','Cosmic':':cosmic:339469261057556480','Mystic':':mystic:339469261053493248','Science':':science:339469261103955978',
+    'Mutant':':mutant:339469261128859648','Tech':':tech:339469261099630593'}
 
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
@@ -1066,6 +1068,11 @@ class Champion:
     @property
     def verbose_prestige_str(self):
         return '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self)
+
+    @property
+    def verbose_prestige_str2(self):
+        return '{1} {0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self, KLASS_EMOJI[self.klass.title()])
+
 
     @property
     def stars_str(self):
