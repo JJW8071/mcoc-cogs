@@ -446,7 +446,7 @@ class Hook:
                 classes[champ.klass].append(champ)
             for klass, champs in classes.items():
                 if champs:
-                    strs = [champ.verbose_prestige_str for champ in
+                    strs = [champ.verbose_prestige_str2 for champ in
                             sorted(champs, key=attrgetter('prestige'), reverse=True)]
                     em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
                     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
