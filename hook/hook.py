@@ -654,23 +654,23 @@ class Hook:
             # react = react.reaction.emoji
             if react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}': #next_page
                 next_page = (page + 1) % len(embed_list)
-                await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}', react.user)
+                # await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}': #previous_page
                 next_page = (page - 1) % len(embed_list)
-                await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}', react.user)
+                # await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}': #rewind
                 next_page = (page - 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}'', react.user)
+                # await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}'', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}': # fast_forward
                 next_page = (page + 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}', react.user)
+                # await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '\N{SQUARED OK}': #choose
                 if choice is True:
-                    await self.bot.remove_reaction(message, '\N{SQUARED OK}', react.user)
+                    # await self.bot.remove_reaction(message, '\N{SQUARED OK}', react.user)
                     prompt = await self.bot.say(SELECTION.format(category+' '))
                     answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
                     if answer is not None:
