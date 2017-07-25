@@ -430,7 +430,7 @@ class Hook:
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        if len(filtered) < 10:
+        if len(filtered) < 20:
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
