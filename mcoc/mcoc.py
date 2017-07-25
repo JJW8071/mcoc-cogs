@@ -83,7 +83,7 @@ gsheet_files = {
 
 star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
 KLASS_EMOJI={'Skill':'<:skill:339469261028196353>','Cosmic':'<:cosmic:339469261057556480>','Mystic':'<:mystic:339469261053493248>','Science':'<:science:339469261103955978>',
-    'Mutant':'<:mutant:339469261128859648>','Tech':'<:tech:339469261099630593>'}
+    'Mutant':'<:mutant:339469261128859648>','Tech':'<:tech:339469261099630593>','All':'<:all:339469261028196352>'}
 
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
