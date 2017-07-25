@@ -336,12 +336,12 @@ class Hook:
             embeds.append(em2)
             await self.pages_menu(ctx, embed_list=embeds)
         else:
-            try:
-                em = discord.Embed(color=discord.Color.green(),title='[????]')
-                em.set_author(name = roster.user.name,icon_url=roster.user.avatar_url)
-            except:
-                em = discord.Embed(color=discord.Color.green(),title='[????]')
-                em.set_author(name=ctx.message.author, icon_url=ctx.message.author.avatar_url))
+            # try:
+            em = discord.Embed(color=discord.Color.green(),title='[????]')
+            em.set_author(name = roster.user.name,icon_url=roster.user.avatar_url)
+            # except:
+            #     em = discord.Embed(color=discord.Color.green(),title='[????]')
+            #     em.set_author(name=ctx.message.author, icon_url=ctx.message.author.avatar_url))
             em.add_field(name='Missing Roster',
                     value='Load up a "champ*.csv" file from Hook to import your roster')
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
