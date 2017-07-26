@@ -4,9 +4,9 @@ from .mcoc import class_color_codes, ChampConverter, ChampConverterMult, QuietUs
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
+from .utils import chat_formatting as chat
 from operator import itemgetter, attrgetter
 from collections import OrderedDict
-from functools import reduce
 from random import randint
 import shutil
 import time
@@ -178,7 +178,9 @@ class ChampionRoster:
 
     @property
     def all_tags(self):
-        return reduce(set.union, [c.all_tags for c in self.roster.values()])
+        if not self.roster:
+            return set()
+        return set.union(*[c.all_tags for c in self.roster.values()])
 
     @property
     def prestige(self):
@@ -379,28 +381,6 @@ class Hook:
             em.add_field(name='AWD Champs', value='\n'.join(info['awd']))
         await self.bot.say(embed=em)
 
-    # def setup_hook(self, author):
-    #     emcolor=discord.Color.red()
-        # em1 = '1. On the hook/champions webiste, enter your 4★ & 5★ champions.\nhook/champions website: <http://hook.github.io/champions>'
-        # em2 = '2. Set the [rank], [level], and [signature level] for your champions.  Disregard the Power Index.  Collector will recalcualte.'
-        # em3 = '3. [Optional] Set the champions in your Alliance Quest, Alliance War Defense, and Alliance War Offense teams.'
-        # em4 = '4. [Android | PC Browser] Using the upper right-hand menu, Export CSV.  This will download a file [champions.csv]'
-        # em5 = '4. [iOS] If you are using iOS, you have an extra step. Using the upper right-hand menu, Export CSV.\nThis produces a webpage with the content of the CSV.\nCopy the text of the entire page.\nUse the **goodReader** app (Apple Store) create a file [champions.csv] and paste the content of your clipboard.'
-        # em6 ='https://cdn.discordapp.com/attachments/324676145490427904/329060454833979392/unknown.png'
-        # em7 = '5. In DISCORD, upload your [champions.csv] file here, or in an appropriate channel on your server.'
-        # em1=discord.Embed(color=emcolor,title='hook/Champions setup instructions',description='')
-        # em1.add_field(name='Step 1: hook tool',value=em1d)
-        # em1.add_field(name='Step 2: set rank, level, sig',value=em2d)
-        # em1.add_field(name='Step 3: set teams',value=emd3d)
-        # em1.add_field(name='Step 4: Export',value=emd4d)
-        # await self.bot.send_message(author, 'test')
-        # await self.bot.send_message(author, em2)
-        # await self.bot.send_message(author, em3)
-        # await self.bot.send_message(author, em4)
-        # await self.bot.send_message(author, em5)
-        # await self.bot.send_message(author, em6)
-        # await self.bot.send_message(author, em7)
-
     @commands.group(pass_context=True, invoke_without_command=True)
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
@@ -409,6 +389,7 @@ class Hook:
         /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         filtered = await hargs.roster.filter_champs(hargs.tags)
+        user = await RosterUserConverter(ctx, '').convert()
         embeds = []
         if not filtered:
             em = discord.Embed(title='User', description=hargs.user.name,
@@ -430,31 +411,46 @@ class Hook:
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        if len(filtered) < 20:
+        strs = [champ.verbose_prestige_str for champ in 
+                sorted(filtered, key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'), 
+                    reverse=True)]
+        pages = chat.pagify(text='\n'.join(strs), page_length=1000)
+        for page in pages:
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            strs = [champ.verbose_prestige_str for champ in
-                    sorted(filtered, key=attrgetter('prestige'), reverse=True)]
-            em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
+            em.add_field(name=user.prestige, value=page ,inline=False)
             embeds.append(em)
-        else:
-            i = 1
-            for champ in filtered:
-                classes[champ.klass].append(champ)
-            for klass, champs in classes.items():
-                if champs:
-                    strs = [champ.verbose_prestige_str for champ in
-                            sorted(champs, key=attrgetter('prestige'), reverse=True)]
-                    em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
-                    em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-                    # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
-                    em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-                    em.add_field(name=klass, value='\n'.join(strs), inline=False)
-                    embeds.append(em)
-                    i+=1
+
+
+        # if len(filtered) < 20:
+        #     em = discord.Embed(title='', color=color)
+        #     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
+        #     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        #     strs = [champ.verbose_prestige_str for champ in
+        #             sorted(filtered, key=attrgetter('prestige'), reverse=True)]
+        #     em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
+        #     embeds.append(em)
+        # else:
+        #     i = 1
+        #     for champ in filtered:
+        #         classes[champ.klass].append(champ)
+        #     for klass, champs in classes.items():
+        #         if champs:
+        #             strs = [champ.verbose_prestige_str for champ in
+        #                     sorted(champs, key=attrgetter('prestige'), reverse=True)]
+        #             em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
+        #             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
+        #             # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
+        #             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        #             em.add_field(name=klass, value='\n'.join(strs), inline=False)
+        #             embeds.append(em)
+        #             i+=1
         # await self.bot.say(embed=em)
-        await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
+        if len(embeds) == 1:
+            await self.bot.say(embed=embeds[0])
+        else:
+            await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
@@ -622,7 +618,8 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
+    async def pages_menu(self, ctx, embed_list: list, category: str='', 
+            message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
         print('list len = {}'.format(len(embed_list)))
@@ -631,56 +628,59 @@ class Hook:
         if not message:
             message = await self.bot.say(embed=em)
             if length > 5:
-                await self.bot.add_reaction(message, '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}')
-            await self.bot.add_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}')
+                await self.bot.add_reaction(message, '⏪')
+            if length > 1:
+                await self.bot.add_reaction(message, '◀')
             if choice is True:
-                await self.bot.add_reaction(message,'\N{SQUARED OK}')
-            await self.bot.add_reaction(message, '\N{CROSS MARK}')
-            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+                await self.bot.add_reaction(message,'🆗')
+            await self.bot.add_reaction(message, '❌')
+            if length > 1:
+                await self.bot.add_reaction(message, '▶')
             if length > 5:
-                await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}')
+                await self.bot.add_reaction(message, '⏩')
         else:
             message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{SQUARED OK}'])
+        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         # if react.reaction.me == self.bot.user:
-        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['\N{BLACK RIGHT-POINTING TRIANGLE}', '\N{BLACK LEFT-POINTING TRIANGLE}', '\N{CROSS MARK}', '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}','\N{SQUARED OK}'])
+        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         if react is None:
             try:
                 try:
                     await self.bot.clear_reactions(message)
                 except:
-                    await self.bot.remove_reaction(message,'\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}', self.bot.user) #rewind
-                    await self.bot.remove_reaction(message, '\N{BLACK LEFT-POINTING TRIANGLE}', self.bot.user) #previous_page
-                    await self.bot.remove_reaction(message, '\N{CROSS MARK}', self.bot.user) # Cancel
-                    await self.bot.remove_reaction(message,'\N{SQUARED OK}',self.bot.user) #choose
-                    await self.bot.remove_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}', self.bot.user) #next_page
-                    await self.bot.remove_reaction(message,'\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}', self.bot.user) # fast_forward
+                    await self.bot.remove_reaction(message,'⏪', self.bot.user) #rewind
+                    await self.bot.remove_reaction(message, '◀', self.bot.user) #previous_page
+                    await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+                    await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+                    await self.bot.remove_reaction(message, '▶', self.bot.user) #next_page
+                    await self.bot.remove_reaction(message,'⏩', self.bot.user) # fast_forward
             except:
                 pass
             return None
         elif react is not None:
             # react = react.reaction.emoji
-            if react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}': #next_page
+            if react.reaction.emoji == '▶': #next_page
                 next_page = (page + 1) % len(embed_list)
-                # await self.bot.remove_reaction(message, '▶', react.reaction.message.author)
+                # await self.bot.remove_reaction(message, '▶', react.user)
+                await self.bot.remove_reaction(message, '▶', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}': #previous_page
+            elif react.reaction.emoji == '◀': #previous_page
                 next_page = (page - 1) % len(embed_list)
-                # await self.bot.remove_reaction(message, '⬅', react.reaction.message.author)
+                await self.bot.remove_reaction(message, '◀', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}': #rewind
+            elif react.reaction.emoji == '⏪': #rewind
                 next_page = (page - 5) % len(embed_list)
-                # await self.bot.remove_reaction(message, '⏪', react.reaction.message.author)
+                await self.bot.remove_reaction(message, '⏪', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}': # fast_forward
+            elif react.reaction.emoji == '⏩': # fast_forward
                 next_page = (page + 5) % len(embed_list)
-                # await self.bot.remove_reaction(message, '⬅', react.reaction.message.author)
+                await self.bot.remove_reaction(message, '⏩', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '\N{SQUARED OK}': #choose
+            elif react.reaction.emoji == '🆗': #choose
                 if choice is True:
-                    # await self.bot.remove_reaction(message, '⏩', react.reaction.message.author)
+                    # await self.bot.remove_reaction(message, '🆗', react.user)
                     prompt = await self.bot.say(SELECTION.format(category+' '))
                     answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
                     if answer is not None:
