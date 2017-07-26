@@ -7,7 +7,6 @@ from .utils import checks
 from .utils import chat_formatting as chat
 from operator import itemgetter, attrgetter
 from collections import OrderedDict
-from functools import reduce
 from random import randint
 import shutil
 import time
@@ -179,7 +178,9 @@ class ChampionRoster:
 
     @property
     def all_tags(self):
-        return reduce(set.union, [c.all_tags for c in self.roster.values()])
+        if not self.roster:
+            return set()
+        return set.union(*[c.all_tags for c in self.roster.values()])
 
     @property
     def prestige(self):
@@ -410,7 +411,9 @@ class Hook:
         classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
                 'Science', 'Mystic', 'Default')])
 
-        strs = [champ.verbose_prestige_str for champ in sorted(filtered, key=attrgetter('prestige'), reverse=True)]
+        strs = [champ.verbose_prestige_str for champ in 
+                sorted(filtered, key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'), 
+                    reverse=True)]
         pages = chat.pagify(text='\n'.join(strs), page_length=1000)
         for page in pages:
             em = discord.Embed(title='', color=color)
@@ -444,7 +447,10 @@ class Hook:
         #             embeds.append(em)
         #             i+=1
         # await self.bot.say(embed=em)
-        await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
+        if len(embeds) == 1:
+            await self.bot.say(embed=embeds[0])
+        else:
+            await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
