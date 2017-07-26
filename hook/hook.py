@@ -612,7 +612,7 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
+    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False, bookend=False):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
         print('list len = {}'.format(len(embed_list)))
@@ -621,7 +621,10 @@ class Hook:
         if not message:
             message = await self.bot.say(embed=em)
             if length > 5:
-                await self.bot.add_reaction(message, '⏪')
+                if bookend:
+                    await self.bot.add_reaction(message, '⏮')
+                else:
+                    await self.bot.add_reaction(message, '⏪')
             if length > 1:
                 await self.bot.add_reaction(message, '◀')
             if choice is True:
@@ -630,12 +633,15 @@ class Hook:
             if length > 1:
                 await self.bot.add_reaction(message, '▶')
             if length > 5:
-                await self.bot.add_reaction(message, '⏩')
+                if bookend:
+                    await self.bot.add_reaction(message,'⏭')
+                else:
+                    await self.bot.add_reaction(message, '⏩')
         else:
             message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
+        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗','⏮','⏭',])
         # if react.reaction.me == self.bot.user:
         #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         if react is None:
@@ -646,9 +652,11 @@ class Hook:
                     await self.bot.remove_reaction(message,'⏪', self.bot.user) #rewind
                     await self.bot.remove_reaction(message, '◀', self.bot.user) #previous_page
                     await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                    await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+                    await self.bot.remove_reaction(message,'🆗', self.bot.user) #choose
                     await self.bot.remove_reaction(message, '▶', self.bot.user) #next_page
                     await self.bot.remove_reaction(message,'⏩', self.bot.user) # fast_forward
+                    await self.bot.remove_reaction(message,'⏭', self.bot.user)
+                    await self.bot.remove_reaction(message,'⏮', self.bot.user)
             except:
                 pass
             return None
@@ -670,6 +678,14 @@ class Hook:
             elif react.reaction.emoji == '⏩': # fast_forward
                 next_page = (page + 5) % len(embed_list)
                 await self.bot.remove_reaction(message, '⏩', react.user)
+                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+            elif react.reaction.emoji == '⏮':
+                next_page = 0
+                await self.bot.remove_reaction(message, '⏮', react.user)
+                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+            elif react.reaction.emoji == '⏭':
+                next_page = 0
+                await self.bot.remove_reaction(message, '⏭', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '🆗': #choose
                 if choice is True:
