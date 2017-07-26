@@ -4,7 +4,7 @@ import logging
 import urllib3
 import httplib2
 import discord
-import hook from .cogs
+import pages_menu from hook
 from discord.ext import commands
 from cogs.utils import checks
 from cogs.utils.chat_formatting import pagify, box
@@ -182,7 +182,7 @@ class GSheets:
         msg = pagify(msg)
         for page in msg:
             # await self.bot.say(box(page))
-            await self.hook.pages_menu(ctx=ctx, embed_list=msg, timeout=60)
+            await self.pages_menu(ctx=ctx, embed_list=msg, timeout=60)
 
     @commands.command(pass_context=True)
     @checks.is_owner()
