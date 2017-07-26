@@ -357,20 +357,20 @@ class MCOCTools:
             em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [1]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
             message = await self.bot.send_message(ctx.message.channel, embed=em)
-            await self.bot.add_reaction(message,'🔁')
-            await self.bot.add_reaction(message,'❌')
-            await self.bot.add_reaction(message, '➡')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁','➡'])
-            if react is None or react.reaction.emoji == "❌":
+            await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+            await self.bot.add_reaction(message,'\N{CROSS MARK}')
+            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
+            if react is None or react.reaction.emoji == '\N{CROSS MARK}':
                 try:
                     await self.bot.delete_message(message)
                 except:
                     pass
                 return None
-            elif react.reaction.emoji == '🔁':
+            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_one(ctx)
-            elif react.reaction.emoji == '➡':
+            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
                 await self.bot.delete_message(message)
                 return await self.setup_phase_two(ctx)
         elif phase == True:
@@ -378,51 +378,59 @@ class MCOCTools:
 
     async def setup_phase_two(self, ctx):
         '''Check Role ORDER'''
-        message = await self.bot.say('initiate phase two')
-        # prev_phase =await self.setup_phase_one(ctx)
-        # repeat_phase = await self.setup_phase_two(ctx)
-        # next_phase = await self.setup_phase_three(ctx)
         server = ctx.message.server
-        roles = server.roles
-        required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2')
+        roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
+        required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner', 'everyone')
+        said = []
         em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
         positions = []
-        roles2 = sorted(roles, key=getattr(roles, 'positions'))
-        for r in roles2:
+        for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        em.add_field(name='Position',value='\n'.join(positions))
+        em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
+        said.append(await self.bot.say(embed=em))
         order = []
-        c=len(required_roles)
+        c=len(required_roles)-1
         for r in required_roles:
             order.append('{} = {}'.format(c, r))
             c-=1
-        em.add_field(name='Correct order', value ='\n'.join(order) )
+        em = discord.Embed(color=discord.Color.red(), title='',description='')
+        em.add_field(name='Correct Role Positions', value =chat.box('\n'.join(order)),inline=False)
+        perm_order = []
         phase = True
-        phase = False
-        desc = 'filler text'
+        for i in range(0,len(required_roles)-2):
+            j = i+1
+            if required_roles[j] > required_roles[i]:
+                phase = False
+                # perm_order.append('{} should be above {}'.format(required_roles[i],required_roles[j]))
         if phase == False:
             # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
             em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
+            # em.add_field(name='',value='\n'.join(perm_order))
             message = await self.bot.send_message(ctx.message.channel, embed=em)
-            await self.bot.add_reaction(message,'⬅')
-            await self.bot.add_reaction(message,'🔁')
-            await self.bot.add_reaction(message,'❌')
-            await self.bot.add_reaction(message, '➡')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['❌','🔁','➡'])
-            if react is None or react.reaction.emoji == "❌":
+            said.append(message)
+            await self.bot.add_reaction(message,'\N{BLACK LEFT-POINTING TRIANGLE}')
+            await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+            await self.bot.add_reaction(message,'\N{CROSS MARK}')
+            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
+            if react is None or react.reaction.emoji == '\N{CROSS MARK}':
                 try:
-                    await self.bot.delete_message(message)
+                    for message in said:
+                        await self.bot.delete_message(message)
                 except:
                     pass
                 return None
-            elif react.reaction.emoji == '🔁':
-                await self.bot.delete_message(message)
+            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
+                for message in said:
+                    await self.bot.delete_message(message)
                 return await self.setup_phase_two(ctx)
-            elif react.reaction.emoji == '➡':
-                await self.bot.delete_message(message)
+            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
+                for message in said:
+                    await self.bot.delete_message(message)
                 return await self.setup_phase_three(ctx)
-            elif react.reaction.emoji == '⬅':
-                await self.bot.delete_message(message)
+            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
+                for message in said:
+                    await self.bot.delete_message(message)
                 return await self.setup_phase_one(ctx)
         elif phase == True:
             await setup_phase_three
