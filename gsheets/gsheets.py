@@ -181,7 +181,7 @@ class GSheets:
         msg = pagify(msg)
         for page in msg:
             # await self.bot.say(box(page))
-            await self.pages_menu(ctx=ctx, embed_list=msg, timeout=60)
+            await pages_menu(self=self, ctx=ctx, embed_list=msg, timeout=60)
 
     @commands.command(pass_context=True)
     @checks.is_owner()
