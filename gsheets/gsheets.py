@@ -193,7 +193,7 @@ class GSheets:
         length = len(embed_list)
         em = embed_list[page]
         if not message:
-            message = await self.bot.say(box(em))
+            message = await self.bot.say(em)
             if length > 5:
                 await self.bot.add_reaction(message, '⏪')
             if length > 1:
@@ -206,7 +206,7 @@ class GSheets:
             if length > 5:
                 await self.bot.add_reaction(message, '⏩')
         else:
-            message = await self.bot.edit_message(message, box(em))
+            message = await self.bot.edit_message(message, em)
         await asyncio.sleep(1)
 
         react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
