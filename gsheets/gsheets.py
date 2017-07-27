@@ -179,7 +179,7 @@ class GSheets:
             return
         headers = table.pop(0)
         msg = '\n%s\n' % tabulate(table, headers)
-        pages = pagify(msg, page_length=750)
+        pages = pagify(msg, page_length=1000)
             # await self.bot.say(box(page))
         await self.pages_menu(ctx=ctx, embed_list=pages, timeout=60)
 
