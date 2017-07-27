@@ -179,10 +179,10 @@ class GSheets:
             return
         headers = table.pop(0)
         msg = '\n%s\n' % tabulate(table, headers)
-        pages = pagify(msg, page_length=1000)
+        pages = pagify(msg, page_length=1500)
         embeds = []
         for page in pages:
-            em = discord.Embed(title='Missing Prestige',desc=page)
+            em = discord.Embed(color=discord.Color.red(),title='Missing Prestige',description=page)
             em.set_footer(text='```/donateprestige``` to contribute')
             embeds.append(em)
             # await self.bot.say(box(page))
