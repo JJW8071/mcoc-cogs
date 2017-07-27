@@ -4,7 +4,7 @@ import logging
 import urllib3
 import httplib2
 import discord
-import cogs.hook as hook
+import asyncio
 from discord.ext import commands
 from cogs.utils import checks
 from cogs.utils.chat_formatting import pagify, box
