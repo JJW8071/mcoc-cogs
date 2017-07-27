@@ -180,12 +180,8 @@ class GSheets:
         headers = table.pop(0)
         msg = '\n%s\n' % tabulate(table, headers)
         pages = pagify(msg, page_length=750)
-        embeds = []
-        for page in pages:
-            em = discord.Embed(color=discord.Color.red(),title='',description=box(page))
-            embeds.append(em)
             # await self.bot.say(box(page))
-        await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=60)
+        await self.pages_menu(ctx=ctx, embed_list=pages, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
@@ -194,7 +190,7 @@ class GSheets:
         length = len(embed_list)
         em = embed_list[page]
         if not message:
-            message = await self.bot.say(embed=em)
+            message = await self.bot.say(box(em))
             if length > 5:
                 await self.bot.add_reaction(message, '⏪')
             if length > 1:
@@ -207,7 +203,7 @@ class GSheets:
             if length > 5:
                 await self.bot.add_reaction(message, '⏩')
         else:
-            message = await self.bot.edit_message(message, embed=em)
+            message = await self.bot.edit_message(message, box(em))
         await asyncio.sleep(1)
 
         react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
