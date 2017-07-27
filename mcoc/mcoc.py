@@ -4,10 +4,10 @@ from textwrap import wrap
 from collections import UserDict, defaultdict
 from math import log2
 from math import *
+from operator import attrgetter
 import os
 import time
 import inspect
-import urllib
 import aiohttp
 import logging
 import csv
@@ -18,7 +18,6 @@ from .utils.dataIO import dataIO
 from functools import wraps
 import discord
 from discord.ext import commands
-from .utils.dataIO import dataIO
 from .utils import chat_formatting as chat
 
 logger = logging.getLogger('red.mcoc')
@@ -590,12 +589,9 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    #@commands.command(pass_context=True, aliases=['bio',])
     @command_arg_help(aliases=('bio',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
-    #async def champ_bio(self, ctx, *, champ):
         '''Retrieve the Bio of a Champion'''
-        #champ = await ChampConverter(ctx, champ).convert()
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
@@ -829,16 +825,20 @@ class MCOC(ChampionFactory):
     @command_arg_help(aliases=('prestige',))
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
-        em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
-        for champ in champs:
-            try:
-                em.add_field(name='{0.class_icon} {0.star_char}{0.star} {0.full_name}'.format(champ),
-                        #value='{0.stars_str}\n{0.rank_sig_str}\n{0.prestige}'.format(champ),
-                        value='{0.rank_sig_str}\n{0.prestige}'.format(champ),
-                        inline=False)
-            except AttributeError:
-                await self.bot.say("**WARNING** Champion Data for "
-                    + "{} does not exist".format(champ.verbose_str))
+        #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
+        pch = [c for c in champs if c.has_prestige] 
+        em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
+                description='\n'.join([c.verbose_prestige_str for c in 
+                    sorted(pch, key=attrgetter('prestige'), reverse=True)]))
+        #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
+            #try:
+            #em.add_field(name='{0.class_icon} {0.star_char}{0.star} {0.full_name}'.format(champ),
+                    #value='{0.stars_str}\n{0.rank_sig_str}\n{0.prestige}'.format(champ),
+            #        value='{0.rank_sig_str}\n{0.prestige}'.format(champ),
+            #        inline=False)
+            #except AttributeError:
+            #    await self.bot.say("**WARNING** Champion Data for "
+            #        + "{} does not exist".format(champ.verbose_str))
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -1126,6 +1126,10 @@ class Champion:
         except KeyError:
             return 0
         return self.prestige_data[self.star][self.rank-1][self.sig]
+
+    @property
+    def has_prestige(self):
+        return hasattr(self, 'prestige_data')
 
     @property
     @validate_attr('prestige')
