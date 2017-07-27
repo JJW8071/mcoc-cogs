@@ -8,6 +8,7 @@ from .utils import chat_formatting as chat
 from operator import itemgetter, attrgetter
 from collections import OrderedDict
 from random import randint
+from math import ceil
 import shutil
 import time
 import types
@@ -414,12 +415,19 @@ class Hook:
         strs = [champ.verbose_prestige_str for champ in 
                 sorted(filtered, key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'), 
                     reverse=True)]
-        pages = chat.pagify(text='\n'.join(strs), page_length=1000)
-        for page in pages:
+        #pages = chat.pagify(text='\n'.join(strs), page_length=1000)
+        champs_per_page = 15
+        max_pages = ceil(len(strs) / champs_per_page)
+        for enum, i in enumerate(range(0, len(strs)+1, champs_per_page)):
             em = discord.Embed(title='', color=color)
             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-            em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-            em.add_field(name=user.prestige, value=page ,inline=False)
+            em.set_footer(text='hook/champions for Collector (Page {} of {})'.format(
+                    enum+1, max_pages), 
+                    icon_url='https://assets-cdn.github.com/favicon.ico')
+            #em.add_field(name='{}  (Page {} of {})'.format(user.prestige, enum+1, max_pages), 
+                    #inline=False,
+            em.add_field(name=user.prestige, inline=False,
+                    value='\n'.join(strs[i:min(i+champs_per_page, len(strs))]))
             embeds.append(em)
 
 
