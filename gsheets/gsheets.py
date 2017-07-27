@@ -179,13 +179,14 @@ class GSheets:
             return
         headers = table.pop(0)
         msg = '\n%s\n' % tabulate(table, headers)
-        # print('msg len : {}'.format(len(msg)))
-        # print(msg)
-
         pages = pagify(msg, page_length=1000)
-        # for page in pages:
+        embeds = []
+        for page in pages:
+            em = discord.Embed(title='Missing Prestige',desc=page)
+            em.set_footer(text='```/donateprestige``` to contribute')
+            embeds.append(em)
             # await self.bot.say(box(page))
-        await self.pages_menu(ctx=ctx, embed_list=pages, timeout=60)
+        await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
