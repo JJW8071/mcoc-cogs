@@ -179,7 +179,7 @@ class GSheets:
             return
         headers = table.pop(0)
         msg = '\n%s\n' % tabulate(table, headers)
-        pages = pagify(msg, page_length=400)
+        pages = pagify(msg, page_length=750)
         embeds = []
         for page in pages:
             em = discord.Embed(color=discord.Color.red(),title='',description=box(page))
