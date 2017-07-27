@@ -183,12 +183,6 @@ class GSheets:
         pages = pagify(msg, page_length=1000)
         for page in pages:
             page_list.append(box(page))
-            # await self.bot.say(box(page))
-        await asyncio.sleep(5)
-        try:
-            await self.bot.delete_message(ctx.message)
-        except:
-            pass
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
@@ -199,6 +193,10 @@ class GSheets:
         em = embed_list[page]
         if not message:
             message = await self.bot.say(em)
+            try:
+                await self.bot.delete_message(ctx.message)
+            except:
+                pass
             if length > 5:
                 await self.bot.add_reaction(message, '⏪')
             if length > 1:
