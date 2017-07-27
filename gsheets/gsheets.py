@@ -178,7 +178,7 @@ class GSheets:
             await self.bot.say("That range is empty.")
             return
         headers = table.pop(0)
-        # msg = '\n%s\n' % tabulate(table, headers)
+        msg = '\n%s\n' % tabulate(table, headers)
         # print('msg len : {}'.format(len(msg)))
         # print(msg)
 
