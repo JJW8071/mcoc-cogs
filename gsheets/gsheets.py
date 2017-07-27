@@ -180,6 +180,7 @@ class GSheets:
         headers = table.pop(0)
         msg = '\n%s\n' % tabulate(table, headers)
         print('msg len : {}'.format(len(msg)))
+        print(msg)
         # pages = pagify(msg, page_length=1000)
         # for page in pages:
             # await self.bot.say(box(page))
