@@ -2,14 +2,12 @@ import re
 from datetime import datetime, timedelta
 from textwrap import wrap
 from collections import UserDict, defaultdict
-from operator import or_, and_
-from functools import reduce
 from math import log2
 from math import *
+from operator import attrgetter
 import os
 import time
 import inspect
-import urllib
 import aiohttp
 import logging
 import csv
@@ -20,7 +18,6 @@ from .utils.dataIO import dataIO
 from functools import wraps
 import discord
 from discord.ext import commands
-from .utils.dataIO import dataIO
 from .utils import chat_formatting as chat
 
 logger = logging.getLogger('red.mcoc')
@@ -32,10 +29,6 @@ data_files = {
                 'local': 'data/mcoc/spotlight_data.csv', 'update_delta': 1},
     'crossreference': {'remote': 'https://docs.google.com/spreadsheets/d/1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
-    # 'sig_data': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=799981914&single=true&format=csv',
-    #             'local': 'data/mcoc/sig_data.csv', 'update_delta': 1},
-    #'prestige': {'remote': 'https://spreadsheets.google.com/feeds/list/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/2/public/values?alt=json',
-                #'local': 'data/mcoc/prestige.json', 'update_delta': 1},
     'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=1346864636&single=true&output=csv',
                 'local': 'data/mcoc/prestige.csv', 'update_delta': 1},
     'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
@@ -44,13 +37,6 @@ data_files = {
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
     'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
-    #'sig_coeff': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=696682690&format=csv',
-                #'local': 'data/mcoc/sig_coeff.csv', 'update_delta': 0},
-    #'effect_keys': {'remote': 'https://docs.google.com/spreadsheets/d/1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg/export?gid=229525912&format=csv',
-    #            'local': 'data/mcoc/effect_keys.csv', 'update_delta': 0},
-### coefficient by rank is HOOK's prestige coefficients.  But I am uncertain of generation process.
-##   'coefficient-by-rank': {'remote': 'https://github.com/hook/champions/blob/master/src/data/pi/coefficient-by-rank.json',
-##               'local': 'data/mcoc/coefficient-by-rank.json'},
     }
 
 local_files = {
@@ -81,13 +67,7 @@ gsheet_files = {
             #'payload': 'pub?gid=0&single=true&output=csv'}
 }
 
-star_glyph = {1: '★', 2: '★★', 3: '★★★', 4: '★★★★', 5: '★★★★★'}
-# KLASS_EMOJI={'Skill':'<:skill:339469261028196353>','Cosmic':'<:cosmic:339469261057556480>','Mystic':'<:mystic:339469261053493248>','Science':'<:science:339469261103955978>',
-#     'Mutant':'<:mutant:339469261128859648>','Tech':'<:tech:339469261099630593>','All':'<:all:339469261028196352>'}
-KLASS_EMOJI={'All':'<:all2:339511715920084993>','Cosmic':'<:cosmic2:339511716104896512>',
-    'Tech':'<:tech2:339511716197171200>','Mutant':'<:mutant2:339511716201365514>',
-    'Skill':'<:skill2:339511716549230592>','Science':'<:science2:339511716029267969>',
-    'Mystic':'<:mystic2:339511716150771712>'}
+star_glyph = '★'
 lolmap_path='data/mcoc/maps/lolmap.png'
 file_checks_json = 'data/mcoc/file_checks.json'
 remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/'
@@ -110,6 +90,15 @@ class_color_codes = {
         'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
         'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
+        }
+class_emoji = {
+        'All':'<:all2:339511715920084993>',
+        'Cosmic':'<:cosmic2:339511716104896512>',
+        'Tech':'<:tech2:339511716197171200>',
+        'Mutant':'<:mutant2:339511716201365514>',
+        'Skill':'<:skill2:339511716549230592>',
+        'Science':'<:science2:339511716029267969>',
+        'Mystic':'<:mystic2:339511716150771712>',
         }
 
 def from_flat(flat, ch_rating):
@@ -297,6 +286,7 @@ class ChampionFactory():
         kwargs['bold_name'] = chat.bold(' '.join(
                 [word.capitalize() for word in kwargs['full_name'].split(' ')]))
         kwargs['class_color'] = class_color_codes[kwargs['klass']]
+        kwargs['class_icon'] = class_emoji[kwargs['klass']]
 
         kwargs['class_tags'] = {'#' + kwargs['klass'].lower()}
         for a in kwargs['abilities'].split(','):
@@ -327,7 +317,7 @@ class ChampionFactory():
         re_str = re.compile(search_str)
         champs = []
         for champ in self.champions.values():
-            if reduce(or_, [re_str.search(alias) is not None
+            if any([re_str.search(alias) is not None
                     for alias in champ.alias_set]):
                 champs.append(champ(attrs))
         return champs
@@ -405,7 +395,7 @@ class ChampionFactory():
         id_index = raw_data.fieldnames.index('status')
         alias_index = raw_data.fieldnames[:id_index]
         for row in raw_data:
-            if reduce(and_, [not i for i in row.values()]):
+            if all([not i for i in row.values()]):
                 continue    # empty row check
             alias_set = set()
             for col in alias_index:
@@ -599,12 +589,9 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    #@commands.command(pass_context=True, aliases=['bio',])
     @command_arg_help(aliases=('bio',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
-    #async def champ_bio(self, ctx, *, champ):
         '''Retrieve the Bio of a Champion'''
-        #champ = await ChampConverter(ctx, champ).convert()
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
@@ -667,18 +654,18 @@ class MCOC(ChampionFactory):
             em.add_field(name='Base Stats',
                 value=tabulate(stats, width=11, rotate=False, header_sep=False))
         # em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-        # em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
-        # em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],inline=False)
+        # em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
+        # em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
         # state = xref['f/s/b']
         # if state == 'b':
-        #     em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
-        #     em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+        #     em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
+        #     em.add_field(name='Basic 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         # elif state == 's':
-        #     em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
-        #     em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+        #     em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
+        #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         # elif state == 'f':
-        #     em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
-        #     em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+        #     em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['5chance'],inline=False)
+        #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
@@ -696,18 +683,18 @@ class MCOC(ChampionFactory):
             em = discord.Embed(color=champ.class_color,
                     title=champ.verbose_str, description='Base Attributes')
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-            em.add_field(name='4'+star_glyph[1]+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
-            em.add_field(name='5'+star_glyph[1]+' Crystal', value=xref['5subfeature'],inline=False)
+            em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
+            em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
             state = xref['f/s/b']
             if state == 'b':
-                em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
-                em.add_field(name='Basic 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+                em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
+                em.add_field(name='Basic 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
             elif state == 's':
-                em.add_field(name='Basic 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
-                em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+                em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
+                em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
             elif state == 'f':
-                em.add_field(name='Featured 4'+star_glyph[1]+' Chance', value=xref['4chance'],inline=False)
-                em.add_field(name='Featured 5'+star_glyph[1]+' Chance', value=xref['5chance'],inline=False)
+                em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
+                em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
             em.set_thumbnail(url=champ.get_avatar())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
@@ -716,7 +703,7 @@ class MCOC(ChampionFactory):
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
-            await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph[1]))
+            await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph))
             return
         try:
             title, desc, sig_calcs = await champ.process_sig_description()
@@ -838,37 +825,40 @@ class MCOC(ChampionFactory):
     @command_arg_help(aliases=('prestige',))
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
-        em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
-        for champ in champs:
-            try:
-                # em.add_field(name=champ.coded_str, value=champ.prestige)
-                #em.add_field(name=champ.star_name_str,
-                        #value='{0.rank_sig_str}\n{0.prestige}'.format(champ),
-                em.add_field(name=champ.full_name,
-                        value='{0.stars_str}\n{0.rank_sig_str}\n{0.prestige}'.format(champ),
-                        inline=False)
-            except AttributeError:
-                await self.bot.say("**WARNING** Champion Data for "
-                    + "{} does not exist".format(champ.verbose_str))
+        #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
+        pch = [c for c in champs if c.has_prestige] 
+        em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
+                description='\n'.join([c.verbose_prestige_str for c in 
+                    sorted(pch, key=attrgetter('prestige'), reverse=True)]))
+        #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
+            #try:
+            #em.add_field(name='{0.class_icon} {0.star_char}{0.star} {0.full_name}'.format(champ),
+                    #value='{0.stars_str}\n{0.rank_sig_str}\n{0.prestige}'.format(champ),
+            #        value='{0.rank_sig_str}\n{0.prestige}'.format(champ),
+            #        inline=False)
+            #except AttributeError:
+            #    await self.bot.say("**WARNING** Champion Data for "
+            #        + "{} does not exist".format(champ.verbose_str))
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
     @commands.command(aliases=('calias',))
     async def champ_aliases(self, *args):
         '''Retrieve Champion Aliases'''
-        champs_matched = []
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
+        champs_matched = set()
         for arg in args:
-            if (arg.startswith("'") and arg.endswith("'")) or (arg.startswith('"') and arg.endswith('"')) :
+            if (arg.startswith("'") and arg.endswith("'")) or \
+                    (arg.startswith('"') and arg.endswith('"')):
                 champs = await self.search_champions(arg[1:-1])
             elif '*' in arg:
                 champs = await self.search_champions('.*'.join(re.split(r'\\?\*', arg)))
             else:
-                champs = (await self.get_champion(arg),)
+                champs = await self.search_champions('.*{}.*'.format(arg))
             for champ in champs:
-                if champ not in champs_matched:
+                if champ.mattkraftid not in champs_matched:
                     em.add_field(name=champ.full_name, value=champ.get_aliases())
-                    champs_matched.append(champ)
+                    champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
     @commands.command()
@@ -1068,14 +1058,10 @@ class Champion:
     def rank_sig_str(self):
         return '{0.rank}/{0.max_lvl} sig{0.sig:<2}'.format(self)
 
-    # @property
-    # def verbose_prestige_str(self):
-    #     return '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self)
-
     @property
     def verbose_prestige_str(self):
-        return '{1} {0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'.format(self, KLASS_EMOJI[self.klass.title()])
-
+        return ('{0.class_icon} {0.star}{0.star_char} {0.full_name} '
+                + 'r{0.rank} s{0.sig:<2} [ {0.prestige} ]').format(self)
 
     @property
     def stars_str(self):
@@ -1140,6 +1126,10 @@ class Champion:
         except KeyError:
             return 0
         return self.prestige_data[self.star][self.rank-1][self.sig]
+
+    @property
+    def has_prestige(self):
+        return hasattr(self, 'prestige_data')
 
     @property
     @validate_attr('prestige')
