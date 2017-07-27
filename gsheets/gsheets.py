@@ -184,12 +184,12 @@ class GSheets:
         for page in pages:
             page_list.append(box(page))
             # await self.bot.say(box(page))
-        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
         await asyncio.sleep(5)
         try:
             await self.bot.delete_message(ctx.message)
         except:
             pass
+        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
