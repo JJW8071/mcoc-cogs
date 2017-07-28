@@ -35,6 +35,9 @@ JSONEncoder.default = _default # replacemente
 class MissingRosterError(QuietUserError):
     pass
 
+class MisorderedArgumentError(QuietUserError):
+    pass
+
 class HashtagRosterConverter(commands.Converter):
     async def convert(self):
         tags = set()
@@ -59,8 +62,32 @@ class HashtagRosterConverter(commands.Converter):
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             await self.ctx.bot.say(embed=em)
-            # raise MissingRosterError('No Roster found for {}'.format(user.name))
-        return types.SimpleNamespace(tags=tags, user=user, roster=chmp_rstr)
+            raise MissingRosterError('No Roster found for {}'.format(user.name))
+        return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
+
+class HashtagRankConverter(commands.Converter):
+    parse_re = ChampConverter.parse_re
+    async def convert(self):
+        tags = set()
+        attrs = {}
+        arguments = self.argument.split()
+        start_hashtags = 0
+        for i, arg in enumerate(arguments):
+            if arg[0] in '#(~':
+                start_hashtags = i
+                break
+            for m in self.parse_re.finditer(arg):
+                attrs[m.lastgroup] = int(m.group(m.lastgroup))
+        else:
+            start_hashtags = len(arguments)
+        for arg in arguments[start_hashtags:]:
+            if arg[0] not in '#(~':
+                await self.ctx.bot.say('All arguments must be before the Hashtags')
+                raise MisorderedArgumentError(arg)
+            if arg.startswith('#'):
+                tags.add(arg.lower())
+        return types.SimpleNamespace(tags=tags, attrs=attrs)
+
 
 class RosterUserConverter(commands.Converter):
     async def convert(self):
@@ -134,6 +161,9 @@ class ChampionRoster:
             champ = await self.get_champion(k)
             self.roster[champ.immutable_id] = champ
 
+    def from_list(self, champ_list):
+        self.roster = {champ.immutable_id: champ for champ in champ_list}
+
     def load_champ_data(self):
         data = dataIO.load_json(self.champs_file)
         self.fieldnames = data['fieldnames']
@@ -160,6 +190,10 @@ class ChampionRoster:
     @property
     def champs_file(self):
         return self._champs_file.format(self.user.id)
+
+    @property
+    def embed_display(self):
+        return getattr(self, 'display_override', self.prestige)
 
     async def get_champion(self, cdict):
         mcoc = self.bot.get_cog('MCOC')
@@ -389,14 +423,17 @@ class Hook:
         ex.
         /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
-        filtered = await hargs.roster.filter_champs(hargs.tags)
-        user = await RosterUserConverter(ctx, '').convert()
+        await self.display_roster(ctx, hargs.roster, hargs.tags)
+
+    async def display_roster(self, ctx, roster, tags):
+        filtered = await roster.filter_champs(tags)
+        user = roster.user
         embeds = []
         if not filtered:
-            em = discord.Embed(title='User', description=hargs.user.name,
+            em = discord.Embed(title='User', description=user.name,
                     color=discord.Color.gold())
             em.add_field(name='Tags used filtered to an empty roster',
-                    value=' '.join(hargs.tags))
+                    value=' '.join(tags))
             await self.bot.say(embed=em)
             return
 
@@ -408,53 +445,22 @@ class Hook:
                 color = discord.Color.gold()
                 break
 
-        #champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
-        classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
-                'Science', 'Mystic', 'Default')])
-
-        strs = [champ.verbose_prestige_str for champ in 
-                sorted(filtered, key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'), 
-                    reverse=True)]
-        #pages = chat.pagify(text='\n'.join(strs), page_length=1000)
+        strs = [champ.verbose_prestige_str for champ in sorted(filtered, reverse=True,
+                    key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'))] 
         champs_per_page = 15
         max_pages = ceil(len(strs) / champs_per_page)
         for enum, i in enumerate(range(0, len(strs)+1, champs_per_page)):
             em = discord.Embed(title='', color=color)
-            em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
+            em.set_author(name=user.name, icon_url=user.avatar_url)
             em.set_footer(text='hook/champions for Collector (Page {} of {})'.format(
                     enum+1, max_pages), 
                     icon_url='https://assets-cdn.github.com/favicon.ico')
             #em.add_field(name='{}  (Page {} of {})'.format(user.prestige, enum+1, max_pages), 
                     #inline=False,
-            em.add_field(name=user.prestige, inline=False,
+            em.add_field(name=roster.embed_display, inline=False,
                     value='\n'.join(strs[i:min(i+champs_per_page, len(strs))]))
             embeds.append(em)
 
-
-        # if len(filtered) < 20:
-        #     em = discord.Embed(title='', color=color)
-        #     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-        #     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-        #     strs = [champ.verbose_prestige_str for champ in
-        #             sorted(filtered, key=attrgetter('prestige'), reverse=True)]
-        #     em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
-        #     embeds.append(em)
-        # else:
-        #     i = 1
-        #     for champ in filtered:
-        #         classes[champ.klass].append(champ)
-        #     for klass, champs in classes.items():
-        #         if champs:
-        #             strs = [champ.verbose_prestige_str for champ in
-        #                     sorted(champs, key=attrgetter('prestige'), reverse=True)]
-        #             em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
-        #             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-        #             # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
-        #             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-        #             em.add_field(name=klass, value='\n'.join(strs), inline=False)
-        #             embeds.append(em)
-        #             i+=1
-        # await self.bot.say(embed=em)
         if len(embeds) == 1:
             await self.bot.say(embed=embeds[0])
         else:
@@ -571,6 +577,21 @@ class Hook:
     #     elif awd is True:
     #         info['awd'] = champs
 
+    @commands.command(pass_context=True, name='rank_prestige', aliases=('prestige_list',))
+    async def _rank_prestige(self, ctx, *, hargs=''):
+        hargs = await HashtagRankConverter(ctx, hargs).convert()
+        roster = ChampionRoster(self.bot, self.bot.user)
+        mcoc = self.bot.get_cog('MCOC')
+        rlist = []
+        for champ_class in mcoc.champions.values():
+            champ = champ_class(hargs.attrs.copy())
+            if champ.has_prestige:
+                rlist.append(champ)
+        roster.from_list(rlist)
+        roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
+        await self.display_roster(ctx, roster, hargs.tags)
+
+
     @commands.command(pass_context=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         '''Report Clan Prestige'''
@@ -630,7 +651,7 @@ class Hook:
             message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
-        print('list len = {}'.format(len(embed_list)))
+        #print('list len = {}'.format(len(embed_list)))
         length = len(embed_list)
         em = embed_list[page]
         if not message:

@@ -35,8 +35,8 @@ data_files = {
                 'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
     'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=1266181139&single=true&output=csv',
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
-    'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
-                'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
+    #'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
+                #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
 
 local_files = {
@@ -1038,6 +1038,10 @@ class Champion:
         return '{0.stars_str} {0.rank}/{0.max_lvl}'.format(self)
 
     @property
+    def attrs_str(self):
+        return '{0.star}{0.star_char} {0.rank}/{0.max_lvl} sig{0.sig}'.format(self)
+
+    @property
     def unique(self):
         return '{0.star}-{0.mattkraftid}-{0.rank}'.format(self)
 
@@ -1233,8 +1237,8 @@ class Champion:
                     sig_calcs[ckey] = raw_str.format(per_val)
 
         if data_missing:
-            await self.bot.say('Missing Attack/Health info for {} {}'.format(
-                    self.full_name, self.star_str))
+            await self.bot.say(('Missing Attack/Health info for '
+                    + '{0.full_name} {0.star_str}').format(self))
         fdesc = []
         for i, kabam_key in enumerate(desc):
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
