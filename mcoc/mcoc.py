@@ -579,6 +579,7 @@ class MCOC(ChampionFactory):
     async def champ_featured(self, champ : ChampConverter):
         '''Retrieve Champion Feature Images'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
 
@@ -586,6 +587,7 @@ class MCOC(ChampionFactory):
     async def champ_portrait(self, champ : ChampConverter):
         '''Retrieve Champion Portrait'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -599,6 +601,7 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name,
                 description=bio_desc)
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
                 value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
         em.set_thumbnail(url=champ.get_avatar())
@@ -641,6 +644,7 @@ class MCOC(ChampionFactory):
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
                 title=champ.verbose_str, description='Base Attributes')
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -670,7 +674,8 @@ class MCOC(ChampionFactory):
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
             em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
-        em.add_field(name='hashtags',value=', '.join(champ.class_tags.union(champ.tags)))
+            em.add_field(name='hashtags',
+                    value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -713,6 +718,7 @@ class MCOC(ChampionFactory):
         if title is None:
             return
         em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
@@ -771,6 +777,7 @@ class MCOC(ChampionFactory):
     @command_arg_help(aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name=champ.full_name, value='No URL found')
         else:
@@ -783,8 +790,8 @@ class MCOC(ChampionFactory):
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
-        em = discord.Embed(color=champ.class_color,
-        title=champ.full_name + 'Abilities')
+        em = discord.Embed(color=champ.class_color, title=champ.full_name + 'Abilities')
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         # em.add_field(name='Passive',value='placeholder')
         # em.add_field(name='All Attacks',value='placeholder')
         # em.add_field(name='When Attacked',value='placeholder')
@@ -826,9 +833,9 @@ class MCOC(ChampionFactory):
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
         #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
-        pch = [c for c in champs if c.has_prestige] 
+        pch = [c for c in champs if c.has_prestige]
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
-                description='\n'.join([c.verbose_prestige_str for c in 
+                description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
         #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
             #try:
