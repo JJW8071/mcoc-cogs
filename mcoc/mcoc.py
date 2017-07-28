@@ -641,6 +641,7 @@ class MCOC(ChampionFactory):
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
                 title=champ.verbose_str, description='Base Attributes')
+        em.set_author(name=champ.short, icon_url=champ.get_avatar())
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -826,9 +827,9 @@ class MCOC(ChampionFactory):
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
         #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
-        pch = [c for c in champs if c.has_prestige] 
+        pch = [c for c in champs if c.has_prestige]
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
-                description='\n'.join([c.verbose_prestige_str for c in 
+                description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
         #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
             #try:
