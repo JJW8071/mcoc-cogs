@@ -1,14 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "2d86010fbe87da7718f26a772413c2da4a5bc74b",
+    "hash": "d9bacea50cb4016a9f8134c250e5cf66ccdcfcf3",
     "language": "en",
-    "string_count": 2773,
+    "post_processed": true,
+    "string_count": 2897,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1497309980
+    "ts": 1499966803,
+    "versionLock": "14.1"
   },
   "strings": [
     {
@@ -204,18 +206,8 @@
       "v": "Any Bleed effects triggered by this attack have [16982bff]{1}%[-] increased duration."
     },
     {
-      "k": "ID_UI_ATTRIBUTE_RNRG_TOOLTIP",
-      "v": "[PLACEHOLDER]Energy Resistance simple tooltip",
-      "vn": 16
-    },
-    {
       "k": "ID_UI_ATTRIBUTE_ROLE",
       "v": "ROLE:"
-    },
-    {
-      "k": "ID_UI_ATTRIBUTE_RPHY_TOOLTIP",
-      "v": "[PLACEHOLDER]Physical Resistance simple tooltip",
-      "vn": 16
     },
     {
       "k": "ID_UI_ATTRIBUTE_TITLE",
@@ -238,12 +230,22 @@
       "v": "Percentages displayed are based on facing a 4-Star Rank 5 Champion (Challenge Rating 100)."
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_BIOCHEM",
+      "v": "BIOCHEMISTRY",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_ARMOR_AO",
       "v": "All Champions gain +{0} Armor Rating"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ARMOR_FALCON_AO",
       "v": "All Champions gain +{0} Armor Rating and Redwing's Recon Bonus"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_BIOCHEM",
+      "v": "[64acff]Doctor Octopus:[-] Start with {0} Chemistry Research.\n[64acff]Ant-Man:[-] Glancing Hits reflect {0}% of Physical Damage done, by attacks that make Contact.",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_COMP_AO",
@@ -262,8 +264,33 @@
       "v": "All Champions gain +{0} Critical Damage Rating"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_ENGINEERING",
+      "v": "[64acff]Doctor Octopus:[-] Research Categories no longer fall off over time.\n[64acff]Vulture:[-] Gain an additional +{0} Chitauri Charge on Critical Hit.",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_HFH_AO",
       "v": "All Champions gain +{0} Block Proficiency & Physical Resistance"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_PARTICLEPHYSICS",
+      "v": "[64acff]Doctor Octopus:[-] When a Breakthrough expires, Research Categories reset to {0}.\r\n[64acff]Electro:[-] Gains {0}% additional Power from Critical Hits.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENGINEERING",
+      "v": "ENGINEERING",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PARTICLEPHYSICS",
+      "v": "PARTICLE PHYSICS",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_SEETHINGHATRED_DESC",
+      "v": "[64acff]Green Goblin:[-] +{0}% Pumpkin Bomb damage for each Cunning and Madness charge.\n[64acff]Spider-Man Champions:[-] Critical Hits generate {0}% more Power.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_SIG_ABILITY_NONE",
@@ -1150,6 +1177,11 @@
       "v": "[b310e8]Armor Break VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_BREAKTHROUGH_HUD",
+      "v": "BREAKTHROUGH",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_BUFFSTEAL",
       "v": "[16982bff]{1}%[-] chance to Steal the Opponent's Fury, Armor Up, Regeneration, Cruelty, Precision or Resist Physical Buff effects for yourself."
     },
@@ -1938,6 +1970,141 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_DIZZINESS_VII",
       "v": "[b310e8]Dizziness VII[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_BIO_A",
+      "v": "Builds on Block or Parry",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_BIO_B",
+      "v": "Scaling Effect: Block Prof Buff, granting up to [16982bff]{1}[-] Block Proficiency.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_BIO_C",
+      "v": "Breakthrough: Applies a Heal Block Debuff to the Opponent which lasts {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_CHEM_A",
+      "v": "Builds when landing Hits and when being Struck",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_CHEM_B",
+      "v": "Scaling Effect: Fury, granting up to [16982bff]{1}[-] Attack.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_CHEM_C",
+      "v": "Breakthrough: Applies an Armor Up Buff, granting {1} Armor for {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_HVY_DET",
+      "v": "Remove all currently active Breakthroughs dealing [16982bff]{1}[-] damage per Breakthrough removed.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_PHYS_A",
+      "v": "Builds on Opponent Gaining Power.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_PHYS_B",
+      "v": "Scaling Effect: Opponent’s Special Attack Damage reduced by up to [16982bff]{1}%[-]",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_PHYS_C",
+      "v": "Breakthrough: Applies a Power Lock Debuff on the Opponent which lasts {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_RC_A",
+      "v": "Research is built in each Category until it hits {1}. If you haven’t gained research in a category for {2} seconds it begins to fall off. ",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_RC_B",
+      "v": "Each Category grants a Passive effect which scales as its category builds.        ",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_RC_C",
+      "v": "When a Category reaches {1} it triggers a Breakthrough, as long as there isn’t one already active.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_RC_D",
+      "v": "When a Breakthrough effect expires all Research Categories reset to {1}.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A",
+      "v": "Doctor Octopus’s extensive academic background let him start the fight with each of his Research Categories at {1} and each Breakthroughs is replaced by a new effect.       ",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B",
+      "v": "Physics: Drain 100% of Power Gained and Steal [16982bff]{1}%[-] of the Power Drained.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C",
+      "v": "Biology: Gain the standard Biology Breakthrough Armor Up and [16982bff]{1}[-] Armor Penetration while it's active.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D",
+      "v": "Chemistry: Deal Direct Damage equal to 100% of Health Gained and Lifesteal [16982bff]{1}%[-] of the Damage done.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_SIMPLE",
+      "v": "Doctor Octopus’s extensive academic background leads his research to sometimes entirely unexpected breakthroughs.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_TITLE",
+      "v": "ACADEMIC BACKGROUND",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_TITLE_LOWER",
+      "v": "Academic Background",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_TITLE_SHORT",
+      "v": "Academic Background {0}",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SP1_A",
+      "v": "Reset the duration of any currently active Breakthrough Effect.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SP1_B",
+      "v": "If no Breakthroughs are currently active it triggers the Breakthrough of whichever category is currently Highest.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SP2",
+      "v": "Trigger the Breakthrough effect of all Research Categories currently at {1}, and reset the duration of all Breakthroughs to {2} seconds per Category currently at {1}.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SP3_A",
+      "v": "Duplicate {1} Currently active Breakthrough(s) with a duration of {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DOC_OCK_SP3_B",
+      "v": "This Duration increases by {1} seconds per currently active Breakthrough.",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_DOOMCURSED_DESC",
@@ -4566,7 +4733,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HEX_HOOD_AO",
-      "v": "Hexes the opponent, reducing Ability Accuracy by {0} and Fate Sealing them for {2} seconds. When the Hex expires, it deals a burst of [16982bff]{1}[-] Energy Damage."
+      "v": "Hexes the opponent, reducing Ability Accuracy by {0}% and Fate Sealing them for {2} seconds. When the Hex expires, it deals a burst of [16982bff]{1}[-] Energy Damage.",
+      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HEX_HUH",
@@ -4814,7 +4982,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_BLEED_AO",
-      "v": "Judgement of Spite: {0}% chance. \r\nSecondary: Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds."
+      "v": "Judgement of Spite: {0}% chance.\nSecondary: Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_DAMN",
@@ -4834,7 +5002,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_FATESE",
-      "v": "Judgement of Pride: {0}% chance. \r\nSecondary: Fate Seals the opponent, Nullifying all Buffs for [16982bff]{2}[-] seconds."
+      "v": "Judgement of Pride: {0}% chance.\nSecondary: Fate Seals the opponent, Nullifying all Buffs for [16982bff]{2}[-] seconds."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_I",
@@ -4858,7 +5026,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_LIFEST_AO",
-      "v": "Judgement of Malice: {0}% chance. \r\nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}[-] Health with each attack."
+      "v": "Judgement of Malice: {0}% chance. \nSecondary: Gain a Lifesteal Passive effect for [16982bff]{2}[-] seconds, allowing Ghost Rider to steal [16982bff]{1}[-] Health with each attack."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_JUDGMENT_PWRDR",
@@ -7169,6 +7337,21 @@
       "v": "[b310e8]Toughness VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_BAGOFTRICKS",
+      "v": "Bag of Tricks - Special & Heavy Attacks",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_CUNNING",
+      "v": "Cunning",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MADNESS",
+      "v": "Madness",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_NEUROTOXIN",
       "v": "Neurotoxin - Passive"
     },
@@ -7201,6 +7384,11 @@
       "v": "When Attacked"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBIO",
+      "v": "Biology - Research Category",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCK",
       "v": "Blocking"
     },
@@ -7211,6 +7399,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCKRESOLVED",
       "v": "Blocking"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCHEM",
+      "v": "Chemistry - Research Category",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCOMBOENDMED",
@@ -7393,6 +7586,11 @@
       "v": "Phoenix Force - Passive"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPHYS",
+      "v": "Physics - Research Category",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPOWEREDARMOR",
       "v": "Powered Armor - Buff"
     },
@@ -7411,6 +7609,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPSICHARGE",
       "v": "Psi-charge - Passive"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONSCIENTIFICMETHOD",
+      "v": "Scientific Method - Passive",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONSPECIAL1ACTIVATE",
@@ -7547,8 +7750,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_DESC_B",
-      "v": "Additionally, while the Opponent is Incinerated, Gain {1}% Power per Second.",
-      "vn": 14
+      "v": "Additionally, while the Opponent is Incinerated, Gain {1}% Power every {2} second(s).",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_SIMPLE",
@@ -7572,7 +7775,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_PA_A",
-      "v": "Vulture has a permanent Armor Up Buff, increasing his Armor by {1} per point of Chitarui Energy."
+      "v": "Vulture has a permanent Armor Up Buff, increasing his Armor by [16982bff]{1}[-] per point of Chitarui Energy."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_PA_B",
@@ -7592,7 +7795,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_B",
-      "v": "Vulture spends {1} Chitauri Energy, by Dashing Away from then immediately back towards his opponent triggering a Raptor Strike."
+      "v": "Vulture spends {1} Chitauri Energy by dashing away from his opponent, then immediately back to trigger a Raptor Strike."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_C",
@@ -7612,7 +7815,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_E",
-      "v": "Vulture Evades all attacks while Dodging back. Dodging an attack this way consumes {0} Chitarui Energy and Incinerates the Opponent, dealing {1} Damage over {2} seconds. Max: 1 Stack"
+      "v": "Vulture Evades all attacks while Dodging back. Dodging an attack this way consumes {0} Chitarui Energy and Incinerates the Opponent, dealing [16982bff]{1}[-] Damage over {2} seconds. Max: 1 Stack"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_WEAKNESS_HUD",
@@ -7808,6 +8011,135 @@
       "v": "Life Steal deals [16982bff]{1}[-] Energy Damage."
     },
     {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAGTRICKS_INCINERATE",
+      "v": "Incinerate - deals [16982bff]{1}[-] Energy Damage.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAGTRICKS_INCINERATE_2",
+      "v": "Incinerate - deals [16982bff]{1}[-] Energy Damage over {2} seconds. This also removes Perfect Block Chance and reduces Block Proficiency by 50%.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAGTRICKS_PSN",
+      "v": "Poison - deals [16982bff]{1}[-] direct damage over {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAGTRICKS_PWRDRAIN",
+      "v": "Power Drain - drains {1}% of the opponent’s max Power.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAGTRICKS_SHOCK",
+      "v": "Shock - deals [16982bff]{1}[-] Energy Damage over {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAGTRICKS_WEAKNESS",
+      "v": "Weakness - reduces the opponent’s Attack by {1}% for {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAG_AFTERB",
+      "v": "Afterburner: {0}% chance to Incinerate.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAG_BOMB_ALL",
+      "v": "Pumpkin Bombs: {0}% chance to inflict Power Drain, Weakness, Incinerate and Poison.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAG_BOMB_PSN",
+      "v": "Pumpkin Bomb: {0}% chance to Poison.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAG_BOMB_SHK",
+      "v": "Pumpkin Bomb: {0}% chance to Shock.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAG_BOMB_WEAK",
+      "v": "Pumpkin Bomb: {0}% chance to inflict Weakness."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_BAG_LASER",
+      "v": "Laser Blasts: {0}% chance to Power Drain.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING",
+      "v": "[808080ff]Cunning[-]",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_A",
+      "v": "When Green Goblin gains a full bar of Power, he gains Cunning. Cunning charges last {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_B",
+      "v": "Each Cunning charge increases the Ability Accuracy of all Bag of Tricks effects by {1}%. This also affects the Super Bomb Ability Accuracy.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_C",
+      "v": "While Green Goblin has more Cunning than Madness, or the two are equal, the opponent generates {1}% less Power when fighting.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_C_2",
+      "v": "While Green Goblin has more Cunning than Madness, or the two are equal, the opponent generates {1}% less Power when fighting and Green Goblin gains +{1}% Attack on Special Attacks.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_C_3",
+      "v": "While Green Goblin has more Cunning than Madness, or the two are equal, the opponent generates {0}% less Power and Green Goblin gains +{1}% Attack on Special Attacks.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_HUD",
+      "v": "CUNNING",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS",
+      "v": "[808080ff]Madness[-]",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_A",
+      "v": "Green Goblin has a {0}% chance to gain Madness whenever opponents attack him. +{1}% chance if Green Goblin performs a well-timed Block. Madness charges last {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_B",
+      "v": "Each Madness charge increases the Potency of Green Goblin’s Bag of Tricks effects by {1}%. This also affects the Super Bomb Potency.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C",
+      "v": "While Green Goblin has more Madness than Cunning, or the two are equal, he Regenerates {1}% of damage taken from Basic Attacks over {2} seconds and gains +{0}% Attack on Special Attacks.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C_2",
+      "v": "While Green Goblin has more Madness than Cunning, or the two are equal, he Regenerates {1}% of damage taken from Basic Attacks over {2} seconds and opponents deal -{0}% less damage on Special Attacks.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C_4",
+      "v": "While Green Goblin has more Madness than Cunning, or the two are equal, he passively Regenerates up to {1}% of damage taken from Basic Attacks and opponents deal -{0}% less damage on Special Attacks.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_HUD",
+      "v": "MADNESS",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_HULK_DESC_UPDATED",
       "v": "Hulk has a [16982bff]{0}%[-] chance to Rage, strengthening his attacks and Physical Resistance by [16982bff]{1}%[-] per Rage charge. Rage charges expire every [16982bff]{2}[-] seconds and 50% faster against female Champions."
     },
@@ -7987,6 +8319,11 @@
       "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_DRAIN",
       "v": "An EMP webshot drains {1}% of the opponent’s Power Meter. Cooldown: {2} seconds.",
       "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_EMPREADY",
+      "v": "E.M.P. WEB READY",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_ENSNARE",
@@ -9204,6 +9541,11 @@
       "v": "A [16982bff]{0}%[-] chance Gamora's Godslayer blade deals a lethal blow, striking for massive Critical Hit Damage."
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_GAMORA_DESC_NEW",
+      "v": "A [16982bff]{0}%[-] chance for Gamora to strike an Assassination blow with her Godslayer blade, guaranteeing a Critical Hit and granting a 700% increase in Critical Damage Multiplier. This can only occur once per fight.",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_GAMORA_SHORT",
       "v": "Assassination {0}"
     },
@@ -9238,6 +9580,31 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_TITLE",
       "v": "SPIRIT OF VENGEANCE"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
+      "v": "[16982bff]{0}%[-] chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect; however, the Special 3 still has a chance to trigger both Super Bomb and Pumpkin Bomb effects.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_HUD",
+      "v": "SUPER BOMB",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_SHORT",
+      "v": "Oscorp Weaponry {0}",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_SIMPLE",
+      "v": "Green Goblin gains access to the Super Bomb that allows him to activate his entire Bag of Tricks at once.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_TITLE",
+      "v": "OSCORP WEAPONRY",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GROOT_DESC",
@@ -9314,6 +9681,11 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_HAWKEYE_DESC_AO",
       "v": "Arrows strike the jugular with a fixed {0}% chance to inflict severe Bleeding, dealing [16982bff]{1}[-] Direct Damage over one minute."
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_HAWKEYE_DESC_NEW",
+      "v": "Arrow strikes have a {0}% chance to Hemorrhage the opponent, causing a massive Bleed that deals [16982bff]{1}[-] direct damage over {2} seconds. This can only occur once per fight.",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_HAWKEYE_SHORT",
@@ -10649,6 +11021,16 @@
       "v": "When Thor Stuns his opponents he tears apart their Armor, reducing it by [16982bff]{1}[-]."
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_THOR_DESC_NEW_B_FIXED",
+      "v": "When Thor Stuns his opponent, he tears apart their Armor reducing it by [16982bff]{1}[-] for {2} seconds.",
+      "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_THOR_DESC_NEW_FIXED",
+      "v": "Stunning the Thunder God infuriates him and grants him Fury, increasing his Attack by [16982bff]{1}[-] for {2} seconds.",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_THOR_JANEFOSTER_DESC",
       "v": "With Freyja's guidance and Mjölnir's power, Thor lets loose \"That Which Smashes\", dealing guaranteed Critical Hits and dealing [16982bff]{1}%[-] Critical Damage against stunned opponents."
     },
@@ -10910,7 +11292,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VOODOO_DESC",
-      "v": "Brother Daniel will possess either Doctor Voodoo or his opponent moving between them based on Doctor Voodoo's combo meter when he uses a Special Attack.\r\nCombo Even: Doctor Voodoo is possessed gaining 100% increased Ability Accuracy and [16982bff]{1}%[-] increased Buff Duration.\r\nOdd Combo: Opponent is possesed gaining 50% decreased Ability Accuracy and [16982bff]{1}%[-] increased Debuff Duration."
+      "v": "Brother Daniel will possess either Doctor Voodoo or his opponent moving between them based on Doctor Voodoo's combo meter when he uses a Special Attack.\nCombo Even: Doctor Voodoo is possessed gaining 100% increased Ability Accuracy and [16982bff]{1}%[-] increased Buff Duration. Odd Combo: Opponent is possessed gaining 50% decreased Ability Accuracy and [16982bff]{1}%[-] increased Debuff Duration."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VOODOO_SHORT",

@@ -6,7 +6,7 @@ from .utils.dataIO import fileIO
 from .utils import checks
 from .utils import chat_formatting as chat
 from operator import itemgetter, attrgetter
-from collections import OrderedDict
+from collections import OrderedDict, namedtuple
 from random import randint
 from math import ceil
 import shutil
@@ -35,6 +35,9 @@ JSONEncoder.default = _default # replacemente
 class MissingRosterError(QuietUserError):
     pass
 
+class MisorderedArgumentError(QuietUserError):
+    pass
+
 class HashtagRosterConverter(commands.Converter):
     async def convert(self):
         tags = set()
@@ -59,8 +62,32 @@ class HashtagRosterConverter(commands.Converter):
             em.add_field(name='Hook Web App', value='http://hook.github.io/champions/#/roster')
             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
             await self.ctx.bot.say(embed=em)
-            # raise MissingRosterError('No Roster found for {}'.format(user.name))
-        return types.SimpleNamespace(tags=tags, user=user, roster=chmp_rstr)
+            raise MissingRosterError('No Roster found for {}'.format(user.name))
+        return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
+
+class HashtagRankConverter(commands.Converter):
+    parse_re = ChampConverter.parse_re
+    async def convert(self):
+        tags = set()
+        attrs = {}
+        arguments = self.argument.split()
+        start_hashtags = 0
+        for i, arg in enumerate(arguments):
+            if arg[0] in '#(~':
+                start_hashtags = i
+                break
+            for m in self.parse_re.finditer(arg):
+                attrs[m.lastgroup] = int(m.group(m.lastgroup))
+        else:
+            start_hashtags = len(arguments)
+        for arg in arguments[start_hashtags:]:
+            if arg[0] not in '#(~':
+                await self.ctx.bot.say('All arguments must be before the Hashtags')
+                raise MisorderedArgumentError(arg)
+            if arg.startswith('#'):
+                tags.add(arg.lower())
+        return types.SimpleNamespace(tags=tags, attrs=attrs)
+
 
 class RosterUserConverter(commands.Converter):
     async def convert(self):
@@ -78,6 +105,85 @@ class RosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, self.ctx.message.author)
         await chmp_rstr.load_champions()
         return chmp_rstr
+
+
+class PagesMenu:
+
+    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
+
+    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False, 
+            delete_onX=True):
+        self.bot = bot
+        self.timeout = timeout
+        self.add_pageof = add_pageof
+        self.choice = choice
+        self.delete_onX = delete_onX
+
+    async def menu_start(self, page_list):
+        page_length = len(page_list)
+        self.all_emojis = OrderedDict([(i.emoji, i) for i in (
+            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+            self.EmojiReact("\N{CROSS MARK}", True, None),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+                      )])
+
+        self.is_embeds = isinstance(page_list[0], discord.Embed)
+        if not self.is_embeds:
+            await self.bot.say('Function does not support non-embeds currently')
+            return
+
+        if self.add_pageof:
+            for i, page in enumerate(page_list):
+                if self.is_embeds:
+                    ftr = page.footer
+                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text, 
+                            i+1, page_length), icon_url=ftr.icon_url)
+                else:
+                    page += '\n(Page {} of {})'.format(i+1, page_length)
+
+        self.page_list = page_list
+        await self.display_page(None, 0)
+
+    async def display_page(self, message, page):
+        if not message:
+            message = await self.bot.say(embed=self.page_list[page])
+            self.included_emojis = set()
+            for emoji in self.all_emojis.values():
+                if emoji.include:
+                    await self.bot.add_reaction(message, emoji.emoji)
+                    self.included_emojis.add(emoji.emoji)
+        else:
+            message = await self.bot.edit_message(message, embed=self.page_list[page])
+        await asyncio.sleep(1)
+
+        react = await self.bot.wait_for_reaction(message=message, 
+                timeout=self.timeout, emoji=self.included_emojis)
+        if react is None:
+            try:
+                await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                logger.warn("clear_reactions didn't work")
+                for emoji in self.included_emojis:
+                    await self.bot.remove_reaction(message, emoji, self.bot.user)
+            return None
+
+        emoji = react.reaction.emoji
+        pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
+        if pages_to_inc:
+            next_page = (page + pages_to_inc) % len(self.page_list)
+            await self.bot.remove_reaction(message, emoji, react.user)
+            await self.display_page(message=message, page=next_page)
+        elif emoji == '\N{CROSS MARK}':
+            try:
+                if self.delete_onX:
+                    await self.bot.delete_message(message)
+                else:
+                    await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                await self.bot.say("Bot does not have the proper Permissions")
+
 
 class ChampionRoster:
 
@@ -134,6 +240,9 @@ class ChampionRoster:
             champ = await self.get_champion(k)
             self.roster[champ.immutable_id] = champ
 
+    def from_list(self, champ_list):
+        self.roster = {champ.immutable_id: champ for champ in champ_list}
+
     def load_champ_data(self):
         data = dataIO.load_json(self.champs_file)
         self.fieldnames = data['fieldnames']
@@ -160,6 +269,10 @@ class ChampionRoster:
     @property
     def champs_file(self):
         return self._champs_file.format(self.user.id)
+
+    @property
+    def embed_display(self):
+        return getattr(self, 'display_override', self.prestige)
 
     async def get_champion(self, cdict):
         mcoc = self.bot.get_cog('MCOC')
@@ -389,76 +502,41 @@ class Hook:
         ex.
         /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
-        filtered = await hargs.roster.filter_champs(hargs.tags)
-        user = await RosterUserConverter(ctx, '').convert()
+        await self.display_roster(ctx, hargs.roster, hargs.tags)
+
+    async def display_roster(self, ctx, roster, tags):
+        filtered = await roster.filter_champs(tags)
+        user = roster.user
         embeds = []
         if not filtered:
-            em = discord.Embed(title='User', description=hargs.user.name,
+            em = discord.Embed(title='User', description=user.name,
                     color=discord.Color.gold())
             em.add_field(name='Tags used filtered to an empty roster',
-                    value=' '.join(hargs.tags))
+                    value=' '.join(tags))
             await self.bot.say(embed=em)
             return
 
-        color = None
-        for champ in filtered:
-            if color is None:
-                color = champ.class_color
-            elif color != champ.class_color:
-                color = discord.Color.gold()
-                break
-
-        #champ_str = '{0.star}{0.star_char} {0.full_name} r{0.rank} s{0.sig:<2} [ {0.prestige} ]'
-        classes = OrderedDict([(k, []) for k in ('Cosmic', 'Tech', 'Mutant', 'Skill',
-                'Science', 'Mystic', 'Default')])
-
-        strs = [champ.verbose_prestige_str for champ in 
-                sorted(filtered, key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'), 
-                    reverse=True)]
-        #pages = chat.pagify(text='\n'.join(strs), page_length=1000)
+        strs = [champ.verbose_prestige_str for champ in sorted(filtered, reverse=True,
+                    key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'))] 
         champs_per_page = 15
-        max_pages = ceil(len(strs) / champs_per_page)
-        for enum, i in enumerate(range(0, len(strs)+1, champs_per_page)):
-            em = discord.Embed(title='', color=color)
-            em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-            em.set_footer(text='hook/champions for Collector (Page {} of {})'.format(
-                    enum+1, max_pages), 
+        for i in range(0, len(strs)+1, champs_per_page):
+            em = discord.Embed(title='', color=discord.Color.gold())
+            em.set_author(name=user.name, icon_url=user.avatar_url)
+            em.set_footer(text='hook/champions for Collector',
                     icon_url='https://assets-cdn.github.com/favicon.ico')
-            #em.add_field(name='{}  (Page {} of {})'.format(user.prestige, enum+1, max_pages), 
-                    #inline=False,
-            em.add_field(name=user.prestige, inline=False,
-                    value='\n'.join(strs[i:min(i+champs_per_page, len(strs))]))
+            page = strs[i:min(i+champs_per_page, len(strs))]
+            if not page:
+                break
+            em.add_field(name=roster.embed_display, inline=False,
+                    value='\n'.join(page))
             embeds.append(em)
 
-
-        # if len(filtered) < 20:
-        #     em = discord.Embed(title='', color=color)
-        #     em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-        #     em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-        #     strs = [champ.verbose_prestige_str for champ in
-        #             sorted(filtered, key=attrgetter('prestige'), reverse=True)]
-        #     em.add_field(name='Filtered Roster', value='\n'.join(strs),inline=False)
-        #     embeds.append(em)
-        # else:
-        #     i = 1
-        #     for champ in filtered:
-        #         classes[champ.klass].append(champ)
-        #     for klass, champs in classes.items():
-        #         if champs:
-        #             strs = [champ.verbose_prestige_str for champ in
-        #                     sorted(champs, key=attrgetter('prestige'), reverse=True)]
-        #             em = discord.Embed(title='', description='Page {}'.format(i), color=class_color_codes[klass])
-        #             em.set_author(name=hargs.user.name,icon_url=hargs.user.avatar_url)
-        #             # em.set_thumbnail(url=KLASS_ICON.format(klass.lower()))
-        #             em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
-        #             em.add_field(name=klass, value='\n'.join(strs), inline=False)
-        #             embeds.append(em)
-        #             i+=1
-        # await self.bot.say(embed=em)
         if len(embeds) == 1:
             await self.bot.say(embed=embeds[0])
         else:
-            await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(embeds)
+            #await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
@@ -571,6 +649,21 @@ class Hook:
     #     elif awd is True:
     #         info['awd'] = champs
 
+    @commands.command(pass_context=True, name='rank_prestige', aliases=('prestige_list',))
+    async def _rank_prestige(self, ctx, *, hargs=''):
+        hargs = await HashtagRankConverter(ctx, hargs).convert()
+        roster = ChampionRoster(self.bot, self.bot.user)
+        mcoc = self.bot.get_cog('MCOC')
+        rlist = []
+        for champ_class in mcoc.champions.values():
+            champ = champ_class(hargs.attrs.copy())
+            if champ.has_prestige:
+                rlist.append(champ)
+        roster.from_list(rlist)
+        roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
+        await self.display_roster(ctx, roster, hargs.tags)
+
+
     @commands.command(pass_context=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         '''Report Clan Prestige'''
@@ -626,19 +719,17 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False, bookend=False):
+    async def pages_menu(self, ctx, embed_list: list, category: str='', 
+            message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
-        print('list len = {}'.format(len(embed_list)))
+        #print('list len = {}'.format(len(embed_list)))
         length = len(embed_list)
         em = embed_list[page]
         if not message:
             message = await self.bot.say(embed=em)
             if length > 5:
-                if bookend:
-                    await self.bot.add_reaction(message, '⏮')
-                else:
-                    await self.bot.add_reaction(message, '⏪')
+                await self.bot.add_reaction(message, '⏪')
             if length > 1:
                 await self.bot.add_reaction(message, '◀')
             if choice is True:
@@ -647,15 +738,12 @@ class Hook:
             if length > 1:
                 await self.bot.add_reaction(message, '▶')
             if length > 5:
-                if bookend:
-                    await self.bot.add_reaction(message,'⏭')
-                else:
-                    await self.bot.add_reaction(message, '⏩')
+                await self.bot.add_reaction(message, '⏩')
         else:
             message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗','⏮','⏭',])
+        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         # if react.reaction.me == self.bot.user:
         #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
         if react is None:
@@ -666,11 +754,9 @@ class Hook:
                     await self.bot.remove_reaction(message,'⏪', self.bot.user) #rewind
                     await self.bot.remove_reaction(message, '◀', self.bot.user) #previous_page
                     await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                    await self.bot.remove_reaction(message,'🆗', self.bot.user) #choose
+                    await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
                     await self.bot.remove_reaction(message, '▶', self.bot.user) #next_page
                     await self.bot.remove_reaction(message,'⏩', self.bot.user) # fast_forward
-                    await self.bot.remove_reaction(message,'⏭', self.bot.user)
-                    await self.bot.remove_reaction(message,'⏮', self.bot.user)
             except:
                 pass
             return None
@@ -692,14 +778,6 @@ class Hook:
             elif react.reaction.emoji == '⏩': # fast_forward
                 next_page = (page + 5) % len(embed_list)
                 await self.bot.remove_reaction(message, '⏩', react.user)
-                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '⏮':
-                next_page = 0
-                await self.bot.remove_reaction(message, '⏮', react.user)
-                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '⏭':
-                next_page = 0
-                await self.bot.remove_reaction(message, '⏭', react.user)
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '🆗': #choose
                 if choice is True:

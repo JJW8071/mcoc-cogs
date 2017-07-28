@@ -1,14 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "b6c6025d9a458ea208e87491a37009625d6b01ec",
+    "hash": "d5a5be193a14d62c0cec29b6032c80c467a1bbb5",
     "language": "en",
-    "string_count": 115,
+    "post_processed": true,
+    "string_count": 118,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1497309981
+    "ts": 1499816702,
+    "versionLock": "14.1"
   },
   "strings": [
     {
@@ -116,6 +118,11 @@
       "v": "Wade Winston Wilson (a.k.a Deadpool) joined X-Force, a black ops team running covert missions to eliminate threats to the muta-- Hold up -- didn’t we do this whole bio thing already? You know, with the other, less-cool version of me? I’m the hot one! That red-suited scab factory just copies Spider-Man! I’ve got skills, suckahs!"
     },
     {
+      "k": "ID_CHARACTER_BIOS_DOC_OCK",
+      "v": "Otto Octavius came from a troubled home. Determined not to follow in his abusive father’s footsteps, Otto devoted himself to his studies. Despite years of derision from his peers, he became a nuclear physicist. But after he had to have the mechanical arms he designed and built surgically removed following an accident Otto finally had enough. Assuming the derogatory name his co-coworkers had coined for him, Otto began a life of crime as Doctor Octopus.",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_CHARACTER_BIOS_DORMAMMU",
       "v": "Dormammu was born to a race of powerful beings made of pure magical energy known as the Faltine, and has only one true desire: power. This desire drove him from his home world and brought him to the Dark Dimension, where he now rules and draws even greater power from the worship of his subjects. Now with the power of so many heroes concentrated in the Contest, Dormammu has come as one of the greatest mystical threats in the univer, undoubtedly to gain that power for himself."
     },
@@ -154,6 +161,11 @@
     {
       "k": "ID_CHARACTER_BIOS_GHOSTRIDER",
       "v": "Tricked by the demonic being Mephisto into selling his soul to save a loved one, stunt cyclist Johnny Blaze soon found himself bonded to the Spirit of Vengeance, a being of almost unlimited power from Hell itself. With the power to control Hellfire as well as his mystical Hell Cycle and Hell Chains, Ghost Rider has turned against Mephisto’s purpose and instead uses his newfound abilities to protect the innocent and cast judgment upon the wicked."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_GREEN_GOBLIN",
+      "v": "Cunning businessman and founder of Oscorp, Norman Osborn was rarely satisfied with the success lawful ventures provided. Intending to gain the strength to beat Spider-Man, Norman subjected himself to an experimental serum created by Oscorp. The formula was terrifyingly successful, granting Norman enhanced strength, reflexes, and constitution but at the price of his sanity. Unhinged and armed with Oscorp’s most advanced weaponry, the Green Goblin now rules the skies.",
+      "vn": "14.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_GROOT",
@@ -201,7 +213,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_ICEMAN",
-      "v": "Iceman aka Robert \"Bobby\" Drake, was the second, and youngest member of the original X-men. His mutant powers give him the ability to lower his body's temperature, transform himself into organic ice, and freeze the air around him. When he was possessed by Emma Frost, she unleashed powers within Bobby far greater than he had before, such as freezing fluids inside another person's body, and traveling great distances as a liquid, solid, or gas. Iceman works towards the mastery of his powers and there's no telling where his limits lie.\n"
+      "v": "Iceman aka Robert \"Bobby\" Drake, was the second, and youngest member of the original X-men. His mutant powers give him the ability to lower his body's temperature, transform himself into organic ice, and freeze the air around him. When he was possessed by Emma Frost, she unleashed powers within Bobby far greater than he had before, such as freezing fluids inside another person's body, and traveling great distances as a liquid, solid, or gas. Iceman works towards the mastery of his powers and there's no telling where his limits lie.\r\n"
     },
     {
       "k": "ID_CHARACTER_BIOS_IRONFIST",
@@ -361,7 +373,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_SPIDERMAN_MOVIE",
-      "v": "Most kids Peter Parker’s age rush home after school to play video games or do homework, but not for New York’s friendly neighborhood Spider-Man. Donning his new suit with high-tech web shooters and some awesome upgrades courtesy of Tony Stark, Peter protects his home city of Queens. But a new threat has risen from the ashes caused by the Battle of New York, and Parker must look beyond his own desires and understand the true meaning of great responsibility.",
+      "v": "Most kids Peter Parker’s age rush home after school to play video games or do homework, but not New York’s friendly neighborhood Spider-Man. Donning his new suit with high-tech web shooters and some awesome upgrades courtesy of Tony Stark, Peter protects his home city of Queens. But a new threat has risen from the ashes caused by the Battle of New York, and Parker must look beyond his own desires and understand the true meaning of great responsibility.",
       "vn": 14
     },
     {
