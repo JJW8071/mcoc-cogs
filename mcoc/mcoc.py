@@ -585,7 +585,7 @@ class MCOC(ChampionFactory):
                 await send_cmd_help(ctx)
             return
 
-    @champ.command(name='featured')
+    @champ.command(name='featured', invoke_without_command=True)
     async def champ_featured(self, champ : ChampConverter):
         '''Retrieve Champion Feature Images'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
@@ -593,7 +593,7 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
 
-    @champ.command(name='portrait')
+    @champ.command(name='portrait', invoke_without_command=True)
     async def champ_portrait(self, champ : ChampConverter):
         '''Retrieve Champion Portrait'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
@@ -601,7 +601,7 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='bio')
+    @champ.command(name='bio', aliases=('biography',), invoke_without_command=True)
     async def champ_bio(self, *, champ : ChampConverterDebug):
         '''Retrieve the Bio of a Champion'''
         try:
@@ -618,7 +618,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
-    @champ.command(name='duel')
+    @champ.command(name='duel', invoke_without_command=True)
     async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
         dataset=data_files['duelist']['local']
@@ -648,7 +648,7 @@ class MCOC(ChampionFactory):
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
         await self.bot.say(embed=em)
 
-    @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
+    @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',), invoke_without_command=True)
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
@@ -691,7 +691,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='released')
+    @champ.command(name='released', aliases=('odds','chances',), invoke_without_command=True)
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Retrieve Champion Release Date'''
         for champ in champs:
@@ -716,7 +716,7 @@ class MCOC(ChampionFactory):
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
-    @champ.command(name='sig', aliases=['signature',])
+    @champ.command(name='sig', aliases=['signature',], invoke_without_command=True)
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
@@ -786,7 +786,7 @@ class MCOC(ChampionFactory):
         assert desc == jsig['description']
         assert sig_calcs == jsig['sig_data'][champ.sig-1]
 
-    @champ.command(name='info', aliases=('infopage',))
+    @champ.command(name='info', aliases=('infopage',), invoke_without_command=True)
     async def champ_info(self, *, champ : ChampConverterDebug):
         '''Retrieve Champion Spotlight link if available'''
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
@@ -799,7 +799,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='abilities')
+    @champ.command(name='abilities', invoke_without_command=True)
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
@@ -842,7 +842,7 @@ class MCOC(ChampionFactory):
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=('prestige',))
+    @champ.command(name='prestige', invoke_without_command=True)
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
         #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
@@ -862,7 +862,7 @@ class MCOC(ChampionFactory):
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='aliases', aliases=('calias','ca'))
+    @champ.command(name='aliases', aliases=('calias','ca'), invoke_without_command=True)
     async def champ_aliases(self, *args):
         '''Retrieve Champion Aliases'''
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
