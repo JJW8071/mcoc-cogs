@@ -19,6 +19,7 @@ from functools import wraps
 import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
+from __main__ import send_cmd_help
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -578,7 +579,10 @@ class MCOC(ChampionFactory):
     @commands.group(pass_context=True)
     async def champ(self, ctx):
         if ctx.invoked_subcommand is None:
-            await send_cmd_help(ctx)
+            try:
+                await self.command_arg_help(ctx)
+            except:
+                await self.send_cmd_help(ctx)
             return
 
     @champ.command(name='featured')
