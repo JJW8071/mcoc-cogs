@@ -654,8 +654,8 @@ class MCOC(ChampionFactory):
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
-                title='Base Attributes')
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+                title='')
+        em.set_author(name=champ.verbose_str + ' - ' + champ.short, icon_url=champ.get_avatar())
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
