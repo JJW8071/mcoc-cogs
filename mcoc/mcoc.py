@@ -582,7 +582,7 @@ class MCOC(ChampionFactory):
             try:
                 await self.command_arg_help(ctx)
             except:
-                await self.send_cmd_help(ctx)
+                await send_cmd_help(ctx)
             return
 
     @champ.command(name='featured')
