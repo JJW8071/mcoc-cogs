@@ -597,7 +597,7 @@ class MCOC(ChampionFactory):
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command_arg_help(name='bio')
+    @champ.command(name='bio')
     async def champ_bio(self, *, champ : ChampConverterDebug):
         '''Retrieve the Bio of a Champion'''
         try:
@@ -614,7 +614,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
-    @champ.command_arg_help(name='duel')
+    @champ.command(name='duel')
     async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
         dataset=data_files['duelist']['local']
@@ -644,7 +644,7 @@ class MCOC(ChampionFactory):
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
         await self.bot.say(embed=em)
 
-    @champ.command_arg_help(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
+    @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
@@ -711,7 +711,7 @@ class MCOC(ChampionFactory):
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
-    @champ.command_arg_help(name='sig', aliases=['signature',])
+    @champ.command(name='sig', aliases=['signature',])
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
@@ -781,7 +781,7 @@ class MCOC(ChampionFactory):
         assert desc == jsig['description']
         assert sig_calcs == jsig['sig_data'][champ.sig-1]
 
-    @champ.command_arg_help(name='info', aliases=('infopage',))
+    @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
         em.set_author(name=champ.short, icon_url=champ.get_avatar())
@@ -793,7 +793,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command_arg_help(name='abilities')
+    @champ.command(name='abilities')
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
