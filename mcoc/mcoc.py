@@ -611,7 +611,7 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title='Champion Biography',
                 description=bio_desc)
-                em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
                 value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
         em.set_thumbnail(url=champ.get_avatar())
