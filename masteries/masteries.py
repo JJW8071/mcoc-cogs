@@ -52,9 +52,32 @@ class masteries:
             await self.bot.say(embed=em)
 
     @masteries.command(pass_context=True)
-    async def cost(self, ctx, *, selected):
+    async def costtable(self, ctx, *, selected):
         await self.bot.say('looking up: ' + selected)
-
+        if selected in self.MDATA.keys():
+            SELECTION = self.MDATA.[selected]
+            pibump =[]
+            ucarbs =[]
+            uclass =[]
+            uunits =[]
+            ustony =[]
+            rgold =[]
+            runit =[]
+            em = discord.Embed(color=COLORS[selection['category']], title='Mastery Cost Table')
+            for r in range(1,SELECTION['ranks'])
+                pibump.append=SELECTION[r]['pibump']
+                ucarbs.append=SELECTION[r]['ucarbs']
+                uclass.append=SELECTION[r]['uclass']
+                uunits.append=SELECTION[r]['uunits']
+                ustony.append=SELECTION[r]['ustony']
+                rgold.append=SELECTION[r]['rgold']
+                runit.append=SELECTION[r]['runit']
+            em.add_field(name='Unlock Cost - Carb Cores', value = '\n'.join(ucarbs))
+            em.add_field(name='Unlock Cost - Class Cores', value = '\n'.join(uclass))
+            em.add_field(name='Unlock Cost - Stony Cores', value = '\n'.join(ustony))
+            em.add_field(name='Unlock Cost - Units', value = '\n'.join(uunits))
+            em.add_field(name='Rank Cost - Units', value = '\n'.join(runits))
+            em.add_field(name='Unlock Cost - Gold', value = '\n'.join(rgold))
 
 
 def setup(bot):
