@@ -624,30 +624,32 @@ class MCOC(ChampionFactory):
     async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
         dataset=data_files['duelist']['local']
-        targets = defaultdict(list)
-        names = {4: 'Duel', 5: 'Sparring'}
+        # targets = defaultdict(list)
+        targets = []
+        # names = {4: 'Duel', 5: 'Sparring'}
         em = discord.Embed(color=champ.class_color, title='')
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         em.set_footer(text='Sourced from Community Spreadsheet',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
         for star in (4,5):
             for rank in range(1,5):
-                champ.update_attrs({'star': star, 'rank': rank})
-                for data in get_csv_rows(dataset, 'unique', champ.unique):
+                key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+                # champ.update_attrs({'star': star, 'rank': rank})
+                for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets[star].append( '{} : {}'.format(
-                                champ.star_str, data['username']))
-            if len(targets[star]) > 0:
-                target_found = True
-                em.add_field(name='{} Target'.format(names[star]),
-                        value='\n'.join(k for k in targets[star]), inline=False)
-        if not target_found:
+                        targets[star].append( '{} : {}'.format(champ.verbose_str, data['username']))
+        if len(targets) > 0:
+            em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
+                # em.add_field(name='{} Target'.format(names[star]),
+                #         value='\n'.join(k for k in targets[star]), inline=False)
+        else:
             em.add_field(name='Target not found',
                     value='\n'.join(['Add one to the Community Spreadhseet!',
                             'Duel Targets: <http://simians.tk/mcocduel>',
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
+        await em.add_field(name='Shortcode', value=champ.short)
         await self.bot.say(embed=em)
 
     @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
