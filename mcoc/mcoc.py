@@ -716,7 +716,7 @@ class MCOC(ChampionFactory):
                 em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
                 em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
             em.add_field(name='Shortcode', value=champ.short)
-            em.set_thumbnail(url=champ.get_avatar())
+            em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
