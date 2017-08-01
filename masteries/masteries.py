@@ -86,7 +86,7 @@ class masteries:
         await self.bot.say('looking up: ' + selected)
         if selected in self.MDATA.keys():
             SELECTION = self.MDATA[selected]
-            effect = SELECTION['effect'].format(SELECTION[rank]['effects'])
+            effect = SELECTION['text'].format(SELECTION[rank]['effects'])
             em = discord.Embed(color=COLORS[SELECTION['category']], title='Mastery Effect', description=effect)
             await self.bot.say(embed=em)
 
