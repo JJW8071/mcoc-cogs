@@ -37,6 +37,7 @@ class masteries:
         offense = []
         defense = []
         utility = []
+        embeds = []
         for key in keys:
             if 'Offense' in key:
                 offense.append(key)
@@ -44,11 +45,11 @@ class masteries:
                 defense.append(key)
             else:
                 utility.append(key)
-        em=discord.Embed(title='Mastery List by Category', description='')
-        em.add_field(name='Offense', value='\n'.join(offense))
-        em.add_field(name='Defense', value='\n'.join(defense))
-        em.add_field(name='Utility', value='\n'.join(utility))
-        await self.bot.say(embed=em)
+        embeds.append(discord.Embed(color=COLORS['Offense'],title='Offense', description='\n'.join(offense)))
+        embeds.append(discord.Embed(color=COLORS['Defense'],title='Defense', description='\n'.join(defense)))
+        embeds.append(discord.Embed(color=COLORS['Utility'],title='Utility', description='\n'.join(utility)))
+        for em in embeds:
+            await self.bot.say(embed=em)
 
 
 
