@@ -81,5 +81,14 @@ class masteries:
             em.add_field(name='Unlock Cost - Gold', value = '\n'.join(rgold))
             await self.bot.say(embed=em)
 
+    @masteries.command(pass_context=True)
+    async def effect(self, ctx, *, selected, rank:int = 1):
+        await self.bot.say('looking up: ' + selected)
+        if selected in self.MDATA.keys():
+            SELECTION = self.MDATA[selected]
+            effect = SELECTION['effect'].format(SELECTION[rank]['effects'])
+            em = discord.Embed(color=COLORS[SELECTION['category']], title='Mastery Effect', description=effect)
+            await self.bot.say(embed=em)
+
 def setup(bot):
     bot.add_cog(masteries(bot))
