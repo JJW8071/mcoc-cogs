@@ -633,7 +633,7 @@ class MCOC(ChampionFactory):
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
         for star in (4,5):
-            for rank in range(6):
+            for rank in range(1,5):
                 champ.update_attrs({'star': star, 'rank': rank})
                 for data in get_csv_rows(dataset, 'unique', champ.unique):
                     if data['username'] != 'none':
