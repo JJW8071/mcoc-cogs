@@ -8,6 +8,8 @@ from operator import itemgetter, attrgetter
 from .utils import chat_formatting as chat
 from cogs.utils import checks
 from discord.ext import commands
+from __main__ import send_cmd_help
+
 
 COLORS = {'Offense': discord.Color.red(), 'Defense': discord.Color.blue(), 'Utility': discord.Color.green()}
 
