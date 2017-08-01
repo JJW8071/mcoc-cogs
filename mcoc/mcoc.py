@@ -580,7 +580,7 @@ class MCOC(ChampionFactory):
     async def champ(self, ctx):
         if ctx.invoked_subcommand is None:
             try:
-                await self.command_arg_help(ctx)
+                await command_arg_help(ctx)
             except:
                 print('command_arg_help failed')
                 await send_cmd_help(ctx)
