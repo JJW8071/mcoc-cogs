@@ -29,7 +29,7 @@ class masteries:
             return
 
     @masteries.command(pass_context=True)
-    async def list(self, ctx)
+    async def list(self, ctx):
         '''Just lists Masteries'''
         keys = MASTERY.keys()
         offense = []
