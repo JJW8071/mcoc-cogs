@@ -66,13 +66,13 @@ class masteries:
             runit = []
             em = discord.Embed(color=COLORS[SELECTION['category']], title='Mastery Cost Table')
             for r in range(1, ranks):
-                pibump.append=SELECTION[r]['pibump']
-                ucarbs.append=SELECTION[r]['ucarbs']
-                uclass.append=SELECTION[r]['uclass']
-                ustony.append=SELECTION[r]['ustony']
-                uunits.append=SELECTION[r]['uunits']
-                rgold.append=SELECTION[r]['rgold']
-                runit.append=SELECTION[r]['runit']
+                pibump.append(SELECTION[r]['pibump'])
+                uclass.append(SELECTION[r]['uclass'])
+                ucarbs.append(SELECTION[r]['ucarbs'])
+                ustony.append(SELECTION[r]['ustony'])
+                uunits.append(SELECTION[r]['uunits'])
+                rgold.append(SELECTION[r]['rgold'])
+                runit.append(SELECTION[r]['runit'])
             em.add_field(name='Unlock Cost - Carb Cores', value = '\n'.join(ucarbs))
             em.add_field(name='Unlock Cost - Class Cores', value = '\n'.join(uclass))
             em.add_field(name='Unlock Cost - Stony Cores', value = '\n'.join(ustony))
