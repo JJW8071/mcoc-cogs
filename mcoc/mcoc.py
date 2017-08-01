@@ -1325,6 +1325,8 @@ class Champion:
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
+        if preamble + '_SIMPLE_NEW2' in sigs:
+            simple.append(preamble + '_SIMPLE_NEW2')
         if preamble + '_SIMPLE_NEW' in sigs:
             simple.append(preamble + '_SIMPLE_NEW')
         elif preamble + '_SIMPLE' in sigs:
@@ -1357,7 +1359,10 @@ class Champion:
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
-            for k in ('_DESC_NEW','_DESC_NEW_B'):
+            desclist = ('_DESC_NEW','_DESC_NEW_B')
+            if preamble + '_DESC_NEW2' in sigs:
+                desclist = ('_DESC_NEW2','_DESC_NEW2_B')
+            for k in desclist:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
                         desc.append(preamble + k + '_AO')
