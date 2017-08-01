@@ -599,11 +599,12 @@ class MCOC(ChampionFactory):
         except KeyError:
             await self.say_user_error("Cannot find bio for Champion '{}'".format(champ.full_name))
             return
-        em = discord.Embed(color=champ.class_color, title=champ.full_name,
+        em = discord.Embed(color=champ.class_color, title='Biography',
                 description=bio_desc)
-        em.set_author(name=champ.short, icon_url=champ.get_avatar())
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
                 value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
+        em.add_field('Shortcode: '+champ.short)
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
@@ -643,8 +644,8 @@ class MCOC(ChampionFactory):
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
-                title=champ.verbose_str, description='Base Attributes')
-        em.set_author(name=champ.short, icon_url=champ.get_avatar())
+                title='Base Attributes')
+        em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -676,6 +677,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
             em.add_field(name='hashtags',
                     value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
+        em.add_field('Shortcode: '+champ.short)
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -686,7 +688,8 @@ class MCOC(ChampionFactory):
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
-                    title=champ.verbose_str, description='Base Attributes')
+                    title='Base Attributes')
+            em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
             em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
             em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
@@ -700,6 +703,7 @@ class MCOC(ChampionFactory):
             elif state == 'f':
                 em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
                 em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
+            em.add_field('Shortcode: '+champ.short)
             em.set_thumbnail(url=champ.get_avatar())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
@@ -717,11 +721,12 @@ class MCOC(ChampionFactory):
             return
         if title is None:
             return
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.set_author(name=champ.short, icon_url=champ.get_avatar())
+        em = discord.Embed(color=champ.class_color, title='Signature Ability')
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
+        em.add_field('Shortcode: '+champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -777,11 +782,12 @@ class MCOC(ChampionFactory):
     @command_arg_help(aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
-        em.set_author(name=champ.short, icon_url=champ.get_avatar())
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
+        em.add_field('Shortcode: '+champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -790,8 +796,8 @@ class MCOC(ChampionFactory):
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
-        em = discord.Embed(color=champ.class_color, title=champ.full_name + 'Abilities')
-        em.set_author(name=champ.short, icon_url=champ.get_avatar())
+        em = discord.Embed(color=champ.class_color, title='Abilities')
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         # em.add_field(name='Passive',value='placeholder')
         # em.add_field(name='All Attacks',value='placeholder')
         # em.add_field(name='When Attacked',value='placeholder')
@@ -806,6 +812,7 @@ class MCOC(ChampionFactory):
         # em2.add_field(name=specials[0], value=specials[3])
         # em2.add_field(name=specials[1], value=specials[4])
         # em2.add_field(name=specials[2], value=specials[5])
+        em.add_field('Shortcode: '+champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         # await self.bot.say(embed=em2)
