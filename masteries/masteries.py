@@ -68,8 +68,8 @@ class masteries:
                 pibump.append=SELECTION[r]['pibump']
                 ucarbs.append=SELECTION[r]['ucarbs']
                 uclass.append=SELECTION[r]['uclass']
-                uunits.append=SELECTION[r]['uunits']
                 ustony.append=SELECTION[r]['ustony']
+                uunits.append=SELECTION[r]['uunits']
                 rgold.append=SELECTION[r]['rgold']
                 runit.append=SELECTION[r]['runit']
             em.add_field(name='Unlock Cost - Carb Cores', value = '\n'.join(ucarbs))
@@ -78,7 +78,7 @@ class masteries:
             em.add_field(name='Unlock Cost - Units', value = '\n'.join(uunits))
             em.add_field(name='Rank Cost - Units', value = '\n'.join(runits))
             em.add_field(name='Unlock Cost - Gold', value = '\n'.join(rgold))
-
+            await self.bot.say(embed=em)
 
 def setup(bot):
     bot.add_cog(masteries(bot))
