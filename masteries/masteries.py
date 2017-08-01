@@ -87,7 +87,7 @@ class masteries:
         if selected in self.MDATA.keys():
             SELECTION = self.MDATA[selected]
             text = SELECTION['text']
-            effects = SELECTION[rank]['effects'],split(',')
+            effects = SELECTION[rank]['effects'].split(',')
             desc = text.format(effects)
             em = discord.Embed(color=COLORS[SELECTION['category']], title='Mastery Effect', description=desc)
             await self.bot.say(embed=em)
