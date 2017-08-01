@@ -16,7 +16,8 @@ class masteries:
 
     def __init__(self, bot):
         self.bot = bot
-        self.masteries = dataIO.load_json("data/masteries/masteries.json")
+        self.masteryJSON="data/masteries/masteries.json"
+        self.MDATA = dataIO.load_json(self.masteryJSON)
 
     @commands.group(pass_context=True)
     async def masteries(self, ctx):
@@ -30,7 +31,7 @@ class masteries:
     @masteries.command(pass_context=True)
     async def listed(self, ctx):
         '''Just lists Masteries'''
-        keys = self.masteries.keys()
+        keys = self.MDATA.keys()
         offense = []
         defense = []
         utility = []
