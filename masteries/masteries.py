@@ -2,7 +2,7 @@ import discord
 import re
 import random
 import os
-import dataIO
+from .utils.dataIO import dataIO
 import datetime
 from operator import itemgetter, attrgetter
 from .utils import chat_formatting as chat
