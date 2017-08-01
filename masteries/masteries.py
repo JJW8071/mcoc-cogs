@@ -16,8 +16,7 @@ class masteries:
 
     def __init__(self, bot):
         self.bot = bot
-        self.masteriesJSON = "data/masteries/masteries.json"
-        self.MASTERY = dataIO.load_json(self.masteriesJSON)
+        self.MASTERY = dataIO.load_json("data/masteries/masteries.json")
 
     @commands.group(pass_context=True)
     async def masteries(self, ctx):
