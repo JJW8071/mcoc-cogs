@@ -688,7 +688,7 @@ class MCOC(ChampionFactory):
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
-                    title='Base Attributes')
+                    title='Release Dates & Est. Pull Chance')
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
             em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
