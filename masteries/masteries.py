@@ -39,9 +39,9 @@ class masteries:
         utility = []
         embeds = []
         for key in keys:
-            if 'Offense' in key:
+            if 'Offense' in MDATA[key]:
                 offense.append(key)
-            elif 'Defense' in key:
+            elif 'Defense' in MDATA[key]:
                 defense.append(key)
             else:
                 utility.append(key)
