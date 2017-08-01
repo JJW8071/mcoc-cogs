@@ -55,7 +55,7 @@ class masteries:
     async def costtable(self, ctx, *, selected):
         await self.bot.say('looking up: ' + selected)
         if selected in self.MDATA.keys():
-            SELECTION = self.MDATA.[selected]
+            SELECTION = self.MDATA[selected]
             pibump =[]
             ucarbs =[]
             uclass =[]
