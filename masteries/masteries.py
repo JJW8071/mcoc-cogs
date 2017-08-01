@@ -50,7 +50,7 @@ class masteries:
         embeds.append(discord.Embed(color=COLORS['Utility'],title='Utility', description='\n'.join(utility)))
         for em in embeds:
             await self.bot.say(embed=em)
-    # 
+    #
     # @masteries.command(pass_context=True)
     # async def cost(self, ctx, *, selected):
     #     await self.bot.say('looking up: ' + selected)
