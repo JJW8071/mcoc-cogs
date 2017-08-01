@@ -51,6 +51,10 @@ class masteries:
         for em in embeds:
             await self.bot.say(embed=em)
 
+    @masteries.command(pass_context=True)
+    async def cost(self, ctx, *, selected):
+        await self.bot.say('looking up: ' + selected)
+
 
 
 def setup(bot):
