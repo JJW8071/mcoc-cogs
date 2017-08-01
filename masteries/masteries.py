@@ -56,15 +56,16 @@ class masteries:
         await self.bot.say('looking up: ' + selected)
         if selected in self.MDATA.keys():
             SELECTION = self.MDATA[selected]
-            pibump =[]
-            ucarbs =[]
-            uclass =[]
-            uunits =[]
-            ustony =[]
-            rgold =[]
-            runit =[]
+            ranks = SELECTION['ranks']
+            pibump = []
+            ucarbs = []
+            uclass = []
+            uunits = []
+            ustony = []
+            rgold = []
+            runit = []
             em = discord.Embed(color=COLORS[selection['category']], title='Mastery Cost Table')
-            for r in range(1,SELECTION['ranks'])
+            for r in range(1, ranks):
                 pibump.append=SELECTION[r]['pibump']
                 ucarbs.append=SELECTION[r]['ucarbs']
                 uclass.append=SELECTION[r]['uclass']
