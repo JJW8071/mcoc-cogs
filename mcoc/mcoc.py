@@ -604,7 +604,7 @@ class MCOC(ChampionFactory):
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
                 value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
-        em.add_field('Shortcode: '+champ.short)
+        em.add_field(name='Shortcode: ' value=champ.short)
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
@@ -677,7 +677,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
             em.add_field(name='hashtags',
                     value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
-        em.add_field('Shortcode: '+champ.short)
+        em.add_field(name='Shortcode: ' value=champ.short)
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -703,7 +703,7 @@ class MCOC(ChampionFactory):
             elif state == 'f':
                 em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
                 em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-            em.add_field('Shortcode: '+champ.short)
+            em.add_field(name='Shortcode: ' value=champ.short)
             em.set_thumbnail(url=champ.get_avatar())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
@@ -726,7 +726,7 @@ class MCOC(ChampionFactory):
         em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
-        em.add_field('Shortcode: '+champ.short)
+        em.add_field(name='Shortcode: ' value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -787,7 +787,7 @@ class MCOC(ChampionFactory):
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
-        em.add_field('Shortcode: '+champ.short)
+        em.add_field(name='Shortcode: ' value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
@@ -812,7 +812,7 @@ class MCOC(ChampionFactory):
         # em2.add_field(name=specials[0], value=specials[3])
         # em2.add_field(name=specials[1], value=specials[4])
         # em2.add_field(name=specials[2], value=specials[5])
-        em.add_field('Shortcode: '+champ.short)
+        em.add_field(name='Shortcode: ' value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         # await self.bot.say(embed=em2)
