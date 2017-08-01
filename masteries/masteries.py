@@ -64,7 +64,7 @@ class masteries:
             ustony = []
             rgold = []
             runit = []
-            em = discord.Embed(color=COLORS[selection['category']], title='Mastery Cost Table')
+            em = discord.Embed(color=COLORS[SELECTION['category']], title='Mastery Cost Table')
             for r in range(1, ranks):
                 pibump.append=SELECTION[r]['pibump']
                 ucarbs.append=SELECTION[r]['ucarbs']
