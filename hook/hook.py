@@ -673,7 +673,7 @@ class Hook:
         await self.display_roster(ctx, roster, hargs.tags)
 
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, no_pm=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
         '''Report Clan Prestige.
         Specify clan-role or battlegroup-role.'''
