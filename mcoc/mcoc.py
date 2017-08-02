@@ -639,7 +639,7 @@ class MCOC(ChampionFactory):
                 # champ.update_attrs({'star': star, 'rank': rank})
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets.append( '{} : {}'.format(champ.star_name_str, data['username']))
+                        targets.append( '{} : {}'.format(champ.duel_str, data['username']))
         if len(targets) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
                 # em.add_field(name='{} Target'.format(names[star]),
@@ -1061,6 +1061,10 @@ class Champion:
     @property
     def immutable_id(self):
         return (type(self), self.star)
+
+    @property
+    def duel_str(self):
+        return '{0.star}{0.star_char} {0.rank}/{0.max_lvl} {0.full_name}'.format(self)
 
     @property
     def star_str(self):
