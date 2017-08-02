@@ -18,7 +18,7 @@ class ClanMod:
         self.champ_re = re.compile(r'champions(?: \(\d+\))?.csv')
 
     @commands.command(no_pm=True, pass_context=True)
-    @checks.admin_or_permissions(manage_nicknames=True, aliases=['clan_assign', 'clan'])
+    @checks.mod_or_permissions(manage_nicknames=True, aliases=['clan_assign', 'clan'])
     async def assign_clan(self, ctx, user : discord.Member, *, clanname=""):
         """Change user's nickname to match his clan
 
