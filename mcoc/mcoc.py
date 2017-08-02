@@ -639,7 +639,7 @@ class MCOC(ChampionFactory):
                 # champ.update_attrs({'star': star, 'rank': rank})
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets.append( '{} : {}'.format(champ.verbose_str, data['username']))
+                        targets.append( '{} : {}'.format(champ.star_name_str, data['username']))
         if len(targets) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
                 # em.add_field(name='{} Target'.format(names[star]),
