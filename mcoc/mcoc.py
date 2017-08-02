@@ -636,14 +636,9 @@ class MCOC(ChampionFactory):
         for star in (4,5):
             for rank in range(1,5):
                 key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-                maxlevel = rank*10
-                if star == 5:
-                    maxlevel += 15
-                string = '{}{} {}/{}'.format(star, star_glyph, rank, maxlevel)
-                # champ.update_attrs({'star': star, 'rank': rank})
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets.append( '{} {} : {}'.format(string, champ.full_name, data['username']))
+                        targets.append( '{}{} {} {} : {}'.format(star, star_glyph, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
             em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
                 # em.add_field(name='{} Target'.format(names[star]),
