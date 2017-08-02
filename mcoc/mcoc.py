@@ -649,7 +649,7 @@ class MCOC(ChampionFactory):
                     value='\n'.join(['Add one to the Community Spreadhseet!',
                             'Duel Targets: <http://simians.tk/mcocduel>',
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
-        em.add_field(name='Shortcode', value=champ.short)
+        em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
     @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
