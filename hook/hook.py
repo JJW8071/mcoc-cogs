@@ -697,9 +697,12 @@ class Hook:
                         member.display_name, roster.prestige, width=width))
         if verbose > 0:
             line_out.append('_' * (width + 11))
-        line_out.append('{0:{width}} p = {1}  from {2} members'.format(
-                role.name, round(prestige/cnt,0), cnt, width=width))
-        await self.bot.say('```{}```'.format('\n'.join(line_out)))
+        if cnt > 0:
+            line_out.append('{0:{width}} p = {1}  from {2} members'.format(
+                    role.name, round(prestige/cnt,0), cnt, width=width))
+            await self.bot.say('```{}```'.format('\n'.join(line_out)))
+        else:
+            await self.bot.say('You cannot divide by zero.')
 
 
     # @commands.group(pass_context=True, aliases=('teams',))
