@@ -173,8 +173,12 @@ class PagesMenu:
         pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
         if pages_to_inc:
             next_page = (page + pages_to_inc) % len(self.page_list)
-            await self.bot.remove_reaction(message, emoji, react.user)
-            await self.display_page(message=message, page=next_page)
+            try:
+                await self.bot.remove_reaction(message, emoji, react.user)
+                await self.display_page(message=message, page=next_page)
+            except:
+                await self.bot.delete_message(message)
+                await self.display_page(page=next_page)
         elif emoji == '\N{CROSS MARK}':
             try:
                 if self.delete_onX:
