@@ -178,7 +178,7 @@ class PagesMenu:
                 await self.display_page(message=message, page=next_page)
             except:
                 await self.bot.delete_message(message)
-                await self.display_page(page=next_page)
+                await self.display_page(message=None, page=next_page)
         elif emoji == '\N{CROSS MARK}':
             try:
                 if self.delete_onX:
