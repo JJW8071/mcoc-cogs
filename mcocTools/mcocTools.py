@@ -31,7 +31,7 @@ class MCOCTools:
                 '<http://simians.tk/MCoCspotlight>',
                 '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[MCOC Spotlight on Discord](https://discord.gg/wJqpYGS)'),
             'marvelsynergy': (
-                'http://www.marvelsynergy.com/team-builder>',
+                '<http://www.marvelsynergy.com/team-builder>',
                 '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
                 'Marvel Synergy',
                 'http://www.marvelsynergy.com/images/marvelsynergy.png'),
@@ -44,7 +44,7 @@ class MCOCTools:
                 '<http://simians.tk/msimSDF>',
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
             'streak': (
-                'http://simians.tk/-sdf-streak'
+                '<http://simians.tk/-sdf-streak>'
                 '[Infinite Streak](http://simians.tk/-sdf-streak)'),
                 #'http://simians.tk/SDFstreak')
     }
