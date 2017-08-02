@@ -771,19 +771,31 @@ class Hook:
             if react.reaction.emoji == '▶': #next_page
                 next_page = (page + 1) % len(embed_list)
                 # await self.bot.remove_reaction(message, '▶', react.user)
-                await self.bot.remove_reaction(message, '▶', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '▶', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '◀': #previous_page
                 next_page = (page - 1) % len(embed_list)
-                await self.bot.remove_reaction(message, '◀', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '◀', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '⏪': #rewind
                 next_page = (page - 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '⏪', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '⏪', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '⏩': # fast_forward
                 next_page = (page + 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '⏩', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '⏩', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '🆗': #choose
                 if choice is True:
