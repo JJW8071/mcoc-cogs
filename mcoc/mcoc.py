@@ -767,19 +767,19 @@ class MCOC(ChampionFactory):
         "isunique" : effects not summed
         "triggers" : champion.full_name
         '''
-        length = len(syndata[values])-1
-        synstring = []
-        if len(champs) > 5:
-            await self.bot.say('Too many champions')
-        elif len(champs) < 2:
-            await self.bot.say('TBD List synergy partners for champ')
-        else:
-            await self.bot.say('List synergies for selected champions')
-        for champ in champs:
-            key = '{}-{}'.format(champ.star, champ.mattkraftid)
-            if key in syndata['unique']:
-                for champ in champs:
-                    if champ.full_name in
+        # length = len(syndata[values])-1
+        # synstring = []
+        # if len(champs) > 5:
+        #     await self.bot.say('Too many champions')
+        # elif len(champs) < 2:
+        #     await self.bot.say('TBD List synergy partners for champ')
+        # else:
+        #     await self.bot.say('List synergies for selected champions')
+        # for champ in champs:
+        #     key = '{}-{}'.format(champ.star, champ.mattkraftid)
+        #     if key in syndata['unique']:
+        #         for champ in champs:
+        #             if champ.full_name in
 
 
 
