@@ -762,17 +762,17 @@ class MCOC(ChampionFactory):
         async with aiohttp.get(head_url) as response:
             try:
                 header_json = await response.json()
-    		except:
+            except:
                 print('No header data found.')
                 return
             header_values = header_json["values"]
         async with aiohttp.get(body_url) as response:
             try:
-                header_json = await response.json()
+                body_json = await response.json()
     		except:
                 print('No header data found.')
                 return
-            header_values = header_json["values"]
+            body_values = header_json["values"]
 
         '''
         champion : full_name
