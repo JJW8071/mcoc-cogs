@@ -900,9 +900,11 @@ class MCOC(ChampionFactory):
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
         if len(spch) > 3:
             denom = min(5, len(pch))
+            print(denom)
             for i in range(0,denom-1):
                 chmp = spch[i]
                 numerator += int(chmp.prestige)
+            print(numerator)
             emtitle='Prestige: {}'.format(numerator/denom)
         else:
             emtitle = 'Prestige'
