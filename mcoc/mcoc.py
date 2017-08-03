@@ -761,18 +761,18 @@ class MCOC(ChampionFactory):
 
         async with aiohttp.get(head_url) as response:
             try:
-    			header_json = await response.json()
+                header_json = await response.json()
     		except:
-    			print('No header data found.')
-    			return
-    		header_values = header_json["values"]
-		async with aiohttp.get(body_url) as response:
-			try:
-				body_json = await response.json()
-			except:
-				print('No data found.')
-				return
-		body_values = body_json["values"]
+                print('No header data found.')
+                return
+            header_values = header_json["values"]
+        async with aiohttp.get(body_url) as response:
+            try:
+                header_json = await response.json()
+    		except:
+                print('No header data found.')
+                return
+            header_values = header_json["values"]
 
         '''
         champion : full_name
@@ -801,19 +801,19 @@ class MCOC(ChampionFactory):
 					groupby_value = 0
 					warn = ":warning:  <GROUP_BY> value not found in <HEADER_ROW> range. By default, JSON rows grouped by 1st Column: **{}**"
 
-			grouped_by = header_values[0][groupby_value]
-			for row in body_values:
-				dict_zip = dict(zip(header_values[0], row))
-				groupby = row[groupby_value]
-				output_dict.update({groupby:dict_zip})
+            grouped_by = header_values[0][groupby_value]
+            for row in body_values:
+                dict_zip = dict(zip(header_values[0], row))
+                groupby = row[groupby_value]
+                output_dict.update({groupby:dict_zip})
 
         foldername = 'synergies'
         filename = 'synergies.json'
-		if not os.path.exists(self.shell_json.format(foldername,filename)):       				#check if the FILE exists
-			if not os.path.exists(self.data_dir.format(foldername)):                  #if not, check if the FOLDER exists
-				os.makedirs(self.data_dir.format(foldername))                         #if not, MAKE the FOLDER
-			dataIO.save_json(self.shell_json.format(foldername,filename), output_dict)   #then save  file in that folder
-		dataIO.save_json(self.shell_json.format(foldername,filename), output_dict)
+        if not os.path.exists(self.shell_json.format(foldername,filename)):       				#check if the FILE exists
+            if not os.path.exists(self.data_dir.format(foldername)):                  #if not, check if the FOLDER exists
+                os.makedirs(self.data_dir.format(foldername))                         #if not, MAKE the FOLDER
+            dataIO.save_json(self.shell_json.format(foldername,filename), output_dict)   #then save  file in that folder
+        dataIO.save_json(self.shell_json.format(foldername,filename), output_dict)
 
 
         await self.bot.upload(self.shell_json.format(foldername,filename))
