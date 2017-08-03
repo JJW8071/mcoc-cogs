@@ -775,17 +775,17 @@ class MCOC(ChampionFactory):
 		body_values = body_json["values"]
 
         '''
-        "champion" : full_name
-        "stars" : star
-        "unique" : star-full_nam
-        "synergycode" : synergycode
-        "synergyname" : synergyname
-        "rank" : rank
-        "scope" : All, class, or specific champions
-        "text" : text{}
-        "effect" : comma separated. split
-        "isunique" : effects not summed
-        "triggers" : champion.full_name
+        champion : full_name
+        stars : star
+        unique : star-full_nam
+        synergycode : synergycode
+        synergyname : synergyname
+        rank : rank
+        scope : All, class, or specific champions
+        text : text{}
+        effect : comma separated. split
+        isunique : effects not summed
+        triggers : champion.full_name
         '''
         if not body_values:
             await self.bot.say('No data found.')
