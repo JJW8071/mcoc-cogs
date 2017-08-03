@@ -111,7 +111,7 @@ class PagesMenu:
 
     EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
 
-    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False, 
+    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
             delete_onX=True):
         self.bot = bot
         self.timeout = timeout
@@ -138,7 +138,7 @@ class PagesMenu:
             for i, page in enumerate(page_list):
                 if self.is_embeds:
                     ftr = page.footer
-                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text, 
+                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
                             i+1, page_length), icon_url=ftr.icon_url)
                 else:
                     page += '\n(Page {} of {})'.format(i+1, page_length)
@@ -158,7 +158,7 @@ class PagesMenu:
             message = await self.bot.edit_message(message, embed=self.page_list[page])
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, 
+        react = await self.bot.wait_for_reaction(message=message,
                 timeout=self.timeout, emoji=self.included_emojis)
         if react is None:
             try:
@@ -173,8 +173,12 @@ class PagesMenu:
         pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
         if pages_to_inc:
             next_page = (page + pages_to_inc) % len(self.page_list)
-            await self.bot.remove_reaction(message, emoji, react.user)
-            await self.display_page(message=message, page=next_page)
+            try:
+                await self.bot.remove_reaction(message, emoji, react.user)
+                await self.display_page(message=message, page=next_page)
+            except:
+                await self.bot.delete_message(message)
+                await self.display_page(message=None, page=next_page)
         elif emoji == '\N{CROSS MARK}':
             try:
                 if self.delete_onX:
@@ -517,7 +521,7 @@ class Hook:
             return
 
         strs = [champ.verbose_prestige_str for champ in sorted(filtered, reverse=True,
-                    key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'))] 
+                    key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'))]
         champs_per_page = 15
         for i in range(0, len(strs)+1, champs_per_page):
             em = discord.Embed(title='', color=discord.Color.gold())
@@ -580,6 +584,7 @@ class Hook:
 
     @roster.command(pass_context=True, name='delete', aliases=('del',))
     async def _roster_del(self, ctx, *, champs: ChampConverterMult):
+        '''Delete champion(s) from your roster'''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
         track = roster.delete(champs)
@@ -593,6 +598,7 @@ class Hook:
 
     @roster.command(pass_context=True, name='import')
     async def _roster_import(self, ctx):
+        '''Silent import file attachement command'''
         if not ctx.message.attachments:
             await self.bot.say('This command can only be used when uploading files')
             return
@@ -606,6 +612,9 @@ class Hook:
 
     @roster.command(pass_context=True, name='export')
     async def _roster_export(self, ctx):
+        '''Export roster as champions.csv
+        Exported file can be imported to hook/champions
+        '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
         rand = randint(1000, 9999)
@@ -664,9 +673,10 @@ class Hook:
         await self.display_roster(ctx, roster, hargs.tags)
 
 
-    @commands.command(pass_context=True)
+    @commands.command(pass_context=True, no_pm=True)
     async def clan_prestige(self, ctx, role : discord.Role, verbose=0):
-        '''Report Clan Prestige'''
+        '''Report Clan Prestige.
+        Specify clan-role or battlegroup-role.'''
         server = ctx.message.server
         width = 20
         prestige = 0
@@ -687,9 +697,12 @@ class Hook:
                         member.display_name, roster.prestige, width=width))
         if verbose > 0:
             line_out.append('_' * (width + 11))
-        line_out.append('{0:{width}} p = {1}  from {2} members'.format(
-                role.name, round(prestige/cnt,0), cnt, width=width))
-        await self.bot.say('```{}```'.format('\n'.join(line_out)))
+        if cnt > 0:
+            line_out.append('{0:{width}} p = {1}  from {2} members'.format(
+                    role.name, round(prestige/cnt,0), cnt, width=width))
+            await self.bot.say('```{}```'.format('\n'.join(line_out)))
+        else:
+            await self.bot.say('You cannot divide by zero.')
 
 
     # @commands.group(pass_context=True, aliases=('teams',))
@@ -719,7 +732,7 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    async def pages_menu(self, ctx, embed_list: list, category: str='', 
+    async def pages_menu(self, ctx, embed_list: list, category: str='',
             message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
            https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
@@ -765,19 +778,31 @@ class Hook:
             if react.reaction.emoji == '▶': #next_page
                 next_page = (page + 1) % len(embed_list)
                 # await self.bot.remove_reaction(message, '▶', react.user)
-                await self.bot.remove_reaction(message, '▶', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '▶', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '◀': #previous_page
                 next_page = (page - 1) % len(embed_list)
-                await self.bot.remove_reaction(message, '◀', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '◀', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '⏪': #rewind
                 next_page = (page - 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '⏪', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '⏪', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '⏩': # fast_forward
                 next_page = (page + 5) % len(embed_list)
-                await self.bot.remove_reaction(message, '⏩', react.user)
+                try:
+                    await self.bot.remove_reaction(message, '⏩', react.user)
+                except:
+                    pass
                 return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
             elif react.reaction.emoji == '🆗': #choose
                 if choice is True:

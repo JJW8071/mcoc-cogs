@@ -19,6 +19,7 @@ from functools import wraps
 import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
+from __main__ import send_cmd_help
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -38,6 +39,8 @@ data_files = {
     #'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
+
+SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -485,7 +488,7 @@ class MCOC(ChampionFactory):
         '''Convert Percentage to MCOC Flat Value'''
         await self.bot.say(to_flat(per, ch_rating))
 
-    @commands.command(aliases=('flat', 'f2p'), hidden=True)
+    @commands.command(name='flat', aliases=('f2p'))
     async def flat2per(self, *, m):
         '''Convert MCOC Flat Value to Percentge'''
         if ' ' in m:
@@ -575,21 +578,33 @@ class MCOC(ChampionFactory):
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
 
-    @commands.command(aliases=['featured'])
+    @commands.group(pass_context=True)
+    async def champ(self, ctx):
+        if ctx.invoked_subcommand is None:
+            try:
+                await command_arg_help(ctx)
+            except:
+                print('command_arg_help failed')
+                await send_cmd_help(ctx)
+            return
+
+    @champ.command(name='featured')
     async def champ_featured(self, champ : ChampConverter):
         '''Retrieve Champion Feature Images'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['portrait',])
+    @champ.command(name='portrait')
     async def champ_portrait(self, champ : ChampConverter):
         '''Retrieve Champion Portrait'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=('bio',))
+    @champ.command(name='bio', aliases=('biography',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
         '''Retrieve the Bio of a Champion'''
         try:
@@ -597,50 +612,55 @@ class MCOC(ChampionFactory):
         except KeyError:
             await self.say_user_error("Cannot find bio for Champion '{}'".format(champ.full_name))
             return
-        em = discord.Embed(color=champ.class_color, title=champ.full_name,
+        em = discord.Embed(color=champ.class_color, title='Champion Biography',
                 description=bio_desc)
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
                 value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
+        em.add_field(name='Shortcode', value=champ.short)
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=('duel',))
+    @champ.command(name='duel')
     async def champ_duel(self, champ : ChampConverter):
         '''Lookup Duel/Sparring Targets'''
         dataset=data_files['duelist']['local']
-        targets = defaultdict(list)
-        names = {4: 'Duel', 5: 'Sparring'}
+        # targets = defaultdict(list)
+        targets = []
+        # names = {4: 'Duel', 5: 'Sparring'}
         em = discord.Embed(color=champ.class_color, title='')
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         em.set_footer(text='Sourced from Community Spreadsheet',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
         for star in (4,5):
-            for rank in range(6):
-                champ.update_attrs({'star': star, 'rank': rank})
-                for data in get_csv_rows(dataset, 'unique', champ.unique):
+            for rank in range(1,5):
+                key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+                for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets[star].append( '{} : {}'.format(
-                                champ.star_str, data['username']))
-            if len(targets[star]) > 0:
-                target_found = True
-                em.add_field(name='{} Target'.format(names[star]),
-                        value='\n'.join(k for k in targets[star]), inline=False)
-        if not target_found:
+                        targets.append( '{}{} {} {} : {}'.format(star, star_glyph, data['maxlevel'], champ.full_name, data['username']))
+        if len(targets) > 0:
+            em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
+                # em.add_field(name='{} Target'.format(names[star]),
+                #         value='\n'.join(k for k in targets[star]), inline=False)
+        else:
             em.add_field(name='Target not found',
                     value='\n'.join(['Add one to the Community Spreadhseet!',
                             'Duel Targets: <http://simians.tk/mcocduel>',
                             'Sparring Targets: <http://simians.tk/mcocspar>']))
+        em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ', 'about'))
+    @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Retrieve Champion Base Stats'''
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
-                title=champ.verbose_str, description='Base Attributes')
+                title='Base Attributes')
+        em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
         titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
         keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -670,18 +690,21 @@ class MCOC(ChampionFactory):
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
             em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
-        em.add_field(name='hashtags',value=', '.join(champ.class_tags.union(champ.tags)))
+            em.add_field(name='hashtags',
+                    value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
+        em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=['released',])
+    @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Retrieve Champion Release Date'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
-                    title=champ.verbose_str, description='Base Attributes')
+                    title='Release Dates & Est. Pull Chance')
+            em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
             em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
             em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
@@ -695,11 +718,12 @@ class MCOC(ChampionFactory):
             elif state == 'f':
                 em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
                 em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-            em.set_thumbnail(url=champ.get_avatar())
+            em.add_field(name='Shortcode', value=champ.short)
+            em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=['sig','signature'])
+    @champ.command(name='sig', aliases=['signature',])
     async def champ_sig(self, *, champ : ChampConverterSig):
         '''Retrieve the Signature Ability of a Champion'''
         if champ.star == 5:
@@ -712,13 +736,54 @@ class MCOC(ChampionFactory):
             return
         if title is None:
             return
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        em = discord.Embed(color=champ.class_color, title='Signature Ability')
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
+        em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    @champ.command(name='synergies', aliases=['syn',], hidden=True)
+    async def champ_synergies(self, champs : ChampConverterMult):
+        '''Coming Soon
+        Champion Synergies'''
+        async with aiohttp.ClientSession() as session:
+            async with session.get(self.SYNERGIES) as response:
+                synsheet = await response.json()
+                syndata = load_json(synsheet)
+        '''
+        "champion" : full_name
+        "stars" : star
+        "unique" : star-full_nam
+        "synergycode" : synergycode
+        "synergyname" : synergyname
+        "rank" : rank
+        "scope" : All, class, or specific champions
+        "text" : text{}
+        "effect" : comma separated. split
+        "isunique" : effects not summed
+        "triggers" : champion.full_name
+        '''
+        # length = len(syndata[values])-1
+        # synstring = []
+        # if len(champs) > 5:
+        #     await self.bot.say('Too many champions')
+        # elif len(champs) < 2:
+        #     await self.bot.say('TBD List synergy partners for champ')
+        # else:
+        #     await self.bot.say('List synergies for selected champions')
+        # for champ in champs:
+        #     key = '{}-{}'.format(champ.star, champ.mattkraftid)
+        #     if key in syndata['unique']:
+        #         for champ in champs:
+        #             if champ.full_name in
+
+
+
+
 
     @commands.command(hidden=True)
     async def dump_sigs(self):
@@ -768,23 +833,26 @@ class MCOC(ChampionFactory):
         assert desc == jsig['description']
         assert sig_calcs == jsig['sig_data'][champ.sig-1]
 
-    @command_arg_help(aliases=('infopage',))
+    @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
+        '''Retrieve Champion Spotlight link if available'''
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
+        em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=('abilities',))
+    @champ.command(name='abilities')
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
-        em = discord.Embed(color=champ.class_color,
-        title=champ.full_name + 'Abilities')
+        em = discord.Embed(color=champ.class_color, title='Champion Abilities')
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         # em.add_field(name='Passive',value='placeholder')
         # em.add_field(name='All Attacks',value='placeholder')
         # em.add_field(name='When Attacked',value='placeholder')
@@ -799,6 +867,7 @@ class MCOC(ChampionFactory):
         # em2.add_field(name=specials[0], value=specials[3])
         # em2.add_field(name=specials[1], value=specials[4])
         # em2.add_field(name=specials[2], value=specials[5])
+        em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         # await self.bot.say(embed=em2)
@@ -822,13 +891,13 @@ class MCOC(ChampionFactory):
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @command_arg_help(aliases=('prestige',))
+    @champ.command(name='prestige')
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
         #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
-        pch = [c for c in champs if c.has_prestige] 
+        pch = [c for c in champs if c.has_prestige]
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
-                description='\n'.join([c.verbose_prestige_str for c in 
+                description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
         #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
             #try:
@@ -842,7 +911,7 @@ class MCOC(ChampionFactory):
         ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=('calias',))
+    @champ.command(name='aliases', aliases=('calias','ca'))
     async def champ_aliases(self, *args):
         '''Retrieve Champion Aliases'''
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
@@ -1032,6 +1101,10 @@ class Champion:
     @property
     def immutable_id(self):
         return (type(self), self.star)
+
+    @property
+    def duel_str(self):
+        return '{0.star}{0.star_char} {0.rank}/{0.max_lvl} {0.full_name}'.format(self)
 
     @property
     def star_str(self):
@@ -1298,6 +1371,8 @@ class Champion:
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
+        if preamble + '_SIMPLE_NEW2' in sigs:
+            simple.append(preamble + '_SIMPLE_NEW2')
         if preamble + '_SIMPLE_NEW' in sigs:
             simple.append(preamble + '_SIMPLE_NEW')
         elif preamble + '_SIMPLE' in sigs:
@@ -1330,7 +1405,10 @@ class Champion:
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
-            for k in ('_DESC_NEW','_DESC_NEW_B'):
+            desclist = ('_DESC_NEW','_DESC_NEW_B')
+            if preamble + '_DESC_NEW2' in sigs:
+                desclist = ('_DESC_NEW2','_DESC_NEW2_B')
+            for k in desclist:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
                         desc.append(preamble + k + '_AO')
