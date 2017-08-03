@@ -1398,6 +1398,10 @@ class Champion:
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
             'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO'],
             'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
+            'DOC_OCK':['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
+                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
+                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C',
+                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',],
         }
 
         if self.mcocsig == 'CYCLOPS_90S':
