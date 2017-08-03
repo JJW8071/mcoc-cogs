@@ -903,6 +903,7 @@ class MCOC(ChampionFactory):
             print(denom)
             for i in range(0,denom-1):
                 chmp = spch[i]
+                print(chmp.prestige)
                 numerator += int(chmp.prestige)
             print(numerator)
             emtitle='Prestige: {}'.format(numerator/denom)
