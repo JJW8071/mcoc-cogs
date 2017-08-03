@@ -759,7 +759,7 @@ class MCOC(ChampionFactory):
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
 
-        async with aiohttp.get(head_url) as response:
+        async with aiohttp.get(head_url) as response
         try:
 			header_json = await response.json()
 		except:
