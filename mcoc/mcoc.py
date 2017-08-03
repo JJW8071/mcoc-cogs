@@ -39,7 +39,6 @@ data_files = {
     #'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
-GS_BASE = "https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS"
 
 SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
@@ -260,8 +259,6 @@ class ChampionFactory():
     created from user function calls off of the dynamic classes.'''
 
     def __init__(self, *args, **kwargs):
-        self.data_dir = 'data/mcoc/{}/'
-        self.shell_json = self.data_dir + '{}.json'
         self.cooldown_delta = 5 * 60
         self.cooldown = time.time() - self.cooldown_delta - 1
         self.needs_init = True
@@ -753,76 +750,28 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-        sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
-        range_headers = 'Synergies!A1:L1'
-        range_body = 'Synergies!A2:L'
-        head_url = GS_BASE.format(sheet,range_headers)
-        body_url = GS_BASE.format(sheet,range_body)
-
-        async with aiohttp.get(head_url) as response:
-            try:
-                header_json = await response.json()
-            except:
-                print('No header data found.')
-                return
-            header_values = header_json["values"]
-        async with aiohttp.get(body_url) as response:
-            try:
-                body_json = await response.json()
-    		except:
-                print('No header data found.')
-                return
-            body_values = header_json["values"]
-
+        async with aiohttp.ClientSession() as session:
+            async with session.get(self.SYNERGIES) as response:
+                synsheet = await response.json()
+                syndata = load_json(synsheet)
         '''
-        champion : full_name
-        stars : star
-        unique : star-full_nam
-        synergycode : synergycode
-        synergyname : synergyname
-        rank : rank
-        scope : All, class, or specific champions
-        text : text{}
-        effect : comma separated. split
-        isunique : effects not summed
-        triggers : champion.full_name
+        "champion" : full_name
+        "stars" : star
+        "unique" : star-full_nam
+        "synergycode" : synergycode
+        "synergyname" : synergyname
+        "rank" : rank
+        "scope" : All, class, or specific champions
+        "text" : text{}
+        "effect" : comma separated. split
+        "isunique" : effects not summed
+        "triggers" : champion.full_name
         '''
-        if not body_values:
-            await self.bot.say('No data found.')
-        else:
-            output_dict = {}
-			if not groupby_key:
-				groupby_value = 0
-				warn = ":warning:  No <GROUP_BY> value provided in command string. By default, JSON rows grouped by 1st Column: **{}**"
-			else:
-				try:
-					groupby_value = header_values[0].index(groupby_key)
-				except ValueError:
-					groupby_value = 0
-					warn = ":warning:  <GROUP_BY> value not found in <HEADER_ROW> range. By default, JSON rows grouped by 1st Column: **{}**"
-
-            grouped_by = header_values[0][groupby_value]
-            for row in body_values:
-                dict_zip = dict(zip(header_values[0], row))
-                groupby = row[groupby_value]
-                output_dict.update({groupby:dict_zip})
-
-        foldername = 'synergies'
-        filename = 'synergies.json'
-        if not os.path.exists(self.shell_json.format(foldername,filename)):       				#check if the FILE exists
-            if not os.path.exists(self.data_dir.format(foldername)):                  #if not, check if the FOLDER exists
-                os.makedirs(self.data_dir.format(foldername))                         #if not, MAKE the FOLDER
-            dataIO.save_json(self.shell_json.format(foldername,filename), output_dict)   #then save  file in that folder
-        dataIO.save_json(self.shell_json.format(foldername,filename), output_dict)
-
-
-        await self.bot.upload(self.shell_json.format(foldername,filename))
-        # syndata = output_dict
-        #
+        # length = len(syndata[values])-1
         # synstring = []
         # if len(champs) > 5:
         #     await self.bot.say('Too many champions')
-        # elif len (champs) < 2:
+        # elif len(champs) < 2:
         #     await self.bot.say('TBD List synergy partners for champ')
         # else:
         #     await self.bot.say('List synergies for selected champions')
@@ -947,7 +896,16 @@ class MCOC(ChampionFactory):
         '''Retrieve prestige data for champs'''
         #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
         pch = [c for c in champs if c.has_prestige]
-        em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
+        numerator = 0
+        spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
+        if len(spch) > 3:
+            denom = min(5, len(pch))
+            for i in range(0,denom-1):
+                numerator += spch[i]['prestige']
+            emtitle='Prestige: {}'.format(numerator/denom)
+        else:
+            emtitle = 'Prestige'
+        em = discord.Embed(color=discord.Color.magenta(), title=emtitle,
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
         #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
@@ -1449,6 +1407,10 @@ class Champion:
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
             'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO'],
             'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
+            'DOC_OCK':['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
+                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
+                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C',
+                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',],
         }
 
         if self.mcocsig == 'CYCLOPS_90S':
