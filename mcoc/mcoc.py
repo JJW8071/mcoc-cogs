@@ -40,6 +40,8 @@ data_files = {
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
 
+SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
     'effect_keys': 'data/mcoc/effect_keys.csv',
@@ -744,6 +746,45 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
+    @champ.command(name='synergies', aliases=['syn',], hidden=True)
+    async def champ_synergies(self, champs : ChampConverterMult):
+        '''Coming Soon
+        Champion Synergies'''
+        async with aiohttp.ClientSession() as session:
+            async with session.get(self.SYNERGIES) as response:
+                synsheet = await response.json()
+                syndata = load_json(synsheet)
+        '''
+        "champion" : full_name
+        "stars" : star
+        "unique" : star-full_nam
+        "synergycode" : synergycode
+        "synergyname" : synergyname
+        "rank" : rank
+        "scope" : All, class, or specific champions
+        "text" : text{}
+        "effect" : comma separated. split
+        "isunique" : effects not summed
+        "triggers" : champion.full_name
+        '''
+        length = len(syndata[values])-1
+        synstring = []
+        if len(champs) > 5:
+            await self.bot.say('Too many champions')
+        elif len(champs) < 2:
+            await self.bot.say('TBD List synergy partners for champ')
+        else:
+            await self.bot.say('List synergies for selected champions')
+        for champ in champs:
+            key = '{}-{}'.format(champ.star, champ.mattkraftid)
+            if key in syndata['unique']:
+                for champ in champs:
+                    if champ.full_name in
+
+
+
+
+
     @commands.command(hidden=True)
     async def dump_sigs(self):
         with open('sig_data_4star.json', encoding='utf-8', mode="w") as fp:
@@ -810,8 +851,8 @@ class MCOC(ChampionFactory):
     async def champ_abilities(self, champ : ChampConverter):
         '''In-Development: Retrieve Champion Abilities'''
         specials = champ.get_special_attacks()
-        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em = discord.Embed(color=champ.class_color, title='Champion Abilities')
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         # em.add_field(name='Passive',value='placeholder')
         # em.add_field(name='All Attacks',value='placeholder')
         # em.add_field(name='When Attacked',value='placeholder')
