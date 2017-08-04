@@ -228,6 +228,7 @@ class ChampConverterMult(ChampConverter):
         bot = self.ctx.bot
         champs = []
         default = {}
+        dangling_arg = None
         for arg in self.argument.lower().split(' '):
             attrs = default.copy()
             for m in self.parse_re.finditer(arg):
@@ -235,9 +236,16 @@ class ChampConverterMult(ChampConverter):
             token = self.parse_re.sub('', arg)
             if token != '':
                 champ = await self.get_champion(bot, token, attrs)
+                dangling_arg = None
                 champs.append(champ)
             else:
                 default.update(attrs)
+                dangling_arg = arg
+        if dangling_arg:
+            em = discord.Embed(title='Dangling Argument', 
+                    description="Last argument '{}' is unused.\n".format(dangling_arg)
+                        + "Place **before** the champion or **without a space**.")
+            await bot.say(embed=em)
         return champs
 
 class AliasDict(UserDict):
@@ -393,6 +401,7 @@ class ChampionFactory():
         logger.debug('Preparing aliases')
         self.champions = AliasDict()
         raw_data = load_csv(data_files['crossreference']['local'])
+        punc_strip = re.compile(r'[\s)(-]')
         champs = []
         all_aliases = set()
         id_index = raw_data.fieldnames.index('status')
@@ -402,8 +411,9 @@ class ChampionFactory():
                 continue    # empty row check
             alias_set = set()
             for col in alias_index:
-                if row[col]:
+                if row[col] and col != 'champ':
                     alias_set.add(row[col].lower())
+            alias_set.add(punc_strip.sub('', row['champ'].lower()))
             if all_aliases.isdisjoint(alias_set):
                 all_aliases.union(alias_set)
             else:
@@ -581,12 +591,7 @@ class MCOC(ChampionFactory):
     @commands.group(pass_context=True)
     async def champ(self, ctx):
         if ctx.invoked_subcommand is None:
-            try:
-                await command_arg_help(ctx)
-            except:
-                print('command_arg_help failed')
-                await send_cmd_help(ctx)
-            return
+            await send_cmd_help(ctx)
 
     @champ.command(name='featured')
     async def champ_featured(self, champ : ChampConverter):
@@ -783,8 +788,6 @@ class MCOC(ChampionFactory):
 
 
 
-
-
     @commands.command(hidden=True)
     async def dump_sigs(self):
         with open('sig_data_4star.json', encoding='utf-8', mode="w") as fp:
@@ -894,24 +897,13 @@ class MCOC(ChampionFactory):
     @champ.command(name='prestige')
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
-        #em = discord.Embed(color=discord.Color.magenta(), title='Prestige')
         pch = [c for c in champs if c.has_prestige]
         em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
-        #for champ in sorted(pch, key=attrgetter('prestige'), reverse=True):
-            #try:
-            #em.add_field(name='{0.class_icon} {0.star_char}{0.star} {0.full_name}'.format(champ),
-                    #value='{0.stars_str}\n{0.rank_sig_str}\n{0.prestige}'.format(champ),
-            #        value='{0.rank_sig_str}\n{0.prestige}'.format(champ),
-            #        inline=False)
-            #except AttributeError:
-            #    await self.bot.say("**WARNING** Champion Data for "
-            #        + "{} does not exist".format(champ.verbose_str))
-        ##em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='aliases', aliases=('calias','ca'))
+    @champ.command(name='aliases', aliases=('alias',))
     async def champ_aliases(self, *args):
         '''Retrieve Champion Aliases'''
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
