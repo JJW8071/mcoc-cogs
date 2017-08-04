@@ -899,7 +899,7 @@ class MCOC(ChampionFactory):
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
         if len(spch) > 3:
-            denom = min(5, len(pch)-1)
+            denom = min(4, len(pch)-1)
             print(denom)
             for i in range(0,denom):
                 chmp = spch[i]
@@ -907,7 +907,7 @@ class MCOC(ChampionFactory):
                 print(chmp.prestige)
                 numerator += int(chmp.prestige)
             print(numerator)
-            emtitle='Prestige: {}'.format(numerator/denom)
+            emtitle='Prestige: {}'.format(numerator/denom+1)
         else:
             emtitle = 'Prestige'
         em = discord.Embed(color=discord.Color.magenta(), title=emtitle,
