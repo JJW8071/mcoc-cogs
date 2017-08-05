@@ -752,6 +752,11 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
+
+        desc = await self.get_synergies(champs)
+
+
+    async def get_synergies(self, champs):
         sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
@@ -766,14 +771,14 @@ class MCOC(ChampionFactory):
         filename = 'effects'
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
-        synlist = await self.gs_to_json(head_url=head_url,body_url=body_url, foldername=foldername, filename=filename)
+        synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
 
         effect_keys = synlist.keys
         # effects = defaultdict{}
         synergy_package = []
 
         print('len champs: '+str(len(champs)))
-        if len(champs) > 1:
+        if len(champs) > 1: ## If more than one champ, display synergies triggered
             for champ in champs:
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
@@ -783,7 +788,7 @@ class MCOC(ChampionFactory):
                                 effect = champ_synergies[lookup]['effect'].split(', ')
                                 txt = champ_synergies[lookup]['text'].format(*effect)
                                 synergy_package.append(txt)
-        elif len(champs) == 1:
+        elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
@@ -800,7 +805,8 @@ class MCOC(ChampionFactory):
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
-        await self.bot.say(desc)
+        return desc
+        # await self.bot.say(desc)
 
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
@@ -839,8 +845,8 @@ class MCOC(ChampionFactory):
                 dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
             dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
-            # Uncomment to debug
-            await self.bot.upload(self.shell_json.format(foldername,filename))
+            # # Uncomment to debug
+            # await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
         return output_dict
