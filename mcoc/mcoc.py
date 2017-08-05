@@ -791,7 +791,7 @@ class MCOC(ChampionFactory):
 
                                 synergy_package.append(txt)
             if embed is not None:
-                embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=false)
+                embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
                 return embed
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
