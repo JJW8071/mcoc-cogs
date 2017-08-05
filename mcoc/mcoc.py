@@ -766,7 +766,7 @@ class MCOC(ChampionFactory):
         filename = 'effects'
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
-        synlist = await self.gs_to_json(headurl=head_url,body_url=body_url, foldername=foldername, filename=filename)
+        synlist = await self.gs_to_json(head_url=head_url,body_url=body_url, foldername=foldername, filename=filename)
 
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
