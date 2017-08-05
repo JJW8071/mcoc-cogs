@@ -780,7 +780,7 @@ class MCOC(ChampionFactory):
 
         print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
-            effectsused = {}
+            effectsused = []
             for champ in champs:
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
@@ -791,6 +791,7 @@ class MCOC(ChampionFactory):
                                 effectsused.append(current = {s : effect})
                                 txt = champ_synergies[lookup]['text'].format(*effect)
                                 synergy_package.append(txt)
+            effectsused = defaultdict(effectsued)
             print(effectsused)
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
