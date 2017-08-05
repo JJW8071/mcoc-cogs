@@ -793,7 +793,7 @@ class MCOC(ChampionFactory):
                     except:
                         effects = selected['effect']
                     text = selected['text'].format(effects)
-                    synergy_package.append('{} : {}'.format(triggers, text)
+                    synergy_package.append('{} : {}'.format(triggers, text))
         desc = '\n'.join(synergy_package)
         await self.bot.say('test: '+desc)
 
