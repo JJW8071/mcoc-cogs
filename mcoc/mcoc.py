@@ -796,6 +796,7 @@ class MCOC(ChampionFactory):
                         triggers = selected['triggers']
                         # try:
                         effect = selected['effect'].split(',')
+                        print(effect)
                         # except:
                         #     effects = selected['effect']
                         if len(effect)==1:
@@ -845,8 +846,8 @@ class MCOC(ChampionFactory):
                 dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
             dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
-            ## Uncomment to debug
-            # await self.bot.upload(self.shell_json.format(foldername,filename))
+            # Uncomment to debug
+            await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
         return output_dict
