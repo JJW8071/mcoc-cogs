@@ -781,9 +781,8 @@ class MCOC(ChampionFactory):
                         for c in champs:
                             if c.full_name in  champ_synergies[lookup]['triggers']:
                                 effect = champ_synergies[lookup]['effect'].split(', ')
-                                for e in effect:
-                                    txt = champ_synergies[lookup]['text'].format(*e)
-                                synergy_package.append(txt)
+                                txt = champ_synergies[lookup]['text'].format(*effect)
+                            synergy_package.append(txt)
         elif len(champs) == 1:
             for champ in champs:
                 for s in synlist:
@@ -793,12 +792,11 @@ class MCOC(ChampionFactory):
                         triggers = selected['triggers']
                         effect = selected['effect'].split(', ')
                         print(effect)
-                        for e in effect:
-                            try:
-                                txt = champ_synergies[lookup]['text'].format(*e)
-                            except:
-                                print(champ_synergies[lookup]['text'], effect)
-                                raise
+                        try:
+                            txt = champ_synergies[lookup]['text'].format(*effect)
+                        except:
+                            print(champ_synergies[lookup]['text'], effect)
+                            raise
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
