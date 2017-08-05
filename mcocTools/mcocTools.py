@@ -113,6 +113,7 @@ class MCOCTools:
                     "\n[JJW#8071](https://discordapp.com/channels/@me/124984294035816448)"
                     "\n[ranemartin8#1636](https://discordapp.com/channels/@me/245589956012146688)")
         artteam = ('[ViceOne#3005](https://discordapp.com/channels/@me/276111652943036416)')
+        bughunters = ('[SpiderSebas]')
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)

@@ -774,12 +774,13 @@ class MCOC(ChampionFactory):
         body_url = GS_BASE.format(sheet,range_body)
         synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
 
-        effect_keys = synlist.keys
-        # effects = defaultdict{}
+        # effect_keys = synlist.keys
+        # effects = defaultdict(effect_keys)
         synergy_package = []
 
         print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
+            effectsused = {}
             for champ in champs:
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
@@ -787,9 +788,10 @@ class MCOC(ChampionFactory):
                         for c in champs:
                             if c.full_name in  champ_synergies[lookup]['triggers']:
                                 effect = champ_synergies[lookup]['effect'].split(', ')
+                                effectsused.append(current = {s : effect})
                                 txt = champ_synergies[lookup]['text'].format(*effect)
-
                                 synergy_package.append(txt)
+            print(effectsused)
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
                 return embed
