@@ -792,8 +792,8 @@ class MCOC(ChampionFactory):
                                 effectsused.append(current)
                                 txt = champ_synergies[lookup]['text'].format(*effect)
                                 synergy_package.append(txt)
-            effectsused = defaultdict(effectsused)
             print(effectsused)
+            await self.bot.say(chat.box(effectsused))
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
                 return embed
