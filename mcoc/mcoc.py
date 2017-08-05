@@ -801,7 +801,7 @@ class MCOC(ChampionFactory):
                             txt = champ_synergies[lookup]['text'].format(effect[0])
                         else:
                             txt = champ_synergies[lookup]['text'].format(e for e in effect)
-                        synergy_package.append('{} : {}'.format(triggers, text))
+                        synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
         await self.bot.say(desc)
