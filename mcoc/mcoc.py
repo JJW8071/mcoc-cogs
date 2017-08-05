@@ -799,7 +799,7 @@ class MCOC(ChampionFactory):
                         synergy_package.append('{} : {}'.format(triggers, text))
 
         desc = '\n'.join(synergy_package)
-        await self.bot.say('test: '+desc)
+        await self.bot.say(desc)
 
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
