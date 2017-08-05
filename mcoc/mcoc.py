@@ -787,7 +787,13 @@ class MCOC(ChampionFactory):
                 lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
                 if lookup in champ_synergies:
                     selected = champ_synergies[lookup]
-                    synergy_package.append('{} : {}'.format(selected['triggers'], selected['text'], split(selected['effect'],','))
+                    triggers = selected['triggers']
+                    try:
+                        effects = split(selected['effect'],',')
+                    except:
+                        effects = selected['effect']
+                    text = selected['text'].format(effects)
+                    synergy_package.append('{} : {}'.format(triggers, text)
         desc = '\n'.join(synergy_package)
         await self.bot.say('test: '+desc)
 
