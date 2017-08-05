@@ -749,7 +749,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='synergies', aliases=['syn',], hidden=True)
-    async def champ_synergies(self, champs : ChampConverterMult):
+    async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
         sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
@@ -784,7 +784,6 @@ class MCOC(ChampionFactory):
                                 effect = split(champ_synergies[lookup]['effect'], ',')
                                 synergy_package.append(txt.format(split(effect,',')))
         elif len(champs) == 1:
-
             for champ in champs:
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
