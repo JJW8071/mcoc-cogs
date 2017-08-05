@@ -781,7 +781,7 @@ class MCOC(ChampionFactory):
             dict_zip = dict(zip(header_values[0],row))
             groupby = row[groupby_value]
             output_dict.update({groupby:dict_zip})
-            output_dict = dict_zip
+            # output_dict = dict_zip
 
         foldername = 'synergies'
         filename = 'synergies'
