@@ -782,7 +782,7 @@ class MCOC(ChampionFactory):
             # groupby = row[groupby_value]
             # output_dict.update({groupby:dict_zip})
             output_dict = dict_zip
-            
+
         foldername = 'synergies'
         filename = 'synergies'
         if not os.path.exists(self.shell_json.format(foldername, filename)):
@@ -791,7 +791,7 @@ class MCOC(ChampionFactory):
             dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
         dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
-        await self.bot.upload(self.shell_json.format(foldername,filename))+'.json'
+        await self.bot.upload(self.shell_json.format(foldername,filename)+'.json')
 
 
 
