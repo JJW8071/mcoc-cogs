@@ -753,12 +753,11 @@ class MCOC(ChampionFactory):
         '''Coming Soon
         Champion Synergies'''
 
-        desc = await self.get_synergies(champs)
-        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies', desc=desc)
+        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+        em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
-
-    async def get_synergies(self, champs : ChampConverterMult):
+    async def get_synergies(self, champs : ChampConverterMult, embed=None):
         sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
@@ -789,7 +788,11 @@ class MCOC(ChampionFactory):
                             if c.full_name in  champ_synergies[lookup]['triggers']:
                                 effect = champ_synergies[lookup]['effect'].split(', ')
                                 txt = champ_synergies[lookup]['text'].format(*effect)
+
                                 synergy_package.append(txt)
+            if embed is not None:
+                embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package, inline=false))
+                return embed
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
                 for s in synlist:
@@ -804,12 +807,14 @@ class MCOC(ChampionFactory):
                         except:
                             print(champ_synergies[lookup]['text'], effect)
                             raise
+                        if embed is not None:
+                            embed.add_field(name=triggers, value=txt, inline=False)
                         synergy_package.append('{} : {}'.format(triggers, txt))
-
-        desc = '\n'.join(synergy_package)
-        await self.bot.say(desc)
-        return desc
-        # await self.bot.say(desc)
+            if embed is not None:
+                return embed
+            else:
+                desc = '\n'.join(synergy_package)
+                return desc
 
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
