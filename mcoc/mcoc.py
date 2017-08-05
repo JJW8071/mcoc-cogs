@@ -772,7 +772,7 @@ class MCOC(ChampionFactory):
 
         synergy_package = []
 
-        print('len champs: '+len(champs))
+        print('len champs: '+str(len(champs)))
         if len(champs) > 1:
             for champ in champs:
                 for s in synlist:
