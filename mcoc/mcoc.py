@@ -783,7 +783,7 @@ class MCOC(ChampionFactory):
         output_dict = {}
 
         if head_url is not None:
-            if groupby_value=None:
+            if groupby_value is None:
                 groupby_value = 0
             grouped_by = header_values[0][groupby_value]
             for row in body_values:
