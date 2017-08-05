@@ -779,7 +779,7 @@ class MCOC(ChampionFactory):
                     if lookup in champ_synergies:
                         for c in champs:
                             if c.full_name in  champ_synergies[lookup]:
-                                txt = champ_synergies[lookup]['text'])
+                                txt = champ_synergies[lookup]['text']
                                 effect = split(champ_synergies[lookup]['effect'], ',')
                                 synergy_package.append(txt.format(split(effect,',')))
         elif len(champs) == 1:
