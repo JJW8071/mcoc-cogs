@@ -754,7 +754,7 @@ class MCOC(ChampionFactory):
         Champion Synergies'''
 
         desc = await self.get_synergies(champs)
-        em = discord.Embed(color=discord.color.Red(), title='Champion Synergies', desc=desc)
+        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies', desc=desc)
         await self.bot.say(embed=em)
 
 
