@@ -785,7 +785,7 @@ class MCOC(ChampionFactory):
                                     txt = champ_synergies[lookup]['text'].format(effect[0])
                                 else:
                                     print(champ.full_name)
-                                    txt = champ_synergies[lookup]['text'].format(e for e in effect)
+                                    txt = champ_synergies[lookup]['text'].format(effect)
                                 synergy_package.append(txt)
         elif len(champs) == 1:
             for champ in champs:
@@ -803,7 +803,7 @@ class MCOC(ChampionFactory):
                             txt = champ_synergies[lookup]['text'].format(effect[0])
                         else:
                             print(champ.full_name)
-                            txt = champ_synergies[lookup]['text'].format(e for e in effect)
+                            txt = champ_synergies[lookup]['text'].format(effect)
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
