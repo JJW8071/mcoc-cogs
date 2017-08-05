@@ -768,6 +768,29 @@ class MCOC(ChampionFactory):
         body_url = GS_BASE.format(sheet,range_body)
         synlist = await self.gs_to_json(head_url=head_url,body_url=body_url, foldername=foldername, filename=filename)
 
+        effect_keys = synlist.keys
+
+        synergy_package = []
+
+        if len(champs) > 1:
+            for champ in champs:
+                for s in synlist:
+                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
+                    if lookup in champ_synergies:
+                        for c in champs:
+                            if c.full_name in  champ_synergies[lookup]:
+                                txt = champ_synergies[lookup]['text'])
+                                effect = split(champ_synergies[lookup]['effect'], ',')
+                                synergy_package.append(txt.format(split(effect,',')))
+        elif len(champs) == 1:
+            for s in synlist:
+                lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
+                if lookup in champ_synergies:
+                    selected = champ_synergies[lookup]
+                    synergy_package.append('{} : {}'.format(selected['triggers'], selected['text'], split(selected['effect'],','))
+
+        await self.bot.say('\n'.join(synergy_package))
+
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
             async with aiohttp.get(head_url) as response:
@@ -787,7 +810,6 @@ class MCOC(ChampionFactory):
         body_values = body_json['values']
 
         output_dict = {}
-
         if head_url is not None:
             if groupby_value is None:
                 groupby_value = 0
@@ -805,7 +827,9 @@ class MCOC(ChampionFactory):
                     os.makedirs(self.data_dir.format(foldername))
                 dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
             dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
-            await self.bot.upload(self.shell_json.format(foldername,filename))
+
+            ## Uncomment to debug
+            # await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
         return output_dict
