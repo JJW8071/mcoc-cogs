@@ -753,8 +753,8 @@ class MCOC(ChampionFactory):
         '''Coming Soon
         Champion Synergies'''
         sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
-        range_header = 'Synergies!A1:L1'
-        body_header = 'Synergies!A2:L'
+        range_headers = 'Synergies!A1:L1'
+        range_body = 'Synergies!A2:L'
 
         head_url = GS_BASE.format(sheet,range_headers)
         async with aiohttp.get(head_url) as response:
