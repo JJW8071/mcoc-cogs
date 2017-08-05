@@ -797,7 +797,7 @@ class MCOC(ChampionFactory):
                             try:
                                 txt = champ_synergies[lookup]['text'].format(e)
                             except:
-                                print(syn[look]['text'], effect)
+                                print(champ_synergies[lookup]['text'], effect)
                                 raise
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
