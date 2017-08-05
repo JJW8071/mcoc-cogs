@@ -176,7 +176,7 @@ class PagesMenu:
             try:
                 await self.bot.remove_reaction(message, emoji, react.user)
                 await self.display_page(message=message, page=next_page)
-            except:
+            except discord.Forbidden:
                 await self.bot.delete_message(message)
                 await self.display_page(message=None, page=next_page)
         elif emoji == '\N{CROSS MARK}':
