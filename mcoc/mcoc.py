@@ -773,7 +773,7 @@ class MCOC(ChampionFactory):
         synergy_package = []
 
         print('len champs: '+len(champs))
-        if len(champs) > :
+        if len(champs) > 1:
             for champ in champs:
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
