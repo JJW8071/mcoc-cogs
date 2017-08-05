@@ -784,7 +784,7 @@ class MCOC(ChampionFactory):
 
         foldername = 'synergies'
         filename = 'synergies'
-        if not os.path.exists(self.shell)json.format(foldername, filename):
+        if not os.path.exists(self.shell_json.format(foldername, filename):
             if not os.path.exists(self.data_dir.format(foldername)):
                 os.makedirs(self.data_dir.format(foldername))
             dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
