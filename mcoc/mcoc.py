@@ -580,7 +580,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
 
-    @commands.group(pass_context=True)
+    @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
         if ctx.invoked_subcommand is None:
             try:
@@ -769,7 +769,7 @@ class MCOC(ChampionFactory):
         synlist = await self.gs_to_json(head_url=head_url,body_url=body_url, foldername=foldername, filename=filename)
 
         effect_keys = synlist.keys
-
+        # effects = defaultdict{}
         synergy_package = []
 
         print('len champs: '+str(len(champs)))
@@ -784,6 +784,7 @@ class MCOC(ChampionFactory):
                                 if len(effect)==1:
                                     txt = champ_synergies[lookup]['text'].format(effect[0])
                                 else:
+                                    print(champ.full_name)
                                     txt = champ_synergies[lookup]['text'].format(e for e in effect)
                                 synergy_package.append(txt)
         elif len(champs) == 1:
@@ -800,6 +801,7 @@ class MCOC(ChampionFactory):
                         if len(effect)==1:
                             txt = champ_synergies[lookup]['text'].format(effect[0])
                         else:
+                            print(champ.full_name)
                             txt = champ_synergies[lookup]['text'].format(e for e in effect)
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
