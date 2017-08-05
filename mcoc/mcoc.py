@@ -758,7 +758,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
 
-    async def get_synergies(self, *, champs : ChampConverterMulti):
+    async def get_synergies(self, *, champs):
         sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
