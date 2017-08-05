@@ -761,8 +761,8 @@ class MCOC(ChampionFactory):
         body_url = GS_BASE.format(sheet,range_body)
         champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
 
-        range_headers = 'SynergyEffects!A1:GG'
-        range_body = 'SynergyEffects!B2:G'
+        range_headers = 'SynergyEffects!A1:G'
+        range_body = 'SynergyEffects!A2:G'
         filename = 'effects'
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
