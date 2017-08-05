@@ -794,7 +794,11 @@ class MCOC(ChampionFactory):
                         effect = selected['effect'].split(',')
                         print(effect)
                         for e in effect:
-                            txt = champ_synergies[lookup]['text'].format(e)
+                            try:
+                                txt = champ_synergies[lookup]['text'].format(e)
+                            except:
+                                print(syn[look]['text'], effect)
+                                raise
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
