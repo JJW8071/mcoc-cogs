@@ -756,7 +756,7 @@ class MCOC(ChampionFactory):
         range_header = 'Synergies!A1:L1'
         body_header = 'Synergies!A2:L'
 
-        head_url = gs_base.format(sheet,range_headers)
+        head_url = GS_BASE.format(sheet,range_headers)
         async with aiohttp.get(head_url) as response:
             try:
                 header_json = await response.json()
@@ -765,7 +765,7 @@ class MCOC(ChampionFactory):
                 return
         header_values = header_json['values']
 
-        body_url = gs_base.format(sheet,range_body)
+        body_url = GS_BASE.format(sheet,range_body)
         async with aiohttp.get(body_url) as response:
             try:
                 body_json = await response.json()
