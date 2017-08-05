@@ -779,8 +779,8 @@ class MCOC(ChampionFactory):
         grouped_by = header_values[0][groupby_value]
         for row in body_values:
             dict_zip = dict(zip(header_values[0],row))
-            # groupby = row[groupby_value]
-            # output_dict.update({groupby:dict_zip})
+            groupby = row[groupby_value]
+            output_dict.update({groupby:dict_zip})
             output_dict = dict_zip
 
         foldername = 'synergies'
