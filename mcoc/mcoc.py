@@ -783,17 +783,18 @@ class MCOC(ChampionFactory):
                                 effect = split(champ_synergies[lookup]['effect'], ',')
                                 synergy_package.append(txt.format(split(effect,',')))
         elif len(champs) == 1:
-            for s in synlist:
-                lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                if lookup in champ_synergies:
-                    selected = champ_synergies[lookup]
-                    triggers = selected['triggers']
-                    try:
-                        effects = split(selected['effect'],',')
-                    except:
-                        effects = selected['effect']
-                    text = selected['text'].format(effects)
-                    synergy_package.append('{} : {}'.format(triggers, text))
+            for champ in champs:
+                for s in synlist:
+                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
+                    if lookup in champ_synergies:
+                        selected = champ_synergies[lookup]
+                        triggers = selected['triggers']
+                        try:
+                            effects = split(selected['effect'],',')
+                        except:
+                            effects = selected['effect']
+                        text = selected['text'].format(effects)
+                        synergy_package.append('{} : {}'.format(triggers, text))
         desc = '\n'.join(synergy_package)
         await self.bot.say('test: '+desc)
 
