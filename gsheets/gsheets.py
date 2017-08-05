@@ -193,10 +193,10 @@ class GSheets:
         em = embed_list[page]
         if not message:
             message = await self.bot.say(em)
-            try:
-                await self.bot.delete_message(ctx.message)
-            except:
-                pass
+            # try:
+            #     await self.bot.delete_message(ctx.message)
+            # except:
+            #     pass
             if length > 5:
                 await self.bot.add_reaction(message, '⏪')
             if length > 1:
