@@ -788,8 +788,8 @@ class MCOC(ChampionFactory):
                 if lookup in champ_synergies:
                     selected = champ_synergies[lookup]
                     synergy_package.append('{} : {}'.format(selected['triggers'], selected['text'], split(selected['effect'],','))
-
-        await self.bot.say('\n'.join(synergy_package))
+        desc = '\n'.join(synergy_package)
+        await self.bot.say('test: '+desc)
 
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
