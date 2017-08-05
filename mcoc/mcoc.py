@@ -788,7 +788,8 @@ class MCOC(ChampionFactory):
                         for c in champs:
                             if c.full_name in  champ_synergies[lookup]['triggers']:
                                 effect = champ_synergies[lookup]['effect'].split(', ')
-                                effectsused.append(current = {s : effect})
+                                current = {s : effect}
+                                effectsused.append(current)
                                 txt = champ_synergies[lookup]['text'].format(*effect)
                                 synergy_package.append(txt)
             effectsused = defaultdict(effectsued)
