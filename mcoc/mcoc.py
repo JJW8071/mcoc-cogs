@@ -41,6 +41,7 @@ data_files = {
     }
 
 SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -477,7 +478,8 @@ class MCOC(ChampionFactory):
                 'table_width': 9,
                 'sig_inc_zero': False,
                 }
-
+        self.data_dir='data/gsheeter/{}/'
+        self.shell_json=self.data_dir + '{}.json'
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
@@ -750,36 +752,45 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-        async with aiohttp.ClientSession() as session:
-            async with session.get(self.SYNERGIES) as response:
-                synsheet = await response.json()
-                syndata = load_json(synsheet)
-        '''
-        "champion" : full_name
-        "stars" : star
-        "unique" : star-full_nam
-        "synergycode" : synergycode
-        "synergyname" : synergyname
-        "rank" : rank
-        "scope" : All, class, or specific champions
-        "text" : text{}
-        "effect" : comma separated. split
-        "isunique" : effects not summed
-        "triggers" : champion.full_name
-        '''
-        # length = len(syndata[values])-1
-        # synstring = []
-        # if len(champs) > 5:
-        #     await self.bot.say('Too many champions')
-        # elif len(champs) < 2:
-        #     await self.bot.say('TBD List synergy partners for champ')
-        # else:
-        #     await self.bot.say('List synergies for selected champions')
-        # for champ in champs:
-        #     key = '{}-{}'.format(champ.star, champ.mattkraftid)
-        #     if key in syndata['unique']:
-        #         for champ in champs:
-        #             if champ.full_name in
+        sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
+        range_header = 'Synergies!A1:L1'
+        body_header = 'Synergies!A2:L'
+
+        head_url = gs_base.format(sheet,range_headers)
+        async with aiohttp.get(head_url) as response:
+            try:
+                header_json = await response.json()
+            except:
+                print('No header data found.')
+                return
+        header_values = header_json['values']
+
+        body_url = gs_base.format(sheet,range_body)
+        async with aiohttp.get(body_url) as response:
+            try:
+                body_json = await response.json()
+            except:
+                print('No data found.')
+                return
+        body_values = body_json['values']
+
+        output_dict = {}
+        groupby_value = 0
+        grouped_by = header_values[0][groupby_value]
+        for row in body_values:
+            dict_zip = dict(zip(header_values[0],row))
+            groupby = row[groupby_value]
+            output_dict.update({groupby:dict_zip})
+
+        foldername = 'synergies'
+        filename = 'synergies'
+        if not os.path.exists(self.shell)json.format(foldername, filename):
+            if not os.path.exists(self.data_dir.format(foldername)):
+                os.makedirs(self.data_dir.format(foldername))
+            dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
+        dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
+
+        await self.bot.upload(self.shell_json.format(foldername,filename))+'.json'
 
 
 
