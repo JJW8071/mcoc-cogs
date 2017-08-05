@@ -791,7 +791,7 @@ class MCOC(ChampionFactory):
             dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
         dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
-        await self.bot.upload(self.shell_json.format(foldername,filename)+'.json')
+        await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
 
