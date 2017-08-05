@@ -799,11 +799,14 @@ class MCOC(ChampionFactory):
                         print(effect)
                         # except:
                         #     effects = selected['effect']
-                        if len(effect)==1:
-                            txt = champ_synergies[lookup]['text'].format(effect[0])
-                        else:
-                            print(champ.full_name)
-                            txt = champ_synergies[lookup]['text'].format(effect)
+                        if isinstance(effect,list):
+                            for i in range(0,len(effect)-1)
+                                txt = champ_synergies[lookup]['text'].format(effect[i])
+                        # if len(effect)==1:
+                        #     txt = champ_synergies[lookup]['text'].format(effect[0])
+                        # else:
+                        #     print(champ.full_name)
+                        #     txt = champ_synergies[lookup]['text'].format(effect)
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
