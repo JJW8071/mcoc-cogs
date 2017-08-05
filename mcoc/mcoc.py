@@ -781,11 +781,8 @@ class MCOC(ChampionFactory):
                         for c in champs:
                             if c.full_name in  champ_synergies[lookup]['triggers']:
                                 effect = champ_synergies[lookup]['effect'].split(',')
-                                if len(effect)==1:
-                                    txt = champ_synergies[lookup]['text'].format(effect[0])
-                                else:
-                                    print(champ.full_name)
-                                    txt = champ_synergies[lookup]['text'].format(effect)
+                                for i in range(0,len(effect)-1):
+                                    txt = champ_synergies[lookup]['text'].format(effect[i])
                                 synergy_package.append(txt)
         elif len(champs) == 1:
             for champ in champs:
@@ -794,19 +791,10 @@ class MCOC(ChampionFactory):
                     if lookup in champ_synergies:
                         selected = champ_synergies[lookup]
                         triggers = selected['triggers']
-                        # try:
                         effect = selected['effect'].split(',')
                         print(effect)
-                        # except:
-                        #     effects = selected['effect']
-                        if isinstance(effect,list):
-                            for i in range(0,len(effect)-1)
-                                txt = champ_synergies[lookup]['text'].format(effect[i])
-                        # if len(effect)==1:
-                        #     txt = champ_synergies[lookup]['text'].format(effect[0])
-                        # else:
-                        #     print(champ.full_name)
-                        #     txt = champ_synergies[lookup]['text'].format(effect)
+                        for i in range(0,len(effect)-1):
+                            txt = champ_synergies[lookup]['text'].format(effect[i])
                         synergy_package.append('{} : {}'.format(triggers, txt))
 
         desc = '\n'.join(synergy_package)
