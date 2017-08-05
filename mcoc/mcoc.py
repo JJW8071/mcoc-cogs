@@ -755,17 +755,23 @@ class MCOC(ChampionFactory):
         sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
-
+        foldername = 'synergies'
+        filename = 'synergies'
         head_url = GS_BASE.format(sheet,range_headers)
-        async with aiohttp.get(head_url) as response:
-            try:
-                header_json = await response.json()
-            except:
-                print('No header data found.')
-                return
-        header_values = header_json['values']
-
         body_url = GS_BASE.format(sheet,range_body)
+        champ_synergies = self.gs_to_json(head_url, body_url, foldername, filename)
+        synlist = self.gs_to_json(body_url=body_url, foldername=foldername, filename=filename)
+
+    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
+        if head_url is not None:
+            async with aiohttp.get(head_url) as response:
+                try:
+                    header_json = await response.json()
+                except:
+                    print('No header data found.')
+                    return
+            header_values = header_json['values']
+
         async with aiohttp.get(body_url) as response:
             try:
                 body_json = await response.json()
@@ -775,24 +781,28 @@ class MCOC(ChampionFactory):
         body_values = body_json['values']
 
         output_dict = {}
-        groupby_value = 0
-        grouped_by = header_values[0][groupby_value]
-        for row in body_values:
-            dict_zip = dict(zip(header_values[0],row))
-            groupby = row[groupby_value]
-            output_dict.update({groupby:dict_zip})
-            # output_dict = dict_zip
 
-        foldername = 'synergies'
-        filename = 'synergies'
-        if not os.path.exists(self.shell_json.format(foldername, filename)):
-            if not os.path.exists(self.data_dir.format(foldername)):
-                os.makedirs(self.data_dir.format(foldername))
-            dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
-        dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
+        if head_url is not None:
+            if groupby_value=None:
+                groupby_value = 0
+            grouped_by = header_values[0][groupby_value]
+            for row in body_values:
+                dict_zip = dict(zip(header_values[0],row))
+                groupby = row[groupby_value]
+                output_dict.update({groupby:dict_zip})
+        else:
+            output_dict =body_values
 
-        await self.bot.upload(self.shell_json.format(foldername,filename))
+        if foldername is not None and filename is not None:
+            if not os.path.exists(self.shell_json.format(foldername, filename)):
+                if not os.path.exists(self.data_dir.format(foldername)):
+                    os.makedirs(self.data_dir.format(foldername))
+                dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
+            dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
+            await self.bot.upload(self.shell_json.format(foldername,filename))
 
+
+        return output_dict
 
 
 
