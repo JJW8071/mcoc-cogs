@@ -778,7 +778,7 @@ class MCOC(ChampionFactory):
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
                     if lookup in champ_synergies:
                         for c in champs:
-                            if c.full_name in  champ_synergies[lookup]:
+                            if c.full_name in  champ_synergies[lookup]['triggers']:
                                 txt = champ_synergies[lookup]['text']
                                 effect = split(champ_synergies[lookup]['effect'], ',')
                                 synergy_package.append(txt.format(split(effect,',')))
