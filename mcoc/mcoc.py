@@ -794,7 +794,7 @@ class MCOC(ChampionFactory):
             print(effectsused)
             combined = {}
             for k, v in effectsused.items():
-                combined[k] = [sum(row) for row in rotate(v)]
+                combined[k] = [sum(row) for row in iter_rows(v, True)]
             await self.bot.say(chat.box('\n'.join(combined)))
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
