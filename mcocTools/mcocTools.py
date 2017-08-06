@@ -110,17 +110,22 @@ class MCOCTools:
             "and help us improve!\n\n"
             "".format(red_repo, author_repo, server_url))
         devteam = ( "[DeltaSigma#8530](https://discordapp.com/channels/@me/148622879817334784)"
-                    "\n[JJW#8071](https://discordapp.com/channels/@me/124984294035816448)"
-                    "\n[ranemartin8#1636](https://discordapp.com/channels/@me/245589956012146688)")
+                    "[JJW#8071](https://discordapp.com/channels/@me/124984294035816448)"
+                    "[ranemartin8#1636](https://discordapp.com/channels/@me/245589956012146688)")
         artteam = ('[ViceOne#3005](https://discordapp.com/channels/@me/276111652943036416)')
+        supportteam=('[phil_wo#3733](https://discordapp.com/channels/@me/202502240072761356)'
+                    '[SpiderSebas](https://discordapp.com/channels/@me/159707467834589184)'
+                    '[The Living Tribunal](https://discordapp.com/channels/@me/268418759868284928'
+                    )
         bughunters = ('[SpiderSebas]')
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
         embed.add_field(name="About Collector", value=about, inline=False)
-        embed.add_field(name="The Collector Dev Team",value=devteam,inline=True)
-        embed.add_field(name="The Collector Art Team",value=artteam,inline=True)
+        embed.add_field(name="CollectorDevTeam",value=devteam,inline=True)
+        embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
+        embed.add_field(name="CollectorArtTeam",value=artteam,inline=True)
         embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
                          "{} days ago!)".format(days_since))
 
