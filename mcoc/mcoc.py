@@ -757,7 +757,7 @@ class MCOC(ChampionFactory):
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
         desc = await self.get_synergies(champs)
-        awiat self.bot.say(chat.box(desc))
+        await self.bot.say(chat.box(desc))
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
@@ -806,10 +806,6 @@ class MCOC(ChampionFactory):
             if embed is None:
                 embed=desc
             return embed
-            # await self.bot.say(chat.box('\n'.join(combined)))
-            # print(combined)
-                # embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
-                # return embed
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
                 for s in synlist:
