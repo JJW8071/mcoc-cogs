@@ -795,7 +795,7 @@ class MCOC(ChampionFactory):
             combined = {}
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
-                txt = synlist[k]['text'].format(combined[*k])
+                txt = synlist[k]['text'].format(*combined[k])
                 if embed is not None:
                     embed.add_field(name=synlist[k]['synergyname'],value=txt)
             return embed
