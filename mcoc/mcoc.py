@@ -41,6 +41,7 @@ data_files = {
     }
 
 SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -242,7 +243,7 @@ class ChampConverterMult(ChampConverter):
                 default.update(attrs)
                 dangling_arg = arg
         if dangling_arg:
-            em = discord.Embed(title='Dangling Argument', 
+            em = discord.Embed(title='Dangling Argument',
                     description="Last argument '{}' is unused.\n".format(dangling_arg)
                         + "Place **before** the champion or **without a space**.")
             await bot.say(embed=em)
@@ -487,7 +488,8 @@ class MCOC(ChampionFactory):
                 'table_width': 9,
                 'sig_inc_zero': False,
                 }
-
+        self.data_dir='data/gsheeter/{}/'
+        self.shell_json=self.data_dir + '{}.json'
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
@@ -588,7 +590,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
 
-    @commands.group(pass_context=True)
+    @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
@@ -691,6 +693,7 @@ class MCOC(ChampionFactory):
         # elif state == 'f':
         #     em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
+        em = await self.get_synergies([champ], em)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
@@ -752,40 +755,126 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='synergies', aliases=['syn',], hidden=True)
-    async def champ_synergies(self, champs : ChampConverterMult):
+    async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-        async with aiohttp.ClientSession() as session:
-            async with session.get(self.SYNERGIES) as response:
-                synsheet = await response.json()
-                syndata = load_json(synsheet)
-        '''
-        "champion" : full_name
-        "stars" : star
-        "unique" : star-full_nam
-        "synergycode" : synergycode
-        "synergyname" : synergyname
-        "rank" : rank
-        "scope" : All, class, or specific champions
-        "text" : text{}
-        "effect" : comma separated. split
-        "isunique" : effects not summed
-        "triggers" : champion.full_name
-        '''
-        # length = len(syndata[values])-1
-        # synstring = []
-        # if len(champs) > 5:
-        #     await self.bot.say('Too many champions')
-        # elif len(champs) < 2:
-        #     await self.bot.say('TBD List synergy partners for champ')
-        # else:
-        #     await self.bot.say('List synergies for selected champions')
-        # for champ in champs:
-        #     key = '{}-{}'.format(champ.star, champ.mattkraftid)
-        #     if key in syndata['unique']:
-        #         for champ in champs:
-        #             if champ.full_name in
 
+        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+        em = await self.get_synergies(champs, embed=em)
+        await self.bot.say(embed=em)
+
+    async def get_synergies(self, champs : ChampConverterMult, embed=None):
+        sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
+        range_headers = 'Synergies!A1:L1'
+        range_body = 'Synergies!A2:L'
+        foldername = 'synergies'
+        filename = 'synergies'
+        head_url = GS_BASE.format(sheet,range_headers)
+        body_url = GS_BASE.format(sheet,range_body)
+        champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+
+        range_headers = 'SynergyEffects!A1:G'
+        range_body = 'SynergyEffects!A2:G'
+        filename = 'effects'
+        head_url = GS_BASE.format(sheet,range_headers)
+        body_url = GS_BASE.format(sheet,range_body)
+        synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+
+        # effect_keys = synlist.keys
+        # effects = defaultdict(effect_keys)
+        synergy_package = []
+
+        print('len champs: '+str(len(champs)))
+        if len(champs) > 1: ## If more than one champ, display synergies triggered
+            effectsused = defaultdict(list)
+            for champ in champs:
+                for s in synlist:
+                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
+                    if lookup in champ_synergies:
+                        for c in champs:
+                            if c.full_name in  champ_synergies[lookup]['triggers']:
+                                effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                effectsused[s].append(effect)
+                                txt = champ_synergies[lookup]['text'].format(*effect)
+                                # synergy_package.append(txt)
+            print(effectsused)
+            combined = {}
+            desc= []
+            for k, v in effectsused.items():
+                combined[k] = [sum(row) for row in iter_rows(v, True)]
+                txt = synlist[k]['text'].format(*combined[k])
+                if embed is not None:
+                    embed.add_field(name=synlist[k]['synergyname'],value=txt,inline=False)
+                else:
+                    desc.append('{}\n{}\n'.format(synlist[k]['synergyname'],txt))
+            if embed is None:
+                embed='\n'.join(desc)
+            return embed
+        elif len(champs) == 1: ## If only 1 champ, display synergies available.
+            for champ in champs:
+                for s in synlist:
+                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
+                    if lookup in champ_synergies:
+                        selected = champ_synergies[lookup]
+                        triggers = selected['triggers']
+                        effect = selected['effect'].split(', ')
+                        print(effect)
+                        try:
+                            txt = champ_synergies[lookup]['text'].format(*effect)
+                        except:
+                            print(champ_synergies[lookup]['text'], effect)
+                            raise
+                        if embed is not None:
+                            embed.add_field(name=triggers, value='{}\n{}'.format(synlist[s]['synergyname'],txt), inline=False)
+                        synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
+            if embed is not None:
+                return embed
+            else:
+                desc = '\n'.join(synergy_package)
+                return desc
+
+    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
+        if head_url is not None:
+            async with aiohttp.get(head_url) as response:
+                try:
+                    header_json = await response.json()
+                except:
+                    print('No header data found.')
+                    return
+            header_values = header_json['values']
+
+        async with aiohttp.get(body_url) as response:
+            try:
+                body_json = await response.json()
+            except:
+                print('No data found.')
+                return
+        body_values = body_json['values']
+
+        output_dict = {}
+        if head_url is not None:
+            if groupby_value is None:
+                groupby_value = 0
+            grouped_by = header_values[0][groupby_value]
+            for row in body_values:
+                dict_zip = dict(zip(header_values[0],row))
+                groupby = row[groupby_value]
+                output_dict.update({groupby:dict_zip})
+        else:
+            output_dict =body_values
+
+        if foldername is not None and filename is not None:
+            if not os.path.exists(self.shell_json.format(foldername, filename)):
+                if not os.path.exists(self.data_dir.format(foldername)):
+                    os.makedirs(self.data_dir.format(foldername))
+                dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
+            dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
+
+            # # Uncomment to debug
+            # await self.bot.upload(self.shell_json.format(foldername,filename))
+
+
+        return output_dict
 
 
     @commands.command(hidden=True)
@@ -898,7 +987,21 @@ class MCOC(ChampionFactory):
     async def champ_prestige(self, *, champs : ChampConverterMult):
         '''Retrieve prestige data for champs'''
         pch = [c for c in champs if c.has_prestige]
-        em = discord.Embed(color=discord.Color.magenta(), title='Prestige',
+        numerator = 0
+        spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
+        if len(spch) > 3:
+            denom = min(4, len(pch)-1)
+            print(denom)
+            for i in range(0,denom):
+                chmp = spch[i]
+                print(chmp.full_name)
+                print(chmp.prestige)
+                numerator += int(chmp.prestige)
+            print(numerator)
+            emtitle='Prestige: {}'.format(numerator/denom+1)
+        else:
+            emtitle = 'Prestige'
+        em = discord.Embed(color=discord.Color.magenta(), title=emtitle,
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
         await self.bot.say(embed=em)

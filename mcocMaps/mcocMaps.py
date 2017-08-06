@@ -20,6 +20,7 @@ class MCOCMaps:
     @commands.command(pass_context=True, aliases=['warmap','aqmap','aq'])
     async def mmap(self, ctx, *, maptype: str):
         '''Select a Map
+        lol map: lol
         aq maps : 5, 5.1, 5.2, 5.3
             /aq 5
         war map syntax: /map <left><right>
@@ -32,7 +33,7 @@ class MCOCMaps:
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
-            elif maptype in self.aq_map:
+            elif maptype in self.lolmap:
                 mapurl = '{}{}.png'.format(self.basepath, self.lolmap[maptype]['map'])
                 maptitle = '{}'.format(self.aq_map[maptype]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
