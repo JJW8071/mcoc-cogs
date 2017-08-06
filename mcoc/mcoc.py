@@ -804,7 +804,7 @@ class MCOC(ChampionFactory):
                 else:
                     desc.append('{}\n{}'.format(synlist[k]['synergyname'],txt))
             if embed is None:
-                embed=desc
+                embed='\n'.join(desc)
             return embed
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
