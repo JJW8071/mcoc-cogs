@@ -688,6 +688,7 @@ class MCOC(ChampionFactory):
         # elif state == 'f':
         #     em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
+        em = await self.get_synergies(champ, em)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
@@ -802,7 +803,7 @@ class MCOC(ChampionFactory):
                 if embed is not None:
                     embed.add_field(name=synlist[k]['synergyname'],value=txt,inline=False)
                 else:
-                    desc.append('{}\n{}'.format(synlist[k]['synergyname'],txt))
+                    desc.append('{}\n{}\n'.format(synlist[k]['synergyname'],txt))
             if embed is None:
                 embed='\n'.join(desc)
             return embed
