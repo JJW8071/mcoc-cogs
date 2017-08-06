@@ -790,11 +790,14 @@ class MCOC(ChampionFactory):
                                 effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                 effectsused[s].append(effect)
                                 txt = champ_synergies[lookup]['text'].format(*effect)
-                                synergy_package.append(txt)
+                                # synergy_package.append(txt)
             print(effectsused)
             combined = {}
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
+                txt = synlist[k]['text'].format(combined[k])
+                em.add_field(name=synlist[k]['synergyname'],value=txt)
+
             await self.bot.say(chat.box('\n'.join(combined)))
             print(combined)
             if embed is not None:
