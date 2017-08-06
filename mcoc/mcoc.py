@@ -796,9 +796,9 @@ class MCOC(ChampionFactory):
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(combined[k])
-                em.add_field(name=synlist[k]['synergyname'],value=txt)
-
-            await self.bot.say(chat.box('\n'.join(combined)))
+                embed.add_field(name=synlist[k]['synergyname'],value=txt)
+                return embed
+            # await self.bot.say(chat.box('\n'.join(combined)))
             print(combined)
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
