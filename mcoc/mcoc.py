@@ -756,6 +756,8 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
+        desc = await self.get_synergies(champs)
+        awiat self.bot.say(chat.box(desc))
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
@@ -793,11 +795,16 @@ class MCOC(ChampionFactory):
                                 # synergy_package.append(txt)
             print(effectsused)
             combined = {}
+            desc= []
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
                 if embed is not None:
                     embed.add_field(name=synlist[k]['synergyname'],value=txt)
+                else:
+                    desc.append('{}\n{}'.format(synlist[k]['synergyname'],txt))
+            if embed is None:
+                embed=desc
             return embed
             # await self.bot.say(chat.box('\n'.join(combined)))
             # print(combined)
@@ -818,8 +825,8 @@ class MCOC(ChampionFactory):
                             print(champ_synergies[lookup]['text'], effect)
                             raise
                         if embed is not None:
-                            embed.add_field(name=triggers, value=txt, inline=False)
-                        synergy_package.append('{} : {}'.format(triggers, txt))
+                            embed.add_field(name=triggers, value='{}\{}'.format(synlist[s]['synergyname'],txt), inline=False)
+                        synergy_package.append('{}\n{}: {}'.format(triggers, synlist[s]['synergyname'], txt))
             if embed is not None:
                 return embed
             else:
