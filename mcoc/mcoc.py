@@ -822,7 +822,7 @@ class MCOC(ChampionFactory):
                             raise
                         if embed is not None:
                             embed.add_field(name=triggers, value='{}\{}'.format(synlist[s]['synergyname'],txt), inline=False)
-                        synergy_package.append('{}\n{}: {}'.format(triggers, synlist[s]['synergyname'], txt))
+                        synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
             if embed is not None:
                 return embed
             else:
