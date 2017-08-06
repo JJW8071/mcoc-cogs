@@ -109,13 +109,14 @@ class MCOCTools:
             "creates content for everyone to enjoy. [Join us today]({}) "
             "and help us improve!\n\n"
             "".format(red_repo, author_repo, server_url))
-        devteam = ( "[DeltaSigma#8530](https://discordapp.com/channels/@me/148622879817334784)"
-                    "[JJW#8071](https://discordapp.com/channels/@me/124984294035816448)"
-                    "[ranemartin8#1636](https://discordapp.com/channels/@me/245589956012146688)")
-        artteam = ('[ViceOne#3005](https://discordapp.com/channels/@me/276111652943036416)')
-        supportteam=('[phil_wo#3733](https://discordapp.com/channels/@me/202502240072761356)'
-                    '[SpiderSebas](https://discordapp.com/channels/@me/159707467834589184)'
-                    '[The Living Tribunal](https://discordapp.com/channels/@me/268418759868284928'
+        devteam = ( "DeltaSigma#8530"
+                    "JJW#8071"
+                    "ranemartin8#1636"
+                    )
+        artteam = ('ViceOne#3005')
+        supportteam=('phil_wo#3733'
+                    'SpiderSebas'
+                    'The Living Tribunal'
                     )
         bughunters = ('[SpiderSebas]')
         embed = discord.Embed(colour=discord.Colour.red())
