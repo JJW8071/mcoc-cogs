@@ -758,7 +758,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
-        sheet = '1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE'
+        sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
         foldername = 'synergies'
@@ -779,21 +779,20 @@ class MCOC(ChampionFactory):
         synergy_package = []
 
         print('len champs: '+str(len(champs)))
-        if len(champs) > 1: ## If more than one champ, display synergies triggered
-            effectsused = defaultdict()
-            for champ in champs:
-                for s in synlist:
+         if len(champs) > 1: ## If more than one champ, display synergies triggered
+                    effectsused = defaultdict(list)
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                    if lookup in champ_synergies:
-                        for c in champs:
-                            if c.full_name in  champ_synergies[lookup]['triggers']:
-                                effect = champ_synergies[lookup]['effect'].split(', ')
-                                effectsused[s]=[]
-                                effectsused[s].append(effect)
-                                txt = champ_synergies[lookup]['text'].format(*effect)
-                                synergy_package.append(txt)
-            print(effectsused)
-            await self.bot.say(chat.box(effectsused))
+                    for champ in champs:
+                        for s in synlist:
+                            if lookup in champ_synergies:
+                                for c in champs:
+                                    if c.full_name in  champ_synergies[lookup]['triggers']:
+                                        effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                        effectsused[s].append(effect)
+                                        txt = champ_synergies[lookup]['text'].format(*effect)
+                                        synergy_package.append(txt)
+                    print(effectsused)
+                    await self.bot.say(chat.box(effectsused))
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
                 return embed
