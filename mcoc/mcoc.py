@@ -688,7 +688,7 @@ class MCOC(ChampionFactory):
         # elif state == 'f':
         #     em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        em = await self.get_synergies(champ, em)
+        em = await self.get_synergies([champ], em)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
         else:
