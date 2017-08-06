@@ -109,16 +109,15 @@ class MCOCTools:
             "creates content for everyone to enjoy. [Join us today]({}) "
             "and help us improve!\n\n"
             "".format(red_repo, author_repo, server_url))
-        devteam = ( "DeltaSigma#8530"
-                    "JJW#8071"
-                    "ranemartin8#1636"
+        devteam = ( "DeltaSigma#8530\n"
+                    "JJW#8071\n"
+                    "ranemartin8#1636\n"
                     )
-        artteam = ('ViceOne#3005')
-        supportteam=('phil_wo#3733'
-                    'SpiderSebas'
-                    'The Living Tribunal'
+        artteam = ('ViceOne#3005\n')
+        supportteam=('phil_wo#3733\n'
+                    'SpiderSebas#9910\n'
+                    'The Living Tribunal#2984\n'
                     )
-        bughunters = ('[SpiderSebas]')
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)

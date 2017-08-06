@@ -243,7 +243,7 @@ class ChampConverterMult(ChampConverter):
                 default.update(attrs)
                 dangling_arg = arg
         if dangling_arg:
-            em = discord.Embed(title='Dangling Argument', 
+            em = discord.Embed(title='Dangling Argument',
                     description="Last argument '{}' is unused.\n".format(dangling_arg)
                         + "Place **before** the champion or **without a space**.")
             await bot.say(embed=em)
@@ -762,8 +762,6 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
-        desc = await self.get_synergies(champs)
-        await self.bot.say(chat.box(desc))
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
