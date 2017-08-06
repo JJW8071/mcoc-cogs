@@ -779,20 +779,20 @@ class MCOC(ChampionFactory):
         synergy_package = []
 
         print('len champs: '+str(len(champs)))
-         if len(champs) > 1: ## If more than one champ, display synergies triggered
-                    effectsused = defaultdict(list)
-                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                    for champ in champs:
-                        for s in synlist:
-                            if lookup in champ_synergies:
-                                for c in champs:
-                                    if c.full_name in  champ_synergies[lookup]['triggers']:
-                                        effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                        effectsused[s].append(effect)
-                                        txt = champ_synergies[lookup]['text'].format(*effect)
-                                        synergy_package.append(txt)
-                    print(effectsused)
-                    await self.bot.say(chat.box(effectsused))
+        if len(champs) > 1: ## If more than one champ, display synergies triggered
+            effectsused = defaultdict(list)
+            lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
+            for champ in champs:
+                for s in synlist:
+                    if lookup in champ_synergies:
+                        for c in champs:
+                            if c.full_name in  champ_synergies[lookup]['triggers']:
+                                effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                effectsused[s].append(effect)
+                                txt = champ_synergies[lookup]['text'].format(*effect)
+                                synergy_package.append(txt)
+            print(effectsused)
+            await self.bot.say(chat.box(effectsused))
             if embed is not None:
                 embed.add_field(name='Synergies Activated',value='\n'.join(synergy_package), inline=False)
                 return embed
