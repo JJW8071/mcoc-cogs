@@ -135,7 +135,7 @@ class ChampConverter(commands.Converter):
         4* yj r4 s30  ->  4 star Yellowjacket rank 4/40 sig 30
         r35*im        ->  5 star Ironman rank 3/45 sig 99
         '''
-
+#(?:(?:s(?P<sig>[0-9]{1,3})) |(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)|(?:d(?P<debug>[0-9]{1,2})))(?=\b|[a-zA-Z]|(?:[1-5]\\?\*))
     _bare_arg = None
     parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
                              |(?:r(?P<rank>[1-5]))
@@ -1093,7 +1093,7 @@ class Champion:
 
     base_tags = {'#cr{}'.format(i) for i in range(10, 130, 10)}
     base_tags.update({'#{}star'.format(i) for i in range(1, 6)})
-    base_tags.update({'#awake', '#sig0'})
+    base_tags.update({'#awake', }, {'#sig{}'.format(i) for i in range(1, 201)})
     dupe_levels = {2: 1, 3: 8, 4: 20, 5: 20}
     default_stars = {i: {'rank': i+1, 'sig': 99} for i in range(1,5)}
     default_stars[5] = {'rank': 3, 'sig': 200}
@@ -1146,10 +1146,9 @@ class Champion:
                 self._sig = 99
         self.tags.add('#cr{}'.format(self.chlgr_rating))
         self.tags.add('#{}star'.format(self.star))
-        if self.sig == 0:
-            self.tags.add('#sig0')
-        else:
+        if self.sig != 0:
             self.tags.add('#awake')
+        self.tags.add('#sig{}'.format(self.sig))
 
     def update_default(self, attrs):
         self._default.update(attrs)
@@ -1493,10 +1492,10 @@ class Champion:
             'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
             'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO'],
             'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
-            'DOC_OCK':['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
-                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
-                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C',
-                    'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',],
+            'DOC_OCK': ['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
+            			'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
+            			'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',
+            			'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C']
         }
 
         if self.mcocsig == 'CYCLOPS_90S':
@@ -1507,6 +1506,8 @@ class Champion:
             desclist = ('_DESC_NEW','_DESC_NEW_B')
             if preamble + '_DESC_NEW2' in sigs:
                 desclist = ('_DESC_NEW2','_DESC_NEW2_B')
+            elif preamble + '_DESC_NEW_FIXED' in sigs:
+                desclist = ('_DESC_NEW_FIXED','_DESC_NEW_B_FIXED')
             for k in desclist:
                 if preamble + k in sigs:
                     if preamble + k + '_AO' in sigs:
@@ -1516,7 +1517,7 @@ class Champion:
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
         else:
-            for k in ('_DESC','_DESC_A','_DESC_B'):
+            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
