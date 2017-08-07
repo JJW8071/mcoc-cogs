@@ -789,7 +789,7 @@ class MCOC(ChampionFactory):
             for champ in champs:
                 for s in synlist:
                     for i in range(1, 4):
-                        lookup_base = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                        lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
                             for c in champs:
                                 if c.full_name in  champ_synergies[lookup]['triggers']:
@@ -814,7 +814,7 @@ class MCOC(ChampionFactory):
             for champ in champs:
                 for s in synlist:
                     for i in range(1, 4):
-                        lookup_base = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                        lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
                             selected = champ_synergies[lookup]
                             triggers = selected['triggers']
