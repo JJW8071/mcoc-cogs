@@ -757,8 +757,9 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-
         em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+        if len(champs)=1:
+            em.set_author(name=champ.star_name_str, icon_url=get_avatar)
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
@@ -783,7 +784,7 @@ class MCOC(ChampionFactory):
         # effects = defaultdict(effect_keys)
         synergy_package = []
 
-        print('len champs: '+str(len(champs)))
+        # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
             for champ in champs:
