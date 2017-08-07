@@ -759,7 +759,7 @@ class MCOC(ChampionFactory):
         Champion Synergies'''
         em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         if len(champs)==1:
-            em.set_author(name=champs[0].star_name_str, icon_url=champs[0].get_avatar)
+            em.set_author(name=champs.star_name_str, icon_url=champs.get_avatar)
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
