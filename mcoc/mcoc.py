@@ -788,14 +788,14 @@ class MCOC(ChampionFactory):
             effectsused = defaultdict(list)
             for champ in champs:
                 for s in synlist:
-                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                    if lookup in champ_synergies:
-                        for lookup in champ_synergies:
-                            for c in champs:
-                                if c.full_name in  champ_synergies[lookup]['triggers']:
-                                    effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                    effectsused[s].append(effect)
-                                    txt = champ_synergies[lookup]['text'].format(*effect)
+                    for i in range(1, 4):
+                        lookup_base = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                            if lookup in champ_synergies:
+                                for c in champs:
+                                    if c.full_name in  champ_synergies[lookup]['triggers']:
+                                        effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                        effectsused[s].append(effect)
+                                        txt = champ_synergies[lookup]['text'].format(*effect)
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
@@ -813,20 +813,21 @@ class MCOC(ChampionFactory):
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
                 for s in synlist:
-                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                    if lookup in champ_synergies:
-                        selected = champ_synergies[lookup]
-                        triggers = selected['triggers']
-                        effect = selected['effect'].split(', ')
-                        # print(effect)
-                        try:
-                            txt = champ_synergies[lookup]['text'].format(*effect)
-                        except:
-                            print(champ_synergies[lookup]['text'], effect)
-                            raise
-                        if embed is not None:
-                            embed.add_field(name=triggers, value='{}\n{}'.format(synlist[s]['synergyname'],txt), inline=False)
-                        synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
+                    for i in range(1, 4):
+                        lookup_base = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                        if lookup in champ_synergies:
+                            selected = champ_synergies[lookup]
+                            triggers = selected['triggers']
+                            effect = selected['effect'].split(', ')
+                            # print(effect)
+                            try:
+                                txt = champ_synergies[lookup]['text'].format(*effect)
+                            except:
+                                print(champ_synergies[lookup]['text'], effect)
+                                raise
+                            if embed is not None:
+                                embed.add_field(name=triggers, value='{}\n{}'.format(synlist[s]['synergyname'],txt), inline=False)
+                            synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
             if embed is not None:
                 return embed
             else:
