@@ -40,7 +40,6 @@ data_files = {
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
 
-SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
 local_files = {
@@ -791,13 +790,14 @@ class MCOC(ChampionFactory):
                 for s in synlist:
                     lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
                     if lookup in champ_synergies:
-                        for c in champs:
-                            if c.full_name in  champ_synergies[lookup]['triggers']:
-                                effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                effectsused[s].append(effect)
-                                txt = champ_synergies[lookup]['text'].format(*effect)
+                        for lookup in champ_synergies:
+                            for c in champs:
+                                if c.full_name in  champ_synergies[lookup]['triggers']:
+                                    effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                    effectsused[s].append(effect)
+                                    txt = champ_synergies[lookup]['text'].format(*effect)
                                 # synergy_package.append(txt)
-            print(effectsused)
+            # print(effectsused)
             combined = {}
             desc= []
             for k, v in effectsused.items():
@@ -818,7 +818,7 @@ class MCOC(ChampionFactory):
                         selected = champ_synergies[lookup]
                         triggers = selected['triggers']
                         effect = selected['effect'].split(', ')
-                        print(effect)
+                        # print(effect)
                         try:
                             txt = champ_synergies[lookup]['text'].format(*effect)
                         except:
