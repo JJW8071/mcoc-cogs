@@ -790,12 +790,12 @@ class MCOC(ChampionFactory):
                 for s in synlist:
                     for i in range(1, 4):
                         lookup_base = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
-                            if lookup in champ_synergies:
-                                for c in champs:
-                                    if c.full_name in  champ_synergies[lookup]['triggers']:
-                                        effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                        effectsused[s].append(effect)
-                                        txt = champ_synergies[lookup]['text'].format(*effect)
+                        if lookup in champ_synergies:
+                            for c in champs:
+                                if c.full_name in  champ_synergies[lookup]['triggers']:
+                                    effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                    effectsused[s].append(effect)
+                                    txt = champ_synergies[lookup]['text'].format(*effect)
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
