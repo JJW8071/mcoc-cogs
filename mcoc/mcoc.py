@@ -772,26 +772,31 @@ class MCOC(ChampionFactory):
         range_body2 = 'Synergies!A751:L1250'
         foldername = 'synergies'
         filename = 'synergies'
-        head_url = GS_BASE.format(sheet,range_headers)
-        body_url = GS_BASE.format(sheet,range_body)
-        body_url2 = GS_BASE.format(sheet,range_body2)
-        champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-        champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
-        champ_synergies.update(champ_synergies2)
+        if champs[0].debug:
+            head_url = GS_BASE.format(sheet,range_headers)
+            body_url = GS_BASE.format(sheet,range_body)
+            body_url2 = GS_BASE.format(sheet,range_body2)
+            champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+            champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
+            champ_synergies.update(champ_synergies2)
+            await self.bot.upload(self.shell_json.format(foldername,filename))
+        else:
+            champ_synergies = load_json(self.shell_json.format(foldername, filename))
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/'Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
-        if champs[0].debug:
-            await self.bot.upload(self.shell_json.format(foldername,filename))
+
 
         range_headers = 'SynergyEffects!A1:G'
         range_body = 'SynergyEffects!A2:G'
         filename = 'effects'
-        head_url = GS_BASE.format(sheet,range_headers)
-        body_url = GS_BASE.format(sheet,range_body)
-        body_url2 = GS_BASE.format(sheet,range_body2)
-        synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
         if champs[0].debug:
+            head_url = GS_BASE.format(sheet,range_headers)
+            body_url = GS_BASE.format(sheet,range_body)
+            body_url2 = GS_BASE.format(sheet,range_body2)
+            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.upload(self.shell_json.format(foldername,filename))
+        else:
+            synlist = load_json(self.shell_json.format(foldername, filename))
 
         # effect_keys = synlist.keys
         # effects = defaultdict(effect_keys)
