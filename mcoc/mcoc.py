@@ -787,7 +787,9 @@ class MCOC(ChampionFactory):
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
         body_url2 = GS_BASE.format(sheet,range_body2)
-        synlist = await self.gs_to_json(head_url, body_url, foldername, filename, body_url2)
+        synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+        synlist2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
+        synlist.update(synlist2)
 
         # effect_keys = synlist.keys
         # effects = defaultdict(effect_keys)
@@ -844,7 +846,7 @@ class MCOC(ChampionFactory):
                 desc = '\n'.join(synergy_package)
                 return desc
 
-    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None, body_url2=None):
+    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
             async with aiohttp.get(head_url) as response:
                 try:
@@ -862,15 +864,6 @@ class MCOC(ChampionFactory):
                 return
         body_values = body_json['values']
 
-        if body_url2 is not None:
-            async with aiohttp.get(body_url2) as response:
-                try:
-                    body_json2 = await response.json()
-                except:
-                    print('No data found.')
-                    return
-            body_values2 = body_json2['values']
-
         output_dict = {}
         if head_url is not None:
             if groupby_value is None:
@@ -880,11 +873,6 @@ class MCOC(ChampionFactory):
                 dict_zip = dict(zip(header_values[0],row))
                 groupby = row[groupby_value]
                 output_dict.update({groupby:dict_zip})
-            if body_values2:
-                for row in body_values2:
-                    dict_zip = dict(zip(header_values[0],row))
-                    groupby = row[groupby_value]
-                    output_dict.update({groupby:dict_zip})
         else:
             output_dict =body_values
 
