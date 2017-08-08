@@ -757,7 +757,7 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-        em = discord.Embed(color=discord.Color.red(), title='[Champion Synergies](http://hook.github.io/champions/#/roster)')
+        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         if len(champs)==1:
             for champ in champs:
                 em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
@@ -829,7 +829,7 @@ class MCOC(ChampionFactory):
                                 print(champ_synergies[lookup]['text'], effect)
                                 raise
                             if embed is not None:
-                                embed.add_field(name=triggers, value='{}\n{}'.format(synlist[s]['synergyname'],txt), inline=False)
+                                embed.add_field(name=triggers, value='{}\n\n{}'.format(synlist[s]['synergyname'],txt), inline=False)
                             synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
             if embed is not None:
                 return embed
