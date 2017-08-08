@@ -768,7 +768,7 @@ class MCOC(ChampionFactory):
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
-        range_body = 'Synergies!A2:L'
+        range_body = 'Synergies!A2:L1250'
         foldername = 'synergies'
         filename = 'synergies'
         head_url = GS_BASE.format(sheet,range_headers)
