@@ -782,7 +782,7 @@ class MCOC(ChampionFactory):
             champ_synergies.update(champ_synergies2)
             await self.bot.upload(self.shell_json.format(foldername,filename))
         else:
-            champ_synergies = dataIO.load_json(self.shell_json.format(foldername, filename))
+            champ_synergies = await dataIO.load_json(self.shell_json.format(foldername, filename))
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
@@ -797,7 +797,7 @@ class MCOC(ChampionFactory):
             synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.upload(self.shell_json.format(foldername,filename))
         else:
-            synlist = dataIO.load_json(self.shell_json.format(foldername, filename))
+            synlist = await dataIO.load_json(self.shell_json.format(foldername, filename))
 
         synergy_package = []
 
