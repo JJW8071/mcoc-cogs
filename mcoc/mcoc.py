@@ -776,7 +776,7 @@ class MCOC(ChampionFactory):
         body_url = GS_BASE.format(sheet,range_body)
         body_url2 = GS_BASE.format(sheet,range_body2)
         champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-        champ_synergies2 = await self.gs_to_json(head_url, bodyurl2, foldername, filename)
+        champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
         champ_synergies.update(champ_synergies2)
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/'Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
