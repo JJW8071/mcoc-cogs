@@ -870,7 +870,6 @@ class MCOC(ChampionFactory):
                     print('No data found.')
                     return
             body_values2 = body_json2['values']
-            body_values += body_values2
 
         output_dict = {}
         if head_url is not None:
@@ -881,6 +880,11 @@ class MCOC(ChampionFactory):
                 dict_zip = dict(zip(header_values[0],row))
                 groupby = row[groupby_value]
                 output_dict.update({groupby:dict_zip})
+            if body_values2:
+                for row in body_values2:
+                    dict_zip = dict(zip(header_values[0],row))
+                    groupby = row[groupby_value]
+                    output_dict.update({groupby:dict_zip})
         else:
             output_dict =body_values
 
