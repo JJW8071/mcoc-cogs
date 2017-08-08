@@ -790,7 +790,7 @@ class MCOC(ChampionFactory):
         body_url2 = GS_BASE.format(sheet,range_body2)
         synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
 
-        if champs.debug:
+        if champs[0].debug:
             await self.bot.upload(self.shell_json.format(foldername,filename))
         # effect_keys = synlist.keys
         # effects = defaultdict(effect_keys)
