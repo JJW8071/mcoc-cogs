@@ -761,6 +761,7 @@ class MCOC(ChampionFactory):
         if len(champs)==1:
             for champ in champs:
                 em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
+                em.set_thumbnail(url=champ.get_featured())
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
