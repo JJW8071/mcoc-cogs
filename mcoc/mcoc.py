@@ -788,7 +788,7 @@ class MCOC(ChampionFactory):
         body_url = GS_BASE.format(sheet,range_body)
         body_url2 = GS_BASE.format(sheet,range_body2)
         synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
-        synlist2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
+        synlist2 = await self.gs_to_json(head_url, body_url=bodyurl2, foldername, filename)
         synlist.update(synlist2)
 
         # effect_keys = synlist.keys
