@@ -790,6 +790,8 @@ class MCOC(ChampionFactory):
         body_url2 = GS_BASE.format(sheet,range_body2)
         synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
 
+        if champs.debug:
+            await self.bot.upload(self.shell_json.format(foldername,filename))
         # effect_keys = synlist.keys
         # effects = defaultdict(effect_keys)
         synergy_package = []
@@ -883,8 +885,8 @@ class MCOC(ChampionFactory):
             dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
             # # Uncomment to debug
-            if champ.debug:
-                await self.bot.upload(self.shell_json.format(foldername,filename))
+            # if champ.debug:
+            #     await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
         return output_dict
