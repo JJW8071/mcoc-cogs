@@ -766,6 +766,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
+        '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L750'
@@ -781,9 +782,9 @@ class MCOC(ChampionFactory):
             champ_synergies.update(champ_synergies2)
             await self.bot.upload(self.shell_json.format(foldername,filename))
         else:
-            champ_synergies = load_json(self.shell_json.format(foldername, filename))
+            champ_synergies = dataIO.load_json(self.shell_json.format(foldername, filename))
 
-        # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/'Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+        # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
 
         range_headers = 'SynergyEffects!A1:G'
@@ -796,10 +797,8 @@ class MCOC(ChampionFactory):
             synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.upload(self.shell_json.format(foldername,filename))
         else:
-            synlist = load_json(self.shell_json.format(foldername, filename))
+            synlist = dataIO.load_json(self.shell_json.format(foldername, filename))
 
-        # effect_keys = synlist.keys
-        # effects = defaultdict(effect_keys)
         synergy_package = []
 
         # print('len champs: '+str(len(champs)))
