@@ -773,14 +773,20 @@ class MCOC(ChampionFactory):
         filename = 'synergies'
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
-        champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+        body_url2 = GS_BASE.format(sheet,range_body2)
+        champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename, body_url2=body_url)
+
+        # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/'Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+
 
         range_headers = 'SynergyEffects!A1:G'
-        range_body = 'SynergyEffects!A2:G'
+        range_body = 'SynergyEffects!A2:G500'
+        range_body2 = 'SynergyEffects!A501:G1250'
         filename = 'effects'
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
-        synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+        body_url2 = GS_BASE.format(sheet,range_body2)
+        synlist = await self.gs_to_json(head_url, body_url, foldername, filename, body_url2)
 
         # effect_keys = synlist.keys
         # effects = defaultdict(effect_keys)
@@ -837,7 +843,7 @@ class MCOC(ChampionFactory):
                 desc = '\n'.join(synergy_package)
                 return desc
 
-    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
+    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None, body_url2=None):
         if head_url is not None:
             async with aiohttp.get(head_url) as response:
                 try:
@@ -855,6 +861,15 @@ class MCOC(ChampionFactory):
                 return
         body_values = body_json['values']
 
+        if body_url2 is not None:
+            async with aiohttp.get(body_url2) as response:
+                try:
+                    body_json2 = await response.json()
+                except:
+                    print('No data found.')
+                    return
+            body_values.appaend(row for row in body_json2['values'])
+                
         output_dict = {}
         if head_url is not None:
             if groupby_value is None:
