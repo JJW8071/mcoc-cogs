@@ -869,7 +869,8 @@ class MCOC(ChampionFactory):
                 except:
                     print('No data found.')
                     return
-            body_values = body_values + body_json2['values']
+            body_values2 = body_json2['values']
+            body_values += body_values2
 
         output_dict = {}
         if head_url is not None:
