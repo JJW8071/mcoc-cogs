@@ -487,7 +487,7 @@ class MCOC(ChampionFactory):
                 'table_width': 9,
                 'sig_inc_zero': False,
                 }
-        self.data_dir='data/gsheeter/{}/'
+        self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
