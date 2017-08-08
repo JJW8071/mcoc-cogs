@@ -883,7 +883,8 @@ class MCOC(ChampionFactory):
             dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
             # # Uncomment to debug
-            # await self.bot.upload(self.shell_json.format(foldername,filename))
+            if champ.debug:
+                await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
         return output_dict
