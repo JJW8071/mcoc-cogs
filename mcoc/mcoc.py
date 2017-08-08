@@ -760,7 +760,11 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         if len(champs)==1:
             for champ in champs:
+<<<<<<< HEAD
                 em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
+=======
+                em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar)
+>>>>>>> master
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
