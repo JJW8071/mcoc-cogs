@@ -777,7 +777,7 @@ class MCOC(ChampionFactory):
         body_url = GS_BASE.format(sheet,range_body)
         # body_url2 = GS_BASE.format(sheet,range_body2)
         champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-        champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
+        # champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
         champ_synergies.update(champ_synergies2)
         if champs[0].debug:
             await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -790,7 +790,7 @@ class MCOC(ChampionFactory):
         filename = 'effects'
         head_url = GS_BASE.format(sheet,range_headers)
         body_url = GS_BASE.format(sheet,range_body)
-        body_url2 = GS_BASE.format(sheet,range_body2)
+        # body_url2 = GS_BASE.format(sheet,range_body2)
         synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
         if champs[0].debug:
             await self.bot.upload(self.shell_json.format(foldername,filename))
