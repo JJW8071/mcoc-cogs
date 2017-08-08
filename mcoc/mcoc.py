@@ -785,7 +785,6 @@ class MCOC(ChampionFactory):
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
-
         range_headers = 'SynergyEffects!A1:G'
         range_body = 'SynergyEffects!A2:G'
         filename = 'effects'
@@ -803,7 +802,7 @@ class MCOC(ChampionFactory):
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
             for champ in champs:
-                for s in synlist.keys(): #try this with .keys()
+                for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
