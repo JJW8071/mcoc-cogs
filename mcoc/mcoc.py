@@ -829,7 +829,7 @@ class MCOC(ChampionFactory):
                                 print(champ_synergies[lookup]['text'], effect)
                                 raise
                             if embed is not None:
-                                embed.add_field(name='__{}__'.format(synlist[s]['synergyname']), value='+ **{}**\n{}'.format(triggers,txt), inline=False)
+                                embed.add_field(name='{}'.format(synlist[s]['synergyname']), value='+ **{}**\n{}'.format(triggers,txt), inline=False)
                             synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
             if embed is not None:
                 return embed
