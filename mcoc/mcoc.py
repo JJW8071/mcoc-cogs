@@ -778,7 +778,7 @@ class MCOC(ChampionFactory):
         # body_url2 = GS_BASE.format(sheet,range_body2)
         champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
         # champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
-        champ_synergies.update(champ_synergies2)
+        # champ_synergies.update(champ_synergies2)
         if champs[0].debug:
             await self.bot.upload(self.shell_json.format(foldername,filename))
         # champ_synergies = dataIO.load_json(self.shell_json.format(foldername, filename))
