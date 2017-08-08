@@ -781,8 +781,7 @@ class MCOC(ChampionFactory):
             champ_synergies2 = await self.gs_to_json(head_url, body_url2, foldername, filename)
             champ_synergies.update(champ_synergies2)
             await self.bot.upload(self.shell_json.format(foldername,filename))
-        else:
-            champ_synergies = await dataIO.load_json(self.shell_json.format(foldername, filename))
+        champ_synergies = dataIO.load_json(self.shell_json.format(foldername, filename))
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
@@ -796,8 +795,7 @@ class MCOC(ChampionFactory):
             body_url2 = GS_BASE.format(sheet,range_body2)
             synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.upload(self.shell_json.format(foldername,filename))
-        else:
-            synlist = await dataIO.load_json(self.shell_json.format(foldername, filename))
+        synlist = dataIO.load_json(self.shell_json.format(foldername, filename))
 
         synergy_package = []
 
@@ -805,7 +803,7 @@ class MCOC(ChampionFactory):
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
             for champ in champs:
-                for s in synlist:
+                for s in synlist.keys(): #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
