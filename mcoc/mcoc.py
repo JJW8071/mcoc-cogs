@@ -776,6 +776,7 @@ class MCOC(ChampionFactory):
             head_url = GS_BASE.format(sheet,range_headers)
             body_url = GS_BASE.format(sheet,range_body)
             champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+            message = await self.bot.say('Collecting Synergy data ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
         else:
             getfile = self.shell_json.format(foldername, filename)
@@ -790,7 +791,9 @@ class MCOC(ChampionFactory):
             head_url = GS_BASE.format(sheet,range_headers)
             body_url = GS_BASE.format(sheet,range_body)
             synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+            await self.bot.edit_message(message, 'Almost done ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
+            await self.bot.edit_message(message, 'Synergies collected.')
         else:
             getfile = self.shell_json.format(foldername, filename)
             synlist = dataIO.load_json(getfile)
@@ -842,6 +845,8 @@ class MCOC(ChampionFactory):
                             if embed is not None:
                                 embed.add_field(name='{}'.format(synlist[s]['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
                             synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
+            if champs[0].debug:
+                await self.bot.delete_message(message)
             if embed is not None:
                 return embed
             else:
