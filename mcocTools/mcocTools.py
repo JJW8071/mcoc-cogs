@@ -179,7 +179,7 @@ class MCOCTools:
         tickets = dataIO.load_json(ticketsjson)
         em = discord.Embed(title='Tickets')
         cnt = 0
-        for ticket in tickets:
+        for ticket in tickets[0]:
             em.add_field(name='{} - filed by {}'.format(cnt, ticket['name'],value='{}\n id: {}'.format(ticket['message'],ticket)))
         await self.bot.say(embed=em)
 
