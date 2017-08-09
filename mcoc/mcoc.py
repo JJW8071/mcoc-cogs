@@ -757,11 +757,14 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         if len(champs)==1:
             for champ in champs:
+                em = discord.Embed(color=champ.class_color, title='')
                 em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
+                em.set_color()
                 em.set_thumbnail(url=champ.get_featured())
+        else:
+            em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
