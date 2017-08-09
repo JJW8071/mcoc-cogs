@@ -173,7 +173,7 @@ class MCOCTools:
 
     @checks.admin_or_permissions(manage_server=True)
     @commands.command()
-    async def tickets():
+    async def tickets(self):
         ticketsjson = 'data/tickets/tickets.json'
         tickets = dataIO.load_json(ticketsjson[0])
         em = discord.Embed(title='Tickets')
