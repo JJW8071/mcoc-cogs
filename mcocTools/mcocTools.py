@@ -171,6 +171,7 @@ class MCOCTools:
             await self.bot.say("I need the `Embed links` permission "
                                "to send this")
 
+    @checks.admin_or_permissions(manage_server=True)
     @commands.command()
     async def tickets():
         ticketsjson = 'data/tickets/tickets.json'
@@ -179,7 +180,7 @@ class MCOCTools:
         cnt = 0
         for ticket in tickets:
             em.add_field(name='{} - filed by {}'.format(cnt, ticket['name'],value='{}\n id: {}'.format(ticket['message'],ticket)))
-
+        await self.bot.say(embed=em)
 
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
