@@ -9,7 +9,7 @@ from .utils import chat_formatting as chat
 from cogs.utils import checks
 from discord.ext import commands
 
-EMOJIS = {"t5tech":"<:t5tech:344554971582431232>", 
+EMOJIS = {"t5tech":"<:t5tech:344554971582431232>",
             "t5skill":"<:t5skill:344554971427241985>",
             "t5science":"<:t5science:344554972739928076>",
             "t5mystic":"<:t5mystic:344554971603402762>",
@@ -170,6 +170,17 @@ class MCOCTools:
         except discord.HTTPException:
             await self.bot.say("I need the `Embed links` permission "
                                "to send this")
+
+    @commands.command()
+    async def tickets():
+        ticketsjson = 'data/tickets/tickets.json'
+        tickets = dataIO.load_json(ticketsjson[0])
+        em = discord.Embed(title='Tickets')
+        cnt = 0
+        for ticket in tickets:
+            em.add_field(name='{} - filed by {}'.format(cnt, ticket['name'],value='{}\n id: {}'.format(ticket['message'],ticket)))
+
+
 
     @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
     async def event(self):
