@@ -176,7 +176,7 @@ class MCOCTools:
     @commands.command()
     async def tickets(self):
         ticketsjson = 'data/tickets/tickets.json'
-        tickets = dataIO.load_json(ticketsjson[0])
+        tickets = dataIO.load_json(ticketsjson)
         em = discord.Embed(title='Tickets')
         cnt = 0
         for ticket in tickets:
