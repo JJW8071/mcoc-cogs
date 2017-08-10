@@ -73,7 +73,7 @@ class GSJSON():
         return output_dict
 
     def save_gsjson(self, output_dict, DATA_DIR, SHELL_JSON):
-        if foldername is not None and filename is not None:
+        if DATA_DIR is not None and SHELL_JSON is not None:
             if not os.path.exists(SHELL_JSON):
                 if not os.path.exists(DATA_DIR):
                     os.makedirs(DATA_DIR)
