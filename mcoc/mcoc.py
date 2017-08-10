@@ -20,11 +20,7 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
-try:
-    import cogs.GSJSON
-    import .data.utils.GSJSON
-except:
-    pass
+import .data.mcoc.utils.GSJSON
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
