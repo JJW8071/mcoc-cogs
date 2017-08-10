@@ -21,7 +21,8 @@ from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
 try:
-    import .cogs.GSJSON
+    import cogs.GSJSON
+    import .data.utils.GSJSON
 except:
     pass
 
