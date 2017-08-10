@@ -7,6 +7,8 @@ import json
 import asyncio
 from .utils.dataIO import dataIO
 from cogs.utils import checks
+from discord.ext import commands
+
 
 class GSJSON():
     '''Google Sheet to JSON utility'''
