@@ -1,0 +1,8 @@
+{
+    "AUTHOR" : "JJW",
+    "INSTALL_MSG" : "MCOC Companion Cog",
+    "NAME" : "gsjson",
+    "SHORT" : "A Redbot Utility Cog for Marvel's Contest of Champions",
+    "HIDDEN" : True,
+    "DESCRIPTION" : "Useful Tools for Contest of Champions"
+}
