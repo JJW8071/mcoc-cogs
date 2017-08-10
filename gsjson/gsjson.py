@@ -13,7 +13,7 @@ from discord.ext import commands
 class GSJSON():
     '''Google Sheet to JSON utility'''
 
-    def __init__(self):
+    def __init__(self, bot):
         self.bot = bot
 
     @checks.is_owner()
