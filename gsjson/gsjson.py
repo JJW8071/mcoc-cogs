@@ -24,11 +24,11 @@ class GSJSON():
         msg1 = await self.bot.wait_for_message(timeout=30, author=ctx.message.author)
         await self.bot.edit_message(msg, 'What is your Google API key?\nKey: {}'.format(msg1.content))
         settings.update({"GSJSON":msg1.content})
+        dataIO.save_json('data/red/settingstest.json', settings)
         await asyncio.sleep(15)
         await self.bot.delete_message(msg)
         await self.bot.delete_message(msg1)
         await self.bot.delete_message(ctx.message)
-        dataIO.save_json('data/red/settingstest.json')
 
 
     @commands.command(hidden=True)
