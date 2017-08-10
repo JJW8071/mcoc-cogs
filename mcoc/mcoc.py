@@ -96,12 +96,12 @@ class_color_codes = {
         }
 class_emoji = {
         'All':'<:all2:339511715920084993>',
-        'Cosmic':'<:cosmic2:339511716104896512>',
-        'Tech':'<:tech2:339511716197171200>',
-        'Mutant':'<:mutant2:339511716201365514>',
-        'Skill':'<:skill2:339511716549230592>',
-        'Science':'<:science2:339511716029267969>',
-        'Mystic':'<:mystic2:339511716150771712>',
+        'Cosmic':'<:cosmic2:345005691620163585>',
+        'Tech':'<:tech2:345005691938799626>',
+        'Mutant':'<:mutant2:345005691901313024>',
+        'Skill':'<:skill2:345005691909439488>',
+        'Science':'<:science:345005691779547138>',
+        'Mystic':'<:mystic2:345005691963965450>',
         }
 
 def from_flat(flat, ch_rating):
