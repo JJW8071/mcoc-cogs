@@ -776,7 +776,7 @@ class MCOC(ChampionFactory):
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
-        gsjson = self.get_cog('GSJSON')
+        gsjson = self.bot.get_cog('GSJSON')
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
