@@ -5,6 +5,7 @@ import random
 import os
 import json
 import asyncio
+import aiohttp
 from .utils.dataIO import dataIO
 from cogs.utils import checks
 from discord.ext import commands
