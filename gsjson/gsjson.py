@@ -19,7 +19,7 @@ class GSJSON():
     @checks.is_owner()
     @commands.command(hidden=True, pass_context=True)
     async def setgoogleapikey(self, ctx):
-        settings = load_json('data/red/settings.json')
+        settings = dataIO.load_json('data/red/settings.json')
         msg = await self.bot.say('What is your Google API key?')
         msg1 = await self.bot.wait_for_message(timeout=30, author=ctx.message.author)
         await self.bot.edit_message(msg, 'What is your Google API key?\nKey: {}'.format(msg1.content))
