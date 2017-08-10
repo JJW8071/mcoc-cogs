@@ -1,6 +1,6 @@
 import re
 import sys
-sys.path.append('data/mcoc/utils')
+sys.path.append('/data/mcoc/utils')
 import gsjson
 from datetime import datetime, timedelta
 from textwrap import wrap
