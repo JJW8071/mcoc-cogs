@@ -11,6 +11,7 @@ class GSJSON():
     '''Google Sheet to JSON utility'''
 
     def __init__(self):
+        self.bot = bot
 
     @checks.is_owner()
     @commands.command(hidden=True, pass_context=True)
