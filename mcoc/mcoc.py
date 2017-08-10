@@ -776,6 +776,7 @@ class MCOC(ChampionFactory):
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
+        gsjson = self.get_cog('GSJSON')
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
@@ -785,7 +786,7 @@ class MCOC(ChampionFactory):
             if REDSETTINGS is not None:
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-                champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+                champ_synergies = await gsjson.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
                 await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -803,7 +804,7 @@ class MCOC(ChampionFactory):
         if champs[0].debug:
             head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
             body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+            synlist = await gsjson.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -813,6 +814,7 @@ class MCOC(ChampionFactory):
             synlist = dataIO.load_json(getfile)
 
         synergy_package = []
+        activated = []
 
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
@@ -822,11 +824,14 @@ class MCOC(ChampionFactory):
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
-                            for c in champs:
-                                if c.full_name in  champ_synergies[lookup]['triggers']:
-                                    effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                    effectsused[s].append(effect)
-                                    txt = champ_synergies[lookup]['text'].format(*effect)
+                            while lookup not in activated:
+                                for c in champs:
+                                    if c.full_name in  champ_synergies[lookup]['triggers']:
+                                        effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                        effectsused[s].append(effect)
+                                        txt = champ_synergies[lookup]['text'].format(*effect)
+                                        activated.append(lookup)
+                                        continue
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
