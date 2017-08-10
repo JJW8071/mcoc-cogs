@@ -783,8 +783,8 @@ class MCOC(ChampionFactory):
         filename = 'synergies'
         if champs[0].debug:
             if REDSETTINGS is not None:
-                head_url = GS_BASE.format(sheet,range_headers)
-                body_url = GS_BASE.format(sheet,range_body)
+                head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
+                body_url = GS_BASE.format(sheet,range_body,GS_KEY)
                 champ_synergies = await GSJSON.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
@@ -801,8 +801,8 @@ class MCOC(ChampionFactory):
         range_body = 'SynergyEffects!A2:G'
         filename = 'effects'
         if champs[0].debug:
-            head_url = GS_BASE.format(sheet,range_headers)
-            body_url = GS_BASE.format(sheet,range_body)
+            head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
+            body_url = GS_BASE.format(sheet,range_body,GS_KEY)
             synlist = await GSJSON.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
