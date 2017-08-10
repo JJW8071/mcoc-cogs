@@ -823,7 +823,7 @@ class MCOC(ChampionFactory):
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
-                            If lookup in active:
+                            if lookup in active:
                                 continue
                             for c in champs:
                                 if c.full_name in  champ_synergies[lookup]['triggers']:
