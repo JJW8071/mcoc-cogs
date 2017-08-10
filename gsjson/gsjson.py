@@ -6,6 +6,7 @@ import os
 import json
 import asyncio
 from .utils.dataIO import dataIO
+from cogs.utils import checks
 
 class GSJSON():
     '''Google Sheet to JSON utility'''
