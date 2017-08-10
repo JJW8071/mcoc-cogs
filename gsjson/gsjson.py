@@ -17,18 +17,22 @@ class GSJSON():
         self.bot = bot
 
     @checks.is_owner()
-    @commands.command(hidden=True, pass_context=True)
+    @commands.command(hidden=True, pass_context=True, no_pm=False)
     async def setgoogleapikey(self, ctx):
-        settings = dataIO.load_json('data/red/settings.json')
-        msg = await self.bot.say('What is your Google API key?')
-        msg1 = await self.bot.wait_for_message(timeout=30, author=ctx.message.author)
-        await self.bot.edit_message(msg, 'What is your Google API key?\nKey: {}'.format(msg1.content))
-        settings.update({"GSJSON":msg1.content})
-        dataIO.save_json('data/red/settings.json', settings)
-        await asyncio.sleep(15)
-        await self.bot.delete_message(msg)
-        await self.bot.delete_message(msg1)
-        await self.bot.delete_message(ctx.message)
+        if ctx.message.server is None:
+            self.bot.say('This command can only run in Private Message')
+        else:
+            settings = dataIO.load_json('data/red/settings.json')
+            msg = await self.bot.say('What is your Google API key?')
+            msg1 = await self.bot.wait_for_message(timeout=30, author=ctx.message.author)
+            await self.bot.edit_message(msg, 'What is your Google API key?\nKey: {}'.format(msg1.content))
+            settings.update({"GSJSON":msg1.content})
+            dataIO.save_json('data/red/settings.json', settings)
+            await self.bot.say('API Key stored.')
+            # await asyncio.sleep(15)
+            # await self.bot.delete_message(msg)
+            # await self.bot.delete_message(msg1)
+            # await self.bot.delete_message(ctx.message)
 
     @commands.command(hidden=True)
     async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None, DATA_DIR='data/mcoc/{}/'):
