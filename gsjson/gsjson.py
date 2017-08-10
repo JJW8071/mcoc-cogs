@@ -36,7 +36,7 @@ class GSJSON():
             # await self.bot.delete_message(ctx.message)
 
     # @commands.command(hidden=True)
-    async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None, DATA_DIR='data/mcoc/{}/'):
+    async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None, DATA_DIR='data/{}/'):
         DATA_DIR = DATA_DIR.format(foldername)
         SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
 

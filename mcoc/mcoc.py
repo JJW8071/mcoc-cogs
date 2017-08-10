@@ -780,7 +780,7 @@ class MCOC(ChampionFactory):
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
-        foldername = 'synergies'
+        foldername = 'mcoc'
         filename = 'synergies'
         if champs[0].debug:
             if REDSETTINGS is not None:
@@ -815,7 +815,6 @@ class MCOC(ChampionFactory):
 
         synergy_package = []
         active = set()
-
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
@@ -824,13 +823,13 @@ class MCOC(ChampionFactory):
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
+                            If lookup in active:
+                                continue
                             for c in champs:
                                 if c.full_name in  champ_synergies[lookup]['triggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
-                                    If lookup in active:
-                                        continue
                                     active.add(lookup)
                                 # synergy_package.append(txt)
             # print(effectsused)
