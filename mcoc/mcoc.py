@@ -1,6 +1,4 @@
 import re
-import sys
-sys.path.append('\data\mcoc\utils')
 import gsjson
 from datetime import datetime, timedelta
 from textwrap import wrap
@@ -23,6 +21,10 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
+try:
+    import .cogs.gsjson
+except:
+    pass
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -43,10 +45,12 @@ data_files = {
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
 
-settings = dataIO.load_json('data/red/settings.json')
-GS_KEY = settings['GSJSON']
-GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key={}&majorDimension=ROWS'
-
+try:
+    REDSETTINGS = dataIO.load_json('data/red/settings.json')
+    GS_KEY = REDSETTINGS['GSJSON']
+    GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key={}&majorDimension=ROWS'
+except:
+    REDSETTINGS = None
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -779,12 +783,15 @@ class MCOC(ChampionFactory):
         foldername = 'synergies'
         filename = 'synergies'
         if champs[0].debug:
-            head_url = GS_BASE.format(sheet,range_headers)
-            body_url = GS_BASE.format(sheet,range_body)
-            champ_synergies = await GSJSON.gs_to_json(head_url, body_url, foldername, filename)
-            # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-            message = await self.bot.say('Collecting Synergy data ...')
-            await self.bot.upload(self.shell_json.format(foldername,filename))
+            if REDSETTINGS is not None:
+                head_url = GS_BASE.format(sheet,range_headers)
+                body_url = GS_BASE.format(sheet,range_body)
+                champ_synergies = await GSJSON.gs_to_json(head_url, body_url, foldername, filename)
+                # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+                message = await self.bot.say('Collecting Synergy data ...')
+                await self.bot.upload(self.shell_json.format(foldername,filename))
+            else:
+                await self.bot.say('Prerequisite: GSJSON ```[/] cog install mcoc-cogs gsjson```')
         else:
             getfile = self.shell_json.format(foldername, filename)
             champ_synergies = dataIO.load_json(getfile)
@@ -861,49 +868,49 @@ class MCOC(ChampionFactory):
                 desc = '\n'.join(synergy_package)
                 return desc
 
-    async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
-        if head_url is not None:
-            async with aiohttp.get(head_url) as response:
-                try:
-                    header_json = await response.json()
-                except:
-                    print('No header data found.')
-                    return
-            header_values = header_json['values']
-
-        async with aiohttp.get(body_url) as response:
-            try:
-                body_json = await response.json()
-            except:
-                print('No data found.')
-                return
-        body_values = body_json['values']
-
-        output_dict = {}
-        if head_url is not None:
-            if groupby_value is None:
-                groupby_value = 0
-            grouped_by = header_values[0][groupby_value]
-            for row in body_values:
-                dict_zip = dict(zip(header_values[0],row))
-                groupby = row[groupby_value]
-                output_dict.update({groupby:dict_zip})
-        else:
-            output_dict =body_values
-
-        if foldername is not None and filename is not None:
-            if not os.path.exists(self.shell_json.format(foldername, filename)):
-                if not os.path.exists(self.data_dir.format(foldername)):
-                    os.makedirs(self.data_dir.format(foldername))
-                dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
-            dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
-
-            # # Uncomment to debug
-            # if champ.debug:
-            #     await self.bot.upload(self.shell_json.format(foldername,filename))
-
-
-        return output_dict
+    # async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
+    #     if head_url is not None:
+    #         async with aiohttp.get(head_url) as response:
+    #             try:
+    #                 header_json = await response.json()
+    #             except:
+    #                 print('No header data found.')
+    #                 return
+    #         header_values = header_json['values']
+    #
+    #     async with aiohttp.get(body_url) as response:
+    #         try:
+    #             body_json = await response.json()
+    #         except:
+    #             print('No data found.')
+    #             return
+    #     body_values = body_json['values']
+    #
+    #     output_dict = {}
+    #     if head_url is not None:
+    #         if groupby_value is None:
+    #             groupby_value = 0
+    #         grouped_by = header_values[0][groupby_value]
+    #         for row in body_values:
+    #             dict_zip = dict(zip(header_values[0],row))
+    #             groupby = row[groupby_value]
+    #             output_dict.update({groupby:dict_zip})
+    #     else:
+    #         output_dict =body_values
+    #
+    #     if foldername is not None and filename is not None:
+    #         if not os.path.exists(self.shell_json.format(foldername, filename)):
+    #             if not os.path.exists(self.data_dir.format(foldername)):
+    #                 os.makedirs(self.data_dir.format(foldername))
+    #             dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
+    #         dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
+    #
+    #         # # Uncomment to debug
+    #         # if champ.debug:
+    #         #     await self.bot.upload(self.shell_json.format(foldername,filename))
+    #
+    #
+    #     return output_dict
 
 
     @commands.command(hidden=True)
