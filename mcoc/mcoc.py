@@ -1,4 +1,7 @@
 import re
+import sys
+sys.path.insert(0. 'data/mcoc/utils')
+import gsjson
 from datetime import datetime, timedelta
 from textwrap import wrap
 from collections import UserDict, defaultdict
@@ -20,7 +23,7 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
-import .data.mcoc.utils.GSJSON
+import .data
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
