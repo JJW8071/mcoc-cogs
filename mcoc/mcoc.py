@@ -20,6 +20,7 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
+import .cogs.GSJSON
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -40,7 +41,10 @@ data_files = {
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
 
-GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+settings = dataIO.load_json('data/red/settings.json')
+GS_KEY = settings['GSJSON']
+GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key={}&majorDimension=ROWS'
+
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -775,7 +779,8 @@ class MCOC(ChampionFactory):
         if champs[0].debug:
             head_url = GS_BASE.format(sheet,range_headers)
             body_url = GS_BASE.format(sheet,range_body)
-            champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+            champ_synergies = await GSJSON.gs_to_json(head_url, body_url, foldername, filename)
+            # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
             message = await self.bot.say('Collecting Synergy data ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
         else:
@@ -790,7 +795,8 @@ class MCOC(ChampionFactory):
         if champs[0].debug:
             head_url = GS_BASE.format(sheet,range_headers)
             body_url = GS_BASE.format(sheet,range_body)
-            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+            synlist = await GSJSON.gs_to_json(head_url, body_url, foldername, filename)
+            # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
             await self.bot.edit_message(message, 'Synergies collected.')
