@@ -8,9 +8,11 @@ import asyncio
 from .utils.dataIO import dataIO
 
 class GSJSON():
+    '''Google Sheet to JSON utility'''
+
     def __init__(self):
 
-    @checks.owner()
+    @checks.is_owner()
     @commands.command(hidden=True, pass_context=True)
     async def setgoogleapikey(self, ctx):
         settings = load_json('data/red/settings.json')
@@ -18,7 +20,9 @@ class GSJSON():
         msg1 = await self.bot.wait_for_message(timeout=30, author=ctx.message.author)
         await self.bot.edit_message(msg, 'What is your Google API key?\nKey: {}'.format(msg1.content))
         # settings.update({"GSJSON":msg1.content})
-
+        await asyncio.sleep(15)
+        await self.bot.delete_message(msg)
+        await self.bot.delete_message(msg1)
 
 
     @commands.command(hidden=True)
