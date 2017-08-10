@@ -76,4 +76,4 @@ class GSJSON():
 
 
 def setup(bot):
-    bot.add_cog(MCOC(bot))
+    bot.add_cog(GSJSON(bot))
