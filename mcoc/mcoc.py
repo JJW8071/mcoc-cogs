@@ -1,5 +1,4 @@
 import re
-import gsjson
 from datetime import datetime, timedelta
 from textwrap import wrap
 from collections import UserDict, defaultdict
