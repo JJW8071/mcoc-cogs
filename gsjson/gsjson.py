@@ -19,7 +19,7 @@ class GSJSON():
     @checks.is_owner()
     @commands.command(hidden=True, pass_context=True, no_pm=False)
     async def setgoogleapikey(self, ctx):
-        if ctx.message.server is None:
+        if ctx.message.server is not None:
             self.bot.say('This command can only run in Private Message')
         else:
             settings = dataIO.load_json('data/red/settings.json')
