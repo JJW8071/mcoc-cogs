@@ -776,7 +776,7 @@ class MCOC(ChampionFactory):
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
-        foldername = 'mcoc'
+        foldername = 'synergies'
         filename = 'synergies'
         if champs[0].debug:
             if REDSETTINGS is not None:
