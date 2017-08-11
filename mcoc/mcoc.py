@@ -776,7 +776,6 @@ class MCOC(ChampionFactory):
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
-        gsjson = self.bot.get_cog('GSJSON')
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
@@ -786,7 +785,7 @@ class MCOC(ChampionFactory):
             if REDSETTINGS is not None:
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-                champ_synergies = await gsjson.gs_to_json(head_url, body_url, foldername, filename)
+                champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
                 await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -804,7 +803,7 @@ class MCOC(ChampionFactory):
         if champs[0].debug:
             head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
             body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-            synlist = await gsjson.gs_to_json(head_url, body_url, foldername, filename)
+            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -1126,6 +1125,75 @@ def validate_attr(*expected_args):
             return func(self, *args, **kwargs)
         return wrapper
     return decorator
+
+class GSJSON():
+    '''Google Sheet to JSON utility'''
+
+    def __init__(self, bot):
+        self.bot = bot
+
+    @checks.is_owner()
+    @commands.command(hidden=True, pass_context=True, no_pm=False)
+    async def setgoogleapikey(self, ctx):
+        if ctx.message.server:
+            await self.bot.say('This command can only run in Private Message')
+        else:
+            settings = dataIO.load_json('data/red/settings.json')
+            msg = await self.bot.say('What is your Google API key?')
+            msg1 = await self.bot.wait_for_message(timeout=30, author=ctx.message.author)
+            await self.bot.edit_message(msg, 'What is your Google API key?\nKey: {}'.format(msg1.content))
+            settings.update({"GSJSON":msg1.content})
+            dataIO.save_json('data/red/settings.json', settings)
+            await self.bot.say('API Key stored.')
+            # await asyncio.sleep(15)
+            # await self.bot.delete_message(msg)
+            # await self.bot.delete_message(msg1)
+            # await self.bot.delete_message(ctx.message)
+
+    # @commands.command(hidden=True)
+    async def gs_to_json(head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
+        DATA_DIR = 'data/{}/'.format(foldername)
+        SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
+
+        if head_url is not None:
+            async with aiohttp.get(head_url) as response:
+                try:
+                    header_json = await response.json()
+                except:
+                    print('No header data found.')
+                    return
+            header_values = header_json['values']
+
+        async with aiohttp.get(body_url) as response:
+            try:
+                body_json = await response.json()
+            except:
+                print('No data found.')
+                return
+        body_values = body_json['values']
+
+        output_dict = {}
+        if head_url is not None:
+            if groupby_value is None:
+                groupby_value = 0
+            grouped_by = header_values[0][groupby_value]
+            for row in body_values:
+                dict_zip = dict(zip(header_values[0],row))
+                groupby = row[groupby_value]
+                output_dict.update({groupby:dict_zip})
+        else:
+            output_dict =body_values
+
+        self.save_gsjson(output_dict, DATA_DIR, SHELL_JSON)
+        return output_dict
+
+    def save_gsjson(self, output_dict, DATA_DIR, SHELL_JSON):
+        if DATA_DIR is not None and SHELL_JSON is not None:
+            if not os.path.exists(SHELL_JSON):
+                if not os.path.exists(DATA_DIR):
+                    os.makedirs(DATA_DIR)
+                dataIO.save_json(DATA_DIR, output_dict)
+            dataIO.save_json(DATA_DIR,output_dict)
 
 
 class Champion:
