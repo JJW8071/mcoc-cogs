@@ -1180,8 +1180,8 @@ class GSJSON():
             if not os.path.exists(DATA_DIR):
                 os.makedirs(DATA_DIR)
             dataIO.save_json(DATA_DIR, output_dict)
-        dataIO.save_json(DATA_DIR,output_dict)
-
+        dataIO.save_json(SHELL_JSON, output_dict)
+        print('JSON File saved to '+SHELL_JSON)
         return output_dict
 
 class Champion:
