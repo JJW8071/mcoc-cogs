@@ -1143,7 +1143,7 @@ class GSJSON():
             dataIO.save_json('data/red/settings.json', settings)
             await self.bot.say('API Key stored.')
 
-    async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
+    async def gs_to_json(head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
         DATA_DIR = 'data/{}/'.format(foldername)
         SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
 
@@ -1176,17 +1176,13 @@ class GSJSON():
         else:
             output_dict =body_values
 
-        self.save_gsjson(output_dict, DATA_DIR, SHELL_JSON)
+        if not os.path.exists(SHELL_JSON):
+            if not os.path.exists(DATA_DIR):
+                os.makedirs(DATA_DIR)
+            dataIO.save_json(DATA_DIR, output_dict)
+        dataIO.save_json(DATA_DIR,output_dict)
+
         return output_dict
-
-    def save_gsjson(self, output_dict, DATA_DIR, SHELL_JSON):
-        if DATA_DIR is not None and SHELL_JSON is not None:
-            if not os.path.exists(SHELL_JSON):
-                if not os.path.exists(DATA_DIR):
-                    os.makedirs(DATA_DIR)
-                dataIO.save_json(DATA_DIR, output_dict)
-            dataIO.save_json(DATA_DIR,output_dict)
-
 
 class Champion:
 
