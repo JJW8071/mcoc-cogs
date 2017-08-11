@@ -782,7 +782,7 @@ class MCOC(ChampionFactory):
             if REDSETTINGS is not None:
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-                champ_synergies = await GSJSON().gs_to_json(head_url, body_url, foldername, filename)
+                champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
                 await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -800,7 +800,7 @@ class MCOC(ChampionFactory):
         if champs[0].debug:
             head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
             body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-            synlist = await GSJSON().gs_to_json(head_url, body_url, foldername, filename)
+            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -866,51 +866,6 @@ class MCOC(ChampionFactory):
             else:
                 desc = '\n'.join(synergy_package)
                 return desc
-
-    # async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
-    #     if head_url is not None:
-    #         async with aiohttp.get(head_url) as response:
-    #             try:
-    #                 header_json = await response.json()
-    #             except:
-    #                 print('No header data found.')
-    #                 return
-    #         header_values = header_json['values']
-    #
-    #     async with aiohttp.get(body_url) as response:
-    #         try:
-    #             body_json = await response.json()
-    #         except:
-    #             print('No data found.')
-    #             return
-    #     body_values = body_json['values']
-    #
-    #     output_dict = {}
-    #     if head_url is not None:
-    #         if groupby_value is None:
-    #             groupby_value = 0
-    #         grouped_by = header_values[0][groupby_value]
-    #         for row in body_values:
-    #             dict_zip = dict(zip(header_values[0],row))
-    #             groupby = row[groupby_value]
-    #             output_dict.update({groupby:dict_zip})
-    #     else:
-    #         output_dict =body_values
-    #
-    #     if foldername is not None and filename is not None:
-    #         if not os.path.exists(self.shell_json.format(foldername, filename)):
-    #             if not os.path.exists(self.data_dir.format(foldername)):
-    #                 os.makedirs(self.data_dir.format(foldername))
-    #             dataIO.save_json(self.shell_json.format(foldername, filename), output_dict)
-    #         dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
-    #
-    #         # # Uncomment to debug
-    #         # if champ.debug:
-    #         #     await self.bot.upload(self.shell_json.format(foldername,filename))
-    #
-    #
-    #     return output_dict
-
 
     @commands.command(hidden=True)
     async def dump_sigs(self):
@@ -1066,7 +1021,6 @@ class MCOC(ChampionFactory):
         await self.bot.upload(data_files['phc_jpg']['local'],
                 content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
-
     @commands.command(hidden=True)
     async def tst(self, key):
         files = {'bio': (kabam_bio, 'ID_CHARACTER_BIOS_', 'mcocjson'),
@@ -1107,28 +1061,6 @@ class MCOC(ChampionFactory):
             await self.bot.say('Residual keys:\n\t' + '\n\t'.join(dump))
         await self.bot.say('Done')
 
-#My intention was to create a hook command group. If nothing is specified, then drop the URL
-
-    #def _prepare_signature_data(self):
-        #raw_data = load_csv(local_files['sig_coeff'])
-
-def validate_attr(*expected_args):
-    def decorator(func):
-        def wrapper(self, *args, **kwargs):
-            for attr in expected_args:
-                if getattr(self, attr + '_data', None) is None:
-                    raise AttributeError("{} for Champion ".format(attr.capitalize())
-                        + "'{}' has not been initialized.".format(self.champ))
-            return func(self, *args, **kwargs)
-        return wrapper
-    return decorator
-
-class GSJSON():
-    '''Google Sheet to JSON utility'''
-
-    def __init__(self, bot):
-        self.bot = bot
-
     @checks.is_owner()
     @commands.command(hidden=True, pass_context=True, no_pm=False)
     async def setgoogleapikey(self, ctx):
@@ -1143,7 +1075,7 @@ class GSJSON():
             dataIO.save_json('data/red/settings.json', settings)
             await self.bot.say('API Key stored.')
 
-    async def gs_to_json(head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
+    async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
         DATA_DIR = 'data/{}/'.format(foldername)
         SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
 
@@ -1185,6 +1117,17 @@ class GSJSON():
         dataIO.save_json(SHELL_JSON, output_dict)
         print('JSON File saved to '+SHELL_JSON)
         return output_dict
+
+def validate_attr(*expected_args):
+    def decorator(func):
+        def wrapper(self, *args, **kwargs):
+            for attr in expected_args:
+                if getattr(self, attr + '_data', None) is None:
+                    raise AttributeError("{} for Champion ".format(attr.capitalize())
+                        + "'{}' has not been initialized.".format(self.champ))
+            return func(self, *args, **kwargs)
+        return wrapper
+    return decorator
 
 class Champion:
 
