@@ -1181,10 +1181,10 @@ class GSJSON():
         else:
             output_dict =body_values
 
-        self.save_gsjson(output_dict, DATA_DIR, SHELL_JSON)
+        save_gsjson(output_dict, DATA_DIR, SHELL_JSON)
         return output_dict
 
-    def save_gsjson(self, output_dict, DATA_DIR, SHELL_JSON):
+    def save_gsjson(output_dict, DATA_DIR, SHELL_JSON):
         if DATA_DIR is not None and SHELL_JSON is not None:
             if not os.path.exists(SHELL_JSON):
                 if not os.path.exists(DATA_DIR):
