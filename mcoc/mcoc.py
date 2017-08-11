@@ -782,7 +782,7 @@ class MCOC(ChampionFactory):
             if REDSETTINGS is not None:
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-                champ_synergies = await GSJSON.gs_to_json(self, head_url, body_url, foldername, filename)
+                champ_synergies = await self.GSJSON.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
                 await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -800,7 +800,7 @@ class MCOC(ChampionFactory):
         if champs[0].debug:
             head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
             body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-            synlist = await GSJSON.gs_to_json(self, head_url, body_url, foldername, filename)
+            synlist = await self.GSJSON.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
             await self.bot.upload(self.shell_json.format(foldername,filename))
@@ -1142,12 +1142,7 @@ class GSJSON():
             settings.update({"GSJSON":msg1.content})
             dataIO.save_json('data/red/settings.json', settings)
             await self.bot.say('API Key stored.')
-            # await asyncio.sleep(15)
-            # await self.bot.delete_message(msg)
-            # await self.bot.delete_message(msg1)
-            # await self.bot.delete_message(ctx.message)
 
-    # @commands.command(hidden=True)
     async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
         DATA_DIR = 'data/{}/'.format(foldername)
         SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
