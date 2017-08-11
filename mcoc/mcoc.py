@@ -40,7 +40,6 @@ data_files = {
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
     }
 
-SYNERGIES='https://sheets.googleapis.com/v4/spreadsheets/1JSiGo-oGbPdmlegmGTH7hcurd_HYtkpTnZGY1mN_XCE/values/Synergies!A1:L?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
 local_files = {
@@ -488,7 +487,7 @@ class MCOC(ChampionFactory):
                 'table_width': 9,
                 'sig_inc_zero': False,
                 }
-        self.data_dir='data/gsheeter/{}/'
+        self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
@@ -758,46 +757,66 @@ class MCOC(ChampionFactory):
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
-
-        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+        if len(champs)==1:
+            for champ in champs:
+                em = discord.Embed(color=champ.class_color, title='')
+                em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
+                em.set_thumbnail(url=champ.get_featured())
+        else:
+            em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         em = await self.get_synergies(champs, embed=em)
         await self.bot.say(embed=em)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
+        '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:L1'
         range_body = 'Synergies!A2:L'
         foldername = 'synergies'
         filename = 'synergies'
-        head_url = GS_BASE.format(sheet,range_headers)
-        body_url = GS_BASE.format(sheet,range_body)
-        champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+        if champs[0].debug:
+            head_url = GS_BASE.format(sheet,range_headers)
+            body_url = GS_BASE.format(sheet,range_body)
+            champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+            message = await self.bot.say('Collecting Synergy data ...')
+            await self.bot.upload(self.shell_json.format(foldername,filename))
+        else:
+            getfile = self.shell_json.format(foldername, filename)
+            champ_synergies = dataIO.load_json(getfile)
+
+        # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
         range_headers = 'SynergyEffects!A1:G'
         range_body = 'SynergyEffects!A2:G'
         filename = 'effects'
-        head_url = GS_BASE.format(sheet,range_headers)
-        body_url = GS_BASE.format(sheet,range_body)
-        synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+        if champs[0].debug:
+            head_url = GS_BASE.format(sheet,range_headers)
+            body_url = GS_BASE.format(sheet,range_body)
+            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+            await self.bot.edit_message(message, 'Almost done ...')
+            await self.bot.upload(self.shell_json.format(foldername,filename))
+            await self.bot.edit_message(message, 'Synergies collected.')
+        else:
+            getfile = self.shell_json.format(foldername, filename)
+            synlist = dataIO.load_json(getfile)
 
-        # effect_keys = synlist.keys
-        # effects = defaultdict(effect_keys)
         synergy_package = []
 
-        print('len champs: '+str(len(champs)))
+        # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
             for champ in champs:
-                for s in synlist:
-                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                    if lookup in champ_synergies:
-                        for c in champs:
-                            if c.full_name in  champ_synergies[lookup]['triggers']:
-                                effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                effectsused[s].append(effect)
-                                txt = champ_synergies[lookup]['text'].format(*effect)
+                for s in synlist: #try this with .keys()
+                    for i in range(1, 4):
+                        lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                        if lookup in champ_synergies:
+                            for c in champs:
+                                if c.full_name in  champ_synergies[lookup]['triggers']:
+                                    effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                                    effectsused[s].append(effect)
+                                    txt = champ_synergies[lookup]['text'].format(*effect)
                                 # synergy_package.append(txt)
-            print(effectsused)
+            # print(effectsused)
             combined = {}
             desc= []
             for k, v in effectsused.items():
@@ -813,20 +832,23 @@ class MCOC(ChampionFactory):
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
             for champ in champs:
                 for s in synlist:
-                    lookup = '{}-{}-{}'.format(champ.star, champ.mattkraftid, s)
-                    if lookup in champ_synergies:
-                        selected = champ_synergies[lookup]
-                        triggers = selected['triggers']
-                        effect = selected['effect'].split(', ')
-                        print(effect)
-                        try:
-                            txt = champ_synergies[lookup]['text'].format(*effect)
-                        except:
-                            print(champ_synergies[lookup]['text'], effect)
-                            raise
-                        if embed is not None:
-                            embed.add_field(name=triggers, value='{}\n{}'.format(synlist[s]['synergyname'],txt), inline=False)
-                        synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
+                    for i in range(1, 4):
+                        lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                        if lookup in champ_synergies:
+                            selected = champ_synergies[lookup]
+                            triggers = selected['triggers']
+                            effect = selected['effect'].split(', ')
+                            # print(effect)
+                            try:
+                                txt = champ_synergies[lookup]['text'].format(*effect)
+                            except:
+                                print(champ_synergies[lookup]['text'], effect)
+                                raise
+                            if embed is not None:
+                                embed.add_field(name='{}'.format(synlist[s]['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
+                            synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
+            if champs[0].debug:
+                await self.bot.delete_message(message)
             if embed is not None:
                 return embed
             else:
@@ -871,7 +893,8 @@ class MCOC(ChampionFactory):
             dataIO.save_json(self.shell_json.format(foldername,filename),output_dict)
 
             # # Uncomment to debug
-            # await self.bot.upload(self.shell_json.format(foldername,filename))
+            # if champ.debug:
+            #     await self.bot.upload(self.shell_json.format(foldername,filename))
 
 
         return output_dict
