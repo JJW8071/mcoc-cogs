@@ -1179,7 +1179,9 @@ class GSJSON():
         if not os.path.exists(SHELL_JSON):
             if not os.path.exists(DATA_DIR):
                 os.makedirs(DATA_DIR)
-            dataIO.save_json(DATA_DIR, output_dict)
+                print('Created: '+DATA_DIR)
+            # dataIO.save_json(SHELL_JSON, output_dict)
+            # print('JSON File saved: '+SHELL_JSON)
         dataIO.save_json(SHELL_JSON, output_dict)
         print('JSON File saved to '+SHELL_JSON)
         return output_dict
