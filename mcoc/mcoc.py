@@ -775,9 +775,12 @@ class MCOC(ChampionFactory):
         if REDSETTINGS is not None:
             head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
             body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-            champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
-            message = await self.bot.say('Collecting Mastery data ...')
-            await self.bot.upload(SHELLJSON.format(foldername,filename))
+            try:
+                champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
+                message = await self.bot.say('Collecting Mastery data ...')
+                await self.bot.upload(SHELLJSON.format(foldername,filename))
+            except:
+                await self.bot.say('Problem. Verify urls:\n<{}.\n<{}>'.format(head_url, body_url))
         else:
             await self.bot.say('Prerequisite: Google API Key must be set```')
 
