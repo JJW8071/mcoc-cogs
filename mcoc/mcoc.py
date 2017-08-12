@@ -26,7 +26,7 @@ logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
 
 DATADIR = 'data/mcoc/{}/'
-SHELLJSON = DATA_DIR + '{}.json'
+SHELLJSON = DATADIR + '{}.json'
 
 
 data_files = {
