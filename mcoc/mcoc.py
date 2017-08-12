@@ -776,7 +776,7 @@ class MCOC(ChampionFactory):
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
                 try:
                     champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
-                    message = await self.bot.say('Collecting Mastery data ...')
+                    message = await self.bot.say('Collecting {} data ...').format(filename)
                     await self.bot.upload(SHELLJSON.format(foldername,filename))
                 except:
                     await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
@@ -793,7 +793,7 @@ class MCOC(ChampionFactory):
         Rank Up Costs'''
         sheet = '1Zxr4e0ZETScSvwKLbtZSWhJAxxMZgSqMaTpHEokwfbU'
         range_headers = 'rankup!A1:S1'
-        range_body = 'rankup!A2:S'
+        range_body = 'rankup!A2:S103'
         foldername = 'costs'
         filename = 'rankup'
         if update == True:
