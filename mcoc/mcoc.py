@@ -1067,9 +1067,12 @@ class MCOC(ChampionFactory):
 
     @cost.command(pass_context=True, name='update', hidden=True)
     async def _update(self):
-        '''Update cost data'''
+        '''Collect cost data'''
+        message = await self.bot.say('Collecting cost data:')
         await self.get_rankcosts(update=True)
+        await self.bot.edit_message(message, 'Collecting cost data:\nRank cost data')
         await self.get_masteries(update=True)
+        await self.bot.edit_message(message, 'Collecting cost data:\nRank cost data\nMastery cost data.')
         return
 
     @cost.command(pass_context=True, name='rankup', aliases=('ranks',))
