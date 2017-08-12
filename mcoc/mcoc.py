@@ -25,6 +25,9 @@ from cogs.utils import checks
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
 
+DATA_DIR = 'data/mcoc/{}/'.format(foldername)
+SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
+
 
 data_files = {
     'spotlight': {'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=0&single=true&output=csv',
@@ -493,8 +496,8 @@ class MCOC(ChampionFactory):
                 'table_width': 9,
                 'sig_inc_zero': False,
                 }
-        self.data_dir='data/mcoc/{}/'
-        self.shell_json=self.data_dir + '{}.json'
+        # self.data_dir='data/mcoc/{}/'
+        # self.shell_json=self.data_dir + '{}.json'
         self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
@@ -785,11 +788,11 @@ class MCOC(ChampionFactory):
                 champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
-                await self.bot.upload(self.shell_json.format(foldername,filename))
+                await self.bot.upload(SHELL_JSON.format(foldername,filename))
             else:
                 await self.bot.say('Prerequisite: GSJSON ```[/] cog install mcoc-cogs gsjson```')
         else:
-            getfile = self.shell_json.format(foldername, filename)
+            getfile = SHELL_JSON.format(foldername, filename)
             champ_synergies = dataIO.load_json(getfile)
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
@@ -803,10 +806,10 @@ class MCOC(ChampionFactory):
             synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
-            await self.bot.upload(self.shell_json.format(foldername,filename))
+            await self.bot.upload(SHELL_JSON.format(foldername,filename))
             await self.bot.edit_message(message, 'Synergies collected.')
         else:
-            getfile = self.shell_json.format(foldername, filename)
+            getfile = SHELL_JSON.format(foldername, filename)
             synlist = dataIO.load_json(getfile)
 
         synergy_package = []
@@ -1076,9 +1079,6 @@ class MCOC(ChampionFactory):
             await self.bot.say('API Key stored.')
 
     async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
-        DATA_DIR = 'data/{}/'.format(foldername)
-        SHELL_JSON = DATA_DIR + '{}.json'.format(filename)
-
         if head_url is not None:
             async with aiohttp.get(head_url) as response:
                 try:
@@ -1119,7 +1119,7 @@ class MCOC(ChampionFactory):
             # print('JSON File saved: '+SHELL_JSON)
         dataIO.save_json(SHELL_JSON, output_dict)
         await self.bot.edit_message(status, 'Data storage procedure:\nFile saved.\n'+SHELL_JSON)
-        
+
         return output_dict
 
 def validate_attr(*expected_args):
