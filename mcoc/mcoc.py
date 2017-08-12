@@ -762,17 +762,29 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='synergies', aliases=['syn',], hidden=True)
-    async def champ_synergies(self, *, champs : ChampConverterMult):
+    @commands.command(hidden=True)
+    async def get_masteries(self)):
         '''Coming Soon
-        Champion Synergies'''
-        em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
-        if len(champs)==1:
-            for champ in champs:
-                em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
-                em.set_thumbnail(url=champ.get_featured())
-        em = await self.get_synergies(champs, embed=em)
-        await self.bot.say(embed=em)
+        Champion masteries'''
+        async def get_masteries(self, champs : ChampConverterMult, embed=None):
+            '''If Debug is sent, data will refresh'''
+            sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
+            range_headers = 'masteriesjson!A1:O1'
+            range_body = 'masteriesjson!A2:O`'
+            foldername = 'masteries'
+            filename = 'masteries'
+            if champs[0].debug:
+                if REDSETTINGS is not None:
+                    head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
+                    body_url = GS_BASE.format(sheet,range_body,GS_KEY)
+                    champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
+                    message = await self.bot.say('Collecting Mastery data ...')
+                    await self.bot.upload(SHELLJSON.format(foldername,filename))
+                else:
+                    await self.bot.say('Prerequisite: GSJSON ```[/] cog install mcoc-cogs gsjson```')
+            else:
+                getfile = SHELLJSON.format(foldername, filename)
+                champ_masteries = dataIO.load_json(getfile)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
@@ -786,7 +798,6 @@ class MCOC(ChampionFactory):
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
                 champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-                # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
                 await self.bot.upload(SHELLJSON.format(foldername,filename))
             else:
@@ -794,8 +805,6 @@ class MCOC(ChampionFactory):
         else:
             getfile = SHELLJSON.format(foldername, filename)
             champ_synergies = dataIO.load_json(getfile)
-
-        # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
 
         range_headers = 'SynergyEffects!A1:G'
         range_body = 'SynergyEffects!A2:G'
@@ -1119,7 +1128,6 @@ class MCOC(ChampionFactory):
                 os.makedirs(DATA_DIR)
                 await self.bot.edit_message(status, 'Data storage procedure:\nCreating directory.\n'+DATA_DIR)
             dataIO.save_json(SHELL_JSON, output_dict)
-            # print('JSON File saved: '+SHELL_JSON)
         dataIO.save_json(SHELL_JSON, output_dict)
         await self.bot.edit_message(status, 'Data storage procedure:\nFile saved.\n'+SHELL_JSON)
 
