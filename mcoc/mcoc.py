@@ -769,7 +769,7 @@ class MCOC(ChampionFactory):
         Champion masteries'''
         sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
         range_headers = 'masteryjson!A1:O1'
-        range_body = 'masteryjson!A2:O`'
+        range_body = 'masteryjson!A2:O'
         foldername = 'masteries'
         filename = 'masteries'
         if REDSETTINGS is not None:
