@@ -809,11 +809,11 @@ class MCOC(ChampionFactory):
                 for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
-                        if lookup in activated:
-                            continue
-                        elif lookup in champ_synergies:
+                        if lookup in champ_synergies:
                             for c in champs:
-                                if c.full_name in  champ_synergies[lookup]['triggers']:
+                                if lookup in activated:
+                                    continue
+                                elif c.full_name in  champ_synergies[lookup]['triggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
