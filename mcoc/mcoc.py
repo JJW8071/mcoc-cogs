@@ -1108,14 +1108,18 @@ class MCOC(ChampionFactory):
         else:
             output_dict =body_values
 
+        status = await self.bot.say('Data storage procedure:')
         if not os.path.exists(SHELL_JSON):
+            await self.bot.edit_message(status, 'Data storage procedure:\nFile not found.\n'+SHELL_JSON)
             if not os.path.exists(DATA_DIR):
+                await self.bot.edit_message(status, 'Data storage procedure:\nDirectory not found.\n'+DATA_DIR)
                 os.makedirs(DATA_DIR)
-                print('Created: '+DATA_DIR)
-            # dataIO.save_json(SHELL_JSON, output_dict)
+                await self.bot.edit_message(status, 'Data storage procedure:\nCreating directory.\n'+DATA_DIR)
+            dataIO.save_json(SHELL_JSON, output_dict)
             # print('JSON File saved: '+SHELL_JSON)
         dataIO.save_json(SHELL_JSON, output_dict)
-        print('JSON File saved to '+SHELL_JSON)
+        await self.bot.edit_message(status, 'Data storage procedure:\nFile saved.\n'+SHELL_JSON)
+        
         return output_dict
 
 def validate_attr(*expected_args):
