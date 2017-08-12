@@ -762,8 +762,6 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @checks.admin()
-    @commands.command(hidden=True)
     async def get_masteries(self, update=False):
         '''Coming Soon
         Champion masteries'''
@@ -790,8 +788,6 @@ class MCOC(ChampionFactory):
         except:
             self.bot.say('Update to collect data.')
 
-    @checks.admin()
-    @commands.command(hidden=True)
     async def get_rankcosts(self, update=False):
         '''Coming Soon
         Rank Up Costs'''
@@ -1065,6 +1061,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
+    @checks.owner()
     @cost.command(pass_context=True, name='update', hidden=True)
     async def _update(self):
         '''Collect cost data'''
