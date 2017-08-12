@@ -817,7 +817,7 @@ class MCOC(ChampionFactory):
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
-                                    activated.append(lookup)
+                                    activated.add(lookup)
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
