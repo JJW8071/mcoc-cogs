@@ -788,11 +788,11 @@ class MCOC(ChampionFactory):
                 champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 # champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
                 message = await self.bot.say('Collecting Synergy data ...')
-                await self.bot.upload(SHELL_JSON.format(foldername,filename))
+                await self.bot.upload(SHELLJSON.format(foldername,filename))
             else:
                 await self.bot.say('Prerequisite: GSJSON ```[/] cog install mcoc-cogs gsjson```')
         else:
-            getfile = SHELL_JSON.format(foldername, filename)
+            getfile = SHELLJSON.format(foldername, filename)
             champ_synergies = dataIO.load_json(getfile)
 
         # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
@@ -806,10 +806,10 @@ class MCOC(ChampionFactory):
             synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             # synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
             await self.bot.edit_message(message, 'Almost done ...')
-            await self.bot.upload(SHELL_JSON.format(foldername,filename))
+            await self.bot.upload(SHELLJSON.format(foldername,filename))
             await self.bot.edit_message(message, 'Synergies collected.')
         else:
-            getfile = SHELL_JSON.format(foldername, filename)
+            getfile = SHELLJSON.format(foldername, filename)
             synlist = dataIO.load_json(getfile)
 
         synergy_package = []
