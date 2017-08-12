@@ -25,8 +25,8 @@ from cogs.utils import checks
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
 
-DATA_DIR = 'data/mcoc/{}/'
-SHELL_JSON = DATA_DIR + '{}.json'
+DATADIR = 'data/mcoc/{}/'
+SHELLJSON = DATA_DIR + '{}.json'
 
 
 data_files = {
@@ -1079,8 +1079,8 @@ class MCOC(ChampionFactory):
             await self.bot.say('API Key stored.')
 
     async def gs_to_json(self, head_url:str, body_url:str, foldername:str, filename:str, groupby_value=None):
-        DATA_DIR=DATA_DIR.format(foldername)
-        SHELL_JSON=SHELL_JSON.format(foldername, filename)
+        DATA_DIR = DATADIR.format(foldername)
+        SHELL_JSON=SHELLJSON.format(foldername, filename)
 
         if head_url is not None:
             async with aiohttp.get(head_url) as response:
