@@ -764,7 +764,7 @@ class MCOC(ChampionFactory):
 
     @checks.admin()
     @commands.command(hidden=True)
-    async def get_masteries(self, args=None):
+    async def get_masteries(self, update=False):
         '''Coming Soon
         Champion masteries'''
         sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
@@ -772,13 +772,7 @@ class MCOC(ChampionFactory):
         range_body = 'masteryjson!A2:O'
         foldername = 'masteries'
         filename = 'masteries'
-        if args is not None:
-            try:
-                masteries = dataIO.load_json(SHELLJSON.format(foldername, filename))
-                return masteries
-            except:
-                pass
-        else:
+        if update == True:
             if REDSETTINGS is not None:
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
@@ -790,10 +784,15 @@ class MCOC(ChampionFactory):
                     await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
             else:
                 await self.bot.say('Prerequisite: Google API Key must be set```')
+        try:
+            masteries = dataIO.load_json(SHELLJSON.format(foldername, filename))
+            return masteries
+        except:
+            self.bot.say('Update to collect data.')
 
     @checks.admin()
     @commands.command(hidden=True)
-    async def get_rankcosts(self):
+    async def get_rankcosts(self, update=False):
         '''Coming Soon
         Rank Up Costs'''
         sheet = '1Zxr4e0ZETScSvwKLbtZSWhJAxxMZgSqMaTpHEokwfbU'
@@ -801,10 +800,7 @@ class MCOC(ChampionFactory):
         range_body = 'rankup!A2:S'
         foldername = 'costs'
         filename = 'rankup'
-        try:
-            masteries = dataIO.load_json(SHELLJSON.format(foldername, filename))
-            return masteries
-        except:
+        if update == True:
             if REDSETTINGS is not None:
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
@@ -816,8 +812,11 @@ class MCOC(ChampionFactory):
                     await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
             else:
                 await self.bot.say('Prerequisite: Google API Key must be set```')
-
-
+        try:
+            rankup = dataIO.load_json(SHELLJSON.format(foldername, filename))
+            return rankup
+        except:
+            self.bot.say('Update to collect data.')
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
@@ -831,7 +830,7 @@ class MCOC(ChampionFactory):
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
                 champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-                message = await self.bot.say('Collecting Synergy data ...')
+                message = await self.bot.say('Collecting {} data ...').format(filename)
                 await self.bot.upload(SHELLJSON.format(foldername,filename))
             else:
                 await self.bot.say('Prerequisite: Google API Key must be set```')
@@ -1066,9 +1065,11 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @group.command(pass_context=True, name='rankup', aliases=('ranks',)
-    async def _rankup(self, *, args):
-        '''coming soon'''
+    @group.command(pass_context=True, name='update', hidden=True)
+    async def _update(self, *, args):
+        '''Update cost data'''
+        await self.get_rankcosts(update=True)
+        await self.get_masteries(update=True)
 
     @group.command(pass_context=True, name='rankup', aliases=('ranks',)
     async def _rankup(self, *, args):
