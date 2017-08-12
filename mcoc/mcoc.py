@@ -1070,11 +1070,12 @@ class MCOC(ChampionFactory):
         '''Update cost data'''
         await self.get_rankcosts(update=True)
         await self.get_masteries(update=True)
+        return
 
     @group.command(pass_context=True, name='rankup', aliases=('ranks',)
     async def _rankup(self, *, args):
         '''coming soon'''
-
+        pass
 
     @commands.command()
     async def phc(self):
