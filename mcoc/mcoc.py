@@ -792,7 +792,7 @@ class MCOC(ChampionFactory):
         '''Coming Soon
         Rank Up Costs'''
         sheet = '1Zxr4e0ZETScSvwKLbtZSWhJAxxMZgSqMaTpHEokwfbU'
-        range_headers = 'rankup!A1:O1'
+        range_headers = 'rankup!A1:S1'
         range_body = 'rankup!A2:S'
         foldername = 'costs'
         filename = 'rankup'
@@ -1066,10 +1066,17 @@ class MCOC(ChampionFactory):
     async def _update(self):
         '''Collect cost data'''
         message = await self.bot.say('Collecting cost data:')
-        await self.get_rankcosts(update=True)
-        await self.bot.edit_message(message, 'Collecting cost data:\nRank cost data')
-        await self.get_masteries(update=True)
-        await self.bot.edit_message(message, 'Collecting cost data:\nRank cost data\nMastery cost data.')
+        await self.bot.edit_message(message, message.content+'\nRank cost data')
+        rankup = await self.get_rankcosts(update=True)
+        if rankup is None:
+            await self.bot.edit_message(message, message.content+'\nRank cost data problem.')
+        await self.bot.edit_message(message, message.content+'\nMastery cost data.')
+        masteries = await self.get_masteries(update=True)
+        if masteries is None:
+            await self.bot.edit_message(message, message.content+'\nMastery cost data problem.')
+        await self.bot.edit_message(message, message.content+'\nCollection complete.')
+        asyncio.sleep(15)
+        await self.bot.delete_message(message)
         return
 
     @cost.command(pass_context=True, name='rankup', aliases=('ranks',))
