@@ -780,7 +780,7 @@ class MCOC(ChampionFactory):
                 message = await self.bot.say('Collecting Mastery data ...')
                 await self.bot.upload(SHELLJSON.format(foldername,filename))
             except:
-                await self.bot.whisper('Problem. Verify urls:\n<{}\n\n<{}>'.format(head_url, body_url))
+                await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
         else:
             await self.bot.say('Prerequisite: Google API Key must be set```')
 
