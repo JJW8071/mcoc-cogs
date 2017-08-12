@@ -1065,17 +1065,17 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @group.command(pass_context=True, name='update', hidden=True)
-    async def _update(self, *, args):
+    @cost.command(pass_context=True, name='update', hidden=True)
+    async def _update(self, ctx, *, args):
         '''Update cost data'''
         await self.get_rankcosts(update=True)
         await self.get_masteries(update=True)
         return
 
-    @group.command(pass_context=True, name='rankup', aliases=('ranks',)
-    async def _rankup(self, *, args):
+    @cost.command(pass_context=True, name='rankup', aliases=('ranks',))
+    async def _rankup(self, ctx, *, args):
         '''coming soon'''
-        pass
+        return
 
     @commands.command()
     async def phc(self):
