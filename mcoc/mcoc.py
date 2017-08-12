@@ -801,7 +801,7 @@ class MCOC(ChampionFactory):
                 head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
                 body_url = GS_BASE.format(sheet,range_body,GS_KEY)
                 try:
-                    champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
+                    rankup = await self.gs_to_json(head_url, body_url, foldername, filename)
                     message = await self.bot.say('Collecting {} data ...').format(filename)
                     await self.bot.upload(SHELLJSON.format(foldername,filename))
                 except:
