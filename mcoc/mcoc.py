@@ -762,29 +762,28 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
+    @checks.admin()
     @commands.command(hidden=True)
     async def get_masteries(self)):
         '''Coming Soon
         Champion masteries'''
-        async def get_masteries(self, champs : ChampConverterMult, embed=None):
-            '''If Debug is sent, data will refresh'''
-            sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
-            range_headers = 'masteriesjson!A1:O1'
-            range_body = 'masteriesjson!A2:O`'
-            foldername = 'masteries'
-            filename = 'masteries'
-            if champs[0].debug:
-                if REDSETTINGS is not None:
-                    head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
-                    body_url = GS_BASE.format(sheet,range_body,GS_KEY)
-                    champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
-                    message = await self.bot.say('Collecting Mastery data ...')
-                    await self.bot.upload(SHELLJSON.format(foldername,filename))
-                else:
-                    await self.bot.say('Prerequisite: GSJSON ```[/] cog install mcoc-cogs gsjson```')
+        sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
+        range_headers = 'masteriesjson!A1:O1'
+        range_body = 'masteriesjson!A2:O`'
+        foldername = 'masteries'
+        filename = 'masteries'
+        if champs[0].debug:
+            if REDSETTINGS is not None:
+                head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
+                body_url = GS_BASE.format(sheet,range_body,GS_KEY)
+                champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
+                message = await self.bot.say('Collecting Mastery data ...')
+                await self.bot.upload(SHELLJSON.format(foldername,filename))
             else:
-                getfile = SHELLJSON.format(foldername, filename)
-                champ_masteries = dataIO.load_json(getfile)
+                await self.bot.say('Prerequisite: GSJSON ```[/] cog install mcoc-cogs gsjson```')
+        else:
+            getfile = SHELLJSON.format(foldername, filename)
+            champ_masteries = dataIO.load_json(getfile)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
