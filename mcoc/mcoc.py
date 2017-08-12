@@ -1061,7 +1061,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @checks.owner()
+    @checks.admin_or_permissions()
     @cost.command(pass_context=True, name='update', hidden=True)
     async def _update(self):
         '''Collect cost data'''
