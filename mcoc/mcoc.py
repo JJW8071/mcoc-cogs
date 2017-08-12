@@ -764,7 +764,7 @@ class MCOC(ChampionFactory):
 
     @checks.admin()
     @commands.command(hidden=True)
-    async def get_masteries(self):
+    async def get_masteries(self, args=None):
         '''Coming Soon
         Champion masteries'''
         sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
@@ -772,17 +772,50 @@ class MCOC(ChampionFactory):
         range_body = 'masteryjson!A2:O'
         foldername = 'masteries'
         filename = 'masteries'
-        if REDSETTINGS is not None:
-            head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
-            body_url = GS_BASE.format(sheet,range_body,GS_KEY)
+        if args is not None:
             try:
-                champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
-                message = await self.bot.say('Collecting Mastery data ...')
-                await self.bot.upload(SHELLJSON.format(foldername,filename))
+                masteries = dataIO.load_json(SHELLJSON.format(foldername, filename))
+                return masteries
             except:
-                await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
+                pass
         else:
-            await self.bot.say('Prerequisite: Google API Key must be set```')
+            if REDSETTINGS is not None:
+                head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
+                body_url = GS_BASE.format(sheet,range_body,GS_KEY)
+                try:
+                    champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
+                    message = await self.bot.say('Collecting Mastery data ...')
+                    await self.bot.upload(SHELLJSON.format(foldername,filename))
+                except:
+                    await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
+            else:
+                await self.bot.say('Prerequisite: Google API Key must be set```')
+
+    @checks.admin()
+    @commands.command(hidden=True)
+    async def get_rankcosts(self):
+        '''Coming Soon
+        Rank Up Costs'''
+        sheet = '1Zxr4e0ZETScSvwKLbtZSWhJAxxMZgSqMaTpHEokwfbU'
+        range_headers = 'rankup!A1:O1'
+        range_body = 'rankup!A2:S'
+        foldername = 'costs'
+        filename = 'rankup'
+        try:
+            masteries = dataIO.load_json(SHELLJSON.format(foldername, filename))
+            return masteries
+        except:
+            if REDSETTINGS is not None:
+                head_url = GS_BASE.format(sheet,range_headers,GS_KEY)
+                body_url = GS_BASE.format(sheet,range_body,GS_KEY)
+                try:
+                    champ_masteries = await self.gs_to_json(head_url, body_url, foldername, filename)
+                    message = await self.bot.say('Collecting {} data ...').format(filename)
+                    await self.bot.upload(SHELLJSON.format(foldername,filename))
+                except:
+                    await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
+            else:
+                await self.bot.say('Prerequisite: Google API Key must be set```')
 
 
 
@@ -1027,6 +1060,21 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
+    ### COST Command group
+    @commands.group(pass_context=True, aliases=['costs',])
+    async def cost(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @group.command(pass_context=True, name='rankup', aliases=('ranks',)
+    async def _rankup(self, *, args):
+        '''coming soon'''
+
+    @group.command(pass_context=True, name='rankup', aliases=('ranks',)
+    async def _rankup(self, *, args):
+        '''coming soon'''
+
+
     @commands.command()
     async def phc(self):
         '''Premium Hero Crystal Release Dates'''
@@ -1132,6 +1180,10 @@ class MCOC(ChampionFactory):
         await self.bot.edit_message(status, 'Data storage procedure:\nFile saved.\n'+SHELL_JSON)
 
         return output_dict
+
+
+
+
 
 def validate_attr(*expected_args):
     def decorator(func):
