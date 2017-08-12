@@ -1066,7 +1066,7 @@ class MCOC(ChampionFactory):
             await send_cmd_help(ctx)
 
     @cost.command(pass_context=True, name='update', hidden=True)
-    async def _update(self, ctx, *, args):
+    async def _update(self):
         '''Update cost data'''
         await self.get_rankcosts(update=True)
         await self.get_masteries(update=True)
