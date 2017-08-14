@@ -1061,7 +1061,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    # @checks.admin_or_permissions()
+    @checks.admin_or_permissions()
     @cost.command(pass_context=True, name='update', hidden=True)
     async def _update(self):
         '''Collect cost data'''
@@ -1079,7 +1079,7 @@ class MCOC(ChampionFactory):
         await self.bot.delete_message(message)
         return
 
-    @champ.command(pass_context=True, name='rankup', aliases=('ranks',)
+    @champ.command(pass_context=True, name='rankup', aliases=('ranks',))
     async def _rankup(self, ctx, *, champs: ChampConverterMult):
         '''coming soon'''
         hook = self.bot.get_cog['hook']
@@ -1151,7 +1151,7 @@ class MCOC(ChampionFactory):
             await self.bot.say('Residual keys:\n\t' + '\n\t'.join(dump))
         await self.bot.say('Done')
 
-    # @checks.admin_or_permissions()
+    @checks.admin_or_permissions()
     @commands.command(hidden=True, pass_context=True, no_pm=False)
     async def setgoogleapikey(self, ctx):
         if ctx.message.server:
