@@ -1055,7 +1055,7 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='rankup', aliases=('ranks',))
+    @champ.command(name='rankup', aliases=('ranks',))
     async def _rankup(self, *, champs: ChampConverterMult):
         '''coming soon'''
         hook = self.bot.get_cog['hook']
