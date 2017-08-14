@@ -792,8 +792,8 @@ class MCOC(ChampionFactory):
         '''Coming Soon
         Rank Up Costs'''
         sheet = '1Zxr4e0ZETScSvwKLbtZSWhJAxxMZgSqMaTpHEokwfbU'
-        range_headers = 'rankup!A1:S1'
-        range_body = 'rankup!A2:S103'
+        range_headers = 'rankup!A1:AA1'
+        range_body = 'rankup!A2:AA103'
         foldername = 'costs'
         filename = 'rankup'
         if update == True:
@@ -1079,9 +1079,30 @@ class MCOC(ChampionFactory):
         await self.bot.delete_message(message)
         return
 
-    @cost.command(pass_context=True, name='rankup', aliases=('ranks',))
-    async def _rankup(self, ctx, *, args):
+    @champ.command(pass_context=True, name='rankup', aliases=('ranks',)
+    async def _rankup(self, ctx, *, champs: ChampConverterMult):
         '''coming soon'''
+        hook = self.bot.get_cog['hook']
+        goldicon = '<:gold:344506213662326785>'
+        isoicon ='<:iso8:346494518989684745>'
+        rankdata = self.get_rankcosts()
+        embeds = []
+        for champ in champs:
+            for i in range(2, int(champ.star)+1):
+                lookup = '{}-{}-{}'.format(champ.star, champ.klass, i)
+                rankup = rankdata[lookup]
+                levelstr = '{} {} {} {}'.format(rankup['leveliso'], isoicon, rankup['levelgold'], goldicon)
+                rankstr = '{} {} {} {}'.format(rankup['tbasic'], rankup['basicicon'],rankup['tclass'],rankup['classicon'])
+                if rankup['t1a'] != "":
+                    rankstr += '{} {}'.format(rankup['t1a'], rankup['t1aicon'])
+                if rankup ['t1a'] != "":
+                    rankstr += '{} {}'.format(rankup['t2a'], rankup['t2aicon'])
+
+                em = discord.Embed(color=champ.class_color, title=champ.verbose_str)
+                em.add_field(name='Level Up', value=levelstr)
+                em.add_field(name='Rank Up', value=rankstr)
+                embeds.append(em)
+        await hook.menu_start(embeds)
         return
 
     @commands.command()
