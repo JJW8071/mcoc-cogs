@@ -1055,6 +1055,33 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
+    @champ.command(pass_context=True, name='rankup', aliases=('ranks',))
+    async def _rankup(self, *, champs: ChampConverterMult):
+        '''coming soon'''
+        hook = self.bot.get_cog['hook']
+        goldicon = '<:gold:344506213662326785>'
+        isoicon ='<:iso8:346494518989684745>'
+        rankdata = self.get_rankcosts()
+        embeds = []
+        message = await self.bot.say('Collecting costs')
+        for champ in champs:
+            await self.bot.edit_message(message, 'Starting {}'.format(champ.full_name))
+            for i in range(2, int(champ.star)+1):
+                lookup = '{}-{}-{}'.format(champ.star, champ.klass, i)
+                rankup = rankdata[lookup]
+                levelstr = '{} {} {} {}'.format(rankup['leveliso'], isoicon, rankup['levelgold'], goldicon)
+                rankstr = '{} {} {} {}'.format(rankup['tbasic'], rankup['basicicon'],rankup['tclass'],rankup['classicon'])
+                if rankup['t1a'] != "":
+                    rankstr += '{} {}'.format(rankup['t1a'], rankup['t1aicon'])
+                if rankup ['t1a'] != "":
+                    rankstr += '{} {}'.format(rankup['t2a'], rankup['t2aicon'])
+
+                em = discord.Embed(color=champ.class_color, title=champ.verbose_str)
+                em.add_field(name='Level Up', value=levelstr)
+                em.add_field(name='Rank Up', value=rankstr)
+                embeds.append(em)
+        await hook.menu_start(embeds)
+
     ### COST Command group
     @commands.group(pass_context=True, aliases=['costs',])
     async def cost(self, ctx):
@@ -1079,31 +1106,7 @@ class MCOC(ChampionFactory):
         await self.bot.delete_message(message)
         return
 
-    @champ.command(pass_context=True, name='rankup', aliases=('ranks',))
-    async def _rankup(self, ctx, *, champs: ChampConverterMult):
-        '''coming soon'''
-        hook = self.bot.get_cog['hook']
-        goldicon = '<:gold:344506213662326785>'
-        isoicon ='<:iso8:346494518989684745>'
-        rankdata = self.get_rankcosts()
-        embeds = []
-        for champ in champs:
-            for i in range(2, int(champ.star)+1):
-                lookup = '{}-{}-{}'.format(champ.star, champ.klass, i)
-                rankup = rankdata[lookup]
-                levelstr = '{} {} {} {}'.format(rankup['leveliso'], isoicon, rankup['levelgold'], goldicon)
-                rankstr = '{} {} {} {}'.format(rankup['tbasic'], rankup['basicicon'],rankup['tclass'],rankup['classicon'])
-                if rankup['t1a'] != "":
-                    rankstr += '{} {}'.format(rankup['t1a'], rankup['t1aicon'])
-                if rankup ['t1a'] != "":
-                    rankstr += '{} {}'.format(rankup['t2a'], rankup['t2aicon'])
 
-                em = discord.Embed(color=champ.class_color, title=champ.verbose_str)
-                em.add_field(name='Level Up', value=levelstr)
-                em.add_field(name='Rank Up', value=rankstr)
-                embeds.append(em)
-        await hook.menu_start(embeds)
-        return
 
     @commands.command()
     async def phc(self):
