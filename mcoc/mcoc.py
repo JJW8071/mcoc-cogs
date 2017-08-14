@@ -1058,7 +1058,7 @@ class MCOC(ChampionFactory):
     @champ.command(name='rankup', aliases=('ranks',))
     async def _rankup(self, *, champs: ChampConverterMult):
         '''coming soon'''
-        hook = self.bot.get_cog['hook']
+        hook = self.bot.get_cog('hook')
         goldicon = '<:gold:344506213662326785>'
         isoicon ='<:iso8:346494518989684745>'
         rankdata = self.get_rankcosts()
