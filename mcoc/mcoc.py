@@ -1151,7 +1151,7 @@ class MCOC(ChampionFactory):
             await self.bot.say('Residual keys:\n\t' + '\n\t'.join(dump))
         await self.bot.say('Done')
 
-    @checks.is_owner()
+    @checks.admin_or_permissions()
     @commands.command(hidden=True, pass_context=True, no_pm=False)
     async def setgoogleapikey(self, ctx):
         if ctx.message.server:
