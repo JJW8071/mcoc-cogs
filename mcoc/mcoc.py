@@ -801,7 +801,7 @@ class MCOC(ChampionFactory):
             synlist = dataIO.load_json(getfile)
 
         synergy_package = []
-
+        activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
@@ -811,10 +811,13 @@ class MCOC(ChampionFactory):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
                             for c in champs:
-                                if c.full_name in  champ_synergies[lookup]['triggers']:
+                                if lookup in activated:
+                                    continue
+                                elif c.full_name in  champ_synergies[lookup]['triggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
+                                    activated.add(lookup)
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
