@@ -654,7 +654,7 @@ class MCOC(ChampionFactory):
         else:
             em.add_field(name='Target not found',
                     value='\n'.join(['Add one to the Community Spreadhseet!',
-                            '[Survey](http://bit.ly/MCOCDuelTargets)']))
+                            '[bit.ly/MCOCDuelTargets](http://bit.ly/MCOCDuelTargets)']))
         em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
