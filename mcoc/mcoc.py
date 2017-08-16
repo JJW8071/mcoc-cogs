@@ -637,7 +637,7 @@ class MCOC(ChampionFactory):
         # names = {4: 'Duel', 5: 'Sparring'}
         em = discord.Embed(color=champ.class_color, title='')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_featured())
+        em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='superflu0us\' Duel Targets',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
