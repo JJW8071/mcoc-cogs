@@ -561,10 +561,13 @@ class Hook:
         track = roster.update(champs)
         em = discord.Embed(title='Champion Update for {}'.format(roster.user.name),
                 color=discord.Color.gold())
-        for k in ('new', 'modified', 'unchanged'):
-            if track[k]:
-                em.add_field(name='{} Champions'.format(k.capitalize()),
-                        value='\n'.join(sorted(track[k])), inline=False)
+        if len(champs) <= 20:
+            for k in ('new', 'modified', 'unchanged'):
+                if track[k]:
+                    em.add_field(name='{} Champions'.format(k.capitalize()),
+                            value='\n'.join(sorted(track[k])), inline=False)
+        else:
+            em.add_field(name='{} Champion update confirmed. \nNumber exceeds display limitation'.format(len(champs)))
         await self.bot.say(embed=em)
 
     @roster.command(pass_context=True, name='dupe')
