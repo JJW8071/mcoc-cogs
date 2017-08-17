@@ -567,7 +567,7 @@ class Hook:
                     em.add_field(name='{} Champions'.format(k.capitalize()),
                             value='\n'.join(sorted(track[k])), inline=False)
         else:
-            em.add_field(name='{} Champion update confirmed.'.format(len(champs)), value='Number exceeds display limitation')
+            em.add_field(name='{} Champions updated, confirmed.'.format(len(champs)), value='Number exceeds display limitation')
         await self.bot.say(embed=em)
 
     @roster.command(pass_context=True, name='dupe')
