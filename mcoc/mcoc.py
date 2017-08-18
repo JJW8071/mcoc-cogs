@@ -953,12 +953,14 @@ class MCOC(ChampionFactory):
     @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
         '''Retrieve Champion Spotlight link if available'''
-        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
+        infovideo = champ.infovideo
+        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',video=infovideo)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
+
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
