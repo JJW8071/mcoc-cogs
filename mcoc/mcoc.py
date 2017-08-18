@@ -710,7 +710,7 @@ class MCOC(ChampionFactory):
         hargs = await HashtagRankConverter(ctx, hargs).convert() #in hook
         roster = ChampionRoster(self.bot, self.bot.user) #in hook
         rlist = []
-        for champ_class in mcoc.champions.values():
+        for champ_class in self.mcoc.champions.values():
             champ = champ_class(hargs.attrs.copy())
             if champ.has_prestige:
                 rlist.append(champ)
