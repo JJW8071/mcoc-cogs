@@ -710,7 +710,7 @@ class MCOC(ChampionFactory):
         hargs = await HashtagRankConverter(ctx, hargs).convert() #in hook
         roster = ChampionRoster(self.bot, self.bot.user) #in hook
         rlist = []
-        for champ_class in roster.values():
+        for champ_class in mcoc.champions.values():
             champ = champ_class(hargs.attrs.copy())
             if champ.has_prestige:
                 rlist.append(champ)
@@ -727,8 +727,9 @@ class MCOC(ChampionFactory):
                     title='Release Dates & Est. Pull Chance')
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-            em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
-            em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
+            em.add_field(name='4'+star_glyph+' Basic & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
+            em.add_field(name='5'+star_glyph+' Subfeature', value=xref['5subfeature'],inline=False)
+            em.add_field(name='5'+star_glyph+' Basic', value=xref['5basic'],inline=False)
             state = xref['f/s/b']
             if state == 'b':
                 em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
