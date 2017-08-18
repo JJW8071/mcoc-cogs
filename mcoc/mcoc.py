@@ -20,6 +20,7 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
+from .cogs.hook import ChampionRoster, HashtagRankConverter
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -706,8 +707,8 @@ class MCOC(ChampionFactory):
 
     @champ.command(pass_context=True, name='list', aliases=('prestige_list',))
     async def _rank_prestige(self, ctx, *, hargs=''):
-        hargs = await HashtagRankConverter(ctx, hargs).convert() # doesn't exist
-        roster = ChampionRoster(self.bot, self.bot.user) #doesn't exist
+        hargs = await HashtagRankConverter(ctx, hargs).convert() #in hook
+        roster = ChampionRoster(self.bot, self.bot.user) #in hook
         rlist = []
         for champ_class in champions.values():
             champ = champ_class(hargs.attrs.copy())
@@ -715,7 +716,7 @@ class MCOC(ChampionFactory):
                 rlist.append(champ)
         roster.from_list(rlist)
         roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
-        await self.display_roster(ctx, roster, hargs.tags)
+        await self.display_roster(ctx, roster, hargs.tags) #in hook
 
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
