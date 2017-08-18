@@ -704,6 +704,19 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
+    @champ.command(pass_context=True, name='list', aliases=('prestige_list',))
+    async def _rank_prestige(self, ctx, *, hargs=''):
+        hargs = await HashtagRankConverter(ctx, hargs).convert() # doesn't exist
+        roster = ChampionRoster(self.bot, self.bot.user) #doesn't exist
+        rlist = []
+        for champ_class in champions.values():
+            champ = champ_class(hargs.attrs.copy())
+            if champ.has_prestige:
+                rlist.append(champ)
+        roster.from_list(rlist)
+        roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
+        await self.display_roster(ctx, roster, hargs.tags)
+
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
