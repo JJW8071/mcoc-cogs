@@ -388,7 +388,7 @@ class ChampionFactory():
             remote_check = now
             await response.release()
         elif response:
-            err_str = "HTTP error code {} while trying to retrieve {}".format(
+            err_str = "HTTP error code {} while trying to Collect {}".format(
                     response.status, key)
             logger.error(err_str)
             await response.release()
@@ -584,7 +584,7 @@ class MCOC(ChampionFactory):
                 with open(v['local'], 'wb') as fp:
                     fp.write(await response.read())
             else:
-                err_str = "HTTP error code {} while trying to retrieve Google Sheet {}".format(
+                err_str = "HTTP error code {} while trying to Collect Google Sheet {}".format(
                         response.status, k)
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
@@ -596,7 +596,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='featured')
     async def champ_featured(self, champ : ChampConverter):
-        '''Retrieve Champion Feature Images'''
+        '''Champion Featured image'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
@@ -604,7 +604,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='portrait')
     async def champ_portrait(self, champ : ChampConverter):
-        '''Retrieve Champion Portrait'''
+        '''Champion portrait'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_avatar())
@@ -612,7 +612,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='bio', aliases=('biography',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
-        '''Retrieve the Bio of a Champion'''
+        '''Champio Bio'''
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
@@ -630,7 +630,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='duel')
     async def champ_duel(self, champ : ChampConverter):
-        '''Lookup Duel/Sparring Targets'''
+        '''Duel & Spar Targets'''
         dataset=data_files['duelist']['local']
         # targets = defaultdict(list)
         targets = []
@@ -660,7 +660,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
-        '''Retrieve Champion Base Stats'''
+        '''Champion Base Stats'''
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
@@ -705,7 +705,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
-        '''Retrieve Champion Release Date'''
+        '''Champion Release Date'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
@@ -731,7 +731,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='sig', aliases=['signature',])
     async def champ_sig(self, *, champ : ChampConverterSig):
-        '''Retrieve the Signature Ability of a Champion'''
+        '''Champion Signature Ability'''
         if champ.star == 5:
             await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph))
             return
@@ -754,8 +754,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs : ChampConverterMult):
-        '''Coming Soon
-        Champion Synergies'''
+        '''Champion Synergies'''
         if len(champs)==1:
             for champ in champs:
                 em = discord.Embed(color=champ.class_color, title='')
@@ -952,7 +951,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
-        '''Retrieve Champion Spotlight link if available'''
+        '''Champion Spotlight link if available'''
 
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -969,7 +968,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='abilities')
     async def champ_abilities(self, champ : ChampConverter):
-        '''In-Development: Retrieve Champion Abilities'''
+        '''In-Development: Champion Abilities'''
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color, title='Champion Abilities')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -994,7 +993,7 @@ class MCOC(ChampionFactory):
 
     # @commands.command()
     # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
-    #     '''Retrieve the Signature Ability of a Champion at multiple levels'''
+    #     '''the Signature Ability of a Champion at multiple levels'''
     #     champ = self._resolve_alias(champ)
     #     title, desc = champ.get_sigarray(**self.settings)
     #     if dbg == 0:
@@ -1013,7 +1012,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='prestige')
     async def champ_prestige(self, *, champs : ChampConverterMult):
-        '''Retrieve prestige data for champs'''
+        '''prestige data for champs'''
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
@@ -1036,7 +1035,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='aliases', aliases=('alias',))
     async def champ_aliases(self, *args):
-        '''Retrieve Champion Aliases'''
+        '''Champion Aliases'''
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         champs_matched = set()
         for arg in args:
