@@ -705,7 +705,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='list', aliases=('prestige_list',))
+    @champ.command(pass_context=True, name='list', aliases=('prestige_list',), hidden=True)
     async def _rank_prestige(self, ctx, *, hargs=''):
         hargs = await HashtagRankConverter(ctx, hargs).convert() #in hook
         roster = ChampionRoster(self.bot, self.bot.user) #in hook
