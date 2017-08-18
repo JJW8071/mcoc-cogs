@@ -810,6 +810,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Prerequisite: Google API Key must be set```')
         try:
             rankup = dataIO.load_json(SHELLJSON.format(foldername, filename))
+            print('loaded rankup data')
             return rankup
         except:
             self.bot.say('Update to collect data.')
