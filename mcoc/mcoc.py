@@ -752,7 +752,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='synergies', aliases=['syn',], hidden=True)
+    @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Coming Soon
         Champion Synergies'''
