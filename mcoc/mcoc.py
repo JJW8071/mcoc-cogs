@@ -501,7 +501,8 @@ class MCOC(ChampionFactory):
 
     @commands.command(name='flat', aliases=('f2p'))
     async def flat2per(self, *, m):
-        '''Convert MCOC Flat Value to Percentge'''
+        '''Convert MCOC Flat Value to Percentge
+        <equation> [challenger rating = 100]'''
         if ' ' in m:
             m, cr = m.rsplit(' ',1)
             challenger_rating = int(cr)
@@ -705,7 +706,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
-        '''Champion Release Date'''
+        '''Champion(s) Release Date'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
@@ -754,7 +755,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs : ChampConverterMult):
-        '''Champion Synergies'''
+        '''Champion(s) Synergies'''
         if len(champs)==1:
             for champ in champs:
                 em = discord.Embed(color=champ.class_color, title='')
@@ -951,7 +952,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
-        '''Champion Spotlight link if available'''
+        '''Champion Spotlight link'''
 
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -968,7 +969,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='abilities')
     async def champ_abilities(self, champ : ChampConverter):
-        '''In-Development: Champion Abilities'''
+        '''Champion Abilities'''
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color, title='Champion Abilities')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -1012,7 +1013,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='prestige')
     async def champ_prestige(self, *, champs : ChampConverterMult):
-        '''prestige data for champs'''
+        '''Champion(s) Prestige'''
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
