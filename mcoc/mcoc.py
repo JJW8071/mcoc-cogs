@@ -708,6 +708,7 @@ class MCOC(ChampionFactory):
     @champ.command(pass_context=True, name='list', aliases=('prestige_list',), hidden=True)
     async def _rank_prestige(self, ctx, *, hargs=''):
         hargs = await HashtagRankConverter(ctx, hargs).convert() #imported from hook
+        await self.update_local()
         roster = ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
         for champ_class in self.champions.values():
@@ -716,7 +717,7 @@ class MCOC(ChampionFactory):
                 rlist.append(champ)
         roster.from_list(rlist)
         roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
-        await self.display_roster(ctx, roster, hargs.tags) #imported from hook
+        await roster.display(hargs.tags) #imported from hook
 
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
