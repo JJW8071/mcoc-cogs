@@ -21,7 +21,6 @@ from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
 #from .hook import ChampionRoster, HashtagRankConverter
-from . import hook as hook
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -708,7 +707,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(pass_context=True, name='list')
     async def champ_list(self, ctx, *, hargs=''):
-        '''Display a list of all champions in prestige order.
+        '''List of all champions in prestige order.
 
         hargs:  [attribute_args] [hashtags] 
         The optional attribute arguments can be in any order, with or without spaces.
@@ -1720,7 +1719,8 @@ def padd_it(word,max : int,opt='back'):
     #setattr(MCOC, fname, new_func)
     ##print(getattr(MCOC, fname).name, getattr(MCOC, fname).callback)
 
-
+# avoiding cyclic importing
+from . import hook as hook
 
 def setup(bot):
     if not hasattr(bot, '_command_error_orig'):
