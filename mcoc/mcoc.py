@@ -20,7 +20,8 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
-from .hook import ChampionRoster, HashtagRankConverter
+#from .hook import ChampionRoster, HashtagRankConverter
+from . import hook as hook
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -706,10 +707,22 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(pass_context=True, name='list')
-    async def _rank_prestige(self, ctx, *, hargs=''):
-        hargs = await HashtagRankConverter(ctx, hargs).convert() #imported from hook
+    async def champ_list(self, ctx, *, hargs=''):
+        '''Display a list of all champions in prestige order.
+
+        hargs:  [attribute_args] [hashtags] 
+        The optional attribute arguments can be in any order, with or without spaces.
+            <digit>* specifies star <default: 4>
+            r<digit> specifies rank <default: 5>
+            s<digit> specifies signature level <default: 99>
+
+        Examples:
+            /champ list    (all 4* champs rank5, sig99)
+            /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
+        '''
+        hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
         await self.update_local()
-        roster = ChampionRoster(self.bot, self.bot.user) #imported from hook
+        roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
