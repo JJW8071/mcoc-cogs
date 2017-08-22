@@ -23,6 +23,7 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
+#from .hook import ChampionRoster, HashtagRankConverter
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -447,7 +448,7 @@ class ChampionFactory():
             remote_check = now
             await response.release()
         elif response:
-            err_str = "HTTP error code {} while trying to retrieve {}".format(
+            err_str = "HTTP error code {} while trying to Collect {}".format(
                     response.status, key)
             logger.error(err_str)
             await response.release()
@@ -560,7 +561,8 @@ class MCOC(ChampionFactory):
 
     @commands.command(name='flat', aliases=('f2p'))
     async def flat2per(self, *, m):
-        '''Convert MCOC Flat Value to Percentge'''
+        '''Convert MCOC Flat Value to Percentge
+        <equation> [challenger rating = 100]'''
         if ' ' in m:
             m, cr = m.rsplit(' ',1)
             challenger_rating = int(cr)
@@ -643,7 +645,7 @@ class MCOC(ChampionFactory):
                 with open(v['local'], 'wb') as fp:
                     fp.write(await response.read())
             else:
-                err_str = "HTTP error code {} while trying to retrieve Google Sheet {}".format(
+                err_str = "HTTP error code {} while trying to Collect Google Sheet {}".format(
                         response.status, k)
                 await self.bot.say(err_str)
         await self.bot.say("Google Sheet retrieval complete")
@@ -655,7 +657,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='featured')
     async def champ_featured(self, champ : ChampConverter):
-        '''Retrieve Champion Feature Images'''
+        '''Champion Featured image'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
@@ -663,7 +665,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='portrait')
     async def champ_portrait(self, champ : ChampConverter):
-        '''Retrieve Champion Portrait'''
+        '''Champion portrait'''
         em = discord.Embed(color=champ.class_color, title=champ.bold_name)
         em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_avatar())
@@ -671,7 +673,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='bio', aliases=('biography',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
-        '''Retrieve the Bio of a Champion'''
+        '''Champio Bio'''
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
@@ -689,15 +691,15 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='duel')
     async def champ_duel(self, champ : ChampConverter):
-        '''Lookup Duel/Sparring Targets'''
+        '''Duel & Spar Targets'''
         dataset=data_files['duelist']['local']
         # targets = defaultdict(list)
         targets = []
         # names = {4: 'Duel', 5: 'Sparring'}
         em = discord.Embed(color=champ.class_color, title='')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_featured())
-        em.set_footer(text='Sourced from Community Spreadsheet',
+        em.set_thumbnail(url=champ.get_featured())
+        em.set_footer(text='superflu0us\' Duel Targets',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
         for star in (4,5):
@@ -713,14 +715,13 @@ class MCOC(ChampionFactory):
         else:
             em.add_field(name='Target not found',
                     value='\n'.join(['Add one to the Community Spreadhseet!',
-                            'Duel Targets: <http://simians.tk/mcocduel>',
-                            'Sparring Targets: <http://simians.tk/mcocspar>']))
+                            '[bit.ly/DuelTargetForm](http://bit.ly/DuelTargetForm)']))
         em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
     @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
-        '''Retrieve Champion Base Stats'''
+        '''Champion Base Stats'''
         data = champ.get_spotlight(default='x')
         title = 'Base Attributes for {}'.format(champ.verbose_str)
         em = discord.Embed(color=champ.class_color,
@@ -763,17 +764,44 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
+    @champ.command(pass_context=True, name='list')
+    async def champ_list(self, ctx, *, hargs=''):
+        '''List of all champions in prestige order.
+
+        hargs:  [attribute_args] [hashtags] 
+        The optional attribute arguments can be in any order, with or without spaces.
+            <digit>* specifies star <default: 4>
+            r<digit> specifies rank <default: 5>
+            s<digit> specifies signature level <default: 99>
+
+        Examples:
+            /champ list    (all 4* champs rank5, sig99)
+            /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
+        '''
+        hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
+        await self.update_local()
+        roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
+        rlist = []
+        for champ_class in self.champions.values():
+            champ = champ_class(hargs.attrs.copy())
+            if champ.has_prestige:
+                rlist.append(champ)
+        roster.from_list(rlist)
+        roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
+        await roster.display(hargs.tags) #imported from hook
+
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
-        '''Retrieve Champion Release Date'''
+        '''Champion(s) Release Date'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
                     title='Release Dates & Est. Pull Chance')
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-            em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
-            em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
+            em.add_field(name='4'+star_glyph+' Basic & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
+            em.add_field(name='5'+star_glyph+' Subfeature', value=xref['5subfeature'],inline=False)
+            em.add_field(name='5'+star_glyph+' Basic', value=xref['5basic'],inline=False)
             state = xref['f/s/b']
             if state == 'b':
                 em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
@@ -791,7 +819,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='sig', aliases=['signature',])
     async def champ_sig(self, *, champ : ChampConverterSig):
-        '''Retrieve the Signature Ability of a Champion'''
+        '''Champion Signature Ability'''
         if champ.star == 5:
             await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph))
             return
@@ -813,10 +841,9 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='synergies', aliases=['syn',], hidden=True)
+    @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs : ChampConverterMult):
-        '''Coming Soon
-        Champion Synergies'''
+        '''Champion(s) Synergies'''
         if len(champs)==1:
             for champ in champs:
                 em = discord.Embed(color=champ.class_color, title='')
@@ -861,7 +888,7 @@ class MCOC(ChampionFactory):
             synlist = dataIO.load_json(getfile)
 
         synergy_package = []
-
+        activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
@@ -871,10 +898,13 @@ class MCOC(ChampionFactory):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
                         if lookup in champ_synergies:
                             for c in champs:
-                                if c.full_name in  champ_synergies[lookup]['triggers']:
+                                if lookup in activated:
+                                    continue
+                                elif c.full_name in  champ_synergies[lookup]['triggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
+                                    activated.add(lookup)
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
@@ -1030,13 +1060,16 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
-        '''Retrieve Champion Spotlight link if available'''
-        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',)
+        '''Champion Spotlight link'''
+
+        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
+        # if champ.infovideo != '':
+        #     em.video(url=champ.infovideo)
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
@@ -1044,7 +1077,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='abilities')
     async def champ_abilities(self, champ : ChampConverter):
-        '''In-Development: Retrieve Champion Abilities'''
+        '''Champion Abilities'''
         specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color, title='Champion Abilities')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -1069,7 +1102,7 @@ class MCOC(ChampionFactory):
 
     # @commands.command()
     # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
-    #     '''Retrieve the Signature Ability of a Champion at multiple levels'''
+    #     '''the Signature Ability of a Champion at multiple levels'''
     #     champ = self._resolve_alias(champ)
     #     title, desc = champ.get_sigarray(**self.settings)
     #     if dbg == 0:
@@ -1088,7 +1121,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='prestige')
     async def champ_prestige(self, *, champs : ChampConverterMult):
-        '''Retrieve prestige data for champs'''
+        '''Champion(s) Prestige'''
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
@@ -1111,7 +1144,7 @@ class MCOC(ChampionFactory):
 
     @champ.command(name='aliases', aliases=('alias',))
     async def champ_aliases(self, *args):
-        '''Retrieve Champion Aliases'''
+        '''Champion Aliases'''
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         champs_matched = set()
         for arg in args:
@@ -1801,7 +1834,8 @@ def dict_merge(dct, merge_dct):
     #setattr(MCOC, fname, new_func)
     ##print(getattr(MCOC, fname).name, getattr(MCOC, fname).callback)
 
-
+# avoiding cyclic importing
+from . import hook as hook
 
 def setup(bot):
     if not hasattr(bot, '_command_error_orig'):

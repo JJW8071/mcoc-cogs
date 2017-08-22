@@ -428,6 +428,38 @@ class ChampionRoster:
         self.save_champ_data()
         return track
 
+    async def display(self, tags):
+        filtered = await self.filter_champs(tags)
+        user = self.user
+        embeds = []
+        if not filtered:
+            em = discord.Embed(title='User', description=user.name,
+                    color=discord.Color.gold())
+            em.add_field(name='Tags used filtered to an empty roster',
+                    value=' '.join(tags))
+            await self.bot.say(embed=em)
+            return
+
+        strs = [champ.verbose_prestige_str for champ in sorted(filtered, reverse=True,
+                    key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'))]
+        champs_per_page = 15
+        for i in range(0, len(strs)+1, champs_per_page):
+            em = discord.Embed(title='', color=discord.Color.gold())
+            em.set_author(name=user.name, icon_url=user.avatar_url)
+            em.set_footer(text='hook/champions for Collector',
+                    icon_url='https://assets-cdn.github.com/favicon.ico')
+            page = strs[i:min(i+champs_per_page, len(strs))]
+            if not page:
+                break
+            em.add_field(name=self.embed_display, inline=False,
+                    value='\n'.join(page))
+            embeds.append(em)
+
+        if len(embeds) == 1:
+            await self.bot.say(embed=embeds[0])
+        else:
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(embeds)
 
 class Hook:
 
@@ -506,41 +538,7 @@ class Hook:
         ex.
         /roster [user] [#mutuant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
-        await self.display_roster(ctx, hargs.roster, hargs.tags)
-
-    async def display_roster(self, ctx, roster, tags):
-        filtered = await roster.filter_champs(tags)
-        user = roster.user
-        embeds = []
-        if not filtered:
-            em = discord.Embed(title='User', description=user.name,
-                    color=discord.Color.gold())
-            em.add_field(name='Tags used filtered to an empty roster',
-                    value=' '.join(tags))
-            await self.bot.say(embed=em)
-            return
-
-        strs = [champ.verbose_prestige_str for champ in sorted(filtered, reverse=True,
-                    key=attrgetter('prestige', 'chlgr_rating', 'star', 'klass', 'full_name'))]
-        champs_per_page = 15
-        for i in range(0, len(strs)+1, champs_per_page):
-            em = discord.Embed(title='', color=discord.Color.gold())
-            em.set_author(name=user.name, icon_url=user.avatar_url)
-            em.set_footer(text='hook/champions for Collector',
-                    icon_url='https://assets-cdn.github.com/favicon.ico')
-            page = strs[i:min(i+champs_per_page, len(strs))]
-            if not page:
-                break
-            em.add_field(name=roster.embed_display, inline=False,
-                    value='\n'.join(page))
-            embeds.append(em)
-
-        if len(embeds) == 1:
-            await self.bot.say(embed=embeds[0])
-        else:
-            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(embeds)
-            #await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
+        await hargs.roster.display(hargs.tags)
 
     @roster.command(pass_context=True, name='update')
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
@@ -561,10 +559,13 @@ class Hook:
         track = roster.update(champs)
         em = discord.Embed(title='Champion Update for {}'.format(roster.user.name),
                 color=discord.Color.gold())
-        for k in ('new', 'modified', 'unchanged'):
-            if track[k]:
-                em.add_field(name='{} Champions'.format(k.capitalize()),
-                        value='\n'.join(sorted(track[k])), inline=False)
+        if len(champs) <= 20:
+            for k in ('new', 'modified', 'unchanged'):
+                if track[k]:
+                    em.add_field(name='{} Champions'.format(k.capitalize()),
+                            value='\n'.join(sorted(track[k])), inline=False)
+        else:
+            em.add_field(name='{} Champions updated, confirmed.'.format(len(champs)), value='Number exceeds display limitation')
         await self.bot.say(embed=em)
 
     @roster.command(pass_context=True, name='dupe')
@@ -670,7 +671,7 @@ class Hook:
                 rlist.append(champ)
         roster.from_list(rlist)
         roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
-        await self.display_roster(ctx, roster, hargs.tags)
+        await roster.display(hargs.tags)
 
 
     @commands.command(pass_context=True, no_pm=True)
