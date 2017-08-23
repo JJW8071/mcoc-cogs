@@ -766,8 +766,8 @@ class MCOC(ChampionFactory):
         '''Coming Soon
         Champion masteries'''
         sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
-        range_headers = 'masteryjson!A1:O1'
-        range_body = 'masteryjson!A2:O228'
+        range_headers = 'masteryjson!A1:P1'
+        range_body = 'masteryjson!A2:P228'
         foldername = 'masteries'
         filename = 'masteries'
         if update == True:
