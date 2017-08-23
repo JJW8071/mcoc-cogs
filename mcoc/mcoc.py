@@ -767,7 +767,7 @@ class MCOC(ChampionFactory):
         Champion masteries'''
         sheet = '1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8'
         range_headers = 'masteryjson!A1:O1'
-        range_body = 'masteryjson!A2:O'
+        range_body = 'masteryjson!A2:O228'
         foldername = 'masteries'
         filename = 'masteries'
         if update == True:
@@ -780,6 +780,7 @@ class MCOC(ChampionFactory):
                     await self.bot.upload(SHELLJSON.format(foldername,filename))
                 except:
                     await self.bot.whisper('Problem. Verify urls.\nHeader:\n<{}>\nBody:\n<{}>'.format(head_url, body_url))
+                    await self.bot.upload(SHELLJSON.format(foldername,filename))
             else:
                 await self.bot.say('Prerequisite: Google API Key must be set```')
         try:
@@ -1106,6 +1107,15 @@ class MCOC(ChampionFactory):
         asyncio.sleep(15)
         await self.bot.delete_message(message)
         return
+
+    # @cost.command(pass_context=True, name='rankup', hidden=True)
+    # async def cost_rankup(self, *, rargs=None):
+    #     '''Present Rank Up Cost information'''
+    #     _bare_arg = None
+    #     parse_re = re.compile(r'''(?:r(?P<rank>[1-5])) |(?:(?P<star>[1-5])\\?\*)''', re.X)
+    #     if rargs is not None:
+    #         for arg in rargs.split(' '):
+
 
 
 
