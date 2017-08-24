@@ -21,6 +21,9 @@ import asyncio
 ### Monkey Patch of JSONEncoder
 from json import JSONEncoder, dump, dumps
 
+logger = logging.getLogger('red.roster')
+logger.setLevel(logging.INFO)
+
 def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
 
