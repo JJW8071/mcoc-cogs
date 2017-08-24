@@ -351,7 +351,7 @@ class ChampionRoster:
 
         if missing:
             await self.bot.send_message(channel, 'Missing hookid for champs: '
-                    + ', '.join(self.missing))
+                    + ', '.join(missing))
         if dupes:
             await self.bot.send_message(channel,
                     'WARNING: Multiple instances of champs in file.  '
