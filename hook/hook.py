@@ -12,6 +12,7 @@ from math import ceil
 import shutil
 import time
 import types
+import logging
 import os
 import ast
 import csv
@@ -20,6 +21,9 @@ import re
 import asyncio
 ### Monkey Patch of JSONEncoder
 from json import JSONEncoder, dump, dumps
+
+logger = logging.getLogger('red.roster')
+logger.setLevel(logging.INFO)
 
 def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
@@ -347,7 +351,7 @@ class ChampionRoster:
 
         if missing:
             await self.bot.send_message(channel, 'Missing hookid for champs: '
-                    + ', '.join(self.missing))
+                    + ', '.join(missing))
         if dupes:
             await self.bot.send_message(channel,
                     'WARNING: Multiple instances of champs in file.  '
