@@ -51,27 +51,20 @@ local_files = {
     'effect_keys': 'data/mcoc/effect_keys.csv',
 }
 
+gapi_service_creds = 'data/mcoc/mcoc_service_creds.json'
 gsheet_files = {
     'signature': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
-            'local': 'data/mcoc/sig_test.csv',
-            'gid': 799981914,},
-            #'payload': 'pub?gid=799981914&single=true&output=csv'},
-    'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
-            'local': 'data/mcoc/spotlight_test.csv',
+            'local': 'data/mcoc/signature.json',
             },
-            #'payload': 'pub?gid=0&single=true&output=csv'},
-    #'sig_coeff': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
-    'sig_coeff': {'gkey': '1P-GeEOyod6WSGq8fUfSPZcvowthNdy-nXLKOhjrmUVI',
-            'local': 'data/mcoc/sig_co_test.csv',
-            'stub': 'export',
-            #'range': 'A1:N99',
-            #'gid': 696682690},
+    #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
+            #'local': 'data/mcoc/spotlight_test.json',
+            #},
+    #'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
+            #'local': 'data/mcoc/xref_test.json',
+            #},
+    'synergy': {'gkey': '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
+            'local': 'data/mcoc/synergy.json',
             },
-    'crossreference': {'gkey': '1QesYLjDC8yd4t52g4bN70N8FndJXrrTr7g7OAS0BItk',
-            'local': 'data/mcoc/xref_test.csv',
-            #'payload': 'export?format=csv'}
-            },
-            #'payload': 'pub?gid=0&single=true&output=csv'}
 }
 
 star_glyph = '★'
@@ -261,14 +254,22 @@ class GSExport():
         self.data = defaultdict(partial(defaultdict, dict))
 
     async def retrieve_data(self):
-        ws = self.gc.open_by_key(self.gkey)
-        meta = ws.worksheet('title', self.meta_sheet)
-        for record in meta.get_all_records():
-            await self.retrieve_sheet(ws, **record)
+        ss = self.gc.open_by_key(self.gkey)
+        try:
+            meta = ss.worksheet('title', self.meta_sheet)
+        except pygsheets.WorksheetNotFound:
+            await self.retrieve_sheet(ss, sheet_name=None, sheet_action='file', data_type='dict')
+        else:
+            for record in meta.get_all_records():
+                await self.retrieve_sheet(ss, **record)
         return self.data
 
-    async def retrieve_sheet(self, ws, *, sheet_name, sheet_action, data_type, **kwargs):
-        sheet = ws.worksheet('title', sheet_name)
+    async def retrieve_sheet(self, ss, *, sheet_name, sheet_action, data_type, **kwargs):
+        if sheet_name:
+            sheet = ss.worksheet('title', sheet_name)
+        else:
+            sheet = ss.sheet1
+            sheet_name = sheet.title
         data = sheet.get_all_values(include_empty=False)
         header = data[0]
         if data_type.startswith('nested_list'):
@@ -292,12 +293,15 @@ class GSExport():
                     else:
                         pack = [drow[i:i+dlen] for i in range(0, len(drow), dlen)]
                 self.data[row[0]][sheet_name] = pack
-            elif sheet_action == 'dict':
+            elif sheet_action in ('dict', 'file'):
                 if data_type == 'list':
                     pack = drow
                 elif data_type == 'dict':
                     pack = dict(zip(header, [row[0], *drow]))
-                self.data[sheet_name][row[0]] = pack
+                if sheet_action == 'dict':
+                    self.data[sheet_name][row[0]] = pack
+                elif sheet_action == 'file':
+                    self.data[row[0]] = pack
 
     @staticmethod
     def do_nothing(row):
@@ -623,32 +627,24 @@ class MCOC(ChampionFactory):
             self.settings[setting] = int(value)
 
     @commands.command(hidden=True)
-    async def cache_gsheets(self):
-        s = await aiohttp.ClientSession()
-        #gs = Sheets.from_files('data/mcoc/client_secrets.json')
-        for k, v in gsheet_files.items():
-            #s = gs[v['gkey']]
-            #s.sheets[0].to_csv(v['local'])
-            #payload = {'format': 'csv', 'gid': v.get('gid', 0)}
-            if 'payload' in k:
-                payload = {}
-                remote = 'https://docs.google.com/spreadsheets/d/{0[gkey]}/{0[payload]}'.format(v)
-            elif v.get('stub') == 'export':
-                payload = {'format': 'csv', 'gid': v.get('gid', 0)}
-                remote = 'https://docs.google.com/spreadsheets/d/{0[gkey]}/{0[stub]}'.format(v)
-            else:
-                payload = {'output': 'csv', 'single': 'true', 'gid': v.get('gid', 0)}
-                remote = 'https://docs.google.com/spreadsheets/d/{0}/pub'.format(v['gkey'])
-            #response = s.get(remote)
-            response = await s.get(remote, params=payload)
-            if response.status == 200:
-                with open(v['local'], 'wb') as fp:
-                    fp.write(await response.read())
-            else:
-                err_str = "HTTP error code {} while trying to Collect Google Sheet {}".format(
-                        response.status, k)
-                await self.bot.say(err_str)
-        await self.bot.say("Google Sheet retrieval complete")
+    async def cache_gsheets(self, key=None):
+        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        num_files = len(gsheet_files)
+        msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
+        for i, k in enumerate(gsheet_files.keys()):
+            await self.retrieve_gsheet(k, gc)
+            msg = await self.bot.edit_message(msg, 
+                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+        await self.bot.say('Retrieval Complete')
+
+    async def retrieve_gsheet(self, key, gc=None):
+        if gc is None:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        v = gsheet_files[key]
+        gsdata = GSExport(gc, v['gkey'])
+        struct = await gsdata.retrieve_data()
+        dataIO.save_json(v['local'], struct)
+
 
     @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
@@ -1042,7 +1038,7 @@ class MCOC(ChampionFactory):
     async def gs_sig(self):
         await self.update_local()
         gkey = '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg'
-        gc = pygsheets.authorize(service_file='mcoc_service_creds.json', no_cache=True)
+        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         gsdata = GSExport(gc, gkey)
         struct = await gsdata.retrieve_data()
         sigs = load_kabam_json(kabam_bcg_stat_en)
