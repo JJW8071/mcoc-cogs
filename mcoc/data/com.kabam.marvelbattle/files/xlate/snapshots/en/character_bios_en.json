@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "d5a5be193a14d62c0cec29b6032c80c467a1bbb5",
+    "hash": "287e071292e443d7d3b08fb1db4694c84e69fdce",
     "language": "en",
     "post_processed": true,
-    "string_count": 118,
+    "string_count": 123,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1499816702,
-    "versionLock": "14.1"
+    "ts": 1502841992,
+    "versionLock": "15.0"
   },
   "strings": [
     {
@@ -23,7 +23,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_ANGELA",
-      "v": "Leader of the Hunt, Guardian of the Galaxy, Queen of Hel, Angel, Goddess. Angela is a woman of many titles. Born Aldrif Odinsdottir, the first child of Freyja and Odin, but raised as Angela by Loriel, handmaiden to the Queen of Angels, she has battled her way across the Galaxy. Now Angela has come to the Contest, perhaps the greatest challenge of martial skill and strength to be found in the Nine Realms, and beyond."
+      "v": "Leader of the Hunt, Guardian of the Galaxy, Queen of Hel, Angel, Goddess. Angela is a woman of many titles. Born Aldrif Odinsdottir, the first child of Freyja and Odin, but raised as Angela by Loriel, handmaiden to the Queen of Angels, she has battled her way across the Galaxy. Now Angela has come to the Contest, perhaps the greatest challenge of martial skill and strength to be found in the Nine Realms, and beyond.",
+      "vn": "12.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_ANTMAN",
@@ -75,7 +76,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_CARNAGE",
-      "v": "Cletus Kasady was a serial killer from Brooklyn; psychotic and depraved from an early age. As a cellmate of Eddie Brock’s, he bonded with a spawn of the Venom Symbiote during a prison break, and merged into a single twisted being. Kasady and the Symbiote would go on a killing spree, earning them their name: Carnage. With the Symbiote amplifying Kasady’s psychotic tendencies, there’s no telling how deep their acts of depravity will plunge."
+      "v": "Cletus Kasady was a serial killer from Brooklyn; psychotic and depraved from an early age. As a cellmate of Eddie Brock’s, he bonded with a spawn of the Venom Symbiote during a prison break, and merged into a single twisted being. Kasady and the Symbiote would go on a killing spree, earning them their name: Carnage. With the Symbiote amplifying Kasady’s psychotic tendencies, there’s no telling how deep their acts of depravity will plunge.",
+      "vn": "13.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_CIVILWARRIOR",
@@ -124,7 +126,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_DORMAMMU",
-      "v": "Dormammu was born to a race of powerful beings made of pure magical energy known as the Faltine, and has only one true desire: power. This desire drove him from his home world and brought him to the Dark Dimension, where he now rules and draws even greater power from the worship of his subjects. Now with the power of so many heroes concentrated in the Contest, Dormammu has come as one of the greatest mystical threats in the univer, undoubtedly to gain that power for himself."
+      "v": "Dormammu was born to a race of powerful beings made of pure magical energy known as the Faltine, and has only one true desire: power. This desire drove him from his home world and brought him to the Dark Dimension, where he now rules and draws even greater power from the worship of his subjects. Now with the power of so many heroes concentrated in the Contest, Dormammu has come as one of the greatest mystical threats in the univer, undoubtedly to gain that power for himself.",
+      "vn": 12
     },
     {
       "k": "ID_CHARACTER_BIOS_DRAX",
@@ -173,7 +176,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_GROOT_KING",
-      "v": "Rising from under the canopy of a mysterious alien forest, Groot, the invincible master of plants and King of Planet X conquers all! This savage and ferocious monster from a parallel universe never met Rocket or joined the Guardians, instead becoming a galactic warlord and experimenting on capture humans. But now, the ruthless King’s mission has been interrupted by the Collector, and he has set his sights on a new goal: hoarding all of the abundant treasure and power the Contest has to offer!"
+      "v": "Rising from under the canopy of a mysterious alien forest, Groot, the invincible master of plants and King of Planet X conquers all! This savage and ferocious monster from a parallel universe never met Rocket or joined the Guardians, instead becoming a galactic warlord and experimenting on capture humans. But now, the ruthless King’s mission has been interrupted by the Collector, and he has set his sights on a new goal: hoarding all of the abundant treasure and power the Contest has to offer!",
+      "vn": "12.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_GUILLOTINE",
@@ -189,7 +193,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_HOOD",
-      "v": "Always fascinated with super humans, young petty thief Parker Robbins used his gains to help his family, including his ailing mother. When a burglary took an unexpected turn, Parker found himself in possession of a pair of mystical boots and cloak. Struggling to understand the supernatural items, he learned they granted him limited powers, including invisibility and the ability to walk on air. Dubbed \"The Hood\" by the police, Parker soon found himself forced down a darker path, using his newfound powers to start his own criminal empire to ensure the safety of his family."
+      "v": "Always fascinated with super humans, young petty thief Parker Robbins used his gains to help his family, including his ailing mother. When a burglary took an unexpected turn, Parker found himself in possession of a pair of mystical boots and cloak. Struggling to understand the supernatural items, he learned they granted him limited powers, including invisibility and the ability to walk on air. Dubbed \"The Hood\" by the police, Parker soon found himself forced down a darker path, using his newfound powers to start his own criminal empire to ensure the safety of his family.",
+      "vn": "11.2"
     },
     {
       "k": "ID_CHARACTER_BIOS_HOWARDMECH",
@@ -213,7 +218,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_ICEMAN",
-      "v": "Iceman aka Robert \"Bobby\" Drake, was the second, and youngest member of the original X-men. His mutant powers give him the ability to lower his body's temperature, transform himself into organic ice, and freeze the air around him. When he was possessed by Emma Frost, she unleashed powers within Bobby far greater than he had before, such as freezing fluids inside another person's body, and traveling great distances as a liquid, solid, or gas. Iceman works towards the mastery of his powers and there's no telling where his limits lie.\r\n"
+      "v": "Iceman aka Robert \"Bobby\" Drake, was the second, and youngest member of the original X-men. His mutant powers give him the ability to lower his body's temperature, transform himself into organic ice, and freeze the air around him. When he was possessed by Emma Frost, she unleashed powers within Bobby far greater than he had before, such as freezing fluids inside another person's body, and traveling great distances as a liquid, solid, or gas. Iceman works towards the mastery of his powers and there's no telling where his limits lie.",
+      "vn": 12
     },
     {
       "k": "ID_CHARACTER_BIOS_IRONFIST",
@@ -260,6 +266,11 @@
       "v": "Karnak Mander-Azur, Inhuman philosopher and Magister of the Second Tower of Wisdom, refused the transformative Terrigen Mists and chose instead to train his body and mind like no other. Through his training, Karnak has gained immense insight into both himself and others, allowing him to see the flaw in all things and strike down his opponents with ruthless physical and mental precision."
     },
     {
+      "k": "ID_CHARACTER_BIOS_KINGPIN",
+      "v": "Wilson Fisk, kingpin of crime in New York City, rules the underworld with ruthless efficiency. Gaining power through numerous illegal ventures and intimidation, Kingpin has gone toe-to-toe with the likes of Spider-Man and Daredevil and kept pace thanks to his incredible physical prowess and strength. Now the infamous crime lord has set his sights on the Contest and its rich supply of dangerous black ISO-8. For Fisk, the Contest is just another city to conquer.",
+      "vn": 15
+    },
+    {
       "k": "ID_CHARACTER_BIOS_LOKI",
       "v": "I know what they say. The son of a Frost Giant. They also called me the god of mischief, but that lacks a certain...imagination. Don't you think? Look at my adoptive family, my father Odin and my brother Thor are so dull, monotonous. Am I good? Evil? Noble? Nonsense. Call me not mischievous – I merely see the world not as it is, but how it could be. Call me a visionary. Call me Loki."
     },
@@ -284,6 +295,11 @@
       "v": "The Master of Magnetism has embraced a self-proclaimed role of detective, judge, jury, and executioner against those who harm mutants. One of the greatest Marvel anti-heroes ever, Magneto exacts his own form of mutant justice, by any means necessary."
     },
     {
+      "k": "ID_CHARACTER_BIOS_MEDUSA",
+      "v": "Born into the Inhuman Royal Family of Attilan, Medusa was exposed to the mutagenic Terrigen Mists when she was only an infant. This transformation endowed her with tougher-than-steel hair and the ability to control each strand like an added appendage. Along with her husband, Black Bolt, Medusa leads her people as the Queen of the Inhumans in their search for a better place in the world.",
+      "vn": 15
+    },
+    {
       "k": "ID_CHARACTER_BIOS_MODOK",
       "v": "The terrifying result of an unspeakable experiment, M.O.D.O.K. is a grotesque mastermind bent on the destruction of the world. As the sometimes-leader of A.I.M., the Mechanized Organism Designed Only for Killing has tangled many times with his foes, Captain America and the Avengers."
     },
@@ -301,7 +317,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_NEBULA",
-      "v": "Cybernetically enhanced at birth and trained to win at all costs, Nebula is one of the Mad Titan Thanos’ two adopted daughters and harbors a hatred of her sister, Gamora after a personal bout left her broken and reeling. Now she has been brought back from the brink of death and seeks vengeance against Gamora, but her journey to exact justice on her sister may reveal more about herself than she expected..."
+      "v": "Cybernetically enhanced at birth and trained to win at all costs, Nebula is one of the Mad Titan Thanos’ two adopted daughters and harbors a hatred of her sister, Gamora after a personal bout left her broken and reeling. Now she has been brought back from the brink of death and seeks vengeance against Gamora, but her journey to exact justice on her sister may reveal more about herself than she expected...",
+      "vn": 13
     },
     {
       "k": "ID_CHARACTER_BIOS_NIGHTCRAWLER",
@@ -313,7 +330,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_PSYLOCKE",
-      "v": "Elizabeth “Betsy” Braddock, was an intelligent and normal young woman born to a prominent British family. Her surprising mutant powers were unlocked when she was mind-controlled by Dr. Synne, empowered by the sentient supercomputer Mastermind. With her growing telepathic and telekinetic, powers unleashed she joined the X-Men, and later X-Force as Psylocke. Captured by the evil Hand her soul was forcibly transferred into the body and split personality of a deadly ninja warrior. Now a powerful mutant hero, and a skilled assassin, Psylocke is willing to utilize her deadly abilities without hesitation when she believes it’s necessary."
+      "v": "Elizabeth “Betsy” Braddock, was an intelligent and normal young woman born to a prominent British family. Her surprising mutant powers were unlocked when she was mind-controlled by Dr. Synne, empowered by the sentient supercomputer Mastermind. With her growing telepathic and telekinetic powers unleashed, she joined the X-Men, and later X-Force as Psylocke. Captured by the evil Hand her soul was forcibly transferred into the body and split personality of a deadly ninja warrior. Now a powerful mutant hero, and a skilled assassin, Psylocke is willing to utilize her deadly abilities without hesitation when she believes it’s necessary."
     },
     {
       "k": "ID_CHARACTER_BIOS_PUNISHER",
@@ -321,7 +338,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_PUNISHER_2099",
-      "v": "Jake Gallows, proud member of the Public Eye Police Force had his life stolen from him one fateful day in 2099. Left for dead with his family murdered in cold blood, Jake discovered that if he wanted retribution, he’d have to handle it himself. His ruthless approach and top tier training eventually caught the eye of Hydra, and Jake was placed in charge of the Ministry of Punishment, where his punishments have only grown more severe and frequent."
+      "v": "Jake Gallows, proud member of the Public Eye Police Force had his life stolen from him one fateful day in 2099. Left for dead with his family murdered in cold blood, Jake discovered that if he wanted retribution, he’d have to handle it himself. His ruthless approach and top tier training eventually caught the eye of Hydra, and Jake was placed in charge of the Ministry of Punishment, where his punishments have only grown more severe and frequent.",
+      "vn": "13.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_QUAKE",
@@ -484,7 +502,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_YONDU",
-      "v": "Centaurian scoundrel Yondu Udonta may not seem like much of a threat at first glance, but when you hear a whistle and his deadly Yaka Arrow comes out to play it's not advisable to make any rash decisions. Leader of the Ravagers and mentor to Star-Lord, Yondu is a stickler for honor, but not above breaking a rule or ten to get what he wants."
+      "v": "Centaurian scoundrel Yondu Udonta may not seem like much of a threat at first glance, but when you hear a whistle and his deadly Yaka Arrow comes out to play it's not advisable to make any rash decisions. Leader of the Ravagers and mentor to Star-Lord, Yondu is a stickler for honor, but not above breaking a rule or ten to get what he wants.",
+      "vn": 13
     }
   ]
 }
