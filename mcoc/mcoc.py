@@ -49,12 +49,26 @@ GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBu
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
     'effect_keys': 'data/mcoc/effect_keys.csv',
+    'signature': 'data/mcoc/signature.json',
+    'synergy': 'data/mcoc/synergy.json',
 }
+
+async def postprocess_sig_data(bot, struct):
+    sigs = load_kabam_json(kabam_bcg_stat_en)
+    mcoc = bot.get_cog('MCOC')
+    for key in struct.keys():
+        champ_class = mcoc.champions.get(key.lower(), None)
+        if champ_class is None:
+            continue
+        struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
+                champ_class, sigs=sigs, 
+                champ_exceptions=struct['kabam_key_override'])
 
 gapi_service_creds = 'data/mcoc/mcoc_service_creds.json'
 gsheet_files = {
     'signature': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
-            'local': 'data/mcoc/signature.json',
+            'local': local_files['signature'],
+            'postprocess': postprocess_sig_data,
             },
     #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
             #'local': 'data/mcoc/spotlight_test.json',
@@ -63,7 +77,7 @@ gsheet_files = {
             #'local': 'data/mcoc/xref_test.json',
             #},
     'synergy': {'gkey': '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
-            'local': 'data/mcoc/synergy.json',
+            'local': local_files['synergy'],
             },
 }
 
@@ -247,10 +261,14 @@ class ChampConverterMult(ChampConverter):
 
 class GSExport():
 
-    def __init__(self, gc, gkey, meta_sheet='meta_export'):
-        self.gkey = gkey
+    def __init__(self, bot, gc, *, gkey, local, **kwargs):
+        self.bot = bot
         self.gc = gc
-        self.meta_sheet = meta_sheet
+        self.gkey = gkey
+        self.local = local
+        self.meta_sheet = kwargs.pop('meta_sheet', 'meta_export')
+        for k,v in kwargs.items():
+            setattr(self, k, v)
         self.data = defaultdict(partial(defaultdict, dict))
 
     async def retrieve_data(self):
@@ -262,6 +280,10 @@ class GSExport():
         else:
             for record in meta.get_all_records():
                 await self.retrieve_sheet(ss, **record)
+        if hasattr(self, 'postprocess'):
+            await self.postprocess(self.bot, self.data)
+        if self.local:
+            dataIO.save_json(self.local, self.data)
         return self.data
 
     async def retrieve_sheet(self, ss, *, sheet_name, sheet_action, data_type, **kwargs):
@@ -310,7 +332,6 @@ class GSExport():
     @staticmethod
     def remove_commas(row):
         return [cell.replace(',', '') for cell in row]
-
 
 class AliasDict(UserDict):
     '''Custom dictionary that uses a tuple of aliases as key elements.
@@ -640,11 +661,8 @@ class MCOC(ChampionFactory):
     async def retrieve_gsheet(self, key, gc=None):
         if gc is None:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        v = gsheet_files[key]
-        gsdata = GSExport(gc, v['gkey'])
-        struct = await gsdata.retrieve_data()
-        dataIO.save_json(v['local'], struct)
-
+        gsdata = GSExport(self.bot, gc, **gsheet_files[key])
+        await gsdata.retrieve_data()
 
     @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
@@ -813,14 +831,16 @@ class MCOC(ChampionFactory):
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
-    @champ.command(name='sig', aliases=['signature',])
-    async def champ_sig(self, *, champ : ChampConverterSig):
+    @champ.command(pass_context=True, name='sig', aliases=['signature',])
+    async def champ_sig(self, ctx, *, champ : ChampConverterSig):
         '''Champion Signature Ability'''
         if champ.star == 5:
             await self.say_user_error("Sorry.  5{} data for any champion is not currently available".format(star_glyph))
             return
+        appinfo = await self.bot.application_info()
         try:
-            title, desc, sig_calcs = await champ.process_sig_description()
+            title, desc, sig_calcs = await champ.process_sig_description(
+                    isbotowner=ctx.message.author == appinfo.owner)
         except KeyError:
             await champ.missing_sig_ad()
             raise
@@ -985,36 +1005,35 @@ class MCOC(ChampionFactory):
 
         return output_dict
 
-
     @commands.command(hidden=True)
     async def dump_sigs(self):
+        await self.update_local()
+        sdata = dataIO.load_json(local_files['signature'])
+        dump = {}
+        for c, champ_class in enumerate(self.champions.values()):
+            #if c < 75 or c > 90:
+                #continue
+            champ = champ_class()
+            item = {'name': champ.full_name, 'sig_data': []}
+            for i in range(1, 100):
+                champ.update_attrs({'sig': i})
+                try:
+                    title, desc, sig_calcs = await champ.process_sig_description(sdata, quiet=True)
+                except (KeyError, IndexError):
+                    print("Skipping ", champ.full_name)
+                    break
+                if sig_calcs is None:
+                    break
+                if i == 1:
+                    item['title'] = title
+                    item['description'] = desc
+                    item['star_rank'] = champ.star_str
+                item['sig_data'].append(sig_calcs)
+            if not item['sig_data']:
+                continue
+            dump[champ.mattkraftid] = item
+            print(champ.full_name)
         with open('sig_data_4star.json', encoding='utf-8', mode="w") as fp:
-            #jenc = json.JSONEncoder(indent='\t', sort_keys=True)
-            reader = load_csv(local_files['effect_keys'])
-            dump = {}
-            for c, row in enumerate(reader):
-                #if c < 75 or c > 90:
-                    #continue
-                champ = await self.get_champion(row['CHAMP'].lower())
-                item = {'name': champ.full_name, 'sig_data': []}
-                for i in range(1, 100):
-                    champ.update_attrs({'sig': i})
-                    try:
-                        title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
-                    except KeyError:
-                        break
-                    if sig_calcs is None:
-                        break
-                    if i == 1:
-                        item['title'] = title
-                        item['description'] = desc
-                        item['star_rank'] = champ.star_str
-                    item['sig_data'].append(sig_calcs)
-                if not item['sig_data']:
-                    continue
-                #fp.write(jenc.encode(item))
-                dump[champ.mattkraftid] = item
-                print(champ.full_name)
             json.dump(dump, fp, indent='\t', sort_keys=True)
         await self.bot.say('Hopefully dumped')
 
@@ -1465,19 +1484,27 @@ class Champion:
                 value='Contribute your data at http://discord.gg/wJqpYGS')
         await self.bot.say(embed=em)
 
-    async def process_sig_description(self, sd=None, quiet=False):
-        if sd is None:
-            sd = self.get_sig_data_from_csv()
-            #print(json.dumps(sd, indent=2))
+    async def process_sig_description(self, data=None, quiet=False, isbotowner=False):
+        if data is None:
+            try:
+                sd = dataIO.load_json(local_files['signature'])[self.full_name]
+            except FileNotFoundError:
+                if isbotowner:
+                    await self.bot.say("**DEPRECIATION WARNING**  "
+                            + "Couldn't load json file.  Loading csv files.")
+                sd = self.get_sig_data_from_csv()
+        else:
+            sd = data[self.full_name] if self.full_name in data else data
         brkt_re = re.compile(r'{([0-9])}')
+        ktxt = sd['kabam_text']
         if self.debug:
-            dbg_str = ['Title:  ' + sd['kabam_text']['title']['k']]
-            dbg_str.append('Simple:  ' + sd['kabam_text']['simple']['k'])
+            dbg_str = ['Title:  ' + ktxt['title']['k']]
+            dbg_str.append('Simple:  ' + ktxt['simple']['k'])
             dbg_str.append('Description Keys:  ')
-            dbg_str.append('  ' + ', '.join(sd['kabam_text']['desc']['k']))
+            dbg_str.append('  ' + ', '.join(ktxt['desc']['k']))
             dbg_str.append('Description Text:  ')
             dbg_str.extend(['  ' + self._sig_header(d) 
-                            for d in sd['kabam_text']['desc']['v']])
+                            for d in ktxt['desc']['v']])
             await self.bot.say(chat.box('\n'.join(dbg_str)))
 
         if not sd['effects'] or not sd['sig_coeff']:
@@ -1485,7 +1512,7 @@ class Champion:
             if not quiet:
                 await self.missing_sig_ad()
         if self.sig == 0:
-            return sd['kabam_text']['title']['v'], sd['kabam_text']['simple']['v'], None
+            return ktxt['title']['v'], ktxt['simple']['v'], None
 
         raw_str = '{:.2f}'
         raw_per_str = '{:.2%}'
@@ -1533,12 +1560,12 @@ class Champion:
             await self.bot.say(('Missing Attack/Health info for '
                     + '{0.full_name} {0.star_str}').format(self))
         fdesc = []
-        for i, txt in enumerate(sd['kabam_text']['desc']['v']):
+        for i, txt in enumerate(ktxt['desc']['v']):
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
                         self._sig_header(txt)))
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
-        return sd['kabam_text']['title']['v'], '\n'.join(fdesc), sig_calcs
+        return ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
 
     def get_sig_data_from_csv(self):
         sig_text = self.get_kabam_sig_text()
@@ -1802,33 +1829,6 @@ def padd_it(word,max : int,opt='back'):
             return padd+word
     else:
         logger.warn('Padding would be negative.')
-
-def dict_merge(dct, merge_dct):
-    """ Recursive dict merge. Inspired by :meth:``dict.update()``, instead of
-    updating only top-level keys, dict_merge recurses down into dicts nested
-    to an arbitrary depth, updating keys. The ``merge_dct`` is merged into
-    ``dct``.
-    :param dct: dict onto which the merge is executed
-    :param merge_dct: dct merged into dct
-    :return: None
-    """
-    for k, v in merge_dct.iteritems():
-        if (k in dct and isinstance(dct[k], dict)
-                and isinstance(merge_dct[k], Mapping)):
-            dict_merge(dct[k], merge_dct[k])
-        else:
-            dct[k] = merge_dct[k]
-
-# Creation of lookup functions from a tuple through anonymous functions
-#for fname, docstr, link in MCOC.lookup_functions:
-    #async def new_func(self):
-        #await self.bot.say('{}\n{}'.format(docstr, link))
-        #raise Exception
-    ##print(new_func)
-    ##setattr(MCOC, fname, commands.command(name=fname, help=docstr)(new_func))
-    #new_func = commands.command(name=fname, help=docstr)(new_func)
-    #setattr(MCOC, fname, new_func)
-    ##print(getattr(MCOC, fname).name, getattr(MCOC, fname).callback)
 
 # avoiding cyclic importing
 from . import hook as hook
