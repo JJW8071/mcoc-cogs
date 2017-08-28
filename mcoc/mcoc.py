@@ -655,7 +655,12 @@ class MCOC(ChampionFactory):
     @commands.command(hidden=True)
     async def cache_gsheets(self, key=None):
         await self.update_local()
-        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        try:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        except FileNotFoundError:
+            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+                    + gapi_service_creds)
+            return
         num_files = len(gsheet_files)
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
         for i, k in enumerate(gsheet_files.keys()):
