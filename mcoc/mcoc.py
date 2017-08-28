@@ -266,7 +266,7 @@ class GSExport():
         self.gc = gc
         self.gkey = gkey
         self.local = local
-        self.meta_sheet = kwargs.pop('meta_sheet', 'meta_export')
+        self.meta_sheet = kwargs.pop('meta_sheet', 'meta_sheet')
         for k,v in kwargs.items():
             setattr(self, k, v)
         self.data = defaultdict(partial(defaultdict, dict))
@@ -300,30 +300,30 @@ class GSExport():
 
         prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'))
         for row in data[1:]:
-            row = prep_func(row)
-            drow = numericise_all(row[1:], '')
+            drow = numericise_all(prep_func(row), '')
+            rkey = drow[0]
             if sheet_action == 'merge':
                 if data_type == 'nested_dict':
-                    pack = dict(zip(header[2:], drow[1:]))
-                    self.data[row[0]][sheet_name][drow[0]] = pack
+                    pack = dict(zip(header[2:], drow[2:]))
+                    self.data[rkey][sheet_name][drow[1]] = pack
                     continue
                 if data_type == 'list':
-                    pack = drow
+                    pack = drow[1:]
                 elif data_type == 'nested_list':
-                    if len(drow) < dlen:
+                    if len(drow[1:]) < dlen or not any(drow[1:]):
                         pack = None
                     else:
-                        pack = [drow[i:i+dlen] for i in range(0, len(drow), dlen)]
-                self.data[row[0]][sheet_name] = pack
+                        pack = [drow[i:i+dlen] for i in range(1, len(drow), dlen)]
+                self.data[rkey][sheet_name] = pack
             elif sheet_action in ('dict', 'file'):
                 if data_type == 'list':
-                    pack = drow
+                    pack = drow[1:]
                 elif data_type == 'dict':
-                    pack = dict(zip(header, [row[0], *drow]))
+                    pack = dict(zip(header, drow))
                 if sheet_action == 'dict':
-                    self.data[sheet_name][row[0]] = pack
+                    self.data[sheet_name][rkey] = pack
                 elif sheet_action == 'file':
-                    self.data[row[0]] = pack
+                    self.data[rkey] = pack
 
     @staticmethod
     def do_nothing(row):
@@ -332,6 +332,11 @@ class GSExport():
     @staticmethod
     def remove_commas(row):
         return [cell.replace(',', '') for cell in row]
+
+    @staticmethod
+    def remove_NA(row):
+        return [None if cell in ("#N/A", "") else cell for cell in row]
+
 
 class AliasDict(UserDict):
     '''Custom dictionary that uses a tuple of aliases as key elements.
@@ -649,6 +654,7 @@ class MCOC(ChampionFactory):
 
     @commands.command(hidden=True)
     async def cache_gsheets(self, key=None):
+        await self.update_local()
         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         num_files = len(gsheet_files)
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
@@ -1488,6 +1494,8 @@ class Champion:
         if data is None:
             try:
                 sd = dataIO.load_json(local_files['signature'])[self.full_name]
+            except KeyError:
+                sd = self.init_sig_struct()
             except FileNotFoundError:
                 if isbotowner:
                     await self.bot.say("**DEPRECIATION WARNING**  "
@@ -1519,9 +1527,10 @@ class Champion:
         per_str = '{:.2f} ({:.2%})'
         sig_calcs = {}
         ftypes = {}
+        #print(json.dumps(sd, indent='  '))
         try:
             stats = sd['spotlight_trunc'][self.unique]
-        except TypeError:
+        except (TypeError, KeyError):
             stats = {}
         stats_missing = False
         for i in range(len(sd['effects'])):
@@ -1568,7 +1577,7 @@ class Champion:
         return ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
 
     def get_sig_data_from_csv(self):
-        sig_text = self.get_kabam_sig_text()
+        struct = self.init_sig_struct()
         coeff = self.get_sig_coeff()
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
@@ -1577,8 +1586,7 @@ class Champion:
                         for k in ('attack', 'health')}
         else:
             stats = {}
-        struct = dict(effects=[], locations=[], sig_coeff=[], 
-                spotlight_trunc={self.unique: stats}, kabam_text=sig_text)
+        struct['spotlight_trunc'] = {self.unique: stats}
         if coeff is None or ekey is None:
             return struct
         for i in map(str, range(6)):
@@ -1592,6 +1600,11 @@ class Champion:
             except:
                 struct['sig_coeff'] = None
         return struct
+
+    def init_sig_struct(self):
+        return dict(effects=[], locations=[], sig_coeff=[], 
+                #spotlight_trunc={self.unique: stats}, 
+                kabam_text=self.get_kabam_sig_text())
 
     def get_kabam_sig_text(self, sigs=None, champ_exceptions=None):
         if sigs is None:
