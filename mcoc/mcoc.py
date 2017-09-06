@@ -1,10 +1,6 @@
 import re
 from datetime import datetime, timedelta
-from textwrap import wrap
-from collections import UserDict, defaultdict, Mapping
-from functools import partial
-from math import log2
-from math import *
+from collections import UserDict, defaultdict
 from operator import attrgetter
 import os
 import time
@@ -15,7 +11,7 @@ import csv
 import json
 #from gsheets import Sheets
 import pygsheets
-from pygsheets.utils import numericise_all
+from .mcoc_utils import *
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
@@ -23,7 +19,6 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
-#from .hook import ChampionRoster, HashtagRankConverter
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -78,12 +73,17 @@ gsheet_files = {
             'local': local_files['signature'],
             'postprocess': postprocess_sig_data,
             },
-    #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
-            #'local': 'data/mcoc/spotlight_test.json',
-            #},
-    #'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
-            #'local': 'data/mcoc/xref_test.json',
-            #},
+    'spotlight': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
+            'local': 'data/mcoc/spotlight_test.json',
+            'sheet_name': 'spotlight',
+            'range': 'E:L',
+            'data_type': 'list',
+            'include_empty': True,
+            'prepare_function': 'remove_commas',
+            },
+    'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
+            'local': 'data/mcoc/xref_test.json',
+            },
     'synergy': {'gkey': '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
             'local': local_files['synergy'],
             },
@@ -107,243 +107,7 @@ kabam_bcg_stat_en = mcoc_dir+'bcg_stat_en.json'
 #mcoc_special_attack_desc='ID_SPECIAL_ATTACK_DESCRIPTION_'
 
 
-class_color_codes = {
-        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
-        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
-        'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
-        'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
-        }
-class_emoji = {
-        'All':'<:all2:339511715920084993>',
-        'Cosmic':'<:cosmic2:345005691620163585>',
-        'Tech':'<:tech2:345005691938799626>',
-        'Mutant':'<:mutant2:345005691901313024>',
-        'Skill':'<:skill2:345005691909439488>',
-        'Science':'<:science:345005691779547138>',
-        'Mystic':'<:mystic2:345005691963965450>',
-        }
 
-def from_flat(flat, ch_rating):
-    denom = 5 * ch_rating + 1500 + flat
-    return round(100*flat/denom, 2)
-
-def to_flat(per, ch_rating):
-    num = (5 * ch_rating + 1500) * per
-    return round(num/(100-per), 2)
-
-class QuietUserError(commands.UserInputError):
-    pass
-
-class AmbiguousArgError(QuietUserError):
-    pass
-
-class ChampConverter(commands.Converter):
-    '''Argument Parsing class that geneartes Champion objects from user input'''
-
-    arg_help = '''
-    Specify a single champion with optional parameters of star, rank, or sig.
-    Champion names can be a number of aliases or partial aliases if no conflicts are found.
-
-    The optional arguments can be in any order, with or without spaces.
-        <digit>* specifies star <default: 4>
-        r<digit> specifies rank <default: 5>
-        s<digit> specifies signature level <default: 99>
-
-    Examples:
-        4* yj r4 s30  ->  4 star Yellowjacket rank 4/40 sig 30
-        r35*im        ->  5 star Ironman rank 3/45 sig 99
-        '''
-#(?:(?:s(?P<sig>[0-9]{1,3})) |(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)|(?:d(?P<debug>[0-9]{1,2})))(?=\b|[a-zA-Z]|(?:[1-5]\\?\*))
-    _bare_arg = None
-    parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
-                             |(?:r(?P<rank>[1-5]))
-                             |(?:(?P<star>[1-5])\\?\*)
-                             |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
-    async def convert(self):
-        bot = self.ctx.bot
-        attrs = {}
-        if self._bare_arg:
-            args = self.argument.rsplit(' ', maxsplit=1)
-            if len(args) > 1 and args[-1].isdecimal():
-                attrs[self._bare_arg] = int(args[-1])
-                self.argument = args[0]
-        arg = ''.join(self.argument.lower().split(' '))
-        for m in self.parse_re.finditer(arg):
-            attrs[m.lastgroup] = int(m.group(m.lastgroup))
-        token = self.parse_re.sub('', arg)
-        if not token:
-            err_str = "No Champion remains from arg '{}'".format(self.argument)
-            await bot.say(err_str)
-            raise commands.BadArgument(err_str)
-        return (await self.get_champion(bot, token, attrs))
-
-    async def get_champion(self, bot, token, attrs):
-        mcoc = bot.get_cog('MCOC')
-        try:
-            champ = await mcoc.get_champion(token, attrs)
-        except KeyError:
-            champs = await mcoc.search_champions('.*{}.*'.format(token), attrs)
-            if len(champs) == 1:
-                await bot.say("'{}' was not exact but found close alternative".format(
-                        token))
-                champ = champs[0]
-            elif len(champs) > 1:
-                em = discord.Embed(title='Ambiguous Argument "{}"'.format(token),
-                        description='Resolved to multiple possible champs')
-                for champ in champs:
-                    em.add_field(name=champ.full_name, inline=False,
-                            value=chat.box(', '.join(champ.alias_set)))
-                await bot.say(embed=em)
-                raise AmbiguousArgError('Multiple matches for arg "{}"'.format(token))
-            else:
-                err_str = "Cannot resolve alias for '{}'".format(token)
-                await bot.say(err_str)
-                raise commands.BadArgument(err_str)
-        return champ
-
-class ChampConverterSig(ChampConverter):
-    _bare_arg = 'sig'
-    arg_help = ChampConverter.arg_help + '''
-    Bare Number argument for this function is sig level:
-        "yjr5s30" is equivalent to "yjr5 30"'''
-
-class ChampConverterRank(ChampConverter):
-    _bare_arg = 'rank'
-    arg_help = ChampConverter.arg_help + '''
-    Bare Number argument for this function is rank:
-        "yjr5s30" is equivalent to "yjs30 5"'''
-
-class ChampConverterStar(ChampConverter):
-    _bare_arg = 'star'
-    arg_help = ChampConverter.arg_help + '''
-    Bare Number argument for this function is star:
-        "5*yjr5s30" is equivalent to "yjr5s30 5"'''
-
-class ChampConverterDebug(ChampConverter):
-    _bare_arg = 'debug'
-
-class ChampConverterMult(ChampConverter):
-
-    arg_help = '''
-    Specify multiple champions with optional parameters of star, rank, or sig.
-    Champion names can be a number of aliases or partial aliases if no conflicts are found.
-
-    The optional arguments can be in any order.
-        <digit>* specifies star <default: 4>
-        r<digit> specifies rank <default: 5>
-        s<digit> specifies signature level <default: 99>
-
-    If optional arguments are listed without a champion, it changes the default for all
-    remaining champions.  Arguments attached to a champion are local to that champion
-    only.
-
-    Examples:
-        s20 yj im        ->  4* Yellowjacket r5/50 sig 20, 4* Ironman r5/50 sig 20
-        r35*ims20 ims40  ->  5 star Ironman r3/45 sig 20, 4* Ironman r5/50 sig 40
-        r4s20 yj ims40 lc -> 4* Yellowjacket r4/40 sig 20, 4* Ironman r4/40 sig 40, 4* Luke Cage r4/40 sig 20
-        '''
-
-    async def convert(self):
-        bot = self.ctx.bot
-        champs = []
-        default = {}
-        dangling_arg = None
-        for arg in self.argument.lower().split(' '):
-            attrs = default.copy()
-            for m in self.parse_re.finditer(arg):
-                attrs[m.lastgroup] = int(m.group(m.lastgroup))
-            token = self.parse_re.sub('', arg)
-            if token != '':
-                champ = await self.get_champion(bot, token, attrs)
-                dangling_arg = None
-                champs.append(champ)
-            else:
-                default.update(attrs)
-                dangling_arg = arg
-        if dangling_arg:
-            em = discord.Embed(title='Dangling Argument',
-                    description="Last argument '{}' is unused.\n".format(dangling_arg)
-                        + "Place **before** the champion or **without a space**.")
-            await bot.say(embed=em)
-        return champs
-
-class GSExport():
-
-    def __init__(self, bot, gc, *, gkey, local, **kwargs):
-        self.bot = bot
-        self.gc = gc
-        self.gkey = gkey
-        self.local = local
-        self.meta_sheet = kwargs.pop('meta_sheet', 'meta_sheet')
-        for k,v in kwargs.items():
-            setattr(self, k, v)
-        self.data = defaultdict(partial(defaultdict, dict))
-
-    async def retrieve_data(self):
-        ss = self.gc.open_by_key(self.gkey)
-        try:
-            meta = ss.worksheet('title', self.meta_sheet)
-        except pygsheets.WorksheetNotFound:
-            await self.retrieve_sheet(ss, sheet_name=None, sheet_action='file', data_type='dict')
-        else:
-            for record in meta.get_all_records():
-                await self.retrieve_sheet(ss, **record)
-        if hasattr(self, 'postprocess'):
-            await self.postprocess(self.bot, self.data)
-        if self.local:
-            dataIO.save_json(self.local, self.data)
-        return self.data
-
-    async def retrieve_sheet(self, ss, *, sheet_name, sheet_action, data_type, **kwargs):
-        if sheet_name:
-            sheet = ss.worksheet('title', sheet_name)
-        else:
-            sheet = ss.sheet1
-            sheet_name = sheet.title
-        data = sheet.get_all_values(include_empty=False)
-        header = data[0]
-        if data_type.startswith('nested_list'):
-            data_type, dlen = data_type.rsplit('::', maxsplit=1)
-            dlen = int(dlen)
-
-        prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'))
-        for row in data[1:]:
-            drow = numericise_all(prep_func(row), '')
-            rkey = drow[0]
-            if sheet_action == 'merge':
-                if data_type == 'nested_dict':
-                    pack = dict(zip(header[2:], drow[2:]))
-                    self.data[rkey][sheet_name][drow[1]] = pack
-                    continue
-                if data_type == 'list':
-                    pack = drow[1:]
-                elif data_type == 'nested_list':
-                    if len(drow[1:]) < dlen or not any(drow[1:]):
-                        pack = None
-                    else:
-                        pack = [drow[i:i+dlen] for i in range(1, len(drow), dlen)]
-                self.data[rkey][sheet_name] = pack
-            elif sheet_action in ('dict', 'file'):
-                if data_type == 'list':
-                    pack = drow[1:]
-                elif data_type == 'dict':
-                    pack = dict(zip(header, drow))
-                if sheet_action == 'dict':
-                    self.data[sheet_name][rkey] = pack
-                elif sheet_action == 'file':
-                    self.data[rkey] = pack
-
-    @staticmethod
-    def do_nothing(row):
-        return row
-
-    @staticmethod
-    def remove_commas(row):
-        return [cell.replace(',', '') for cell in row]
-
-    @staticmethod
-    def remove_NA(row):
-        return [None if cell in ("#N/A", "") else cell for cell in row]
 
 
 class AliasDict(UserDict):
@@ -592,46 +356,6 @@ class MCOC(ChampionFactory):
         logger.info("MCOC Init")
         super().__init__()
 
-    @commands.command(aliases=('p2f',), hidden=True)
-    async def per2flat(self, per: float, ch_rating: int=100):
-        '''Convert Percentage to MCOC Flat Value'''
-        await self.bot.say(to_flat(per, ch_rating))
-
-    @commands.command(name='flat', aliases=('f2p'))
-    async def flat2per(self, *, m):
-        '''Convert MCOC Flat Value to Percentge
-        <equation> [challenger rating = 100]'''
-        if ' ' in m:
-            m, cr = m.rsplit(' ',1)
-            challenger_rating = int(cr)
-        else:
-            challenger_rating = 100
-        m = ''.join(m)
-        math_filter = re.findall(r'[\[\]\-()*+/0-9=.,% ]' +
-            r'|acos|acosh|asin|asinh' +
-            r'|atan|atan2|atanh|ceil|copysign|cos|cosh|degrees|e|erf|erfc|exp' +
-            r'|expm1|fabs|factorial|floor|fmod|frexp|fsum|gamma|gcd|hypot|inf' +
-            r'|isclose|isfinite|isinf|isnan|round|ldexp|lgamma|log|log10|log1p' +
-            r'|log2|modf|nan|pi|pow|radians|sin|sinh|sqrt|tan|tanh', m)
-        flat_val = eval(''.join(math_filter))
-        p = from_flat(flat_val, challenger_rating)
-        em = discord.Embed(color=discord.Color.gold(),
-                title='FlatValue:',
-                description='{}'.format(flat_val))
-        em.add_field(name='Percentage:', value='{}\%'.format(p))
-        await self.bot.say(embed=em)
-
-    @commands.command(aliases=('compf','cfrac'), hidden=True)
-    async def compound_frac(self, base: float, exp: int):
-        '''Calculate multiplicative compounded fractions'''
-        if base > 1:
-            base = base / 100
-        compound = 1 - (1 - base)**exp
-        em = discord.Embed(color=discord.Color.gold(),
-            title="Compounded Fractions",
-            description='{:.2%} compounded {} times'.format(base, exp))
-        em.add_field(name='Expected Chance', value='{:.2%}'.format(compound))
-        await self.bot.say(embed=em)
 
     @commands.command(aliases=('update_mcoc',), hidden=True)
     async def mcoc_update(self, fname, force=False):
@@ -811,9 +535,9 @@ class MCOC(ChampionFactory):
             /champ list    (all 4* champs rank5, sig99)
             /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
         '''
-        hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
+        hargs = await HashtagRankConverter(ctx, hargs).convert()
         await self.update_local()
-        roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
+        roster = ChampionRoster(self.bot, self.bot.user)
         rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
@@ -2006,16 +1730,5 @@ def padd_it(word,max : int,opt='back'):
     else:
         logger.warn('Padding would be negative.')
 
-# avoiding cyclic importing
-from . import hook as hook
-
 def setup(bot):
-    if not hasattr(bot, '_command_error_orig'):
-        bot._command_error_orig = bot.on_command_error
-        @bot.event
-        async def on_command_error(error, ctx):
-            if isinstance(error, QuietUserError):
-                bot.logger.info('<{}> {}'.format(type(error).__name__, error))
-            else:
-                await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
