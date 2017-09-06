@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "d0b12ac4fb29c4ea3deb01d427fd8fb3f6709314",
+    "hash": "4a2bc35ecb61fd96d72117035e96b38cc65c1a18",
     "language": "en",
     "post_processed": true,
-    "string_count": 687,
+    "string_count": 695,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1499725481,
-    "versionLock": "14.1"
+    "ts": 1502398715,
+    "versionLock": "15.0"
   },
   "strings": [
     {
@@ -855,7 +855,8 @@
     },
     {
       "k": "ID_UI_HEROACTION_EXCLUSIVE",
-      "v": "[FF0000FF]LOCKED[-]"
+      "v": "[FF0000FF]LOCKED[-]",
+      "vn": 13
     },
     {
       "k": "ID_UI_HEROACTION_EXCLUSIVE_V2",
@@ -863,7 +864,8 @@
     },
     {
       "k": "ID_UI_HEROACTION_NON_EXCLUSIVE",
-      "v": "[165C97FF]AVAILABLE[-]"
+      "v": "[165C97FF]AVAILABLE[-]",
+      "vn": 13
     },
     {
       "k": "ID_UI_HEROACTION_NON_EXCLUSIVE_V2",
@@ -1080,29 +1082,39 @@
       "vn": 14
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_BANEOFKITCHEN",
+      "v": "BANE OF HELL'S KITCHEN",
+      "vn": 15
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_BANEOFKITCHEN_DESC",
+      "v": "[64acff]Kingpin:[-] Heavy Attacks gain +{0}% Attack and cannot trigger a Passive Evade.\n[64acff]Daredevil:[-] +40% Armor Break duration.\n[64acff]Daredevil (Classic):[-] +40% Precision Buff duration.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 15
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_BELIEVER",
-      "v": "BELIEVER"
+      "v": "BELIEVER",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BELIEVER_DESC",
-      "v": "[ffffff]Punisher 2099:[-] The first use of the Nano-Tech Battery is immediately recharged.\n[ffffff]Thor:[-] +{0}% Fury Potency.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies."
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_BIOCHEM_DESC",
-      "v": "[64acff]Doctor Octopus:[-] Start with {1} Chemistry Research.\n[64acff]Ant-Man:[-] Glancing Hits reflect {1}% of Physical Damage done, by attacks that make Contact.",
-      "vn": "14.1"
+      "v": "[ffffff]Punisher 2099:[-] The first use of the Nano-Tech Battery is immediately recharged.\n[ffffff]Thor:[-] +{0}% Fury Potency.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BLUE_I",
-      "v": "IT AIN'T EASY Lv. 1"
+      "v": "IT AIN'T EASY Lv. 1",
+      "vn": 13
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BLUE_II",
-      "v": "IT AIN'T EASY Lv. 2"
+      "v": "IT AIN'T EASY Lv. 2",
+      "vn": 13
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BLUE_III",
-      "v": "IT AIN'T EASY Lv. 3"
+      "v": "IT AIN'T EASY Lv. 3",
+      "vn": 13
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BONUS",
@@ -1119,6 +1131,16 @@
     {
       "k": "ID_UI_HERO_SYNERGY_BUDDY_III",
       "v": "FRIENDS Lv. 3"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_COMPETITION",
+      "v": "COMPETITION",
+      "vn": 15
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_COMPETITION_DESC",
+      "v": "[64acff]Kingpin:[-] +{0}% Rage conversion chance.\n[64acff]The Hood:[-] +20% Invisibility Duration\n[64acff]Joe Fixit:[-] +{0}% Attack while the opponent has a Debuff\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 15
     },
     {
       "k": "ID_UI_HERO_SYNERGY_COMP_I",
@@ -1156,35 +1178,53 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CRIMEBOSSES_I",
-      "v": "CRIME BOSSES Lv. 1"
+      "v": "CRIME BOSSES Lv. 1",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CRIMEBOSSES_II",
-      "v": "CRIME BOSSES Lv. 2"
+      "v": "CRIME BOSSES Lv. 2",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CRIMEBOSSES_III",
-      "v": "CRIME BOSSES Lv. 3"
+      "v": "CRIME BOSSES Lv. 3",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CROSSTRAINING",
-      "v": "CROSS TRAINING"
+      "v": "CROSS TRAINING",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CROSSTRAINING_DESC",
-      "v": "[ffffff]Punisher 2099:[-] Begins the fight with {0}% Power Meter.\n[ffffff]Punisher:[-] +{0}% Fury and Bleed Ability Accuracy.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies."
+      "v": "[ffffff]Punisher 2099:[-] Begins the fight with {0}% Power Meter.\n[ffffff]Punisher:[-] +{0}% Fury and Bleed Ability Accuracy.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DARKEMPOWERMENT_I",
-      "v": "DARK EMPOWERMENT Lv. 1"
+      "v": "DARK EMPOWERMENT Lv. 1",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DARKEMPOWERMENT_II",
-      "v": "DARK EMPOWERMENT Lv. 2"
+      "v": "DARK EMPOWERMENT Lv. 2",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DARKEMPOWERMENT_III",
-      "v": "DARK EMPOWERMENT Lv. 3"
+      "v": "DARK EMPOWERMENT Lv. 3",
+      "vn": "11.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEFDESTROYER",
+      "v": "DEFENDERS DESTROYER",
+      "vn": 15
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEFDESTROYER_DESC",
+      "v": "[64acff]Kingpin:[-] +15% more power when struck by a Physical Attack.\n[64acff]Iron Fist:[-] +{0}% Armor Break duration.\n[64acff]Elektra:[-] +{0}% Bleed duration.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 15
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ABILITYPOWER",
@@ -1196,11 +1236,13 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ARMOR",
-      "v": "All Champions gain +{0}% Armor"
+      "v": "All Champions gain +{0}% Armor",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ARMOR_FALCON",
-      "v": "All Champions gain +{0}% Armor and Redwing's Recon Bonus"
+      "v": "All Champions gain +{0}% Armor and Redwing's Recon Bonus",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ATTACK",
@@ -1216,11 +1258,13 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_BLUE",
-      "v": "All Champions gain +{0} Block Penetration"
+      "v": "All Champions gain +{0} Block Penetration",
+      "vn": 13
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_COMP",
-      "v": "All Champions gain +{0}% Armor & Power Gain"
+      "v": "All Champions gain +{0}% Armor & Power Gain",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_COSMIC",
@@ -1232,23 +1276,28 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_CRIMEBOSSES",
-      "v": "Villain champions gain +{0} Armor and Critical Rating"
+      "v": "Villain champions gain +{0} Armor and Critical Rating",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_CRITCHANCE",
-      "v": "All Champions gain +{0} Crit Rate"
+      "v": "All Champions gain +{0} Crit Rate",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_CRITCHANCE_FALCON",
-      "v": "All Champions gain +{0}% Crit Rate and Redwing's Recon Bonus"
+      "v": "All Champions gain +{0}% Crit Rate and Redwing's Recon Bonus",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_CRITDAMAGE",
-      "v": "All Champions gain +{0}% Critical Damage"
+      "v": "All Champions gain +{0}% Critical Damage",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_DARKEMPOWERMENT",
-      "v": "Non-Robot Villain champions have a {0}% chance to Revive at 10% Health when receiving a knock out blow"
+      "v": "Non-Robot Villain champions have a {0}% chance to Revive at 10% Health when receiving a knock out blow",
+      "vn": "11.2"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_HEALTH",
@@ -1256,7 +1305,8 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_HFH",
-      "v": "All Champions gain +{1} Block Proficiency & Physical Resistance"
+      "v": "All Champions gain +{1} Block Proficiency & Physical Resistance",
+      "vn": 12
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_HIVEMIND",
@@ -1296,7 +1346,8 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_SGM",
-      "v": "Venom and Carnage gain +{0} to their maximum number of Genetic Memory or Hyper Mutation Buffs."
+      "v": "Venom and Carnage gain +{0} to their maximum number of Genetic Memory or Hyper Mutation Buffs.",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_SKILL",
@@ -1357,11 +1408,6 @@
       "v": "ENEMIES Lv. 3"
     },
     {
-      "k": "ID_UI_HERO_SYNERGY_ENGINEERING_DESC",
-      "v": "[64acff]Doctor Octopus:[-] Research Categories no longer fall off over time.\n[64acff]Vulture :[-] Gain an additional +{1} Chitauri Charge on Critical Hit.",
-      "vn": "14.1"
-    },
-    {
       "k": "ID_UI_HERO_SYNERGY_FAMILY_I",
       "v": "FAMILY Lv. 1"
     },
@@ -1375,19 +1421,23 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_DESC",
-      "v": "King Groot and Groot gain +{0}% Regeneration Rate and Fury Duration."
+      "v": "King Groot and Groot gain +{0}% Regeneration Rate and Fury Duration.",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_I",
-      "v": "FLORAL COLOSSUS Lv. 1"
+      "v": "FLORAL COLOSSUS Lv. 1",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_II",
-      "v": "FLORAL COLOSSUS Lv. 2"
+      "v": "FLORAL COLOSSUS Lv. 2",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_III",
-      "v": "FLORAL COLOSSUS Lv. 3"
+      "v": "FLORAL COLOSSUS Lv. 3",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_HFH",
@@ -1501,11 +1551,13 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_LOYALMINISTER",
-      "v": "LOYAL MINISTER"
+      "v": "LOYAL MINISTER",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_LOYALMINISTER_DESC",
-      "v": "[ffffff]Punisher 2099:[-] Begin the fight with {0}% additional Battery charge.\n[ffffff]Captain America:[-] +{0}% Attack while the opponent is Fatigued or Stunned.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies."
+      "v": "[ffffff]Punisher 2099:[-] Begin the fight with {0}% additional Battery charge.\n[ffffff]Captain America:[-] +{0}% Attack while the opponent is Fatigued or Stunned.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MASTERMIND_I",
@@ -1521,19 +1573,23 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_DESC",
-      "v": "All champions gain +{0} Block Penetration."
+      "v": "All champions gain +{0} Block Penetration.",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_I",
-      "v": "MONSTERS Lv. 1"
+      "v": "MONSTERS Lv. 1",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_II",
-      "v": "MONSTERS Lv. 2"
+      "v": "MONSTERS Lv. 2",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_III",
-      "v": "MONSTERS Lv. 3"
+      "v": "MONSTERS Lv. 3",
+      "vn": "12.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MUTANT_I",
@@ -1572,11 +1628,6 @@
       "v": "NEMESIS Lv. 3"
     },
     {
-      "k": "ID_UI_HERO_SYNERGY_PARTICLEPHYSICS_DESC",
-      "v": "[64acff]Doctor Octopus:[-] When a Breakthrough expires, Research Categories reset to {1}.\n[64acff]Electro:[-] Gains {1}% additional Power from Critical Hits.",
-      "vn": "14.1"
-    },
-    {
       "k": "ID_UI_HERO_SYNERGY_RIVAL_I",
       "v": "RIVALS Lv. 1"
     },
@@ -1601,6 +1652,16 @@
       "v": "ROMANCE Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_ROYALFAMILY",
+      "v": "INHUMAN ROYAL FAMILY",
+      "vn": 15
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ROYALFAMILY_BLACKBOLT",
+      "v": "[64acff]Medusa:[-] Living Strands generates up to 6 Fury Buffs.\n[64acff]Black Bolt:[-] Provocation generates permanent Buffs instead of temporary Buffs.\n[64acff]Inhuman Royal Family:[-]+{0}% Attack at the start of the fight if Medusa, Black Bolt and Karnak are together in a team.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 15
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_SCIENCE_I",
       "v": "SCIENCE AUTHORITY Lv. 1"
     },
@@ -1619,15 +1680,18 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_SGM_I",
-      "v": "Shared Genetic Memory"
+      "v": "Shared Genetic Memory",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_SGM_II",
-      "v": "Shared Genetic Memory"
+      "v": "Shared Genetic Memory",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_SGM_III",
-      "v": "Shared Genetic Memory"
+      "v": "Shared Genetic Memory",
+      "vn": "13.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_SHIELDBWQ_III",
