@@ -1,18 +1,21 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "287e071292e443d7d3b08fb1db4694c84e69fdce",
+    "hash": "a1dc62d68c2d749bf087b029a90ed0e26d6af147",
     "language": "en",
-    "post_processed": true,
     "string_count": 123,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1502841992,
-    "versionLock": "15.0"
+    "ts": 1503533987
   },
   "strings": [
+    {
+      "k": "ID_CHARACER_BIOS_BLADE",
+      "v": "When Eric Brooks' mother was killed during his birth by a bloodthirsty vampire, the newborn Brooks' blood was infused with vampiric enzymes.This event turned him into a Dhampir, a hybrid human/vampire, possessing the powers of a vampire like immortality, but none of their weaknesses. Eventually becoming known as Blade, he has the ability to sense supernatural phenomenon, enabling him to identify Dimensional Beings and quickly react to incoming threats, making him effective at hunting the most powerful beings in the Battlerealm.",
+      "vn": "15.1"
+    },
     {
       "k": "ID_CHARACTER_BIOS_ABOMINATION",
       "v": "When Russian spy Emil Blonksy exposed himself to gamma radiation, he was transformed forever into the monstrous Abomination! Bigger than the Hulk, the Abomination retains his cunning and intellect – but cannot return to his human form. Enormous, powerful, and angry, the Abomination is a fearsome foe – even to one as strong as the Hulk!"
@@ -53,6 +56,11 @@
     {
       "k": "ID_CHARACTER_BIOS_BLACKWIDOW",
       "v": "There’s no escaping the sting of the world’s greatest spy when she has you in her sights. A skilled fighter possessing astounding agility and a way with weapons, she is often shrouded in mystery. But there’s no mystery as to who you want on your team when things start heating up – Natasha Romanova – The Black Widow!"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_BLADE",
+      "v": "When Eric Brooks' mother was killed during his birth by a bloodthirsty vampire, the newborn Brooks' blood was infused with vampiric enzymes. This event turned him into a Dhampir, a hybrid human/vampire, possessing the powers of a vampire--like immortality--but none of their weaknesses. Eventually becoming known as Blade, he has the ability to sense supernatural phenomena, enabling him to identify Extra-Dimensional Beings and quickly react to incoming threats, making him effective at hunting the most powerful Champions in the Battlerealm.",
+      "vn": "15.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_BROTHERVOODOO",
@@ -300,12 +308,22 @@
       "vn": 15
     },
     {
+      "k": "ID_CHARACTER_BIOS_MEPHISTO",
+      "v": "Mephisto is an extra-dimensional demon whose main goal is to break the will and enslave the souls of noble Champions; though he cannot take their souls himself, his treachery and deception is often enough to convince his victims to give them up willingly. Mephisto is continually seeking to add more spirits to his realm, using them to his advantage whenever he sees fit. As a demon who has collected numerous souls, Mephisto is practically immortal and his fiery power is eternal.",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_CHARACTER_BIOS_MODOK",
       "v": "The terrifying result of an unspeakable experiment, M.O.D.O.K. is a grotesque mastermind bent on the destruction of the world. As the sometimes-leader of A.I.M., the Mechanized Organism Designed Only for Killing has tangled many times with his foes, Captain America and the Avengers."
     },
     {
       "k": "ID_CHARACTER_BIOS_MOONKNIGHT",
       "v": "Avatar? Executioner? Mercenary Marc Spector died in Egypt, under the statue of the ancient deity Khonshu. He returned to life in the shadow of the moon god, and wears his mantle to fight crime for his own redemption. Is he crazy? How would you feel after being resurrected? Listen, sometimes you have to go with the voices in your head."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_MORNINGSTAR",
+      "v": "Queen Haasen conquered and ruthlessly ruled over her kingdom of Languria with only a few mercenaries, and a demonic sword. But her people rebelled against the Queen’s reign of fire and blood, and sealed her within a mystical iron maiden to suffer for all time. When Mephisto offered her a chance for vengeance, the Prince of Lies granted her new life in the tortured form of her walking iron tomb, and the weapon for which she is named: Morningstar.",
+      "vn": "15.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_MSMARVEL",

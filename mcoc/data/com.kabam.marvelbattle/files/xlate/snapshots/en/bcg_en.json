@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "4a2bc35ecb61fd96d72117035e96b38cc65c1a18",
+    "hash": "7cf16fb2776f105da37035d9e25136e940bf60f9",
     "language": "en",
     "post_processed": true,
-    "string_count": 695,
+    "string_count": 725,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1502398715,
-    "versionLock": "15.0"
+    "ts": 1505333423,
+    "versionLock": "15.1"
   },
   "strings": [
     {
@@ -1202,6 +1202,11 @@
       "vn": "13.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DARKBARGAIN",
+      "v": "DARK BARGAIN",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DARKEMPOWERMENT_I",
       "v": "DARK EMPOWERMENT Lv. 1",
       "vn": "11.2"
@@ -1225,6 +1230,26 @@
       "k": "ID_UI_HERO_SYNERGY_DEFDESTROYER_DESC",
       "v": "[64acff]Kingpin:[-] +15% more power when struck by a Physical Attack.\n[64acff]Iron Fist:[-] +{0}% Armor Break duration.\n[64acff]Elektra:[-] +{0}% Bleed duration.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 15
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEMONHUNTER",
+      "v": "DEMON HUNTER",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEMONHUNTER_LONG",
+      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Mystic Champions. \n[64acff]Mephisto, Dormammu:[-] Opponent's Energy Resistance is reduced by {0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEMONS",
+      "v": "DEMONS",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEMONS_LONG",
+      "v": "[64acff]Mephisto, Dormammu:[-] +{0}% Energy Resistance while taking Damage over time.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ABILITYPOWER",
@@ -1295,6 +1320,11 @@
       "vn": "11.2"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_DARKBARGAIN",
+      "v": "[64acff]Morningstar:[-] Starts the fight with {0} Bar of Power.\n[64acff]Mephisto:[-] +{0} Soul at the beginning of the fight.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_DARKEMPOWERMENT",
       "v": "Non-Robot Villain champions have a {0}% chance to Revive at 10% Health when receiving a knock out blow",
       "vn": "11.2"
@@ -1319,6 +1349,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_MANAGAIN_NEW",
       "v": "All Champions begin each fight with {0}% Power"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_MASTERSOFTHESWORD",
+      "v": "[64acff]Morningstar:[-] If she has less than {0} Captured Souls, she gains 1.\n[64acff]Guillotine:[-] Soul charges take 10 seconds longer to expire\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_MUTANT",
@@ -1372,6 +1407,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_THUND",
       "v": "All Champions take {0}% less Special Damage"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_WARRIORQUEENS",
+      "v": "[64acff]Morningstar:[-] Buffs last 20% longer.\n[64acff]Angela:[-] Buffs last 20% longer.\n[64acff]Magik:[-] +{0} Critical Rating and +{0} Critical Damage while Limbo is active.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_EARTH_DEFENDER_I",
@@ -1438,6 +1478,16 @@
       "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_III",
       "v": "FLORAL COLOSSUS Lv. 3",
       "vn": "12.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_HEIGHTENEDSENSES",
+      "v": "HEIGHTENED SENSES",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_HEIGHTENEDSENSES_LONG",
+      "v": "[64acff]Blade:[-] +{0}% Potency for Danger Sense Bonuses.\n[64acff]Spider-Man (Stark Enhanced):[-] Starts the fight with 3 Poise charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_HFH",
@@ -1572,6 +1622,11 @@
       "v": "MASTERMINDS Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_MASTERSOFTHESWORD",
+      "v": "MASTERS OF THE SWORD",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_DESC",
       "v": "All champions gain +{0} Block Penetration.",
       "vn": "12.1"
@@ -1626,6 +1681,16 @@
     {
       "k": "ID_UI_HERO_SYNERGY_NEMESIS_III",
       "v": "NEMESIS Lv. 3"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PACTWDEMON",
+      "v": "PACT WITH A DEMON",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PACTWDEMON_LONG",
+      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.\n",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_RIVAL_I",
@@ -1722,6 +1787,26 @@
       "v": "SKILL DOMINATION Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_SOULSEEKER",
+      "v": "SOUL SEEKER",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_SOULSEEKER_LONG",
+      "v": "[64acff]Mephisto:[-] +{0} Persistent Soul Charge at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_SPIRITOFJUSTICE",
+      "v": "SPIRIT OF JUSTICE",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_SPIRITOFJUSTICE_LONG",
+      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Villain Champions.\n[64acff]Ghost Rider:[-] +{0}% chance to place a Judgment.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_SPLITPERSON",
       "v": "SPLIT PERSONALITY",
       "vn": "14.1"
@@ -1766,6 +1851,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_THUND_III",
       "v": "THUNDERBOLTS Lv. 3"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_WARRIORQUEENS",
+      "v": "WARRIOR QUEENS",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_TILE_LEVEL_FORMAT",
@@ -2146,6 +2236,16 @@
     {
       "k": "ID_UI_MY_TEAMS_TITLE_SAVED",
       "v": "SAVED TEAMS"
+    },
+    {
+      "k": "ID_UI_PERSISTENT_CHARGE",
+      "v": "Persistent Charge",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_PERSISTENT_CHARGE_CAPS",
+      "v": "PERSISTENT CHARGE",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_POPUP_EXCLUSIVITY_WARNING_ALLIANCE_QUEST_AVA",

@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "663b5260d0c00de8e45b0d743c5674788a9ae029",
+    "hash": "c2e51b0df6fa083b2db90c907ddce14043044697",
     "language": "en",
     "post_processed": true,
-    "string_count": 2939,
+    "string_count": 2982,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1502398725,
-    "versionLock": "15.0"
+    "ts": 1505333424,
+    "versionLock": "16.0"
   },
   "strings": [
     {
@@ -48,6 +48,16 @@
     {
       "k": "ID_UI_ATTIRBUTE_PWR",
       "v": "POWER GAIN"
+    },
+    {
+      "k": "ID_UI_ATTIRBUTE_RALLY",
+      "v": "ADRENALINE",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_ATTIRBUTE_RALLY_TOOLTIP",
+      "v": "Percentage of damage taken from unblocked hits that gets converted into ADRENALINE. This value can in turn be converted back to HEALTH by landing successful hits against the opponent.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_ATTIRBUTE_RNRG",
@@ -223,6 +233,11 @@
       "k": "ID_UI_ATTRIBUTE_MK_SP2BLD",
       "v": "Any Bleed effects triggered by this attack have [16982bff]{1}%[-] increased duration.",
       "vn": "11.2"
+    },
+    {
+      "k": "ID_UI_ATTRIBUTE_RALLY",
+      "v": "RALLY",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_ATTRIBUTE_ROLE",
@@ -5789,6 +5804,11 @@
       "v": "MEDIUM ATTACK"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_MEPHIS_IMNPSN",
+      "v": "Immune to all known poisons of the Battlerealm.",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_METABOLISMBLEED_DESC",
       "v": "Beast's thick hide makes him resistant to Bleed effects, decreasing their Potency and Duration by {1}%."
     },
@@ -5908,6 +5928,136 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_MORDOSTUNEVD_HUD",
       "v": "ASTRAL EVADE"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_ATK",
+      "v": "[16982bff]+{1}[-] Attack per Captured Soul.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_CS_A",
+      "v": "Over the course of a quest, Morningstar’s weapon captures Souls and stores up to {1} of them, empowering both her and itself. Captured Souls travel with them from fight-to-fight.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_CS_B",
+      "v": "1 Soul: When struck with a Physical Contact attack, Morningstar has a {0}% chance to cause her Opponent to Bleed for [16982bff]{1}[-] damage over {2} seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_CS_C",
+      "v": "2 Souls: Special 1 Triggers Unstoppable for {2} seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_CS_D",
+      "v": "3 Souls: Special 2 becomes Unblockable.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_CS_E",
+      "v": "4 Souls: Gain [16982bff]{1}[-] Energy Resist, and {0}% Perfect Block chance.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_CS_F",
+      "v": "5 Souls: {0}% chance on Hit to Life Steal {1}% of the Damage done to the Opponent.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_HVY",
+      "v": "{0}% Chance to trigger a Power Gain granting {1}% of Max Power per Captured Soul over {2} seconds. Max: 1 Stack.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_A",
+      "v": "If Morningstar has less than {0} Captured Souls at the start of a fight, she gains 1.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_B",
+      "v": "Morningstar’s weapon grants her a link to her Opponent’s Soul, allowing her to siphon away a portion of the power from any Fury, Power Gain, or Regeneration Buffs they trigger, reducing their potency by [16982bff]{1}%[-], and granting her her own Buff.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_C",
+      "v": "Fury: [16982bff]+{1}[-] Attack for {2} Seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_D",
+      "v": "Regeneration: [16982bff]+{1}[-] Health over {2} Seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_E",
+      "v": "Power Gain: [16982bff]+{1}%[-] Power over {2} Seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_SIMPLE",
+      "v": "Morningstar’s weapon grants her a link to her Opponent’s soul, allowing her to feed on its power, strengthening herself, while weakening them.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_TITLE",
+      "v": "SOUL LINK",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_TITLE_LOWER",
+      "v": "Soul Link",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_TITLE_SHORT",
+      "v": "Soul Link {0}",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP1",
+      "v": "Each hit of this attack deals [16982bff]{1}[-] Bonus Energy Damage per Captured Soul. This damage increases with Critical Hits.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP2_A",
+      "v": "Each hit of this attack deals [16982bff]{1}[-] Bonus Energy Damage per Buff active on the Opponent, when the attack is triggered.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP2_B",
+      "v": "{0}% chance to Nullify all Buffs.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP2_C",
+      "v": "Gain [16982bff]{1}[-] Block Penetration per Buff active on the Opponent when this attack begins.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP3_A",
+      "v": "Morningstar begins to pull her Opponent’s soul from their body, placing a counter on herself.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP3_B",
+      "v": "Damage to the Opponent increases the counter, Damage to Morningstar reduces it.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP3_C",
+      "v": "If the counter reaches {0} she captures the soul, if it reaches {2} her opponent reclaims their soul.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP3_D",
+      "v": "Morningstar can capture only {1} Soul per fight.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SP3_E",
+      "v": "Morningstar can capture only {1} Soul per fight.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_MREALM_HUD",
@@ -7873,6 +8023,11 @@
       "v": "When Attacked"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONAURAINCINERATE",
+      "v": "Aura of Incineration",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBIO",
       "v": "Biology - Research Category",
       "vn": "14.1"
@@ -7888,6 +8043,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCKRESOLVED",
       "v": "Blocking"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCAPTUREDSOUL",
+      "v": "Captured Souls - Passive",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCHEM",
@@ -8046,6 +8206,11 @@
       "v": "Medium Attacks"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONNEARBYBLDOPP",
+      "v": "When nearby Bleeding Opponents",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONNEUROTOXIN",
       "v": "Neurotoxin - Passive",
       "vn": 12
@@ -8074,6 +8239,11 @@
       "v": "Odd Combo"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONOPPDASHEVD",
+      "v": "When Opponents Intercept Blade’s Dash",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONORGANICICE",
       "v": "Organic Ice",
       "vn": 12
@@ -8081,6 +8251,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONOVERRUN",
       "v": "Overrun"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPERSISTENTCHARGE",
+      "v": "Persistent Charge",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPHOENIXFORCEEMPOWERED",
@@ -8186,7 +8361,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_OVERPOWER",
-      "v": "Overpower",
+      "v": "Overpower - Buff",
       "vn": 15
     },
     {
@@ -8203,7 +8378,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_UNRELENTING",
-      "v": "Rage",
+      "v": "Rage - Passive",
       "vn": 15
     },
     {
@@ -8521,6 +8696,56 @@
       "v": "Vibranium Armor absorbs the impact of enemy heavy attacks when the Black Panther is not blocking."
     },
     {
+      "k": "ID_UI_STAT_FORMAT_BLADE_AUTOBLOCK_EXTRA_LONG",
+      "v": "+{1}% chance to Auto-Block if Danger Sense is active.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_AUTOBLOCK_LONG",
+      "v": "Blade has a {0}% chance to Auto-Block any attacks made when Dashing towards the opponent. This can trigger the Parry Mastery.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_DANGERSENSE",
+      "v": "[808080ff]Danger Sense[-]",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_DANGERSENSE_HUD",
+      "v": "DANGER SENSE",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_DANGERSENSE_LONG",
+      "v": "When against Dimensional Beings, Danger Sense activates and grants Blade [16982bff]{1}[-] Attack Rating while also reducing the opponent's Ability Accuracy by {0}%.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_IMMUNITY",
+      "v": "Blade’s immune system attacks alien substances, shrugging off Debuffs up to {1}% faster based on current Power.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_PWGAIN_LONG",
+      "v": "For every stack of Bleed on the opponent, generates {1}% of a Bar of Power per second.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_SP1_LONG",
+      "v": "Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over {2} seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_SP2_LONG",
+      "v": "Inflicts Bleed on Critical Hits, dealing [16982bff]{1}[-] Direct Damage per stack over {2} second. For each Bleed inflicted, Blade instantly generates {0}% of a Bar of Power.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_BLADE_SP3_LONG",
+      "v": "Inflicts {0} stacks of Bleed, each dealing [16982bff]{1}[-] Direct Damage over {2} seconds.",
+      "vn": "15.1"
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_BPREGENERATION",
       "v": "Excessive build-up of fatigue-producing toxins activates Black Panther's superhuman healing. Enabling him to shrug off any Fatigue, Exhaustion or Weakness effects and Regenerate [16982bff]{1}%[-] of his max health over [16982bff]{2}[-] seconds."
     },
@@ -8714,17 +8939,17 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_OVPWR_A",
-      "v": "If Kingpin ever has {0} Debuffs, he converts them into an Overpower Buff, lasting {2} seconds and increasing his Attack by [16982bff]{1}[-].",
+      "v": "If Kingpin's Debuffs and Rages combined equal {0}, he converts them into an Overpower Buff, lasting {2} seconds and increasing his attack by [16982bff]{1}[-].",
       "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_OVPWR_B",
-      "v": "While in Overpower mode, Kingpin’s Special Attacks become Unblockable and he cannot gain Rage Debuffs.",
+      "v": "While in Overpower mode, Kingpin's Special Attacks become Unblockable and he cannot gain Rage.",
       "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_OVPWR_C",
-      "v": "While Unstoppable each strike landed on Kingpin has a {0}% chance to activate a Rage Debuff."
+      "v": "While Unstoppable, each strike landed on Kingpin has a {0}% chance to grant a Rage."
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_OVPWR_HUD",
@@ -8738,17 +8963,17 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_RAGE_A",
-      "v": "Whenever Kingpin gains a Debuff he has a {0}% chance to convert it into a permanent Rage Debuff that has no effect.",
+      "v": "Whenever Kingpin gains a Debuff he has a {0}% chance to convert it into a permanent Rage that has no effect.",
       "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_RAGE_B",
-      "v": "Each Debuff on Kingpin only strengthens his resolve, increasing Attack by [16982bff]{1}[-] and Power Gain Rate by {0}%.",
+      "v": "Each Debuff and Rage on Kingpin only strengthens his resolve, increasing attack by [16982bff]{1}[-] and Power Gain Rate by {0}%.",
       "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_RAGE_C",
-      "v": "Whenever the opponent Evades one of Kingpin’s attacks, he gains a Rage Debuff. Cooldown: {2} seconds.",
+      "v": "Whenever the opponent Evades one of Kingpin's attacks, he gains a Rage. Cooldown: {2} seconds.",
       "vn": 15
     },
     {
@@ -8797,7 +9022,7 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_SP3",
-      "v": "Kingpin gains {1} Rage Debuffs. If he’s in Overpower mode, he instead refreshes the duration of Overpower mode.",
+      "v": "Kingpin gains {1} Rage. If he's in Overpower mode, he instead refreshes the duration of Overpower mode.",
       "vn": 15
     },
     {
@@ -8872,6 +9097,81 @@
       "k": "ID_UI_STAT_FORMAT_MEDUSA_SP3",
       "v": "Inflicts Armor Shattered, reducing the opponent’s Armor Rating by [16982bff]{1}[-] for {2} seconds.",
       "vn": 15
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_ENERGYRES",
+      "v": "+{1}% Energy Resistance for the duration of damage over time Debuffs.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_FIREAURA_LONG",
+      "v": "When Aura of Incineration is active, Mephisto generates Power through his passive Power Gain. Also, for each stack, nearby opponents take {1} Incinerate Energy Damage per second.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_PERSISTENT_FIRE",
+      "v": "Inflicts +{1}% Incinerate damage per Persistent Soul Charge.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_PERSISTENT_HEAL",
+      "v": "When below {0}% Health, each Persistent Soul Charge is consumed, Regenerating {1}% of max Health per charge. Mephisto does not take damage while consuming his Persistent Soul Charges through this ability.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_PERSISTENT_INFO",
+      "v": "Mephisto starts a quest with [37bfff]{1}[-] Persistent Soul Charges, gaining an additional charge each time he knocks out an opponent, up to a max of [37bfff]{2}[-] Soul Charges. Persistent Soul Charges travels with him from fight-to-fight.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_PERSISTENT_TITLE",
+      "v": "[37bfff]Persistent Charge[-]",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_PWGEN",
+      "v": "Generates {1}% of a Power Bar per second instead of taking Incinerate Energy Damage and Immune to Frostbite and Coldsnap.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SOULPRISON",
+      "v": "Mephisto imprisons the opponent’s Soul at the start of the fight, reducing their chance to activate Buffs by {1}% for {2} seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SOULPRISON_HUD",
+      "v": "SOUL IMPRISONMENT",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SOULPRISON_TITLE",
+      "v": "[808080ff]Soul Imprisonment[-]",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP1",
+      "v": "Consumes a Persistent Soul Charge to imprison the opponent’s Soul, reducing their chance to activate Buffs by {1}% for {2} seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP2",
+      "v": "Incinerates the opponent, dealing [16982bff]{1}[-] Energy Damage per stack over {2} seconds. This also removes Perfect Block Chance and reduces Block Proficiency by 50%.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP2_B",
+      "v": "Activates an Aura of Incineration around himself that lasts for {2} seconds.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP2_FIREAURA_HUD",
+      "v": "AURA OF INCINERATION",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP3",
+      "v": "Once a fight, Mephisto instantly drains up to {2} Power Bars from the opponent. If the maximum amount is drained, Mephisto activates his Aura of Incineration for the rest of the fight.",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_POWERSTEALINFO",
@@ -9462,6 +9762,31 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_BLACKWIDOW_TITLE_LOWER",
       "v": "Ignore Pain"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_BLADE_LONG_1",
+      "v": "When below {2}% Health, Blade’s healing factor allows him to recover [16982bff]{1}[-] Health for the cost of [16982bff]{0}[-]% of a Bar of Power per second.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_BLADE_LONG_2",
+      "v": "+{1}% Regeneration Rate if Blade is nearby a Bleeding opponent.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_BLADE_SHORT",
+      "v": "Vampiric Immortality {0}",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_BLADE_SIMPLE",
+      "v": "Blade consumes his own Power to recover from injuries at amazing rates.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_BLADE_TITLE",
+      "v": "VAMPIRIC IMMORTALITY",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_CABLE_DESC",
@@ -10951,12 +11276,12 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_KINGPIN_DESC",
-      "v": "Fisk readies himself to bring his ill intent upon the Contest, beginning the fight with {1} Rage Debuffs active on himself.",
+      "v": "Fisk readies himself to bring his ill intent upon the Contest, beginning the fight with {1} Rages active on himself.",
       "vn": 15
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_KINGPIN_DESC_B",
-      "v": "When Kingpin exits Overpower mode, he has a chance to gain up to {1} Rage debuffs, with each having a [16982bff]{0}%[-] chance to activate.",
+      "v": "When Kingpin exits Overpower mode, he has a chance to gain up to {1} Rages, with each having a [16982bff]{0}%[-] chance to activate.",
       "vn": 15
     },
     {
@@ -10966,7 +11291,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_KINGPIN_SIMPLE",
-      "v": "Fisk sets his ill intent upon the Contest, beginning the fight with Rage Debuffs already active on himself. He also gains the ability to recover some Rage after finishing his Overpower mode.",
+      "v": "Fisk sets his ill intent upon the Contest, beginning the fight with Rage already active on himself. He also gains the ability to recover some Rage after finishing his Overpower mode.",
       "vn": 15
     },
     {
@@ -11107,7 +11432,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_DESC_MOD",
-      "v": "After filling a bar of Power, Magik has a 20% chance to enter a state of Limbo for {2} seconds. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\r\n\r\nBased on current Signature Level, chances are multiplied by [16982bff]{0}%[-]."
+      "v": "After filling a bar of Power, Magik has a 20% chance to enter a state of Limbo for {2} seconds. The chance increases by 12.5% after filling 2 bars, and by 25% after filling 3 bars.\n\nBased on current Signature Level, chances are multiplied by [16982bff]{0}%[-]."
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MAGIKDARKCHYLDE_HUD",
@@ -11220,6 +11545,31 @@
       "k": "ID_UI_STAT_SIGNATURE_MEDUSA_TITLE",
       "v": "LIVING STRANDS",
       "vn": 15
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MEPHISTO_LONG_1",
+      "v": "Mephisto burns with anger, having a [16982bff]{0}%[-] chance to activate his Aura of Incineration for {2} seconds. +{1}% of the above chance on Well Timed Blocks.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MEPHISTO_LONG_B",
+      "v": "Mephisto is immune to Passive Ability Accuracy Modifications.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MEPHISTO_SHORT",
+      "v": "Burning Aura {0}",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MEPHISTO_SIMPLE",
+      "v": "Mephisto burns with anger when getting struck, activating his Aura of Incineration around himself.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MEPHISTO_TITLE",
+      "v": "BURNING AURA",
+      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_MILESMORALES_DESC",
