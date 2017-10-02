@@ -61,7 +61,7 @@ async def postprocess_sig_data(bot, struct):
         if champ_class is None:
             continue
         struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
-                champ_class, sigs=sigs, 
+                champ_class, sigs=sigs,
                 champ_exceptions=struct['kabam_key_override'])
 
 gapi_service_creds = 'data/mcoc/mcoc_service_creds.json'
@@ -665,7 +665,7 @@ class MCOC(ChampionFactory):
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
         for i, k in enumerate(gsheet_files.keys()):
             await self.retrieve_gsheet(k, gc)
-            msg = await self.bot.edit_message(msg, 
+            msg = await self.bot.edit_message(msg,
                     'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
         await self.bot.say('Retrieval Complete')
 
@@ -793,7 +793,7 @@ class MCOC(ChampionFactory):
     async def champ_list(self, ctx, *, hargs=''):
         '''List of all champions in prestige order.
 
-        hargs:  [attribute_args] [hashtags] 
+        hargs:  [attribute_args] [hashtags]
         The optional attribute arguments can be in any order, with or without spaces.
             <digit>* specifies star <default: 4>
             r<digit> specifies rank <default: 5>
@@ -1077,7 +1077,7 @@ class MCOC(ChampionFactory):
             if champ_class is None:
                 continue
             struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
-                    champ_class, sigs=sigs, 
+                    champ_class, sigs=sigs,
                     champ_exceptions=struct['kabam_key_override'])
         with open('data/mcoc/gs_json_test.json', encoding='utf-8', mode='w') as fp:
             json.dump(struct, fp, indent='  ', sort_keys=True)
@@ -1187,11 +1187,11 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
-    @commands.command()
-    async def phc(self):
-        '''Premium Hero Crystal Release Dates'''
-        await self.bot.upload(data_files['phc_jpg']['local'],
-                content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
+    # @commands.command()
+    # async def phc(self):
+    #     '''Premium Hero Crystal Release Dates'''
+    #     await self.bot.upload(data_files['phc_jpg']['local'],
+    #             content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
 
     @commands.command(hidden=True)
@@ -1516,7 +1516,7 @@ class Champion:
             dbg_str.append('Description Keys:  ')
             dbg_str.append('  ' + ', '.join(ktxt['desc']['k']))
             dbg_str.append('Description Text:  ')
-            dbg_str.extend(['  ' + self._sig_header(d) 
+            dbg_str.extend(['  ' + self._sig_header(d)
                             for d in ktxt['desc']['v']])
             await self.bot.say(chat.box('\n'.join(dbg_str)))
 
@@ -1587,7 +1587,7 @@ class Champion:
         ekey = self.get_effect_keys()
         spotlight = self.get_spotlight()
         if spotlight and spotlight['attack'] and spotlight['health']:
-            stats = {k:int(spotlight[k].replace(',','')) 
+            stats = {k:int(spotlight[k].replace(',',''))
                         for k in ('attack', 'health')}
         else:
             stats = {}
@@ -1600,15 +1600,15 @@ class Champion:
             struct['effects'].append(ekey['Effect_' + i])
             struct['locations'].append(ekey['Location_' + i])
             try:
-                struct['sig_coeff'].append((float(coeff['ability_norm' + i]), 
+                struct['sig_coeff'].append((float(coeff['ability_norm' + i]),
                       float(coeff['offset' + i])))
             except:
                 struct['sig_coeff'] = None
         return struct
 
     def init_sig_struct(self):
-        return dict(effects=[], locations=[], sig_coeff=[], 
-                #spotlight_trunc={self.unique: stats}, 
+        return dict(effects=[], locations=[], sig_coeff=[],
+                #spotlight_trunc={self.unique: stats},
                 kabam_text=self.get_kabam_sig_text())
 
     def get_kabam_sig_text(self, sigs=None, champ_exceptions=None):
@@ -1724,8 +1724,8 @@ class Champion:
                         desc.append(preamble + k + '_AO')
                     else:
                         desc.append(preamble + k)
-        return dict(title={'k': title, 'v': sigs[title]}, 
-                    simple={'k': simple, 'v': sigs[simple]}, 
+        return dict(title={'k': title, 'v': sigs[title]},
+                    simple={'k': simple, 'v': sigs[simple]},
                     desc={'k': desc, 'v': [sigs[k] for k in desc]})
 
     def get_sig_coeff(self):

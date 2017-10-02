@@ -101,18 +101,6 @@ class MCOCTools:
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         return em
 
-    #Gold Realm disabled
-    # @commands.command()
-    # async def gold(self,msg = None):
-    #     '''Gold Realm Schedule'''
-    #     package = '```           PST      CST      EST\nJun 5    10:00    12:00    13:00\nJun 5    19:00    21:00    22:00\nJun 6     4:00     6:00     7:00\nJun 6    13:00    15:00    16:00\nJun 6    22:00     0:00     1:00\nJun 7     7:00     9:00    10:00\nJun 7    16:00    18:00    19:00\nJun 8     1:00     3:00     4:00\nJun 8    10:00    12:00    13:00\nJun 8    19:00    21:00    22:00\nJun 9     4:00     6:00     7:00\nJun 9    13:00    15:00    16:00\nJun 10   22:00     0:00     1:00\nJun 11    7:00     9:00    10:00\nJun 11   16:00    18:00    19:00\nJun 12    1:00     3:00     4:00```'
-    #     # await self.bot.say('```'+package+'```')
-    #     if msg is not None:
-    #         package = msg+'\n'+package
-    #     em = discord.Embed(color=discord.Color.gold(),title='Gold Realm Schedule',description=package)
-    #     em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-    #     await self.bot.say(embed=em)
-
     @commands.command(pass_context=True,aliases={'collector','infocollector'})
     async def aboutcollector(self,ctx):
         """Shows info about Collector"""
@@ -150,10 +138,10 @@ class MCOCTools:
                     "JJW#8071\n"
                     "ranemartin8#1636\n"
                     )
-        artteam = ('ViceOne#3005\n')
         supportteam=('phil_wo#3733\n'
                     'SpiderSebas#9910\n'
                     'The Living Tribunal#2984\n'
+                    'suprmatt#2753\n'
                     )
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
