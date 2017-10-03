@@ -150,7 +150,6 @@ class MCOCTools:
         embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name="CollectorDevTeam",value=devteam,inline=True)
         embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
-        embed.add_field(name="CollectorArtTeam",value=artteam,inline=True)
         embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
                          "{} days ago!)".format(days_since))
 
