@@ -10714,9 +10714,9 @@
       "v": "SPIRIT OF VENGEANCE"
     },
     {
-    "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
-    "v": "[16982bff]{0}%[-] chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect; however, the Special 3 still has a chance to trigger both Super Bomb and Pumpkin Bomb effects.",
-    "vn": "14.1"
+      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
+      "v": "[16982bff]{0}%[-] chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect; however, the Special 3 still has a chance to trigger both Super Bomb and Pumpkin Bomb effects.",
+      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_HUD",
