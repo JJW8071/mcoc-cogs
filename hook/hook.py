@@ -544,7 +544,7 @@ class Hook:
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         await hargs.roster.display(hargs.tags)
 
-    @roster.command(pass_context=True, name='update')
+    @roster.command(pass_context=True, name='update', aliases=('add',))
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
         '''Update your roster using the standard command line syntax.
 
@@ -587,7 +587,7 @@ class Hook:
                         value='\n'.join(sorted(track[k])), inline=False)
         await self.bot.say(embed=em)
 
-    @roster.command(pass_context=True, name='delete', aliases=('del',))
+    @roster.command(pass_context=True, name='delete', aliases=('del','remove',))
     async def _roster_del(self, ctx, *, champs: ChampConverterMult):
         '''Delete champion(s) from your roster'''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
