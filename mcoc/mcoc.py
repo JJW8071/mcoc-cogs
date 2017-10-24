@@ -58,7 +58,7 @@ async def postprocess_sig_data(bot, struct):
     mcoc = bot.get_cog('MCOC')
     for key in struct.keys():
         champ_class = mcoc.champions.get(key.lower(), None)
-        if champ_class is None:
+        if champ_class is None or champ_class.mcocsig is None:
             continue
         struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
                 champ_class, sigs=sigs,
@@ -1665,7 +1665,7 @@ class Champion:
                 title = x
 
         if title is None:
-            raise KeyError('DEBUG - title not found')
+            raise KeyError('DEBUG - title not found for champ ' + self.full_name)
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
