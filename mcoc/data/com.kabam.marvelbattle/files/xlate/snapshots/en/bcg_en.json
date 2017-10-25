@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "7cf16fb2776f105da37035d9e25136e940bf60f9",
+    "hash": "c626100c948ff1b2d3076c3e6e0118b97bdf05c5",
     "language": "en",
     "post_processed": true,
-    "string_count": 725,
+    "string_count": 737,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1505333423,
-    "versionLock": "15.1"
+    "ts": 1506705803,
+    "versionLock": "16.0"
   },
   "strings": [
     {
@@ -1334,6 +1334,11 @@
       "v": "All Champions gain +{0}% Health"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_HELLLORDS",
+      "v": "[64acff]Hela:[-] Begin the fight with 1 Bar of Power.\n[64acff]Dormammu:[-] Increases any Health gained while his Imbued Dimensional Link is active by {0}%\n[64acff]Mephisto:[-] Regain the first Soul spent to trigger his Soul Imprisonment each fight.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.\n",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_HFH",
       "v": "All Champions gain +{1} Block Proficiency & Physical Resistance",
       "vn": 12
@@ -1341,6 +1346,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_HIVEMIND",
       "v": "Genetic Memory triggers {0} seconds faster."
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_IMSOUL",
+      "v": "[64acff]Hela:[-] Nullify effects against Hela have a {0}% reduced chance to trigger.\n[64acff]Loki:[-] While they are Cursed, Loki always counts as having more Health than his Opponent.\n[64acff]Thor (Ragnarok):[-] Gains +100% Perfect Block Chance, when Autoblocking.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.\n",
+      "vn": 16
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_MANAGAIN",
@@ -1374,6 +1384,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_PROFICIENCY",
       "v": "All Champions gain +{0}% Block Proficiency"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_QUEENOFHEL",
+      "v": "Champions have a {0}% chance to instantly regain {0}% of their HP just before they’re knocked out. This chance increases by {0}% for each Champion on their team currently knocked out.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.\n",
+      "vn": 16
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_SCIENCE",
@@ -1480,6 +1495,16 @@
       "vn": "12.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_FRIENDFROMWORK",
+      "v": "FRIEND FROM WORK",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_FRIENDFROMWORK_LONG",
+      "v": "[64acff]Thor (Ragnarok):[-] +{0}% Attack when Thunder God’s Wrath is active.\n[64acff]Hulk[-] Becomes Indestructible for 5 seconds when below 20% Health.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_HEIGHTENEDSENSES",
       "v": "HEIGHTENED SENSES",
       "vn": "15.1"
@@ -1488,6 +1513,11 @@
       "k": "ID_UI_HERO_SYNERGY_HEIGHTENEDSENSES_LONG",
       "v": "[64acff]Blade:[-] +{0}% Potency for Danger Sense Bonuses.\n[64acff]Spider-Man (Stark Enhanced):[-] Starts the fight with 3 Poise charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_HELLLORDS",
+      "v": "HELL LORDS",
+      "vn": 16
     },
     {
       "k": "ID_UI_HERO_SYNERGY_HFH",
@@ -1546,6 +1576,11 @@
       "v": "ILLUMINATI Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_IMSOUL",
+      "v": "IMMORTAL SOULS",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_INSEPARABLE",
       "v": "INSEPARABLE Lv. 1"
     },
@@ -1598,6 +1633,16 @@
     {
       "k": "ID_UI_HERO_SYNERGY_LEGALDEFENSE_III",
       "v": "LEGAL DEFENSE Lv. 3"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_LIKEOLDDAYS",
+      "v": "LIKE OLD DAYS",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_LIKEOLDDAYS_LONG",
+      "v": "[64acff]Thor (Ragnarok):[-] {0}% chance to activate a Combo Shield for 5 seconds when Struck.\n[64acff]Loki[-] Ascendant generates Power as long as Loki is below 2 bars.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 16
     },
     {
       "k": "ID_UI_HERO_SYNERGY_LOYALMINISTER",
@@ -1683,6 +1728,16 @@
       "v": "NEMESIS Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_NOTAFRAIDOFDEATH",
+      "v": "NOT AFRAID OF DEATH",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_NOTAFRAIDOFDEATH_LONG",
+      "v": "[64acff]Thor (Ragnarok):[-] Regenerates {0}% of max Health when killing opponents.\n[64acff]Hela[-] Grants {0} Spirits of the Dead charges at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_PACTWDEMON",
       "v": "PACT WITH A DEMON",
       "vn": "15.1"
@@ -1691,6 +1746,11 @@
       "k": "ID_UI_HERO_SYNERGY_PACTWDEMON_LONG",
       "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.\n",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_QUEENOFHEL",
+      "v": "QUEEN OF HEL",
+      "vn": 16
     },
     {
       "k": "ID_UI_HERO_SYNERGY_RIVAL_I",
@@ -1868,6 +1928,56 @@
     {
       "k": "ID_UI_HITS",
       "v": "HITS!"
+    },
+    {
+      "k": "ID_UI_HITS_LSD_0",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_1",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_2",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_3",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_4",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_5",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_6",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_7",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_8",
+      "v": "HITS!",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_HITS_LSD_9",
+      "v": "HITS!",
+      "vn": 16
     },
     {
       "k": "ID_UI_INCREDIBLE",

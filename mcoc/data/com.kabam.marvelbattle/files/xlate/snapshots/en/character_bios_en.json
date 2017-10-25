@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "a1dc62d68c2d749bf087b029a90ed0e26d6af147",
+    "hash": "97b2218572ba967d92e292feb3bb5e47e07ecf88",
     "language": "en",
-    "string_count": 123,
+    "string_count": 125,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1503533987
+    "ts": 1505678304
   },
   "strings": [
     {
@@ -198,6 +198,11 @@
     {
       "k": "ID_CHARACTER_BIOS_HAWKEYE",
       "v": "Clint Barton – a regular guy amongst super soldiers, armored geniuses, and gods of thunder. Known as the World's Greatest Marksman, he's mastered the bow and arrow, and the ability to transform nearly any projectile into an accurate weapon. Tenacious, brave, and heroic, Hawkeye stands tall amongst the mighty Avengers!"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_HELA",
+      "v": "A creature from a primordial and sinister era of the universe, Hela’s power is unlike anything else in the Nine Realms. Armed with the ability to unleash unlimited weapons in astounding and deadly ways, Hela seeks vengeance against those who imprisoned her eons ago, ushering in a new era of cold brutality for Asgard and the universe at large.",
+      "vn": 16
     },
     {
       "k": "ID_CHARACTER_BIOS_HOOD",
@@ -431,6 +436,11 @@
     {
       "k": "ID_CHARACTER_BIOS_THOR_JANEFOSTER",
       "v": "Born a mortal on Midgard, Dr. Jane Foster - a frequent ally of Thor and consulting physician for Tony Stark - has proven herself worthy of wielding the mighty hammer Mjölnir. Taking up the mantle of Thor, Jane now fights to protect the realms from all who would seek to destroy them."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_THOR_RAGNAROK",
+      "v": "When an ancient evil, lurking for eons, is released from its shackles, the Asgardian prince of thunder is thrown into a whilwind of chaos. Ripped from his familiar surroundings and stripped of his powers, Thor's only hope is to summon the warrior within, and fight his way back against impossible odds. With his kingdom shattered and his people in dire need, Thor must discover what it means to be a true leader.",
+      "vn": 16
     },
     {
       "k": "ID_CHARACTER_BIOS_ULTRON",

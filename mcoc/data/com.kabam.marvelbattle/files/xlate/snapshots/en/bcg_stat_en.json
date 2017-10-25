@@ -1,15 +1,15 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "c2e51b0df6fa083b2db90c907ddce14043044697",
+    "hash": "11e301fd69ff24c27990afb38af43f80fccb5323",
     "language": "en",
     "post_processed": true,
-    "string_count": 2982,
+    "string_count": 3041,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1505333424,
+    "ts": 1507851624,
     "versionLock": "16.0"
   },
   "strings": [
@@ -315,7 +315,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_PARTICLEPHYSICS",
-      "v": "[64acff]Doctor Octopus:[-] When a Breakthrough expires, Research Categories reset to {0}.\r\n[64acff]Electro:[-] Gains {0}% additional Power from Critical Hits.",
+      "v": "[64acff]Doctor Octopus:[-] When a Breakthrough expires, Research Categories reset to {0}.\n[64acff]Electro:[-] Gains {0}% additional Power from Critical Hits.",
       "vn": "14.1"
     },
     {
@@ -5006,6 +5006,81 @@
       "v": "HEAVY ATTACK"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_HVY",
+      "v": "While charging her Heavy Attack, Hela continually gains Fury Buffs granting [16982bff]+{1}[-] Attack.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_DESC_A",
+      "v": "At the start of the fight each Champion on Hela’s team that is knocked out grants her [16982bff]+{1}[-] Spirits.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_DESC_B",
+      "v": "The first time Hela would be knocked out in each fight, she gains an Indestructible Buff that lasts for [16982bff]{2}[-] seconds.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_SIMPLE",
+      "v": "As the Asgardian Goddess of Death, Hela in all but invincinble, and is able to draw strength from her fallen comrades.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_TITLE",
+      "v": "GODDESS OF DEATH",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_TITLE_LOWER",
+      "v": "Goddess of Death",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_TITLE_SHORT",
+      "v": "Goddess of Death {0}",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SOD_A",
+      "v": "Hela controls the Spirits of the Dead, using them to power her Fury Buffs, giving them infinite duration, as long as she has Spirits.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SOD_B",
+      "v": "Each Fury Buff active on her drains her Spirits over time, but each strike of her summoned swords empowers them.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SOD_C",
+      "v": "If her Spirits are exhausted her Fury Buffs begin to expire {1} at a time.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SP1",
+      "v": "{0}% chance to trigger a Fury Buff granting [16982bff]+{1}[-] Attack.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SP2",
+      "v": "This attack places an Armor Break on the Opponent reducing their Armor by [16982bff]{1}[-] for each Fury currently active, lasting for {2} seconds.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_SP3",
+      "v": "This attack deals bonus Physical Damage up to [16982bff]{1}%[-] of the Target’s missing health, based on the number of Fury Buffs active on Hela. Max Damage at: {2}",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_TOH_A",
+      "v": "After taking more than {0}% of her Base Health in damage from a single strike, Hela gains a Buff granting [16982bff]+{1}[-] Physical Resistance, that lasts until she is struck by a Heavy Attack.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HELA_TOH_B",
+      "v": "This attack does not stack, instead if triggered multiple times, its effect increases by [16982bff]+{1}[-].",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_HEXMAGIC",
       "v": "Dr. Strange has sold his soul on the Sinner’s Market to gain the power of a god. His newfound power is split into three aspects, each lasting {2} seconds. The Hexes Dr. Strange places upon his foes are inert in nature and do not count as Detrimental effects."
     },
@@ -5972,7 +6047,7 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_A",
       "v": "If Morningstar has less than {0} Captured Souls at the start of a fight, she gains 1.",
-      "vn": "15.1"
+      "vn": 16
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_SIGNATURE_DESC_B",
@@ -7976,6 +8051,11 @@
       "vn": "14.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GOD",
+      "v": "Goddess of Death - Passive",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MADNESS",
       "v": "Madness",
       "vn": "14.1"
@@ -8015,6 +8095,11 @@
       "vn": 15
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONATKSTUN",
+      "v": "When an Attack Inflicts a Stun",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONATTACKRECEIVED",
       "v": "When Attacked"
     },
@@ -8043,6 +8128,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCKRESOLVED",
       "v": "Blocking"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBOONGOD",
+      "v": "Boon of the Gods",
+      "vn": 16
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCAPTUREDSOUL",
@@ -8240,8 +8330,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONOPPDASHEVD",
-      "v": "When Opponents Intercept Blade’s Dash",
-      "vn": "15.1"
+      "v": "When Opponents Intercept Thor’s Dash",
+      "vn": 16
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONORGANICICE",
@@ -8371,6 +8461,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMACKTALK",
       "v": "Smack-Talk"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SOD",
+      "v": "Spirits of the Dead - Passive",
+      "vn": 16
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_STARKAI",
@@ -8717,7 +8812,7 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_BLADE_DANGERSENSE_LONG",
-      "v": "When against Dimensional Beings, Danger Sense activates and grants Blade [16982bff]{1}[-] Attack Rating while also reducing the opponent's Ability Accuracy by {0}%.",
+      "v": "When against Dimensional Beings, Danger Sense activates and grants Blade [16982bff]{1}[-] Attack Rating while also reducing the opponent's Ability Accuracy by {0}%. This Ability Accuracy reduction ignores Dimensional Beings' Immunities.",
       "vn": "15.1"
     },
     {
@@ -9115,7 +9210,7 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_MEPHISTO_PERSISTENT_HEAL",
-      "v": "When below {0}% Health, each Persistent Soul Charge is consumed, Regenerating {1}% of max Health per charge. Mephisto does not take damage while consuming his Persistent Soul Charges through this ability.",
+      "v": "When below {0}% Health, each Persistent Soul Charge is consumed, Regenerating [16982bff]{1}[-] Health per charge. Mephisto does not take damage while consuming his Persistent Soul Charges through this ability.",
       "vn": "15.1"
     },
     {
@@ -9284,6 +9379,31 @@
     {
       "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_OVR_HUD",
       "v": "OVERDRIVE"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_RAGTHOR_ATKSTUN",
+      "v": "Thor deals an additional {1}% of that attack’s damage as Physical Damage if the opponent is suffering from Armor Break.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_RAGTHOR_AUTOBLOCK",
+      "v": "Thor has a {0}% chance to use his shield to Auto-Block any attacks made while he is Dashing towards the opponent. This can trigger the Parry Mastery.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_RAGTHOR_AUTOBLOCK_TITLE",
+      "v": "[808080ff]Auto-Block[-]",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON",
+      "v": "Activates for every {2} hits on the Combo Meter or whenever struck {1} times.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON_POWER",
+      "v": "Fills to max Power over {2} seconds. This Power Gain is interrupted If Thor gets knocked down by a Special Attack. Boon of the Gods is not affected by Ability Accuracy and prevents Thor from gaining Power when struck by Special Attacks.",
+      "vn": 16
     },
     {
       "k": "ID_UI_STAT_FORMAT_REFLECTIVEARMOR",
@@ -11809,6 +11929,61 @@
       "v": "Quake Blocks additional Damage and Redirects it back to the opponent as a pulse of Physical Damage."
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_ARMOR_BREAK",
+      "v": "Breaks the opponent’s Armor, applying [16982bff]{1}[-] Armor Rating reduction for {2} seconds.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_LONG",
+      "v": "After a Special 3, Thor is able to control lightning within his body for [16982bff]{2}[-] seconds. Thor has a {0}% chance to inflict Shock whenever making physical contact with opponents, dealing {1} Energy Damage over 5 seconds.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_LONG_2",
+      "v": "Inflicting Shock has a chance to cause Stun or Armor Break. Additionally, each Shock stack reduces the opponent’s Ability Accuracy by {1}%.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_LONG_2_B",
+      "v": "Inflicting Shock has a {0}% chance to cause Stun and {2}% chance to Armor Break. Additionally, each Shock stack reduces the opponent’s Ability Accuracy by {1}%.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_LONG_3",
+      "v": "Stun lasts for {2} seconds and Armor Break applies a {1} Armor Rating reduction for {0} seconds.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_SHORT",
+      "v": "Thunder God's Wrath {0}",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_SIMPLE",
+      "v": "After a Special 3, Thor is temporarily able to control lightning within his body.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_SP1",
+      "v": "{0}% chance to Stun for {2} seconds, plus {1}% chance if a Combo of 40 or more hits is maintained.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_SP3",
+      "v": "Shocks the opponent, dealing [16982bff]{1}[-]  Energy Damage over {2} seconds.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_SP3_2",
+      "v": "This Special Attack can only inflict up to maximum of {1}% of the opponent’s max Health as damage.",
+      "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_RAGTHOR_TITLE",
+      "v": "THUNDER GOD'S WRATH",
+      "vn": 16
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_REDHULK_DESC",
       "v": "General Ross prepares to cross the line in the sand, beginning the fight with {2} Heat Charge(s) ready. Additionally, for every 2 Heat Charges he has, he gains an additional [16982bff]{1}%[-] Physical Resistance.",
       "vn": "11.2"
@@ -12468,7 +12643,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_DESC",
-      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\r\n01001111 01010000"
+      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\n01001111 01010000"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_HUD",
@@ -12500,7 +12675,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_MOVIE_DESC",
-      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\r\n01001111 01010000"
+      "v": "The only known Synthezoid, the Vision is capable of synthesizing [16982bff]{1}[-] Power periodically during battle.\n01001111 01010000"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_MOVIE_HUD",
