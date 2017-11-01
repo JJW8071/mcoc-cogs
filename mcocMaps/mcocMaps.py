@@ -18,7 +18,7 @@ class MCOCMaps:
         self.bot = bot
 
     @commands.command(pass_context=True, aliases=['warmap','aqmap','aq'])
-    async def mmap(self, ctx, *, maptype: str):
+    async def mmap(self, ctx, *, maptype: str=None):
         '''Select a Map
         lol map: lol
         aq maps : 5, 5.1, 5.2, 5.3
@@ -27,7 +27,14 @@ class MCOCMaps:
              <left> = [a, b, c, d, e]
              <right> = [f, g, g+, h, i]'''
         print(len(maptype))
-        if len(maptype) > 0:
+        if maptype is None:
+            mapurl = '{}warmap_ai.png'.format(self.basepath, maptype.lower())
+            mapTitle = 'Alliance War Map {}'.format(maptype.upper())
+            em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
+            em.set_image(url=mapurl)
+            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            await self.bot.say(embed=em)
+        elif len(maptype) > 0:
             if maptype in self.aq_map:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
@@ -38,15 +45,10 @@ class MCOCMaps:
             #     maptitle = '{}'.format(self.aq_map[maptype]['maptitle'])
             #     em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             #     em.set_image(url=mapurl)
-        else:
-            mapurl = '{}warmap_ai.png'.format(self.basepath, maptype.lower())
-            mapTitle = 'Alliance War Map {}'.format(maptype.upper())
-            em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
-            em.set_image(url=mapurl)
             # else:
             #     em=discord.Embed(color=discord.Color.gold(),title='Apologies',description='Summoner, I cannot find a suitable map.')
-        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-        await self.bot.say(embed=em)
+            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            await self.bot.say(embed=em)
 
 def setup(bot):
     bot.add_cog(MCOCMaps(bot))
