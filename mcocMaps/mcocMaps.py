@@ -33,20 +33,20 @@ class MCOCMaps:
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
-            elif maptype in self.lolmap:
-                mapurl = '{}{}.png'.format(self.basepath, self.lolmap[maptype]['map'])
-                maptitle = '{}'.format(self.aq_map[maptype]['maptitle'])
-                em = discord.Embed(color=discord.Color.gold(),title=maptitle)
-                em.set_image(url=mapurl)
-            elif maptype in self.warmaps:
-                mapurl = '{}warmap_{}.png'.format(self.basepath, maptype.lower())
-                mapTitle = 'Alliance War Map {}'.format(maptype.upper())
-                em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
-                em.set_image(url=mapurl)
-            else:
-                em=discord.Embed(color=discord.Color.gold(),title='Apologies',description='Summoner, I cannot find a suitable map.')
-            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-            await self.bot.say(embed=em)
+            # elif maptype in self.lolmap:
+            #     mapurl = '{}{}.png'.format(self.basepath, self.lolmap[maptype]['map'])
+            #     maptitle = '{}'.format(self.aq_map[maptype]['maptitle'])
+            #     em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+            #     em.set_image(url=mapurl)
+        else:
+            mapurl = '{}warmap_ai.png'.format(self.basepath, maptype.lower())
+            mapTitle = 'Alliance War Map {}'.format(maptype.upper())
+            em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
+            em.set_image(url=mapurl)
+            # else:
+            #     em=discord.Embed(color=discord.Color.gold(),title='Apologies',description='Summoner, I cannot find a suitable map.')
+        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        await self.bot.say(embed=em)
 
 def setup(bot):
     bot.add_cog(MCOCMaps(bot))
