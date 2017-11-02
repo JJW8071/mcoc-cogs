@@ -16,8 +16,8 @@ class MCOCMaps:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, name='aqmap', aliases=['aq'])
-    async def _aqmap(self, ctx, *, maptype: str):
+    @commands.command(pass_context=True, aliases=['aq'])
+    async def aqmap(self, ctx, *, maptype: str):
         '''Select a Map
             aq maps : 5, 5.1, 5.2, 5.3
             /aq 5'''
@@ -29,8 +29,8 @@ class MCOCMaps:
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
             await self.bot.say(embed=em)
 
-    @commands.command(pass_context=True, name='warmap', aliases=('aw'))
-    async def _warmap(self, ctx):
+    @commands.command(pass_context=True, aliases=('aw'))
+    async def warmap(self, ctx):
         '''Alliance War 2.0 Map'''
         mapurl = '{}warmap_2.png'.format(self.basepath, maptype.lower())
         mapTitle = 'Alliance War Map {}'.format(maptype.upper())
