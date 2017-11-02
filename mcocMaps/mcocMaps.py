@@ -30,7 +30,7 @@ class MCOCMaps:
             await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, name='warmap', aliases=('aw'))
-    async def _warmap(self, ctx, *):
+    async def _warmap(self, ctx):
         '''Alliance War 2.0 Map'''
         mapurl = '{}warmap_2.png'.format(self.basepath, maptype.lower())
         mapTitle = 'Alliance War Map {}'.format(maptype.upper())
