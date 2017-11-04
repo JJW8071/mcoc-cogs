@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "6306adb36c0e0fade348e9e99bb35a4b79a4a21a",
+    "hash": "f94a4ae7555ee2de7a89117a701ed3787354abd3",
     "language": "en",
-    "string_count": 750,
+    "string_count": 762,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1502841992
+    "ts": 1505678304
   },
   "strings": [
     {
@@ -929,6 +929,21 @@
       "v": "He didn't miss. You might think he did, but he didn't."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HELA_0",
+      "v": "Hela stabs for the heart of her opponent.",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HELA_1",
+      "v": "Twin blades, followed by an axe hurled with immense force.",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HELA_2",
+      "v": "Summoning a whirlwind of weapons, Hela unleashes a torrent of blades.",
+      "vn": 16
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HOOD_0",
       "v": "Reaching deep into his granted power, The Hood casts out an arc of chaotic lightning.",
       "vn": "11.2"
@@ -1665,6 +1680,21 @@
       "v": "Thor unleashes the ferocity and anger of a God upon her foe, striking with devastating blows and fierce strikes of lightning and thunder."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_THOR_RAGNAROK_0",
+      "v": "Without Mjolnir, Thor must improvise and use his shield as a deadly weapon.",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_THOR_RAGNAROK_1",
+      "v": "Skilled with multiple weapons, Thor engages his opponent with a ferocious sword fighting style.",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_THOR_RAGNAROK_2",
+      "v": "Thor discovers that his true power lies within, channeling lightning through his fists and electrifying opponents with each punch.",
+      "vn": 16
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_ULTRON_0",
       "v": "A powerful blast to knock back any opponent foolish enough to be in its way."
     },
@@ -2137,6 +2167,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_HAWKEYE_2",
       "v": "Explosive Barrage"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_HELA_0",
+      "v": "Fury of the Dead",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_HELA_1",
+      "v": "Soul Breaker",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_HELA_2",
+      "v": "Hand of Glory",
+      "vn": 16
     },
     {
       "k": "ID_SPECIAL_ATTACK_HOOD_0",
@@ -2870,6 +2915,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_THOR_JANEFOSTER_2",
       "v": "Freyja's Wrath"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_THOR_RAGNAROK_0",
+      "v": "Fearsome Fighter",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_THOR_RAGNAROK_1",
+      "v": "The Warrior Within",
+      "vn": 16
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_THOR_RAGNAROK_2",
+      "v": "God of Thunder",
+      "vn": 16
     },
     {
       "k": "ID_SPECIAL_ATTACK_ULTRON_0",
