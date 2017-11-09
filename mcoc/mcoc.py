@@ -58,7 +58,7 @@ async def postprocess_sig_data(bot, struct):
     mcoc = bot.get_cog('MCOC')
     for key in struct.keys():
         champ_class = mcoc.champions.get(key.lower(), None)
-        if champ_class is None or champ_class.mcocsig is None:
+        if champ_class is None:
             continue
         struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
                 champ_class, sigs=sigs,
@@ -927,7 +927,7 @@ class MCOC(ChampionFactory):
                             for c in champs:
                                 if lookup in activated:
                                     continue
-                            elif c.mattkraftid in  champ_synergies[lookup]['triggers']:
+                                elif c.mattkraftid in champ_synergies[lookup]['triggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
@@ -1665,7 +1665,7 @@ class Champion:
                 title = x
 
         if title is None:
-            raise KeyError('DEBUG - title not found for champ ' + self.full_name)
+            raise KeyError('DEBUG - title not found')
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
@@ -1714,7 +1714,7 @@ class Champion:
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
         else:
-            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D','_DESC_E'):
+            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
