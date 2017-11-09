@@ -927,7 +927,7 @@ class MCOC(ChampionFactory):
                             for c in champs:
                                 if lookup in activated:
                                     continue
-                                elif c.mattkraftid in champ_synergies[lookup]['triggers']:
+                                elif c.mattkraftid in champ_synergies[lookup]['mtriggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
