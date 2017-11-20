@@ -8,7 +8,7 @@ class MCOCMaps:
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
-    lolmap = {'1':{'map':'lol1', 'maptitle': 'Path 1'},
+    lolmaps = {'1':{'map':'lol1', 'maptitle': 'Path 1'},
         '2':{'map':'lol1', 'maptitle': 'Path 2'},
         '3':{'map':'lol1', 'maptitle': 'Path 3'},
         '4':{'map':'lol1', 'maptitle': 'Path 4'},
@@ -40,9 +40,9 @@ class MCOCMaps:
         '''Select a Map
             LOL maps: 1, 2, 3, 4, 5, 6, 7
             /lol 5'''
-        if maptype in self.aq_map:
-            mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
-            maptitle = 'Labyrinth of Legends: {}'.format(self.aq_map[maptype]['maptitle'])
+        if maptype in self.lolmaps:
+            mapurl = '{}{}.png'.format(self.basepath, self.lolmaps[maptype]['map'])
+            maptitle = 'Labyrinth of Legends: {}'.format(self.lolmaps[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
