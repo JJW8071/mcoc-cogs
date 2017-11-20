@@ -8,7 +8,13 @@ class MCOCMaps:
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
-    lolmap = {'lol':{'map':'lolmap','maptitle':'Labrynth of Legends Map'}}
+    lolmap = {'1':{'map':'lol1', 'maptitle': 'Path 1'},
+        {'2':{'map':'lol1', 'maptitle': 'Path 2'},
+        {'3':{'map':'lol1', 'maptitle': 'Path 3'},
+        {'4':{'map':'lol1', 'maptitle': 'Path 4'},
+        {'5':{'map':'lol1', 'maptitle': 'Path 5'},
+        {'6':{'map':'lol1', 'maptitle': 'Path 6'},
+        {'7':{'map':'lol1', 'maptitle': 'Path 7'},}
 
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
@@ -24,6 +30,19 @@ class MCOCMaps:
         if maptype in self.aq_map:
             mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
+            em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+            em.set_image(url=mapurl)
+            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            await self.bot.say(embed=em)
+
+    @commands.command(pass_context=True, aliases=['lol'])
+    async def lolmap(self, ctx, *, maptype: str):
+        '''Select a Map
+            LOL maps: 1, 2, 3, 4, 5, 6, 7
+            /lol 5'''
+        if maptype in self.aq_map:
+            mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
+            maptitle = 'Labyrinth of Legends: {}'.format(self.aq_map[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
