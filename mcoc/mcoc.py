@@ -13,9 +13,10 @@ import aiohttp
 import logging
 import csv
 import json
+
 #from gsheets import Sheets
-import pygsheets
-from pygsheets.utils import numericise_all
+#import pygsheets  //failure
+#from pygsheets.utils import numericise_all
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
@@ -927,7 +928,7 @@ class MCOC(ChampionFactory):
                             for c in champs:
                                 if lookup in activated:
                                     continue
-                                elif c.mattkraftid in champ_synergies[lookup]['mtriggers']:
+                                elif '[{}]'.format(c.mattkraftid) in champ_synergies[lookup]['mtriggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
