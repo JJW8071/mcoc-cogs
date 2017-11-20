@@ -9,12 +9,12 @@ class MCOCMaps:
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
     lolmaps = {'1':{'map':'lol1', 'maptitle': 'Path 1'},
-        '2':{'map':'lol1', 'maptitle': 'Path 2'},
-        '3':{'map':'lol1', 'maptitle': 'Path 3'},
-        '4':{'map':'lol1', 'maptitle': 'Path 4'},
-        '5':{'map':'lol1', 'maptitle': 'Path 5'},
-        '6':{'map':'lol1', 'maptitle': 'Path 6'},
-        '7':{'map':'lol1', 'maptitle': 'Path 7'},}
+        '2':{'map':'lol2', 'maptitle': 'Path 2'},
+        '3':{'map':'lol3', 'maptitle': 'Path 3'},
+        '4':{'map':'lol4', 'maptitle': 'Path 4'},
+        '5':{'map':'lol5', 'maptitle': 'Path 5'},
+        '6':{'map':'lol6', 'maptitle': 'Path 6'},
+        '7':{'map':'lol7', 'maptitle': 'Path 7'},}
 
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
