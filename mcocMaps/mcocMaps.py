@@ -47,7 +47,7 @@ class MCOCMaps:
             for i in range(0, 7):
                 mapurl = '{}lolmap{}.png'.format(self.basepath, i)
                 print(mapurl)
-                maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[maptype]['maptitle'])
+                maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(i)
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
                 em.set_footer(text='Planning by Kiryu',)
