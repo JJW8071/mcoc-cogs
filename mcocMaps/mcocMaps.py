@@ -8,13 +8,15 @@ class MCOCMaps:
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
-    lolmaps = {'1':{'map':'lol1', 'maptitle': 'Path 1'},
-        '2':{'map':'lol2', 'maptitle': 'Path 2'},
-        '3':{'map':'lol3', 'maptitle': 'Path 3'},
-        '4':{'map':'lol4', 'maptitle': 'Path 4'},
-        '5':{'map':'lol5', 'maptitle': 'Path 5'},
-        '6':{'map':'lol6', 'maptitle': 'Path 6'},
-        '7':{'map':'lol7', 'maptitle': 'Path 7'},}
+    lolmaps = {'easy':{'map':'lol0', 'maptitle': 'Completion Path 0'},
+        '0':{'map':'lol0', 'maptitle': 'Completion Path 0'},
+        '1':{'map':'lol1', 'maptitle': 'Exploration Path 1'},
+        '2':{'map':'lol2', 'maptitle': 'Exploration Path 2'},
+        '3':{'map':'lol3', 'maptitle': 'Exploration Path 3'},
+        '4':{'map':'lol4', 'maptitle': 'Exploration Path 4'},
+        '5':{'map':'lol5', 'maptitle': 'Exploration Path 5'},
+        '6':{'map':'lol6', 'maptitle': 'Exploration Path 6'},
+        '7':{'map':'lol7', 'maptitle': 'Exploration Path 7'},}
 
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
@@ -38,14 +40,14 @@ class MCOCMaps:
     @commands.command(pass_context=True, aliases=['lol'])
     async def lolmap(self, ctx, *, maptype: str):
         '''Select a Map
-            LOL maps: 1, 2, 3, 4, 5, 6, 7
+            LOL maps: 0, 1, 2, 3, 4, 5, 6, 7
             /lol 5'''
         if maptype in self.lolmaps:
             mapurl = '{}{}.png'.format(self.basepath, self.lolmaps[maptype]['map'])
-            maptitle = 'Labyrinth of Legends: {}'.format(self.lolmaps[maptype]['maptitle'])
+            maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
-            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            em.set_footer(text='Planning by Kiryu',)
             await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, aliases=('aw'))
