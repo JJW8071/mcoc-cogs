@@ -72,7 +72,7 @@ class MCOCMaps:
         length = len(embed_list)
         em = embed_list[page]
         if not message:
-            message = await self.bot.say(em)
+            message = await self.bot.say(embed=em)
             # try:
             #     await self.bot.delete_message(ctx.message)
             # except:
