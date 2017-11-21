@@ -37,7 +37,7 @@ class MCOCMaps:
             await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, aliases=['lol'])
-    async def lolmap(self, ctx, *, maptype: int):
+    async def lolmap(self, ctx, *, maptype: str):
         '''Select a Map
             LOL maps: 0, 1, 2, 3, 4, 5, 6, 7
             /lol 5'''
@@ -50,7 +50,7 @@ class MCOCMaps:
                 em.set_image(url=mapurl)
                 em.set_footer(text='Planning by Kiryu',)
                 emlist.append(em)
-            await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=maptype)
+            await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maptype))
                 #await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, aliases=('aw'))
