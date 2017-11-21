@@ -51,7 +51,7 @@ class MCOCMaps:
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
                 em.set_footer(text='Planning by Kiryu',)
-                page_list.append(embed=em)
+                page_list.append(em)
             await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maptype))
                 #await self.bot.say(embed=em)
 
@@ -72,7 +72,7 @@ class MCOCMaps:
         length = len(embed_list)
         em = embed_list[page]
         if not message:
-            message = await self.bot.say(em)
+            message = await self.bot.say(embed=em)
             # try:
             #     await self.bot.delete_message(ctx.message)
             # except:
@@ -89,7 +89,7 @@ class MCOCMaps:
             if length > 5:
                 await self.bot.add_reaction(message, '⏩')
         else:
-            message = await self.bot.edit_message(message, em)
+            message = await self.bot.edit_message(message, embed=em)
         await asyncio.sleep(1)
 
         react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
