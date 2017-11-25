@@ -140,7 +140,6 @@ class MCOCTools:
                     )
         supportteam=('phil_wo#3733\n'
                     'SpiderSebas#9910\n'
-                    'The Living Tribunal#2984\n'
                     'suprmatt#2753\n'
                     )
         embed = discord.Embed(colour=discord.Colour.red())
