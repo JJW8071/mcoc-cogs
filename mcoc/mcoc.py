@@ -13,9 +13,10 @@ import aiohttp
 import logging
 import csv
 import json
+
 #from gsheets import Sheets
-import pygsheets
-from pygsheets.utils import numericise_all
+#import pygsheets  //failure
+#from pygsheets.utils import numericise_all
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
