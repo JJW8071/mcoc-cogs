@@ -639,23 +639,23 @@ class Hook:
     @roster.command(pass_context=True, name='role_export',aliases=('rrx',))
     async def _role_roster_export(self, ctx, role: discord.Role):
         server = ctx.message.server
+        rand = randint(1000, 9999)
+        path, ext = os.path.split(roster.champs_file)
+        tmp_file = '{}-{}.tmp'.format(path, rand)
+        with open(tmp_file, 'w') as fp:
+            writer = csv.DictWriter(fp, fieldnames='username, ' + roster.fieldnames,
+            extrasaction='ignore', lineterminator='\n')
+            writer.writeheader()
         for member in server.members:
             if role in member.roles:
                 roster = ChampionRoster(ctx.bot, member)
                 await roster.load_champions()
-                rand = randint(1000, 9999)
-                path, ext = os.path.split(roster.champs_file)
-                tmp_file = '{}-{}.tmp'.format(path, rand)
-                with open(tmp_file, 'w') as fp:
-                    writer = csv.DictWriter(fp, fieldnames=roster.fieldnames,
-                            extrasaction='ignore', lineterminator='\n')
-                    writer.writeheader()
                     for champ in roster.roster.values():
-                        writer.writerow(champ.to_json())
-                filename = roster.data_dir + '/' + member.name + '.csv'
-                os.replace(tmp_file, filename)
-                await self.bot.upload(filename)
-                os.remove(filename)
+                        writer.writerow(member.name + ', ' + champ.to_json())
+        filename = roster.data_dir + '/' + role + '.csv'
+        os.replace(tmp_file, filename)
+        await self.bot.upload(filename)
+        os.remove(filename)
 
 
     @commands.command(pass_context=True, name='rank_prestige', aliases=('prestige_list',))
