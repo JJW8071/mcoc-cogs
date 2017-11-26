@@ -639,7 +639,7 @@ class Hook:
     @roster.command(pass_context=True, name='role_export',aliases=('rrx',))
     async def _role_roster_export(self, ctx, role: discord.Role):
         server = ctx.message.server
-        roster = ChampionRoster(ctx.bot, ctx.member.author)
+        roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
         rand = randint(1000, 9999)
         path, ext = os.path.split(roster.champs_file)
