@@ -650,8 +650,8 @@ class Hook:
             if role in member.roles:
                 roster = ChampionRoster(ctx.bot, member)
                 await roster.load_champions()
-                    for champ in roster.roster.values():
-                        writer.writerow(member.name + ', ' + champ.to_json())
+                for champ in roster.roster.values():
+                    writer.writerow(member.name + ', ' + champ.to_json())
         filename = roster.data_dir + '/P{}.csv'.format(role.name)
         os.replace(tmp_file, filename)
         await self.bot.upload(filename)
