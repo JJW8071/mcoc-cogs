@@ -636,32 +636,27 @@ class Hook:
         await self.bot.upload(filename)
         os.remove(filename)
 
-    # @commands.command(pass_context=True, no_pm=True)
-    # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
-    #     '''Set AQ, AW Offense or AW Defense'''
-    #     # if user is None:
-    #     #     user = ctx.message.author
-    #     user = ctx.message.author
-    #     info = self.get_user_info(user)
-    #     aq = False
-    #     awo = False
-    #     awd = False
-    #     champs = []
-    #     for arg in args:
-    #         if arg == 'aq':
-    #             aq = True
-    #         elif arg == 'awo':
-    #             awo = True
-    #         elif arg == 'awd':
-    #             awd = True
-    #         champ = self.mcocCog._resolve_alias(arg)
-    #         champs.append(str(champ.hookid))
-    #     if aq is True:
-    #         info['aq'] = champs
-    #     elif awo is True:
-    #         info['awo'] = champs
-    #     elif awd is True:
-    #         info['awd'] = champs
+    @roster.command(pass_context=True, name='role_export',aliases=('rrx',))
+    async def _role_roster_export(self, ctx, role: discord.Role):
+        server = ctx.message.server
+        for member in server.members:
+            if role in member.roles:
+                roster = ChampionRoster(ctx.bot, member)
+                await roster.load_champions()
+                rand = randint(1000, 9999)
+                path, ext = os.path.split(roster.champs_file)
+                tmp_file = '{}-{}.tmp'.format(path, rand)
+                with open(tmp_file, 'w') as fp:
+                    writer = csv.DictWriter(fp, fieldnames=roster.fieldnames,
+                            extrasaction='ignore', lineterminator='\n')
+                    writer.writeheader()
+                    for champ in roster.roster.values():
+                        writer.writerow(champ.to_json())
+                filename = roster.data_dir + '/champions.csv'
+                os.replace(tmp_file, filename)
+                await self.bot.upload(filename)
+                os.remove(filename)
+
 
     @commands.command(pass_context=True, name='rank_prestige', aliases=('prestige_list',))
     async def _rank_prestige(self, ctx, *, hargs=''):
