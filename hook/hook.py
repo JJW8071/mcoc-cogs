@@ -652,7 +652,7 @@ class Hook:
                 await roster.load_champions()
                     for champ in roster.roster.values():
                         writer.writerow(member.name + ', ' + champ.to_json())
-        filename = roster.data_dir + '/' + role + '.csv'
+        filename = roster.data_dir + '/P{}.csv'.format(role.name)
         os.replace(tmp_file, filename)
         await self.bot.upload(filename)
         os.remove(filename)
