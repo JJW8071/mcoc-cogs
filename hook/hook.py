@@ -643,7 +643,7 @@ class Hook:
         path, ext = os.path.split(roster.champs_file)
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
-            writer = csv.DictWriter(fp, fieldnames='username, ' + roster.fieldnames,
+            writer = csv.DictWriter(fp, fieldnames='username, Id, Stars, Rank, Level, Awakened, Pi, Role',
             extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
         for member in server.members:
