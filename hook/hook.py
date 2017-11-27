@@ -636,8 +636,9 @@ class Hook:
         await self.bot.upload(filename)
         os.remove(filename)
 
-    @roster.command(pass_context=True, name='role_export',aliases=('rrx',))
+    @roster.command(pass_context=True, hidden=True, name='role_export',aliases=('rrx',))
     async def _role_roster_export(self, ctx, role: discord.Role):
+        '''Returns a CSV file with all Roster data for all members of a Role'''
         server = ctx.message.server
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
