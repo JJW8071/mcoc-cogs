@@ -654,7 +654,7 @@ class Hook:
                     await roster.load_champions()
                     for champ in roster.roster.values():
                         champ_dict = champ.to_json()
-                        champ_dict['member_name'] = member.id
+                        champ_dict['member_name'] = str(member.id)
                         writer.writerow(champ_dict)
         filename = roster.data_dir + '/' + role.name + '.csv'
         os.replace(tmp_file, filename)
