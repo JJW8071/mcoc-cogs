@@ -648,14 +648,14 @@ class Hook:
             writer = csv.DictWriter(fp, fieldnames=['member_name', *(roster.fieldnames)],
             extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
-        for member in server.members:
-            if role in member.roles:
-                roster = ChampionRoster(ctx.bot, member)
-                await roster.load_champions()
-                for champ in roster.roster.values():
-                    champ_dict = champ.to_json()
-                    champ_dict['member_name'] = member.name
-                    writer.writerow(champ_dict)
+            for member in server.members:
+                if role in member.roles:
+                    roster = ChampionRoster(ctx.bot, member)
+                    await roster.load_champions()
+                    for champ in roster.roster.values():
+                        champ_dict = champ.to_json()
+                        champ_dict['member_name'] = member.name
+                        writer.writerow(champ_dict)
         filename = roster.data_dir + '/' + role.name + '.csv'
         os.replace(tmp_file, filename)
         await self.bot.upload(filename)
