@@ -44,7 +44,7 @@ class MCOCMaps:
             /lol 5'''
         if maptype in self.lolmaps:
             page_list = []
-            for i in range(0, 7):
+            for i in range(0, 8):
                 mapurl = '{}lolmap{}.png'.format(self.basepath, i)
                 print(mapurl)
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
