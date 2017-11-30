@@ -861,7 +861,6 @@ class MCOC(ChampionFactory):
         '''Champion(s) Base Stats'''
         for champ in champs:
             data = champ.get_spotlight(default='x')
-            title = 'Base Attributes for {}'.format(champ.verbose_str)
             em = discord.Embed(color=champ.class_color,
                     title='Base Attributes')
             em.set_author(name=champ.verbose_str + " [" + champ.short +"]", icon_url=champ.get_avatar())
