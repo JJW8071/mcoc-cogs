@@ -863,7 +863,7 @@ class MCOC(ChampionFactory):
             data = champ.get_spotlight(default='x')
             em = discord.Embed(color=champ.class_color,
                     title='Base Attributes')
-            em.set_author(name=champ.verbose_str + " [" + champ.short +"]", icon_url=champ.get_avatar())
+            em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
             keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -874,7 +874,8 @@ class MCOC(ChampionFactory):
                 em.add_field(name='Added to PHC', value=xref['4basic'])
             else:
                 stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
-                em.add_field(name='Base Stats', value=tabulate(stats, width=11, rotate=False, header_sep=False), inline=False)
+                em.add_field(name='Base Stats', value=tabulate(stats, width=11, rotate=False, header_sep=False))
+            em.add_field(name='Shortcode',value=champ.short)
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
 
