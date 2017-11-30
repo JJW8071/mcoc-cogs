@@ -745,7 +745,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
-    @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
+    @champ.command(name='about', aliases=('about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Champion Base Stats'''
         data = champ.get_spotlight(default='x')
@@ -765,19 +765,6 @@ class MCOC(ChampionFactory):
             stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
             em.add_field(name='Base Stats',
                 value=tabulate(stats, width=11, rotate=False, header_sep=False))
-        # em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-        # em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
-        # em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
-        # state = xref['f/s/b']
-        # if state == 'b':
-        #     em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
-        #     em.add_field(name='Basic 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        # elif state == 's':
-        #     em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
-        #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        # elif state == 'f':
-        #     em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         em = await self.get_synergies([champ], em)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
@@ -868,6 +855,33 @@ class MCOC(ChampionFactory):
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    @champ.command(name='stats', aliases=('stat',))
+    async def champ_stats(self, *, champs : ChampConverterMult):
+        '''Champion(s) Base Stats'''
+        for champ in champs:
+            data = champ.get_spotlight(default='x')
+            title = 'Base Attributes for {}'.format(champ.verbose_str)
+            em = discord.Embed(color=champ.class_color,
+                    title='Base Attributes')
+            em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
+            titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
+            keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+
+            if champ.debug:
+                em.add_field(name='Attrs', value='\n'.join(titles))
+                em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+                em.add_field(name='Added to PHC', value=xref['4basic'])
+            else:
+                stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+                em.add_field(name='Base Stats', value=tabulate(stats, width=11, rotate=False, header_sep=False))
+                em.add_field(name='Added to PHC & 4★', value=xref['4basic'])
+                em.add_field(name='Added to 5★ Basic', value=xref['5basic'])
+            em.add_field(name='Shortcode', value=champ.short)
+            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            em.set_thumbnail(url=champ.get_avatar())
+            await self.bot.say(embed=em)
 
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs : ChampConverterMult):
