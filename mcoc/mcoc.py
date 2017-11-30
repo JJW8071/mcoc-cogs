@@ -861,8 +861,7 @@ class MCOC(ChampionFactory):
         '''Champion(s) Base Stats'''
         for champ in champs:
             data = champ.get_spotlight(default='x')
-            em = discord.Embed(color=champ.class_color,
-                    title='Base Attributes')
+            em = discord.Embed(color=champ.class_color, title='')
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
             keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
