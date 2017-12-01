@@ -1,18 +1,374 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "11e301fd69ff24c27990afb38af43f80fccb5323",
+    "hash": "2d9ac631b02acf53525d2a1aa4dcea60638c3dd0",
     "language": "en",
     "post_processed": true,
-    "string_count": 3041,
+    "string_count": 3247,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1507851624,
-    "versionLock": "16.0"
+    "ts": 1511996627,
+    "versionLock": "16.1"
   },
   "strings": [
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SENTRY_0",
+      "v": "Sentry punches his opponent before unleashing a Light-based Energy blast.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SENTRY_1",
+      "v": "Sentry leads with an uppercut then loops around for a flying double punch.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SENTRY_2",
+      "v": "Sentry transforms into the Void, creating a black hole that consumes the opponent.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SENTRY_0",
+      "v": "Light Blast",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SENTRY_1",
+      "v": "Soaring Strike",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SENTRY_2",
+      "v": "Channel the Void",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FF",
+      "v": "Force Field Passive",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FLUX",
+      "v": "Flux Passive",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_BLOCK_PEN",
+      "v": "This attack ignores [16982bff]{1}[-] Block Proficiency.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_BLOCK_PEN_PCT",
+      "v": "This attack ignores [16982bff]{1}%[-] of the opponent's Block Proficiency.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_BURN",
+      "v": "{0}% chance to Incinerate for [16982bff]{1}[-] damage over {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_BURN_FLX",
+      "v": "Incinerate duration is increased by up to {1}% based on Flux.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_CR",
+      "v": "Every {1}th attack is guaranteed to be Critical, but Critical Rating is ignored.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FF",
+      "v": "As long as a Force Field is active, opponents’ Power Gain Rate is reduced by up to {1}% based on Flux.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FF2",
+      "v": "Once depleted, Force Field charges replenish after {2} second(s).",
+      "vn": "16.1"
+    },
+    {
+      "cn": "charge(s)",
+      "k": "ID_STAT_MODOK_FF3",
+      "v": "Start the fight with {0} Force Field charge(s), each Auto-Blocking one attack with [16982bff]+{1}[-] Block Proficiency. Force Fields cannot trigger Parry.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FF4",
+      "v": "Force Field recharges {1} second(s) faster for each alive Champion on the enemy team.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FF_SHORT",
+      "v": "[808080ff]Force Field[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX",
+      "v": "M.O.D.O.K.’s attributes fluctuate throughout the fight in a complex and seemingly unpredictable manner. It would take a super-genius to calculate the pattern…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX2",
+      "v": "Power Rate, Attack Proficiency, Block Proficiency, Critical Damage, and Ability Accuracy fluctuate throughout the fight in complex and seemingly unpredictable manner. It would take a super-genius to calculate the pattern…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX3",
+      "v": "Power Rate, Attack Rating, Block Proficiency, and Critical Damage fluctuate throughout the fight in complex and seemingly unpredictable manner. It would take a super-genius to calculate the pattern…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX4",
+      "v": "Up to +{1}% Attack Rating.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX5",
+      "v": "Up to +{1} Block Proficiency.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX6",
+      "v": "Up to +{1} Critical Damage.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX7",
+      "v": "Up to +{1}% Power Rate.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX8",
+      "v": "Up to +{1}% Ability Accuracy.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FLUX_SHORT",
+      "v": "[808080ff]Flux[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD1",
+      "v": "KILL ! KILL !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD10",
+      "v": "UGH…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD11",
+      "v": "OAF !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD12",
+      "v": "I AM SCIENCE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD13",
+      "v": "PRETENDER !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD14",
+      "v": "SCIENCE RULES !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD15",
+      "v": "CHARLATAN !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD16",
+      "v": "ALIEN !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD17",
+      "v": "TIN CAN !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD18",
+      "v": "CREATURE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD19",
+      "v": "TREMBLE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD2",
+      "v": "DIE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD20",
+      "v": "FEEL MY POWER !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD21",
+      "v": "FOOL !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD22",
+      "v": "IDIOT !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD23",
+      "v": "BUFFOON !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD24",
+      "v": "SIMPLETON !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD25",
+      "v": "PEA-BRAIN !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD26",
+      "v": "MORON !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD27",
+      "v": "AH HA HA HA !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD3",
+      "v": "BURN !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD4",
+      "v": "FRY !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD5",
+      "v": "DISINTEGRATE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD6",
+      "v": "EVAPORATE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD7",
+      "v": "SILENCE !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD8",
+      "v": "BE SILENT !",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_HUD9",
+      "v": "USELESS…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_SP1",
+      "v": "Enemy abilities that grant Power or Health are reversed for the duration of this attack. Up to {0}% of what they would have gained is lost instead.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_SP1B",
+      "v": "This attack does not generate any Power for opponents.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_SP2_BLD",
+      "v": "{0}% chance to inflict Bleed for [16982bff]{1}[-] damage over {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_SP2_FLX",
+      "v": "Bleed duration is increased by up to {1}% based on Flux.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_SP2_MUT",
+      "v": "+{1}% damage versus Mutant Champions.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_SP3",
+      "v": "Each rocket has an {0}% chance to inflict a random non-unique Debuff.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG",
+      "v": "M.O.D.O.K. gains [16982bff]+{1}[-] Block Proficiency for each Class defeated within the same Quest, plus a unique Block bonus for subsequent fights against that Class.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG2",
+      "v": "     Mutant: Reduce [16982bff]{1}%[-] Special Attack damage.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG3",
+      "v": "     Tech: Gain [16982bff]{1}%[-] Power when struck.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG4",
+      "v": "     Cosmic: Reduce [16982bff]{1}%[-] damage for each unique Buff on the enemy.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG5",
+      "v": "     Mystic: Steal [16982bff]{1}%[-] Power when struck.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG6",
+      "v": "     Science: Reduce [16982bff]{1}%[-] damage for each unique Debuff suffered.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG7",
+      "v": "     Skill: Why bother? They’re not even superhuman!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG8",
+      "v": "Once M.O.D.O.K. has defeated all six Classes, all bonuses are applied each fight.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_SHORT",
+      "v": "Master Plan {0}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_SIMPLE",
+      "v": "Blocking and Auto-Blocking are enhanced, especially if M.O.D.O.K. has already defeated an enemy of the same Class.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_SIGNATURE_MODOK_TITLE",
+      "v": "MASTER PLAN",
+      "vn": "16.1"
+    },
     {
       "k": "ID_UI_ATTIRBUTE_AL",
       "v": "ARMOR"
@@ -264,6 +620,16 @@
       "v": "Percentages displayed are based on facing a 4-Star Rank 5 Champion (Challenge Rating 100)."
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_BECOMEONE",
+      "v": "BECOME ONE",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_BECOMEONE_LONG",
+      "v": "[64acff]Sentry:[-] After a Special 3 Attack, Sentry inflicts Fear of the Void. Fear of the Void combines the effects of Agility, Weakness, and Petrify Debuffs and deals {0} as direct damage. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_BIOCHEM",
       "v": "BIOCHEMISTRY",
       "vn": "14.1"
@@ -322,6 +688,11 @@
       "k": "ID_UI_HERO_SYNERGY_ENGINEERING",
       "v": "ENGINEERING",
       "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENGULFEDBYTHEVOID_LONG",
+      "v": "[64acff]Void:[-] When activating his Special 3, The Void gains a Reality Warp charge for {0} seconds, increasing the duration of any Fury Buffs activated afterwards by 20 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PARTICLEPHYSICS",
@@ -649,12 +1020,12 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ANG_SP1",
-      "v": "If there Is already a Fury active on Angela, this effect last for {2} seconds instead.",
+      "v": "If there Is already a Fury active on Angela, this effect lasts for {2} seconds instead.",
       "vn": "12.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ANG_SP2",
-      "v": "If there Is already an Armor Up active on Angela, this effect last for {2} seconds instead.",
+      "v": "If there Is already an Armor Up active on Angela, this effect lasts for {2} seconds instead.",
       "vn": "12.1"
     },
     {
@@ -2564,6 +2935,16 @@
       "v": "[b310e8]Enervate VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_ENGRESDOWN",
+      "v": "[808080ff]Energy Vulnerability[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_ENGRESDOWN_HUD",
+      "v": "ENERGY VULNERABILITY",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_ENRAGE_LONG",
       "v": "An Enrage timer begins at the start of the fight, weaker opponents decrease the duration of the timer. When the timer ends, the Champion gains boosted Attack, Effect Accuracy, Critical Damage, Critical Rate, and a second timer begins.  Greater effects occur at the end of the second timer."
     },
@@ -2762,6 +3143,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_EXHAUSTION_VII",
       "v": "[b310e8]Exhaustion VII[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_EXPLOITWEAKNESS_SHORT",
+      "v": "Exploit Weakness",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FATESEAL",
@@ -3424,6 +3810,36 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_ENERVATE",
       "v": "{0}% chance to Enervate target, prevent them from gaining Power when struck for [16982bff]{2}[-] seconds."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_HVY_HUD",
+      "v": "EXPLOIT WEAKNESS - HEAVY",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_LGT_HUD",
+      "v": "EXPLOIT WEAKNESS - LIGHT",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_MED_HUD",
+      "v": "EXPLOIT WEAKNESS - MEDIUM",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_SP1_HUD",
+      "v": "EXPLOIT WEAKNESS - SPECIAL 1",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_SP2_HUD",
+      "v": "EXPLOIT WEAKNESS - SPECIAL 2",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_SP3_HUD",
+      "v": "EXPLOIT WEAKNESS - SPECIAL 3",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_FATIGUE_FLAT",
@@ -4376,6 +4792,12 @@
       "v": "[16982bff]{0}%[-] chance to inflict Weakness, decreasing the target's Attack by [16982bff]{1}%[-] for [16982bff]{2}[-] seconds."
     },
     {
+      "cn": "Taskmaster",
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_WE_HUD",
+      "v": "WEAKNESS EXPLOITED",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_ZERO_POISON_AO",
       "v": "[f71817]{0}%[-] chance to Poison the target, reducing their Health recovery by 30% and dealing [16982bff]{1}[-] Direct Damage over [16982bff]{2}[-] seconds.",
       "vn": 12
@@ -4438,7 +4860,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FROSTBITE_DESC",
-      "v": "If Loki has more Health points than his opponent, he has a [16982bff]{0}%[-] chance of subtracting [16982bff]{1}%[-] of their max Health instantly."
+      "v": "If Loki has more Health points than his opponent, he has a [16982bff]{0}%[-] chance of dealing Energy Damage equal to [16982bff]{1}%[-] of their max Health. This damage cannot exceed {2} damage.",
+      "vn": 16
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FROSTBITE_EXPIRE",
@@ -5022,7 +5445,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HELA_SIGNATURE_SIMPLE",
-      "v": "As the Asgardian Goddess of Death, Hela in all but invincinble, and is able to draw strength from her fallen comrades.",
+      "v": "As the Asgardian Goddess of Death, Hela in all but invincible, and is able to draw strength from her fallen comrades.",
       "vn": 16
     },
     {
@@ -5311,6 +5734,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_INCINERATE_VII",
       "v": "[b310e8]Incinerate VII[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_INDESTRUCTIBLE",
+      "v": "[808080ff]Indestructible[-]",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_INIT",
@@ -6005,6 +6433,11 @@
       "v": "ASTRAL EVADE"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_MORDOSTUN_2",
+      "v": "While Stunned, Mordo Evades an incoming non-Special Attack, quickly counter-attacking to inflict Degeneration for [16982bff]{1}[-] Direct Damage over {2} seconds. This ability does not activate if Mordo is suffering from a Concussion or Fatigue or Debuff.",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_MORNINGSTAR_ATK",
       "v": "[16982bff]+{1}[-] Attack per Captured Soul.",
       "vn": "15.1"
@@ -6553,6 +6986,16 @@
       "vn": "13.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_PHYRESDOWN",
+      "v": "[808080ff]Physical Vulnerability[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_PHYRESDOWN_HUD",
+      "v": "PHYSICAL VULNERABILITY",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_PHYSICALRESIST_DD",
       "v": "The remarkable suit crafted by Mr. Potter can turn aside knives and gunfire, granting Daredevil {1}% Physical Resistance against all attacks.",
       "vn": "11.2"
@@ -6963,6 +7406,11 @@
       "v": "[b310e8]Purge VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_PURIFYVOID_HUD",
+      "v": "PURIFIED",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_PURIFY_CRITDRONE",
       "v": "When struck by a Critical Hit, there's a [16982bff]{0}%[-] chance the circuits reset, removing all negative effects."
     },
@@ -7097,6 +7545,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_RADARSENSE",
       "v": "Daredevil’s enhanced senses grant him a {0}% chance to dodge projectile attacks."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_REALITYWARP",
+      "v": "[808080ff]Reality Warp[-]",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_REFLECT",
@@ -7807,6 +8260,11 @@
       "v": "[b310e8]Stagger VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_STATEOFMIND",
+      "v": "[808080ff]State of Mind[-]",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_STATIC_I",
       "v": "[808080ff]Static Shock[-]"
     },
@@ -7948,6 +8406,11 @@
       "v": "[b310e8]Stun VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_SUCCESS_HUD",
+      "v": "SUCCESS",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_SYMBIOTESTEALTH",
       "v": "[808080ff]Symbiote Stealth[-]"
     },
@@ -7974,6 +8437,136 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_SYMBIOTESTEALTH_VII",
       "v": "[b310e8]Symbiote Stealth VII[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_EW_A",
+      "v": "Taskmaster spots a weakness in the last Attack his Opponent attempted, which can be exploited by striking his Opponent with that same attack within {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_EW_B",
+      "v": "After Exploit Weakness is triggered or expires it goes on cooldown for {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_EW_C",
+      "v": "Successfully exploiting a weakness instantly deals [16982bff]{1}[-] Direct Damage.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_EW_D",
+      "v": "An Attack that will trigger Exploit Weakness will not trigger Passive Evades or Auto-Block.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_HVY_A",
+      "v": "If Exploit Weakness is on Cooldown, the Cooldown immediately ends, and the target is set.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_HVY_B",
+      "v": "If Taskmaster has triggered Exploit Weakness in the last {1} second(s), or his current Exploit Weakness target is Heavy Attack, he avoids any incoming attacks for the first {2} second(s) of charging this Attack.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_LTF",
+      "v": "Each time a Debuff is placed on Taskmaster, all future Debuffs placed on him have their Potency reduced by {1}%",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_LTF_B",
+      "v": "If the Debuff Potency reduction reaches 100%, Taskmaster becomes Immune to Debuffs.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_LTF_C",
+      "v": "If the Debuff Potency reduction reaches 100%, Taskmaster becomes Immune to Debuffs.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_PR_A",
+      "v": "Each Unique Attack your Opponent attempts decreases their Offensive Ability Accuracy by {1}%, while increasing your Perfect Block Chance by the same amount.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_PR_B",
+      "v": "Each Unique Attack you make decreases your Opponent’s Defensive Ability Accuracy by {1}%",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_PR_C",
+      "v": "Being Struck by a Special Attack resets both of these abilities’ effects.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_DESC_A",
+      "v": "Increase Concussion Debuff Durations by [16982bff]{1}[-] second(s).",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_DESC_B",
+      "v": "Each time Taskmaster successfully triggers Exploit Weakness it places a Concussion Debuff on his Opponent reducing their Ability Accuracy by [16982bff]{1}%[-] for {2} seconds and resetting the Duration of any currently active Concussions caused by this ability.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_DESC_C",
+      "v": "If Taskmaster places {0} Concussions on his Opponent simultaneously, they convert into a Passive effect which reduces Ability Accuracy by [16982bff]{1}%[-] for {2} seconds, counts as {0} Debuffs for Taskmaster's other Abilities, and removes the Exploit Weakness cooldown timer. While this effect is active, Taskmaster will not trigger additional Concussion Debuffs.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_SIMPLE",
+      "v": "As Taskmaster fights each opponent he gains greater and greater understanding of their combat style as well as their most likely reactions, making it progressively more difficult for them to use even their most potent powers against him.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_TITLE",
+      "v": "INTUITIVE PATTERN RECOGNITION",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_TITLE_LOWER",
+      "v": "Intuitive Pattern Recognition",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SIGNATURE_TITLE_SHORT",
+      "v": "Intuitive Pattern Recognition {0}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP1_A",
+      "v": "Causes Bleed lasting {2} seconds and dealing [16982bff]{1}[-] Damage, per Debuff triggered on the Opponent this fight. Max Damage after {0} Debuffs.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP1_B",
+      "v": "This attack gains [16982bff]+{1}[-] Attack for each Debuff active on either Taskmaster or his Opponent.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP2_A",
+      "v": "Causes Armor Break lasting {2} seconds and reducing Armor by [16982bff]{1}[-] per Buff triggered on the Opponent this fight. Max Damage after {0} Buffs.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP2_B",
+      "v": "This attack gains [16982bff]+{1}[-] Attack for each Buff active on either Taskmaster or his Opponent.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP3_A",
+      "v": "If there is an active Exploit Weakness target it is automatically triggered, and it deals [16982bff]+{1}[-] additional Direct Damage.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP3_B",
+      "v": "Triggering this attack places all non-unique Debuffs triggered on Taskmaster this fight, on to his Opponent, and all non-unique Buffs triggered on Taskmaster’s Opponent this fight, on Taskmaster, all of which last {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TASKMASTER_SP3_C",
+      "v": "This attack gains [16982bff]+{1}[-] Attack for each Buff or Debuff active on either Taskmaster or his Opponent.",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TENACITY",
@@ -8051,9 +8644,29 @@
       "vn": "14.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_EXPLOITWEAKNESS",
+      "v": "Exploit Weakness - Passive",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FF",
+      "v": "Force Field Passive",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FLUX",
+      "v": "Flux Passive",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GOD",
       "v": "Goddess of Death - Passive",
       "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_LEARNTHEFOE",
+      "v": "Learn the Foe - Passive",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MADNESS",
@@ -8225,6 +8838,11 @@
       "v": "On Fury"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONGOLDENGUARDIAN",
+      "v": "Golden Guardian - Passive",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONHEALTHSTEAL",
       "v": "When Stealing Health"
     },
@@ -8264,6 +8882,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONHPLOST6030",
       "v": "When brought below 60% and 30% Max Health"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONINTIMIDATE",
+      "v": "Intimidating Presence",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONJUDGMENT",
@@ -8334,6 +8957,11 @@
       "vn": 16
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONOPPDEBUFFED",
+      "v": "When Opponents Suffer from a Debuff",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONORGANICICE",
       "v": "Organic Ice",
       "vn": 12
@@ -8387,6 +9015,11 @@
       "vn": 12
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONREALITYWARP",
+      "v": "Reality Warp - Passive",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONSCIENTIFICMETHOD",
       "v": "Scientific Method - Passive",
       "vn": "14.1"
@@ -8424,6 +9057,11 @@
       "v": "Passive"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONSTATEOFMIND",
+      "v": "State of Mind - Passive",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONSTRUCK",
       "v": "When Attacked"
     },
@@ -8441,7 +9079,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONVULTURECHARGE",
-      "v": "Chitarui Energy Core - Passive",
+      "v": "Chitauri Energy Core - Passive\n",
       "vn": 14
     },
     {
@@ -8455,8 +9093,18 @@
       "vn": 15
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_PHOTOREFLEXES",
+      "v": "Photographic Reflexes - Passive",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_PSYCHARGES",
       "v": "Psi-Charges"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_PV",
+      "v": "Persistent Charge",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMACKTALK",
@@ -8541,7 +9189,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_DESC_A",
-      "v": "Vulture upgrades his suit to convert excess heat into power allowing him to start the fight at full Chitarui Energy and absorb any Incinerate Debuff applied to him, using it to fill his Chitarui Energy.",
+      "v": "Vulture upgrades his suit to convert excess heat into power allowing him to start the fight at full Chitauri Energy and absorb any Incinerate Debuff applied to him, using it to fill his Chitauri Energy.",
       "vn": 14
     },
     {
@@ -8551,7 +9199,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULTURE_SIGNATURE_SIMPLE",
-      "v": "Vulture upgrades his suit to convert excess heat into power, keeping his Chitarui Energy Core at full power.",
+      "v": "Vulture upgrades his suit to convert excess heat into power, keeping his Chitauri Energy Core at full power.",
       "vn": 14
     },
     {
@@ -8571,7 +9219,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_PA_A",
-      "v": "Vulture has a permanent Armor Up Buff, increasing his Armor by [16982bff]{1}[-] per point of Chitarui Energy.",
+      "v": "Vulture has a permanent Armor Up Buff, increasing his Armor by [16982bff]{1}[-] per point of Chitauri Energy.",
       "vn": 14
     },
     {
@@ -8591,7 +9239,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_A",
-      "v": "Each time Vulture lands a Critical Hit his suit stores {1} Chitarui Energy for later use.",
+      "v": "Each time Vulture lands a Critical Hit his suit stores {1} Chitauri Energy for later use.",
       "vn": 14
     },
     {
@@ -8621,7 +9269,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_VULT_VC_E",
-      "v": "Vulture Evades all attacks while Dodging back. Dodging an attack this way consumes {0} Chitarui Energy and Incinerates the Opponent, dealing [16982bff]{1}[-] Damage over {2} seconds. This also removes Perfect Block Chance and reduces Block Proficiency by 50%. Max: 1 Stack.",
+      "v": "Vulture Evades all attacks while Dodging back. Dodging an attack this way consumes {0} Chitauri Energy and Incinerates the Opponent, dealing [16982bff]{1}[-] Damage over {2} seconds. This also removes Perfect Block Chance and reduces Block Proficiency by 50%. Max: 1 Stack.",
       "vn": 14
     },
     {
@@ -8763,7 +9411,8 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_AFTERSHOCK_STUN",
-      "v": "[16982bff]{0}%[-] chance to Stun the opponent for [16982bff]{2}[-] seconds."
+      "v": "[16982bff]{0}%[-] chance to Stun the opponent for [16982bff]{2}[-] seconds. This effect cannot interrupt Special Attacks.",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_AFTERSHOCK_STUNPOWER",
@@ -8859,12 +9508,12 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_EARTHQUAKE_DMG",
-      "v": "Quake generates powerful waves of vibrations that causes an Earthquake, dealing [16982bff]{1}%[-] of your Attack as physical damage per second.",
+      "v": "Quake generates powerful waves of vibrations that cause an Earthquake, dealing [16982bff]{1}%[-] of your Attack as physical damage per second.",
       "vn": "11.2"
     },
     {
       "k": "ID_UI_STAT_FORMAT_EARTHQUAKE_DMG_AO",
-      "v": "Quake generates powerful waves of vibrations that causes an Earthquake, dealing [16982bff]{1}[-] Physical Damage per second.",
+      "v": "Quake generates powerful waves of vibrations that cause an Earthquake, dealing [16982bff]{1}[-] Physical Damage per second.",
       "vn": 12
     },
     {
@@ -9200,7 +9849,7 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_MEPHISTO_FIREAURA_LONG",
-      "v": "When Aura of Incineration is active, Mephisto generates Power through his passive Power Gain. Also, for each stack, nearby opponents take {1} Incinerate Energy Damage per second.",
+      "v": "When Aura of Incineration is active, Mephisto generates Power through his passive Power Gain. Also, for each stack, nearby opponents take [16982bff]{1}[-] Incinerate Energy Damage per second.",
       "vn": "15.1"
     },
     {
@@ -9574,6 +10223,76 @@
       "vn": 15
     },
     {
+      "k": "ID_UI_STAT_FORMAT_VOID_DARKSTING_TITLE",
+      "v": "[808080ff]Dark Sting[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_DIRECTDAMAGE_TITLE",
+      "v": "[808080ff]Direct Damage[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INCINERATE",
+      "v": "A suffocating, choking, and all-consuming Void provides full immunity to Incinerate effects.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INCINERATE_TITLE",
+      "v": "[5baefc]Incinerate Immunity[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE",
+      "v": "Every {2} seconds, Void’s Intimidating Presence inflicts 1 random Debuff. +{1} seconds on the timer if at least one Intimidating Presence Debuff is already active.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE_AGILITY",
+      "v": "Agility Debuff - Reduces Ability Accuracy of Evade and the Dexterity Mastery by {1}%. Max Stacks: {2}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE_DELAY",
+      "v": "For each Champion alive on the opponent’s team, Intimidating Presence Debuffs have a {1} second delay before fully activating.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE_PETRIFY",
+      "v": "Petrify Debuff - Reduces the effectiveness of Power Gain and Regeneration by {1}%. Max Stacks: {2}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE_PURIFY",
+      "v": "Opponent’s can Purify one Intimidating Presence Debuff for every {0} hits on their Combo Meter.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE_RMVDELAY",
+      "v": "When all Intimidating Presence Debuffs are at max stacks, those Debuffs will be removed after {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATE_WEAKNESS",
+      "v": "Fatigue Debuff - Reduces Critical Rating by {1}. Max Stacks: {2}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATING_TITLE",
+      "v": "[808080ff]Intimidating Presence[-]",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_OPPDEBUFFED_DMG",
+      "v": "For each unique Debuff type, the opponent takes [16982bff]{1}[-] Direct Damage per second.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_VOID_OPPDEBUFFED_EVADE",
+      "v": "{0}% chance per Debuff to Evade Special Attacks. If Fear of the Void is active, this chance is set to {1}%.",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_IMMUNITY_ARMORBREAK",
       "v": "[5baefc]Armor Break Immunity[-]"
     },
@@ -9636,6 +10355,81 @@
     {
       "k": "ID_UI_STAT_IMMUNITY_WEAKNESS",
       "v": "[5baefc]Weakness Immunity[-]"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_INDES",
+      "v": "When Sentry loses his Combo, he reverts to [ffe75f]State 1[-]. In addition, he becomes Indestructible for {2} seconds per Reality Warp. Indestructible doesn’t trigger if Sentry is afflicted with a Debuff.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_LOOP",
+      "v": "After [f6ae47]Absolute Strength[-], Sentry restarts State of Mind, entering [ffd426]Unyielding Fortitude[-].",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_PASSIVE1",
+      "v": "Sentry starts the fight in [ffd426]Unyielding Fortitude[-] and changes to the next State for every 10 Hits in a Combo. When Sentry loses his Combo, he reverts to [ffd426]Unyielding Fortitude[-].",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_REALITYWARP",
+      "v": "At the start of a fight and after every 40 Hits in a Combo, Sentry gains a Reality Warp. Reality Warps stack up to 5 max. Reality Warps are used as a multiplier for his abilities.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_REGEN",
+      "v": "When Health is below 50%, Sentry consumes one Reality Warp to Heal [16982bff]{1}[-] over {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_SP1",
+      "v": "[16982bff]{0}%[-] chance for Fury, increasing your Attack by [16982bff]{1}[-] for [16982bff]{2}[-] seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_SP2",
+      "v": "[16982bff]{0}%[-] chance to Armor Break, removing an enemy Armor Up and applying [16982bff]{1}[-] Armor Rating reduction for [16982bff]{2}[-] seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE1",
+      "v": "[ffd426]Unyielding Fortitude[-]: {0}% chance on entering this State, Sentry cannot lose his Combo. Remains until Sentry changes States.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE1_HUD",
+      "v": "UNYIELDING FORTITUDE",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE2",
+      "v": "[f6ae47]Overpowering Light[-]: {0}% chance on entering this State, Sentry's Special 1 Attack Damage is increased by [16982bff]{1}[-] per Reality Warp and is Unblockable. Remains until Sentry changes States.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE2_HUD",
+      "v": "OVERPOWERING LIGHT",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE3",
+      "v": "[ffd426]Steadfast Approach[-]: {0}% chance on entering this State, Sentry's Heavy Attack Damage is increased by [16982bff]{1}[-] per Reality Warp. In addition, he gains 100% chance to Perfect Block. Remains until Sentry changes States.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE3_HUD",
+      "v": "STEADFAST APPROACH",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE4",
+      "v": "[f6ae47]Absolute Strength[-]: {0}% chance on entering this State, Sentry's Special 2 Attack Damage is increased by [16982bff]{1}[-] per Reality Warp and is Unblockable. Remains until Sentry changes States.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SENTRY_STATE4_HUD",
+      "v": "ABSOLUTE STRENGTH",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_ABOMINATION_DESC",
@@ -10818,7 +11612,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_DESC_AO",
-      "v": "Judgement of Corruption: {0}% chance. \r\nSecondary: Ghost Rider gains a burst of [16982bff]{1}[-] Attack for {2} seconds.",
+      "v": "Judgement of Corruption: {0}% chance. \nSecondary: Ghost Rider gains a burst of [16982bff]{1}[-] Attack for {2} seconds.",
       "vn": 12
     },
     {
@@ -10832,11 +11626,6 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_GHOSTRIDER_TITLE",
       "v": "SPIRIT OF VENGEANCE"
-    },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
-      "v": "[16982bff]{0}%[-] chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect; however, the Special 3 still has a chance to trigger both Super Bomb and Pumpkin Bomb effects.",
-      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_HUD",
@@ -12146,6 +12935,36 @@
       "v": "Veil of Fortune"
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_SENTRY_LONG",
+      "v": "At the start of a fight, if Health is above [16982bff]{1}[-]%, Reality Warps persist with Sentry from the previous fight.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SENTRY_LONG_1",
+      "v": "At the start of a fight, if Health is above [16982bff]{1}[-]%, Reality Warps persist with Sentry from the previous fight.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SENTRY_LONG_2",
+      "v": "When Sentry loses his Combo, he has a [16982bff]{0}[-]% chance to become Indestructible for {2} seconds per Reality Warp. Indestructible doesn’t trigger if Sentry is afflicted with a Debuff.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SENTRY_SHORT",
+      "v": "Molecular Reformation {0}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SENTRY_SIMPLE",
+      "v": "Reality Warps persist from fight to fight and Sentry has a chance to gain Indestructible when he loses a Combo.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SENTRY_TITLE",
+      "v": "MOLECULAR REFORMATION",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_SHEHULK_DESC",
       "v": "Jennifer Walters researches her opponent and applies a fitting Passive effect on them, reducing a stat by [16982bff]{1}%[-] . Jennifer’s sharp, attorney mind can reduce Armor, Regen Rate, Power Gain Rate, Perfect Block Chance, Ability Accuracy, Critical Damage, or Critical Hit Rate."
     },
@@ -12760,6 +13579,91 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_TITLE_LOWER",
       "v": "Synthesis"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_LONG",
+      "v": "When all Intimidating Presence Debuffs are at max stacks, instead of being removed, those Debuffs are converted into a Passive Fear of the Void that combines their effects and grants Void [16982bff]{1}[-] Attack Rating for {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_LONG_2",
+      "v": "When Fear of the Void is active, Intimidating Presence generates Debuffs [16982bff]{1}%[-] faster.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_LONG_3",
+      "v": "Fear of the Void cannot exceed a maximum of {2} stacks.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SHORT",
+      "v": "Fear of the Void {0}",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SIMPLE",
+      "v": "When all Intimidating Presence Debuffs are at max stacks, those Debuffs are converted into a Passive Fear of the Void that combines their effects and increased Void’s strength.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP1",
+      "v": "Inflicts {1} Intimidating Presence Debuff.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP1_2",
+      "v": "Inflicts {0} Power Stings against Villain Champions, each lasting for {2} seconds. An opponent with a Power Sting takes [16982bff]{1}[-] Direct Damage per Sting when activating a Special Attack.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP2",
+      "v": "Inflicts {0} Dark Stings, each lasting for {2} seconds. An opponent with a Dark Sting gains a Weakness or a Degeneration Debuff per Sting when activating a Special Attack.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP2_2",
+      "v": "Weakness - Reduces Attack Rating by {1}% for {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP2_3",
+      "v": "Degeneration - Inflicts [16982bff]{1}[-] Direct Damage over {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP2_3_2",
+      "v": "{0} ~ {2} unique Debuffs inflicts + {1}% Damage.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP2_3_3",
+      "v": "{2}+ unique Debuffs inflicts +{1}% Damage.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP2_HUD",
+      "v": "DARK STING",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP3",
+      "v": "The strength of this Special Attack is increased based on how many unique Debuffs types are currently active on the opponent.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP3_2",
+      "v": "{0} ~ {2} unique Debuffs provides a +{1}% Fury Passive.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_SP3_3",
+      "v": "{2}+ unique Debuffs provides a +{1}% Fury Passive.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VOID_TITLE",
+      "v": "FEAR OF THE VOID",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VOODOO_DESC",

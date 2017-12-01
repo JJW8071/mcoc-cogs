@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "f94a4ae7555ee2de7a89117a701ed3787354abd3",
+    "hash": "c3ba45c93229973f41319c0848cab06f985f669d",
     "language": "en",
-    "string_count": 762,
+    "string_count": 774,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1505678304
+    "ts": 1509508178
   },
   "strings": [
     {
@@ -1285,15 +1285,18 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MODOK_0",
-      "v": "A signature attack is unleashed on the opponent."
+      "v": "M.O.D.O.K. fires a Mental Bolt from the jewel on his forehead.",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MODOK_1",
-      "v": "A signature attack is unleashed on the opponent."
+      "v": "A pinnacle of both Science and Technology, the Doomsday Chair uses a mechanized arm to fling two sawblades at opponents.",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MODOK_2",
-      "v": "A signature attack is unleashed on the opponent."
+      "v": "Opponents submit to M.O.D.O.K.’s superior mind as he experiments with rockets designed only for killing.",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MOONKNIGHT_0",
@@ -1644,6 +1647,21 @@
       "v": "SUPER_ADAPTOID_XL unleashes a signature attack on their opponent."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_TASKMASTER_0",
+      "v": "Taskmaster is a master of landing the perfect strike to disrupt his opponent’s rhythm.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_TASKMASTER_1",
+      "v": "After even a single use, Taskmaster will turn even the most advanced of his opponent’s techniques back on them.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_TASKMASTER_2",
+      "v": "Taskmaster uses his mastery of his opponent’s own tactics to develop the ideal counter strategy.",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_THANOS_0",
       "v": "Two rapid and devastating cosmic blasts from the Mad Titan to soften up his opponent."
     },
@@ -1837,6 +1855,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VISION_MOVIE_2",
       "v": "Vision phases through the ground to deliver a surprise uppercut, followed by a close-range microwave burst of solar energy."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VOID_0",
+      "v": "The Void terrifies the opponent by charging and releasing a massive blast of concentrated dark energy.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VOID_1",
+      "v": "The Void teleports close to his opponent to strike with a point-blank blast from deep inside the abyss.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VOID_2",
+      "v": "The Sentry temporarily wrests control from the Void and ignites a newborn sun around the opponent.",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VULTURE_MOVIE_0",
@@ -2524,15 +2557,18 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_MODOK_0",
-      "v": "Special Attack 1"
+      "v": "SILENCE!",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_MODOK_1",
-      "v": "Special Attack 2"
+      "v": "Doomsday Blades",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_MODOK_2",
-      "v": "Special Attack 3"
+      "v": "Thermodynamics",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_MOONKNIGHT_0",
@@ -2881,6 +2917,21 @@
       "v": "SUPER_ADAPTOID_XL Special Attack 3"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_TASKMASTER_0",
+      "v": "Use their Weaknesses",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_TASKMASTER_1",
+      "v": "Steal their Strengths",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_TASKMASTER_2",
+      "v": "Ideal Counter",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_THANOS_0",
       "v": "Obliterate"
     },
@@ -3074,6 +3125,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_VISION_MOVIE_2",
       "v": "Physical Disruption"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VOID_0",
+      "v": "Existential Threat",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VOID_1",
+      "v": "Abyssal Glimpse",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VOID_2",
+      "v": "Conquer the Void",
+      "vn": "16.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_VULTURE_MOVIE_0",
