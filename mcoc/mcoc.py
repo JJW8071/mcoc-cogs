@@ -691,12 +691,14 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='portrait')
-    async def champ_portrait(self, champ : ChampConverter):
-        '''Champion portrait'''
-        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_avatar())
-        await self.bot.say(embed=em)
+    async def champ_portrait(self, *, champs : ChampConverterMulti):
+        '''Champion portraits'''
+        for champ in champs:
+            em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+            em.set_image(url=champ.get_avatar())
+            print(champ.get_avatar())
+            await self.bot.say(embed=em)
 
     @champ.command(name='bio', aliases=('biography',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
