@@ -691,7 +691,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='portrait')
-    async def champ_portrait(self, *, champs : ChampConverterMulti):
+    async def champ_portrait(self, *, champs : ChampConverterMult):
         '''Champion portraits'''
         for champ in champs:
             em = discord.Embed(color=champ.class_color, title=champ.bold_name)
