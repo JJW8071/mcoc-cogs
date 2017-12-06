@@ -646,8 +646,7 @@ class Hook:
         path, ext = os.path.split(roster.champs_file)
         tmp_file = '{}-{}.tmp'.format(path, rand)
         with open(tmp_file, 'w') as fp:
-            writer = csv.DictWriter(fp, fieldnames=['member_name', *(roster.fieldnames)],
-            extrasaction='ignore', lineterminator='\n')
+            writer = csv.DictWriter(fp, fieldnames=['member_name', *(roster.fieldnames)], extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             for member in server.members:
                 if role in member.roles:
