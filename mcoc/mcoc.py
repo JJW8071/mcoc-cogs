@@ -14,9 +14,10 @@ import logging
 import csv
 import json
 import pygsheets
+
 #from gsheets import Sheets
 #import pygsheets  //failure
-#from pygsheets.utils import numericise_all
+from pygsheets.utils import numericise_all
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
