@@ -1669,6 +1669,7 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
+            'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             )
 
         for x in titles:
@@ -1687,6 +1688,7 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
+            'ID_STAT_SIGNATURE_{}'.format(mcocsig)
             )
 
         for x in preambles:
