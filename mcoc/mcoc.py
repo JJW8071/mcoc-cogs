@@ -1096,6 +1096,16 @@ class MCOC(ChampionFactory):
             json.dump(struct, fp, indent='  ', sort_keys=True)
         await self.bot.upload('data/mcoc/gs_json_test.json')
 
+    @champ.command(name='use', aliases=('howto','htf',))
+    async def champ_use(self,*, champs :ChampConverterMult):
+        '''How to Fight With videos by MCOC Community'''
+        for champ in champs:
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            if xref['infovideo'] != '':
+                await self.bot.say('How to Fight {} by {}\n{}'.format(champ.full_name, xref['vidcredit'], xref['infovideo'])
+            else:
+                await self.bot.say('I got nothing. Send the CollectorDevTeam a good video.')
+
 
     @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
@@ -1108,10 +1118,6 @@ class MCOC(ChampionFactory):
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
-        if xref['infovideo'] != '':
-            em.add_field(name='How-To Fight With', value='{}'.format(xref['infovideo']))
-            print(xref['infovideo'])
-            em.add_field(name='Video by', value='{}'.format(xref['vidcredit']))
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
