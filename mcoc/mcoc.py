@@ -1109,9 +1109,9 @@ class MCOC(ChampionFactory):
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
         if xref['infovideo'] != '':
-            em.add_field(name='How-To-Fight',value=xref['vidcredit'], inline=False)
+            em.add_field(name='How-To Fight With',value=xref['vidcredit'], inline=False)
             try:
-                em.video(url=xref['infovideo'])
+                em.add_field(url=xref['infovideo'])
             except:
                 print(xref['infovideo'])
         em.add_field(name='Shortcode', value=champ.short)
