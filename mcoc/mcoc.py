@@ -1110,7 +1110,7 @@ class MCOC(ChampionFactory):
             em.add_field(name=champ.full_name, value=champ.infopage)
         if xref['infovideo'] != '':
             em.add_field(name='How-To-Fight',value=xref['vidcredit'], inline=False)
-            em.video.url=xref['infovideo'])
+            em.video(url=xref['infovideo'])
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
