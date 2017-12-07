@@ -1102,7 +1102,7 @@ class MCOC(ChampionFactory):
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             if xref['infovideo'] != '':
-                await self.bot.say('How to Fight {} by {}\n{}'.format(champ.full_name, xref['vidcredit'], xref['infovideo']))
+                await self.bot.say('How to Fight with {} by {}\n{}'.format(champ.full_name, xref['vidcredit'], xref['infovideo']))
             else:
                 await self.bot.say('I got nothing. Send the CollectorDevTeam a good video.')
 
