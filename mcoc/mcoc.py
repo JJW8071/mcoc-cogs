@@ -13,8 +13,10 @@ import aiohttp
 import logging
 import csv
 import json
-#from gsheets import Sheets
 import pygsheets
+
+#from gsheets import Sheets
+#import pygsheets  //failure
 from pygsheets.utils import numericise_all
 import asyncio
 from .utils.dataIO import dataIO
@@ -28,6 +30,9 @@ from __main__ import send_cmd_help
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
 
+class TitleError(Exception):
+    def __init__(self, champ):
+        self.champ = champ
 
 data_files = {
     'spotlight': {'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=0&single=true&output=csv',
@@ -56,13 +61,19 @@ local_files = {
 async def postprocess_sig_data(bot, struct):
     sigs = load_kabam_json(kabam_bcg_stat_en)
     mcoc = bot.get_cog('MCOC')
+    missing = []
     for key in struct.keys():
         champ_class = mcoc.champions.get(key.lower(), None)
-        if champ_class is None or champ_class.mcocsig is None:
+        if champ_class is None:
             continue
-        struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
-                champ_class, sigs=sigs,
-                champ_exceptions=struct['kabam_key_override'])
+        try:
+            struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
+                    champ_class, sigs=sigs,
+                    champ_exceptions=struct['kabam_key_override'])
+        except TitleError as e:
+            missing.append(e.champ)
+    if missing:
+        bot.say("Skipped Champs due to Kabam Key Errors: {}".format(', '.join(missing)))
 
 gapi_service_creds = 'data/mcoc/mcoc_service_creds.json'
 gsheet_files = {
@@ -689,12 +700,14 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='portrait')
-    async def champ_portrait(self, champ : ChampConverter):
-        '''Champion portrait'''
-        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_avatar())
-        await self.bot.say(embed=em)
+    async def champ_portrait(self, *, champs : ChampConverterMult):
+        '''Champion portraits'''
+        for champ in champs:
+            em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+            em.set_image(url=champ.get_avatar())
+            print(champ.get_avatar())
+            await self.bot.say(embed=em)
 
     @champ.command(name='bio', aliases=('biography',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
@@ -744,7 +757,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
-    @champ.command(name='about', aliases=('champ_stat', 'champ_stats', 'cstat', 'about_champ',))
+    @champ.command(name='about', aliases=('about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Champion Base Stats'''
         data = champ.get_spotlight(default='x')
@@ -764,19 +777,6 @@ class MCOC(ChampionFactory):
             stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
             em.add_field(name='Base Stats',
                 value=tabulate(stats, width=11, rotate=False, header_sep=False))
-        # em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-        # em.add_field(name='4'+star_glyph+' Crystal & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
-        # em.add_field(name='5'+star_glyph+' Crystal', value=xref['5subfeature'],inline=False)
-        # state = xref['f/s/b']
-        # if state == 'b':
-        #     em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
-        #     em.add_field(name='Basic 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        # elif state == 's':
-        #     em.add_field(name='Basic 4'+star_glyph+' Chance', value=xref['4chance'],inline=False)
-        #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        # elif state == 'f':
-        #     em.add_field(name='Featured 4'+star_glyph+' Chance', value=xref['5chance'],inline=False)
-        #     em.add_field(name='Featured 5'+star_glyph+' Chance', value=xref['5chance'],inline=False)
         em = await self.get_synergies([champ], em)
         if champ.infopage != 'none':
             em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
@@ -868,6 +868,28 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
+    @champ.command(name='stats', aliases=('stat',))
+    async def champ_stats(self, *, champs : ChampConverterMult):
+        '''Champion(s) Base Stats'''
+        for champ in champs:
+            data = champ.get_spotlight(default='x')
+            em = discord.Embed(color=champ.class_color, title='')
+            em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
+            titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
+            keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+
+            if champ.debug:
+                em.add_field(name='Attrs', value='\n'.join(titles))
+                em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+                em.add_field(name='Added to PHC', value=xref['4basic'])
+            else:
+                stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+                em.add_field(name='Base Stats', value=tabulate(stats, width=11, rotate=False, header_sep=False), inline=False)
+            em.add_field(name='Shortcode',value=champ.short)
+            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            await self.bot.say(embed=em)
+
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs : ChampConverterMult):
         '''Champion(s) Synergies'''
@@ -884,8 +906,8 @@ class MCOC(ChampionFactory):
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
         '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
-        range_headers = 'Synergies!A1:L1'
-        range_body = 'Synergies!A2:L'
+        range_headers = 'Synergies!A1:M1'
+        range_body = 'Synergies!A2:M'
         foldername = 'synergies'
         filename = 'synergies'
         if champs[0].debug:
@@ -927,7 +949,7 @@ class MCOC(ChampionFactory):
                             for c in champs:
                                 if lookup in activated:
                                     continue
-                                elif c.full_name in  champ_synergies[lookup]['triggers']:
+                                elif '[{}]'.format(c.mattkraftid) in champ_synergies[lookup]['mtriggers']:
                                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
@@ -1083,10 +1105,21 @@ class MCOC(ChampionFactory):
             json.dump(struct, fp, indent='  ', sort_keys=True)
         await self.bot.upload('data/mcoc/gs_json_test.json')
 
+    @champ.command(name='use', aliases=('howto','htf',))
+    async def champ_use(self,*, champs :ChampConverterMult):
+        '''How to Fight With videos by MCOC Community'''
+        for champ in champs:
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            if xref['infovideo'] != '':
+                await self.bot.say('How to Fight {} by {}\n{}'.format(champ.full_name, xref['vidcredit'], xref['infovideo']))
+            else:
+                await self.bot.say('I got nothing. Send the CollectorDevTeam a good video.')
+
 
     @champ.command(name='info', aliases=('infopage',))
     async def champ_info(self, *, champ : ChampConverterDebug):
         '''Champion Spotlight link'''
+        xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
         em = discord.Embed(color=champ.class_color, title='Kabam Spotlight')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -1094,8 +1127,6 @@ class MCOC(ChampionFactory):
             em.add_field(name=champ.full_name, value='No URL found')
         else:
             em.add_field(name=champ.full_name, value=champ.infopage)
-        # if champ.infovideo != '':
-        #     em.video(url=champ.infovideo)
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
@@ -1658,6 +1689,7 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
+            'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             )
 
         for x in titles:
@@ -1665,7 +1697,7 @@ class Champion:
                 title = x
 
         if title is None:
-            raise KeyError('DEBUG - title not found for champ ' + self.full_name)
+            raise TitleError("'{}' title not found".format(mcocsig), mcocsig)
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
@@ -1676,6 +1708,7 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
+            'ID_STAT_SIGNATURE_{}'.format(mcocsig)
             )
 
         for x in preambles:
@@ -1714,7 +1747,7 @@ class Champion:
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
         else:
-            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D','_DESC_E'):
+            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
