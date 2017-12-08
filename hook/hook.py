@@ -849,11 +849,11 @@ class Hook:
                 if react is not None:
                     await self.bot.send_message(channel, 'Reaction detected.')
                     if react.reaction.emoji == '🆗':
-                        await self.bot.say('OK detected')
+                        await self.bot.send_message(channel,'OK detected')
                         roster = ChampionRoster(self.bot, msg.author)
                         await roster.parse_champions_csv(msg.channel, attachment)
                     elif react.reaction.emoji == '❌':
-                        await self.bot.say('X detected')
+                        await self.bot.send_message(channel,'X detected')
                         await self.bot.delete_message(message)
                         await self.bot.send_message(channel, 'Import canceled by user.')
                 elif react is None:
