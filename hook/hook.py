@@ -838,28 +838,32 @@ class Hook:
                         "Found a CSV file to import.  \nLoad new champions? \nSelect OK to continue or X to cancel.")
                 await self.bot.add_reaction(message, '❌')
                 await self.bot.add_reaction(message, '🆗')
-                react = await self.bot.wait_for_reaction(message=message, timeout=30 ,emoji=['❌', '🆗'])
+                react = await self.bot.wait_for_reaction(message=message, author=msg.author, timeout=30, emoji=['❌', '🆗'])
 
                 # reply1 = await self.bot.wait_for_reaction(30, channel=channel,author=msg.author)
                 #
                 # # reply = await self.bot.wait_for_message(30, channel=channel,author=msg.author,content='yes')
                 # reply = await self.bot.wait_for_message(30, channel=channel,author=msg.author, check=affirmative_check())
                 # if reply:
-                if react is None:
+
+                if react is not None:
+                    await self.bot.say('Reaction detected.')
+                    if react.reaction.emoji == '🆗':
+                        await self.bot.say('OK detected')
+                        roster = ChampionRoster(self.bot, msg.author)
+                        await roster.parse_champions_csv(msg.channel, attachment)
+                    elif react.reaction.emoji == '❌':
+                        await self.bot.say('X detected')
+                        await self.bot.delete_message(message)
+                        await self.bot.send_message(channel, 'Import canceled by user.')
+                elif react is None:
+                    await self.bot.say('No reaction detected.')
                     try:
                         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
                         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
                     except:
                         self.bot.delete_message(message)
                     await self.bot.send_message(channel, "Did not import")
-                elif react.reaction.emoji == '🆗':
-                    await self.bot.say('OK detected')
-                    roster = ChampionRoster(self.bot, msg.author)
-                    await roster.parse_champions_csv(msg.channel, attachment)
-                elif react.reaction.emoji == '❌':
-                    await self.bot.say('X detected')
-                    await self.bot.delete_message(message)
-                    await self.bot.send_message(channel, 'Import canceled by user.')
 
 def affirmative_check(msg):
     return msg.content.lower() in ('y', 'yes', 'si')
