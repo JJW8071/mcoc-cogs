@@ -847,7 +847,7 @@ class Hook:
                 # if reply:
 
                 if react is not None:
-                    await self.bot.say('Reaction detected.')
+                    await self.bot.send_message(channel, 'Reaction detected.')
                     if react.reaction.emoji == '🆗':
                         await self.bot.say('OK detected')
                         roster = ChampionRoster(self.bot, msg.author)
@@ -857,7 +857,7 @@ class Hook:
                         await self.bot.delete_message(message)
                         await self.bot.send_message(channel, 'Import canceled by user.')
                 elif react is None:
-                    await self.bot.say('No reaction detected.')
+                    await self.bot.send_message(channel, 'No reaction detected.')
                     try:
                         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
                         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
