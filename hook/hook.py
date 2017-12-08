@@ -834,16 +834,20 @@ class Hook:
             return
         for attachment in msg.attachments:
             if self.champ_re.match(attachment['filename']):
-                await self.bot.send_message(channel,
+                message = await self.bot.send_message(channel,
                         "Found a CSV file to import.  Load new champions?  Type 'yes'.")
-                reply = await self.bot.wait_for_message(30, channel=channel,
-                        author=msg.author, content=('yes','Yes','y','Y','sure','OK','ok','Ok','okay')
+                message.add_reaction(':x:',':white_check_mark:')
+                # reply1 = await self.bot.wait_for_reaction(30, channel=channel,author=msg.author)
+                # reply = await self.bot.wait_for_message(30, channel=channel,author=msg.author,content='yes')
+                reply = await self.bot.wait_for_message(30, channel=channel,author=msg.author, check=affirmative_check())
                 if reply:
                     roster = ChampionRoster(self.bot, msg.author)
                     await roster.parse_champions_csv(msg.channel, attachment)
                 else:
                     await self.bot.send_message(channel, "Did not import")
 
+def affirmative_check(msg):
+    return msg.content.lower() in ('y', 'yes', 'si')
 
 def parse_value(value):
     try:
