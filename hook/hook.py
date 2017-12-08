@@ -837,7 +837,7 @@ class Hook:
                 await self.bot.send_message(channel,
                         "Found a CSV file to import.  Load new champions?  Type 'yes'.")
                 reply = await self.bot.wait_for_message(30, channel=channel,
-                        author=msg.author, content='yes')
+                        author=msg.author, content=('yes','Yes','y','Y','sure','OK','ok','Ok','okay')
                 if reply:
                     roster = ChampionRoster(self.bot, msg.author)
                     await roster.parse_champions_csv(msg.channel, attachment)
