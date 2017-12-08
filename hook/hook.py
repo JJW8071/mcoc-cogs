@@ -838,7 +838,7 @@ class Hook:
                         "Found a CSV file to import.  \nLoad new champions? \nSelect OK to continue or X to cancel.")
                 await self.bot.add_reaction(message, '❌')
                 await self.bot.add_reaction(message, '🆗')
-                react = await self.bot.wait_for_reaction(message=message, author=msg.author, timeout=30, emoji=['❌', '🆗'])
+                react = await self.bot.wait_for_reaction(message=message, user=msg.author, timeout=30, emoji=['❌', '🆗'])
 
                 # reply1 = await self.bot.wait_for_reaction(30, channel=channel,author=msg.author)
                 #
