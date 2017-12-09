@@ -860,7 +860,7 @@ class Hook:
                 # if reply:
 
                 if react is not None:
-                    await self.bot.send_message(channel, 'Reaction detected.')
+                    # await self.bot.send_message(channel, 'Reaction detected.')
                     if react.reaction.emoji == '🆗':
                         await self.bot.send_message(channel,'OK detected')
                         roster = ChampionRoster(self.bot, msg.author)
