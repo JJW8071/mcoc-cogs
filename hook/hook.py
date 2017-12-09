@@ -637,7 +637,7 @@ class Hook:
         os.remove(filename)
 
     @roster.command(pass_context=True, name='template')
-    async def _roster_template(self, ctx, *, user : discord.User):
+    async def _roster_template(self, ctx, *, user : discord.User = None):
         '''Blank CSV template for champion import'''
         if user is None:
             user=ctx.message.author
