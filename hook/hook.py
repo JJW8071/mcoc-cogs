@@ -639,10 +639,11 @@ class Hook:
     @roster.command(pass_context=True, name='template')
     async def _roster_template(self, ctx):
         '''Blank CSV template for champion import'''
+        author=ctx.message.author
         message = 'Save a copy of the template:\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n```[4★: 0 to 99 | 5★: 0 to 200]```\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.'
 
         em =discord.Embed(color=ctx.message.author.color, title='Champion CSV template',description=message, url='https://goo.gl/LaFrg7')
-        em.set_author(name=ctx.message.author)
+        em.set_author(name=author.name, icon_url=author.avatar)
         em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
         await self.bot.send_message(ctx.message.channel, embed=em)
         # await self.bot.send_message(ctx.message.channel,'iOS dumblink: https://goo.gl/LaFrg7')
