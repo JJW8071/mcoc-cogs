@@ -637,7 +637,7 @@ class Hook:
         os.remove(filename)
 
     @roster.command(pass_context=True, name='template')
-    async def _roster_template(self, ctx)
+    async def _roster_template(self, ctx):
         '''Blank CSV template for champion import'''
         message = 'Save a copy of the template:\n1. Delete champions you do not have.\n2. Add 5★ champions you do have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Level = champion level.\n5. Set Awakened = signature ability level.\n```[4★: 0 to 99 | 5★: 0 to 200]```\n6. Export file as \'champions.csv\'.\n7. Upload to Collector.'
 
