@@ -852,13 +852,6 @@ class Hook:
                 await self.bot.add_reaction(message, '❌')
                 await self.bot.add_reaction(message, '🆗')
                 react = await self.bot.wait_for_reaction(message=message, user=msg.author, timeout=30, emoji=['❌', '🆗'])
-
-                # reply1 = await self.bot.wait_for_reaction(30, channel=channel,author=msg.author)
-                #
-                # # reply = await self.bot.wait_for_message(30, channel=channel,author=msg.author,content='yes')
-                # reply = await self.bot.wait_for_message(30, channel=channel,author=msg.author, check=affirmative_check())
-                # if reply:
-
                 if react is not None:
                     # await self.bot.send_message(channel, 'Reaction detected.')
                     if react.reaction.emoji == '🆗':
@@ -877,9 +870,6 @@ class Hook:
                     except:
                         self.bot.delete_message(message)
                     await self.bot.send_message(channel, "Did not import")
-
-def affirmative_check(msg):
-    return msg.content.lower() in ('y', 'yes', 'si')
 
 def parse_value(value):
     try:
