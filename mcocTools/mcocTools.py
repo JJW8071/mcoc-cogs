@@ -137,7 +137,7 @@ class MCOCTools:
         devteam = ( "DeltaSigma#8530\n"
                     "JJW#8071\n"
                     )
-        supportteam=('\njpags#5202\nmutamatt#4704\nphil_wo#3733\nSpiderSebas#9910\nsuperflu0us#4587\nsuprmatt#2753\n')
+        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\n')
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
@@ -145,6 +145,9 @@ class MCOCTools:
         embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name="CollectorDevTeam",value=devteam,inline=True)
         embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
+        embed.add_field(name='DuelsPartner',value='superflu0us#4587',inline=True)
+        embed.add_field(name='MapsPartner',value='jpags#5202',inline=True)
+        embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
         embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
                          "{} days ago!)".format(days_since))
 
