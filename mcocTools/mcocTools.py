@@ -143,11 +143,11 @@ class MCOCTools:
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
         embed.add_field(name="About Collector", value=about, inline=False)
-        embed.add_field(name="CollectorDevTeam",value=devteam,inline=True)
-        embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
         embed.add_field(name='DuelsPartner',value='superflu0us#4587',inline=True)
         embed.add_field(name='MapsPartner',value='jpags#5202',inline=True)
         embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
+        embed.add_field(name="CollectorDevTeam",value=devteam,inline=True)
+        embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
         embed.set_footer(text="Bringing joy since 02 Jan 2016 (over "
                          "{} days ago!)".format(days_since))
 
