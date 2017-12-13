@@ -641,7 +641,7 @@ class Hook:
         '''Blank CSV template for champion import'''
         if user is None:
             user=ctx.message.author
-        message = 'Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n```[4★: 0 to 99 | 5★: 0 to 200]```\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Press OK\nPrerequisite: Google Sheets\n(there is an app for iOS|Android)\n'
+        message = 'Save a copy of the template (blue text):\n\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n```[4★: 0 to 99 | 5★: 0 to 200]```\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Press OK\n\nPrerequisite: Google Sheets\n(there is an app for iOS|Android)\n'
 
         em =discord.Embed(color=user.color, title='Champion CSV template',description=message, url='https://goo.gl/LaFrg7')
         em.set_author(name=user.name, icon_url=user.avatar_url)
