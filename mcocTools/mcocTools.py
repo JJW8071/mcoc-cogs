@@ -137,13 +137,14 @@ class MCOCTools:
         devteam = ( "DeltaSigma#8530\n"
                     "JJW#8071\n"
                     )
-        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\n')
+        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\ntaoness#5565\n')
         embed = discord.Embed(colour=discord.Colour.red())
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
         embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name='DuelsPartner',value='superflu0us#4587',inline=True)
+        embed.add_field(name='LabyrinthPartner',value='@Kiryu#5755',inline=True)
         embed.add_field(name='MapsPartner',value='jpags#5202',inline=True)
         embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
         embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
