@@ -144,7 +144,7 @@ class MCOCTools:
         embed.add_field(name="discord.py", value=dpy_version)
         embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name='DuelsPartner',value='superflu0us#4587',inline=True)
-        embed.add_field(name='LabyrinthPartner',value='@Kiryu#5755',inline=True)
+        embed.add_field(name='LabyrinthPartner',value='Kiryu#5755',inline=True)
         embed.add_field(name='MapsPartner',value='jpags#5202',inline=True)
         embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
         embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
