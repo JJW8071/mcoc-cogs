@@ -636,32 +636,44 @@ class Hook:
         await self.bot.upload(filename)
         os.remove(filename)
 
-    # @commands.command(pass_context=True, no_pm=True)
-    # async def teamset(self, ctx, *, *args)#, user : discord.Member=None)
-    #     '''Set AQ, AW Offense or AW Defense'''
-    #     # if user is None:
-    #     #     user = ctx.message.author
-    #     user = ctx.message.author
-    #     info = self.get_user_info(user)
-    #     aq = False
-    #     awo = False
-    #     awd = False
-    #     champs = []
-    #     for arg in args:
-    #         if arg == 'aq':
-    #             aq = True
-    #         elif arg == 'awo':
-    #             awo = True
-    #         elif arg == 'awd':
-    #             awd = True
-    #         champ = self.mcocCog._resolve_alias(arg)
-    #         champs.append(str(champ.hookid))
-    #     if aq is True:
-    #         info['aq'] = champs
-    #     elif awo is True:
-    #         info['awo'] = champs
-    #     elif awd is True:
-    #         info['awd'] = champs
+    @roster.command(pass_context=True, name='template')
+    async def _roster_template(self, ctx, *, user : discord.User = None):
+        '''Blank CSV template for champion import'''
+        if user is None:
+            user=ctx.message.author
+        message = 'Save a copy of the template (blue text):\n\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Press OK\n\nPrerequisite: Google Sheets\n(there is an app for iOS|Android)\n'
+
+        em =discord.Embed(color=user.color, title='Champion CSV template',description=message, url='https://goo.gl/LaFrg7')
+        em.set_author(name=user.name, icon_url=user.avatar_url)
+        em.set_footer(text='hook/champions for Collector',icon_url='https://assets-cdn.github.com/favicon.ico')
+        await self.bot.send_message(ctx.message.channel, embed=em)
+        # await self.bot.send_message(ctx.message.channel,'iOS dumblink: https://goo.gl/LaFrg7')
+
+    @roster.command(pass_context=True, hidden=True, name='role_export',aliases=('rrx',))
+    async def _role_roster_export(self, ctx, role: discord.Role):
+        '''Returns a CSV file with all Roster data for all members of a Role'''
+        server = ctx.message.server
+        roster = ChampionRoster(ctx.bot, ctx.message.author)
+        await roster.load_champions()
+        rand = randint(1000, 9999)
+        path, ext = os.path.split(roster.champs_file)
+        tmp_file = '{}-{}.tmp'.format(path, rand)
+        with open(tmp_file, 'w') as fp:
+            writer = csv.DictWriter(fp, fieldnames=['member_name', *(roster.fieldnames)], extrasaction='ignore', lineterminator='\n')
+            writer.writeheader()
+            for member in server.members:
+                if role in member.roles:
+                    roster = ChampionRoster(ctx.bot, member)
+                    await roster.load_champions()
+                    for champ in roster.roster.values():
+                        champ_dict = champ.to_json()
+                        champ_dict['member_name'] = member.name
+                        writer.writerow(champ_dict)
+        filename = roster.data_dir + '/' + role.name + '.csv'
+        os.replace(tmp_file, filename)
+        await self.bot.upload(filename)
+        os.remove(filename)
+
 
     @commands.command(pass_context=True, name='rank_prestige', aliases=('prestige_list',))
     async def _rank_prestige(self, ctx, *, hargs=''):
@@ -835,16 +847,29 @@ class Hook:
             return
         for attachment in msg.attachments:
             if self.champ_re.match(attachment['filename']):
-                await self.bot.send_message(channel,
-                        "Found a CSV file to import.  Load new champions?  Type 'yes'.")
-                reply = await self.bot.wait_for_message(30, channel=channel,
-                        author=msg.author, content='yes')
-                if reply:
-                    roster = ChampionRoster(self.bot, msg.author)
-                    await roster.parse_champions_csv(msg.channel, attachment)
-                else:
+                message = await self.bot.send_message(channel,
+                        "Found a CSV file to import.  \nLoad new champions? \nSelect OK to continue or X to cancel.")
+                await self.bot.add_reaction(message, '❌')
+                await self.bot.add_reaction(message, '🆗')
+                react = await self.bot.wait_for_reaction(message=message, user=msg.author, timeout=30, emoji=['❌', '🆗'])
+                if react is not None:
+                    # await self.bot.send_message(channel, 'Reaction detected.')
+                    if react.reaction.emoji == '🆗':
+                        await self.bot.send_message(channel,'OK detected')
+                        roster = ChampionRoster(self.bot, msg.author)
+                        await roster.parse_champions_csv(msg.channel, attachment)
+                    elif react.reaction.emoji == '❌':
+                        await self.bot.send_message(channel,'X detected')
+                        await self.bot.delete_message(message)
+                        await self.bot.send_message(channel, 'Import canceled by user.')
+                elif react is None:
+                    await self.bot.send_message(channel, 'No reaction detected.')
+                    try:
+                        await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+                        await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+                    except:
+                        self.bot.delete_message(message)
                     await self.bot.send_message(channel, "Did not import")
-
 
 def parse_value(value):
     try:

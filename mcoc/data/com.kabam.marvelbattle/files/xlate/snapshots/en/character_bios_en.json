@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "97b2218572ba967d92e292feb3bb5e47e07ecf88",
+    "hash": "5a7c2bc9ea920bf16320ef1de6f5d184e345dde6",
     "language": "en",
-    "string_count": 125,
+    "string_count": 128,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1505678304
+    "ts": 1510019134
   },
   "strings": [
     {
@@ -22,7 +22,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_AGENTVENOM",
-      "v": "Eugene “Flash” Thompson, long-time fan of Spider-Man and friend of Peter Parker, thought his career was over when he lost his legs fighting in the Iraq War. Desperate for another opportunity to help others, Flash enrolled in Project Rebirth and soon found himself bound to the alien Symbiote Venom. Now possessing many of the same powers as his wall-crawling hero, Flash works for the U.S government as the deadly Agent Venom."
+      "v": "Eugene “Flash” Thompson, long-time fan of Spider-Man and friend of Peter Parker, thought his career was over when he lost his legs fighting in the Iraq War. Desperate for another opportunity to help others, Flash enrolled in Project Rebirth and soon found himself bound to the alien Symbiote Venom. Now possessing many of the same powers as his wall-crawling hero, Flash works for the U.S. government as the deadly Agent Venom."
     },
     {
       "k": "ID_CHARACTER_BIOS_ANGELA",
@@ -319,7 +319,8 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_MODOK",
-      "v": "The terrifying result of an unspeakable experiment, M.O.D.O.K. is a grotesque mastermind bent on the destruction of the world. As the sometimes-leader of A.I.M., the Mechanized Organism Designed Only for Killing has tangled many times with his foes, Captain America and the Avengers."
+      "v": "The terrifying result of an unspeakable experiment, M.O.D.O.K. is a grotesque mastermind bent on the destruction of the world. As the sometimes-leader of A.I.M., the Mechanized Organism Designed Only for Killing has tangled many times with his foes, Captain America and the Avengers.",
+      "vn": "16.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_MOONKNIGHT",
@@ -393,6 +394,11 @@
       "v": "Sister to Quicksilver, Wanda Maximoff a.k.a. The Scarlet Witch is a true master of chaos magic utilizing a deep understanding of mathematics to ensure success as she brandishes her amazing talents for probability manipulation and reality warping."
     },
     {
+      "k": "ID_CHARACTER_BIOS_SENTRY",
+      "v": "Robert Reynolds left his previous ordinary life behind the day he imbibed a mysterious laboratory liquid. Little did Robert know, the concoction was an enhanced version of the Super-Soldier Serum and it transformed him into the Golden Guardian, Sentry. With the power of a million exploding suns, Sentry combats the forces of evil and destruction, whether they come from abroad, or from Sentry himself...",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_CHARACTER_BIOS_SHEHULK",
       "v": "When a bullet meant for her father struck Jennifer Walters, it seemed that all was lost. Bleeding out and in desperate need of a donor for her rare blood type, it was her cousin Bruce Banner that stepped forward to save her. When the Hulk’s gamma-infused blood was introduced into Jennifer, she found herself able to transform into the powerful She-Hulk! Standing as her own hero, She-Hulk has fought alongside the world’s greatest warriors, using her immense strength and intellect to defeat the villains of earth, both in the courtroom and on the battlefield."
     },
@@ -426,6 +432,11 @@
       "v": "Mutant, thief, leader, goddess – Ororo Munroe has played many roles in her life. As Storm, she controls all aspects of the weather on an astonishing scale. Tornados, lightning, and blizzards are hers to command. Summoned from her home in Africa by Professor X, Ororo found a new family in the X-Men – and a new role, as a hero."
     },
     {
+      "k": "ID_CHARACTER_BIOS_TASKMASTER",
+      "v": "Tony Masters was a S.H.I.E.L.D. agent exposed to an experimental variant of the Super-Soldier Serum, called the Mnemonic Primer. It grants him the ability to duplicate any movement he sees, but at a cost. The huge amount of information his brain records, causes it to overwrite his own memories, replacing what little remains of his original self. Now known as Taskmaster he offers his skills to the highest bidder as a mercenary and combat trainer.",
+      "vn": "16.1"
+    },
+    {
       "k": "ID_CHARACTER_BIOS_THANOS",
       "v": "Thanos has entered the Collector’s Contest, not to fight, but to rule. Seizing immense power from all avenues that he can get his hands on, the Mad Titan strikes down any who would dare to stand against him. With near immortality and unlimited cosmic power, Thanos sets his sights on seizing the ISO-Sphere so that he may one day gain the affection of his true love, Mistress Death."
     },
@@ -439,7 +450,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_THOR_RAGNAROK",
-      "v": "When an ancient evil, lurking for eons, is released from its shackles, the Asgardian prince of thunder is thrown into a whilwind of chaos. Ripped from his familiar surroundings and stripped of his powers, Thor's only hope is to summon the warrior within, and fight his way back against impossible odds. With his kingdom shattered and his people in dire need, Thor must discover what it means to be a true leader.",
+      "v": "When an ancient evil, lurking for eons, is released from its shackles, the Asgardian God of Thunder is thrown into a whirlwind of chaos. Ripped from his familiar surroundings and stripped of his powers, Thor's only hope is to summon the warrior within, and fight his way back against impossible odds. With his kingdom shattered and his people in dire need, Thor must discover what it means to be a true leader.",
       "vn": 16
     },
     {
@@ -489,6 +500,11 @@
     {
       "k": "ID_CHARACTER_BIOS_VISION_MOVIE",
       "v": "The synthetic humanoid known as the Vision possesses a sophisticated artificial intelligence that delivers superior strategy in the heat of battle. His synthezoid body delivers super strength, flight, intangibility, and energy blasts. Although he may not be human, the Vision nobly stands shoulder-to-shoulder with the Avengers against overwhelming odds!"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_VOID",
+      "v": "When Robert Reynolds drank an enhanced version of the Super-Soldier serum, The Sentry was born, but also his evil counterpart, The Void. As malignant as the Sentry is noble. The Void's purpose is to kill and destroy anything The Sentry tries to protect. Robert constantly fights an inner battle to prevent The Void from coming out, but when that fails… The darkness of The Void's god-like powers threaten to consume the world and anyone who stands in his way...",
+      "vn": "16.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_VULTURE",
