@@ -1,0 +1,6 @@
+{
+    "AUTHOR" : "Unknown",
+    "INSTALL_MSG" : "Simple Calculator",
+    "NAME" : "calculator",
+    "DESCRIPTION" : "Simple Calculator using limited eval"
+}
