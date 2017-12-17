@@ -636,7 +636,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Expected Chance', value='{:.2%}'.format(compound))
         await self.bot.say(embed=em)
 
-    @commands.command(aliases=('update_mcoc',), hidden=True)
+    @commands.command(aliases=('update_mcoc','mu',), hidden=True)
     async def mcoc_update(self, fname, force=False):
         if len(fname) > 3:
             for key in data_files.keys():
