@@ -161,6 +161,7 @@ class ChampConverter(commands.Converter):
     parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
                              |(?:r(?P<rank>[1-5]))
                              |(?:(?P<star>[1-5])\\?\*)
+                             |(?:(?P<star>[1-5])\\?\★)
                              |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
     async def convert(self):
         bot = self.ctx.bot
