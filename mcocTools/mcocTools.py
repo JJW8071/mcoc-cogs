@@ -253,22 +253,25 @@ class MCOCTools:
         '''Guild | Alliance Popup System'''
         server = ctx.message.server
         roles = server.roles
-        aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
-        await self.bot.say('Stage 1: Creating roles')
-        if 'admin' not in roles:
+        rolenames = []
+        for r in roles:
+            rolenames.append('{}'.format(r.name))
+        aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance', 'summoners']
+        message = await self.bot.say('Stage 1: Creating roles')
+        if 'admin' not in rolenames:
             admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
-        if 'officers' not in roles:
+        if 'officers' not in rolenames:
             officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
-        if 'bg1' not in roles:
+        if 'bg1' not in rolenames:
             bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
-        if 'bg2' not in roles:
+        if 'bg2' not in rolenames:
             bg2 = await self.bot.create_role(server=server, name='bg2', color=discord.Color.purple(), hoist=False, mentionable=True)
-        if 'bg3' not in roles:
+        if 'bg3' not in rolenames:
             bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
-        if 'alliance' not in roles:
+        if 'alliance' not in rolenames:
             alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
-        if 'summoners' not in roles:
-            summoners = await self.bot.create_role(server=server, name='Summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
+        if 'summoners' not in rolenames:
+            summoners = await self.bot.create_role(server=server, name='summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
 
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         em = discord.Embed(color=discord.Color.red(), title='Stage 1 Role Creation', description='')
@@ -276,7 +279,17 @@ class MCOCTools:
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
         em.add_field(name='Role Position on Server',value='\n'.join(positions),inline=False)
-        await self.bot.say(embed=em)
+        await self.bot.edit_message(message,embed=em)
+
+        message2 = await self.bot.say('Stage 2: Create Channels')
+        make_channels = ('Alliance Chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw', 'announcements')
+        await self.bot.create_channel(server=server, name='Alliance', type=discord.ChannelType.category)
+        for chan in make_channels:
+            await self.bot.create_channel(server=server, name=chan, type=discord.ChannelType.text)
+
+        await self.bot.edit_message('Stage 2: Channels:\n{}'.join('\n#{} ', c.name for c in server.channels))
+
+
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
     # async def collectorsetup(self,ctx,*args):
