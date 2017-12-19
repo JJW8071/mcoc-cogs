@@ -255,17 +255,28 @@ class MCOCTools:
         roles = server.roles
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
         await self.bot.say('Stage 1: Creating roles')
-        # everyone = discord.PermissionOverwrite(target=server.default_role, overwrite=discord.PermissionOverwrite(read_messages=False))
-        # adminPerms = server.PermissionsOverwrite(administrator=True)
-        # officerPerms = server.PermissionOverwrite(read_messages=True, manage_server=True, manage_roles=True, kick_members=True, ban_members=True, manage_channels=True)
-        # alliancePerms = server.PermissionOverwrite(read_messages=True)
-        admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
-        officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
-        bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
-        bg2 = await self.bot.create_role(server=server, name='bg2', color=discord.Color.purple(), hoist=False, mentionable=True)
-        bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
-        alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
-        summoners = await self.bot.create_role(server=server, name='Summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
+        if 'admin' is not in roles:
+            admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
+        if 'officers' is not in roles:
+            officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
+        if 'bg1' is not in roles:
+            bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
+        if 'bg2' is not in roles:
+            bg2 = await self.bot.create_role(server=server, name='bg2', color=discord.Color.purple(), hoist=False, mentionable=True)
+        if 'bg3' is not in roles:
+            bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
+        if 'alliance' is not in roles:
+            alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
+        if 'summoners' is not in roles:
+            summoners = await self.bot.create_role(server=server, name='Summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
+
+        roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
+        em = discord.Embed(color=discord.Color.red(), title='Stage 1 Role Creation', description='')
+            positions = []
+            for r in roles:
+                positions.append('{} = {}'.format(r.position, r.name))
+            em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
+        await self.bot.say(embed=em)
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
     # async def collectorsetup(self,ctx,*args):
