@@ -255,7 +255,7 @@ class MCOCTools:
         roles = server.roles
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
         await self.bot.say('Stage 1: Creating roles')
-        everyone = await discord.PermissionOverwrite(read_messages=False)
+        discord.PermissionOverwrite(read_messages=False)
         officers = await discord.Client.create_role(server=server, name='officers', permissions=2146958455, color=discord.Color.light_grey(), hoist=False, mentionable=True)
         bg1 = await discord.Client.create_role(server=server, name='bg1', permissions=None , color=discord.Color.light_blue(), hoist=False, mentionable=True)
         bg2 = await discord.Client.create_role(server=server, name='bg2', permissions=None, color=discord.Color.light_purple(), hoist=False, mentionable=True)
