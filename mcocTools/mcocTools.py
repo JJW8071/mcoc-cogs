@@ -274,14 +274,13 @@ class MCOCTools:
             summoners = await self.bot.create_role(server=server, name='summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
 
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
-        em = discord.Embed(color=discord.Color.red(), title='Stage 1 Role Creation', description='')
+        em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
-        em.add_field(name='Role Position on Server',value='\n'.join(positions),inline=False)
+        em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
         await self.bot.edit_message(message,embed=em)
 
-        message2 = await self.bot.say('Stage 2: Create Channels')
         make_channels = ('Alliance Chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw')
         await self.bot.create_channel(server=server, name='Announcments', type=discord.ChannelType.text)
         await self.bot.create_channel(server=server, name='Alliance', type=discord.ChannelType.category)
@@ -291,9 +290,10 @@ class MCOCTools:
         channels= sorted(server.channels, key=lambda channels:channels.position, reverse=True)
         channelnames=[]
         for c in channels:
-            channelnames.append('{} = #{} '.format(c.position, c.name))
+            channelnames.append('\n{} = #{} '.format(c.position, c.name))
+        em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
 
-        await self.bot.edit_message(message2, 'Stage 2: Channels:\n{}'.format(join(channelnames)))
+        await self.bot.edit_message(message, embed=em)
 
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
