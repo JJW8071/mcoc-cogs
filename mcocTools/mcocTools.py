@@ -256,12 +256,12 @@ class MCOCTools:
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
         await self.bot.say('Stage 1: Creating roles')
         discord.PermissionOverwrite(read_messages=False)
-        officers = await self.bot.create_role(server=server, name='officers', permissions=2146958455, color=discord.Color.light_grey(), hoist=False, mentionable=True)
+        officers = await self.bot.create_role(server=server, name='officers', permissions=permissions(read_messages=True, manage_server=True, manage_roles=True, kick_members=True, ban_members=True, manage_channels=True), color=discord.Color.light_grey(), hoist=False, mentionable=True)
         bg1 = await self.bot.create_role(server=server, name='bg1', permissions=None , color=discord.Color.blue(), hoist=False, mentionable=True)
         bg2 = await self.bot.create_role(server=server, name='bg2', permissions=None, color=discord.Color.purple(), hoist=False, mentionable=True)
         bg3 = await self.bot.create_role(server=server, name='bg3', permissions=None, color=discord.Color.orange(), hoist=False, mentionable=True)
-        alliance = await self.bot.create_role(server=server, name='alliance', permissions=67624001, color=discord.Color.teal(), hoist=True, mentionable=True)
-        summoners = await self.bot.create_role(server=server, name='Summoners', permissions=515137, color=discord.Color.white(), hoist=True, mentionable=True)
+        alliance = await self.bot.create_role(server=server, name='alliance', permissions=permissions(read_messages=True, add_reaction=True), color=discord.Color.teal(), hoist=True, mentionable=True)
+        summoners = await self.bot.create_role(server=server, name='Summoners', permissions=discord.permissions(read_messages=True, add_reaction=True), color=discord.Color.white(), hoist=True, mentionable=True)
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
     # async def collectorsetup(self,ctx,*args):
