@@ -288,7 +288,12 @@ class MCOCTools:
         for chan in make_channels:
             await self.bot.create_channel(server=server, name=chan, type=discord.ChannelType.text)
 
-        await self.bot.edit_message(message2, 'Stage 2: Channels:\n{}'.join('\n#{} ', c.name for c in server.channels))
+        channels= sorted(server.channels, key=lambda channels:channels.position, reverse=True)
+        channelnames=[]
+        for c in channels:
+            channelnames.append('{} = #{} '.format(c.position, c.name)
+
+        await self.bot.edit_message(message2, 'Stage 2: Channels:\n{}'.join(channelnames))
 
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
