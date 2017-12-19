@@ -281,19 +281,34 @@ class MCOCTools:
         em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
         await self.bot.edit_message(message,embed=em)
 
+        channellist = []
+        for c in server.channels:
+            channellist.append(c.name)
         make_channels = ('Alliance Chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw')
-        await self.bot.create_channel(server=server, name='Announcments', type=discord.ChannelType.text)
-        await self.bot.create_channel(server=server, name='Alliance', type=discord.ChannelType.category)
-        for chan in make_channels:
-            await self.bot.create_channel(server=server, name=chan, type=discord.ChannelType.text)
+        if 'Announcements' not in channellist:
+            await self.bot.create_channel(server=server, name='Announcments', type=discord.ChannelType.text)
+        if 'Alliance Chatter' not in channellist:
+            await self.bot.create_channel(server=server, name='Alliance Chatter', type=discord.ChannelType.text)
+        if 'bg1aq' not in channellist:
+            await self.bot.create_channel(server=server, name='bg1aq', type=discord.ChannelType.text)
+        if 'bg1aw' not in channellist:
+            await self.bot.create_channel(server=server, name='bg1aq', type=discord.ChannelType.text)
+        if 'bg2aq' not in channellist:
+            await self.bot.create_channel(server=server, name='bg2aq', type=discord.ChannelType.text)
+        if 'bg2aw' not in channellist:
+            await self.bot.create_channel(server=server, name='bg2aw', type=discord.ChannelType.text)
+        if 'bg3aq' not in channellist:
+            await self.bot.create_channel(server=server, name='bg3aq', type=discord.ChannelType.text)
+        if 'bg3aw' not in channellist:
+            await self.bot.create_channel(server=server, name='bg3aw', type=discord.ChannelType.text)
 
         channels= sorted(server.channels, key=lambda channels:channels.position, reverse=True)
         channelnames=[]
         for c in channels:
             channelnames.append('\n{} = #{} '.format(c.position, c.name))
+        em = discord.Embed(discord.Color.red(), title='Guild Alliance Popup System', description='')
         em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
-
-        await self.bot.edit_message(message, embed=em)
+        await self.bot.send_message(embed=em)
 
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
