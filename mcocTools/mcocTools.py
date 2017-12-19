@@ -248,11 +248,25 @@ class MCOCTools:
         return text
 
     @checks.admin_or_permissions(manage_server=True, manage_roles=True)
-    @commands.command(name='setup', pass_context=True)
-    async def collectorsetup(self,ctx,*args):
-        '''Server Setup Guide
-        Collector Role Requires admin
-        '''
+    @commands.command(name='gaps', pass_context=True, hidden=True)
+    async def _alliance_popup(self, ctx, *args):
+        '''Guild | Alliance Popup System'''
+        server = ctx.message.server
+        roles = server.roles
+        aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
+        await self.bot.say('Stage 1: Creating roles')
+        officers = await discord.client.create_role(server=server, name='officers', permissions=general(), color=discord.Color.light_grey(), hoist=False, mentionable=True)
+        bg1 = await discord.client.create_role(server=server, name='bg1', permissions=general(), color=discord.Color.light_blue(), hoist=False, mentionable=True)
+        bg2 = await discord.client.create_role(server=server, name='bg2', permissions=general(), color=discord.Color.light_purple(), hoist=False, mentionable=True)
+        bg3 = await discord.client.create_role(server=server, name='bg3', permissions=general(), color=discord.Color.light_orange(), hoist=False, mentionable=True)
+        alliance = await discord.client.create_role(server=server, name='alliance', permissions=general(), color=discord.Color.yellow(), hoist=True, mentionable=True)
+        summoners = await discord.client.create_role(server=server, name='Summoners', permissions=general(), color=discord.Color.white(), hoist=True, mentionable=True)
+    # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
+    # @commands.command(name='setup', pass_context=True)
+    # async def collectorsetup(self,ctx,*args):
+    #     '''Server Setup Guide
+    #     Collector Role Requires admin
+    #     '''
         # 1) Check Roles present
         # 2) Check Role Permissions
         # 3) Check Role Order
@@ -261,126 +275,126 @@ class MCOCTools:
         # Manage Roles required for Role assignment / removal
         # 2 ) Check roles
         # 3 ) Check role order
-        check1 = await self.setup_phase_one(ctx)
-        if check1:
-            await self.bot.say(embed=discord.Embed(color=discord.color.red(),
-                                title='Collector Setup Protocol',
-                                description='☑ setup_phase_one '))
+        # check1 = await self.setup_phase_one(ctx)
+        # if check1:
+        #     await self.bot.say(embed=discord.Embed(color=discord.color.red(),
+        #                         title='Collector Setup Protocol',
+        #                         description='☑ setup_phase_one '))
 
 
 
-    async def setup_phase_one(self, ctx):
-        '''Check Server ROLES'''
-        # repeat_phase = await self.setup_phase_one(ctx)
-        # next_phase = await self.setup_phase_two(ctx)
-
-        server = ctx.message.server
-        roles = server.roles
-        rolenames = []
-        phase = True
-        for r in roles:
-            rolenames.append(r.name)
-        required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
-        roles_fields={'officers': {True, discord.Color.lighter_grey(),},
-                    'bg1':{True, discord.Color.blue(), },
-                    'bg2':{True, discord.Color.purple(), },
-                    'bg3':{True, discord.Color.orange(), },
-                    'TestRole1':{True, discord.Color.default(), },
-                    'TestRole2':{True, discord.Color.light_grey()},
-                    }
-        stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
-        for i in required_roles:
-            if i in rolenames:
-                stageone.append('☑️ {}'.format(i))
-            else:
-                stageone.append('❌ {}'.format(i))
-                phase = False
-        desc = '\n'.join(stageone)
-        if phase == False:
-            em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [1]',description=desc)
-            em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
-            message = await self.bot.send_message(ctx.message.channel, embed=em)
-            await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
-            await self.bot.add_reaction(message,'\N{CROSS MARK}')
-            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
-            if react is None or react.reaction.emoji == '\N{CROSS MARK}':
-                try:
-                    await self.bot.delete_message(message)
-                except:
-                    pass
-                return None
-            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
-                await self.bot.delete_message(message)
-                return await self.setup_phase_one(ctx)
-            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
-                await self.bot.delete_message(message)
-                return await self.setup_phase_two(ctx)
-        elif phase == True:
-            await setup_phase_two
-
-    async def setup_phase_two(self, ctx):
-        '''Check Role ORDER'''
-        server = ctx.message.server
-        roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
-        required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner', 'everyone')
-        said = []
-        em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
-        positions = []
-        for r in roles:
-            positions.append('{} = {}'.format(r.position, r.name))
-        em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
-        said.append(await self.bot.say(embed=em))
-        order = []
-        c=len(required_roles)-1
-        for r in required_roles:
-            order.append('{} = {}'.format(c, r))
-            c-=1
-        em = discord.Embed(color=discord.Color.red(), title='',description='')
-        em.add_field(name='Correct Role Positions', value =chat.box('\n'.join(order)),inline=False)
-        perm_order = []
-        phase = True
-        for i in range(0,len(required_roles)-2):
-            j = i+1
-            if required_roles[j] > required_roles[i]:
-                phase = False
-                # perm_order.append('{} should be above {}'.format(required_roles[i],required_roles[j]))
-        if phase == False:
-            # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
-            em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
-            # em.add_field(name='',value='\n'.join(perm_order))
-            message = await self.bot.send_message(ctx.message.channel, embed=em)
-            said.append(message)
-            await self.bot.add_reaction(message,'\N{BLACK LEFT-POINTING TRIANGLE}')
-            await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
-            await self.bot.add_reaction(message,'\N{CROSS MARK}')
-            await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
-            if react is None or react.reaction.emoji == '\N{CROSS MARK}':
-                try:
-                    for message in said:
-                        await self.bot.delete_message(message)
-                except:
-                    pass
-                return None
-            elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
-                for message in said:
-                    await self.bot.delete_message(message)
-                return await self.setup_phase_two(ctx)
-            elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
-                for message in said:
-                    await self.bot.delete_message(message)
-                return await self.setup_phase_three(ctx)
-            elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
-                for message in said:
-                    await self.bot.delete_message(message)
-                return await self.setup_phase_one(ctx)
-        elif phase == True:
-            await setup_phase_three
-
-    async def setup_phase_three(self, ctx):
-        '''Check Role Permissions'''
-        message = await self.bot.say('initiate phase three')
+    # async def setup_phase_one(self, ctx):
+    #     '''Check Server ROLES'''
+    #     # repeat_phase = await self.setup_phase_one(ctx)
+    #     # next_phase = await self.setup_phase_two(ctx)
+    #
+    #     server = ctx.message.server
+    #     roles = server.roles
+    #     rolenames = []
+    #     phase = True
+    #     for r in roles:
+    #         rolenames.append(r.name)
+    #     required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
+    #     roles_fields={'officers': {True, discord.Color.lighter_grey(),},
+    #                 'bg1':{True, discord.Color.blue(), },
+    #                 'bg2':{True, discord.Color.purple(), },
+    #                 'bg3':{True, discord.Color.orange(), },
+    #                 'TestRole1':{True, discord.Color.default(), },
+    #                 'TestRole2':{True, discord.Color.light_grey()},
+    #                 }
+    #     stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
+    #     for i in required_roles:
+    #         if i in rolenames:
+    #             stageone.append('☑️ {}'.format(i))
+    #         else:
+    #             stageone.append('❌ {}'.format(i))
+    #             phase = False
+    #     desc = '\n'.join(stageone)
+    #     if phase == False:
+    #         em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [1]',description=desc)
+    #         em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
+    #         message = await self.bot.send_message(ctx.message.channel, embed=em)
+    #         await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+    #         await self.bot.add_reaction(message,'\N{CROSS MARK}')
+    #         await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+    #         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
+    #         if react is None or react.reaction.emoji == '\N{CROSS MARK}':
+    #             try:
+    #                 await self.bot.delete_message(message)
+    #             except:
+    #                 pass
+    #             return None
+    #         elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
+    #             await self.bot.delete_message(message)
+    #             return await self.setup_phase_one(ctx)
+    #         elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
+    #             await self.bot.delete_message(message)
+    #             return await self.setup_phase_two(ctx)
+    #     elif phase == True:
+    #         await setup_phase_two
+    #
+    # async def setup_phase_two(self, ctx):
+    #     '''Check Role ORDER'''
+    #     server = ctx.message.server
+    #     roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
+    #     required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner', 'everyone')
+    #     said = []
+    #     em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
+    #     positions = []
+    #     for r in roles:
+    #         positions.append('{} = {}'.format(r.position, r.name))
+    #     em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
+    #     said.append(await self.bot.say(embed=em))
+    #     order = []
+    #     c=len(required_roles)-1
+    #     for r in required_roles:
+    #         order.append('{} = {}'.format(c, r))
+    #         c-=1
+    #     em = discord.Embed(color=discord.Color.red(), title='',description='')
+    #     em.add_field(name='Correct Role Positions', value =chat.box('\n'.join(order)),inline=False)
+    #     perm_order = []
+    #     phase = True
+    #     for i in range(0,len(required_roles)-2):
+    #         j = i+1
+    #         if required_roles[j] > required_roles[i]:
+    #             phase = False
+    #             # perm_order.append('{} should be above {}'.format(required_roles[i],required_roles[j]))
+    #     if phase == False:
+    #         # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
+    #         em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
+    #         # em.add_field(name='',value='\n'.join(perm_order))
+    #         message = await self.bot.send_message(ctx.message.channel, embed=em)
+    #         said.append(message)
+    #         await self.bot.add_reaction(message,'\N{BLACK LEFT-POINTING TRIANGLE}')
+    #         await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
+    #         await self.bot.add_reaction(message,'\N{CROSS MARK}')
+    #         await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
+    #         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
+    #         if react is None or react.reaction.emoji == '\N{CROSS MARK}':
+    #             try:
+    #                 for message in said:
+    #                     await self.bot.delete_message(message)
+    #             except:
+    #                 pass
+    #             return None
+    #         elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
+    #             for message in said:
+    #                 await self.bot.delete_message(message)
+    #             return await self.setup_phase_two(ctx)
+    #         elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
+    #             for message in said:
+    #                 await self.bot.delete_message(message)
+    #             return await self.setup_phase_three(ctx)
+    #         elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
+    #             for message in said:
+    #                 await self.bot.delete_message(message)
+    #             return await self.setup_phase_one(ctx)
+    #     elif phase == True:
+    #         await setup_phase_three
+    #
+    # async def setup_phase_three(self, ctx):
+    #     '''Check Role Permissions'''
+    #     message = await self.bot.say('initiate phase three')
 
 
 def load_csv(filename):
