@@ -275,7 +275,7 @@ class MCOCTools:
             positions = []
             for r in roles:
                 positions.append('{} = {}'.format(r.position, r.name))
-            em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
+            em.add_field(name='Role Position on Server',value='\n'.join(positions),inline=False)
         await self.bot.say(embed=em)
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
