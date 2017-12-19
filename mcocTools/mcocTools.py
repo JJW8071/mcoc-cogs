@@ -282,12 +282,13 @@ class MCOCTools:
         await self.bot.edit_message(message,embed=em)
 
         message2 = await self.bot.say('Stage 2: Create Channels')
-        make_channels = ('Alliance Chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw', 'announcements')
+        make_channels = ('Alliance Chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw')
+        await self.bot.create_channel(server=server, name='Announcments', type=discord.ChannelType.text)
         await self.bot.create_channel(server=server, name='Alliance', type=discord.ChannelType.category)
         for chan in make_channels:
             await self.bot.create_channel(server=server, name=chan, type=discord.ChannelType.text)
 
-        await self.bot.edit_message('Stage 2: Channels:\n{}'.join('\n#{} ', c.name for c in server.channels))
+        await self.bot.edit_message(message2, 'Stage 2: Channels:\n{}'.join('\n#{} ', c.name for c in server.channels))
 
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
