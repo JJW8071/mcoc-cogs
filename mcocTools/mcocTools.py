@@ -255,19 +255,19 @@ class MCOCTools:
         roles = server.roles
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
         await self.bot.say('Stage 1: Creating roles')
-        if 'admin' is not in roles:
+        if 'admin' not in roles:
             admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
-        if 'officers' is not in roles:
+        if 'officers' not in roles:
             officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
-        if 'bg1' is not in roles:
+        if 'bg1' not in roles:
             bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
-        if 'bg2' is not in roles:
+        if 'bg2' not in roles:
             bg2 = await self.bot.create_role(server=server, name='bg2', color=discord.Color.purple(), hoist=False, mentionable=True)
-        if 'bg3' is not in roles:
+        if 'bg3' not in roles:
             bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
-        if 'alliance' is not in roles:
+        if 'alliance' not in roles:
             alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
-        if 'summoners' is not in roles:
+        if 'summoners' not in roles:
             summoners = await self.bot.create_role(server=server, name='Summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
 
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
