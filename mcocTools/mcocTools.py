@@ -306,7 +306,7 @@ class MCOCTools:
         channelnames=[]
         for c in channels:
             channelnames.append('\n{} = #{} '.format(c.position, c.name))
-        em = discord.Embed(discord.Color.red(), title='Guild Alliance Popup System', description='')
+        em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
         await self.bot.send_message(embed=em)
 
