@@ -272,10 +272,10 @@ class MCOCTools:
 
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         em = discord.Embed(color=discord.Color.red(), title='Stage 1 Role Creation', description='')
-            positions = []
-            for r in roles:
-                positions.append('{} = {}'.format(r.position, r.name))
-            em.add_field(name='Role Position on Server',value='\n'.join(positions),inline=False)
+        positions = []
+        for r in roles:
+            positions.append('{} = {}'.format(r.position, r.name))
+        em.add_field(name='Role Position on Server',value='\n'.join(positions),inline=False)
         await self.bot.say(embed=em)
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
