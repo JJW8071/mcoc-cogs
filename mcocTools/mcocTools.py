@@ -287,8 +287,8 @@ class MCOCTools:
         make_channels = ('Alliance Chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw')
         if 'Announcements' not in channellist:
             await self.bot.create_channel(server=server, name='Announcments', type=discord.ChannelType.text)
-        if 'Alliance Chatter' not in channellist:
-            await self.bot.create_channel(server=server, name='Alliance Chatter', type=discord.ChannelType.text)
+        # if 'Alliance Chatter' not in channellist:
+        #     await self.bot.create_channel(server=server, name='Alliance Chatter', type=discord.ChannelType.text)
         if 'bg1aq' not in channellist:
             await self.bot.create_channel(server=server, name='bg1aq', type=discord.ChannelType.text)
         if 'bg1aw' not in channellist:
