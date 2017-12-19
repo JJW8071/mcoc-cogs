@@ -255,10 +255,10 @@ class MCOCTools:
         roles = server.roles
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance']
         await self.bot.say('Stage 1: Creating roles')
-        discord.PermissionOverwrite(read_messages=False)
-        adminPerms = discord.PermissionsOverwrite(administrator=True)
-        officerPerms = discord.PermissionOverwrite(read_messages=True, manage_server=True, manage_roles=True, kick_members=True, ban_members=True, manage_channels=True)
-        alliancePerms = discord.PermissionOverwrite(read_messages=True)
+        server.PermissionOverwrite(read_messages=False)
+        adminPerms = server.PermissionsOverwrite(administrator=True)
+        officerPerms = server.PermissionOverwrite(read_messages=True, manage_server=True, manage_roles=True, kick_members=True, ban_members=True, manage_channels=True)
+        alliancePerms = server.PermissionOverwrite(read_messages=True)
         admin = await self.bot.create_role(server=server, name='admin', permissions=adminPerms, color=discord.Color.yellow(), hoist=False, mentionable=False)
         officers = await self.bot.create_role(server=server, name='officers', permissions=officerPerms, color=discord.Color.light_grey(), hoist=False, mentionable=True)
         bg1 = await self.bot.create_role(server=server, name='bg1', permissions=None , color=discord.Color.blue(), hoist=False, mentionable=True)
