@@ -257,7 +257,7 @@ class MCOCTools:
         for r in roles:
             rolenames.append('{}'.format(r.name))
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance', 'summoners']
-        message = await self.bot.say('Stage 1: Creating roles')
+        # message = await self.bot.say('Stage 1: Creating roles')
         if 'admin' not in rolenames:
             admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
         if 'officers' not in rolenames:
@@ -279,7 +279,7 @@ class MCOCTools:
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.name))
         em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
-        await self.bot.edit_message(message,embed=em)
+        await self.bot.say(embed=em)
 
         channellist = []
         for c in server.channels:
@@ -308,7 +308,7 @@ class MCOCTools:
             channelnames.append('\n{} = #{} '.format(c.position, c.name))
         em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
-        await self.bot.send_message(embed=em)
+        await self.bot.say(embed=em)
 
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
