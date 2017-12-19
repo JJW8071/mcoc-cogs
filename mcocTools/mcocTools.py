@@ -277,13 +277,13 @@ class MCOCTools:
         em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         positions = []
         for r in roles:
-            positions.append('{} = {}'.format(r.position, r.name))
+            positions.append('{} = {}'.format(r.position, r.mention))
         em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
         await self.bot.say(embed=em)
 
         channellist = []
         for c in server.channels:
-            channellist.append(c.name)
+            channellist.append(c.mention)
         make_channels = ('announcements', 'alliance-chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw')
         if 'announcements' not in channellist:
             await self.bot.create_channel(server=server, name='announcements', type=discord.ChannelType.text)
@@ -302,10 +302,10 @@ class MCOCTools:
         if 'bg3aw' not in channellist:
             await self.bot.create_channel(server=server, name='bg3aw', type=discord.ChannelType.text)
 
-        channels= sorted(server.channels, key=lambda channels:channels.position, reverse=True)
+        channels= sorted(server.channels, key=lambda channels:channels.position, reverse=False)
         channelnames=[]
         for c in channels:
-            channelnames.append('\n{} = #{} '.format(c.position, c.name))
+            channelnames.append('\n{} = {} '.format(c.position, c.name))
         em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
         await self.bot.say(embed=em)
