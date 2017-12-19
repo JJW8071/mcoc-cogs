@@ -265,7 +265,7 @@ class MCOCTools:
         bg2 = await self.bot.create_role(server=server, name='bg2', color=discord.Color.purple(), hoist=False, mentionable=True)
         bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
         alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
-        summoners = await self.bot.create_role(server=server, name='Summoners', color=discord.Color.white(), hoist=True, mentionable=True)
+        summoners = await self.bot.create_role(server=server, name='Summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
     # async def collectorsetup(self,ctx,*args):
