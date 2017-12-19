@@ -291,9 +291,9 @@ class MCOCTools:
         channels= sorted(server.channels, key=lambda channels:channels.position, reverse=True)
         channelnames=[]
         for c in channels:
-            channelnames.append('{} = #{} '.format(c.position, c.name)
+            channelnames.append('{} = #{} '.format(c.position, c.name))
 
-        await self.bot.edit_message(message2, 'Stage 2: Channels:\n{}'.join(channelnames))
+        await self.bot.edit_message(message2, 'Stage 2: Channels:\n{}'.format(join(channelnames)))
 
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
