@@ -253,8 +253,8 @@ class MCOCTools:
         '''Guild | Alliance Popup System'''
         server = ctx.message.server
         everyone_perms = discord.PermissionOverwrite(target=server.default_role, read_messages = False)
-        summoner_perms = discord.PermissionsOverwrite(read_messages = True)
-        alliance_perms = discord.PermissionsOverwrite(read_messages = True)
+        summoner_perms = discord.PermissionOverwrite(read_messages = True)
+        alliance_perms = discord.PermissionOverwrite(read_messages = True)
         alliance_perms.change_nickname = True
         officer_perms = discord.PermissionOverwrite(read_messages = True)
         officer_perms.manage_server = True
