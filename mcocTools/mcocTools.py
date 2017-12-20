@@ -252,19 +252,7 @@ class MCOCTools:
     async def _alliance_popup(self, ctx, *args):
         '''Guild | Alliance Popup System'''
         server = ctx.message.server
-        everyone_perms = discord.PermissionOverwrite(target=server.default_role, read_messages = False)
-        summoner_perms = discord.PermissionOverwrite(read_messages = True)
-        alliance_perms = discord.PermissionOverwrite(read_messages = True)
-        alliance_perms.change_nickname = True
-        officer_perms = discord.PermissionOverwrite(read_messages = True)
-        officer_perms.manage_server = True
-        officer_perms.manage_roles = True
-        officer_perms.kick_members = True
-        officer_perms.ban_members = True
-        officer_perms.manage_nicknames = True
-        officer_perms.manage_webhooks = True
-        officer_perms.view_audit_logs = True
-        admin_perms = discord.PermissionOverwrite(administrator = True)
+
 
         roles = server.roles
         rolenames = []
@@ -273,9 +261,9 @@ class MCOCTools:
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance', 'summoners']
         # message = await self.bot.say('Stage 1: Creating roles')
         if 'admin' not in rolenames:
-            admin = await self.bot.create_role(server=server, name='admin', permissions=admin_perms, color=discord.Color.gold(), hoist=False, mentionable=False)
+            admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
         if 'officers' not in rolenames:
-            officers = await self.bot.create_role(server=server, name='officers', permissions=officer_perms, color=discord.Color.light_grey(), hoist=False, mentionable=True)
+            officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
         if 'bg1' not in rolenames:
             bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
         if 'bg2' not in rolenames:
@@ -283,9 +271,11 @@ class MCOCTools:
         if 'bg3' not in rolenames:
             bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
         if 'alliance' not in rolenames:
-            alliance = await self.bot.create_role(server=server, name='alliance', permissions=alliance_perms, color=discord.Color.teal(), hoist=True, mentionable=True)
+            alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
         if 'summoners' not in rolenames:
-            summoners = await self.bot.create_role(server=server, name='summoners', permissions=summoner_perms, color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
+            summoners = await self.bot.create_role(server=server, name='summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
+
+
 
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
@@ -306,6 +296,20 @@ class MCOCTools:
                 summoners = r
             elif r.name == 'admin':
                 admin = r
+
+        everyone_perms = discord.PermissionOverwrite(target=server.default_role, read_messages = False)
+        summoner_perms = discord.PermissionOverwrite(target=summoner, read_messages = True)
+        alliance_perms = discord.PermissionOverwrite(target = alliance, read_messages = True)
+        alliance_perms.change_nickname = True
+        officer_perms = discord.PermissionOverwrite(target=officers, read_messages = True)
+        officer_perms.manage_server = True
+        officer_perms.manage_roles = True
+        officer_perms.kick_members = True
+        officer_perms.ban_members = True
+        officer_perms.manage_nicknames = True
+        officer_perms.manage_webhooks = True
+        officer_perms.view_audit_logs = True
+        admin_perms = discord.PermissionOverwrite(target=admin, administrator = True)
 
         em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
         await self.bot.say(embed=em)
