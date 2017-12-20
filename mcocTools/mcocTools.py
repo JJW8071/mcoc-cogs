@@ -352,7 +352,7 @@ class MCOCTools:
         em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
         await self.bot.say(embed=em)
 
-        em = discord.Embed(color=ctx.message.author.Color, titel= 'Guild Alliance Popup System', descritpion='')
+        em = discord.Embed(color=ctx.message.author.color, titel= 'Guild Alliance Popup System', descritpion='')
 
         # fixNotifcations = await self.bot.say('Stage 3: Attempting to set Default Notification to Direct Message Only')
         try:
