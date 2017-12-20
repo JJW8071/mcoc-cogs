@@ -252,6 +252,20 @@ class MCOCTools:
     async def _alliance_popup(self, ctx, *args):
         '''Guild | Alliance Popup System'''
         server = ctx.message.server
+        everyone_perms = discord.PermissionOverwrite(target=server.default_role, read_messages = False)
+        summoner_perms = discord.PermissionsOverwrite(read_messages = True)
+        alliance_perms = discord.PermissionsOverwrite(read_messages = True)
+        alliance_perms.change_nickname = True
+        officer_perms = discord.PermissionOverwrite(read_messages = True)
+        officer_perms.manage_server = True
+        officer_perms.manage_roles = True
+        officer_perms.kick_members = True
+        officer_perms.ban_members = True
+        officer_perms.manage_nicknames = True
+        officer_perms.manage_webhooks = True
+        officer_perms.view_audit_logs = True
+        admin_perms = discord.PermissionOverwrite(administrator = True)
+
         roles = server.roles
         rolenames = []
         for r in roles:
@@ -259,9 +273,9 @@ class MCOCTools:
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance', 'summoners']
         # message = await self.bot.say('Stage 1: Creating roles')
         if 'admin' not in rolenames:
-            admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
+            admin = await self.bot.create_role(server=server, name='admin', permissions=admin_perms, color=discord.Color.gold(), hoist=False, mentionable=False)
         if 'officers' not in rolenames:
-            officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
+            officers = await self.bot.create_role(server=server, name='officers', permissions=officer_perms, color=discord.Color.light_grey(), hoist=False, mentionable=True)
         if 'bg1' not in rolenames:
             bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
         if 'bg2' not in rolenames:
@@ -269,38 +283,61 @@ class MCOCTools:
         if 'bg3' not in rolenames:
             bg3 = await self.bot.create_role(server=server, name='bg3', color=discord.Color.orange(), hoist=False, mentionable=True)
         if 'alliance' not in rolenames:
-            alliance = await self.bot.create_role(server=server, name='alliance', color=discord.Color.teal(), hoist=True, mentionable=True)
+            alliance = await self.bot.create_role(server=server, name='alliance', permissions=alliance_perms, color=discord.Color.teal(), hoist=True, mentionable=True)
         if 'summoners' not in rolenames:
-            summoners = await self.bot.create_role(server=server, name='summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
+            summoners = await self.bot.create_role(server=server, name='summoners', permissions=summoner_perms, color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
 
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.mention))
+            if r.name = 'officers':
+                officers = r
+            elif r.name = 'bg1':
+                bg1 = r
+            elif r.name = 'bg2':
+                bg2 = r
+            elif r.name = 'bg3':
+                bg3 = r
+            elif r.name = 'alliance':
+                alliance = r
+            elif r.name = 'summoners':
+                summoners = r
+            elif r.name = 'admin':
+                admin = r
+
         em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
         await self.bot.say(embed=em)
+
+
+        officerbg_perms = discord.PermissionOverwrite(target=officers, read_messages=True)
+        alliancechat_perms = discord.PermissionOverwrite(target=alliance, read_messages=True)
+        summonerchat_perms = discord.PermissionOverwrite(target=summoners, read_messages=True)
+        bg1_perms = discord.PermissionOverwrite(target=bg1, read_messages=True)
+        bg2_perms = discord.PermissionOverwrite(target=bg2, read_messages=True)
+        bg3_perms = discord.PermissionOverwrite(target=bg3, read_messages=True)
 
         channellist = []
         for c in server.channels:
             channellist.append(c.name)
         make_channels = ('announcements', 'alliance-chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw')
         if 'announcements' not in channellist:
-            await self.bot.create_channel(server=server, name='announcements', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='announcements', type=discord.ChannelType.text, everyone_perms, summonerchat_perms, alliancechat_perms)
         if 'alliance-chatter' not in channellist:
-            await self.bot.create_channel(server=server, name='alliance-chatter', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='alliance-chatter', type=discord.ChannelType.text, everyone_perms, alliancechat_perms)
         if 'bg1aq' not in channellist:
-            await self.bot.create_channel(server=server, name='bg1aq', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='bg1aq', type=discord.ChannelType.text, officerbg_perms, bg1_perms)
         if 'bg1aw' not in channellist:
-            await self.bot.create_channel(server=server, name='bg1aw', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='bg1aw', type=discord.ChannelType.text, officerbg_perms, bg1_perms)
         if 'bg2aq' not in channellist:
-            await self.bot.create_channel(server=server, name='bg2aq', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='bg2aq', type=discord.ChannelType.text, officerbg_perms, bg2_perms)
         if 'bg2aw' not in channellist:
-            await self.bot.create_channel(server=server, name='bg2aw', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='bg2aw', type=discord.ChannelType.text, officerbg_perms, bg2_perms)
         if 'bg3aq' not in channellist:
-            await self.bot.create_channel(server=server, name='bg3aq', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='bg3aq', type=discord.ChannelType.text, officerbg_perms, bg2_perms)
         if 'bg3aw' not in channellist:
-            await self.bot.create_channel(server=server, name='bg3aw', type=discord.ChannelType.text)
+            await self.bot.create_channel(server=server, name='bg3aw', type=discord.ChannelType.text, officerbg_perms, bg2_perms)
 
         channels= sorted(server.channels, key=lambda channels:channels.position, reverse=False)
         channelnames=[]
