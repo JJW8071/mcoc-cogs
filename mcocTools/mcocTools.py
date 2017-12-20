@@ -352,12 +352,15 @@ class MCOCTools:
         em.add_field(name='Stage 2 Create Channels',value='\n'.join(channelnames),inline=False)
         await self.bot.say(embed=em)
 
-        fixNotifcations = await self.bot.say('Attempting to set Default Notification to Direct Message Only')
+        em = discord.Embed(color=ctx.message.author.Color, titel= 'Guild Alliance Popup System', descritpion='')
+
+        # fixNotifcations = await self.bot.say('Stage 3: Attempting to set Default Notification to Direct Message Only')
         try:
             # mentions only
             payload = {'default_message_notifications': 1}
             await self.bot.http.request(discord.http.Route('PATCH', '/guilds/{guild_id}', guild_id=server.id), json=payload)
-            await self.bot.edit_message(fixNotifcations, "I've modified the servers I can to use better notification settings")
+            em.add_field(name='Stage 3: Notification Settings', value='I have modified the servers to use better notification settings.')
+            # await self.bot.edit_message(fixNotifcations, "Stage 3: I have modified the servers I can to use better notification settings")
         except Exception as e:
             await self.bot.edit_message(fixNotifcations, "An exception occurred. check your log.")
 
