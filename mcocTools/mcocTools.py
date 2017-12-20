@@ -364,7 +364,8 @@ class MCOCTools:
         except Exception as e:
             await self.bot.edit_message(fixNotifcations, "An exception occurred. check your log.")
 
-
+        em.add_field(value='Server Owner Instructions', value='Enroll a channel for Collector announcements\n```/addchan #announcements```\n')
+        await self.bot.say(embed=em)
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
