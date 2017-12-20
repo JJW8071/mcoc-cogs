@@ -271,9 +271,9 @@ class MCOCTools:
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance', 'summoners']
         # message = await self.bot.say('Stage 1: Creating roles')
         if 'admin' not in rolenames:
-            admin = await self.bot.create_role(server=server, name='admin', adminpermissions, color=discord.Color.gold(), hoist=False, mentionable=False)
+            admin = await self.bot.create_role(server=server, name='admin', permissions=adminpermissions, color=discord.Color.gold(), hoist=False, mentionable=False)
         if 'officers' not in rolenames:
-            officers = await self.bot.create_role(server=server, name='officers', moderatorpermissions, color=discord.Color.light_grey(), hoist=False, mentionable=True)
+            officers = await self.bot.create_role(server=server, name='officers', permissions=moderatorpermissions, color=discord.Color.light_grey(), hoist=False, mentionable=True)
         if 'bg1' not in rolenames:
             bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
         if 'bg2' not in rolenames:
