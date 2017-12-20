@@ -316,7 +316,7 @@ class MCOCTools:
         if 'announcements' not in channellist:
             await self.bot.create_channel(server, 'announcements', everyoneperms, allianceperms, summonerperms)
         if 'alliance-chatter' not in channellist:
-            await self.bot.create_channel(server, 'alliance-chatter', erveryoneperms, allianceperms)
+            await self.bot.create_channel(server, 'alliance-chatter', everyoneperms, allianceperms)
         if 'officers' not in channellist:
             await self.bot.create_channel(server, 'officers', everyoneperms, officerperms)
         if 'bg1aq' not in channellist:
