@@ -326,9 +326,8 @@ class MCOCTools:
             channellist.append(c.name)
         if 'announcements' not in channellist:
             await self.bot.create_channel(server, 'announcements', everyoneperms, allianceperms, summonerperms)
-        if 'alliance' not in channellist:
-            await self.bot.create_channel(server, 'alliance-chatter', type=discord.ChannelType.category)
-            # , everyoneperms, allianceperms)
+        # if 'alliance' not in channellist:
+        #     await self.bot.create_channel(server, 'alliance', everyoneperms, allianceperms)
         if 'alliance-chatter' not in channellist:
             await self.bot.create_channel(server, 'alliance-chatter', everyoneperms, allianceperms)
         if 'officers' not in channellist:
