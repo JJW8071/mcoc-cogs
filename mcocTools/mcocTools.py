@@ -298,7 +298,7 @@ class MCOCTools:
                 admin = r
 
         everyone_perms = discord.PermissionOverwrite(target=server.default_role, read_messages = False)
-        summoner_perms = discord.PermissionOverwrite(target=summoner, read_messages = True)
+        summoner_perms = discord.PermissionOverwrite(target=summoners, read_messages = True)
         alliance_perms = discord.PermissionOverwrite(target = alliance, read_messages = True)
         alliance_perms.change_nickname = True
         officer_perms = discord.PermissionOverwrite(target=officers, read_messages = True)
