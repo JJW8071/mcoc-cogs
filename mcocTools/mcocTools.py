@@ -304,7 +304,7 @@ class MCOCTools:
         readperm = discord.PermissionOverwrite(read_messages = True)
         officerperms = discord.ChannelPermissions(target=officers, overwrite=readperm)
         allianceperms = discord.ChannelPermissions(target=alliance, overwrite=readperm)
-        summonerperms = discord.ChannelPermissions(target=summoner, overwrite=readperm)
+        summonerperms = discord.ChannelPermissions(target=summoners, overwrite=readperm)
         bg1perms = discord.ChannelPermissions(target=bg1, overwrite=readperm)
         bg2perms = discord.ChannelPermissions(target=bg2, overwrite=readperm)
         bg3perms = discord.ChannelPermissions(target=bg3, overwrite=readperm)
