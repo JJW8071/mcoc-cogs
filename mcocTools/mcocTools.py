@@ -292,19 +292,19 @@ class MCOCTools:
         positions = []
         for r in roles:
             positions.append('{} = {}'.format(r.position, r.mention))
-            if r.name = 'officers':
+            if r.name == 'officers':
                 officers = r
-            elif r.name = 'bg1':
+            elif r.name == 'bg1':
                 bg1 = r
-            elif r.name = 'bg2':
+            elif r.name == 'bg2':
                 bg2 = r
-            elif r.name = 'bg3':
+            elif r.name == 'bg3':
                 bg3 = r
-            elif r.name = 'alliance':
+            elif r.name == 'alliance':
                 alliance = r
-            elif r.name = 'summoners':
+            elif r.name == 'summoners':
                 summoners = r
-            elif r.name = 'admin':
+            elif r.name == 'admin':
                 admin = r
 
         em.add_field(name='Stage 1 Role Creation',value='\n'.join(positions),inline=False)
