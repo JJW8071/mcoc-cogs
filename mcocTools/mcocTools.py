@@ -314,23 +314,23 @@ class MCOCTools:
             channellist.append(c.name)
         make_channels = ('announcements', 'alliance-chatter', 'bg1aq', 'bg1aw', 'bg2aq', 'bg2aw', 'bg3aq', 'bg3aw', 'officers')
         if 'announcements' not in channellist:
-            await self.bot.create_channel(server=server, name='announcements', type=discord.ChannelType.text, everyoneperms, allianceperms, summonerperms)
+            await self.bot.create_channel(server, 'announcements', everyoneperms, allianceperms, summonerperms)
         if 'alliance-chatter' not in channellist:
-            await self.bot.create_channel(server=server, name='alliance-chatter', type=discord.ChannelType.text, erveryoneperms, allianceperms)
+            await self.bot.create_channel(server, 'alliance-chatter', erveryoneperms, allianceperms)
         if 'officers' not in channellist:
-            await self.bot.create_channel(server=server, name='officers', type=discord.ChannelType.text, everyoneperms, officerperms)
+            await self.bot.create_channel(server, 'officers', everyoneperms, officerperms)
         if 'bg1aq' not in channellist:
-            await self.bot.create_channel(server=server, name='bg1aq', type=discord.ChannelType.text, everyoneperms, officerperms, bg1perms)
+            await self.bot.create_channel(server, 'bg1aq', everyoneperms, officerperms, bg1perms)
         if 'bg1aw' not in channellist:
-            await self.bot.create_channel(server=server, name='bg1aw', type=discord.ChannelType.text, everyoneperms, officerperms, bg1perms)
+            await self.bot.create_channel(server, 'bg1aw', everyoneperms, officerperms, bg1perms)
         if 'bg2aq' not in channellist:
-            await self.bot.create_channel(server=server, name='bg2aq', type=discord.ChannelType.text, everyoneperms, officerperms, bg2perms)
+            await self.bot.create_channel(server, 'bg2aq', everyoneperms, officerperms, bg2perms)
         if 'bg2aw' not in channellist:
-            await self.bot.create_channel(server=server, name='bg2aw', type=discord.ChannelType.text, everyoneperms, officerperms, bg2perms)
+            await self.bot.create_channel(server, 'bg2aw', everyoneperms, officerperms, bg2perms)
         if 'bg3aq' not in channellist:
-            await self.bot.create_channel(server=server, name='bg3aq', type=discord.ChannelType.text, everyoneperms, officerperms, bg3perms)
+            await self.bot.create_channel(server, 'bg3aq', everyoneperms, officerperms, bg3perms)
         if 'bg3aw' not in channellist:
-            await self.bot.create_channel(server=server, name='bg3aw', type=discord.ChannelType.text, everyoneperms, officerperms, bg2perms)
+            await self.bot.create_channel(server, 'bg3aw', everyoneperms, officerperms, bg2perms)
 
         channels= sorted(server.channels, key=lambda channels:channels.position, reverse=False)
         channelnames=[]
