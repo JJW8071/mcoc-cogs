@@ -366,8 +366,8 @@ class MCOCTools:
 
         await self.bot.say(embed=em)
         em = discord.Embed(color=ctx.message.author.color, titel= 'Guild Alliance Popup System', descritpion='Server Owner Instructions')
-        em.add_field(name='Enroll for Collector announcements', value='Enroll a channel for Collector announcements\n```/addchan #announcements```\n')
-        em.add_field(name='Set up Autorole', value='Default Role should be {}\n```/autorole role summoners```\n/autorole toggle '.format(summoners.mention))
+        em.add_field(name='Enroll for Collector announcements', value='Enroll a channel for Collector announcements\n```/addchan #announcements```\n', inline=False)
+        em.add_field(name='Set up Autorole', value='Default Role should be {}\n```/autorole role summoners```\n```/autorole toggle``` '.format(summoners.mention), inline=False)
         await self.bot.say(embed=em)
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
