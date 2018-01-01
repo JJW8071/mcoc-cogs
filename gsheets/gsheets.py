@@ -80,7 +80,7 @@ class GSheets:
             self.gc = GSheetsClient(credentials)
 
     @checks.mod_or_permissions(manage_messages=True)
-    @commands.command(pass_context=True, no_pm=True, name='showsheet')
+    @commands.command(pass_context=True, no_pm=True, name='showsheet', hidden=True)
     async def list_sheets(self, ctx, privacy: str=SERVER):
         '''Return a list of sheet names added previously'''
         if self.gc is None:
