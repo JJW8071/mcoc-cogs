@@ -96,10 +96,7 @@ class GSheets:
             await self.bot.say("Invalid privacy option. Must be `global`, `server` or `channel`.")
             return
         names = self.sheets[scope]
-        namelist = []
-        for key in names.keys():
-            namelist.append('\n{}'.format(key))
-        await self.bot.say(''.format(join(namelist)))
+        await self.bot.say('\n{}'.format(k) for k in names.keys())
 
 
     @checks.mod_or_permissions(manage_messages=True)
