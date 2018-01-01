@@ -79,6 +79,29 @@ class GSheets:
         if credentials and not credentials.invalid:
             self.gc = GSheetsClient(credentials)
 
+    @checks.mmod_or_permissions(manage_messages=True)
+    @commands.command(pass_context=True, no_pm=True, hidden=True)
+    async def sheets(self, ctx, privacy: str=SERVER)
+        '''Return a list of sheet names added previously'''
+        if self.gc is None:
+            await self.bot.say('There are no sheets registered.')
+            return
+        channel = ctx.message.channels
+            if channel.is_private:
+                server_id= None
+            else:
+                server_id = channel.server.id
+        scope = self.get_scope(privacy, channel.id, server_id)
+        if scope is None:
+            await self.bot.say("Invalid privacy option. Must be `global`, `server` or `channel`.")
+            return
+        names = self.sheets[scope]
+        namelist = []
+        for key in names.keys():
+            namelist.append('\n{}'.format(key))
+        await self.bot.say(join(namelist))
+
+
     @checks.mod_or_permissions(manage_messages=True)
     @commands.command(pass_context=True, no_pm=True)
     async def addsheet(self, ctx: commands.Context, name: str, url: str, privacy: str=SERVER):
