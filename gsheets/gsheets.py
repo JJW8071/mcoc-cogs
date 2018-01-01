@@ -99,7 +99,7 @@ class GSheets:
         namelist = []
         for key in names.keys():
             namelist.append('\n{}'.format(key))
-        await self.bot.say(join(namelist))
+        await self.bot.say(''.format(join(namelist)))
 
 
     @checks.mod_or_permissions(manage_messages=True)
