@@ -86,7 +86,7 @@ class GSheets:
         if self.gc is None:
             await self.bot.say('There are no sheets registered.')
             return
-        channel = ctx.message.channels
+        channel = ctx.message.channel
         if channel.is_private:
             server_id= None
         else:
