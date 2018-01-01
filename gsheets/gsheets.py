@@ -79,7 +79,7 @@ class GSheets:
         if credentials and not credentials.invalid:
             self.gc = GSheetsClient(credentials)
 
-    @checks.mmod_or_permissions(manage_messages=True)
+    @checks.mod_or_permissions(manage_messages=True)
     @commands.command(pass_context=True, no_pm=True, hidden=True)
     async def sheets(self, ctx, privacy: str=SERVER):
         '''Return a list of sheet names added previously'''
