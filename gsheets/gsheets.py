@@ -92,6 +92,7 @@ class GSheets:
         else:
             server_id = channel.server.id
         scope = self.get_scope(privacy, channel.id, server_id)
+        await self.bot.say(scope)
         if scope is None:
             await self.bot.say("Invalid privacy option. Must be `global`, `server` or `channel`.")
             return
