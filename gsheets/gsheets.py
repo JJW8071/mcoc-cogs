@@ -80,8 +80,8 @@ class GSheets:
             self.gc = GSheetsClient(credentials)
 
     @checks.mod_or_permissions(manage_messages=True)
-    @commands.command(pass_context=True, no_pm=True, hidden=True)
-    async def sheets(self, ctx, privacy: str=SERVER):
+    @commands.command(pass_context=True, no_pm=True, name='showsheet')
+    async def list_sheets(self, ctx, privacy: str=SERVER):
         '''Return a list of sheet names added previously'''
         if self.gc is None:
             await self.bot.say('There are no sheets registered.')
