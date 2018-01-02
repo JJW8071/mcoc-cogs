@@ -56,7 +56,7 @@ class MCOCMaps:
                 #await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, aliases=['lolteam, kiryu'])
-    async def lolteams(self, ctx, *):
+    async def lolteams(self, ctx, *, team: int = 1):
         '''Highly Effective LOL Teams'''
         maxkiryu = 5
         page_list = []
@@ -68,7 +68,7 @@ class MCOCMaps:
             em.set_image(url=imgurl)
             em.set_footer(text='Art: CollectorDevTeam Plan: Kiryu',)
             page_list.append(em)
-        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maxkiryu-1))
+        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=team)
 
     @commands.command(pass_context=True, aliases=('aw'))
     async def warmap(self, ctx):
