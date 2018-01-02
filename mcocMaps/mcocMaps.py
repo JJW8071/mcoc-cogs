@@ -68,7 +68,7 @@ class MCOCMaps:
             em.set_image(url=imgurl)
             em.set_footer(text='Art: CollectorDevTeam Plan: Kiryu',)
             page_list.append(em)
-        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=team)
+        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=team-1)
 
     @commands.command(pass_context=True, aliases=('aw'))
     async def warmap(self, ctx):
