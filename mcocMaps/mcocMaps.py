@@ -63,7 +63,7 @@ class MCOCMaps:
         for i in range(1, 5):
             imgurl = '{}kiryu{}.png'.format(self.basepath, i)
             print(imgurl)
-            imgtitle = 'Labyrinth of Legends: Kiryu\'s Teams'
+            imgtitle = 'Labyrinth of Legends: Kiryu\'s Teams #{}'.format(i)
             em = discord.Embed(color=discord.Color.gold(),title=imgtitle)
             em.set_image(url=imgurl)
             em.set_footer(text='Art: CollectorDevTeam Plan: Kiryu',)
