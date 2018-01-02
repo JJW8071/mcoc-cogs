@@ -60,7 +60,7 @@ class MCOCMaps:
         '''Highly Effective LOL Teams'''
         maxkiryu = 5
         page_list = []
-        for i in range(1, 5):
+        for i in range(1, maxkiryu+1):
             imgurl = '{}kiryu{}.png'.format(self.basepath, i)
             print(imgurl)
             imgtitle = 'Labyrinth of Legends: Kiryu\'s Teams #{}'.format(i)
