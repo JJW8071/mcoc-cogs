@@ -55,6 +55,23 @@ class MCOCMaps:
             await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maptype))
                 #await self.bot.say(embed=em)
 
+    @commands.command(pass_context=True, aliases=['lolteam, kiryu'])
+    async def lolteams(self, ctx, *):
+        '''Select an LOL Team
+            LOL maps: 0, 1, 2, 3, 4, 5, 6, 7
+            /lol 5'''
+        maxkiryu = 5
+        page_list = []
+        for i in range(1, 5):
+            imgurl = '{}kiryu{}.png'.format(self.basepath, i)
+            print(mapurl)
+            imgtitle = 'Labyrinth of Legends: Kiryu\'s Teams'])
+            em = discord.Embed(color=discord.Color.gold(),title=imgtitle)
+            em.set_image(url=imgurl)
+            em.set_footer(text='Art: CollectorDevTeam Plan: Kiryu',)
+            page_list.append(em)
+        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maxkiryu-1))
+
     @commands.command(pass_context=True, aliases=('aw'))
     async def warmap(self, ctx):
         '''Alliance War 2.0 Map'''
