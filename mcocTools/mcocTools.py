@@ -252,8 +252,8 @@ class MCOCTools:
     async def _alliance_popup(self, ctx, *args):
         '''Guild | Alliance Popup System'''
         server = ctx.message.server
-        adminpermissions = discord.administrator=True
-        moderatorpermissions = discord.manage_roles=True
+        adminpermissions = discord.PermissionOverwrite(administrator=True)
+        moderatorpermissions = discord.PermissionOverwrite(manage_roles=True)
         moderatorpermissions.manage_server=True
         moderatorpermissions.kick_members=True
         moderatorpermissions.ban_members=True
@@ -271,9 +271,9 @@ class MCOCTools:
         aroles = ['officers', 'bg1', 'bg2', 'bg3', 'alliance', 'summoners']
         # message = await self.bot.say('Stage 1: Creating roles')
         if 'admin' not in rolenames:
-            admin = await self.bot.create_role(server=server, name='admin', permissions=adminpermissions, color=discord.Color.gold(), hoist=False, mentionable=False)
+            admin = await self.bot.create_role(server=server, name='admin', color=discord.Color.gold(), hoist=False, mentionable=False)
         if 'officers' not in rolenames:
-            officers = await self.bot.create_role(server=server, name='officers', permissions=moderatorpermissions, color=discord.Color.light_grey(), hoist=False, mentionable=True)
+            officers = await self.bot.create_role(server=server, name='officers', color=discord.Color.light_grey(), hoist=False, mentionable=True)
         if 'bg1' not in rolenames:
             bg1 = await self.bot.create_role(server=server, name='bg1', color=discord.Color.blue(), hoist=False, mentionable=True)
         if 'bg2' not in rolenames:
