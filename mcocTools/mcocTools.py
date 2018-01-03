@@ -144,7 +144,7 @@ class MCOCTools:
         embed.add_field(name="discord.py", value=dpy_version)
         embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name='DuelsPartner',value='superflu0us#4587',inline=True)
-        embed.add_field(name='LabyrinthPartner',value='Kiryu#5755',inline=True)
+        embed.add_field(name='LabyrinthPartner',value='Kiryu#5755\nre-1#7595',inline=True)
         embed.add_field(name='MapsPartner',value='jpags#5202',inline=True)
         embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
         embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
@@ -177,69 +177,69 @@ class MCOCTools:
         x = 'event'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
         x = 'spotlight'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['rttl'][0],)
     async def rttl(self):
         x = 'rttl'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['marvelsynergy'][0])
     async def marvelsynergy(self):
         x = 'marvelsynergy'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
     async def simulator(self):
         x = 'simulator'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
     async def alsciende(self):
         x = 'alsciende'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['streak'][0])
     async def streak(self):
         x='streak'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
         x = 'hook'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
-        await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
-    @commands.command()
-    async def keygen(self, prefix='SDCC17'):
-        '''SDCC Code Generator
-        No warranty :)'''
-        letters='ABCDEFGHIJKLMNOPQURSTUVWXYZ'
-        numbers='0123456789'
-        package = []
-        for i in range(0,9):
-            lets='{}{}{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(numbers),random.choice(numbers),random.choice(letters),random.choice(letters))
-            package.append(prefix+lets)
-        em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
-        await self.bot.say(embed=em)
+    # @commands.command()
+    # async def keygen(self, prefix='SDCC17'):
+    #     '''SDCC Code Generator
+    #     No warranty :)'''
+    #     letters='ABCDEFGHIJKLMNOPQURSTUVWXYZ'
+    #     numbers='0123456789'
+    #     package = []
+    #     for i in range(0,9):
+    #         lets='{}{}{}{}{}{}'.format(random.choice(letters),random.choice(letters),random.choice(numbers),random.choice(numbers),random.choice(letters),random.choice(letters))
+    #         package.append(prefix+lets)
+    #     em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
+    #     await self.bot.say(embed=em)
 
     def _get_text(self, mastery, rank):
         rows = csv_get_rows(self.dataset,'Mastery',mastery)
