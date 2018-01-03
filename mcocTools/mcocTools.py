@@ -252,8 +252,8 @@ class MCOCTools:
     async def _alliance_popup(self, ctx, *args):
         '''Guild | Alliance Popup System'''
         server = ctx.message.server
-        adminpermissions = discord.PermissionOverwrite(administrator=True)
-        moderatorpermissions = discord.PermissionOverwrite(manage_roles=True)
+        adminpermissions = discord.administrator=True
+        moderatorpermissions = discord.manage_roles=True
         moderatorpermissions.manage_server=True
         moderatorpermissions.kick_members=True
         moderatorpermissions.ban_members=True

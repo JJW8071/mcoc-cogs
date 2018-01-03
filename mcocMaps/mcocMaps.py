@@ -50,7 +50,7 @@ class MCOCMaps:
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em.set_image(url=mapurl)
-                em.set_footer(text='Art: CollectorDevTeam Plan: Kiryu',)
+                em.set_footer(text='Art: CollectorDevTeam, Plan: LabyrinthTeam',)
                 page_list.append(em)
             await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maptype))
                 #await self.bot.say(embed=em)
@@ -66,7 +66,7 @@ class MCOCMaps:
             imgtitle = 'Labyrinth of Legends: Kiryu\'s Teams #{}'.format(i)
             em = discord.Embed(color=discord.Color.gold(),title=imgtitle)
             em.set_image(url=imgurl)
-            em.set_footer(text='Art: CollectorDevTeam Plan: Kiryu',)
+            em.set_footer(text='Art: CollectorDevTeam Plan: LabyrinthTeam',)
             page_list.append(em)
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=team-1)
 
