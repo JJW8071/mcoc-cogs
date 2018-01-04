@@ -962,11 +962,11 @@ class MCOC(ChampionFactory):
             # print(effectsused)
             combined = {}
             desc= []
+            embed.add_field(name='test', value=' '.join(collectoremojis))
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
                 if embed is not None:
-                    embed.add_field(name=''.join(collectoremojis))
                     embed.add_field(name=synlist[k]['synergyname'],value=txt,inline=False)
                 else:
                     desc.append('{}\n{}\n'.format(synlist[k]['synergyname'],txt))
