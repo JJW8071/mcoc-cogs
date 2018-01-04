@@ -904,6 +904,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
+
         '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:M1'
@@ -940,6 +941,8 @@ class MCOC(ChampionFactory):
         activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            collectoremojis = []
             effectsused = defaultdict(list)
             for champ in champs:
                 for s in synlist: #try this with .keys()
@@ -954,6 +957,7 @@ class MCOC(ChampionFactory):
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
                                     activated.add(lookup)
+                                    collectoremojis.add(xref['collectoremoji'])
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
@@ -962,6 +966,7 @@ class MCOC(ChampionFactory):
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
                 if embed is not None:
+                    embed.add_field(name=''.join(collectoremojis))
                     embed.add_field(name=synlist[k]['synergyname'],value=txt,inline=False)
                 else:
                     desc.append('{}\n{}\n'.format(synlist[k]['synergyname'],txt))
