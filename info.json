@@ -1,7 +1,7 @@
 {
-    "AUTHOR" : "JJW",
+    "AUTHOR" : "JJW & DeltaSigma (CollectorDevTeam)",
     "INSTALL_MSG" : "Thanks for installing our repo.  mcoc is a cog for Marvel's Contest of Champions",
     "NAME" : "mcoc-cogs",
-    "SHORT" : "Redbot Cogs designed for Alliance Management in Marvel's Contest of Champions",
-    "DESCRIPTION" : "TBD :)s"
+    "SHORT" : "Collector Cogs designed for Alliance Management in Marvel's Contest of Champions",
+    "DESCRIPTION" : "This repo contains a suite of cogs designed to power Collector, a RED instance.\nThe mcoc-cogs provide character data, user roster management tools, and alliance management tools for Marvel Contest of Champions."
 }
