@@ -965,7 +965,8 @@ class MCOC(ChampionFactory):
             # print(effectsused)
             combined = {}
             desc= []
-            embed.add_field(name='', value=''.join(collectoremojis))
+            # embed.add_field(name='', value=''.join(collectoremojis))
+            embed.description = ''.join(collectoremojis)
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
