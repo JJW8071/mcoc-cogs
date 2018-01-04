@@ -941,10 +941,10 @@ class MCOC(ChampionFactory):
         activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
-            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             collectoremojis = []
             effectsused = defaultdict(list)
             for champ in champs:
+                xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
                 for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
