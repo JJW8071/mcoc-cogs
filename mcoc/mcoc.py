@@ -957,12 +957,15 @@ class MCOC(ChampionFactory):
                                     effectsused[s].append(effect)
                                     txt = champ_synergies[lookup]['text'].format(*effect)
                                     activated.add(lookup)
-                                    collectoremojis.append(xref['collectoremoji'])
+                                    collectoremoji=xref['collectoremoji']
+                                    if collectoremoji in collectoremojis:
+                                        continue
+                                    collectoremojis.append(collectoremoji)
                                 # synergy_package.append(txt)
             # print(effectsused)
             combined = {}
             desc= []
-            embed.add_field(name='test', value=' '.join(collectoremojis))
+            embed.add_field(name='test', value=''.join(collectoremojis))
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
