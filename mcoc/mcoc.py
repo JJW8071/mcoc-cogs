@@ -945,10 +945,7 @@ class MCOC(ChampionFactory):
             effectsused = defaultdict(list)
             for champ in champs:
                 xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-                if xref['collectoremoji'] in collectoremojis:
-                    continue
-                else:
-                    collectoremojis.append(xref['collectoremoji'])
+                collectoremojis.append(xref['collectoremoji'])
                 for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
