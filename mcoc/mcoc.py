@@ -50,6 +50,8 @@ data_files = {
     }
 
 GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
+PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -873,7 +875,7 @@ class MCOC(ChampionFactory):
         '''Champion(s) Base Stats'''
         for champ in champs:
             data = champ.get_spotlight(default='x')
-            em = discord.Embed(color=champ.class_color, title='')
+            em = discord.Embed(color=champ.class_color, title='',url=SPOTLIGHT_SURVEY)
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
             keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
@@ -1127,7 +1129,7 @@ class MCOC(ChampionFactory):
         '''Champion Spotlight link'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
-        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight')
+        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',url=SPOTLIGHT_SURVEY)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name=champ.full_name, value='No URL found')
@@ -1200,9 +1202,10 @@ class MCOC(ChampionFactory):
             emtitle='Prestige: {}'.format(numerator/denom+1)
         else:
             emtitle = 'Prestige'
-        em = discord.Embed(color=discord.Color.magenta(), title=emtitle,
+        em = discord.Embed(color=discord.Color.magenta(), title=emtitle,url=PRESTIGE_SURVEY,
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
+        em.set_footer(icon_url='https://www.fresnostate.edu/president/discovere/images/improvedlogos/unnamed.png',text='mutamatt Prestige for Collector')
         await self.bot.say(embed=em)
 
     @champ.command(name='aliases', aliases=('alias',))
