@@ -28,6 +28,7 @@ logger.setLevel(logging.INFO)
 def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
 
+PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
@@ -438,7 +439,7 @@ class ChampionRoster:
         embeds = []
         if not filtered:
             em = discord.Embed(title='User', description=user.name,
-                    color=discord.Color.gold())
+                    color=discord.Color.gold(), url=PRESTIGE_SURVEY)
             em.add_field(name='Tags used filtered to an empty roster',
                     value=' '.join(tags))
             await self.bot.say(embed=em)
