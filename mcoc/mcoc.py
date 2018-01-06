@@ -50,6 +50,7 @@ data_files = {
     }
 
 GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffeOzKiaeQeqoUgaESknK-QpXTYV2GdJgbxQkeCjoSajuLjafKdJ5imE1ADPYeoh8QkAr/pubhtml?gid=1483787822&single=true'
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 
@@ -823,7 +824,7 @@ class MCOC(ChampionFactory):
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
-                    title='Release Dates & Est. Pull Chance')
+                    title='Release Dates & Est. Pull Chance',url=SPOTLIGHT_DATASET)
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
             em.add_field(name='4'+star_glyph+' Basic & \nPremium Hero Crystal', value=xref['4basic'],inline=False)
@@ -875,7 +876,7 @@ class MCOC(ChampionFactory):
         '''Champion(s) Base Stats'''
         for champ in champs:
             data = champ.get_spotlight(default='x')
-            em = discord.Embed(color=champ.class_color, title='',url=SPOTLIGHT_SURVEY)
+            em = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
             keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
