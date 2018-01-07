@@ -53,6 +53,7 @@ GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBu
 SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffeOzKiaeQeqoUgaESknK-QpXTYV2GdJgbxQkeCjoSajuLjafKdJ5imE1ADPYeoh8QkAr/pubhtml?gid=1483787822&single=true'
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
+COLLECTOR_ICON='https://images-ext-1.discordapp.net/external/drzqadqtDB3udEqQ-wOcOfNLZFpF7HR05_iiTieI2uQ/https/raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_collector.png'
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -904,6 +905,7 @@ class MCOC(ChampionFactory):
         else:
             em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         em = await self.get_synergies(champs, embed=em)
+        em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
     async def get_synergies(self, champs : ChampConverterMult, embed=None):
