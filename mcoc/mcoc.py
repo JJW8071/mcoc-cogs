@@ -1121,10 +1121,13 @@ class MCOC(ChampionFactory):
         '''How to Fight With videos by MCOC Community'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            em = discord.Embed(color=champ.class_color, title='How-To-Use:', url='https://goo.gl/forms/VXSQ1z40H4Knia0t2')
             if xref['infovideo'] != '':
-                await self.bot.say('How to Fight with {} by {}\n{}'.format(champ.full_name, xref['vidcredit'], xref['infovideo']))
+                em.add_field(name=champ.full_name, value=xref['infovideo'])
             else:
-                await self.bot.say('I got nothing. Send the CollectorDevTeam a good video.')
+                em.add_field(name=champ.full_name, value='I got nothing. Send the CollectorDevTeam a good video.\nClick the blue text for a survey link.')
+            em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
+            await self.bot.say(embed=em)
 
 
     @champ.command(name='info', aliases=('infopage',))
