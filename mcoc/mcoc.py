@@ -753,13 +753,8 @@ class MCOC(ChampionFactory):
                         targets.append( '{}{} {} {} : {}'.format(star, star_glyph, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
             em.description='\n'.join(targets)
-            # em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
-                # em.add_field(name='{} Target'.format(names[star]),
-                #         value='\n'.join(k for k in targets[star]), inline=False)
         else:
-            em.add_field(name='Target not found',
-                    value='\n'.join(['Add one to the Community Spreadhseet!',
-                            '[bit.ly/DuelTargetForm](http://bit.ly/DuelTargetForm)']))
+            em.description='Target not found!\nAdd one to the Community Spreadhseet!\n[bit.ly/DuelTargetForm](http://bit.ly/DuelTargetForm)'
             em.url='http://bit.ly/DuelTargetForm'
         em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
