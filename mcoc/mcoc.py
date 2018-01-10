@@ -738,7 +738,8 @@ class MCOC(ChampionFactory):
         # targets = defaultdict(list)
         targets = []
         # names = {4: 'Duel', 5: 'Sparring'}
-        em = discord.Embed(color=champ.class_color, title='')
+        DUEL_SPREADSHEET='https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/view#gid=61189525'
+        em = discord.Embed(color=champ.class_color, title='Duel & Spart Targets',url=DUEL_SPREADSHEET)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='superflu0us\' Duel Targets',
@@ -758,6 +759,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Target not found',
                     value='\n'.join(['Add one to the Community Spreadhseet!',
                             '[bit.ly/DuelTargetForm](http://bit.ly/DuelTargetForm)']))
+            em.url='http://bit.ly/DuelTargetForm'
         em.add_field(name='Shortcode', value=champ.short, inline=False)
         await self.bot.say(embed=em)
 
