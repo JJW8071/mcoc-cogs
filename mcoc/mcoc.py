@@ -752,7 +752,8 @@ class MCOC(ChampionFactory):
                     if data['username'] != 'none':
                         targets.append( '{}{} {} {} : {}'.format(star, star_glyph, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
-            em.add_field(name='', value='\n'.join(targets),inline=False)
+            em.description='\n'.join(targets)
+            # em.add_field(name='Duel Targets', value='\n'.join(targets),inline=False)
                 # em.add_field(name='{} Target'.format(names[star]),
                 #         value='\n'.join(k for k in targets[star]), inline=False)
         else:
