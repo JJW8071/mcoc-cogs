@@ -66,7 +66,7 @@ class MCOCTools:
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
                 '<http://simians.tk/MCoCspotlight>',
-                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[MCOC Spotlight on Discord](https://discord.gg/wJqpYGS)'),
+                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[MCOC Spotlight on Discord](https://discord.gg/BwhgZxk)'),
             'marvelsynergy': (
                 '<http://www.marvelsynergy.com/team-builder>',
                 '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
@@ -80,10 +80,10 @@ class MCOCTools:
             'simulator': (
                 '<http://simians.tk/msimSDF>',
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
-            'streak': (
-                '<http://simians.tk/-sdf-streak>'
-                '[Infinite Streak](http://simians.tk/-sdf-streak)'),
-                #'http://simians.tk/SDFstreak')
+            # 'streak': (
+            #     '<http://simians.tk/-sdf-streak>'
+            #     '[Infinite Streak](http://simians.tk/-sdf-streak)'),
+            #     #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
@@ -214,12 +214,12 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
-    @commands.command(help=lookup_links['streak'][0])
-    async def streak(self):
-        x='streak'
-        lookup = self.lookup_links[x]
-        await self.bot.say(embed=self.present(lookup))
-        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+    # @commands.command(help=lookup_links['streak'][0])
+    # async def streak(self):
+    #     x='streak'
+    #     lookup = self.lookup_links[x]
+    #     await self.bot.say(embed=self.present(lookup))
+    #     # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
