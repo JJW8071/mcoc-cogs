@@ -409,6 +409,8 @@ class ChampionFactory():
             kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
         for a in kwargs['hashtags'].split('#'):
             kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
+        for a in kwargs['extended_abilities'].split('#'):
+            kwargs['class_tags'].add('#' + ''.join(a.lower().split(' ')))
         if kwargs['class_tags']:
             kwargs['class_tags'].difference_update({'#'})
 
