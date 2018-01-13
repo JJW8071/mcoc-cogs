@@ -296,4 +296,4 @@ def check_files():
 def setup(bot):
     check_folders()
     check_files()
-    bot.add_cog(brownie(bot))
+    bot.add_cog(Brownie(bot))
