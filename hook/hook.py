@@ -63,10 +63,10 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            try:
-                embeds = await Hook.roster_kickback(self.ctx, user.color)
-                await Hook.pages_menu(self, self.ctx, embeds)
-            except:
+            # try:
+            #     embeds = await Hook.roster_kickback(self.ctx, user.color)
+            #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
+            # except:
                 await self.ctx.bot.say('No roster detected.  \nUse ``profile`` for import instructions.')
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
 
