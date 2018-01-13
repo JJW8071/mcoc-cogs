@@ -94,7 +94,7 @@ class Brownie:
         await self.bot.say(msg)
 
     @commands.command(pass_context=True, no_pm=True)
-    async def nom(self,ctx)
+    async def nom(self,ctx):
         '''Eat a brownie'''
         author=ctx.message.author
         settings=self.check_server_settings(author.server)
