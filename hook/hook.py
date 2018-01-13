@@ -63,15 +63,11 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            embeds = await Hook.roster_kickback(user.color)
-            await Hook.pages_menu(self, self.ctx, embeds)
-            # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
-            # em.add_field(name='Missing Roster',
-            #         value='Load up a "champ*.csv" file from Hook to import your roster')
-            # em.add_field(name='Hook Web App', value=HOOK_URL)
-            # em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            # await self.ctx.bot.say(embed=em)
-            # raise MissingRosterError('No Roster found for {}'.format(user.name))
+            try:
+                embeds = await Hook.roster_kickback(user.color)
+                await Hook.pages_menu(self, self.ctx, embeds)
+            except:
+                await self.bot.say('No roster detected.  \nUse ``profile`` for import instructions.')
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
 
 class HashtagRankConverter(commands.Converter):
