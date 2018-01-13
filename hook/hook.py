@@ -549,7 +549,7 @@ class Hook:
         em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
         em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
         embeds.append(em3)
-        await self.pages.menu(ctx, embed_list=embeds)
+        await self.pages_menu(ctx, embed_list=embeds)
 
 
 
