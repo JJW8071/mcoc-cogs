@@ -497,11 +497,15 @@ class Hook:
             embeds.append(em2)
             em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
             em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
-            embeds.append(em)
+            rating=0
+            for champ in roster:
+                rating = rating + champ.pi
+            em3.add_field(name='Total Hero Rating',value='{}'.format(rating)
+            embeds.append(em3)
         else:
             em=discord.Embed(color=user.color, title='Champion CSV template', url='https://goo.gl/LaFrg7')
             em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
-            em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)')
+            em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
             em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em)
             em2=discord.Embed(color=user.color,title='Import from Hook',url=HOOK_URL)
@@ -510,7 +514,7 @@ class Hook:
             embeds.append(em2)
             em3=discord.Embed(color=user.color,title='Import from Hook',url=HOOK_URL)
             em3.add_field(name='iOS + Hook instructions',value='1. Go to Hook/Champions webapp (blue text)\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV > Copy Text from Safari\n5. In Google Sheets App > paste\n6. Download as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
-            em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)')
+            em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
             em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em3)
         await self.pages_menu(ctx, embed_list=embeds)
