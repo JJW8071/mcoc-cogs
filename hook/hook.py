@@ -478,12 +478,10 @@ class Hook:
 
     @commands.command(pass_context=True)
     #async def profile(self, roster: RosterUserConverter):
-    async def profile(self, ctx, user : discord.User = None):
+    async def profile(self, ctx, user=''):
         """Displays a user profile."""
-        if user is None:
-            user=ctx.message.author
-        ucolor = user.color
         roster = await RosterUserConverter(ctx, user).convert()
+        user = roster.user
         embeds = []
         if roster:
             em = discord.Embed(color=discord.Color.gold(),title='Prestige: {}'.format(roster.prestige))
