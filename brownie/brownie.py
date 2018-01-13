@@ -72,8 +72,8 @@ class Brownie:
             msg = "Cooldown needs to be higher than 0."
         await self.bot.say(msg)
 
-    @commands.command(pass_context=True, no_pm=True)
-    async def give(self, ctx, user: discord.Member, brownies: int):
+    @commands.command(pass_context=True, no_pm=True, aliases=['giveb',])
+    async def givebrownie(self, ctx, user: discord.Member, brownies: int):
         """Gives another user your brownies"""
         author = ctx.message.author
         settings = self.check_server_settings(author.server)
