@@ -102,13 +102,13 @@ class Brownie:
         brownies = settings['Players'][author.id]['brownies']
         if brownies == 0:
             await self.bot.say('There are no brownies to eat.')
-        else if brownies > 0:
+        else if brownies >= 0:
             brownies -= 1
             settings['Players'][author.id]['brownies'] -= brownies
             dataIO.save_json(self.file_path, self.system)
-            if brownies > 1:
+            if brownies >= 1:
                 await self.bot.say('Nom nom nom.\nYou have {} brownie points remaining.')
-            else if brownies = 1
+            else if brownies == 1
                 await self.bot.say('Nom nom nom.\nYou have 1 brownie point remaining')
             else:
                 await self.bot.say('Nom nom nom.\nYou have no more brownie points')
@@ -135,7 +135,7 @@ class Brownie:
 
     @commands.command(pass_context=True, no_pm=False, ignore_extra=False)
     async def brownies(self, ctx):
-        """See how many brownies are in your jar."""
+        """See how many brownie points you have."""
         author = ctx.message.author
         server = ctx.message.server
         settings = self.check_server_settings(server)
