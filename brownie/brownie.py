@@ -129,9 +129,9 @@ class Brownie:
             settings["Players"][author.id]["brownies"] += brownies
             dataIO.save_json(self.file_path, self.system)
             if brownies > 1:
-                await self.bot.say("You found {} brownies!".format(brownies))
+                await self.bot.say("{} found {} brownies!".format(author.name, brownies))
             else:
-                await self.bot.say('You found 1 brownie!')
+                await self.bot.say('{} found 1 brownie!'.format(author.name))
 
     @commands.command(pass_context=True, no_pm=False, ignore_extra=False)
     async def brownies(self, ctx):
@@ -141,7 +141,7 @@ class Brownie:
         settings = self.check_server_settings(server)
         self.account_check(settings, author)
         brownies = settings["Players"][author.id]["brownies"]
-        await self.bot.say('You have **{}** brownie points.'.format(brownies))
+        await self.bot.whipser('You have **{}** brownie points.'.format(brownies))
 
     @commands.command(pass_context=True, no_pm=True)
     async def steal(self, ctx, user: discord.Member=None):
