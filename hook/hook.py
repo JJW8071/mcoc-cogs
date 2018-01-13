@@ -500,7 +500,7 @@ class Hook:
             rating=0
             for champ in roster:
                 rating = rating + champ.pi
-            em3.add_field(name='Total Hero Rating',value='{}'.format(rating)
+            em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
             embeds.append(em3)
         else:
             em=discord.Embed(color=user.color, title='Champion CSV template', url='https://goo.gl/LaFrg7')
