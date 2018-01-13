@@ -63,7 +63,8 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            await Hook.roster_kickback(self, self.ctx, user)
+            embeds =  Hook.roster_kickback(self, self.ctx, user)
+            await Hook.pages_menu(self, self.ctx, embeds)
             # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
             # em.add_field(name='Missing Roster',
             #         value='Load up a "champ*.csv" file from Hook to import your roster')
@@ -515,9 +516,9 @@ class Hook:
             #     rating = rating + roster[k].pi
             # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
             embeds.append(em3)
-            await self.pages_menu(ctx, embed_list=embeds)
         else:
-            await self.roster_kickback(ctx, user)
+            embeds = await self.roster_kickback(ctx, user)
+        await self.pages_menu(ctx, embed_list=embeds)
 
     async def roster_kickback(self, ctx, user : discord.User = None):
         embeds=[]
@@ -539,7 +540,7 @@ class Hook:
         em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
         em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
         embeds.append(em3)
-        await self.pages_menu(ctx, embed_list=embeds)
+        return embeds
 
 
 
