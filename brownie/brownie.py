@@ -100,7 +100,7 @@ class Brownie:
         settings=self.check_server_settings(author.server)
         self.account_check(settings, author)
         brownies = settings['Players'][author.id]['brownies']
-        if brownies = 0:
+        if brownies == 0:
             await self.bot.say('There are no brownies to eat.')
         else if brownies > 0:
             brownies -= 1
