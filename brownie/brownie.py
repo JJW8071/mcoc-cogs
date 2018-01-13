@@ -108,7 +108,7 @@ class Brownie:
             dataIO.save_json(self.file_path, self.system)
             if brownies >= 1:
                 await self.bot.say('Nom nom nom.\nYou have {} brownie points remaining.')
-            else if brownies == 1
+            else if brownies == 1:
                 await self.bot.say('Nom nom nom.\nYou have 1 brownie point remaining')
             else:
                 await self.bot.say('Nom nom nom.\nYou have no more brownie points')
