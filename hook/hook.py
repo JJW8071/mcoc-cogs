@@ -498,8 +498,9 @@ class Hook:
             em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
             em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
             total = 0
-            for champ in roster.roster:
-                total += champ.pi
+            #
+            # for champ in roster:
+            #     total += champ.pi
             em3.add_field(name='Total Hero Rating',value='{}'.format(total))
             em3.add_field(name='Cosmic ',value='TBD')
             em3.add_field(name='Mystic ',value='TBD')
