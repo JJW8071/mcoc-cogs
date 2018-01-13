@@ -67,9 +67,9 @@ class HashtagRosterConverter(commands.Converter):
             #     embeds = await Hook.roster_kickback(self.ctx, user.color)
             #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
             # except:
-            await self.ctx.bot.say('No roster detected.  \nUse ``profile`` for import instructions.')
+            await self.ctx.bot.say('No roster detected.  \nUse ``/profile`` for import instructions.')
 
-            # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name)) 
+            # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
             # em.add_field(name='Missing Roster',
             #         value='Load up a "champ*.csv" file from Hook to import your roster')
             # em.add_field(name='Hook Web App', value=HOOK_URL)
