@@ -128,7 +128,7 @@ class Brownie:
             brownies = random.choice(weighted_sample)
             settings["Players"][author.id]["brownies"] += brownies
             dataIO.save_json(self.file_path, self.system)
-            if brownie > 1:
+            if brownies > 1:
                 await self.bot.say("You found {} brownies!".format(brownies))
             else:
                 await self.bot.say('You found 1 brownie')
