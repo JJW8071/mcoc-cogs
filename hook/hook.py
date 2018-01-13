@@ -510,7 +510,7 @@ class Hook:
             embeds.append(em2)
             em3=discord.Embed(color=user.color,title='Import from Hook',url=HOOK_URL)
             em3.add_field(name='iOS + Hook instructions',value='1. Go to Hook/Champions webapp\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV > Copy Text from Safari\n5. In Google Sheets App > paste\n6. Download as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
-            em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)')
+            em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)')
             em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em3)
         await self.pages_menu(ctx, embed_list=embeds)
