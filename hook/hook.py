@@ -67,7 +67,7 @@ class HashtagRosterConverter(commands.Converter):
             #     embeds = await Hook.roster_kickback(self.ctx, user.color)
             #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
             # except:
-                await self.ctx.bot.say('No roster detected.  \nUse ``profile`` for import instructions.')
+            await self.ctx.bot.say('No roster detected.  \nUse ``profile`` for import instructions.')
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
 
 class HashtagRankConverter(commands.Converter):
