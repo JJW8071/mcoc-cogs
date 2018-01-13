@@ -63,7 +63,7 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            Hook.roster_kickback(self, self.ctx, self.ctx.message.author)
+            await Hook.roster_kickback(self, self.ctx)
             # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
             # em.add_field(name='Missing Roster',
             #         value='Load up a "champ*.csv" file from Hook to import your roster')
@@ -519,8 +519,10 @@ class Hook:
         else:
             await self.roster_kickback(ctx, user)
 
-    async def roster_kickback(self, ctx, user : discord.User):
+    async def roster_kickback(self, ctx, user : discord.User = None):
         embeds=[]
+        if user is None:
+            user = ctx.messaage.author
         em=discord.Embed(color=user.color, title='Champion CSV template', url='https://goo.gl/LaFrg7')
         em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
         em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
