@@ -63,7 +63,7 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            embeds = list(Hook.roster_kickback(user.color))
+            embeds = await Hook.roster_kickback(user.color)
             await Hook.pages_menu(self, self.ctx, embeds)
             # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
             # em.add_field(name='Missing Roster',
