@@ -63,7 +63,7 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            embeds =  Hook.roster_kickback(self, self.ctx, user)
+            embeds =  Hook.roster_kickback(self, self.ctx, user.color)
             await Hook.pages_menu(self, self.ctx, embeds)
             # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
             # em.add_field(name='Missing Roster',
@@ -517,25 +517,21 @@ class Hook:
             # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
             embeds.append(em3)
         else:
-            embeds = await self.roster_kickback(ctx, user)
+            embeds = await self.roster_kickback(ctx, user.color)
         await self.pages_menu(ctx, embed_list=embeds)
 
-    async def roster_kickback(self, ctx, user : discord.User = None):
+    async def roster_kickback(self, ctx, *, ucolor = discord.Color.gold()):
         embeds=[]
-        if user is None:
-            color = user.color
-        else:
-            color = discord.Color.gold()
-        em=discord.Embed(color=color, title='Champion CSV template', url='https://goo.gl/LaFrg7')
+        em=discord.Embed(color=ucolor, title='Champion CSV template', url='https://goo.gl/LaFrg7')
         em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
         em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
         em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
         embeds.append(em)
-        em2=discord.Embed(color=color,title='Import from Hook',url=HOOK_URL)
+        em2=discord.Embed(color=ucolor,title='Import from Hook',url=HOOK_URL)
         em2.add_field(name='Hook instructions',value='1. Go to Hook/Champions webapp (blue text)\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
         em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
         embeds.append(em2)
-        em3=discord.Embed(color=color,title='Import from Hook',url=HOOK_URL)
+        em3=discord.Embed(color=ucolor,title='Import from Hook',url=HOOK_URL)
         em3.add_field(name='iOS + Hook instructions',value='1. Go to Hook/Champions webapp (blue text)\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV > Copy Text from Safari\n5. In Google Sheets App > paste\n6. Download as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
         em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
         em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
