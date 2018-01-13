@@ -107,7 +107,7 @@ class Brownie:
             settings['Players'][author.id]['brownies'] -= brownies
             dataIO.save_json(self.file_path, self.system)
             if brownies >= 1:
-                await self.bot.say('Nom nom nom.\nYou have {} brownie points remaining.')
+                await self.bot.say('Nom nom nom.\nYou have {} brownie points remaining.'.format(brownies))
             elif brownies == 1:
                 await self.bot.say('Nom nom nom.\nYou have 1 brownie point remaining')
             else:
