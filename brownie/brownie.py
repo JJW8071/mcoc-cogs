@@ -141,7 +141,7 @@ class Brownie:
         settings = self.check_server_settings(server)
         self.account_check(settings, author)
         brownies = settings["Players"][author.id]["brownies"]
-        await self.bot.whipser('You have **{}** brownie points.'.format(brownies))
+        await self.bot.whisper('You have **{}** brownie points.'.format(brownies))
 
     @commands.command(pass_context=True, no_pm=True)
     async def steal(self, ctx, user: discord.Member=None):
