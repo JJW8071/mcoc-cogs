@@ -31,6 +31,7 @@ def _default(self, obj):
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
+HOOK_URL=HOOK_URL
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
 ### Done with patch
@@ -69,18 +70,18 @@ class HashtagRosterConverter(commands.Converter):
             em.set_author(name=user.name, icon_url=user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em)
-            em2=discord.Embed(color=discord.Color.green(),title='Import from Hook',url='http://hook.github.io/champions/#/roster')
+            em2=discord.Embed(color=discord.Color.green(),title='Import from Hook',url=HOOK_URL)
             em2.set_author(name = user.name,icon_url=user.avatar_url)
             em2.add_field(name='Hook instructions',value='1. Go to Hook/Champions webapp\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
             em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em2)
-            em3=discord.Embed(color=discord.Color.green(),title='Import from Hook',url='http://hook.github.io/champions/#/roster')
+            em3=discord.Embed(color=discord.Color.green(),title='Import from Hook',url=HOOK_URL)
             em3.set_author(name = user.name,icon_url=user.avatar_url)
             em3.add_field(name='iOS + Hook instructions',value='1. Go to Hook/Champions webapp\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV > Copy Text from Safari\n5. In Google Sheets App > paste\n6. Download as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
             em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)')
             em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em3)
-            await self.pages_menu(ctx, embed_list=embeds)
+            await self.Hook.pages_menu(ctx, embed_list=embeds)
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
 
 class HashtagRankConverter(commands.Converter):
@@ -516,12 +517,12 @@ class Hook:
             em.set_author(name=user.name, icon_url=user.avatar_url)
             em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em)
-            em2=discord.Embed(color=discord.Color.green(),title='Import from Hook',url='http://hook.github.io/champions/#/roster')
+            em2=discord.Embed(color=discord.Color.green(),title='Import from Hook',url=HOOK_URL)
             em2.set_author(name = user.name,icon_url=user.avatar_url)
             em2.add_field(name='Hook instructions',value='1. Go to Hook/Champions webapp\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
             em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
             embeds.append(em2)
-            em3=discord.Embed(color=discord.Color.green(),title='Import from Hook',url='http://hook.github.io/champions/#/roster')
+            em3=discord.Embed(color=discord.Color.green(),title='Import from Hook',url=HOOK_URL)
             em3.set_author(name = user.name,icon_url=user.avatar_url)
             em3.add_field(name='iOS + Hook instructions',value='1. Go to Hook/Champions webapp\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV > Copy Text from Safari\n5. In Google Sheets App > paste\n6. Download as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
             em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)')
