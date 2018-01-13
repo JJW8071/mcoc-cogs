@@ -64,7 +64,7 @@ class HashtagRosterConverter(commands.Converter):
         await chmp_rstr.load_champions()
         if not chmp_rstr:
             try:
-                embeds = await Hook.roster_kickback(user.color)
+                embeds = await Hook.roster_kickback(self, user.color)
                 await Hook.pages_menu(self, self.ctx, embeds)
             except:
                 await self.bot.say('No roster detected.  \nUse ``profile`` for import instructions.')
@@ -516,7 +516,7 @@ class Hook:
             embeds = await self.roster_kickback(user.color)
         await self.pages_menu(ctx, embed_list=embeds)
 
-    async def roster_kickback(ucolor = discord.Color.gold()):
+    async def roster_kickback(self, ucolor = discord.Color.gold()):
         embeds=[]
         em=discord.Embed(color=ucolor, title='Champion CSV template', url='https://goo.gl/LaFrg7')
         em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
