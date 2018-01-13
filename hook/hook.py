@@ -31,7 +31,7 @@ def _default(self, obj):
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
-HOOK_URL=HOOK_URL
+HOOK_URL='http://hook.github.io/champions/#/roster'
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
 ### Done with patch
