@@ -497,6 +497,13 @@ class Hook:
             embeds.append(em2)
             em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
             em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
+            em3.add_field(name='Total Hero Rating',value='TBD')
+            em3.add_field(name='Cosmic ',value='TBD')
+            em3.add_field(name='Mystic ',value='TBD')
+            em3.add_field(name='Science ',value='TBD')
+            em3.add_field(name='Skill ',value='TBD')
+            em3.add_field(name='Mutant ',value='TBD')
+            em3.add_field(name='Tech ',value='TBD')
             # rating=0
             # keys = roster.keys()
             # for k in keys:
