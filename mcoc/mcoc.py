@@ -1348,7 +1348,7 @@ class MCOC(ChampionFactory):
         worksheet = sh.worksheet(property='title',value='collector_submit')
         # champ	sig	kabam	star	rank
         level = int(champ.rank)*10
-        if champ.star = 5:
+        if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid)],[champ.sig],[observation],[champ.star],[champ.rank],[level]]
         worksheet.insertrows(row=1, number=1,values=package, inherit=False)
