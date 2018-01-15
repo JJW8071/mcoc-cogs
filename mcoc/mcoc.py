@@ -1164,7 +1164,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
         # await self.bot.say(embed=em2)
 
-    @champ.comman(name='specials', aliases=['special',])
+    @champ.command(name='specials', aliases=['special',])
     async def champ_specials(self, champ : ChampConverter):
         '''Special Attack Descritpion'''
         try:
