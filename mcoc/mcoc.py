@@ -1148,7 +1148,6 @@ class MCOC(ChampionFactory):
     @champ.command(name='abilities')
     async def champ_abilities(self, champ : ChampConverter):
         '''Champion Abilities'''
-        specials = champ.get_special_attacks()
         em = discord.Embed(color=champ.class_color, title='Champion Abilities')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         # em.add_field(name='Passive',value='placeholder')
@@ -1160,16 +1159,27 @@ class MCOC(ChampionFactory):
         em.add_field(name='Abilities', value='\n'.join(abilities))
         em.add_field(name='Hashtags', value='\n#'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
-        # em2 = discord.Embed(color=champ.class_color,
-        # title=champ.full_name + ' Special Attacks')
-        # em2.add_field(name=specials[0], value=specials[3])
-        # em2.add_field(name=specials[1], value=specials[4])
-        # em2.add_field(name=specials[2], value=specials[5])
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         # await self.bot.say(embed=em2)
 
+    @champ.comman(name='specials', aliases=['special',])
+    asyn def champ_specials(self, champ : ChampConverter):
+        '''Special Attack Descritpion'''
+        try:
+            specials = champ.get_special_attacks()
+            em discord.Embed(color=champ.class_color, title='Champion Special Attacks')
+            em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
+            em.add_field(name=specials[0], value=specials[3])
+            em.add_field(name=specials[1], value=specials[4])
+            em.add_field(name=specials[2], value=specials[5])
+            em.set_thumbnail(url=champ.get_avatar())
+            em.add_field(name='Shortcode', value=champ.short)
+            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            await self.bot.say(embed=em)
+        except:
+            await self.bot.say('Special Attack not found')
     # @commands.command()
     # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
     #     '''the Signature Ability of a Champion at multiple levels'''
