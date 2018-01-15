@@ -1319,7 +1319,7 @@ class MCOC(ChampionFactory):
                 #     await self.bot.delete_message(message)
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_prestige_submit(champ, observation)
+                await self._process_prestige_submit(champ, observation, ctx.message.author)
                 await self.bot.edit_message(message2, 'Submission complete.')
             #     try:
             #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
@@ -1337,7 +1337,7 @@ class MCOC(ChampionFactory):
         #     except:
         #         await self.bot.delete_message(message)
 
-    async def _process_prestige_submit(self, champ, observation):
+    async def _process_prestige_submit(self, champ, observation, author):
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1351,7 +1351,7 @@ class MCOC(ChampionFactory):
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level]]
+        package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level, author.name, author.id]]
         worksheet.insert_rows(row=1, number=1,values=package, inherit=False)
         worksheet.sync()
         return
