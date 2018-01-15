@@ -1318,8 +1318,9 @@ class MCOC(ChampionFactory):
                 # except:
                 #     await self.bot.delete_message(message)
             elif react.reaction.emoji == '🆗':
-                message2 = await self.bot.say('Submission in process')
+                message2 = await self.bot.say('Submission in process.')
                 await self._process_prestige_submit(champ, observation)
+                await self.bot.edit_message(message2, 'Submission complete.')
             #     try:
             #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
             #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
@@ -1350,7 +1351,7 @@ class MCOC(ChampionFactory):
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = ['{}'.format(champ.mattkraftid)],[champ.sig],[observation],[champ.star],[champ.rank],[level]
+        package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level]]
         worksheet.insert_rows(row=1, number=1,values=package, inherit=False)
         worksheet.sync()
         return
