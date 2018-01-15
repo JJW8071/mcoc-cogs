@@ -1294,6 +1294,25 @@ class MCOC(ChampionFactory):
     #def _prepare_signature_data(self):
         #raw_data = load_csv(local_files['sig_coeff'])
 
+    @commands.group(pass_context=True, aliases=['donate',], hidden=True)
+    async def submit(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @submit.command(pass_context=True, name='prestige')
+    async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
+        message = await self.bot.say('Submission registered.\nChampion: {}\nPrestige: {}\nPress OK to confirm.'.format(champ.verbose_str, prestige))
+        react = await self.bot.wait_for_reaction(message=message, emoji=':ok:',':no_entry_sign:',timeout=60)
+        if react is None:
+            await self.bot.say('Submission timeout. Entry canceled.')
+        elif react == ':no_entry_sign:':
+            await self.bot.say('Submission canceled.')
+        elif react == ':ok:':
+            await self.bot.say('Submission in process')
+
+
+
+
 def validate_attr(*expected_args):
     def decorator(func):
         def wrapper(self, *args, **kwargs):
