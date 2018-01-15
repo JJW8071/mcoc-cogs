@@ -1165,7 +1165,7 @@ class MCOC(ChampionFactory):
         # await self.bot.say(embed=em2)
 
     @champ.comman(name='specials', aliases=['special',])
-    asyn def champ_specials(self, champ : ChampConverter):
+    async def champ_specials(self, champ : ChampConverter):
         '''Special Attack Descritpion'''
         try:
             specials = champ.get_special_attacks()
