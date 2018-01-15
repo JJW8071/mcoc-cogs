@@ -1305,31 +1305,31 @@ class MCOC(ChampionFactory):
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
-        response = await self.bot.wait_for_message(author=ctx.message.author,timeout=30)
-        if react is None and response is None:
-            await self.bot.say('Submission timeout. Entry canceled.')
+        # response = await self.bot.wait_for_message(author=ctx.message.author,timeout=30)
+        # if react is None and response is None:
+        #     await self.bot.say('Submission timeout. Entry canceled.')
+        # else:
+        if react is not None:
+            if react.reaction.emoji == '❌':
+                await self.bot.say('Submission canceled.')
+                # try:
+                #     await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+                #     await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+                # except:
+                #     await self.bot.delete_message(message)
+            elif react.reaction.emoji == '🆗':
+                message2 = await self.bot.say('Submission in process')
+                await self._process_prestige_submit(champ, observation)
+            #     try:
+            #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+            #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+        # elif response is not None:
+        #     if response.content.lower() == 'yes':
+        #         message2 = await self.bot.say('Submission in process')
+        #     elif response.content.lower() == 'no':
+        #         message2 = await self.bot.say('Submission canceled')
         else:
-            if react is not None:
-                if react.reaction.emoji == '❌':
-                    await self.bot.say('Submission canceled.')
-                    # try:
-                    #     await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                    #     await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-                    # except:
-                    #     await self.bot.delete_message(message)
-                elif react.reaction.emoji == '🆗':
-                    message2 = await self.bot.say('Submission in process')
-                    await self._process_prestige_submit(champ, observation)
-                #     try:
-                #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-            elif response is not None:
-                if response.content.lower() == 'yes':
-                    message2 = await self.bot.say('Submission in process')
-                elif response.content.lower() == 'no':
-                    message2 = await self.bot.say('Submission canceled')
-            else:
-                await self.bot.say('Ambiguous response.  Submission canceled')
+            await self.bot.say('Ambiguous response.  Submission canceled')
         #     try:
         #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
         #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
@@ -1351,7 +1351,7 @@ class MCOC(ChampionFactory):
         if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid)],[champ.sig],[observation],[champ.star],[champ.rank],[level]]
-        worksheet.insertrows(row=1, number=1,values=package, inherit=False)
+        worksheet.insert_rows(row=1, number=1,values=package, inherit=False)
         worksheet.sync()
         return
 
