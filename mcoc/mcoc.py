@@ -1307,25 +1307,23 @@ class MCOC(ChampionFactory):
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
         if react.reaction.emoji == '❌':
             await self.bot.say('Submission canceled.')
-            try:
-                await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-            except:
-                await self.bot.delete_message(message)
+            # try:
+            #     await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+            #     await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+            # except:
+            #     await self.bot.delete_message(message)
         elif react.reaction.emoji == '🆗':
             message2 = await self.bot.say('Submission in process')
-            try:
-                await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-            except:
-                continue
+        #     try:
+        #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+        #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
         else:
             await self.bot.say('Submission timeout. Entry canceled.')
-            try:
-                await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-            except:
-                await self.bot.delete_message(message)
+        #     try:
+        #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+        #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+        #     except:
+        #         await self.bot.delete_message(message)
 
 def validate_attr(*expected_args):
     def decorator(func):
