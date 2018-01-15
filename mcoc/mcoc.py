@@ -1305,7 +1305,7 @@ class MCOC(ChampionFactory):
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
-        response = await self.bot.wait_for_message(user=ctx.message.author,timeout=30)
+        response = await self.bot.wait_for_message(author=ctx.message.author,timeout=30)
         if react is None and response is None:
             await self.bot.say('Submission timeout. Entry canceled.')
         else:
