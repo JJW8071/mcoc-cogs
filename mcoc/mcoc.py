@@ -1294,6 +1294,7 @@ class MCOC(ChampionFactory):
     #def _prepare_signature_data(self):
         #raw_data = load_csv(local_files['sig_coeff'])
 
+    @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
         if ctx.invoked_subcommand is None:
