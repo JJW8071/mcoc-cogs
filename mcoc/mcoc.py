@@ -1169,7 +1169,7 @@ class MCOC(ChampionFactory):
         '''Special Attack Descritpion'''
         try:
             specials = champ.get_special_attacks()
-            em discord.Embed(color=champ.class_color, title='Champion Special Attacks')
+            em = discord.Embed(color=champ.class_color, title='Champion Special Attacks')
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
             em.add_field(name=specials[0], value=specials[3])
             em.add_field(name=specials[1], value=specials[4])
