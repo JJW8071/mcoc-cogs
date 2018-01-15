@@ -1317,6 +1317,8 @@ class MCOC(ChampionFactory):
             try:
                 await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
                 await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+            except:
+                continue
         else:
             await self.bot.say('Submission timeout. Entry canceled.')
             try:
