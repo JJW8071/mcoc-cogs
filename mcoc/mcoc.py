@@ -1300,7 +1300,7 @@ class MCOC(ChampionFactory):
             await send_cmd_help(ctx)
 
     @submit.command(pass_context=True, name='prestige')
-    async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
+    async def submit_prestige(self, ctx, *, champ : ChampConverter, observation : int):
         message = await self.bot.say('Submission registered.\nChampion: {}\nPrestige: {}\nPress OK to confirm.'.format(champ.verbose_str, prestige))
         react = await self.bot.wait_for_reaction(message=message, emoji=':ok:',':no_entry_sign:',timeout=60)
         if react is None:
