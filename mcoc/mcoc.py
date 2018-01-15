@@ -1302,12 +1302,14 @@ class MCOC(ChampionFactory):
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
         message = await self.bot.say('Submission registered.\nChampion: {}\nPrestige: {}\nPress OK to confirm.'.format(champ.verbose_str, observation))
-        react = await self.bot.wait_for_reaction(message=message, emoji=[':ok:',':no_entry_sign:'],timeout=60)
+        await self.bot.add_reaction(message, '❌')
+        await self.bot.add_reaction(message, '🆗')
+        react = await self.bot.wait_for_reaction(message=message, user=msg.author, timeout=30, emoji=['❌', '🆗'])
         if react is None:
             await self.bot.say('Submission timeout. Entry canceled.')
-        elif react == ':no_entry_sign:':
+        elif react == '❌':
             await self.bot.say('Submission canceled.')
-        elif react == ':ok:':
+        elif react == '🆗':
             await self.bot.say('Submission in process')
 
 
