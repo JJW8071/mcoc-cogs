@@ -1297,6 +1297,9 @@ class MCOC(ChampionFactory):
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
+        if not check_guild(ctx):
+            await self.bot.say('This server is unauthorized.')
+            return
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
@@ -1338,13 +1341,13 @@ class MCOC(ChampionFactory):
         #     except:
         #         await self.bot.delete_message(message)
 
-    # async def check_guild(ctx)
-    #     authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
-    #     serverid = ctx.message.server.id
-    #     if serverid in authorized:
-    #         return TRUE
-    #     else
-    #         return FALSE
+    async def check_guild(ctx)
+        authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
+        serverid = ctx.message.server.id
+        if serverid in authorized:
+            return TRUE
+        else
+            return FALSE
 
     async def _process_prestige_submit(self, champ, observation, author):
         await self.update_local()
