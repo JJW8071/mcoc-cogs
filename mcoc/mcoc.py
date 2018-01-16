@@ -1364,7 +1364,7 @@ class MCOC(ChampionFactory):
         if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level, author.name, author.id]]
-        worksheet.insert_rows(row=1, number=1,values=package, inherit=False)
+        worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
 
