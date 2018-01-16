@@ -1346,7 +1346,7 @@ class MCOC(ChampionFactory):
         serverid = ctx.message.server.id
         if serverid in authorized:
             return TRUE
-        else
+        else:
             return FALSE
 
     async def _process_prestige_submit(self, champ, observation, author):
