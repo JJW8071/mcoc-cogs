@@ -1,5 +1,6 @@
 import discord
 import asyncio
+import urllib, json #For fetching JSON from alliancewar.com
 from discord.ext import commands
 
 class MCOCMaps:
@@ -79,6 +80,13 @@ class MCOCMaps:
         em.set_image(url=mapurl)
         em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
+
+    @commands.commnd(pass_context=True, hidden=True)
+    async def node_info(self, ctx, args):
+        nodelist = split(',', args)
+        for node in nodelist:
+            await self.bot.say('Node lookup: \'{}\''.format(node))
+
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
