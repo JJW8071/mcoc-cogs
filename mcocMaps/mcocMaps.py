@@ -82,7 +82,7 @@ class MCOCMaps:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, hidden=True)
-    async def node_info(self, ctx, args):
+    async def node_info(self, ctx, *, **args):
         nodelist = args.split(',')
         for node in nodelist:
             await self.bot.say('Node lookup: \'{}\''.format(node))
