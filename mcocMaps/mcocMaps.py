@@ -82,7 +82,14 @@ class MCOCMaps:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, hidden=True)
-    async def node_info(self, ctx, args : str):
+    async def boost_info(self, ctx, args : str):
+        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
+        with *.urllib.request.urlopen(boosturl) as url:
+            boosts = json.loads(url.read().decode())
+
+        keys = boosts.keys()
+        await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
+
         nodelist = args.split(',')
         for node in nodelist:
             await self.bot.say('Node lookup: \'{}\''.format(node))
