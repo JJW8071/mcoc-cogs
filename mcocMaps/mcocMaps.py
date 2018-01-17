@@ -81,7 +81,7 @@ class MCOCMaps:
         em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
 
-    @commands.commnd(pass_context=True, hidden=True)
+    @commands.command(pass_context=True, hidden=True)
     async def node_info(self, ctx, args):
         nodelist = split(',', args)
         for node in nodelist:
