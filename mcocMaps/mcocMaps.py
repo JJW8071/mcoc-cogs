@@ -97,7 +97,7 @@ class MCOCMaps:
             await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
         else:
             em = discord.Embed(color=ctx.message.author.color, title='Boost Info', descritpion='', url='www.alliancewar.com')
-            em.thumbnail(url='http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(boosts[boost]['img']))
+            em.set_thumbnail(url='http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(boosts[boost]['img']))
             em.add_field(name=boosts[boost]['title'], value=boosts[boost]['text'])
             em.footer(icon_url='',text='JPAG\'s AllianceWar.com')
             await self.bot.say(embed=em)
