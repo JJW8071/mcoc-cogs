@@ -8,6 +8,7 @@ from math import *
 from operator import attrgetter
 import os
 import time
+import datetime
 import inspect
 import aiohttp
 import logging
@@ -1299,7 +1300,6 @@ class MCOC(ChampionFactory):
 
     #def _prepare_signature_data(self):
         #raw_data = load_csv(local_files['sig_coeff'])
-    # @commands.check(check_guild())
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
@@ -1311,42 +1311,35 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
-        message = await self.bot.say('Submission registered.\nChampion: {}\nPrestige: {}\nPress OK to confirm.'.format(champ.verbose_str, observation))
+        message = await self.bot.say('Submission registered.\nChampion: {}★{}\nPrestige: {}\nPress OK to confirm.'.format(champ.star, champ.full_name, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
-        # response = await self.bot.wait_for_message(author=ctx.message.author,timeout=30)
-        # if react is None and response is None:
-        #     await self.bot.say('Submission timeout. Entry canceled.')
-        # else:
         if react is not None:
             if react.reaction.emoji == '❌':
                 await self.bot.say('Submission canceled.')
-                # try:
-                #     await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                #     await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-                # except:
-                #     await self.bot.delete_message(message)
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
                 await self._process_prestige_submit(champ, observation, ctx.message.author)
                 await self.bot.edit_message(message2, 'Submission complete.')
-            #     try:
-            #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-            #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-        # elif response is not None:
-        #     if response.content.lower() == 'yes':
-        #         message2 = await self.bot.say('Submission in process')
-        #     elif response.content.lower() == 'no':
-        #         message2 = await self.bot.say('Submission canceled')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
-        #     try:
-        #         await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-        #         await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-        #     except:
-        #         await self.bot.delete_message(message)
 
+    @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
+    async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str):
+        message await self.bot.say('Duel Target registered.\nChampion: {}★{}\nTarget: {}\nPress OK to confirm.'.format(champ.star, champ.full_name, observation))
+        await self.bot.add_reaction(message, '❌')
+        await self.bot.add_reaction(message, '🆗')
+        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+        if react is not None:
+            if react.reaction.emoji == '❌':
+                await self.bot.say('Submission canceled.')
+            elif react.reaction.emoji == '🆗':
+                message2 = await self.bot.say('Submission in process.')
+                await self._process_duel_submit(champ, observation, ctx.message.author)
+                await self.bot.edit_message(message2, 'Submission complete.')
+        else:
+            await self.bot.say('Ambiguous response.  Submission canceled')
     async def check_guild(self, ctx):
         authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
         serverid = ctx.message.server.id
@@ -1354,6 +1347,8 @@ class MCOC(ChampionFactory):
             return TRUE
         else:
             return FALSE
+
+
 
     async def _process_prestige_submit(self, champ, observation, author):
         await self.update_local()
@@ -1374,6 +1369,26 @@ class MCOC(ChampionFactory):
         worksheet.sync()
         return
 
+    async def _process_duel_submit(self, champ, observation, author):
+        await self.update_local()
+        try:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        except FileNotFoundError:
+            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+                    + gapi_service_creds)
+            return
+        sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
+        worksheet = sh.worksheet(property='title',value='surveyed')
+        # champ	sig	kabam	star	rank
+        ts = time.time()
+        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        level = int(champ.rank)*10
+        if champ.star == 5:
+            level += 15
+        package = [[st,author.name,champ.star+'★',champ.full_name, champ.rank, level, champ.pi, observation, author.id,'','Collector Submission']]
+        worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
+        worksheet.sync()
+        return
 
 
 def validate_attr(*expected_args):
