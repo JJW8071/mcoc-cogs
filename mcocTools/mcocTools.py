@@ -269,7 +269,6 @@ class MCOCTools:
                 return
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('G.A.P.S. in progess.')
-                continue
         else:
             await self.bot.say('Ambiguous response.  G.A.P.S. canceled')
             return
