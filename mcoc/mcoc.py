@@ -1350,7 +1350,7 @@ class MCOC(ChampionFactory):
         else:
             return False
 
-    async def _process_submit_prestige(self, ctx, champ, observation):
+    async def _process_submit_prestige(self, ctx, *, champ, observation):
         author = ctx.message.author
         level = int(champ.rank)*10
         if champ.star == 5:
@@ -1368,7 +1368,7 @@ class MCOC(ChampionFactory):
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
-    async def _process_submit_duel(self, ctx, champ, observation, pi):
+    async def _process_submit_duel(self, ctx, *, champ, observation, pi):
         author = ctx.message.author
         level = champ.rank*10
         if champ.star == 5:
