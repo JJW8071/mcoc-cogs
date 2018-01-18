@@ -1320,7 +1320,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_submit_prestige(champ, observation, ctx.message.author)
+                await self._process_submit_prestige(ctx, champ, observation)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1337,7 +1337,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_submit_duel(champ, observation, ctx.message.author, pi, now)
+                await self._process_submit_duel(ctx, champ, observation, pi)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1350,33 +1350,29 @@ class MCOC(ChampionFactory):
         else:
             return False
 
-    async def _process_submit_prestige(self, champ, observation, author):
-        await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-                    + gapi_service_creds)
-            return
+    async def _process_submit_prestige(self, ctx, champ, observation):
+        author = ctx.message.author
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level, author.name, author.id]]
 
+        await self.update_local()
+        try:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        except FileNotFoundError:
+            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+            + gapi_service_creds)
+            return
         sh = gc.open_by_key(key='1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc',returnas='spreadsheet')
         worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
 
-    async def _process_submit_duel(self, champ, observation, author, pi, now):
-        await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-                    + gapi_service_creds)
-            return
+    async def _process_submit_duel(self, ctx, champ, observation, pi):
+        now = ctx.message.timestamp
+        author = ctx.message.author
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
@@ -1385,6 +1381,13 @@ class MCOC(ChampionFactory):
         package = [[now, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         # print('submit package:')
         # print(' '.join(package[0]))
+        await self.update_local()
+        try:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        except FileNotFoundError:
+            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+            + gapi_service_creds)
+            return
         sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
         worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
