@@ -1327,7 +1327,7 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
     async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str):
-        message await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
+        message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
