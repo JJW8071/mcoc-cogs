@@ -1136,12 +1136,12 @@ class MCOC(ChampionFactory):
         '''Champion Spotlight link'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
-        em = discord.Embed(color=champ.class_color, title='Kabam Spotlight',url=SPOTLIGHT_SURVEY)
+        em = discord.Embed(color=champ.class_color, title='Champ Info',url=SPOTLIGHT_SURVEY)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
-            em.add_field(name=champ.full_name, value='No URL found')
+            em.add_field(name='Kabam Spotlight', value='No URL found')
         else:
-            em.add_field(name=champ.full_name, value=champ.infopage)
+            em.add_field(name='Kabam Spotlight', value=champ.infopage)
         if xref['royal_writeup'] != '':
             em.add_field(name='Royal Writeup', value=xref['royal_writeup'])
         em.add_field(name='Shortcode', value=champ.short)
