@@ -8,7 +8,6 @@ from math import *
 from operator import attrgetter
 import os
 import time
-import datetime
 import inspect
 import aiohttp
 import logging
@@ -1382,12 +1381,13 @@ class MCOC(ChampionFactory):
         sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
         worksheet = sh.worksheet(property='title',value='surveyed')
         # champ	sig	kabam	star	rank
-        ts = time.time()
-        st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        # ts = time.time()
+        # st = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d %H:%M:%S')
+        now = datetime.now()
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = [[st, author.name, '{}★'.format(champ.star), champ.full_name, champ.rank, level, champ.pi, str(observation), author.id,'','Collector Submission']]
+        package = [[now, author.name, '{}★'.format(champ.star), champ.full_name, champ.rank, level, champ.pi, str(observation), author.id,'','Collector Submission']]
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
