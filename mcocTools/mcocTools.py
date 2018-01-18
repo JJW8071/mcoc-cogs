@@ -286,7 +286,7 @@ class MCOCTools:
                 self.bot.remove_reaction(message, '❌')
                 self.bot.remove_reaction(message, '🆗')
             except:
-                continue:
+                continue
 
         server = ctx.message.server
         adminpermissions = discord.PermissionOverwrite(administrator=True)
