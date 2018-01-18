@@ -5,6 +5,9 @@ import os
 from .utils.dataIO import dataIO
 from discord.ext import commands
 
+JPAGS = 'http://www.alliancewar.com'
+
+
 class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
 
@@ -23,7 +26,7 @@ class MCOCMaps:
 
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
-    JPAGS = 'http://www.alliancewar.com'
+
     def __init__(self, bot):
         self.bot = bot
 
@@ -82,6 +85,8 @@ class MCOCMaps:
         em.set_image(url=mapurl)
         em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
+
+### Beginning of AllianceWar.com integration
 
     @commands.command(pass_context=True, hidden=True)
     async def boost_info(self, ctx, boost):
