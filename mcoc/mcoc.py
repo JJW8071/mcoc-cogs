@@ -1359,7 +1359,7 @@ class MCOC(ChampionFactory):
 
         await self.update_local()
         try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=False)
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
             await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
             + gapi_service_creds)
@@ -1386,7 +1386,7 @@ class MCOC(ChampionFactory):
         package = [[ts, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         await self.update_local()
         try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=False)
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
             await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
             + gapi_service_creds)
