@@ -1303,7 +1303,8 @@ class MCOC(ChampionFactory):
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
-        if not self.check_guild(ctx):
+        guild = await self.check_guild(ctx)
+        if not guild:
             await self.bot.say('This server is unauthorized.')
             return
         if ctx.invoked_subcommand is None:
