@@ -1384,9 +1384,9 @@ class MCOC(ChampionFactory):
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = [[str(now), author.name, '{}★'.format(champ.star), champ.full_name, champ.rank, level, champ.prestige, observation, author.id,'','Collector Submission']]
-        print('submit package:')
-        print(' '.join(package[0]))
+        package = [[now, author.name, '{}★'.format(champ.star), champ.full_name, champ.rank, level, champ.prestige, observation, author.id,'','Collector Submission']]
+        # print('submit package:')
+        # print(' '.join(package[0]))
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
