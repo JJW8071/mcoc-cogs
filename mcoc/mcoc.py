@@ -1337,7 +1337,25 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_submit_duel(ctx, champ, observation, pi)
+                author = ctx.message.author
+                level = champ.rank*10
+                if champ.star == 5:
+                    level += 15
+                if pi == 0:
+                    pi = champ.prestige
+                package = [[ctx.message.timestamp, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
+                await self.update_local()
+                try:
+                    gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+                except FileNotFoundError:
+                    await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+                    + gapi_service_creds)
+                    return
+                sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
+                worksheet = sh.worksheet(property='title',value='collector_submit')
+                worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
+                worksheet.sync()
+                # await self._process_submit_duel(ctx, champ, observation, pi)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1350,7 +1368,7 @@ class MCOC(ChampionFactory):
         else:
             return False
 
-    async def _process_submit_prestige(self, ctx, *, champ, observation):
+    async def _process_submit_prestige(self, ctx, champ, observation):
         author = ctx.message.author
         level = int(champ.rank)*10
         if champ.star == 5:
@@ -1368,7 +1386,7 @@ class MCOC(ChampionFactory):
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
-    async def _process_submit_duel(self, ctx, *, champ, observation, pi):
+    async def _process_submit_duel(self, ctx, champ, observation, pi):
         author = ctx.message.author
         level = champ.rank*10
         if champ.star == 5:
