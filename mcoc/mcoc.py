@@ -1336,7 +1336,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_duel_submit(champ, observation, ctx.message.author)
+                await self._process_duel_submit(champ, observation, ctx.message.author, pi)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
