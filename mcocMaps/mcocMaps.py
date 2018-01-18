@@ -104,6 +104,7 @@ class MCOCMaps:
             # em.set_thumbnail(url=img)
             em.add_field(name=title, value=text)
             # em.set_footer(icon_url='www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG & AllianceWar.com')
+            await self.bot.say(embed=em)
             try:
                 await self.bot.say(embed=em)
             except:
