@@ -1381,6 +1381,7 @@ class MCOC(ChampionFactory):
         sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
         worksheet = sh.worksheet(property='title',value='collector_submit')
         now = datetime.now()
+        print(str(now))
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
