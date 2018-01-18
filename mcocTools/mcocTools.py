@@ -252,7 +252,7 @@ class MCOCTools:
     async def _alliance_popup(self, ctx, *args):
         '''Guild | Alliance Popup System'''
 
-        warning_msg =('The G.A.P.S. System will configure your server for basic Alliance Operations.',
+        warning_msg =('The G.A.P.S. System will configure your server for basic Alliance Operations.'
                 'Roles will be added for summoners, alliance, officers, bg1, bg2, bg3'
                 'Channels will be added for announcements, alliance, & battlegroups.'
                 'Channel permissions will be configured.'
