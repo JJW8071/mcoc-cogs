@@ -100,7 +100,7 @@ class MCOCMaps:
             img = 'http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(info['img'])
             title = info['title']
             text = info['text']
-            em = discord.Embed(color=ctx.message.author.color, title='Boost Info', descritpion='', url='www.alliancewar.com')
+            em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url='www.alliancewar.com')
             em.set_thumbnail(url=img)
             em.add_field(name=title, value=text)
             em.set_footer(icon_url='www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG\'s AllianceWar.com')
