@@ -266,12 +266,13 @@ class MCOCTools:
         if react is not None:
             if react.reaction.emoji == '❌':
                 await self.bot.say('G.A.P.S. canceled.')
+                return
             elif react.reaction.emoji == '🆗':
-                message2 = await self.bot.say('G.A.P.S. in process.')
-                await self._process_submit_duel(ctx, champ, observation, pi)
-                await self.bot.edit_message(message2, 'G.A.P.S. complete.')
+                message2 = await self.bot.say('G.A.P.S. in progess.')
+                continue
         else:
             await self.bot.say('Ambiguous response.  G.A.P.S. canceled')
+            return
 
         server = ctx.message.server
         adminpermissions = discord.PermissionOverwrite(administrator=True)
@@ -390,6 +391,7 @@ class MCOCTools:
         em.add_field(name='Enroll for Collector announcements', value='Enroll a channel for Collector announcements\n```/addchan #announcements```\n', inline=False)
         em.add_field(name='Set up Autorole', value='Default Role should be {}\n```/autorole role summoners```\n```/autorole toggle``` '.format(summoners.mention), inline=False)
         await self.bot.say(embed=em)
+        await self.bot.delete_message(message2)
 
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
