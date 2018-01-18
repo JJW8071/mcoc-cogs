@@ -1386,10 +1386,10 @@ class MCOC(ChampionFactory):
             level += 15
         if pi == 0:
             pi = 100
-        package = [['{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.name, author.id]]
+        package = [[author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         # print('submit package:')
         # print(' '.join(package[0]))
-        worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
+        worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
 
