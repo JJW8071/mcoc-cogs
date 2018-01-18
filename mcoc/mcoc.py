@@ -1326,7 +1326,7 @@ class MCOC(ChampionFactory):
             await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
-    async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str):
+    async def submit_duel_target(self, ctx, champ : ChampConverter, observation):
         message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
@@ -1365,7 +1365,7 @@ class MCOC(ChampionFactory):
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level, author.name, author.id]]
+        package = [['{}'.format(champ.mattkraftid), champ.sig, '{}'.format(observation), '{}★'.format(champ.star), champ.rank, level, author.name, author.id]]
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
