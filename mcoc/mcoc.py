@@ -1351,6 +1351,7 @@ class MCOC(ChampionFactory):
             return False
 
     async def _process_submit_prestige(self, ctx, champ, observation):
+        GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
         author = ctx.message.author
         level = int(champ.rank)*10
         if champ.star == 5:
@@ -1363,12 +1364,14 @@ class MCOC(ChampionFactory):
             await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
             + gapi_service_creds)
             return
-        sh = gc.open_by_key(key='1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc',returnas='spreadsheet')
+        sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
         worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
     async def _process_submit_duel(self, ctx, champ, observation):
+        GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
+        GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
         author = ctx.message.author
         level = champ.rank*10
         if champ.star == 5:
@@ -1384,11 +1387,11 @@ class MCOC(ChampionFactory):
             await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
             + gapi_service_creds)
             return
-        sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
-        worksheet = sh.worksheet(property='title',value='collector_submit')
+        sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
+        # worksheet = sh.worksheet(property='title',value='collector_submit')
+        worksheet = sh.worksheet(property='title',value='collector_duels')
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
-
 
 
 def validate_attr(*expected_args):
