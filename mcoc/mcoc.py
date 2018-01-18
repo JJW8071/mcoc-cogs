@@ -1378,7 +1378,7 @@ class MCOC(ChampionFactory):
             level += 15
         if pi == 0:
             pi = 100
-        print(str(now))
+        print(str(ts))
         print(author.name)
         print(str(level))
         print(str(pi))
