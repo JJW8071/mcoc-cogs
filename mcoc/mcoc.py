@@ -1346,9 +1346,9 @@ class MCOC(ChampionFactory):
         authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
         serverid = ctx.message.server.id
         if serverid in authorized:
-            return TRUE
+            return True
         else:
-            return FALSE
+            return False
 
 
 
