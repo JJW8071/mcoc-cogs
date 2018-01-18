@@ -1326,7 +1326,7 @@ class MCOC(ChampionFactory):
             await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
-    async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str):
+    async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str, pi : int = 0):
         message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
@@ -1370,7 +1370,7 @@ class MCOC(ChampionFactory):
         worksheet.sync()
         return
 
-    async def _process_duel_submit(self, champ, observation, author):
+    async def _process_duel_submit(self, champ, observation, author, pi):
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1384,7 +1384,9 @@ class MCOC(ChampionFactory):
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = [[now, author.name, '{}★'.format(champ.star), champ.full_name, champ.rank, level, champ.prestige, observation, author.id,'','Collector Submission']]
+        if pi == 0:
+            pi = 100
+        package = [[now, author.name, '{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, author.id,'','Collector Submission']]
         # print('submit package:')
         # print(' '.join(package[0]))
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
