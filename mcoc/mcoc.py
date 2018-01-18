@@ -1385,7 +1385,7 @@ class MCOC(ChampionFactory):
             level += 15
         if pi == 0:
             pi = 100
-        package = [[author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id, now]]
+        package = [[author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         # print('submit package:')
         # print(' '.join(package[0]))
         sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
