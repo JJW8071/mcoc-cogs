@@ -1370,7 +1370,7 @@ class MCOC(ChampionFactory):
         worksheet.sync()
 
     async def _process_submit_duel(self, ctx, champ, observation):
-        GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
+        # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
         GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
         author = ctx.message.author
         level = champ.rank*10
