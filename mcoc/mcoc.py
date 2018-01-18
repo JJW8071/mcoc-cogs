@@ -1320,7 +1320,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_prestige_submit(champ, observation, ctx.message.author)
+                await self._process_submit_prestige(champ, observation, ctx.message.author)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1337,7 +1337,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_duel_submit(champ, observation, ctx.message.author, pi, now)
+                await self._process_submit_duel(champ, observation, ctx.message.author, pi, now)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1350,7 +1350,7 @@ class MCOC(ChampionFactory):
         else:
             return False
 
-    async def _process_prestige_submit(self, champ, observation, author):
+    async def _process_submit_prestige(self, champ, observation, author):
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1369,7 +1369,7 @@ class MCOC(ChampionFactory):
         worksheet.sync()
         return
 
-    async def _process_duel_submit(self, champ, observation, author, pi):
+    async def _process_submit_duel(self, champ, observation, author, pi, now):
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1382,7 +1382,7 @@ class MCOC(ChampionFactory):
             level += 15
         if pi == 0:
             pi = 100
-        package = [[author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
+        package = [[now, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         # print('submit package:')
         # print(' '.join(package[0]))
         sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
