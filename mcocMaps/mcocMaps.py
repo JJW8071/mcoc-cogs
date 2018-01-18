@@ -89,7 +89,7 @@ class MCOCMaps:
         # data = urllib.urlopen(boosturl).read()
         if os.path.exists('data/mcocMaps/boosts.json'):
             boosts = dataIO.load_json('data/mcocMaps/boosts.json')
-            await self.bot.say('data loaded')
+            # await self.bot.say('data loaded')
         # boosts = json.loads(data)
 
         keys = boosts.keys()
@@ -97,13 +97,13 @@ class MCOCMaps:
             await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
         else:
             info = boosts[boost]
-            img = 'http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(info['img'])
+            img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, info['img'])
             title = info['title']
             text = info['text']
-            em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url='http://www.alliancewar.com')
+            em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
             em.set_thumbnail(url=img)
             em.add_field(name=title, value=text)
-            em.set_footer(icon_url='http://www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG & AllianceWar.com')
+            em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
             await self.bot.say(embed=em)
 
 
