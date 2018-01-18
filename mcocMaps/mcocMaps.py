@@ -99,7 +99,7 @@ class MCOCMaps:
             em = discord.Embed(color=ctx.message.author.color, title='Boost Info', descritpion='', url='www.alliancewar.com')
             em.set_thumbnail(url='http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(boosts[boost]['img']))
             em.add_field(name=boosts[boost]['title'], value=boosts[boost]['text'])
-            em.footer(icon_url='',text='JPAG\'s AllianceWar.com')
+            em.set_footer(icon_url='www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG\'s AllianceWar.com')
             await self.bot.say(embed=em)
 
 
