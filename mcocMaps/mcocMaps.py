@@ -84,7 +84,7 @@ class MCOCMaps:
         await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, hidden=True)
-    async def boost_info(self, ctx):
+    async def boost_info(self, ctx, boost):
         # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         # data = urllib.urlopen(boosturl).read()
         if os.path.exists('data/mcocMaps/boosts.json'):
@@ -93,13 +93,14 @@ class MCOCMaps:
         # boosts = json.loads(data)
 
         keys = boosts.keys()
-        await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
-
-        content = ctx.message.content
-
-        nodelist = content.split(',')
-        for node in nodelist:
-            await self.bot.say('Node lookup: \'{}\''.format(node))
+        if boost not in keys:
+            await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
+        else:
+            em = discord.Embed(color=ctx.message.author.color, title='Boost Info', descritpion='', url='www.alliancewar.com')
+            em.thumbnail(url='http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(boosts[boost]['img']))
+            em.add_field(name=boosts[boost]['title'], value=boosts[boost]['text'])
+            em.footer(icon_url='',text='JPAG\'s AllianceWar.com')
+            await self.bot.say(embed=em)
 
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
