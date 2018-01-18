@@ -1372,8 +1372,8 @@ class MCOC(ChampionFactory):
 
     async def _process_duel_submit(self, champ, observation, author, pi):
         await self.update_local()
-        now = datetime.now()
-        print(str(now))
+        # now = datetime.now()
+        # print(str(now))
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
