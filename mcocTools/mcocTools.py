@@ -269,18 +269,24 @@ class MCOCTools:
                 try:
                     self.bot.remove_reaction(message, '❌')
                     self.bot.remove_reaction(message, '🆗')
+                except:
+                    continue
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('G.A.P.S. in process.')
                 await self._process_submit_duel(ctx, champ, observation, pi)
                 try:
                     self.bot.remove_reaction(message, '❌')
                     self.bot.remove_reaction(message, '🆗')
+                except:
+                    continue
                 await self.bot.edit_message(message2, 'G.A.P.S. complete.')
         else:
             await self.bot.say('Ambiguous response.  G.A.P.S. canceled')
             try:
                 self.bot.remove_reaction(message, '❌')
                 self.bot.remove_reaction(message, '🆗')
+            except:
+                continue:
 
         server = ctx.message.server
         adminpermissions = discord.PermissionOverwrite(administrator=True)
