@@ -1359,7 +1359,7 @@ class MCOC(ChampionFactory):
 
         await self.update_local()
         try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=False)
         except FileNotFoundError:
             await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
             + gapi_service_creds)
@@ -1384,19 +1384,17 @@ class MCOC(ChampionFactory):
         print(str(pi))
         print(str(champ.prestige))
         package = [[ts, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
-        # print('submit package:')
-        # print(' '.join(package[0]))
-        await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-            + gapi_service_creds)
-            return
-        sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
-        worksheet = sh.worksheet(property='title',value='collector_submit')
-        worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
-        worksheet.sync()
+        # await self.update_local()
+        # try:
+        #     gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=False)
+        # except FileNotFoundError:
+        #     await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+        #     + gapi_service_creds)
+        #     return
+        # sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
+        # worksheet = sh.worksheet(property='title',value='collector_submit')
+        # worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
+        # worksheet.sync()
         return
 
 
