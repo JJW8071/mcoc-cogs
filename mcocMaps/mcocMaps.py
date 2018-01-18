@@ -105,10 +105,7 @@ class MCOCMaps:
             em.add_field(name=title, value=text)
             em.set_footer(icon_url='http://www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG & AllianceWar.com')
             await self.bot.say(embed=em)
-            try:
-                await self.bot.say(embed=em)
-            except:
-                await self.bot.say('**{}**\n{}'.format(title, text))
+
 
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
