@@ -2,6 +2,7 @@ import discord
 import asyncio
 import urllib, json #For fetching JSON from alliancewar.com
 import os
+from .utils.dataIO import dataIO
 from discord.ext import commands
 
 class MCOCMaps:
