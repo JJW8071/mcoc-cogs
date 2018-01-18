@@ -96,11 +96,18 @@ class MCOCMaps:
         if boost not in keys:
             await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
         else:
+            info = boosts[boost]
+            img = 'http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(info['img'])
+            title = info['title']
+            text = info['text']
             em = discord.Embed(color=ctx.message.author.color, title='Boost Info', descritpion='', url='www.alliancewar.com')
-            em.set_thumbnail(url='http://www.alliancewar.com/global/ui/images/booster/{}.png'.format(boosts[boost]['img']))
-            em.add_field(name=boosts[boost]['title'], value=boosts[boost]['text'])
+            em.set_thumbnail(url=img)
+            em.add_field(name=title, value=text)
             em.set_footer(icon_url='www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG\'s AllianceWar.com')
-            await self.bot.say(embed=em)
+            try:
+                await self.bot.say(embed=em)
+            except:
+                await self.bot.say('**{}**\n{}'.format(title, text))
 
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
