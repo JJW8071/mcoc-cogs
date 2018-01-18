@@ -1311,7 +1311,7 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
-        message = await self.bot.say('Submission registered.\nChampion: {}★{}\nPrestige: {}\nPress OK to confirm.'.format(champ.star, champ.full_name, observation))
+        message = await self.bot.say('Submission registered.\nChampion: {0.star}★{0.full_name}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
@@ -1326,7 +1326,7 @@ class MCOC(ChampionFactory):
             await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
-    async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str, pi : int = 0):
+    async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str):
         now = ctx.message.timestamp
         message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
@@ -1337,25 +1337,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                author = ctx.message.author
-                level = champ.rank*10
-                if champ.star == 5:
-                    level += 15
-                if pi == 0:
-                    pi = champ.prestige
-                package = [[ctx.message.timestamp, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
-                await self.update_local()
-                try:
-                    gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-                except FileNotFoundError:
-                    await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-                    + gapi_service_creds)
-                    return
-                sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
-                worksheet = sh.worksheet(property='title',value='collector_submit')
-                worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
-                worksheet.sync()
-                # await self._process_submit_duel(ctx, champ, observation, pi)
+                await self._process_submit_duel(ctx, champ, observation)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1373,7 +1355,7 @@ class MCOC(ChampionFactory):
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
-        package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level, author.name, author.id]]
+        package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1386,14 +1368,15 @@ class MCOC(ChampionFactory):
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
-    async def _process_submit_duel(self, ctx, champ, observation, pi):
+    async def _process_submit_duel(self, ctx, champ, observation):
         author = ctx.message.author
         level = champ.rank*10
         if champ.star == 5:
             level += 15
-        if pi == 0:
-            pi = champ.prestige
-        package = [[ctx.message.timestamp, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
+        pi = champ.prestige
+        star = '{}★'.format(champ.star)
+        rank = champ.rank
+        package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1403,8 +1386,9 @@ class MCOC(ChampionFactory):
             return
         sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
         worksheet = sh.worksheet(property='title',value='collector_submit')
-        worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
+        worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
+
 
 
 def validate_attr(*expected_args):
