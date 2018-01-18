@@ -101,9 +101,9 @@ class MCOCMaps:
             title = info['title']
             text = info['text']
             em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url='www.alliancewar.com')
-            em.set_thumbnail(url=img)
+            # em.set_thumbnail(url=img)
             em.add_field(name=title, value=text)
-            em.set_footer(icon_url='www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG\'s AllianceWar.com')
+            # em.set_footer(icon_url='www.alliancewar.com/aw/images/app_icon.jpg',text='JPAG & AllianceWar.com')
             try:
                 await self.bot.say(embed=em)
             except:
