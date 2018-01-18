@@ -259,19 +259,28 @@ class MCOCTools:
                 'After the G.A.P.S. system prepares your server, there will be additional instructions.'
                 'If you consent, press OK')
         em = discord.Embed(color=ctx.message.author.color, title='G.A.P.S. Warning Message', description=warning_msg)
-        message = await self.bot.say(em)
+        message = await self.bot.say(embed=em)
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
         if react is not None:
             if react.reaction.emoji == '❌':
                 await self.bot.say('G.A.P.S. canceled.')
+                try:
+                    self.bot.remove_reaction(message, '❌')
+                    self.bot.remove_reaction(message, '🆗')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('G.A.P.S. in process.')
                 await self._process_submit_duel(ctx, champ, observation, pi)
+                try:
+                    self.bot.remove_reaction(message, '❌')
+                    self.bot.remove_reaction(message, '🆗')
                 await self.bot.edit_message(message2, 'G.A.P.S. complete.')
         else:
             await self.bot.say('Ambiguous response.  G.A.P.S. canceled')
+            try:
+                self.bot.remove_reaction(message, '❌')
+                self.bot.remove_reaction(message, '🆗')
 
         server = ctx.message.server
         adminpermissions = discord.PermissionOverwrite(administrator=True)
