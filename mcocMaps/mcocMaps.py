@@ -83,9 +83,12 @@ class MCOCMaps:
 
     @commands.command(pass_context=True, hidden=True)
     async def boost_info(self, ctx):
-        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        data = urllib.urlopen(boosturl).read()
-        boosts = json.loads(data)
+        # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
+        # data = urllib.urlopen(boosturl).read()
+        if os.path.exists('data/mcocMaps/boosts.json')
+            boosts = dataIO.load_json('data/mcocMaps/boosts.json')
+            await self.bot.say('data loaded')
+        # boosts = json.loads(data)
 
         keys = boosts.keys()
         await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
