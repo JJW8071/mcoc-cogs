@@ -85,7 +85,7 @@ class MCOCMaps:
     async def boost_info(self, ctx):
         # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         # data = urllib.urlopen(boosturl).read()
-        if os.path.exists('data/mcocMaps/boosts.json')
+        if os.path.exists('data/mcocMaps/boosts.json'):
             boosts = dataIO.load_json('data/mcocMaps/boosts.json')
             await self.bot.say('data loaded')
         # boosts = json.loads(data)
