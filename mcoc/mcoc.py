@@ -1356,7 +1356,6 @@ class MCOC(ChampionFactory):
         if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid),champ.sig,observation,champ.star,champ.rank,level, author.name, author.id]]
-
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1368,22 +1367,15 @@ class MCOC(ChampionFactory):
         worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
-        return
 
     async def _process_submit_duel(self, ctx, champ, observation, pi):
-        ts = ctx.message.timestamp
         author = ctx.message.author
         level = champ.rank*10
         if champ.star == 5:
             level += 15
         if pi == 0:
             pi = champ.prestige
-        print(str(ts))
-        print(author.name)
-        print(str(level))
-        print(str(pi))
-        print(str(champ.prestige))
-        package = [[ts, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
+        package = [[ctx.message.timestamp, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
@@ -1395,7 +1387,6 @@ class MCOC(ChampionFactory):
         worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
-        return
 
 
 def validate_attr(*expected_args):
