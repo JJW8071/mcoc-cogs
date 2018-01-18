@@ -1371,13 +1371,17 @@ class MCOC(ChampionFactory):
         return
 
     async def _process_submit_duel(self, ctx, champ, observation, pi):
-        now = ctx.message.timestamp
+        ts = ctx.message.timestamp
         author = ctx.message.author
-        level = int(champ.rank)*10
+        level = champ.rank*10
         if champ.star == 5:
             level += 15
         if pi == 0:
             pi = 100
+        print(str(now))
+        print(author.name)
+        print(str(level))
+        print(str(pi))
         package = [[now, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         # print('submit package:')
         # print(' '.join(package[0]))
