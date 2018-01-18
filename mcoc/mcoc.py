@@ -1372,16 +1372,14 @@ class MCOC(ChampionFactory):
 
     async def _process_duel_submit(self, champ, observation, author, pi):
         await self.update_local()
+        now = datetime.now()
+        print(str(now))
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
             await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
                     + gapi_service_creds)
             return
-        sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
-        worksheet = sh.worksheet(property='title',value='collector_submit')
-        now = datetime.now()
-        print(str(now))
         level = int(champ.rank)*10
         if champ.star == 5:
             level += 15
@@ -1390,6 +1388,8 @@ class MCOC(ChampionFactory):
         package = [[author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id, now]]
         # print('submit package:')
         # print(' '.join(package[0]))
+        sh = gc.open_by_key(key='1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q',returnas='spreadsheet')
+        worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
         return
