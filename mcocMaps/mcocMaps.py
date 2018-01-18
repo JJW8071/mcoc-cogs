@@ -23,7 +23,7 @@ class MCOCMaps:
 
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
-
+    JPAGS = 'http://www.alliancewar.com'
     def __init__(self, bot):
         self.bot = bot
 
