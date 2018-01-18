@@ -1371,6 +1371,7 @@ class MCOC(ChampionFactory):
 
     async def _process_submit_duel(self, ctx, champ, observation):
         # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
+        await self.update_local()
         GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
         author = ctx.message.author
         level = champ.rank*10
@@ -1379,8 +1380,8 @@ class MCOC(ChampionFactory):
         pi = champ.prestige
         star = '{}★'.format(champ.star)
         rank = champ.rank
-        package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
-        await self.update_local()
+        full_name = champ.full_name
+        package = [[ctx.message.timestamp, author.name, star, full_name, rank, level, pi, observation, author.id]]
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
