@@ -1161,7 +1161,7 @@ class MCOC(ChampionFactory):
         counters=row['counters'].split(', ')
         hashtags=row['hashtags'].split(' #')
         em.add_field(name='Abilities', value='\n'.join(abilities))
-        em.add_field(name='Extended Abilities', value='\n'.join(extended_abilities))
+        # em.add_field(name='Extended Abilities', value='\n'.join(extended_abilities))
         em.add_field(name='Counters', value='\n'.join(counters))
         em.add_field(name='Hashtags', value='\n#'.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
