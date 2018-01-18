@@ -1382,7 +1382,8 @@ class MCOC(ChampionFactory):
         print(author.name)
         print(str(level))
         print(str(pi))
-        package = [[now, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
+        print(str(champ.prestige))
+        package = [[ts, author.name,'{}★'.format(champ.star), champ.full_name, champ.rank, level, pi, observation, 'Collector Submission', author.id]]
         # print('submit package:')
         # print(' '.join(package[0]))
         await self.update_local()
