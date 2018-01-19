@@ -1334,7 +1334,7 @@ class MCOC(ChampionFactory):
             await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
-    async def submit_duel_target(self, ctx, champ : ChampConverter, observation):
+    async def submit_duel_target(self, ctx, champ : ChampConverter, observation, pi:int = 0):
         message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
@@ -1348,11 +1348,11 @@ class MCOC(ChampionFactory):
                 message2 = await self.bot.say('Submission in process.')
                 author = ctx.message.author
                 star = '{}★'.format(champ.star)
-                prestige = 0
-                if champ.has_prestige:
-                    prestige=champ.prestige
+                if pi == 0:
+                    if champ.has_prestige:
+                        pi=champ.prestige
                 now = str(ctx.message.timestamp)
-                package = [[now, author.name, star, champ.full_name, champ.rank, champ.max_lvl, prestige, observation, author.id]]
+                package = [[now, author.name, star, champ.full_name, champ.rank, champ.max_lvl, pi, observation, author.id]]
                 print('package built')
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
                 if check:
