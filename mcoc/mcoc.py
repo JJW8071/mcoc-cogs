@@ -1321,9 +1321,18 @@ class MCOC(ChampionFactory):
             if react.reaction.emoji == '❌':
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
+                GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_submit_prestige(ctx, champ, observation)
-                await self.bot.edit_message(message2, 'Submission complete.')
+                author = ctx.message.author
+                level = int(champ.rank)*10
+                if champ.star == 5:
+                    level += 15
+                package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
+                check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')                # await self._process_submit_prestige(ctx, champ, observation)
+                if check:
+                    await self.bot.edit_message(message2, 'Submission complete.')
+                else:
+                    await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
 
