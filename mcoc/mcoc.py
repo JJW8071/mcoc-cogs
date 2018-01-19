@@ -1382,7 +1382,7 @@ class MCOC(ChampionFactory):
         # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
         GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
         print('initializing _process_submit_duel')
-        await self.update_local()
+        # await self.update_local()
         print('self.update_local() complete')
         # try:
         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
