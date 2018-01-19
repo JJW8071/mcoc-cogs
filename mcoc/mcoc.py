@@ -1350,7 +1350,8 @@ class MCOC(ChampionFactory):
                 prestige = 0
                 if champ.has_prestige:
                     prestige=champ.prestige
-                package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, champ.max_lvl, prestige, observation, author.id]]
+                now = str(ctx.message.timestamp)
+                package = [[now, author.name, star, champ.full_name, champ.rank, champ.max_lvl, prestige, observation, author.id]]
                 print('package built')
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_duels')
                 if check:
