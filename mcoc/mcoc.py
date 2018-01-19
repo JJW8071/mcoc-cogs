@@ -1381,12 +1381,12 @@ class MCOC(ChampionFactory):
         star = '{}★'.format(champ.star)
         package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, champ.prestige, observation, author.id]]
         await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-            + gapi_service_creds)
-            return
+        # try:
+        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        # except FileNotFoundError:
+        #     await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+        #     + gapi_service_creds)
+        #     return
         sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
         # worksheet = sh.worksheet(property='title',value='collector_submit')
         worksheet = sh.worksheet(property='title',value='collector_duels')
