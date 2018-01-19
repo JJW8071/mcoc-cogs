@@ -1324,15 +1324,12 @@ class MCOC(ChampionFactory):
                 GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
                 message2 = await self.bot.say('Submission in process.')
                 author = ctx.message.author
-                level = int(champ.rank)*10
-                if champ.star == 5:
-                    level += 15
-                package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
+                package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, champ.max_lvl, author.name, author.id]]
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')                # await self._process_submit_prestige(ctx, champ, observation)
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.')
                 else:
-                    await self.bot.edit_message(message2, 'Submission complete.')
+                    await self.bot.edit_message(message2, 'Submission failed.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
 
@@ -1348,15 +1345,12 @@ class MCOC(ChampionFactory):
             elif react.reaction.emoji == '🆗':
                 GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
                 message2 = await self.bot.say('Submission in process.')
-                level = champ.rank*10
-                if champ.star == 5:
-                    level += 15
-                star = '{}★'.format(champ.star)
                 author = ctx.message.author
+                star = '{}★'.format(champ.star)
                 prestige = 0
                 if champ.has_prestige:
                     prestige=champ.prestige
-                package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, prestige, observation, author.id]]
+                package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, champ.max_lvl, prestige, observation, author.id]]
                 print('package built')
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_duels')
                 if check:
