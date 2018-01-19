@@ -1357,6 +1357,9 @@ class MCOC(ChampionFactory):
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.')
+                    async with aiohttp.ClientSession() as s:
+                        await self.cache_remote_file('duelist', s, force_cache=force, verbose=True)
+                        await self.bot.edit_message(message2, 'Submission complete.\nDuel Targets refreshed.')
                 else:
                     await self.bot.edit_message(message2, 'Submission failed.')
         else:
