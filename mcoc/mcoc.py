@@ -653,7 +653,7 @@ class MCOC(ChampionFactory):
                     break
         if fname in data_files:
             async with aiohttp.ClientSession() as s:
-                await self.cache_remote_file(fname, s, force_cache=force, verbose=True)
+                await self.cache_remote_file(fname, s, force_cache=True, verbose=True)
         else:
             await self.bot.say('Valid options for 1st argument are one of (or initial portion of)\n\t'
                     + '\n\t'.join(data_files.keys()))
@@ -1358,7 +1358,7 @@ class MCOC(ChampionFactory):
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.')
                     async with aiohttp.ClientSession() as s:
-                        await self.cache_remote_file('duelist', s, force_cache=force, verbose=True)
+                        await self.cache_remote_file('duelist', s, force_cache=True, verbose=True)
                         await self.bot.edit_message(message2, 'Submission complete.\nDuel Targets refreshed.')
                 else:
                     await self.bot.edit_message(message2, 'Submission failed.')
