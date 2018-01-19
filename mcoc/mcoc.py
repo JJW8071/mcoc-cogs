@@ -1346,7 +1346,7 @@ class MCOC(ChampionFactory):
                 author = ctx.message.author
                 package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, champ.prestige, observation, author.id]]
                 print('package built')
-                await self._process_submit_duel(ctx, package)
+                await self._process_submit_duel(package)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
