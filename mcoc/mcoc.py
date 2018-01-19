@@ -1329,7 +1329,6 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
     async def submit_duel_target(self, ctx, champ : ChampConverter, observation : str):
-        now = ctx.message.timestamp
         message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
@@ -1338,6 +1337,7 @@ class MCOC(ChampionFactory):
             if react.reaction.emoji == '❌':
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
+                GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
                 message2 = await self.bot.say('Submission in process.')
                 level = champ.rank*10
                 if champ.star == 5:
@@ -1346,8 +1346,11 @@ class MCOC(ChampionFactory):
                 author = ctx.message.author
                 package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, champ.prestige, observation, author.id]]
                 print('package built')
-                await self._process_submit_duel(package)
-                await self.bot.edit_message(message2, 'Submission complete.')
+                check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_duels')
+                if check:
+                    await self.bot.edit_message(message2, 'Submission complete.')
+                else:
+                    await self.bot.edit_message(message2, 'Submission failed.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
 
@@ -1358,6 +1361,21 @@ class MCOC(ChampionFactory):
             return True
         else:
             return False
+
+    async def _process_submission(self, package, GKEY, sheet):
+        await self.update_local()
+        try:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+            sh = gc.open_by_key(key=GKEY, returnas='spreadsheet')
+            worksheet = sh.worksheet(property='title',value=sheet)
+            worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
+            worksheet.sync()
+            return True
+        except FileNotFoundError:
+            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+            + gapi_service_creds)
+            return False
+
 
     async def _process_submit_prestige(self, ctx, champ, observation):
         GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
@@ -1378,23 +1396,24 @@ class MCOC(ChampionFactory):
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
-    async def _process_submit_duel(self, package):
-        # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
-        GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
-        print('initializing _process_submit_duel')
-        # await self.update_local()
-        print('self.update_local() complete')
-        # try:
-        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        # except FileNotFoundError:
-        #     await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-        #     + gapi_service_creds)
-        #     return
-        sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
-        # worksheet = sh.worksheet(property='title',value='collector_submit')
-        worksheet = sh.worksheet(property='title',value='collector_duels')
-        worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
-        worksheet.sync()
+
+    # async def _process_submit_duel(self, package, GKEY):
+    #     # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
+    #     GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
+    #     print('initializing _process_submit_duel')
+    #     # await self.update_local()
+    #     print('self.update_local() complete')
+    #     # try:
+    #     gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+    #     # except FileNotFoundError:
+    #     #     await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+    #     #     + gapi_service_creds)
+    #     #     return
+    #     sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
+    #     # worksheet = sh.worksheet(property='title',value='collector_submit')
+    #     worksheet = sh.worksheet(property='title',value='collector_duels')
+    #     worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
+    #     worksheet.sync()
 
 
 def validate_attr(*expected_args):
