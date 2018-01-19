@@ -1339,7 +1339,14 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 message2 = await self.bot.say('Submission in process.')
-                await self._process_submit_duel(ctx, champ, observation)
+                level = champ.rank*10
+                if champ.star == 5:
+                    level += 15
+                star = '{}★'.format(champ.star)
+                author = ctx.message.author
+                package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, champ.prestige, observation, author.id]]
+                print('package built')
+                await self._process_submit_duel(ctx, package)
                 await self.bot.edit_message(message2, 'Submission complete.')
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
@@ -1371,16 +1378,12 @@ class MCOC(ChampionFactory):
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
-    async def _process_submit_duel(self, ctx, champ, observation):
+    async def _process_submit_duel(self, package):
         # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
         GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
-        author = ctx.message.author
-        level = champ.rank*10
-        if champ.star == 5:
-            level += 15
-        star = '{}★'.format(champ.star)
-        package = [[ctx.message.timestamp, author.name, star, champ.full_name, champ.rank, level, champ.prestige, observation, author.id]]
+        print('initializing _process_submit_duel')
         await self.update_local()
+        print('self.update_local() complete')
         # try:
         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         # except FileNotFoundError:
