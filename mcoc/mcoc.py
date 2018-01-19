@@ -1343,7 +1343,8 @@ class MCOC(ChampionFactory):
             if react.reaction.emoji == '❌':
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
-                GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
+                # GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
+                GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
                 message2 = await self.bot.say('Submission in process.')
                 author = ctx.message.author
                 star = '{}★'.format(champ.star)
@@ -1353,7 +1354,7 @@ class MCOC(ChampionFactory):
                 now = str(ctx.message.timestamp)
                 package = [[now, author.name, star, champ.full_name, champ.rank, champ.max_lvl, prestige, observation, author.id]]
                 print('package built')
-                check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_duels')
+                check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.')
                 else:
