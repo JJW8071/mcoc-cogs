@@ -88,7 +88,7 @@ class Brownie:
             settings["Players"][author.id]["brownies"] -= brownies
             settings["Players"][user.id]["brownies"] += brownies
             dataIO.save_json(self.file_path, self.system)
-            msg = "You gave **{}** brownies to {}".format(brownies, user.name)
+            msg = "{} gave {} brownies to {}".format(author.name, brownies, user.name)
         else:
             msg = "You don't have enough brownies points"
         await self.bot.say(msg)
@@ -163,7 +163,7 @@ class Brownie:
 
         if await self.check_cooldowns(author.id, action, settings):
             msg = self.steal_logic(settings, user, author)
-            await self.bot.say("Collector is on the prowl to steal brownies.")
+            await self.bot.say("{} is on the prowl to steal brownies.".format(author.name))
             await asyncio.sleep(4)
             await self.bot.say(msg)
 
@@ -207,7 +207,7 @@ class Brownie:
                 settings["Players"][user.id]["brownies"] -= stolen
                 settings["Players"][author.id]["brownies"] += stolen
                 dataIO.save_json(self.file_path, self.system)
-                msg = ("You stole {} brownie points from {}!".format(stolen, user.name))
+                msg = ("{} stole {} brownie points from {}!".format(author.name, stolen, user.name))
             else:
                 msg = "I could not find their brownie points."
         return msg
