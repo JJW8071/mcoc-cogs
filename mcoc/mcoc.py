@@ -755,7 +755,7 @@ class MCOC(ChampionFactory):
                 key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
+                        targets.append( '{}{} {} {} : {}'.format(star, champ.star_str, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
             em.description='\n'.join(targets)
         else:
@@ -867,7 +867,7 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title='Signature Ability')
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
-        em.add_field(name=title, value=champ.)
+        em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
         em.add_field(name='Shortcode', value=champ.short)
@@ -1763,7 +1763,7 @@ class Champion:
 
         if stats_missing:
             await self.bot.say(('Missing Attack/Health info for '
-                    + '{0.star}{0.star_char} {0.full_name}').format(self))
+                    + '{0.full_name} {0.star_str}').format(self))
         fdesc = []
         for i, txt in enumerate(ktxt['desc']['v']):
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
