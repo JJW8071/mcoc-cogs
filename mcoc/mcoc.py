@@ -755,7 +755,7 @@ class MCOC(ChampionFactory):
                 key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
                     if data['username'] != 'none':
-                        targets.append( '{}{} {} {} : {}'.format(star, star_glyph, data['maxlevel'], champ.full_name, data['username']))
+                        targets.append( '{}{} {} {} : {}'.format(star, champ.star_str, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
             em.description='\n'.join(targets)
         else:
@@ -1314,7 +1314,7 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
-        message = await self.bot.say('Submission registered.\nChampion: {0.star}★{0.full_name}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
+        message = await self.bot.say('Submission registered.\nChampion: {0.verbose_str}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
@@ -1336,7 +1336,7 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
     async def submit_duel_target(self, ctx, champ : ChampConverter, observation, pi:int = 0):
-        message = await self.bot.say('Duel Target registered.\nChampion: {0.star}★{0.full_name}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
+        message = await self.bot.say('Duel Target registered.\nChampion: {0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
@@ -1348,7 +1348,7 @@ class MCOC(ChampionFactory):
                 GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
                 message2 = await self.bot.say('Submission in process.')
                 author = ctx.message.author
-                star = '{}★'.format(champ.star)
+                star = '{0.star}{0.star_str}'.format(champ.star)
                 if pi == 0:
                     if champ.has_prestige:
                         pi=champ.prestige
