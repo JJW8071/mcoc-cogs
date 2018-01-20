@@ -559,7 +559,7 @@ class ChampionFactory():
                         print(name, i, v, len(sig))
                         raise
                 if not hasattr(champ, 'prestige_data'):
-                    champ.prestige_data = {4: [None] * 5, 5: [None] * 5, 3: [None] * 4, 2: [None]*3, 1: [None]*2}
+                    champ.prestige_data = {4: [None] * 5, 5: [None] * 5,6: [None] * 5, 3: [None] * 4, 2: [None]*3, 1: [None]*2}
                 try:
                     champ.prestige_data[star][rank-1] = sig
                 except:
