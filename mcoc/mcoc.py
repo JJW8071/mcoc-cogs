@@ -1348,7 +1348,7 @@ class MCOC(ChampionFactory):
                 GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
                 message2 = await self.bot.say('Submission in process.')
                 author = ctx.message.author
-                star = '{0.star}{0.star_char}'.format(champ.star)
+                star = '{0.star}{0.star_char}'.format(champ)
                 if pi == 0:
                     if champ.has_prestige:
                         pi=champ.prestige
