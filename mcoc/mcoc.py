@@ -1570,7 +1570,8 @@ class Champion:
 
     @property
     def verbose_str(self):
-        return '{0.stars_str} {0.full_name} r{0.rank}'.format(self)
+        return '{0.star}{0.star_char} {0.full_name} r{0.rank}'.format(self)
+        # return '{0.stars_str} {0.full_name} r{0.rank}'.format(self)
 
     @property
     def star_name_str(self):
