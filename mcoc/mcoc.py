@@ -1366,6 +1366,31 @@ class MCOC(ChampionFactory):
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
 
+    @submit.command(pass_context=True, name='awkill', aliases=['awko','defkill','defko'])
+    async def submit_awkill(self, ctx, champ : ChampConverter, node:int, ko: int):
+        message = await self.bot.say('Defender Kill registered.\nChampion: {0.star_name_str}\nAW Node: {1}\nKills: {2}\nPress OK to confirm.'.format(champ, node, ko))
+        await self.bot.add_reaction(message, '❌')
+        await self.bot.add_reaction(message, '🆗')
+        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+        if react is not None:
+            if react.reaction.emoji == '❌':
+                await self.bot.say('Submission canceled.')
+            elif react.reaction.emoji == '🆗':
+                GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE' #Collector Submissions
+                message2 = await self.bot.say('Submission in process.')
+                author = ctx.message.author
+                now = str(ctx.message.timestamp)
+                package = [[now, author.name, author.id, champ.mattkraftid, node, ko]]
+                print('package built')
+                check = await self._process_submission(package=package, GKEY=GKEY, sheet='defender_kos')
+                if check:
+                    await self.bot.edit_message(message2, 'Submission complete.')
+                else:
+                    await self.bot.edit_message(message2, 'Submission failed.')
+        else:
+            await self.bot.say('Ambiguous response.  Submission canceled')
+
+
     async def check_guild(self, ctx):
         authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
         serverid = ctx.message.server.id
