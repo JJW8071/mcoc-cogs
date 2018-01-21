@@ -1380,7 +1380,7 @@ class MCOC(ChampionFactory):
                 message2 = await self.bot.say('Submission in process.')
                 author = ctx.message.author
                 now = str(ctx.message.timestamp)
-                package = [[now, author.name, author.id, champ.mattkraftid, node, ko]]
+                package = [[now, author.name, author.id, champ.unique, node, ko]]
                 print('package built')
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet='defender_kos')
                 if check:
