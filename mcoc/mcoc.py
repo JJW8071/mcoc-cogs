@@ -752,8 +752,8 @@ class MCOC(ChampionFactory):
         target_found = False
         for star in (4,5):
             for rank in range(1,5):
-                key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
-                for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
+                # key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
+                for data in get_csv_rows(dataset, 'unique', champ.unique):#champ.unique):
                     if data['username'] != 'none':
                         targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
@@ -1368,7 +1368,7 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='awkill', aliases=['awko','defkill','defko'])
     async def submit_awkill(self, ctx, champ : ChampConverter, node:int, ko: int):
-        message = await self.bot.say('Defender Kill registered.\nChampion: {0.star_name_str}\nAW Node: {1}\nKills: {2}\nPress OK to confirm.'.format(champ, node, ko))
+        message = await self.bot.say('Defender Kill registered.\nChampion: {0.verbose_str}\nAW Node: {1}\nKills: {2}\nPress OK to confirm.'.format(champ, node, ko))
         await self.bot.add_reaction(message, '❌')
         await self.bot.add_reaction(message, '🆗')
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
