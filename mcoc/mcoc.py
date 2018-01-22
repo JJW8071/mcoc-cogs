@@ -1166,7 +1166,7 @@ class MCOC(ChampionFactory):
         if extended_abilities != '':
             em.add_field(name='Extended Abilities',value='\n'.join(x.proper() for x in extended_abilities))
         if counters != '':
-            em.add_field(name='Counters (#!)', value=counters[0])
+            em.add_field(name='Counters (#!)', value=' '.join('#!{}'.format(c) for c in counters))
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
         em.set_thumbnail(url=champ.get_avatar())
 
