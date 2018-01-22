@@ -1171,7 +1171,7 @@ class MCOC(ChampionFactory):
         em.add_field(name='Abilities', value=', '.join(abilities))
         em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
         em.add_field(name='Counters (#!)', value=', '.join(counters))
-        em.add_field(name='Hashtags (#)', value='\n#'.join(hashtags))
+        em.add_field(name='Hashtags (#)', value='# '.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
