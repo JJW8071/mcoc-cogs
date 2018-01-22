@@ -1161,7 +1161,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='Abilities',value='\n'.join(champ.abilities.split(',')))
-        if len(extended_abilities) > 0:
+        if len(champ.extended_abilities) > 0:
             em.add_field(name='Extended Abilities',value='\n'.join(champ.extended_abilities.split(',')))
         #     print('extended_abilities '+str(len(extended_abilities)))
         #     em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
