@@ -752,10 +752,9 @@ class MCOC(ChampionFactory):
         target_found = False
         for star in range(3,6):
             for rank in range(1,5):
-                key = '{0}{1}{2}'.format(star, champ.full_name, rank)
+                key = '{0}-{1}-{2}'.format(star, champ.full_name, rank)
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
-                    if data['username'] != 'none':
-                        targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
+                    targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
             em.description='\n'.join(targets)
         else:
