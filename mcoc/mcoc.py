@@ -1154,7 +1154,7 @@ class MCOC(ChampionFactory):
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         # abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities'].split(', ')
-            
+
         counters=xref['counters'].split(', ')
         hashtags=xref['hashtags'].split(' #')
         # em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
@@ -1163,7 +1163,7 @@ class MCOC(ChampionFactory):
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='Abilities',value='\n'.join(champ.abilities.split(', ')))
         if extended_abilities != '':
-            em.add_field(name='Extended Abilities',value='\n'.join(x.proper() for x in extended_abilities))
+            em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
         if counters != '':
             em.add_field(name='Counters (#!)', value=' '.join('#!{}'.format(c) for c in counters))
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
