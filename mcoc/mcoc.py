@@ -1159,13 +1159,13 @@ class MCOC(ChampionFactory):
         hashtags=xref['hashtags'].split(' #')
         # em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
         # em.add_field(name='Champion Number {}'.format(champ.champNumber), value='')
-        em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
+        em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(champ.abilities.split(', ')))
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        em.add_field(name='Abilities',value='\n'.join(champ.abilities.split(', ')))
+        # em.add_field(name='Abilities',value='')
         # if len(extended_abilities) > 0:
         #     em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
-        # if len(counters) > 0:
-        #     em.add_field(name='Counters (#!)', value=' '.join('#!{} '.format(c) for c in counters))
+        if len(counters) > 0:
+            em.add_field(name='Counters (#!)', value=' '.join('#!{} '.format(c) for c in counters))
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
         # em.set_thumbnail(url=champ.get_avatar())
 
