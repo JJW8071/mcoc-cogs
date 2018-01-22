@@ -1359,6 +1359,7 @@ class MCOC(ChampionFactory):
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.')
                     async with aiohttp.ClientSession() as s:
+                        await asyncio.sleep(10)
                         await self.cache_remote_file('duelist', s, force_cache=True, verbose=True)
                         await self.bot.edit_message(message2, 'Submission complete.\nDuel Targets refreshed.')
                 else:
