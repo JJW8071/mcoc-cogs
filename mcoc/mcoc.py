@@ -37,7 +37,7 @@ class TitleError(Exception):
 data_files = {
     'spotlight': {'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/spotlight_data.csv', 'update_delta': 1},
-    'crossreference': {'remote': 'https://docs.google.com/spreadsheets/d/1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y/pub?gid=0&single=true&output=csv',
+    '': {'remote': 'https://docs.google.com/spreadsheets/d/1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y/pub?gid=0&single=true&output=csv',
                 'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
     'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=1346864636&single=true&output=csv',
                 'local': 'data/mcoc/prestige.csv', 'update_delta': 1},
@@ -1151,29 +1151,26 @@ class MCOC(ChampionFactory):
     @champ.command(name='abilities')
     async def champ_abilities(self, *, champ : ChampConverter):
         '''Champion Abilities'''
-        # xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+        xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         # abilities=xref['abilities'].split(', ')
-        # extended_abilities=xref['extended_abilities'].split(', ')
-        # counters=xref['counters'].split(', ')
-        # hashtags=xref['hashtags'].split(' #')
+        extended_abilities=xref['extended_abilities'].split(', ')
+        counters=xref['counters'].split(', ')
+        hashtags=xref['hashtags'].split(' #')
         # em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
         # em.add_field(name='Champion Number {}'.format(champ.champNumber), value='')
         em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='Abilities',value='\n'.join(champ.abilities.split(',')))
-        if champ.extended_abilities is not None:
-            em.add_field(name='Extended Abilities',value='\n'.join(champ.extended_abilities.split(',')))
-        #     print('extended_abilities '+str(len(extended_abilities)))
-        #     em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
-        # if len(counters) > 0:
-        #     print('counters '+str(len(counters)))
-        #     em.add_field(name='Counters (#!)', value=', '.join(counters))
-        # if len(hashtags) > 0:
-        #     print('hashtags '+str(len(hashtags)))
-        #     em.add_field(name='Hashtags (#)', value='# '.join(hashtags))
-        # em.set_thumbnail(url=champ.get_avatar())
+        if extended_abilities != '':
+            em.add_field(name='Extended Abilities',value=extended_abilities))
+        if counters != '':
+            em.add_field(name='Counters (#!)', value=counters)
+        em.add_field(name='Hashtags (#)', value=champ.hashtags)
+        em.set_thumbnail(url=champ.get_avatar())
+
+
         # em.add_field(name='Shortcode', value=champ.short)
-        # em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
     @champ.command(name='specials', aliases=['special',])
