@@ -1158,16 +1158,16 @@ class MCOC(ChampionFactory):
         hashtags=xref['hashtags'].split(' #')
         em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
         # em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
-        if len(extended_abilities) > 0:
-            print('extended_abilities '+len(extended_abilities))
-            em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
-        if len(counters) > 0:
-            print('counters '+len(counters))
-            em.add_field(name='Counters (#!)', value=', '.join(counters))
-        if len(hashtags) > 0:
-            print('hashtags '+len(hashtags))
-            em.add_field(name='Hashtags (#)', value='# '.join(hashtags))
-        em.set_thumbnail(url=champ.get_avatar())
+        # if len(extended_abilities) > 0:
+        #     print('extended_abilities '+str(len(extended_abilities)))
+        #     em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
+        # if len(counters) > 0:
+        #     print('counters '+str(len(counters)))
+        #     em.add_field(name='Counters (#!)', value=', '.join(counters))
+        # if len(hashtags) > 0:
+        #     print('hashtags '+str(len(hashtags)))
+        #     em.add_field(name='Hashtags (#)', value='# '.join(hashtags))
+        # em.set_thumbnail(url=champ.get_avatar())
         # em.add_field(name='Shortcode', value=champ.short)
         # em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
