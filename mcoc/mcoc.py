@@ -1165,7 +1165,8 @@ class MCOC(ChampionFactory):
         hashtags=xref['hashtags'].split(' #')
         checks = ['abilities','extended_abilities','counters','hashtags']
         length = 0
-        length += xref[c] for c in checks
+        for c in checks:
+            length += xref[c]
         print(length)
         em.add_field(name='Abilities', value=', '.join(abilities))
         em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
