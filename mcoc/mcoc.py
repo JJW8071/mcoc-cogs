@@ -1162,7 +1162,7 @@ class MCOC(ChampionFactory):
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='Abilities',value='\n'.join(champ.abilities.split(',')))
         if extended_abilities != '':
-            em.add_field(name='Extended Abilities',value=extended_abilities))
+            em.add_field(name='Extended Abilities',value=extended_abilities)
         if counters != '':
             em.add_field(name='Counters (#!)', value=counters)
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
