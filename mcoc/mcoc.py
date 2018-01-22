@@ -754,7 +754,6 @@ class MCOC(ChampionFactory):
             for rank in range(1,5):
                 key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
-                for data in get_csv_rows(dataset, 'mattkrafid', key):
                     if data['username'] != 'none':
                         targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
