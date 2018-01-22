@@ -1162,10 +1162,10 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='Abilities',value='\n'.join(champ.abilities.split(', ')))
-        if len(extended_abilities) > 0:
-            em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
-        if len(counters) > 0:
-            em.add_field(name='Counters (#!)', value=' '.join('#!{}'.format(c) for c in counters))
+        # if len(extended_abilities) > 0:
+        #     em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
+        # if len(counters) > 0:
+        #     em.add_field(name='Counters (#!)', value=' '.join('#!{} '.format(c) for c in counters))
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
         # em.set_thumbnail(url=champ.get_avatar())
 
