@@ -1152,20 +1152,20 @@ class MCOC(ChampionFactory):
     async def champ_abilities(self, *, champ : ChampConverter):
         '''Champion Abilities'''
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-        # abilities=xref['abilities'].split(', ')
+        abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities'].split(', ')
 
         counters=xref['counters'].split(', ')
         hashtags=xref['hashtags'].split(' #')
         # em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
         # em.add_field(name='Champion Number {}'.format(champ.champNumber), value='')
-        em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(champ.abilities.split(', ')))
+        em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
         em.set_author(name='#{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
         # em.add_field(name='Abilities',value='')
         # if len(extended_abilities) > 1:
         #     em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
         if len(counters) > 1:
-            em.add_field(name='Counters (#!)', value=' '.join('#!{} '.format(c) for c in counters))
+            em.add_field(name='Counters (#!)', value=' '.join('#!{} '.format(c.title()) for c in counters))
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
         # em.set_thumbnail(url=champ.get_avatar())
 
