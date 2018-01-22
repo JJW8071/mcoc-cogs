@@ -750,7 +750,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='superflu0us\' Duel Targets',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
-        for star in (3,4,5):
+        for star in (3,4,5,6):
             for rank in range(1,5):
                 key = '{}-{}-{}'.format(star, champ.mattkraftid, rank)
                 for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
