@@ -1167,10 +1167,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        # await self.bot.say(embed=em)
-        channel=self.ctx.message.channel
-        await self.bot.send_message(channel, embed=em)
-        # await self.bot.say(embed=em2)
+        await self.bot.say(embed=em)
 
     @champ.command(name='specials', aliases=['special',])
     async def champ_specials(self, champ : ChampConverter):
