@@ -1153,27 +1153,21 @@ class MCOC(ChampionFactory):
     async def champ_abilities(self, champ : ChampConverter):
         '''Champion Abilities'''
 
-        em = discord.Embed(color=champ.class_color, title='Champion Abilities')
-        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
-        # em.add_field(name='Passive',value='placeholder')
-        # em.add_field(name='All Attacks',value='placeholder')
-        # em.add_field(name='When Attacked',value='placeholder')
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities'].split(', ')
         counters=xref['counters'].split(', ')
         hashtags=xref['hashtags'].split(' #')
-        checks = ['abilities','extended_abilities','counters','hashtags']
-        length = 0
-        for c in checks:
-            length += len(xref[c])
-        print('abilities len '+str(length))
-        em.description('\n'.join(abilities))
-        em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
-        em.add_field(name='Counters (#!)', value=', '.join(counters))
-        em.add_field(name='Hashtags (#)', value='# '.join(hashtags))
+        em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
+        if len(extended_abilities) > 0:
+            em.add_field(name='Extended Abilities', value=', '.join(extended_abilities))
+        if len(counters) > 0:
+            em.add_field(name='Counters (#!)', value=', '.join(counters))
+        if len(hashtags) > 0:
+            em.add_field(name='Hashtags (#)', value='# '.join(hashtags))
         em.set_thumbnail(url=champ.get_avatar())
-        # em.add_field(name='Shortcode', value=champ.short)
+        em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
         # await self.bot.say(embed=em2)
