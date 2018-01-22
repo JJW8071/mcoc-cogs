@@ -1154,8 +1154,7 @@ class MCOC(ChampionFactory):
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         # abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities'].split(', ')
-        for x in extended_abilities:
-
+            
         counters=xref['counters'].split(', ')
         hashtags=xref['hashtags'].split(' #')
         # em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
