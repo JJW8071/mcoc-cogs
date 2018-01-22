@@ -1119,7 +1119,7 @@ class MCOC(ChampionFactory):
         await self.bot.upload('data/mcoc/gs_json_test.json')
 
     @champ.command(name='use', aliases=('howto','htf',))
-    async def champ_use(self,*, champs :ChampConverterMult):
+    async def champ_use(self, *, champs :ChampConverterMult):
         '''How to Fight With videos by MCOC Community'''
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -1135,7 +1135,6 @@ class MCOC(ChampionFactory):
     async def champ_info(self, *, champ : ChampConverterDebug):
         '''Champion Spotlight link'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-
         em = discord.Embed(color=champ.class_color, title='Champ Info',url=SPOTLIGHT_SURVEY)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         if champ.infopage == 'none':
@@ -1150,9 +1149,8 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='abilities')
-    async def champ_abilities(self, champ : ChampConverter):
+    async def champ_abilities(self, *, champ : ChampConverter):
         '''Champion Abilities'''
-
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities'].split(', ')
@@ -1169,7 +1167,9 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        await self.bot.say(embed=em)
+        # await self.bot.say(embed=em)
+        channel=self.ctx.message.channel
+        await self.bot.send_message(channel, embed=em)
         # await self.bot.say(embed=em2)
 
     @champ.command(name='specials', aliases=['special',])
