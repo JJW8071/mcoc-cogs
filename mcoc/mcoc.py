@@ -1137,6 +1137,7 @@ class MCOC(ChampionFactory):
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         em = discord.Embed(color=champ.class_color, title='Champ Info',url=SPOTLIGHT_SURVEY)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
+        em.add_field(name='Champion Number {}'.format(champ.champNumber), value='')
         if champ.infopage == 'none':
             em.add_field(name='Kabam Spotlight', value='No URL found')
         else:
@@ -1151,15 +1152,15 @@ class MCOC(ChampionFactory):
     @champ.command(name='abilities')
     async def champ_abilities(self, *, champ : ChampConverter):
         '''Champion Abilities'''
-        xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-        abilities=xref['abilities'].split(', ')
-        extended_abilities=xref['extended_abilities'].split(', ')
-        counters=xref['counters'].split(', ')
-        hashtags=xref['hashtags'].split(' #')
+        # xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+        # abilities=xref['abilities'].split(', ')
+        # extended_abilities=xref['extended_abilities'].split(', ')
+        # counters=xref['counters'].split(', ')
+        # hashtags=xref['hashtags'].split(' #')
         # em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='\n'.join(abilities))
-
         em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
-        em.add_field(name='Champion Number',value='{}'.format(champ.champNumber))
+        abilities = champ.abilities.split(',')
+        em.add_field(name='Abilities',value='\n'.join(abilities))
         # em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
         # if len(extended_abilities) > 0:
         #     print('extended_abilities '+str(len(extended_abilities)))
