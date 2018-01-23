@@ -1164,7 +1164,7 @@ class MCOC(ChampionFactory):
         # if len(extended_abilities) > 1:
         #     em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
         if len(extended_abilities) > 1:
-            em.add_field('Extended Abilities', value=extended_abilities)
+            em.add_field(name='Extended Abilities', value=extended_abilities)
         if len(counters) > 1:
             em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters))
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
