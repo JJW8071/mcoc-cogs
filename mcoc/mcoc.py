@@ -728,7 +728,7 @@ class MCOC(ChampionFactory):
             return
         em = discord.Embed(color=champ.class_color, title='Champion Biography',
                 description=bio_desc)
-        em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
+        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
                 value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
         em.add_field(name='Shortcode', value=champ.short)
@@ -745,7 +745,7 @@ class MCOC(ChampionFactory):
         # names = {4: 'Duel', 5: 'Sparring'}
         DUEL_SPREADSHEET='https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/view#gid=61189525'
         em = discord.Embed(color=champ.class_color, title='Duel & Spart Targets',url=DUEL_SPREADSHEET)
-        em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
+        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='superflu0us\' Duel Targets',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
@@ -828,7 +828,7 @@ class MCOC(ChampionFactory):
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color,
                     title='Release Dates & Est. Pull Chance',url=SPOTLIGHT_DATASET)
-            em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
+            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
             em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
             em.add_field(name='4{0.star_char} Basic & \nPremium Hero Crystal'.format(champ), value=xref['4basic'],inline=False)
             em.add_field(name='5{0.star_char} Subfeature'.format(champ), value=xref['5subfeature'],inline=False)
@@ -865,7 +865,7 @@ class MCOC(ChampionFactory):
         if title is None:
             return
         em = discord.Embed(color=champ.class_color, title='Signature Ability')
-        em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
+        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name=title, value=champ.star_str)
         em.add_field(name='Signature Level {}'.format(champ.sig),
                 value=desc.format(d=sig_calcs))
@@ -1136,7 +1136,7 @@ class MCOC(ChampionFactory):
         '''Champion Spotlight link'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         em = discord.Embed(color=champ.class_color, title='Champ Info',url=SPOTLIGHT_SURVEY)
-        em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
+        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         if champ.infopage == 'none':
             em.add_field(name='Kabam Spotlight', value='No URL found')
         else:
@@ -1159,19 +1159,15 @@ class MCOC(ChampionFactory):
         hashtags=xref['hashtags'].split(' #')
         em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
         em.description = champ.abilities
-        em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
-        # em.add_field(name='Abilities',value='')
-        # if len(extended_abilities) > 1:
-        #     em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
+        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         if len(extended_abilities) > 1:
-            em.add_field(name='Extended Abilities', value=extended_abilities)
+            em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
         if len(counters) > 1:
             em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-        em.add_field(name='Hashtags (#)', value=champ.hashtags)
+        em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+        em.add_field(name='Shortcode', value=champ.short)
+        em.add_field(name='Champion Number', value=champ.champNumber)
         em.set_thumbnail(url=champ.get_avatar())
-
-
-        # em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
@@ -1181,7 +1177,7 @@ class MCOC(ChampionFactory):
         try:
             specials = champ.get_special_attacks()
             em = discord.Embed(color=champ.class_color, title='Champion Special Attacks')
-            em.set_author(name='{0.full_name} - Champion #{0.champNumber}'.format(champ), icon_url=champ.get_avatar())
+            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
             em.add_field(name=specials[0], value=specials[3])
             em.add_field(name=specials[1], value=specials[4])
             em.add_field(name=specials[2], value=specials[5])
