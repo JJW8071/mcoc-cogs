@@ -1443,10 +1443,11 @@ class MCOC(ChampionFactory):
 
     @costs.command(name='rankup', aliases=['rank',])
     async def cost_rankup(self, ctx, champs : ChampConverterMult):
-        keys = champs.keys
-        print(str(keys))
-
-
+        counter = 0
+        for champ in champs:
+            counter += 1
+        print('rankup counter: '+str(len(counter)))
+        
 
 
 def validate_attr(*expected_args):
