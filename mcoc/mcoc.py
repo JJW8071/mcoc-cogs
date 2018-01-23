@@ -1166,13 +1166,13 @@ class MCOC(ChampionFactory):
         if len(extended_abilities) > 1:
             em.add_field(name='Extended Abilities', value=extended_abilities)
         if len(counters) > 1:
-            em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters))
+            em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
-        # em.set_thumbnail(url=champ.get_avatar())
+        em.set_thumbnail(url=champ.get_avatar())
 
 
         # em.add_field(name='Shortcode', value=champ.short)
-        # em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
 
     @champ.command(name='specials', aliases=['special',])
