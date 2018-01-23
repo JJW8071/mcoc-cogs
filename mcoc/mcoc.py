@@ -1389,7 +1389,6 @@ class MCOC(ChampionFactory):
         else:
             await self.bot.say('Ambiguous response.  Submission canceled')
 
-
     async def check_guild(self, ctx):
         authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
         serverid = ctx.message.server.id
@@ -1432,24 +1431,21 @@ class MCOC(ChampionFactory):
         worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
         worksheet.sync()
 
+    @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
+    @commands.group(pass_context=True, hidden=True)
+    async def cost(self, ctx):
+        guild = await self.check_guild(ctx)
+        if not guild:
+            await self.bot.say('This server is unauthorized.')
+            return
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
 
-    # async def _process_submit_duel(self, package, GKEY):
-    #     # GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
-    #     GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
-    #     print('initializing _process_submit_duel')
-    #     # await self.update_local()
-    #     print('self.update_local() complete')
-    #     # try:
-    #     gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-    #     # except FileNotFoundError:
-    #     #     await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-    #     #     + gapi_service_creds)
-    #     #     return
-    #     sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
-    #     # worksheet = sh.worksheet(property='title',value='collector_submit')
-    #     worksheet = sh.worksheet(property='title',value='collector_duels')
-    #     worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
-    #     worksheet.sync()
+    @costs.command(name='rankup', aliases=['rank',])
+    async def cost_rankup(self, ctx, champs : ChampConverterMult):
+        print(str(len(champs)))
+
+
 
 
 def validate_attr(*expected_args):
