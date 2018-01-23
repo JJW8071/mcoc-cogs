@@ -1433,7 +1433,7 @@ class MCOC(ChampionFactory):
 
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, hidden=True)
-    async def cost(self, ctx):
+    async def costs(self, ctx):
         guild = await self.check_guild(ctx)
         if not guild:
             await self.bot.say('This server is unauthorized.')
