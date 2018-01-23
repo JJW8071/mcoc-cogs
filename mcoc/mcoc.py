@@ -1446,8 +1446,8 @@ class MCOC(ChampionFactory):
         counter = 0
         for champ in champs:
             counter += 1
-        print('rankup counter: '+str(len(counter)))
-        
+        print('rankup counter: '+str(counter))
+
 
 
 def validate_attr(*expected_args):
