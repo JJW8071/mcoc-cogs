@@ -1153,7 +1153,7 @@ class MCOC(ChampionFactory):
         '''Champion Abilities'''
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=xref['abilities'].split(', ')
-        extended_abilities=xref['extended_abilities'].split(', ')
+        extended_abilities=xref['extended_abilities']
 
         counters=xref['counters'].split(', ')
         hashtags=xref['hashtags'].split(' #')
@@ -1165,8 +1165,10 @@ class MCOC(ChampionFactory):
         # em.add_field(name='Abilities',value='')
         # if len(extended_abilities) > 1:
         #     em.add_field(name='Extended Abilities',value='\n'.join(x.title() for x in extended_abilities))
+        if len(extended_abilities) > 1:
+            em.add_field('Extended Abilities', value=extended_abilities)
         if len(counters) > 1:
-            em.add_field(name='Counters (#!)', value=' '.join('#!{} '.format(c.title()) for c in counters))
+            em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters)
         em.add_field(name='Hashtags (#)', value=champ.hashtags)
         # em.set_thumbnail(url=champ.get_avatar())
 
