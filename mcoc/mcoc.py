@@ -1303,16 +1303,16 @@ class MCOC(ChampionFactory):
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
-        if not guild:
-            await self.bot.say('This server is unauthorized.')
-            return
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
         guild = await self.check_guild(ctx)
-        if guild:
+        if not guild:
+            await self.bot.say('This server is unauthorized.')
+            return
+        else:
             message = await self.bot.say('Submission registered.\nChampion: {0.verbose_str}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
@@ -1333,10 +1333,14 @@ class MCOC(ChampionFactory):
             else:
                 await self.bot.say('Ambiguous response.  Submission canceled')
 
+
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
     async def submit_duel_target(self, ctx, champ : ChampConverter, observation, pi:int = 0):
         guild = await self.check_guild(ctx)
-        if guild:
+        if not guild:
+            await self.bot.say('This server is unauthorized.')
+            return
+        else:
             message = await self.bot.say('Duel Target registered.\nChampion: {0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
