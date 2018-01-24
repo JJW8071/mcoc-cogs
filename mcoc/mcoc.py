@@ -730,8 +730,8 @@ class MCOC(ChampionFactory):
                 description=bio_desc)
         em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.add_field(name='hashtags',
-                value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
-        em.add_field(name='Shortcode', value=champ.short)
+                value=chat.box(' '.join(champ.class_tags.union(champ.tags))),inline=False)
+        em.add_field(name='Shortcode', value=champ.short,inline=False)
         em.set_thumbnail(url=champ.get_avatar())
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         await self.bot.say(embed=em)
