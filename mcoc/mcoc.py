@@ -1416,7 +1416,7 @@ class MCOC(ChampionFactory):
         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
         GKEY = '1RoofkyYgFu6XOypoe_IPVHivvToEuLL2Vqv1KDQLGlA' #100 hit challenge
         SHEETKEY = 'collector_submit'
-        pct = round((547774-wintersoldier_hp)/547774, 4)*10
+        pct = round((547774-wintersoldier_hp)/547774)*100, 4)
         package = [[author.name, champ.unique, champ.full_name, champ.star, champ.rank, wintersoldier_hp, hits, pct]]
         print('package built')
         if react is not None:
