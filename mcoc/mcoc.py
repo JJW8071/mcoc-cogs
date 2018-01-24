@@ -1303,7 +1303,6 @@ class MCOC(ChampionFactory):
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
-        guild = await self.check_guild(ctx)
         if not guild:
             await self.bot.say('This server is unauthorized.')
             return
@@ -1312,58 +1311,62 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
-        message = await self.bot.say('Submission registered.\nChampion: {0.verbose_str}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
-        await self.bot.add_reaction(message, '❌')
-        await self.bot.add_reaction(message, '🆗')
-        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
-        if react is not None:
-            if react.reaction.emoji == '❌':
-                await self.bot.say('Submission canceled.')
-            elif react.reaction.emoji == '🆗':
-                GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
-                message2 = await self.bot.say('Submission in process.')
-                author = ctx.message.author
-                package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, champ.max_lvl, author.name, author.id]]
-                check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')                # await self._process_submit_prestige(ctx, champ, observation)
-                if check:
-                    await self.bot.edit_message(message2, 'Submission complete.')
-                else:
-                    await self.bot.edit_message(message2, 'Submission failed.')
-        else:
-            await self.bot.say('Ambiguous response.  Submission canceled')
+        guild = await self.check_guild(ctx)
+        if guild:
+            message = await self.bot.say('Submission registered.\nChampion: {0.verbose_str}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
+            await self.bot.add_reaction(message, '❌')
+            await self.bot.add_reaction(message, '🆗')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+            if react is not None:
+                if react.reaction.emoji == '❌':
+                    await self.bot.say('Submission canceled.')
+                elif react.reaction.emoji == '🆗':
+                    GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
+                    message2 = await self.bot.say('Submission in process.')
+                    author = ctx.message.author
+                    package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, champ.max_lvl, author.name, author.id]]
+                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')                # await self._process_submit_prestige(ctx, champ, observation)
+                    if check:
+                        await self.bot.edit_message(message2, 'Submission complete.')
+                    else:
+                        await self.bot.edit_message(message2, 'Submission failed.')
+            else:
+                await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
     async def submit_duel_target(self, ctx, champ : ChampConverter, observation, pi:int = 0):
-        message = await self.bot.say('Duel Target registered.\nChampion: {0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
-        await self.bot.add_reaction(message, '❌')
-        await self.bot.add_reaction(message, '🆗')
-        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
-        if react is not None:
-            if react.reaction.emoji == '❌':
-                await self.bot.say('Submission canceled.')
-            elif react.reaction.emoji == '🆗':
-                # GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
-                GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
-                message2 = await self.bot.say('Submission in progess.')
-                author = ctx.message.author
-                star = '{0.star}{0.star_char}'.format(champ)
-                if pi == 0:
-                    if champ.has_prestige:
-                        pi=champ.prestige
-                now = str(ctx.message.timestamp)
-                package = [[now, author.name, star, champ.full_name, champ.rank, champ.max_lvl, pi, observation, author.id]]
-                print('package built')
-                check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
-                if check:
-                    await self.bot.edit_message(message2, 'Submission complete.')
-                    async with aiohttp.ClientSession() as s:
-                        await asyncio.sleep(10)
-                        await self.cache_remote_file('duelist', s, force_cache=True, verbose=True)
-                        await self.bot.edit_message(message2, 'Submission complete.\nDuel Targets refreshed.')
-                else:
-                    await self.bot.edit_message(message2, 'Submission failed.')
-        else:
-            await self.bot.say('Ambiguous response.  Submission canceled')
+        guild = await self.check_guild(ctx)
+        if guild:
+            message = await self.bot.say('Duel Target registered.\nChampion: {0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
+            await self.bot.add_reaction(message, '❌')
+            await self.bot.add_reaction(message, '🆗')
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+            if react is not None:
+                if react.reaction.emoji == '❌':
+                    await self.bot.say('Submission canceled.')
+                elif react.reaction.emoji == '🆗':
+                    # GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
+                    GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
+                    message2 = await self.bot.say('Submission in progess.')
+                    author = ctx.message.author
+                    star = '{0.star}{0.star_char}'.format(champ)
+                    if pi == 0:
+                        if champ.has_prestige:
+                            pi=champ.prestige
+                    now = str(ctx.message.timestamp)
+                    package = [[now, author.name, star, champ.full_name, champ.rank, champ.max_lvl, pi, observation, author.id]]
+                    print('package built')
+                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
+                    if check:
+                        await self.bot.edit_message(message2, 'Submission complete.')
+                        async with aiohttp.ClientSession() as s:
+                            await asyncio.sleep(10)
+                            await self.cache_remote_file('duelist', s, force_cache=True, verbose=True)
+                            await self.bot.edit_message(message2, 'Submission complete.\nDuel Targets refreshed.')
+                    else:
+                        await self.bot.edit_message(message2, 'Submission failed.')
+            else:
+                await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='awkill', aliases=['awko','defkill','defko'])
     async def submit_awkill(self, ctx, champ : ChampConverter, node:int, ko: int):
@@ -1394,6 +1397,37 @@ class MCOC(ChampionFactory):
             package = [[now, author.name, author.id, champ.unique, node, ko]]
             print('package built')
             check = await self._process_submission(package=package, GKEY=GKEY, sheet='defender_kos')
+            if check:
+                await self.bot.edit_message(message2, 'Submission complete.')
+            else:
+                await self.bot.edit_message(message2, 'Submission failed.')
+
+    @submit.command(pass_context=True, name='100hits')
+    async def submit_100hitchallenge(self, ctx, champ : ChampConverter, hits : int, wintersoldier_hp : int, author : discord.User = None):
+        if author is None:
+            author = ctx.message.author
+        message = await self.bot.say('100 Hit Challenge registered.\nChampion: {0.verbose_str}\nHits: {1}\nWinter Soldier HP: {2}\nPress OK to confirm.'.format(champ, hits, wintersoldier_hp))
+        await self.bot.add_reaction(message, '❌')
+        await self.bot.add_reaction(message, '🆗')
+        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+        GKEY = '1RoofkyYgFu6XOypoe_IPVHivvToEuLL2Vqv1KDQLGlA' #100 hit challenge
+        SHEETKEY = 'collector_submit'
+        package = [[author.name, champ.full_name, champ.star, champ.rank, wintersoldier_hp, hits]]
+        print('package built')
+        if react is not None:
+            if react.reaction.emoji == '❌':
+                await self.bot.say('Submission canceled.')
+            elif react.reaction.emoji == '🆗':
+                message2 = await self.bot.say('Submission in progess.')
+                check = await self._process_submission(package=package, GKEY=GKEY, sheet=SHEETKEY)
+                if check:
+                    await self.bot.edit_message(message2, 'Submission complete.')
+                else:
+                    await self.bot.edit_message(message2, 'Submission failed.')
+        else:
+            message2 = await self.bot.say('Ambiguous response: Submission in progess.')
+            print('package built')
+            check = await self._process_submission(package=package, GKEY=GKEY, sheet=SHEETKEY)
             if check:
                 await self.bot.edit_message(message2, 'Submission complete.')
             else:
