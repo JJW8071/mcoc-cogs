@@ -1,14 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "c3ba45c93229973f41319c0848cab06f985f669d",
+    "hash": "3e7da5aa43dc8380ac49bdd6a4aa1a229065cc00",
     "language": "en",
-    "string_count": 774,
+    "post_processed": true,
+    "string_count": 792,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1509508178
+    "ts": 1516299248,
+    "versionLock": "17.0"
   },
   "strings": [
     {
@@ -995,6 +997,21 @@
       "v": "HULK! SMASH!"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HULK_RAGNAROK_0",
+      "v": "Hulk smashes his hammer down sending out shockwaves to knock his opponent flying.",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HULK_RAGNAROK_1",
+      "v": "Hulk unleashes a powerful series of attacks with both weapons.",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HULK_RAGNAROK_2",
+      "v": "A favorite of the crowd, Hulk uses his axe to throw his opponent to the ground before launching himself into a massive leaping SMASH!",
+      "vn": 17
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_HULK_RED_0",
       "v": "Punch through their defenses. Shatter their formation."
     },
@@ -1165,6 +1182,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_KARNAK_2",
       "v": "All of humanity is as nothing. The universe will not notice when Karnak’s foe is no longer."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_KILLMONGER_0",
+      "v": "Killmonger stays true to his name, offering a 2-for-1 special on knives to the chest and a bonus leaping kick to the face.",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_KILLMONGER_1",
+      "v": "Leaping into the air for a height advantage, Killmonger lands with his ceremonial blades, striking deep wounds in his target.",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_KILLMONGER_2",
+      "v": "Killmonger’s black-ops training becomes painfully realized as he uses his Vibranium claws to lacerate his Opponent.",
+      "vn": 17
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_KINGPIN_0",
@@ -2268,6 +2300,21 @@
       "v": "Worldbreaker"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_HULK_RAGNAROK_0",
+      "v": "Shockwave",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_HULK_RAGNAROK_1",
+      "v": "Whirlwind",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_HULK_RAGNAROK_2",
+      "v": "Hulk Smash",
+      "vn": 17
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_HULK_RED_0",
       "v": "Blistering Assault"
     },
@@ -2437,6 +2484,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_KARNAK_2",
       "v": "Blind Time"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_KILLMONGER_0",
+      "v": "Merchant of Death",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_KILLMONGER_1",
+      "v": "Leopard Strike",
+      "vn": 17
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_KILLMONGER_2",
+      "v": "Claws Out",
+      "vn": 17
     },
     {
       "k": "ID_SPECIAL_ATTACK_KINGPIN_0",

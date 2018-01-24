@@ -1,15 +1,15 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "ed56ba67d26c18740b2d6061ea09c4f0cd6f2180",
+    "hash": "bfa3ebd8e18ee7ea0098cfa67540d466b7b5ec12",
     "language": "en",
     "post_processed": true,
-    "string_count": 765,
+    "string_count": 783,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1511473915,
+    "ts": 1516651450,
     "versionLock": "17.0"
   },
   "strings": [
@@ -1104,7 +1104,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BELIEVER_DESC",
-      "v": "[ffffff]Punisher 2099:[-] The first use of the Nano-Tech Battery is immediately recharged.\n[ffffff]Thor:[-] +{0}% Fury Potency.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Punisher 2099:[-] The first use of the Nano-Tech Battery is immediately recharged.\n[64acff]Thor:[-] +{0}% Fury Potency.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "13.1"
     },
     {
@@ -1204,7 +1204,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CROSSTRAINING_DESC",
-      "v": "[ffffff]Punisher 2099:[-] Begins the fight with {0}% Power Meter.\n[ffffff]Punisher:[-] +{0}% Fury and Bleed Ability Accuracy.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Punisher 2099:[-] Begins the fight with {0}% Power Meter.\n[64acff]Punisher:[-] +{0}% Fury and Bleed Ability Accuracy.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "13.1"
     },
     {
@@ -1351,7 +1351,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_HELLLORDS",
-      "v": "[64acff]Hela:[-] Begin the fight with 1 Bar of Power.\n[64acff]Dormammu:[-] Increases any Health gained while his Imbued Dimensional Link is active by {0}%\n[64acff]Mephisto:[-] Regain the first Soul spent to trigger his Soul Imprisonment each fight.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.\n",
+      "v": "[64acff]Hela:[-] Begin the fight with 1 Bar of Power.\n[64acff]Dormammu:[-] Increases any Health gained while his Imbued Dimensional Link is active by {0}%\n[64acff]Mephisto:[-] Regain the first Soul spent to trigger his Soul Imprisonment each fight.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
       "vn": 16
     },
     {
@@ -1365,8 +1365,13 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_IMSOUL",
-      "v": "[64acff]Hela:[-] Nullify effects against Hela have a {0}% reduced chance to trigger.\n[64acff]Loki:[-] While they are Cursed, Loki always counts as having more Health than his Opponent.\n[64acff]Thor (Ragnarok):[-] Gains +100% Perfect Block Chance, when Autoblocking.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.\n",
+      "v": "[64acff]Hela:[-] Nullify effects against Hela have a {0}% reduced chance to trigger.\n[64acff]Loki:[-] While they are Cursed, Loki always counts as having more Health than his Opponent.\n[64acff]Thor (Ragnarok):[-] Gains +100% Perfect Block Chance, when Autoblocking.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
       "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_LULLABY",
+      "v": "[64acff]Hulk (Ragnarok):[-] When Struck Hulk has a {0}% chance to ready a SMASH for his next attack.\n[64acff]Black Widow:[-] Evade chance increases by 100%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_MANAGAIN",
@@ -1395,6 +1400,11 @@
       "v": "Mystic Champions gain +{0}% Energy Resistance"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_OFFLIMITS",
+      "v": "[64acff]Hulk (Ragnarok):[-] Hulk's chance to SMASH on All Attacks increases by {0}% while Face Me is active.\n[64acff]Hela:[-] Hela begins the first with 1 Fury Buff, and if she is ever without a Fury Buff for 10 seconds, she gains one.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_PERFECTBLOCK",
       "v": "All Champions gain +{0}% Perfect Block Chance"
     },
@@ -1412,8 +1422,13 @@
       "v": "All Champions gain +{0}% Block Proficiency"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_PUNYGOD",
+      "v": "[64acff]Hulk (Ragnarok):[-] +{0} Physical Resistance while Unstoppable.\n[64acff]Loki:[-] Basic Attacks against Loki have a 10% chance to miss, while his Opponent is under the effect of any Buff.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_QUEENOFHEL",
-      "v": "Champions have a {0}% chance to instantly regain {0}% of their HP just before they’re knocked out. This chance increases by {0}% for each Champion on their team currently knocked out.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.\n",
+      "v": "Champions have a {0}% chance to instantly regain {0}% of their HP just before they’re knocked out. This chance increases by {0}% for each Champion on their team currently knocked out.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
       "vn": 16
     },
     {
@@ -1436,6 +1451,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_STUN_AVENGERS",
       "v": "All Champions gain a {0}% chance to Stun with each Special Attack."
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_TEAMBUILDING",
+      "v": "[64acff]Hulk (Ragnarok):[-] SMASH attacks have a {0}% chance to be Unblockable.\n[64acff]Thor (Ragnarok):[-] Special attacks becomes Unblockable while the Boon of the Gods Power Gain is active.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_TECH",
@@ -1504,6 +1524,21 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG",
+      "v": "[64acff]Killmonger:[-] [16982bff]15%[-] chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] [16982bff]+{0}%[-] Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.\n[16982bff]This Synergy is enhanced in the next Tier.[-]",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG_B",
+      "v": "[64acff]Killmonger:[-] [16982bff]30%[-] chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] [16982bff]+{0}%[-] Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.\n[16982bff]This Synergy is enhanced in the next Tier.[-]",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG_C",
+      "v": "[64acff]Killmonger:[-] 100% chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] +{0}% Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_FAMILY_I",
       "v": "FAMILY Lv. 1"
     },
@@ -1514,6 +1549,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_FAMILY_III",
       "v": "FAMILY Lv. 3"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_FEARLESS_LONG",
+      "v": "[64acff]Killmonger:[-] If Vibranium Armor is active, Killmonger has a 35% chance to Purify a Debuff after a 0.5 second delay and then instantly Regenerate 4% Health per Debuff.\n[64acff]Void[-] Regenerates {0}% Health when inflicting his Intimidating Debuffs.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_DESC",
@@ -1712,8 +1752,13 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_LOYALMINISTER_DESC",
-      "v": "[ffffff]Punisher 2099:[-] Begin the fight with {0}% additional Battery charge.\n[ffffff]Captain America:[-] +{0}% Attack while the opponent is Fatigued or Stunned.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Punisher 2099:[-] Begin the fight with {0}% additional Battery charge.\n[64acff]Captain America:[-] +{0}% Attack while the opponent is Fatigued or Stunned.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_LULLABY",
+      "v": "LULLABY",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_MASTERMIND_I",
@@ -1800,8 +1845,13 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_NOTAFRAIDOFDEATH_LONG",
-      "v": "[64acff]Thor (Ragnarok):[-] Regenerates {0}% of max Health when killing opponents.\n[64acff]Hela[-] Grants {0} Spirits of the Dead charges at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Thor (Ragnarok):[-] Regenerates {0}% of max Health when killing opponents.\n[64acff]Hela[-] Grants 100 Spirits of the Dead charges at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_OFFLIMITS",
+      "v": "OFF LIMITS",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_OTHERHALF",
@@ -1820,7 +1870,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_OVERCOMINGFEAR_LONG",
-      "v": "[64acff]Void:[-] Fear of the Void activates at the start of the fight for {0} seconds against the Avengers. \n[64acff]Avengers:[-] {0}% chance to shrug off Debuffs and become Unstoppable for 3 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Void:[-] Fear of the Void activates at the start of the fight for {0} seconds against the Avengers. \n[64acff]Avengers[-] [64acff]Avengers:[-] +15% Attack Rating.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "16.1"
     },
     {
@@ -1830,13 +1880,18 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PACTWDEMON_LONG",
-      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.\n",
+      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PROFESSORSINCRIME",
       "v": "PROFESSORS IN CRIME",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PUNYGOD",
+      "v": "PUNY GOD",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_QUEENOFHEL",
@@ -1976,6 +2031,11 @@
       "k": "ID_UI_HERO_SYNERGY_SPLITPERSON_DESC",
       "v": "[64acff]Green Goblin:[-] Super Bomb Ability Accuracy +{0}%.\n[64acff]Iron Patriot:[-] Arc Overload Potency +{0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_TEAMBUILDING",
+      "v": "TEAM BUILDING EXERCISE",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_TEAMMATES_I",

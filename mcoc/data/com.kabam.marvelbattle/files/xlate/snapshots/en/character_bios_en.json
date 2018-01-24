@@ -1,14 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "5a7c2bc9ea920bf16320ef1de6f5d184e345dde6",
+    "hash": "801f06fb5a55c32450589bb1bb5ac7de936fec99",
     "language": "en",
-    "string_count": 128,
+    "post_processed": true,
+    "string_count": 131,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1510019134
+    "ts": 1516299286,
+    "versionLock": "17.0"
   },
   "strings": [
     {
@@ -134,7 +136,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_DORMAMMU",
-      "v": "Dormammu was born to a race of powerful beings made of pure magical energy known as the Faltine, and has only one true desire: power. This desire drove him from his home world and brought him to the Dark Dimension, where he now rules and draws even greater power from the worship of his subjects. Now with the power of so many heroes concentrated in the Contest, Dormammu has come as one of the greatest mystical threats in the univer, undoubtedly to gain that power for himself.",
+      "v": "Dormammu was born to a race of powerful beings made of pure magical energy known as the Faltine, and has only one true desire: power. This desire drove him from his home world and brought him to the Dark Dimension, where he now rules and draws even greater power from the worship of his subjects. Now with the power of so many heroes concentrated in the Contest, Dormammu has come as one of the greatest mystical threats in the universe, undoubtedly to gain that power for himself.",
       "vn": 12
     },
     {
@@ -222,6 +224,11 @@
       "v": "Tony Stark, man of means and intelligence, knows what to do when it’s time to battle a raging Hulk – build a Hulkbuster exo-frame to bolster your armor.  Loaded for maximum strength and power with loads of heavy weaponry, this is a must have for anyone looking to SMASH!"
     },
     {
+      "k": "ID_CHARACTER_BIOS_HULK_RAGNAROK",
+      "v": "Only Hulk truly knows how he ended up on Sakaar, fighting in the arena. But once he entered the arena, he was immediately a crowd favorite! By using his unique blend of savage rage, showmanship, and unstoppable strength to smash through some of the strongest beings in the galaxy, he became their Champion. After all, the only thing better than smashing, is smashing them while the crowd goes wild!",
+      "vn": 17
+    },
+    {
       "k": "ID_CHARACTER_BIOS_HULK_RED",
       "v": "General Thaddeus “Thunderbolt” Ross has done the unthinkable in his unending mission to hunt down and destroy the Incredible Hulk. Using a combination of radiations, Ross has turned himself into what he hated for so long: a walking weapon of mass destruction. Now, equipped with super strength, durability and the ability to absorb radiation and energy, Thunderbolt Ross struggles with his desire to end the Hulk without succumbing to his own monstrous impulses."
     },
@@ -277,6 +284,11 @@
     {
       "k": "ID_CHARACTER_BIOS_KARNAK",
       "v": "Karnak Mander-Azur, Inhuman philosopher and Magister of the Second Tower of Wisdom, refused the transformative Terrigen Mists and chose instead to train his body and mind like no other. Through his training, Karnak has gained immense insight into both himself and others, allowing him to see the flaw in all things and strike down his opponents with ruthless physical and mental precision."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_KILLMONGER",
+      "v": "Erik Stevens’ ruthlessness and combat skill earned him the nickname “Killmonger” during his time as a black-ops soldier. While he has not set foot in Wakanda for a long time, he has returned with a plan that threatens to put Black Panther and all of Wakanda at risk. Using his charisma, combat prowess and his knowledge of Wakandan customs, Erik Killmonger is an imminent threat to all that T'Challa holds dear.",
+      "vn": 17
     },
     {
       "k": "ID_CHARACTER_BIOS_KINGPIN",

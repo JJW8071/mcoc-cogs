@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "2d9ac631b02acf53525d2a1aa4dcea60638c3dd0",
+    "hash": "0802e59fe45df8183f54a4247e67ec8a8f8da03d",
     "language": "en",
     "post_processed": true,
-    "string_count": 3247,
+    "string_count": 3343,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1511996627,
-    "versionLock": "16.1"
+    "ts": 1516065469,
+    "versionLock": "17.0"
   },
   "strings": [
     {
@@ -98,6 +98,11 @@
       "k": "ID_STAT_MODOK_FF4",
       "v": "Force Field recharges {1} second(s) faster for each alive Champion on the enemy team.",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_STAT_MODOK_FF5",
+      "v": "Force Field is removed by Unblockable attacks.",
+      "vn": 17
     },
     {
       "k": "ID_STAT_MODOK_FF_SHORT",
@@ -345,8 +350,13 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_STAT_SIGNATURE_MODOK_LONG6B",
+      "v": "Science: Reduce [16982bff]{1}%[-] damage for each unique Debuff active.",
+      "vn": 17
+    },
+    {
       "k": "ID_STAT_SIGNATURE_MODOK_LONG7",
-      "v": "     Skill: Why bother? They’re not even superhuman!",
+      "v": "Skill: Why bother? They’re not even superhuman!",
       "vn": "16.1"
     },
     {
@@ -412,7 +422,7 @@
     },
     {
       "k": "ID_UI_ATTIRBUTE_RALLY_TOOLTIP",
-      "v": "Percentage of damage taken from unblocked hits that gets converted into ADRENALINE. This value can in turn be converted back to HEALTH by landing successful hits against the opponent.",
+      "v": "Percentage of damage received from hits get converted into ADRENALINE (also applies to Blocked hits). ADRENALINE can be converted back into HEALTH by landing successful hits against the opponent.",
       "vn": "15.1"
     },
     {
@@ -646,7 +656,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_BIOCHEM",
-      "v": "[64acff]Doctor Octopus:[-] Start with {0} Chemistry Research.\n[64acff]Ant-Man:[-] Glancing Hits reflect {0}% of Physical Damage done, by attacks that make Contact.",
+      "v": "[64acff]Doctor Octopus:[-] Start with {0} Chemistry Research.\n[64acff]Ant-Man:[-] Glancing Hits reflect {0}% of Physical Damage done, by attacks that make Contact.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
     },
     {
@@ -671,7 +681,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ENGINEERING",
-      "v": "[64acff]Doctor Octopus:[-] Research Categories no longer fall off over time.\n[64acff]Vulture:[-] Gain an additional +{0} Chitauri Charge on Critical Hit.",
+      "v": "[64acff]Doctor Octopus:[-] Research Categories no longer fall off over time.\n[64acff]Vulture:[-] Gain an additional +{0} Chitauri Charge on Critical Hit.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
     },
     {
@@ -681,7 +691,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_PARTICLEPHYSICS",
-      "v": "[64acff]Doctor Octopus:[-] When a Breakthrough expires, Research Categories reset to {0}.\n[64acff]Electro:[-] Gains {0}% additional Power from Critical Hits.",
+      "v": "[64acff]Doctor Octopus:[-] When a Breakthrough expires, Research Categories reset to {0}.\n[64acff]Electro:[-] Gains {0}% additional Power from Critical Hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
     },
     {
@@ -691,8 +701,28 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_ENGULFEDBYTHEVOID_LONG",
-      "v": "[64acff]Void:[-] When activating his Special 3, The Void gains a Reality Warp charge for {0} seconds, increasing the duration of any Fury Buffs activated afterwards by 20 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Void:[-] When activating his Special 3, The Void gains a Reality Warp charge for {0} seconds, increasing the duration of any Fury effects activated afterward by 20 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER",
+      "v": "ENHANCED SOLDIERS Lv. 1",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_B",
+      "v": "ENHANCED SOLDIERS Lv. 2",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_C",
+      "v": "ENHANCED SOLDIERS Lv. 3",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_FEARLESS",
+      "v": "FEARLESS",
+      "vn": 17
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PARTICLEPHYSICS",
@@ -708,6 +738,16 @@
       "k": "ID_UI_HERO_SYNERGY_SEETHINGHATRED_DESC",
       "v": "[64acff]Green Goblin:[-] +{0}% Pumpkin Bomb damage for each Cunning and Madness charge.\n[64acff]Spider-Man Champions:[-] Critical Hits generate {0}% more Power.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_WAKANDA",
+      "v": "WAKANDA LEADERSHIP",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_WAKANDA_LONG",
+      "v": "[64acff]Killmonger:[-] Starts the fight with 3 of his Indestructible and Unstoppable Charges.\n[64acff]Black Panther CW[-] Well Timed Blocks provides a +{0}% Fury Buff for 15 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 17
     },
     {
       "k": "ID_UI_SIG_ABILITY_NONE",
@@ -3538,7 +3578,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_BLEED_CRIT_AO",
-      "v": "Critical Hits lacerate opponents with a [16982bff]{0}%[-] chance, inflicting [16982bff]{1}[-] Bleed damage over [16982bff]{2}[-] seconds.",
+      "v": "Critical Hits lacerate opponents with a {0}% chance, inflicting [16982bff]{1} Bleed damage over {2} seconds.",
       "vn": 12
     },
     {
@@ -3768,6 +3808,11 @@
       "vn": 12
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_CROWDFRENZY_HUD",
+      "v": "CROWD FRENZY!",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_DANCE_SP",
       "v": "This champion gains {1} Buff effects, chosen at random."
     },
@@ -3809,7 +3854,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_ENERVATE",
-      "v": "{0}% chance to Enervate target, prevent them from gaining Power when struck for [16982bff]{2}[-] seconds."
+      "v": "{0}% chance to Enervate target, preventing them from gaining Power when struck for [16982bff]{2}[-] seconds.",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_HVY_HUD",
@@ -3840,6 +3886,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EW_SP3_HUD",
       "v": "EXPLOIT WEAKNESS - SPECIAL 3",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_FACEME_HUD",
+      "v": "FACE ME!",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_FATIGUE_FLAT",
@@ -3934,6 +3985,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_HEAL_AO",
       "v": "[16982bff]{0}%[-] chance to restore [16982bff]{1}[-] health.",
       "vn": 12
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_HULKENRAGED_HUD",
+      "v": "HULK ENRAGED!",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_HULKSMASH",
@@ -4621,6 +4677,11 @@
       "v": "For each Armor Up effect active, Civil Warrior’s advanced Stark Tech protects him further, reducing enemy Offensive Ability Accuracy by [16982bff]{1}%[-] per Armor Up charge."
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_SMASH_HUD",
+      "v": "SMASH!",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_STATIC_100",
       "v": "Opponents that make contact with you receive a Static Shock for [16982bff]{1}%[-] of the damage they inflicted."
     },
@@ -4718,6 +4779,16 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_TENACITY_HUD",
       "v": "TENACITY"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_THUMBSDOWN_HUD",
+      "v": "THUMBS DOWN",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_THUMBSUP_HUD",
+      "v": "THUMBS UP",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_TOUGHNESS",
@@ -5614,6 +5685,156 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HUD_GENERIC",
       "v": "SPECIAL"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_A",
+      "v": "The crowd is out for blood, and cares little about who spills it. Crowd Excitement increases by {1} each time either Hulk or his Opponent land a hit.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_B",
+      "v": "The crowd also loves a champion with a certain special flourish. Each time either Hulk or his Opponent uses a Special Attack, Crowd Excitement increases by {1}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_C",
+      "v": "However the crowd bores easily, and Crowd Excitement falls constantly, falling faster the longer it’s been since it last increased.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_C_2",
+      "v": "However the crowd bores easily, and Crowd Excitement falls constantly, falling faster the more excited it is.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_D",
+      "v": "Hulk is a champion of the people, and he gets worked up as the crowd does Passively increasing his Attack by up to [16982bff]+{1}[-] based on Crowd Excitement.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_E",
+      "v": "While Crowd Excitement is 100, the Attack bonus increases by [16982bff]{1}[-].",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_E_2",
+      "v": "While Crowd Excitement is 100, all of Hulk's attacks SMASH.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_F",
+      "v": "If Crowd Excitement reaches 100 the Crowd works itself into a frenzy, locking Crowd Excitement at 100 for {2} seconds, then resetting it to {1}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_ADORATION_G",
+      "v": "If Crowd Excitement reaches 0, Hulk becomes Enraged at the insult. This locks Crowd Excitement to 0, and Hulk’s next attack will be Unblockable and SMASH, then Crowd Excitement resets to {1}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_FACEME_A",
+      "v": "Hulk becomes Enraged while under the Effects of a cowardly Passive Damage Over Time Effect. While Enraged Hulk gains:",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_FACEME_B",
+      "v": "[16982bff]+{1}[-] Attack.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_FACEME_C",
+      "v": "Chance the Opponent will trigger a Special Attack +{1}%.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_FACEME_D",
+      "v": "Instantly Regenerate [16982bff]{1}%[-] of Damage taken.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_HVY_SMASH",
+      "v": "If this attack SMASHes it gains an additional [16982bff]+{1}[-] Attack, and increases the Crowd Excitement by {2}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_DESC_A",
+      "v": "Once per fight when either Hulk or his Opponent hits {1}% Health remaining the crowd judges that fighter's performance. If they feel they fought well they give a Thumbs Up, if they feel they fought poorly a Thumbs Down. Each judgement grants Hulk a Passive effect.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_DESC_A_ALT",
+      "v": "Once per fight when either Hulk or his Opponent hits [16982bff]{1}%[-] Health remaining the crowd judges that fighter's performance. If they feel they fought well they give a Thumbs Up, if they feel they fought poorly a Thumbs Down. Each judgement grants Hulk a Passive effect.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_DESC_B",
+      "v": "Thumbs Up: Regenerate [16982bff]{1}[-] Health on Hulk over {2} seconds.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_DESC_C",
+      "v": "Thumbs Down: [16982bff]+{1}[-] Attack for the rest of the fight.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_SIMPLE",
+      "v": "At the end of the fight the crowd shall with a turned thumb pass judgement on the competitors. Those found wanting will fall, and those deemed worthy shall rise to fight once more.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_TITLE",
+      "v": "POLLICE VERSO",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_TITLE_LOWER",
+      "v": "Pollice Verso",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SIGNATURE_TITLE_SHORT",
+      "v": "Pollice Verso {0}",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SMASH_A",
+      "v": "Every time Hulk attacks he has a {0}% chance to SMASH!",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SMASH_B",
+      "v": "Additionally every {2} seconds Hulk gets angry and triggers SMASH on his next attack.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SMASH_C",
+      "v": "When SMASHing Hulk goes Unstoppable and gains [16982bff]+{1}[-] Attack.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SP1_STUN",
+      "v": "{0}% Chance to Stun for {2} seconds, if Crowd Excitement is less than {1}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SP2_ENERVATE",
+      "v": "This attack gains [16982bff]+{1}[-] Attack for each Buff active on either Taskmaster or his Opponent.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SP2_STUN",
+      "v": "{0}% Chance to Stun for {2} seconds, if Crowd Excitement is greater than {1}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SP3_CROWD",
+      "v": "Crowd Excitement goes to {1}.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_HULK_RAGNAROK_SP3_SMASH",
+      "v": "If this Attack SMASHes it gains [16982bff]+{1}[-] Attack.",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_HYPCOSMICCHARGE",
@@ -7592,6 +7813,11 @@
       "v": "[b310e8]Reflective Armor VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_REFLECTIVEDMG_HUD",
+      "v": "REFLECTING DAMAGE",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_REFLECTSTUN_HUD",
       "v": "REFLECT STUN"
     },
@@ -8078,6 +8304,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_SIPHONCHARGE_HUD",
       "v": "SIPHON CHARGE",
       "vn": 14
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_SMASH_SHORT",
+      "v": "SMASH",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_SOULHARVEST",
@@ -8634,6 +8865,11 @@
       "v": "[b310e8]Toughness VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ADORATION",
+      "v": "Adoration of the Masses - Passive",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_BAGOFTRICKS",
       "v": "Bag of Tricks - Special & Heavy Attacks",
       "vn": "14.1"
@@ -8647,6 +8883,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_EXPLOITWEAKNESS",
       "v": "Exploit Weakness - Passive",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FACEME",
+      "v": "Face Me - Passive",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FF",
@@ -8724,6 +8965,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONAURAINCINERATE",
       "v": "Aura of Incineration",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBASICSTRUCK",
+      "v": "When Struck by Basic Attacks",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBIO",
@@ -9079,7 +9325,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONVULTURECHARGE",
-      "v": "Chitauri Energy Core - Passive\n",
+      "v": "Chitauri Energy Core - Passive",
       "vn": 14
     },
     {
@@ -9109,6 +9355,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMACKTALK",
       "v": "Smack-Talk"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMASH",
+      "v": "SMASH - Passive",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SOD",
@@ -9677,6 +9928,46 @@
       "vn": 13
     },
     {
+      "k": "ID_UI_STAT_FORMAT_KILLM_CRITICALRES",
+      "v": "This Champion has additional Critical Resistance in its Base Attributes.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_INDESTRUCTIBLE_SHORT",
+      "v": "[808080ff]Indestructible[-]",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_SP3",
+      "v": "Unstoppable and Indestructible when Blocking for {2} seconds.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_SP_BLD",
+      "v": "If Killmonger inflicted 15 or more Bleed Debuffs in this fight, he inflicts a Bleed stack for every Bleed he inflicted. Each Bleed deals [16982bff]{1}[-] Direct Damage over {2} seconds. This effect can activate once a fight.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_SP_INDESTRUCTIBLE",
+      "v": "Vibranium Armor activates {1} Indestructible Charges. A charge is spent to ignore all the incoming damage from an attack. \n",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_SP_UNSTOPPABLE",
+      "v": "Killmonger gains {1} Counterpunch Charges that last for {0} seconds. A charge is spent to shrug off the impact of enemy attacks for {2} seconds when Killmonger is blocking, allowing him to immediately counter-attack.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_TRUESTRIKE",
+      "v": "Hitting opponents that are recovering from a Special Attack grants Killmonger True Strike for {2} seconds. This allows him to ignore Armor, Resistances, and Evasion.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KILLM_VIBRANIUM_PURIFY",
+      "v": "At the start of the fight, Vibranium Armor provides [16982bff]{1}[-] Armor Rating and Killmonger gains {2}% of his missing Power each time a Debuff is inflicted against him. Vibranium Armor is disabled if he is suffering from an Armor Break effect.",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_KPIN_BLACKISO_HUD",
       "v": "BLACK ISO-8",
       "vn": 15
@@ -9776,6 +10067,41 @@
     {
       "k": "ID_UI_STAT_FORMAT_LIFEDRAIN",
       "v": "Rogue is healed for {0}% of the Life Stolen."
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_CONCUSSION",
+      "v": "Consumes all Exhaustion Debuffs to inflict Concussion, reducing the opponent’s Ability Accuracy by {1}% per Debuff converted for {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_DMG",
+      "v": "Luke Cage gains [16982bff]{1}[-] Attack Rating for each Debuff on the opponent.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_EXHAUST",
+      "v": "{0}% chance to Exhaust the opponent, reducing Critical Hit Damage Rating by [16982bff]{1}[-] and the potency of their Power Gain effects by 25% for {2} seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_PHYSICAL",
+      "v": "[16982bff]+{1}[-] Physical Resistance against non-Critical Hits.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_SIG_1",
+      "v": "Bullet-proof skin allows Luke Cage to become Indestructible and ignore all incoming damage for [16982bff]{2}[-] seconds.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_SIG_2",
+      "v": "This ability can be activated again after a [16982bff]{2}[-] second cooldown.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_LUKECAGEU_SP3",
+      "v": "Inflicts 4 Exhaustion Debuffs, each reducing Critical Hit Damage Rating by [16982bff]{1}[-] and the potency of their Power Gain effects by 25% for {2} seconds.",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_MEDUSA_ARMORSHATTERED",
@@ -10053,6 +10379,41 @@
       "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON_POWER",
       "v": "Fills to max Power over {2} seconds. This Power Gain is interrupted If Thor gets knocked down by a Special Attack. Boon of the Gods is not affected by Ability Accuracy and prevents Thor from gaining Power when struck by Special Attacks.",
       "vn": 16
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_BLOCK",
+      "v": "Blocking has a {0}% chance to convert Energy Attacks into Heat Charges. All Attacks from Mystic Champions are considered as Energy Attacks towards this ability.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_HEAT",
+      "v": "Whenever Red Hulk loses 10% of his Max Health, he gains 1 Heat Charge. For each Heat Charge he has, his attacks deal an additional {1}% of the damage dealt as a burst of Physical Damage. Max Stacks: 10",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_IMMUNITIES",
+      "v": "Whenever Red Hulk would become Poisoned or Incinerated, his altered state removes it and has a {0}% chance to convert it to a Heat Charge.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_REGEN",
+      "v": "Expends {0} Heat Charge(s) to Regenerate [16982bff]{1}[-] Health.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_SIG_1",
+      "v": "General Ross prepares to cross the line in the sand, beginning the fight with {2} Heat Charge(s) ready and for each charge he gains [16982bff]{1}[-] Physical Resistance.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_SIG_2",
+      "v": "Additionally, each Heat Charge provides him [16982bff]{1}%[-] Incinerate Damage Resistance.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_REDHULK_SP3",
+      "v": "Red Hulk expends {0} Heat Charge(s) to Incinerate his opponent, dealing [16982bff]{1}[-] Energy Damage over {2} seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it's active.",
+      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_REFLECTIVEARMOR",
@@ -11590,6 +11951,11 @@
       "vn": "14.1"
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_GAMORA_DESC_NEW2",
+      "v": "A [16982bff]{0}%[-] chance for Gamora to strike an Assassination blow with her Godslayer blade, guaranteeing a Critical Hit and granting a {1}% increase in Critical Damage Multiplier. This can only occur once per fight.",
+      "vn": "14.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_GAMORA_SHORT",
       "v": "Assassination {0}"
     },
@@ -12172,6 +12538,31 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_KARNAK_TITLE",
       "v": "SECOND TOWER TRAINING"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_KILLM_LONG",
+      "v": "Vibranium Armor activates Reverberation for {2} seconds, dealing damage back to the opponent when Killmonger is Struck or Blocks an attack. Damage is based on Killmonger’s stored Power at the time of activation, inflicting up to [16982bff]{1}%[-] of the incoming damage as Physical Damage. Reverberation has a {0} second cooldown time after expiring.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_KILLM_LONG_2",
+      "v": "When both Reverberation and True Strike are active, Killmonger gains [16982bff]+{1}[-] Attack Rating when hitting opponents.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_KILLM_SHORT",
+      "v": "Reverberation {0}",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_KILLM_SIMPLE",
+      "v": "Vibranium Armor reverberates incoming damage back to the opponent.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_KILLM_TITLE",
+      "v": "REVERBERATION",
+      "vn": 17
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_KINGGROOT_DESC",

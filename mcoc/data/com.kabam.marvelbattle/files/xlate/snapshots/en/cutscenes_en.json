@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "41916fdfa372d868d85f172f67d5e9f455c93f84",
+    "hash": "945033a48e5b6edc2a78fc3e5dfb9f866d0cf6d6",
     "language": "en",
-    "string_count": 234,
+    "string_count": 250,
     "tagged": [
       "cutscenes",
       "client"
     ],
-    "ts": 1511481485
+    "ts": 1513805209
   },
   "strings": [
     {
@@ -583,6 +583,86 @@
       "v": "ANT-MAN EPILOGUE"
     },
     {
+      "k": "ID_UI_CUTSCENE_BP",
+      "v": "RISE OF THE BLACK PANTHER",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_01",
+      "v": "Spider-Man completed his mission. The Chaos Stone is ours.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_02",
+      "v": "I knew Peter could pull it off... but it was a bit too close for comfort, Strange.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_03",
+      "v": "At least our team is tied with Thanos, with two stones each.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_04",
+      "v": "We have two, yes. But Spider-Man got close to the Gauntlet. He said Thanos has secured a third stone, Turquoise in color.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_05",
+      "v": "Son of a-",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_06",
+      "v": "We’re playing a losing game, Tony. It’s in Thanos’ nature to complete the gauntlet. Even I can’t hide the stones from him forever.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_07",
+      "v": "The Black Panther’s words… “We can’t out-swim a shark in the water.”",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_08",
+      "v": "T’Challa went on a rogue mission to prevent the impeding war. I tried to contact him after he went silent about a month ago... But he’s nowhere.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_09",
+      "v": "You mean he’s nowhere to be found.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_10",
+      "v": "I mean he’s nowhere. After Guillotine got kidnapped, I placed tracking spells on each of the Illuminati. No matter where you are, dead or alive, I should be able to find you… ",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_11",
+      "v": "….At least in this plane of existence.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_12",
+      "v": "The Black Panther is locked in a battle too large for human comprehension. To find him, one needs to look beyond the traditional concepts of “place” and “time”.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_13",
+      "v": "You’re going abstract again, Strange. Where’s the Black Panther?!",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_14",
+      "v": "He’s all around us.",
+      "vn": 17
+    },
+    {
+      "k": "ID_UI_CUTSCENE_BP_15",
+      "v": "I think I’m gonna need a new armor...",
+      "vn": 17
+    },
+    {
       "k": "ID_UI_CUTSCENE_CIVILWAR",
       "v": "CIVIL WAR EPILOGUE"
     },
@@ -602,7 +682,7 @@
     },
     {
       "k": "ID_UI_CUTSCENE_MODOK_02",
-      "v": "If we’re going to run a five-star facility, we need to do better! ",
+      "v": "If we’re going to run a five-star facility, we need to do better!",
       "vn": "16.1"
     },
     {
@@ -617,7 +697,7 @@
     },
     {
       "k": "ID_UI_CUTSCENE_MODOK_05",
-      "v": "I propose a toast… to all self-proclaimed “Cosmic Gods” out there. ",
+      "v": "I propose a toast… to all self-proclaimed “Cosmic Gods” out there.",
       "vn": "16.1"
     },
     {
@@ -665,7 +745,7 @@
     },
     {
       "k": "ID_UI_CUTSCENE_YET_PG01_02",
-      "v": "Three Billion Years ago. ",
+      "v": "Three Billion Years ago.",
       "vn": "16.1"
     },
     {
