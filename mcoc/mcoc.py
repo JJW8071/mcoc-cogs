@@ -1978,7 +1978,7 @@ class Champion:
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
         else:
-            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D'):
+            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D','_LONG','_LONG_2'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
