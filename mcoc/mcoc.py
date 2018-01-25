@@ -107,7 +107,8 @@ icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data
 mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
 kabam_bio = mcoc_dir + 'character_bios_en.json'
 kabam_special_attacks = mcoc_dir+ 'special_attacks_en.json'
-kabam_bcg_stat_en = mcoc_dir+'bcg_stat_en.json'
+kabam_bcg_stat_en = mcoc_dir+'bcg_stat_en.json
+kabam_bcg_en= mcoc_dir + 'bcg_en.json'
 ##### Special attacks require:
 ## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack title
 #mcoc_special_attack='ID_SPECIAL_ATTACK_'
