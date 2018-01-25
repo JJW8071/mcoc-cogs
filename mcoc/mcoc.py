@@ -1255,10 +1255,10 @@ class MCOC(ChampionFactory):
     #     await self.bot.upload(data_files['phc_jpg']['local'],
     #             content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
     @commands.command(hidden=True, pass_context=True)
-    async def search_bcg_stat_en(self, ctx, key: str = None):
+    async def search_bcg_stat_en(self, ctx, term: str = None):
         data =  load_kabam_json(kabam_bcg_stat_en)
         keylist = data.keys()
-        if key is None:
+        if term is None:
             print(keylist)
             pages = chat.pagify('\n'.join(k for k in keylist)))
             for page in pages:
