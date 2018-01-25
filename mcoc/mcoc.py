@@ -1260,7 +1260,9 @@ class MCOC(ChampionFactory):
         keylist = data.keys()
         if key is None:
             print(keylist)
-            # await self.bot.say(chat.box('\n'.join(k for k in keylist)))
+            pages = chat.pagify('\n'.join(k for k in keylist)))
+            for page in pages:
+                await self.bot.say(page)
         # # elif key in keylist:
         #     print('key found')
         #     await self.bot.say(chat.box(strings[key]))
