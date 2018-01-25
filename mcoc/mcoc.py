@@ -1260,7 +1260,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @search.command(hidden=True, pass_context=True, name='bcg_stat_en')
+    @search.command(hidden=True, pass_context=True, name='bcg_stat_en',aliases='bcg_stat')
     async def search_bcg_stat_en(self, ctx, term: str = None):
         '''Search for keys or terms within bcg_stat_en'''
         data =  load_kabam_json(kabam_bcg_stat_en)
@@ -1282,7 +1282,7 @@ class MCOC(ChampionFactory):
                 for page in pages:
                     await self.bot.say(page)
 
-    @search.command(hidden=True, pass_context=True, name='bcg_stat_en')
+    @search.command(hidden=True, pass_context=True, name='bcg_en', aliases='bcg')
     async def search_bcg_en(self, ctx, term: str = None):
         '''Search for keys or terms within bcg_en'''
         data =  load_kabam_json(kabam_bcg_en)
