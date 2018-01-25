@@ -1262,9 +1262,9 @@ class MCOC(ChampionFactory):
         if key is None:
             print('searching for keys')
             await self.bot.say(chat.box('\n'.join(k for k in keylist))
-        elif key in keylist:
-            print('key found')
-            await self.bot.say(chat.box(strings[key]))
+        # elif key in keylist:
+        #     print('key found')
+        #     await self.bot.say(chat.box(strings[key]))
 
 
 
