@@ -1254,8 +1254,15 @@ class MCOC(ChampionFactory):
     #     '''Premium Hero Crystal Release Dates'''
     #     await self.bot.upload(data_files['phc_jpg']['local'],
     #             content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
-    @commands.command(hidden=True, pass_context=True)
+
+    @commands.group(hidden=True, pass_context=True)
+    async def search(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @search.command(hidden=True, pass_context=True, name='bcg_stat_en')
     async def search_bcg_stat_en(self, ctx, term: str = None):
+        '''Search for keys or terms within bcg_stat_en'''
         data =  load_kabam_json(kabam_bcg_stat_en)
         keylist = data.keys()
         if term is None:
@@ -1275,10 +1282,27 @@ class MCOC(ChampionFactory):
                 for page in pages:
                     await self.bot.say(page)
 
-        # # elif key in keylist:
-        #     print('key found')
-        #     await self.bot.say(chat.box(strings[key]))
-
+    @search.command(hidden=True, pass_context=True, name='bcg_stat_en')
+    async def search_bcg_en(self, ctx, term: str = None):
+        '''Search for keys or terms within bcg_en'''
+        data =  load_kabam_json(kabam_bcg_stat_en)
+        keylist = data.keys()
+        if term is None:
+            print(keylist)
+            pages = chat.pagify('\n'.join(k for k in keylist))
+            for page in pages:
+                await self.bot.say(page)
+        else:
+            if term in keylist:
+                await self.bot.say(data[term])
+            else:
+                searchlist = []
+                for k in keylist:
+                    if term in data[k]:
+                        searchlist.append(data[k])
+                pages = chat.pagify('\n'.join(s for s in searchlist))
+                for page in pages:
+                    await self.bot.say(page)
 
 
 
