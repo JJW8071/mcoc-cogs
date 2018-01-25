@@ -1270,8 +1270,10 @@ class MCOC(ChampionFactory):
         if term is None:
             print(keylist)
             pages = chat.pagify('\n'.join(k for k in keylist))
+            page_list = []
             for page in pages:
-                await PagesMenu.menu_start(self, pages)
+                page_list.append(page)
+            await PagesMenu.menu_start(self, page_list)
         else:
             if term in keylist:
                 await self.bot.say(data[term])
@@ -1293,8 +1295,10 @@ class MCOC(ChampionFactory):
         if term is None:
             print(keylist)
             pages = chat.pagify('\n'.join(k for k in keylist))
+            page_list = []
             for page in pages:
-                await PagesMenu.menu_start(self, pages)
+                page_list.append(page)
+            await PagesMenu.menu_start(self, page_list)
         else:
             if term in keylist:
                 await self.bot.say(data[term])
