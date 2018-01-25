@@ -1278,10 +1278,11 @@ class MCOC(ChampionFactory):
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('```{}```\n{}'.format(k, data[k]))
+                        searchlist.append('``{}``\n```{}```'.format(k, data[k]))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
-                for page in pages:
-                    await self.bot.say(page)
+                await PagesMenu.menu_start(self, pages)
+                # for page in pages:
+                #     await self.bot.say(page)
 
     @search.command(hidden=True, pass_context=True, name='bcg_en', aliases=['bcg',])
     async def search_bcg_en(self, ctx, term: str = None):
@@ -1300,7 +1301,7 @@ class MCOC(ChampionFactory):
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('``{}``\n{}'.format(k, data[k]))
+                        searchlist.append('``{}``\n```{}```'.format(k, data[k]))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
                 for page in pages:
                     await self.bot.say(page)
