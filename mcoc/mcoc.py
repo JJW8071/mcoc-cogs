@@ -1263,6 +1263,18 @@ class MCOC(ChampionFactory):
             pages = chat.pagify('\n'.join(k for k in keylist))
             for page in pages:
                 await self.bot.say(page)
+        else:
+            if term in keylist:
+                await self.bot.say(data[k])
+            else:
+                searchlist = []
+                for k in keylist:
+                    if term in data[k]:
+                        searchlist.append(data[k])
+                pages = chat.pagify('\n'.join(s for s in searchlist))
+                for page in pages:
+                    await self.bot.say(page)
+
         # # elif key in keylist:
         #     print('key found')
         #     await self.bot.say(chat.box(strings[key]))
