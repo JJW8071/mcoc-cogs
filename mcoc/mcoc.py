@@ -1260,7 +1260,7 @@ class MCOC(ChampionFactory):
         keylist = data.keys()
         if term is None:
             print(keylist)
-            pages = chat.pagify('\n'.join(k for k in keylist)))
+            pages = chat.pagify('\n'.join(k for k in keylist))
             for page in pages:
                 await self.bot.say(page)
         # # elif key in keylist:
