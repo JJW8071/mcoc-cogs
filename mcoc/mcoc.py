@@ -1265,7 +1265,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say(page)
         else:
             if term in keylist:
-                await self.bot.say(data[k])
+                await self.bot.say(data[term])
             else:
                 searchlist = []
                 for k in keylist:
