@@ -1285,7 +1285,7 @@ class MCOC(ChampionFactory):
     @search.command(hidden=True, pass_context=True, name='bcg_stat_en')
     async def search_bcg_en(self, ctx, term: str = None):
         '''Search for keys or terms within bcg_en'''
-        data =  load_kabam_json(kabam_bcg_stat_en)
+        data =  load_kabam_json(kabam_bcg_en)
         keylist = data.keys()
         if term is None:
             print(keylist)
