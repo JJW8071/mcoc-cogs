@@ -2071,6 +2071,96 @@ class Champion:
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
         return '• ' + hex_re.sub(r'**\1**', str_data)
 
+class PagesMenu:
+
+    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
+
+    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
+            delete_onX=True):
+        self.bot = bot
+        self.timeout = timeout
+        self.add_pageof = add_pageof
+        self.choice = choice
+        self.delete_onX = delete_onX
+        self.embeded = False
+
+    async def menu_start(self, page_list):
+        page_length = len(page_list)
+        self.all_emojis = OrderedDict([(i.emoji, i) for i in (
+            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+            self.EmojiReact("\N{CROSS MARK}", True, None),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+                      )])
+
+        self.is_embeds = isinstance(page_list[0], discord.Embed)
+            self.embeded = True
+
+        if not self.is_embeds:
+            await self.bot.say('Function does not support non-embeds currently')
+            return
+
+        if self.add_pageof:
+            for i, page in enumerate(page_list):
+                if self.is_embeds:
+                    ftr = page.footer
+                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
+                            i+1, page_length), icon_url=ftr.icon_url)
+                else:
+                    page += '\n(Page {} of {})'.format(i+1, page_length)
+
+        self.page_list = page_list
+        await self.display_page(None, 0)
+
+    async def display_page(self, message, page):
+        if not message:
+            if self.embeded == True:
+                message = await self.bot.say(embed=self.page_list[page])
+            else:
+                message = await self.bot.say(self.page_list[page])
+            self.included_emojis = set()
+            for emoji in self.all_emojis.values():
+                if emoji.include:
+                    await self.bot.add_reaction(message, emoji.emoji)
+                    self.included_emojis.add(emoji.emoji)
+        else:
+            if self.embedded == True:
+                message = await self.bot.edit_message(message, embed=self.page_list[page])
+            else:
+                message = await self.bot.edit_message(message, self.page_list[page])
+        await asyncio.sleep(1)
+
+        react = await self.bot.wait_for_reaction(message=message,
+                timeout=self.timeout, emoji=self.included_emojis)
+        if react is None:
+            try:
+                await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                logger.warn("clear_reactions didn't work")
+                for emoji in self.included_emojis:
+                    await self.bot.remove_reaction(message, emoji, self.bot.user)
+            return None
+
+        emoji = react.reaction.emoji
+        pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
+        if pages_to_inc:
+            next_page = (page + pages_to_inc) % len(self.page_list)
+            try:
+                await self.bot.remove_reaction(message, emoji, react.user)
+                await self.display_page(message=message, page=next_page)
+            except discord.Forbidden:
+                await self.bot.delete_message(message)
+                await self.display_page(message=None, page=next_page)
+        elif emoji == '\N{CROSS MARK}':
+            try:
+                if self.delete_onX:
+                    await self.bot.delete_message(message)
+                else:
+                    await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                await self.bot.say("Bot does not have the proper Permissions")
+
 def bound_lvl(siglvl, max_lvl=99):
     if isinstance(siglvl, list):
         ret = []
