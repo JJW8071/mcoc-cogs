@@ -1257,12 +1257,10 @@ class MCOC(ChampionFactory):
     @commands.command(hidden=True, pass_context=True)
     async def search_bcg_stat_en(self, ctx, key: str = None):
         data =  load_kabam_json(kabam_bcg_stat_en)
-        strings = data['strings']
-        length = len(strings)
-        # keylist = strings.keys()
-        # if key is None:
-        #     print('searching for keys')
-        #     await self.bot.say(chat.box('\n'.join(k for k in keylist))
+        keylist = data.keys()
+        if key is None:
+            print('searching for keys')
+            await self.bot.say(chat.box('\n'.join(k for k in keylist))
         # # elif key in keylist:
         #     print('key found')
         #     await self.bot.say(chat.box(strings[key]))
