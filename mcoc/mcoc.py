@@ -1300,7 +1300,7 @@ class MCOC(ChampionFactory):
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('```{}```\n{}'.format(k, data[k]))
+                        searchlist.append('``{}``\n{}'.format(k, data[k]))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
                 for page in pages:
                     await self.bot.say(page)
