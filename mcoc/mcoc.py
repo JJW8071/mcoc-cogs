@@ -1254,6 +1254,20 @@ class MCOC(ChampionFactory):
     #     '''Premium Hero Crystal Release Dates'''
     #     await self.bot.upload(data_files['phc_jpg']['local'],
     #             content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
+    @commands.command(hidden=True)
+    async def search_bcg_stat_en(self, key : str = None):
+        data =  load_kabam_json(kabam_bcg_stat_en)
+        strings = data['strings']
+        keylist = strings.keys()
+        if key is None:
+            print('searching for keys')
+            await self.bot.say(chat.box('\n'.join(k for k in keylist))
+        elif key in keylist:
+            print('key found')
+            await self.bot.say(chat.box(strings[key]))
+
+
+
 
 
     @commands.command(hidden=True)
