@@ -1270,7 +1270,7 @@ class MCOC(ChampionFactory):
             print(keylist)
             pages = chat.pagify('\n'.join(k for k in keylist))
             for page in pages:
-                await self.bot.say(page)
+                await PagesMenu.menu_start(self, pages)
         else:
             if term in keylist:
                 await self.bot.say(data[term])
@@ -1293,7 +1293,7 @@ class MCOC(ChampionFactory):
             print(keylist)
             pages = chat.pagify('\n'.join(k for k in keylist))
             for page in pages:
-                await self.bot.say(page)
+                await PagesMenu.menu_start(self, pages)
         else:
             if term in keylist:
                 await self.bot.say(data[term])
@@ -1303,8 +1303,7 @@ class MCOC(ChampionFactory):
                     if term in data[k]:
                         searchlist.append('``{}``\n```{}```'.format(k, data[k]))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
-                for page in pages:
-                    await self.bot.say(page)
+                await PagesMenu.menu_start(self, pages)
 
 
 
