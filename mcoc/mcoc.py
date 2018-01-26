@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from textwrap import wrap
-from collections import UserDict, defaultdict, Mapping
+from collections import UserDict, defaultdict, Mapping, namedtuple
 from functools import partial
 from math import log2
 from math import *
@@ -2095,7 +2095,7 @@ class PagesMenu:
                       )])
 
         self.is_embeds = isinstance(page_list[0], discord.Embed)
-            self.embeded = True
+        self.embeded = True
 
         if not self.is_embeds:
             await self.bot.say('Function does not support non-embeds currently')
@@ -2125,7 +2125,7 @@ class PagesMenu:
                     await self.bot.add_reaction(message, emoji.emoji)
                     self.included_emojis.add(emoji.emoji)
         else:
-            if self.embedded == True:
+            if self.embeded == True:
                 message = await self.bot.edit_message(message, embed=self.page_list[page])
             else:
                 message = await self.bot.edit_message(message, self.page_list[page])
