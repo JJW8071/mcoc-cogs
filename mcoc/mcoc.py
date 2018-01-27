@@ -42,10 +42,7 @@ data_files = {
                 'local': 'data/mcoc/crossreference.csv', 'update_delta': 1},
     'prestigeCSV':{'remote': 'https://docs.google.com/spreadsheets/d/1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks/pub?gid=1346864636&single=true&output=csv',
                 'local': 'data/mcoc/prestige.csv', 'update_delta': 1},
-    'phc_jpg' : {'remote': 'http://marvelbitvachempionov.ru/wp-content/dates_PCHen.jpg',
-                'local': 'data/mcoc/dates_PCHen.jpg', 'update_delta': 7},
     'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTsPSNaY6WbNF1fY49jqjRm9hJZ60Sa6fU6Yd_t7nOrIxikVj-Y7JW_YSPwHoJfix9MA4YgWSenIwfl/pub?gid=694495962&single=true&output=csv',
-    # 'duelist' : {'remote': 'https://docs.google.com/spreadsheets/d/1LSNS5j1d_vs8LqeiDQD3lQFNIxQvTc9eAx3tNe5mdMk/pub?gid=1266181139&single=true&output=csv',
                 'local': 'data/mcoc/duelist.csv', 'update_delta': 1},
     #'masteries' : {'remote':'https://docs.google.com/spreadsheets/d/1mEnMrBI5c8Tbszr0Zne6qHkW6WxZMXBOuZGe9XmrZm8/pub?gid=0&single=true&output=csv',
                 #'local': 'data/mcoc/masteries.csv', 'update_delta': 1},
@@ -105,7 +102,7 @@ remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/mast
 icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
 
 ###### KEYS for MCOC JSON Data Extraction
-mcoc_dir='data/mcoc/com.kabam.marvelbattle/files/xlate/snapshots/en/'
+mcoc_dir='data/mcoc/json/snapshots/en/'
 kabam_bio = mcoc_dir + 'character_bios_en.json'
 kabam_special_attacks = mcoc_dir+'special_attacks_en.json'
 kabam_bcg_stat_en = mcoc_dir+'bcg_stat_en.json'
@@ -1641,12 +1638,12 @@ class Champion:
         self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
-        image = '{}portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        image = '{}/images/portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
         logger.debug(image)
         return image
 
     def get_featured(self):
-        image = '{}uigacha/featured/GachaChasePrize_256x256_{}.png'.format(
+        image = '{}images/featured/GachaChasePrize_256x256_{}.png'.format(
                     remote_data_basepath, self.mcocfeatured)
         logger.debug(image)
         return image
@@ -2084,7 +2081,13 @@ class PagesMenu:
         self.delete_onX = delete_onX
         self.embeded = False
 
-    async def menu_start(self, page_list):
+    async def menu_start(self, pages):
+        page_list = []
+        if isinstance(pages, list):
+            page_list = pages
+        else:
+            for page in pages:
+                page_list.append(page)
         page_length = len(page_list)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
             self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
@@ -2097,13 +2100,9 @@ class PagesMenu:
         self.is_embeds = isinstance(page_list[0], discord.Embed)
         self.embeded = True
 
-        if not self.is_embeds:
-            await self.bot.say('Function does not support non-embeds currently')
-            return
-
         if self.add_pageof:
             for i, page in enumerate(page_list):
-                if self.is_embeds:
+                if self.embedded:
                     ftr = page.footer
                     page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
                             i+1, page_length), icon_url=ftr.icon_url)
