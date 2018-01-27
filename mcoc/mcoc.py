@@ -1638,7 +1638,7 @@ class Champion:
         self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
-        image = '{}/images/portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        image = '{}images/portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
         logger.debug(image)
         return image
 
