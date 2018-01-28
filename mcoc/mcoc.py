@@ -1220,7 +1220,7 @@ class MCOC(ChampionFactory):
                 print(chmp.prestige)
                 numerator += int(chmp.prestige)
             print(numerator)
-            emtitle='Prestige: {}'.format(numerator/denom+1)
+            emtitle='Prestige: {}'.format(numerator/denom)
         else:
             emtitle = 'Prestige'
         em = discord.Embed(color=discord.Color.magenta(), title=emtitle,url=PRESTIGE_SURVEY,
