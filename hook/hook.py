@@ -518,7 +518,7 @@ class Hook:
             #         rating += roster[r]['Pi']
             # # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
             # em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
-            embeds.append(em3)
+            # embeds.append(em3)
         else:
             embeds = await self.roster_kickback(user.color)
         await self.pages_menu(ctx, embed_list=embeds)
