@@ -1218,7 +1218,7 @@ class MCOC(ChampionFactory):
         print(denom)
         for i in range(0,denom):
             chmp = spch[i]
-            print(i+' '+chmp.full_name)
+            print(str(i)+' '+chmp.full_name)
             print(chmp.prestige)
             numerator += int(chmp.prestige)
         print(numerator)
