@@ -505,21 +505,19 @@ class Hook:
             em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
             total = 0
             #
-            # for champ in roster:
-            #     total += champ.pi
-            em3.add_field(name='Cosmic ',value='TBD')
-            em3.add_field(name='Mystic ',value='TBD')
-            em3.add_field(name='Science ',value='TBD')
-            em3.add_field(name='Skill ',value='TBD')
-            em3.add_field(name='Mutant ',value='TBD')
-            em3.add_field(name='Tech ',value='TBD')
-            rating=0
-            for r in range(len(roster)):
-                champ = roster[r]
-                if champ["Stars"] == "4" or champ["Stars"] == "5":
-                    rating += roster[r]['Pi']
-            # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
-            em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
+            # em3.add_field(name='Cosmic ',value='TBD')
+            # em3.add_field(name='Mystic ',value='TBD')
+            # em3.add_field(name='Science ',value='TBD')
+            # em3.add_field(name='Skill ',value='TBD')
+            # em3.add_field(name='Mutant ',value='TBD')
+            # em3.add_field(name='Tech ',value='TBD')
+            # rating=0
+            # for r in range(len(roster)):
+            #     champ = roster[r]
+            #     if champ["Stars"] == "4" or champ["Stars"] == "5":
+            #         rating += roster[r]['Pi']
+            # # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
+            # em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
             embeds.append(em3)
         else:
             embeds = await self.roster_kickback(user.color)
