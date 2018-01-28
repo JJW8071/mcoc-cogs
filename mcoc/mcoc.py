@@ -1211,12 +1211,12 @@ class MCOC(ChampionFactory):
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
-        if len(spch) > 3:
-            denom = min(5, len(pch)-1)
+        if len(spch) > 5:
+            denom = 5
             print(denom)
             for i in range(0,denom):
                 chmp = spch[i]
-                print(chmp.full_name)
+                print(i+' '+chmp.full_name)
                 print(chmp.prestige)
                 numerator += int(chmp.prestige)
             print(numerator)
