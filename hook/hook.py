@@ -507,7 +507,6 @@ class Hook:
             #
             # for champ in roster:
             #     total += champ.pi
-            em3.add_field(name='Total Hero Rating',value='{}'.format(total))
             em3.add_field(name='Cosmic ',value='TBD')
             em3.add_field(name='Mystic ',value='TBD')
             em3.add_field(name='Science ',value='TBD')
@@ -517,8 +516,9 @@ class Hook:
             rating=0
             for r in range(len(roster)):
                 if roster[r]['Stars']=>4:
-                    rating = rating + roster[r]['Pi']
-            em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
+                    rating += roster[r]['Pi']
+            # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
+            em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
             embeds.append(em3)
         else:
             embeds = await self.roster_kickback(user.color)
