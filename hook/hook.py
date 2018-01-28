@@ -515,7 +515,8 @@ class Hook:
             em3.add_field(name='Tech ',value='TBD')
             rating=0
             for r in range(len(roster)):
-                if roster[r]['Stars']=>4:
+                champ = roster[r]
+                if champ["Stars"] == "4" or champ["Stars"] == "5":
                     rating += roster[r]['Pi']
             # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
             em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
