@@ -1212,7 +1212,7 @@ class MCOC(ChampionFactory):
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
         if len(spch) > 3:
-            denom = min(4, len(pch)-1)
+            denom = min(5, len(pch)-1)
             print(denom)
             for i in range(0,denom):
                 chmp = spch[i]
