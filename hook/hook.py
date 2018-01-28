@@ -514,8 +514,8 @@ class Hook:
             em3.add_field(name='Skill ',value='TBD')
             em3.add_field(name='Mutant ',value='TBD')
             em3.add_field(name='Tech ',value='TBD')
-            # rating=0
-            # keys = roster.keys()
+            rating=0
+            print len(roster)
             # for k in keys:
             #     rating = rating + roster[k].pi
             # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
