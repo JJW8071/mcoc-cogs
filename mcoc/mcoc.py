@@ -1211,18 +1211,18 @@ class MCOC(ChampionFactory):
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
-        if len(spch) => 5:
-            denom = 5
-            print(denom)
-            for i in range(0,denom):
-                chmp = spch[i]
-                print(i+' '+chmp.full_name)
-                print(chmp.prestige)
-                numerator += int(chmp.prestige)
-            print(numerator)
-            emtitle='Prestige: {}'.format(numerator/denom)
+        if len(spch) < 5:
+            denom = len(spch)
         else:
-            emtitle = 'Prestige'
+            denom = 5
+        print(denom)
+        for i in range(0,denom):
+            chmp = spch[i]
+            print(i+' '+chmp.full_name)
+            print(chmp.prestige)
+            numerator += int(chmp.prestige)
+        print(numerator)
+        emtitle='Prestige: {}'.format(numerator/denom)
         em = discord.Embed(color=discord.Color.magenta(), title=emtitle,url=PRESTIGE_SURVEY,
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
