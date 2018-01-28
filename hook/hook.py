@@ -515,10 +515,10 @@ class Hook:
             em3.add_field(name='Mutant ',value='TBD')
             em3.add_field(name='Tech ',value='TBD')
             rating=0
-            print len(roster)
-            # for k in keys:
-            #     rating = rating + roster[k].pi
-            # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
+            for r in range(len(roster)):
+                if roster[r]['Stars']=>4:
+                    rating = rating + roster[r]['Pi']
+            em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
             embeds.append(em3)
         else:
             embeds = await self.roster_kickback(user.color)
