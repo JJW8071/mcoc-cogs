@@ -394,7 +394,7 @@ class MCOCTools:
 
     @checks.admin_or_permissions(manage_roles=True)
     @commands.command(name='norole',pass_context=True,hidden=True)
-    async def _no_role(self, ctx, role=discord.Role):
+    async def _no_role(self, ctx, role : discord.Role):
         server=ctx.message.server
         members = ctx.message.server.members
         missing = []
@@ -402,7 +402,7 @@ class MCOCTools:
             if role not in member.roles:
                 missing.append('{0.name} : {0.id}'.format(member))
         if len(missing) > 1:
-            await self.bot.say('\n'.join(members))
+            await self.bot.say('\n'.join(missing))
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
     # async def collectorsetup(self,ctx,*args):
