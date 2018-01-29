@@ -2101,7 +2101,7 @@ class PagesMenu:
 
         if self.add_pageof:
             for i, page in enumerate(page_list):
-                if self.embedded:
+                if embedded:
                     ftr = page.footer
                     page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
                             i+1, page_length), icon_url=ftr.icon_url)
