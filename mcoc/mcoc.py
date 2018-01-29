@@ -2085,7 +2085,6 @@ class PagesMenu:
         self.embedded = True
 
     async def menu_start(self, pages):
-        print("Embedded pages: "+str(self.embedded))
         page_list = []
         if isinstance(pages, list):
             page_list = pages
@@ -2114,11 +2113,11 @@ class PagesMenu:
                     page += '\n(Page {} of {})'.format(i+1, page_length)
 
         self.page_list = page_list
-        await self.display_page(None, 0, embedded)
+        await self.display_page(None, 0)
 
-    async def display_page(self, message, page, embedded = False):
+    async def display_page(self, message, page):
         if not message:
-            if embedded == True:
+            if self.embedded == True:
                 message = await self.bot.say(embed=self.page_list[page])
             else:
                 message = await self.bot.say(self.page_list[page])
@@ -2128,7 +2127,7 @@ class PagesMenu:
                     await self.bot.add_reaction(message, emoji.emoji)
                     self.included_emojis.add(emoji.emoji)
         else:
-            if embedded == True:
+            if self.embedded == True:
                 message = await self.bot.edit_message(message, embed=self.page_list[page])
             else:
                 message = await self.bot.edit_message(message, self.page_list[page])
@@ -2151,10 +2150,10 @@ class PagesMenu:
             next_page = (page + pages_to_inc) % len(self.page_list)
             try:
                 await self.bot.remove_reaction(message, emoji, react.user)
-                await self.display_page(message=message, page=next_page, embedded=embedded)
+                await self.display_page(message=message, page=next_page)
             except discord.Forbidden:
                 await self.bot.delete_message(message)
-                await self.display_page(message=None, page=next_page, embedded=embedded)
+                await self.display_page(message=None, page=next_page)
         elif emoji == '\N{CROSS MARK}':
             try:
                 if self.delete_onX:
