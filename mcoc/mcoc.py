@@ -1288,31 +1288,33 @@ class MCOC(ChampionFactory):
                     await menu.menu_start(page_list)                # for page in pages:
                 #     await self.bot.say(page)
     #
-    # @search.command(hidden=True, pass_context=True, name='bcg_en', aliases=['bcg',])
-    # async def search_bcg_en(self, ctx, term: str = None):
-    #     '''Search for keys or terms within bcg_en'''
-    #     data =  load_kabam_json(kabam_bcg_en)
-    #     keylist = data.keys()
-    #     if term is None:
-    #         print(keylist)
-    #         pages = chat.pagify('\n'.join(k for k in keylist))
-    #         page_list = []
-    #         for page in pages:
-    #             page_list.append(page)
-    #         await PagesMenu.menu_start(self, page_list)
-    #     else:
-    #         if term in keylist:
-    #             await self.bot.say(data[term])
-    #         else:
-    #             searchlist = []
-    #             for k in keylist:
-    #                 if term in data[k]:
-    #                     searchlist.append('``{}``\n```{}```'.format(k, data[k]))
-    #             pages = chat.pagify('\n'.join(s for s in searchlist))
-    #             page_list = []
-    #             for page in pages:
-    #                 page_list.append(page)
-    #             await PagesMenu.menu_start(self, page_list)
+    @search.command(hidden=True, pass_context=True, name='bcg_en', aliases=['bcg',])
+    async def search_bcg_en(self, ctx, term: str = None):
+        '''Search for keys or terms within bcg_en'''
+        data =  load_kabam_json(kabam_bcg_en)
+        keylist = data.keys()
+        if term is None:
+            print(keylist)
+            pages = chat.pagify('\n'.join(k for k in keylist))
+            page_list = []
+            for page in pages:
+                page_list.append(page)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)                # for page in pages:
+        else:
+            if term in keylist:
+                await self.bot.say(data[term])
+            else:
+                searchlist = []
+                for k in keylist:
+                    if term in data[k]:
+                        searchlist.append('``{}``\n```{}```'.format(k, data[k]))
+                pages = chat.pagify('\n'.join(s for s in searchlist))
+                page_list = []
+                for page in pages:
+                    page_list.append(page)
+                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                await menu.menu_start(page_list)                # for page in pages:
 
 
 
@@ -2080,8 +2082,11 @@ class PagesMenu:
         self.add_pageof = add_pageof
         self.choice = choice
         self.delete_onX = delete_onX
+        self.embedded = TRUE
 
     async def menu_start(self, pages):
+        self.embedded = isinstance(page_list[0], discord.Embed)
+        print("Embedded pages: "+str(self.embedded))
         page_list = []
         if isinstance(pages, list):
             page_list = pages
