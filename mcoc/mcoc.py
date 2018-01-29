@@ -1316,7 +1316,7 @@ class MCOC(ChampionFactory):
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 await menu.menu_start(page_list)                # for page in pages:
 
-    def _bcg_recompile(str_data):
+    def _bcg_recompile(self, str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
         return hex_re.sub(r'**\1**', str_data)
 
