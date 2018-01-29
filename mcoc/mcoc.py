@@ -2146,10 +2146,10 @@ class PagesMenu:
             next_page = (page + pages_to_inc) % len(self.page_list)
             try:
                 await self.bot.remove_reaction(message, emoji, react.user)
-                await self.display_page(message=message, page=next_page, embedded)
+                await self.display_page(message=message, page=next_page, embedded=embedded)
             except discord.Forbidden:
                 await self.bot.delete_message(message)
-                await self.display_page(message=None, page=next_page, embedded)
+                await self.display_page(message=None, page=next_page, embedded=embedded)
         elif emoji == '\N{CROSS MARK}':
             try:
                 if self.delete_onX:
