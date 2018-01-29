@@ -107,6 +107,7 @@ kabam_bio = mcoc_dir + 'character_bios_en.json'
 kabam_special_attacks = mcoc_dir+'special_attacks_en.json'
 kabam_bcg_stat_en = mcoc_dir+'bcg_stat_en.json'
 kabam_bcg_en= mcoc_dir+'bcg_en.json'
+kabam_masteries=mcoc_dir+'masteries_en.json'
 ##### Special attacks require:
 ## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack title
 #mcoc_special_attack='ID_SPECIAL_ATTACK_'
@@ -1259,37 +1260,62 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @search.command(hidden=True, pass_context=True, name='all')
-    async def search_all(self, ctx, term: str = None):
-        '''Search for keys or terms within all gamefiles'''
-        datafiles = [kabam_bcg_en, kabam_bcg_stat_en, kabam_special_attacks, kabam_bio]
-        page_list = []
-        for d in datafiles:
-            data =  load_kabam_json(d)
-            keylist = data.keys()
-            if term is None:
-                print(keylist)
-                pages = chat.pagify('\n'.join(k for k in keylist))
+    @search.command(hidden=True, pass_context=True, name='masteries')
+    async def search_masteries(self, ctx, term: str = None):
+        '''Search for keys or terms within masteries'''
+        data =  load_kabam_json(kabam_masteries)
+        keylist = data.keys()
+        if term is None:
+            print(keylist)
+            pages = chat.pagify('\n'.join(k for k in keylist))
+            page_list = []
+            for page in pages:
+                page_list.append(page)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)
+        else:
+            if term in keylist:
+                await self.bot.say(self._bcg_recompile(data[term]))
+            else:
+                searchlist = []
+                for k in keylist:
+                    if term in data[k]:
+                        searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompile(data[k])))
+                pages = chat.pagify('\n'.join(s for s in searchlist))
+                page_list = []
                 for page in pages:
                     page_list.append(page)
-                # menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-                # await menu.menu_start(page_list)
-            else:
-                if term in keylist:
-                    await self.bot.say(self._bcg_recompile(data[term]))
-                    return
-                else:
-                    searchlist = []
-                    for k in keylist:
-                        if term in data[k]:
-                            searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompile(data[k])))
-                    pages = chat.pagify('\n'.join(s for s in searchlist))
-                    page_list = []
-                    for page in pages:
-                        page_list.append(page)
-        if len(page_list) > 0:
+                    menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                    await menu.menu_start(page_list)                # for page in pages:
+
+
+    @search.command(hidden=True, pass_context=True, name='special_attacks', aliases=['specials'],)
+    async def search_special_attacks(self, ctx, term: str = None):
+        '''Search for keys or terms within special_attacks'''
+        data =  load_kabam_json(kabam_special_attacks)
+        keylist = data.keys()
+        if term is None:
+            print(keylist)
+            pages = chat.pagify('\n'.join(k for k in keylist))
+            page_list = []
+            for page in pages:
+                page_list.append(page)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(page_list)                # for page in pages:
+            await menu.menu_start(page_list)
+        else:
+            if term in keylist:
+                await self.bot.say(self._bcg_recompile(data[term]))
+            else:
+                searchlist = []
+                for k in keylist:
+                    if term in data[k]:
+                        searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompile(data[k])))
+                pages = chat.pagify('\n'.join(s for s in searchlist))
+                page_list = []
+                for page in pages:
+                    page_list.append(page)
+                    menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                    await menu.menu_start(page_list)                # for page in pages:
 
 
 
