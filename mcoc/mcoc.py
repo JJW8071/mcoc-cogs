@@ -2082,7 +2082,7 @@ class PagesMenu:
         self.add_pageof = add_pageof
         self.choice = choice
         self.delete_onX = delete_onX
-        self.embedded = TRUE
+        self.embedded = True
 
     async def menu_start(self, pages):
         self.embedded = isinstance(page_list[0], discord.Embed)
