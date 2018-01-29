@@ -2113,7 +2113,7 @@ class PagesMenu:
 
     async def display_page(self, message, page, embedded = False):
         if not message:
-            if embeded == True:
+            if embedded == True:
                 message = await self.bot.say(embed=self.page_list[page])
             else:
                 message = await self.bot.say(self.page_list[page])
@@ -2123,7 +2123,7 @@ class PagesMenu:
                     await self.bot.add_reaction(message, emoji.emoji)
                     self.included_emojis.add(emoji.emoji)
         else:
-            if embeded == True:
+            if embedded == True:
                 message = await self.bot.edit_message(message, embed=self.page_list[page])
             else:
                 message = await self.bot.edit_message(message, self.page_list[page])
