@@ -1287,7 +1287,7 @@ class MCOC(ChampionFactory):
                     page_list = []
                     for page in pages:
                         page_list.append(page)
-        if len(pages_list) > 0:
+        if len(page_list) > 0:
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
             await menu.menu_start(page_list)                # for page in pages:
 
