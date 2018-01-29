@@ -2070,7 +2070,6 @@ class Champion:
 
 class PagesMenu:
 
-    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
 
     def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
             delete_onX=True):
@@ -2080,6 +2079,7 @@ class PagesMenu:
         self.choice = choice
         self.delete_onX = delete_onX
         self.embeded = False
+        self.EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
 
     async def menu_start(self, pages):
         page_list = []
@@ -2130,8 +2130,7 @@ class PagesMenu:
                 message = await self.bot.edit_message(message, self.page_list[page])
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message,
-                timeout=self.timeout, emoji=self.included_emojis)
+        react = await self.bot.wait_for_reaction(message=message, timeout=self.timeout, emoji=self.included_emojis)
         if react is None:
             try:
                 await self.bot.clear_reactions(message)
