@@ -1266,7 +1266,7 @@ class MCOC(ChampionFactory):
         keylist = data.keys()
         if term is None:
             print(keylist)
-            pages = chat.pagify('\n'.join(k for k in keylist))
+            pages = chat.pagify('\n'.join(self._sig_header(k) for k in keylist))
             page_list = []
             for page in pages:
                 page_list.append(page)
@@ -1295,7 +1295,7 @@ class MCOC(ChampionFactory):
         keylist = data.keys()
         if term is None:
             print(keylist)
-            pages = chat.pagify('\n'.join(k for k in keylist))
+            pages = chat.pagify('\n'.join(self._sig_header(k) for k in keylist))
             page_list = []
             for page in pages:
                 page_list.append(page)
