@@ -2080,7 +2080,6 @@ class PagesMenu:
         self.add_pageof = add_pageof
         self.choice = choice
         self.delete_onX = delete_onX
-        self.embeded = False
 
     async def menu_start(self, pages):
         page_list = []
@@ -2098,8 +2097,7 @@ class PagesMenu:
             self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
                       )])
 
-        self.is_embeds = isinstance(page_list[0], discord.Embed)
-        self.embeded = True
+        embedded = isinstance(page_list[0], discord.Embed)
 
         if self.add_pageof:
             for i, page in enumerate(page_list):
@@ -2111,11 +2109,11 @@ class PagesMenu:
                     page += '\n(Page {} of {})'.format(i+1, page_length)
 
         self.page_list = page_list
-        await self.display_page(None, 0)
+        await self.display_page(None, 0, embedded)
 
-    async def display_page(self, message, page):
+    async def display_page(self, message, page, embedded = False):
         if not message:
-            if self.embeded == True:
+            if embeded == True:
                 message = await self.bot.say(embed=self.page_list[page])
             else:
                 message = await self.bot.say(self.page_list[page])
@@ -2125,7 +2123,7 @@ class PagesMenu:
                     await self.bot.add_reaction(message, emoji.emoji)
                     self.included_emojis.add(emoji.emoji)
         else:
-            if self.embeded == True:
+            if embeded == True:
                 message = await self.bot.edit_message(message, embed=self.page_list[page])
             else:
                 message = await self.bot.edit_message(message, self.page_list[page])
@@ -2148,10 +2146,10 @@ class PagesMenu:
             next_page = (page + pages_to_inc) % len(self.page_list)
             try:
                 await self.bot.remove_reaction(message, emoji, react.user)
-                await self.display_page(message=message, page=next_page)
+                await self.display_page(message=message, page=next_page, embedded)
             except discord.Forbidden:
                 await self.bot.delete_message(message)
-                await self.display_page(message=None, page=next_page)
+                await self.display_page(message=None, page=next_page, embedded)
         elif emoji == '\N{CROSS MARK}':
             try:
                 if self.delete_onX:
