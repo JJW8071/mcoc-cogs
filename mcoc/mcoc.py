@@ -1254,10 +1254,44 @@ class MCOC(ChampionFactory):
     #     await self.bot.upload(data_files['phc_jpg']['local'],
     #             content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
-    @commands.group(hidden=True, pass_context=True)
+    @commands.group(hidden=True, pass_context=True, aliases=['datamine',])
     async def search(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
+
+    @search.command(hidden=True, pass_context=True, name='all')
+    async def search_all(self, ctx, term: str = None):
+        '''Search for keys or terms within all gamefiles'''
+        datafiles = [kabam_bcg_en, kabam_bcg_stat_en, kabam_special_attacks, kabam_bio]
+        page_list = []
+        for d in datafiles:
+            data =  load_kabam_json(d)
+            keylist = data.keys()
+            if term is None:
+                print(keylist)
+                pages = chat.pagify('\n'.join(k for k in keylist))
+                for page in pages:
+                    page_list.append(page)
+                # menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                # await menu.menu_start(page_list)
+            else:
+                if term in keylist:
+                    await self.bot.say(self._bcg_recompile(data[term]))
+                    return
+                else:
+                    searchlist = []
+                    for k in keylist:
+                        if term in data[k]:
+                            searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompile(data[k])))
+                    pages = chat.pagify('\n'.join(s for s in searchlist))
+                    page_list = []
+                    for page in pages:
+                        page_list.append(page)
+        if len(pages_list) > 0:
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)                # for page in pages:
+
+
 
     @search.command(hidden=True, pass_context=True, name='bcg_stat_en',aliases=['bcg_stat',])
     async def search_bcg_stat_en(self, ctx, term: str = None):
