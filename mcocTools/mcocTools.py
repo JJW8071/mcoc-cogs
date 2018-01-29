@@ -399,7 +399,7 @@ class MCOCTools:
         members = ctx.message.server.members
         missing = []
         for member in members:
-            if role not in member.Roles:
+            if role not in member.roles:
                 missing.append('{0.name} : {0.id}'.format(member))
         if len(missing) > 1:
             await self.bot.say('\n'.join(members))
