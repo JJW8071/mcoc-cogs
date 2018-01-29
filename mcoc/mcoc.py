@@ -2070,6 +2070,7 @@ class Champion:
 
 class PagesMenu:
 
+    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
 
     def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
             delete_onX=True):
@@ -2079,7 +2080,6 @@ class PagesMenu:
         self.choice = choice
         self.delete_onX = delete_onX
         self.embeded = False
-        self.EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
 
     async def menu_start(self, pages):
         page_list = []
@@ -2090,11 +2090,11 @@ class PagesMenu:
                 page_list.append(page)
         page_length = len(page_list)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
-            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
-            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
-            self.EmojiReact("\N{CROSS MARK}", True, None),
-            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
-            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+            PagesMenu.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+            PagesMenu.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+            PagesMenu.EmojiReact("\N{CROSS MARK}", True, None),
+            PagesMenu.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+            PagesMenu.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
                       )])
 
         self.is_embeds = isinstance(page_list[0], discord.Embed)
