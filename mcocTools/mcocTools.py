@@ -396,7 +396,7 @@ class MCOCTools:
     @commands.command(name='norole',pass_context=True,hidden=True)
     async def _no_role(self, ctx, role=discord.Role):
         server=ctx.message.server
-        members = ctx.message.server.ban_members
+        members = ctx.message.server.members
         missing = []
         for member in members:
             if role not in member.Roles:
