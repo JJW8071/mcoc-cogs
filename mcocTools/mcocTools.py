@@ -394,7 +394,7 @@ class MCOCTools:
 
     @checks.admin_or_permissions(manage_roles=True)
     @commands.command(name='norole',pass_context=True,hidden=True)
-    async def _no_role(self, role=discord.Role)
+    async def _no_role(self, ctx, role=discord.Role):
         server=ctx.message.server
         members = ctx.message.server.ban_members
         missing = []
