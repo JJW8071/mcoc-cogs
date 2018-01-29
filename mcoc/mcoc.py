@@ -1270,7 +1270,8 @@ class MCOC(ChampionFactory):
             page_list = []
             for page in pages:
                 page_list.append(page)
-            await PagesMenu.menu_start(self, page_list)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)
         else:
             if term in keylist:
                 await self.bot.say(data[term])
@@ -1283,7 +1284,8 @@ class MCOC(ChampionFactory):
                 page_list = []
                 for page in pages:
                     page_list.append(page)
-                await PagesMenu.menu_start(self, page_list)                # for page in pages:
+                    menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                    await menu.menu_start(page_list)                # for page in pages:
                 #     await self.bot.say(page)
     #
     # @search.command(hidden=True, pass_context=True, name='bcg_en', aliases=['bcg',])
@@ -1554,7 +1556,6 @@ class MCOC(ChampionFactory):
         for champ in champs:
             counter += 1
         print('rankup counter: '+str(counter))
-
 
 
 def validate_attr(*expected_args):
@@ -2090,11 +2091,11 @@ class PagesMenu:
                 page_list.append(page)
         page_length = len(page_list)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
-            PagesMenu.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
-            PagesMenu.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
-            PagesMenu.EmojiReact("\N{CROSS MARK}", True, None),
-            PagesMenu.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
-            PagesMenu.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+            self.EmojiReact("\N{CROSS MARK}", True, None),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
                       )])
 
         self.is_embeds = isinstance(page_list[0], discord.Embed)
@@ -2130,7 +2131,8 @@ class PagesMenu:
                 message = await self.bot.edit_message(message, self.page_list[page])
         await asyncio.sleep(1)
 
-        react = await self.bot.wait_for_reaction(message=message, timeout=self.timeout, emoji=self.included_emojis)
+        react = await self.bot.wait_for_reaction(message=message,
+                timeout=self.timeout, emoji=self.included_emojis)
         if react is None:
             try:
                 await self.bot.clear_reactions(message)
