@@ -2085,7 +2085,6 @@ class PagesMenu:
         self.embedded = True
 
     async def menu_start(self, pages):
-        self.embedded = isinstance(page_list[0], discord.Embed)
         print("Embedded pages: "+str(self.embedded))
         page_list = []
         if isinstance(pages, list):
@@ -2094,6 +2093,7 @@ class PagesMenu:
             for page in pages:
                 page_list.append(page)
         page_length = len(page_list)
+        self.embedded = isinstance(page_list[0], discord.Embed)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
             self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
             self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
