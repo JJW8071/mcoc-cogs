@@ -747,7 +747,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=champ.class_color, title='Duel & Spart Targets',url=DUEL_SPREADSHEET)
         em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
-        em.set_footer(text='superflu0us\' Duel Targets',
+        em.set_footer(text='2OO2RC51\' Duel Targets',
                 icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
         target_found = False
         for star in range(3,7):
@@ -1227,7 +1227,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.magenta(), title=emtitle,url=PRESTIGE_SURVEY,
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
-        em.set_footer(icon_url='https://www.fresnostate.edu/president/discovere/images/improvedlogos/unnamed.png',text='mutamatt Prestige for Collector')
+        em.set_footer(icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png',text='mutamatt Prestige for Collector')
         await self.bot.say(embed=em)
 
     @champ.command(name='aliases', aliases=('alias',))
@@ -1248,12 +1248,6 @@ class MCOC(ChampionFactory):
                     em.add_field(name=champ.full_name, value=champ.get_aliases())
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
-
-    # @commands.command()
-    # async def phc(self):
-    #     '''Premium Hero Crystal Release Dates'''
-    #     await self.bot.upload(data_files['phc_jpg']['local'],
-    #             content='Dates Champs are added to PHC (and as 5* Featured for 2nd time)')
 
     @commands.group(hidden=True, pass_context=True, aliases=['datamine',])
     async def search(self, ctx):
