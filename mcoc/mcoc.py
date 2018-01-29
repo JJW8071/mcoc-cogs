@@ -1266,7 +1266,7 @@ class MCOC(ChampionFactory):
         keylist = data.keys()
         if term is None:
             print(keylist)
-            pages = chat.pagify('\n'.join(self._sig_header(k) for k in keylist))
+            pages = chat.pagify('\n'.join(k for k in keylist))
             page_list = []
             for page in pages:
                 page_list.append(page)
@@ -1274,12 +1274,12 @@ class MCOC(ChampionFactory):
             await menu.menu_start(page_list)
         else:
             if term in keylist:
-                await self.bot.say(data[term])
+                await self.bot.say(self._bcg_recompile(data[term]))
             else:
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('``{}``\n```{}```'.format(k, data[k]))
+                        searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompiledata[k])))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
                 page_list = []
                 for page in pages:
@@ -1295,7 +1295,7 @@ class MCOC(ChampionFactory):
         keylist = data.keys()
         if term is None:
             print(keylist)
-            pages = chat.pagify('\n'.join(self._sig_header(k) for k in keylist))
+            pages = chat.pagify('\n'.join(k for k in keylist))
             page_list = []
             for page in pages:
                 page_list.append(page)
@@ -1303,12 +1303,12 @@ class MCOC(ChampionFactory):
             await menu.menu_start(page_list)                # for page in pages:
         else:
             if term in keylist:
-                await self.bot.say(data[term])
+                await self.bot.say(self._bcg_recompile(data[term]))
             else:
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('``{}``\n```{}```'.format(k, data[k]))
+                        searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompiledata[k])))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
                 page_list = []
                 for page in pages:
@@ -1316,6 +1316,9 @@ class MCOC(ChampionFactory):
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 await menu.menu_start(page_list)                # for page in pages:
 
+    def _bcg_recompile(str_data):
+        hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
+        return hex_re.sub(r'**\1**', str_data)
 
 
     @commands.command(hidden=True)
