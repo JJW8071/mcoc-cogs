@@ -95,7 +95,7 @@ class MCOCMaps:
     async def _set(self, ctx):
         '''Alliance Set subcommands'''
 
-    @alliance._set.group(pass_context=True, name='alliance')
+    @_set.command(pass_context=True, name='alliance')
     async def _set_alliance_role(self, ctx):
         '''Set alliance role'''
         await self.bot.say('Subgroup Test complete')
