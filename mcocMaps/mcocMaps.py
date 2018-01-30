@@ -91,14 +91,25 @@ class MCOCMaps:
     async def alliance(self, ctx):
         '''Alliance Commands'''
 
-    @alliance.group(pass_context=True)
-    async def _set(self, ctx):
+    @alliance.command(pass_context=True, name='set')
+    async def _set(self, ctx, role : discord.Role):
         '''Alliance Set subcommands'''
-
-    @_set.command(pass_context=True, name='alliance')
-    async def _set_alliance_role(self, ctx):
-        '''Set alliance role'''
-        await self.bot.say('Subgroup Test complete')
+        server = ctx.message.server
+        if role in server.roles:
+            message = await self.bot.say('Setting the Alliance Role as ``{}``\nClick OK to confirm.'.format(role.name))
+            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+            if react == None:
+                await self.bot.remove_reaction(message, '❌')
+                await self.bot.remove_reaction(message, '🆗')
+                await self.bot.edit_message(message, 'Ambiguous response. Alliance Role set operation canceled.')
+            elif react == '❌':
+                await self.bot.remove_reaction(message, '❌')
+                await self.bot.remove_reaction(message, '🆗')
+                await self.bot.edit_message(message, 'Alliance Role set operation canceled.')
+            elif react == '🆗':
+                await self.bot.remove_reaction(message, '❌')
+                await self.bot.remove_reaction(message, '🆗')
+                await self.bot.edit_message(message, 'Alliance Role = {} \nSet in progress.'.format(role.name))
 ### Beginning of AllianceWar.com integration
 
     @commands.command(pass_context=True, hidden=True)
