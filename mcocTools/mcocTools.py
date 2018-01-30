@@ -405,9 +405,9 @@ class MCOCTools:
         if len(missing) == 0:
             await self.bot.say('No users are missing the role: {}'.format(role.name))
         else:
-            pages = chat.pagify(chat.box('\n'.join(missing)))
+            pages = chat.pagify('\n'.join(missing))
             for page in pages:
-                await self.bot.say(page)
+                await self.bot.say(chat.box(page))
     # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
     # @commands.command(name='setup', pass_context=True)
     # async def collectorsetup(self,ctx,*args):
