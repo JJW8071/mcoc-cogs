@@ -89,16 +89,15 @@ class MCOCMaps:
 ### Beginning of Alliance Management Functions
     @commands.group(pass_context=True)
     async def alliance(self, ctx):
-        if ctx.invoked_subcommand is None:
-            await send_cmd_help(ctx)
+        '''Alliance Commands'''
 
     @alliance.group(pass_context=True)
     async def _set(self, ctx):
-        if ctx.invoked_subcommand is None:
-            await send_cmd_help(ctx)
+        '''Alliance Set subcommands'''
 
-    @_set.group(pass_context=True, name='alliance')
+    @alliance._set.group(pass_context=True, name='alliance')
     async def _set_alliance_role(self, ctx):
+        '''Set alliance role'''
         await self.bot.say('Subgroup Test complete')
 ### Beginning of AllianceWar.com integration
 
