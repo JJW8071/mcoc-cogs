@@ -97,21 +97,28 @@ class MCOCMaps:
         server = ctx.message.server
         if role in server.roles:
             message = await self.bot.say('Setting the Alliance Role as ``{}``\nClick OK to confirm.'.format(role.name))
+            confirm = await self._confirmation(ctx, message)
+            if confirm:
+                await self.bot.edit_message(message,'Setting the Alliance Role as ``{}``'.format(role.name))
+            else:
+                await self.bot.edit_message(message,'Setting the Alliance Role as ``{}``\nOperation canceled.'.format(role.name))
+
+    async def _confirmation(self, ctx, message):
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
-            if react == None:
+            if react.reaction == None:
                 await self.bot.remove_reaction(message, '❌')
                 await self.bot.remove_reaction(message, '🆗')
-                await self.bot.edit_message(message, 'Ambiguous response. Alliance Role set operation canceled.')
-            elif react == '❌':
+                return False
+            elif react.reaction == '❌':
                 await self.bot.remove_reaction(message, '❌')
                 await self.bot.remove_reaction(message, '🆗')
-                await self.bot.edit_message(message, 'Alliance Role set operation canceled.')
-            elif react == '🆗':
+                return False
+            elif react.reaction == '🆗':
                 await self.bot.remove_reaction(message, '❌')
                 await self.bot.remove_reaction(message, '🆗')
-                await self.bot.edit_message(message, 'Alliance Role = {} \nSet in progress.'.format(role.name))
+                return True
 ### Beginning of AllianceWar.com integration
 
     @commands.command(pass_context=True, hidden=True)
