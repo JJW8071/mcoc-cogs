@@ -91,12 +91,14 @@ class MCOCMaps:
     async def alliance(self, ctx):
         '''Alliance Commands'''
 
-    @alliance.command(pass_context=True, name='set')
-    async def _set(self, ctx, role : discord.Role):
+    @alliance.command(pass_context=True, name='setalliancerole')
+    async def _set_alliance_role(self, ctx, role : discord.Role):
         '''Alliance Set subcommands'''
         server = ctx.message.server
         if role in server.roles:
             message = await self.bot.say('Setting the Alliance Role as ``{}``\nClick OK to confirm.'.format(role.name))
+            await self.bot.add_reaction(message, '❌')
+            await self.bot.add_reaction(message, '🆗')
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
             if react == None:
                 await self.bot.remove_reaction(message, '❌')
