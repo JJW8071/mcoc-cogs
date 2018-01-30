@@ -399,8 +399,9 @@ class MCOCTools:
         missing = []
         print(str(len(missing)))
         for member in members:
-            if role not in member.roles:
-                missing.append('{0.name} : {0.id}'.format(member))
+            if not member.bot:
+                if role not in member.roles:
+                    missing.append('{0.name} : {0.id}'.format(member))
         print(str(len(missing)))
         if len(missing) == 0:
             await self.bot.say('No users are missing the role: {}'.format(role.name))
