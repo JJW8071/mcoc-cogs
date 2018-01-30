@@ -402,7 +402,7 @@ class MCOCTools:
             if role not in member.roles:
                 missing.append('{0.name} : {0.id}'.format(member))
         print(str(len(missing)))
-        if len(missing) = 0:
+        if len(missing) == 0:
             await self.bot.say('No users are missing the role: {}'.format(role.name))
         else:
             pages = chat.pagify(chat.box('\n'.join(missing)))
