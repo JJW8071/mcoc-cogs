@@ -86,6 +86,20 @@ class MCOCMaps:
         em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         await self.bot.say(embed=em)
 
+### Beginning of Alliance Management Functions
+    @commands.group(pass_context=True)
+    async def alliance(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @alliance.group(pass_context=True)
+    async def _set(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @_set.group(pass_context=True, name='alliance')
+    async def _set_alliance_role(self, ctx):
+        await self.bot.say('Subgroup Test complete')
 ### Beginning of AllianceWar.com integration
 
     @commands.command(pass_context=True, hidden=True)
