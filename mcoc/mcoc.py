@@ -1365,18 +1365,18 @@ class MCOC(ChampionFactory):
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompile(data[k])))
+                        searchlist.append('{}\n{}'.format(k, self._bcg_recompile(data[k])))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
                 page_list = []
                 for page in pages:
-                    page_list.append(page)
+                    page_list.append(chat.box(page))
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 await menu.menu_start(page_list)
 
 
     def _bcg_recompile(self, str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
-        return hex_re.sub(r'**\1**', str_data)
+        return hex_re.sub(r'\1', str_data)
 
 
     @commands.command(hidden=True)
