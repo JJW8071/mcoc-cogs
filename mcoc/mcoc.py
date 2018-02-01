@@ -1333,7 +1333,7 @@ class MCOC(ChampionFactory):
                 searchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('``{}``\n```{}```'.format(k, self._bcg_recompile(data[k])))
+                        searchlist.append('{}\n{}'.format(k, self._bcg_recompile(data[k])))
                 pages = chat.pagify('\n'.join(s for s in searchlist))
                 page_list = []
                 for page in pages:
