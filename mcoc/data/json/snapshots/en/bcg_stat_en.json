@@ -12005,7 +12005,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
-      "v": "{}% chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect. Additionally each Cunning and Madness charge increases the damage inflicted by the Pumpkin Bomb by 10%.",
+      "v": "{0}% chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect. Additionally each Cunning and Madness charge increases the damage inflicted by the Pumpkin Bomb by 10%.",
       "vn": "14.1"
     },
     {
