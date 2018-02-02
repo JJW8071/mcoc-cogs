@@ -54,7 +54,7 @@ class CommandLog:
                 msg = unicodedata.normalize('NFKD', msg).encode('ascii', 'ignore'))
                 print(msg)
                 try:
-                    f.wright('\n' + msg)
+                    f.write('\n' + msg)
                 except:
                     Print('Command message contains unicode')
 
