@@ -1,4 +1,5 @@
 import pathlib
+import unicodedata
 path = 'data/commandlog'
 
 
@@ -47,8 +48,15 @@ class CommandLog:
 
     def wr_msg(self, msg):
         with open(path + '/cmds.log', mode='a') as f:
-            f.write('\n' + msg)
-
+            try:
+                f.write('\n' + msg)
+            except:
+                msg = unicodedata(normalize('NFKD', msg).encode('ascii', 'ignore'))
+                print(msg)
+                try:
+                    f.wright('\n' + msg)
+                except:
+                    Print('Command message contains unicode')
 
 def setup(bot):
     pathlib.Path(path).mkdir(parents=True, exist_ok=True)
