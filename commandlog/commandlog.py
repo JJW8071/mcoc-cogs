@@ -40,10 +40,10 @@ class CommandLog:
             cmd = message.content[len(prefix):]
             cmdlist = self.cc.c_commands[message.server.id]
             if cmd in cmdlist or cmd.lower() in cmdlist:
-                msg = (
+                msg = unicodedata.normalize('NFKD',
                     '{2.timestamp} (Custom Command) {0.id} | {0.display_name} '
                     'in {1.id} | {1.name} issued: {2.clean_content} '
-                    ''.format(message.author, message.channel, message))
+                    ''.format(message.author, message.channel, message)).encode('ascii', 'ignore')
             self.wr_msg(msg)
 
     def wr_msg(self, msg):
@@ -51,12 +51,7 @@ class CommandLog:
             try:
                 f.write('\n' + msg)
             except:
-                msg = unicodedata.normalize('NFKD', msg).encode('ascii', 'ignore')
-                print(msg)
-                try:
-                    f.write('\n' + msg)
-                except:
-                    Print('Command message contains unicode')
+                print('Command message failed to write')
 
 def setup(bot):
     pathlib.Path(path).mkdir(parents=True, exist_ok=True)
