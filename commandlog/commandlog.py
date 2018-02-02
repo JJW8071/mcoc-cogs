@@ -51,7 +51,7 @@ class CommandLog:
             try:
                 f.write('\n' + msg)
             except:
-                msg = unicodedata.normalize('NFKD', msg).encode('ascii', 'ignore'))
+                msg = unicodedata.normalize('NFKD', msg).encode('ascii', 'ignore')
                 print(msg)
                 try:
                     f.write('\n' + msg)
