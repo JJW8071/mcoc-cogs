@@ -1358,30 +1358,31 @@ class MCOC(ChampionFactory):
     async def submit(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
-    @submit.command(pass_context=True, name='stats')
-    async def submit_stats(self, ctx, *, *sargs):
-        # Need to split out hp atk cr cd armor bp
-        hp = '' #health
-        atk = '' #attack
-        cr = '' #crit rate
-        cd = '' #critical damage
-        apen = '' #armor penetration
-        bpen = '' #block penetration
-        cresist = '' #critical resistance
-        armor = '' #armor
-        bp = '' #block proficiency
-
-
-        # _bare_arg = None
-        # parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])\\?\*)|(?:(?P<star>[1-6])\\?\★)|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
-        parse_re = re.compile(r'''(?:hp(?P<hp>[0-9]{1,6}))
-                                |(?:atk(?P<atk>[0-9]{1,4}))
-                                |(?:cr(?P<cr>[0-9]{1,4}))
-                                |(?:cd(?P<cd>[0-9]{1,4}))
-                                |(?:armor(?P<armor>[0-9]{1,5}))
-                                |(?:bp(?P<bp>[0-9]{1,4}))
-                                ''',re.X)
-        await self.bot.say('hp: {}\natk: {}\ncr: {}\ncd: {}\narmor: {}\nbp:  {}'.format(hp, atk, cr, cd, armor, bp))
+    # @submit.command(pass_context=True, name='stats')
+    # async def submit_stats(self, ctx, args):
+    #     # Need to split out hp atk cr cd armor bp
+    #     hp = '' #health
+    #     atk = '' #attack
+    #     cr = '' #crit rate
+    #     cd = '' #critical damage
+    #     apen = '' #armor penetration
+    #     bpen = '' #block penetration
+    #     cresist = '' #critical resistance
+    #     armor = '' #armor
+    #     bp = '' #block proficiency
+    #
+    #
+    #     # _bare_arg = None
+    #     # parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])\\?\*)|(?:(?P<star>[1-6])\\?\★)|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
+    #     parse_re = re.compile(r'''(?:hp(?P<hp>[0-9]{1,6}))
+    #                             |(?:atk(?P<atk>[0-9]{1,4}))
+    #                             |(?:cr(?P<cr>[0-9]{1,4}))
+    #                             |(?:cd(?P<cd>[0-9]{1,4}))
+    #                             |(?:armor(?P<armor>[0-9]{1,5}))
+    #                             |(?:bp(?P<bp>[0-9]{1,4}))
+    #                             ''',re.X)
+    #
+    #     await self.bot.say('hp: {}\natk: {}\ncr: {}\ncd: {}\narmor: {}\nbp:  {}'.format(hp, atk, cr, cd, armor, bp))
 
         # async def convert(self):
         #     bot = self.ctx.bot
