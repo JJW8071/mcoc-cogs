@@ -1381,7 +1381,7 @@ class MCOC(ChampionFactory):
                                 |(?:armor(?P<armor>[0-9]{1,5}))
                                 |(?:bp(?P<bp>[0-9]{1,4}))
                                 ''',re.X)
-        await self.bot.say('hp: {}\natk: {}\ncr: {}\ncd: {}\narmor: {}\nbp:  {}')
+        await self.bot.say('hp: {}\natk: {}\ncr: {}\ncd: {}\narmor: {}\nbp:  {}'.format(hp, atk, cr, cd, armor, bp))
 
         # async def convert(self):
         #     bot = self.ctx.bot
