@@ -165,7 +165,7 @@ class ChampConverter(commands.Converter):
     _bare_arg = None
     parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
                              |(?:r(?P<rank>[1-5]))
-                             |(?:(?P<star>[1-6])(\\?\*|\\?\★))
+                             |(?:(?P<star>[1-6])(\\?\*|\\?\★)))
                              |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
     async def convert(self):
         bot = self.ctx.bot
@@ -600,7 +600,8 @@ class MCOC(ChampionFactory):
                 }
         self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])(\\?\*|\\?\★))')
+        # self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])\\?\*)')
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])(\\?\*|\\?\★)))')
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
         super().__init__()
