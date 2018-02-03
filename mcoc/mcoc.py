@@ -377,9 +377,10 @@ class ChampionFactory():
         self.cooldown = time.time() - self.cooldown_delta - 1
         self.needs_init = True
         super().__init__(*args, **kwargs)
+        self.bot.loop.create_task(self.update_local())  # async init
         logger.debug('ChampionFactory Init')
 
-    def init(self):
+    def data_struct_init(self):
         logger.info('Preparing data structures')
         self._prepare_aliases()
         self._prepare_prestige_data()
@@ -392,7 +393,7 @@ class ChampionFactory():
         self.cooldown = now
         is_updated = await self.verify_cache_remote_files()
         if is_updated or self.needs_init:
-            self.init()
+            self.data_struct_init()
 
     def create_champion_class(self, bot, alias_set, **kwargs):
         kwargs['bot'] = bot
@@ -428,13 +429,13 @@ class ChampionFactory():
 
     async def get_champion(self, name_id, attrs=None):
         '''straight alias lookup followed by new champion object creation'''
-        await self.update_local()
+        #await self.update_local()
         return self.champions[name_id](attrs)
 
     async def search_champions(self, search_str, attrs=None):
         '''searching through champion aliases and allowing partial matches.
         Returns an array of new champion objects'''
-        await self.update_local()
+        #await self.update_local()
         re_str = re.compile(search_str)
         champs = []
         for champ in self.champions.values():
@@ -660,7 +661,7 @@ class MCOC(ChampionFactory):
                     + '\n\t'.join(data_files.keys()))
             return
 
-        self.init()
+        self.data_struct_init()
         await self.bot.say('Summoner, I have Collected the data')
 
     async def say_user_error(self, msg):
@@ -810,7 +811,7 @@ class MCOC(ChampionFactory):
             /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
         '''
         hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
-        await self.update_local()
+        #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
         for champ_class in self.champions.values():
@@ -897,7 +898,7 @@ class MCOC(ChampionFactory):
             await self.bot.say(embed=em)
 
     @champ.command(name='synergies', aliases=['syn',])
-    async def champ_synergies(self, *, champs : ChampConverterMult):
+    async def champ_synergies(self, *, champs: ChampConverterMult):
         '''Champion(s) Synergies'''
         if len(champs)==1:
             for champ in champs:
@@ -910,8 +911,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
-    async def get_synergies(self, champs : ChampConverterMult, embed=None):
-
+    async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:M1'
@@ -948,11 +948,12 @@ class MCOC(ChampionFactory):
         activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
-            collectoremojis = []
+            #collectoremojis = []
             effectsused = defaultdict(list)
             for champ in champs:
-                xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-                collectoremojis.append(xref['collectoremoji'])
+                #xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+                #collectoremojis.append(xref['collectoremoji'])
+                #collectoremojis.append(champ.collectoremoji)
                 for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
@@ -970,7 +971,8 @@ class MCOC(ChampionFactory):
             combined = {}
             desc= []
             # embed.add_field(name='', value=''.join(collectoremojis))
-            embed.description = ''.join(collectoremojis)
+            #embed.description = ''.join(collectoremojis)
+            embed.description = ''.join([c.collectoremoji for c in champs])
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
@@ -1053,7 +1055,7 @@ class MCOC(ChampionFactory):
 
     @commands.command(hidden=True)
     async def dump_sigs(self):
-        await self.update_local()
+        #await self.update_local()
         sdata = dataIO.load_json(local_files['signature'])
         dump = {}
         for c, champ_class in enumerate(self.champions.values()):
@@ -1543,7 +1545,7 @@ class MCOC(ChampionFactory):
             return False
 
     async def _process_submission(self, package, GKEY, sheet):
-        await self.update_local()
+        #await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
             sh = gc.open_by_key(key=GKEY, returnas='spreadsheet')
@@ -1564,7 +1566,7 @@ class MCOC(ChampionFactory):
         if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
-        await self.update_local()
+        #await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
