@@ -1359,7 +1359,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
     @submit.command(pass_context=True, name='stats')
-    async def submit_stats(self, ctx, *, *sargs)
+    async def submit_stats(self, ctx, *, *sargs):
         # Need to split out hp atk cr cd armor bp
         hp = '' #health
         atk = '' #attack
