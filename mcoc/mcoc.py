@@ -165,7 +165,7 @@ class ChampConverter(commands.Converter):
     _bare_arg = None
     parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
                              |(?:r(?P<rank>[1-5]))
-                             |(?:(?P<star>[1-6])\\?\*)
+                             |(?:(?P<star>[1-6])(\\?\*|\\?\★))
                              |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
     async def convert(self):
         bot = self.ctx.bot
@@ -599,7 +599,7 @@ class MCOC(ChampionFactory):
                 }
         self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])(\\?\*|\\?\★))')
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
         super().__init__()
@@ -1358,6 +1358,48 @@ class MCOC(ChampionFactory):
     async def submit(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
+    @submit.command(pass_context=True, name='stats')
+    async def submit_stats(self, ctx, *, *sargs)
+        # Need to split out hp atk cr cd armor bp
+        hp = '' #health
+        atk = '' #attack
+        cr = '' #crit rate
+        cd = '' #critical damage
+        apen = '' #armor penetration
+        bpen = '' #block penetration
+        cresist = '' #critical resistance
+        armor = '' #armor
+        bp = '' #block proficiency
+
+
+        # _bare_arg = None
+        # parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])\\?\*)|(?:(?P<star>[1-6])\\?\★)|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
+        parse_re = re.compile(r'''(?:hp(?P<hp>[0-9]{1,6}))
+                                |(?:atk(?P<atk>[0-9]{1,4}))
+                                |(?:cr(?P<cr>[0-9]{1,4}))
+                                |(?:cd(?P<cd>[0-9]{1,4}))
+                                |(?:armor(?P<armor>[0-9]{1,5}))
+                                |(?:bp(?P<bp>[0-9]{1,4}))
+                                ''',re.X)
+        await self.bot.say('hp: {}\natk: {}\ncr: {}\ncd: {}\narmor: {}\nbp:  {}')
+
+        # async def convert(self):
+        #     bot = self.ctx.bot
+        #     attrs = {}
+        #     if self._bare_arg:
+        #         args = self.argument.rsplit(' ', maxsplit=1)
+        #         if len(args) > 1 and args[-1].isdecimal():
+        #             attrs[self._bare_arg] = int(args[-1])
+        #             self.argument = args[0]
+        #     arg = ''.join(self.argument.lower().split(' '))
+        #     for m in self.parse_re.finditer(arg):
+        #         attrs[m.lastgroup] = int(m.group(m.lastgroup))
+        #     token = self.parse_re.sub('', arg)
+        #     if not token:
+        #         err_str = "No Champion remains from arg '{}'".format(self.argument)
+        #         await bot.say(err_str)
+        #         raise commands.BadArgument(err_str)
+        #     return (await self.get_champion(bot, token, attrs))
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
@@ -1425,7 +1467,7 @@ class MCOC(ChampionFactory):
             else:
                 await self.bot.say('Ambiguous response.  Submission canceled')
 
-    @submit.command(pass_context=True, name='awkill', aliases=['awko','defkill','defko'])
+    @submit.command(pass_context=True, name='defkill', aliases=['defko',])
     async def submit_awkill(self, ctx, champ : ChampConverter, node:int, ko: int):
         message = await self.bot.say('Defender Kill registered.\nChampion: {0.verbose_str}\nAW Node: {1}\nKills: {2}\nPress OK to confirm.'.format(champ, node, ko))
         await self.bot.add_reaction(message, '❌')
