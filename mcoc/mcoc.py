@@ -308,13 +308,23 @@ class GSExport():
         else:
             sheet = ss.sheet1
             sheet_name = sheet.title
-        data = sheet.get_all_values(include_empty=False)
+        if 'range' in kwargs and kwargs['range']:
+            rng = self.bound_range(sheet, kwargs['range'])
+            data = sheet.get_values(*rng, returnas='matrix',
+                    #include_empty=kwargs['include_empty'])
+                    include_empty=False)
+        else:
+            data = sheet.get_all_values(include_empty=False)
+            #data = sheet.get_all_values(include_empty=kwargs['include_empty'])
+        #data = sheet.get_all_values(include_empty=False)
         header = data[0]
         if data_type.startswith('nested_list'):
             data_type, dlen = data_type.rsplit('::', maxsplit=1)
             dlen = int(dlen)
 
         prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'))
+        if sheet_action == 'table':
+            self.data[sheet_name] = [header]
         for row in data[1:]:
             drow = numericise_all(prep_func(row), '')
             rkey = drow[0]
@@ -336,10 +346,24 @@ class GSExport():
                     pack = drow[1:]
                 elif data_type == 'dict':
                     pack = dict(zip(header, drow))
-                if sheet_action == 'dict':
+                if data_type == 'nested_dict':
+                    pack = dict(zip(header[2:], drow[2:]))
+                    self.data[sheet_name][rkey][drow[1]] = pack
+                elif sheet_action == 'dict':
                     self.data[sheet_name][rkey] = pack
                 elif sheet_action == 'file':
                     self.data[rkey] = pack
+            elif sheet_action == 'table':
+                self.data[sheet_name].append(drow)
+
+    @staticmethod
+    def bound_range(sheet, rng_str):
+        rng = rng_str.split(':')
+        rows = (1, sheet.rows)
+        for i in range(2):
+            if not rng[i][-1].isdigit():
+                rng[i] = '{}{}'.format(rng[i], rows[i])
+        return rng
 
     @staticmethod
     def do_nothing(row):
@@ -949,12 +973,8 @@ class MCOC(ChampionFactory):
         activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
-            #collectoremojis = []
             effectsused = defaultdict(list)
             for champ in champs:
-                #xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-                #collectoremojis.append(xref['collectoremoji'])
-                #collectoremojis.append(champ.collectoremoji)
                 for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
@@ -971,9 +991,7 @@ class MCOC(ChampionFactory):
             # print(effectsused)
             combined = {}
             desc= []
-            # embed.add_field(name='', value=''.join(collectoremojis))
-            #embed.description = ''.join(collectoremojis)
-            embed.description = ''.join([c.collectoremoji for c in champs])
+            embed.description = ''.join(c.collectoremoji for c in champs)
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
