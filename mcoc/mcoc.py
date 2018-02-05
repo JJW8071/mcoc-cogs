@@ -165,7 +165,7 @@ class ChampConverter(commands.Converter):
     _bare_arg = None
     parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))
                              |(?:r(?P<rank>[1-5]))
-                             |(?:(?P<star>[1-6])(\\?\*|\\?\★))
+                             |(?:(?P<star>[1-6])\\?\*)
                              |(?:d(?P<debug>[0-9]{1,2}))''', re.X)
     async def convert(self):
         bot = self.ctx.bot
@@ -308,13 +308,23 @@ class GSExport():
         else:
             sheet = ss.sheet1
             sheet_name = sheet.title
-        data = sheet.get_all_values(include_empty=False)
+        if 'range' in kwargs and kwargs['range']:
+            rng = self.bound_range(sheet, kwargs['range'])
+            data = sheet.get_values(*rng, returnas='matrix',
+                    #include_empty=kwargs['include_empty'])
+                    include_empty=False)
+        else:
+            data = sheet.get_all_values(include_empty=False)
+            #data = sheet.get_all_values(include_empty=kwargs['include_empty'])
+        #data = sheet.get_all_values(include_empty=False)
         header = data[0]
         if data_type.startswith('nested_list'):
             data_type, dlen = data_type.rsplit('::', maxsplit=1)
             dlen = int(dlen)
 
         prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'))
+        if sheet_action == 'table':
+            self.data[sheet_name] = [header]
         for row in data[1:]:
             drow = numericise_all(prep_func(row), '')
             rkey = drow[0]
@@ -336,10 +346,24 @@ class GSExport():
                     pack = drow[1:]
                 elif data_type == 'dict':
                     pack = dict(zip(header, drow))
-                if sheet_action == 'dict':
+                if data_type == 'nested_dict':
+                    pack = dict(zip(header[2:], drow[2:]))
+                    self.data[sheet_name][rkey][drow[1]] = pack
+                elif sheet_action == 'dict':
                     self.data[sheet_name][rkey] = pack
                 elif sheet_action == 'file':
                     self.data[rkey] = pack
+            elif sheet_action == 'table':
+                self.data[sheet_name].append(drow)
+
+    @staticmethod
+    def bound_range(sheet, rng_str):
+        rng = rng_str.split(':')
+        rows = (1, sheet.rows)
+        for i in range(2):
+            if not rng[i][-1].isdigit():
+                rng[i] = '{}{}'.format(rng[i], rows[i])
+        return rng
 
     @staticmethod
     def do_nothing(row):
@@ -377,9 +401,10 @@ class ChampionFactory():
         self.cooldown = time.time() - self.cooldown_delta - 1
         self.needs_init = True
         super().__init__(*args, **kwargs)
+        self.bot.loop.create_task(self.update_local())  # async init
         logger.debug('ChampionFactory Init')
 
-    def init(self):
+    def data_struct_init(self):
         logger.info('Preparing data structures')
         self._prepare_aliases()
         self._prepare_prestige_data()
@@ -392,7 +417,7 @@ class ChampionFactory():
         self.cooldown = now
         is_updated = await self.verify_cache_remote_files()
         if is_updated or self.needs_init:
-            self.init()
+            self.data_struct_init()
 
     def create_champion_class(self, bot, alias_set, **kwargs):
         kwargs['bot'] = bot
@@ -428,13 +453,13 @@ class ChampionFactory():
 
     async def get_champion(self, name_id, attrs=None):
         '''straight alias lookup followed by new champion object creation'''
-        await self.update_local()
+        #await self.update_local()
         return self.champions[name_id](attrs)
 
     async def search_champions(self, search_str, attrs=None):
         '''searching through champion aliases and allowing partial matches.
         Returns an array of new champion objects'''
-        await self.update_local()
+        #await self.update_local()
         re_str = re.compile(search_str)
         champs = []
         for champ in self.champions.values():
@@ -599,7 +624,8 @@ class MCOC(ChampionFactory):
                 }
         self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
-        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])(\\?\*|\\?\★))')
+        self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-5])\\?\*)')
+        # self.parse_re = re.compile(r'(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])(\\?\*|\\?\★)))')
         self.split_re = re.compile(', (?=\w+:)')
         logger.info("MCOC Init")
         super().__init__()
@@ -660,7 +686,7 @@ class MCOC(ChampionFactory):
                     + '\n\t'.join(data_files.keys()))
             return
 
-        self.init()
+        self.data_struct_init()
         await self.bot.say('Summoner, I have Collected the data')
 
     async def say_user_error(self, msg):
@@ -810,7 +836,7 @@ class MCOC(ChampionFactory):
             /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
         '''
         hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
-        await self.update_local()
+        #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
         for champ_class in self.champions.values():
@@ -897,7 +923,7 @@ class MCOC(ChampionFactory):
             await self.bot.say(embed=em)
 
     @champ.command(name='synergies', aliases=['syn',])
-    async def champ_synergies(self, *, champs : ChampConverterMult):
+    async def champ_synergies(self, *, champs: ChampConverterMult):
         '''Champion(s) Synergies'''
         if len(champs)==1:
             for champ in champs:
@@ -910,8 +936,7 @@ class MCOC(ChampionFactory):
         em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
-    async def get_synergies(self, champs : ChampConverterMult, embed=None):
-
+    async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
         range_headers = 'Synergies!A1:M1'
@@ -948,11 +973,8 @@ class MCOC(ChampionFactory):
         activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
-            collectoremojis = []
             effectsused = defaultdict(list)
             for champ in champs:
-                xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-                collectoremojis.append(xref['collectoremoji'])
                 for s in synlist: #try this with .keys()
                     for i in range(1, 4):
                         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
@@ -969,8 +991,7 @@ class MCOC(ChampionFactory):
             # print(effectsused)
             combined = {}
             desc= []
-            # embed.add_field(name='', value=''.join(collectoremojis))
-            embed.description = ''.join(collectoremojis)
+            embed.description = ''.join(c.collectoremoji for c in champs)
             for k, v in effectsused.items():
                 combined[k] = [sum(row) for row in iter_rows(v, True)]
                 txt = synlist[k]['text'].format(*combined[k])
@@ -1053,7 +1074,7 @@ class MCOC(ChampionFactory):
 
     @commands.command(hidden=True)
     async def dump_sigs(self):
-        await self.update_local()
+        #await self.update_local()
         sdata = dataIO.load_json(local_files['signature'])
         dump = {}
         for c, champ_class in enumerate(self.champions.values()):
@@ -1543,7 +1564,7 @@ class MCOC(ChampionFactory):
             return False
 
     async def _process_submission(self, package, GKEY, sheet):
-        await self.update_local()
+        #await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
             sh = gc.open_by_key(key=GKEY, returnas='spreadsheet')
@@ -1564,7 +1585,7 @@ class MCOC(ChampionFactory):
         if champ.star == 5:
             level += 15
         package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
-        await self.update_local()
+        #await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         except FileNotFoundError:
