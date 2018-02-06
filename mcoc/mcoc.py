@@ -917,7 +917,7 @@ class MCOC(ChampionFactory):
                 em.add_field(name='Added to PHC', value=xref['4basic'])
             else:
                 stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
-                em.add_field(name='Base Stats', value=tabulate(stats, width=11, rotate=False, header_sep=False), inline=False)
+                em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
             em.add_field(name='Shortcode',value=champ.short)
             em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             await self.bot.say(embed=em)
