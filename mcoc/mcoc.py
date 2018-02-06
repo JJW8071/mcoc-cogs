@@ -1468,7 +1468,7 @@ class MCOC(ChampionFactory):
                 elif react.reaction.emoji == '🆗':
                     # GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
                     GKEY = '1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q'
-                    message2 = await self.bot.say('Submission in progess.')
+                    message2 = await self.bot.say('Submission in progress.')
                     author = ctx.message.author
                     star = '{0.star}{0.star_char}'.format(champ)
                     if pi == 0:
@@ -1500,7 +1500,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
                 GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE' #Collector Submissions
-                message2 = await self.bot.say('Submission in progess.')
+                message2 = await self.bot.say('Submission in progress.')
                 author = ctx.message.author
                 now = str(ctx.message.timestamp)
                 package = [[now, author.name, author.id, champ.unique, node, ko]]
@@ -1512,7 +1512,7 @@ class MCOC(ChampionFactory):
                     await self.bot.edit_message(message2, 'Submission failed.')
         else:
             GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE' #Collector Submissions
-            message2 = await self.bot.say('Ambiguous response: Submission in progess.')
+            message2 = await self.bot.say('Ambiguous response: Submission in progress.')
             author = ctx.message.author
             now = str(ctx.message.timestamp)
             package = [[now, author.name, author.id, champ.unique, node, ko]]
@@ -1540,14 +1540,14 @@ class MCOC(ChampionFactory):
             if react.reaction.emoji == '❌':
                 await self.bot.say('Submission canceled.')
             elif react.reaction.emoji == '🆗':
-                message2 = await self.bot.say('Submission in progess.')
+                message2 = await self.bot.say('Submission in progress.')
                 check = await self._process_submission(package=package, GKEY=GKEY, sheet=SHEETKEY)
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.\nWinter Soldier Damage: {}%'.format(pct))
                 else:
                     await self.bot.edit_message(message2, 'Submission failed.')
         else:
-            message2 = await self.bot.say('Ambiguous response: Submission in progess.')
+            message2 = await self.bot.say('Ambiguous response: Submission in progress.')
             print('package built')
             check = await self._process_submission(package=package, GKEY=GKEY, sheet=SHEETKEY)
             if check:
