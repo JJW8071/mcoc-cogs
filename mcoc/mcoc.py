@@ -698,7 +698,7 @@ class MCOC(ChampionFactory):
         if setting in self.settings:
             self.settings[setting] = int(value)
 
-    @commands.command(hidden=True)
+    @commands.command(hidden=True, aliases=['cg',])
     async def cache_gsheets(self, key=None):
         await self.update_local()
         try:
@@ -907,8 +907,8 @@ class MCOC(ChampionFactory):
             data = champ.get_spotlight(default='x')
             em = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
-            titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
-            keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
+            titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor Penetration', 'Block Penetration', 'Crit Resistance', 'Armor', 'Block Prof')
+            keys = ('health', 'attack', 'critical', 'critdamage', 'armor_pen', 'block_pen', 'crit_resist', 'armor', 'blockprof')
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
             if champ.debug:
@@ -1828,9 +1828,13 @@ class Champion:
         specials = (s0, s1, s2, s0d, s1d, s2d)
         return specials
 
+    def _calc_prestige(self):
+
+
     @property
     @validate_attr('prestige')
     def prestige(self):
+        ## this will need to be amended to use the new prestige Calculate
         try:
             if self.prestige_data[self.star][self.rank-1] is None:
                 return 0
