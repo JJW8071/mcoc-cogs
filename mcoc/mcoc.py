@@ -1847,8 +1847,7 @@ class Champion:
         s2d = specials[prefix + desc + self.mcocjson + two]
         specials = (s0, s1, s2, s0d, s1d, s2d)
         return specials
-
-    # def _calc_prestige(self):
+            
 
     @property
     @validate_attr('prestige')
