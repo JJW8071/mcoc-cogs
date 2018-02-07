@@ -241,15 +241,6 @@ class MCOCTools:
     #         package.append(prefix+lets)
     #     em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
     #     await self.bot.say(embed=em)
-    @commands.command(pass_context=True, hiddne=True, aliases=['nbs',])
-    async def nerfbuffsell(self, ctx, *, hargs=''):
-        hargs = await hook.HashtagRankConverter(ctx, hargs).convert()
-        roster = hook.ChampionRoster(self.bot, self.bot.user)
-
-        selected = []
-        first = random.randint(0,116)
-        champ1 = roster.__getitem__(first)
-        print(champ1.full_name)
 
     def _get_text(self, mastery, rank):
         rows = csv_get_rows(self.dataset,'Mastery',mastery)

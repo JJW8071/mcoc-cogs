@@ -229,16 +229,6 @@ class ChampionRoster:
             return item.immutable_id in self.roster
         return item in self.roster
 
-    ## Added to make ChampionRoster iterable
-    def __getitem__(self,index):
-        return self.roster.champNumber[index]
-
-    # def __setitem__(self,index,value):
-    #     self.roster.champNumber[index] = value
-    #
-    # def __delitem__(self, index):
-    #     del self.roster.champNumber[index]
-
 
     # handles user creation, adding new server, blocking
     def _create_user(self):
