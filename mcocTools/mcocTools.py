@@ -245,11 +245,11 @@ class MCOCTools:
     async def nerfbuffsell(self, ctx, *, hargs=''):
         hargs = await hook.HashtagRankConverter(ctx, hargs).convert()
         roster = hook.ChampionRoster(self.bot, self.bot.user)
-        print(len(roster))
-        print(str(roster[1]))
-        x = len(roster)+1
+
         selected = []
-        first = random.randint(0,x)
+        first = random.randint(0,116)
+        champ1 = self.roster.__getitem__(first)
+        print(champ1.full_name)
 
     def _get_text(self, mastery, rank):
         rows = csv_get_rows(self.dataset,'Mastery',mastery)
