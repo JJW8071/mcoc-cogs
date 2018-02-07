@@ -719,8 +719,8 @@ class MCOC(ChampionFactory):
         gsdata = GSExport(self.bot, gc, **gsheet_files[key])
         await gsdata.retrieve_data()
 
-    @commands.command(aliases=['nbs',], hidden=True)
-    async def nerfbuffsell(self):
+    @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
+    async def nerfbuffsell(self, ctx):
         selected = []
         while len(selected) < 3:
             champ = random.choice(list(self.champions.values()))
