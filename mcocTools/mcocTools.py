@@ -9,6 +9,7 @@ from .utils import chat_formatting as chat
 from .utils.dataIO import dataIO
 from cogs.utils import checks
 from discord.ext import commands
+from . import hook as hook
 
 EMOJIS = {"t5tech":"<:t5tech:344554971582431232>",
             "t5skill":"<:t5skill:344554971427241985>",
@@ -240,6 +241,13 @@ class MCOCTools:
     #         package.append(prefix+lets)
     #     em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
     #     await self.bot.say(embed=em)
+    @commands.command(pass_context=True, hiddne=True, aliases=['nbs',])
+    async def nerfbuffsell(self, x:int=0):
+        roster = hook.ChampionRoster(self.bot, self.bot.user)
+        print(len(roster))
+
+        selected = []
+        first = random.randint(0,116)
 
     def _get_text(self, mastery, rank):
         rows = csv_get_rows(self.dataset,'Mastery',mastery)
