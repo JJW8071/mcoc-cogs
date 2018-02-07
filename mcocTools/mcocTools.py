@@ -66,7 +66,7 @@ class MCOCTools:
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
         return em
 
-    @commands.command(pass_context=True,aliases={'collector','infocollector'})
+    @commands.command(pass_context=True,aliases={'collector','infocollector','about','info'})
     async def aboutcollector(self,ctx):
         """Shows info about Collector"""
         author_repo = "https://github.com/Twentysix26"
