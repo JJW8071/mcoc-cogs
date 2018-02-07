@@ -722,13 +722,20 @@ class MCOC(ChampionFactory):
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
         selected = []
+        embeds = []
+        em = discord.embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell', description='')
+        embeds.append(em)
         while len(selected) < 3:
             champ = random.choice(list(self.champions.values()))
             if champ not in selected:
                 if champ.status != 'npc':
                     selected.append(champ.full_name)
-
-        await self.bot.say('\n'.join(selected))
+                    em = discord.Embed(color=champ.class_color, title=champ.full_name, description='')
+                    em.set_thumbnail(champ.get_avatar)
+                    embeds.append(em)
+        for em in embeds:
+            await self.bot.say(embed=em)
+        # await self.bot.say('\n'.join(selected))
 
     @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
@@ -1847,7 +1854,7 @@ class Champion:
         s2d = specials[prefix + desc + self.mcocjson + two]
         specials = (s0, s1, s2, s0d, s1d, s2d)
         return specials
-            
+
 
     @property
     @validate_attr('prestige')
