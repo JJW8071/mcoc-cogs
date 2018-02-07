@@ -725,7 +725,7 @@ class MCOC(ChampionFactory):
         while len(selected) < 3:
             champ = random.choice(list(self.champions.values()))
             if champ not in selected:
-                if champ.stats != 'npc':
+                if champ.status != 'npc':
                     selected.append(champ.full_name)
 
         await self.bot.say('\n'.join(selected))
