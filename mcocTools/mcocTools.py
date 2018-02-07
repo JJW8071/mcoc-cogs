@@ -242,12 +242,14 @@ class MCOCTools:
     #     em=discord.Embed(color=discord.Color.gold(),title='Email Code Generator',description='\n'.join(package))
     #     await self.bot.say(embed=em)
     @commands.command(pass_context=True, hiddne=True, aliases=['nbs',])
-    async def nerfbuffsell(self, x:int=0):
+    async def nerfbuffsell(self, *, hargs='')
+        hargs = await hook.HashtagRankConverter(ctx, hargs).convert()
         roster = hook.ChampionRoster(self.bot, self.bot.user)
         print(len(roster))
-
+        print(str(roster[1]))
+        x = len(roster)+1
         selected = []
-        first = random.randint(0,116)
+        first = random.randint(0,x)
 
     def _get_text(self, mastery, rank):
         rows = csv_get_rows(self.dataset,'Mastery',mastery)
