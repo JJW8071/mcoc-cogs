@@ -934,6 +934,15 @@ class MCOC(ChampionFactory):
         em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
+    @champ.command(pass_context=True, name='update', hidden=True)
+    async def champ_update(self, ctx, *, args):
+        '''Not a real command'''
+        msg = '`{}` does not exist.\n`{}` is probably what you meant to do'
+        prefixes = tuple(self.bot.settings.get_prefixes(ctx.message.server))
+        await self.bot.say(msg.format(
+                prefixes[0] + 'champ update',
+                prefixes[0] + 'roster update'))
+
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
