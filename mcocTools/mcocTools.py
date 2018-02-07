@@ -248,7 +248,7 @@ class MCOCTools:
 
         selected = []
         first = random.randint(0,116)
-        champ1 = self.roster.__getitem__(first)
+        champ1 = roster.__getitem__(first)
         print(champ1.full_name)
 
     def _get_text(self, mastery, rank):
