@@ -11,42 +11,6 @@ from cogs.utils import checks
 from discord.ext import commands
 from . import hook as hook
 
-EMOJIS = {"t5tech":"<:t5tech:344554971582431232>",
-            "t5skill":"<:t5skill:344554971427241985>",
-            "t5science":"<:t5science:344554972739928076>",
-            "t5mystic":"<:t5mystic:344554971603402762>",
-            "t5mutant":"<:t5mutant:344554971389362179>",
-            "t5cosmic":"<:t5cosmic:344554971594752000>",
-            "t5":"<:t5:344555007191810066>",
-            "t4tech":"<:t4tech:344554971296956416>",
-            "t4skill":"<:t4skill:344554971141767170>",
-            "t4science":"<:t4science:344554971234172939>",
-            "t4mystic":"<:t4mystic:344554971468922880>",
-            "t4mutant":"<:t4mutant:344554971267858443>",
-            "t4cosmic":"<:t4cosmic:344554971217264641>",
-            "t4":"<:t4:344555006952865803>",
-            "t3tech":"<:t3tech:344554971213070357>",
-            "t3skill":"<:t3skill:344554972370829313>",
-            "t3science":"<:t3science:344554971414659072>",
-            "t3mystic":"<:t3mystic:344554971318059008>",
-            "t3mutant":"<:t3mutant:344554970940702721>",
-            "t3cosmic":"<:t3cosmic:344554971124989952>",
-            "t3":"<:t3:344555006822973450>",
-            "t2tech":"<:t2tech:344554971074658304>",
-            "t2skill":"<:t2skill:344554971095629825>",
-            "t2science":"<:t2science:344554970927857667>",
-            "t2mystic":"<:t2mystic:344554971192098816>",
-            "t2mutant":"<:t2mutant:344554971267858452>",
-            "t2cosmic":"<:t2cosmic:344554970785513474>",
-            "t2":"<:t2:344555006676041731>",
-            "t1tech":"<:t1tech:344554970600964096>",
-            "t1skill":"<:t1skill:344554970726531082>",
-            "t1science":"<:t1science:344554970227539970>",
-            "t1mystic":"<:t1mystic:344554970172882944>",
-            "t1mutant":"<:t1mutant:344554969808240652>",
-            "t1cosmic":"<:t1cosmic:344554969648726018>",
-            "t1":"<:t1:344555006873305108>"}
-
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
     lookup_links = {
