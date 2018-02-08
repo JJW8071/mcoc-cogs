@@ -942,7 +942,7 @@ class MCOC(ChampionFactory):
             flats.append(data[keys[0]])
             flats.append(data[keys[1]])
             for k in range(2,len(keys)):
-                flats.append(from_flat(data[keys[k]], champ.chlgr_rating))
+                flats.append(from_flat(int(data[keys[k]]), int(champ.chlgr_rating)))
             pcts = [[titles[i], flats[i]] for i in range(len(titles))]
             em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
             em2.add_field(name='Shortcode', value=champ.short)
