@@ -726,8 +726,8 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
         embeds.append(em)
         while len(selected) < 3:
-            aliases = random.choice(list(self.champions.values()))
-            champ = await self.get_champion(aliases[0])
+            name_id = random.choice(list(self.champions.values()))
+            champ = await self.get_champion(name_id).aliases[0]
             if champ not in selected:
                 if champ.status != 'npc':
                     selected.append(champ)
