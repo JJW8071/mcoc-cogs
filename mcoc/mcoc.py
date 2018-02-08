@@ -938,8 +938,9 @@ class MCOC(ChampionFactory):
             plt.axis([0, 6, 0, 20])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
-            plt.show()
-            plt.savefig('data/mcoc/sigtemp.png', format='png')
+            # plt.show()
+            plt.draw()
+            plt.savefig('data/mcoc/sigtemp.png', format='png', dpi=150)
         except:
             print('champ_sigplot nothing happened')
 
