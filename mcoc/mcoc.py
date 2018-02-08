@@ -29,7 +29,8 @@ from cogs.utils import checks
 # from .hook import PagesMenu
 
 ## experimental jjw
-import matplotlib.pyplot as plt
+try:
+    import matplotlib.pyplot as plt
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
