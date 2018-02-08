@@ -720,7 +720,7 @@ class MCOC(ChampionFactory):
         gsdata = GSExport(self.bot, gc, **gsheet_files[key])
         await gsdata.retrieve_data()
 
-    @checks.admin_or_permissions(manage_server)
+    @checks.admin_or_permissions(manage_server=True)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
         selected = []
@@ -733,14 +733,14 @@ class MCOC(ChampionFactory):
             if champ not in selected:
                 if champ.status != 'npc':
                     selected.append(champ)
-                    try:
-                        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-                        em.set_thumbnail(url=champ.get_avatar())
-                        embeds.append(em)
-                    except:
-                        continue
-        for em in embeds:
-            await self.bot.say(embed=em)
+        #             try:
+        #                 em = discord.Embed(color=champ.class_color, title=champ.full_name)
+        #                 em.set_thumbnail(url=champ.get_avatar())
+        #                 embeds.append(em)
+        #             except:
+        #                 continue
+        # for em in embeds:
+        #     await self.bot.say(embed=em)
         await self.bot.say('\n'.join(selected.full_name))
 
     @commands.group(pass_context=True, aliases=['champs',])
