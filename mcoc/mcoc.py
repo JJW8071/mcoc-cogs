@@ -727,7 +727,7 @@ class MCOC(ChampionFactory):
         embeds.append(em)
         while len(selected) < 3:
             aliases = random.choice(list(self.champions.values()))
-            champ = self.get_champion(aliases)
+            champ = await self.get_champion(aliases)
             if champ not in selected:
                 if champ.status != 'npc':
                     selected.append(champ)
