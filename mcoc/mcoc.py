@@ -937,7 +937,7 @@ class MCOC(ChampionFactory):
             plt.plot([1,2,3,4], [1,4,9,16], 'ro')
             plt.axis([0, 6, 0, 20])
             plt.show()
-            plt.savefig('data/mcoc/sigtemp.png')
+            plt.savefig('data/mcoc/sigtemp.png', dpi=90, format='png')
         except:
             print('champ_sigplot nothing happened')
 
