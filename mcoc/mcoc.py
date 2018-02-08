@@ -733,15 +733,14 @@ class MCOC(ChampionFactory):
             if champ not in selected:
                 if champ.status != 'npc':
                     selected.append(champ)
-        #             try:
-        #                 em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        #                 em.set_thumbnail(url=champ.get_avatar())
-        #                 embeds.append(em)
-        #             except:
-        #                 continue
-        # for em in embeds:
-        #     await self.bot.say(embed=em)
-        await self.bot.say('\n'.join(s.full_name for s in selected))
+                    em = discord.Embed(color=champ.class_color, title=champ.full_name)
+                    em.set_thumbnail(url=champ.get_avatar())
+                    embeds.append(em)
+        try:
+            for em in embeds:
+                await self.bot.say(embed=em)
+        except:
+            await self.bot.say('\n'.join(s.full_name for s in selected))
 
     @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
