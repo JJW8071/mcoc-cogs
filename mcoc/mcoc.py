@@ -925,10 +925,18 @@ class MCOC(ChampionFactory):
 
     @champ.command(pass_context=True, name='sigplot', hidden=True)
     async def champ_sigplot(self,ctx,*, champ: ChampConverterSig):
+        if champ.star <= 4 and champ.star > 1:
+            x = 99
+        elif champ.star > 4:
+            x = 200
+        elif champ.star == 1:
+            await self.bot.say('1★ champs have no signature ability.')
+
+
         try:
-            plt.plot([1,2,3,4])
-            plt.ylabel('some numbers')
-            plt.show()
+            plt.plot([1,2,3,4], [1,4,9,16], 'ro')
+            plt.axis([0, 6, 0, 20])
+            plt.image.imshow()
         except:
             print('champ_sigplot nothing happened')
 
