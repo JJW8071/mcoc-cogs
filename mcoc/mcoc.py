@@ -936,13 +936,13 @@ class MCOC(ChampionFactory):
             stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
             em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
             em.add_field(name='Shortcode',value=champ.short)
-            em.set_thumbnail(champ.get_featured())
+            em.set_thumbnail(url=champ.get_featured())
             embeds.append(em)
 
             em2 = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
             em2.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
             em2.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
-            em2.set_thumbnail(champ.get_featured())
+            em2.set_thumbnail(url=champ.get_featured())
             flats = []
             flats.append(data[keys[0]])
             flats.append(data[keys[1]])
@@ -952,6 +952,7 @@ class MCOC(ChampionFactory):
             em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
             em2.add_field(name='Shortcode', value=champ.short)
             embeds.append(em2)
+
             try:
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 await menu.menu_start(embeds)                # for page in pages:
