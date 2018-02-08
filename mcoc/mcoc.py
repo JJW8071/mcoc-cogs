@@ -939,11 +939,12 @@ class MCOC(ChampionFactory):
             em.add_field(name='Shortcode',value=champ.short)
 
             flats = []
-            flats.append(data[0])
             flats.append(data[1])
-            for k in range(2,len(keys)):
+            flats.append(data[2])
+            for k in range(3,len(keys)):
                 flats.append(self.from_flat(data[k], champ.chlgr_rating))
-            em2.add_field(name='Base Stats %', value=tabulate(flats, width=19, rotate=False, header_sep=False), inline=False)
+            pcts = [[titles[i], flats[i]] for i in range(len(titles))]
+            em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
             em2.add_field(name='Shortcode', value=champ.short)
             embeds.append(em)
             embeds.append(em2)
