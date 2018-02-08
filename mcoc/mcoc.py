@@ -574,7 +574,7 @@ class ChampionFactory():
                     logger.info('Skipping ' + name)
                     continue
 
-                sig_len = 201 if star == 5 else 100
+                sig_len = 201 if star >= 5 else 100
                 sig = [0] * sig_len
                 for i, v in enumerate(row):
                     try:
@@ -1859,7 +1859,6 @@ class Champion:
     @property
     @validate_attr('prestige')
     def prestige(self):
-        ## this will need to be amended to use the new prestige Calculate
         try:
             if self.prestige_data[self.star][self.rank-1] is None:
                 return 0
