@@ -938,11 +938,14 @@ class MCOC(ChampionFactory):
             plt.axis([0, 6, 0, 20])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
+            plt.subtitle('Sig Plot Test')
             # plt.show()
             plt.draw()
             plt.savefig('data/mcoc/sigtemp.png', format='png', dpi=150)
+            await self.bot.upload('data/mcoc/sigtemp.png')
         except:
             print('champ_sigplot nothing happened')
+
 
     @champ.command(name='stats', aliases=('stat',))
     async def champ_stats(self, *, champs : ChampConverterMult):
