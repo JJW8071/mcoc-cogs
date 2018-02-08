@@ -25,6 +25,7 @@ import discord
 from discord.ext import commands
 from .utils import chat_formatting as chat
 from __main__ import send_cmd_help
+from cogs.utils import checks
 #from .hook import ChampionRoster, HashtagRankConverter
 # from .hook import PagesMenu
 
@@ -719,6 +720,7 @@ class MCOC(ChampionFactory):
         gsdata = GSExport(self.bot, gc, **gsheet_files[key])
         await gsdata.retrieve_data()
 
+    @checks.admin_or_permissions(manage_server)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
         selected = []
