@@ -15,8 +15,7 @@ import csv
 import json
 import pygsheets
 import random
-#from gsheets import Sheets
-#import pygsheets  //failure
+
 from pygsheets.utils import numericise_all
 import asyncio
 from .utils.dataIO import dataIO
@@ -28,6 +27,9 @@ from __main__ import send_cmd_help
 from cogs.utils import checks
 #from .hook import ChampionRoster, HashtagRankConverter
 # from .hook import PagesMenu
+
+## experimental jjw
+import matplotlib.pyplot as plt
 
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
@@ -920,6 +922,15 @@ class MCOC(ChampionFactory):
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
+
+    @champ.command(pass_context=True, name='sigplot', hidden=True)
+    async def champ_sigplot(self,ctx,*, champ: ChampConverterSig):
+        try:
+            plt.plot([1,2,3,4])
+            plt.ylabel('some numbers')
+            plt.show()
+        except:
+            print('champ_sigplot nothing happened')
 
     @champ.command(name='stats', aliases=('stat',))
     async def champ_stats(self, *, champs : ChampConverterMult):
