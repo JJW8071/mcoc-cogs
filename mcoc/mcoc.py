@@ -1660,7 +1660,7 @@ class Champion:
     dupe_levels = {2: 1, 3: 8, 4: 20, 5: 20, 6: 20}
     default_stars = {i: {'rank': i+1, 'sig': 99} for i in range(1,5)}
     default_stars[5] = {'rank': 5, 'sig': 200}
-    default_stars[6] = {'rank': 3, 'sig': 200}
+    default_stars[6] = {'rank': 1, 'sig': 200}
 
     def __init__(self, attrs=None):
         if attrs is None:
