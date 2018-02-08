@@ -723,15 +723,15 @@ class MCOC(ChampionFactory):
     async def nerfbuffsell(self, ctx):
         selected = []
         embeds = []
-        em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell', description='')
+        em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
         embeds.append(em)
         while len(selected) < 3:
             champ = random.choice(list(self.champions.values()))
             if champ not in selected:
                 if champ.status != 'npc':
-                    selected.append(champ.full_name)
-                    em = discord.Embed(color=champ.class_color, title=champ.full_name, description='')
-                    em.set_thumbnail(url=champ.get_avatar)
+                    selected.append(champ)
+                    em = discord.Embed(color=champ.class_color, title=champ.full_name)
+                    em.set_thumbnail(url=champ.get_avatar())
                     embeds.append(em)
         for em in embeds:
             await self.bot.say(embed=em)
