@@ -726,16 +726,18 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
         embeds.append(em)
         while len(selected) < 3:
-            champ = random.choice(list(self.champions.values()))
+            name_id = random.choice(list(self.champions.values()))
+            champ = self.get_champion(name_id)
             if champ not in selected:
                 if champ.status != 'npc':
                     selected.append(champ)
-                    em = discord.Embed(color=champ.class_color, title=champ.full_name)
-                    em.set_thumbnail(url=champ.get_avatar())
-                    embeds.append(em)
+                    try:
+                        em = discord.Embed(color=champ.class_color, title=champ.full_name)
+                        em.set_thumbnail(url=champ.get_avatar())
+                        embeds.append(em)
         for em in embeds:
             await self.bot.say(embed=em)
-        # await self.bot.say('\n'.join(selected))
+        await self.bot.say('\n'.join(selected.full_name))
 
     @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
