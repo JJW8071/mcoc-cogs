@@ -937,16 +937,16 @@ class MCOC(ChampionFactory):
             stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
             em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
             em.add_field(name='Shortcode',value=champ.short)
+            embeds.append(em)
 
             flats = []
             flats.append(data[keys[0]])
             flats.append(data[keys[1]])
             for k in range(2,len(keys)):
-                flats.append(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating)))
+                flats.append(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))+' %')
             pcts = [[titles[i], flats[i]] for i in range(len(titles))]
             em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
             em2.add_field(name='Shortcode', value=champ.short)
-            embeds.append(em)
             embeds.append(em2)
             try:
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
@@ -2202,6 +2202,7 @@ class PagesMenu:
                       )])
 
         embedded = isinstance(page_list[0], discord.Embed)
+        print('menu_pages is embedded: '+str(embedded))
 
         if self.add_pageof:
             for i, page in enumerate(page_list):
