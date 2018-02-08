@@ -745,7 +745,7 @@ class MCOC(ChampionFactory):
     @champ.command(name='featured')
     async def champ_featured(self, champ : ChampConverter):
         '''Champion Featured image'''
-        em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+        em = discord.Embed(color=champ.class_color, title=champ.full_name)
         em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
         em.set_image(url=champ.get_featured())
         await self.bot.say(embed=em)
@@ -754,7 +754,7 @@ class MCOC(ChampionFactory):
     async def champ_portrait(self, *, champs : ChampConverterMult):
         '''Champion portraits'''
         for champ in champs:
-            em = discord.Embed(color=champ.class_color, title=champ.bold_name)
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
             em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
             em.set_image(url=champ.get_avatar())
             print(champ.get_avatar())
@@ -921,22 +921,38 @@ class MCOC(ChampionFactory):
         '''Champion(s) Base Stats'''
         for champ in champs:
             data = champ.get_spotlight(default='x')
+            embeds =[]
             em = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
+            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
             titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor Penetration', 'Block Penetration', 'Crit Resistance', 'Armor', 'Block Prof')
             keys = ('health', 'attack', 'critical', 'critdamage', 'armor_pen', 'block_pen', 'crit_resist', 'armor', 'blockprof')
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-
-            if champ.debug:
-                em.add_field(name='Attrs', value='\n'.join(titles))
-                em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
-                em.add_field(name='Added to PHC', value=xref['4basic'])
-            else:
-                stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
-                em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
+            em2=em
+            # if champ.debug:
+            #     em.add_field(name='Attrs', value='\n'.join(titles))
+            #     em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+            #     em.add_field(name='Added to PHC', value=xref['4basic'])
+            # else:
+            stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+            em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
             em.add_field(name='Shortcode',value=champ.short)
-            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
-            await self.bot.say(embed=em)
+
+            flats = []
+            flats.append(data[0])
+            flats.append(data[1])
+            for k in range(2,len(keys)):
+                flats.append(self.from_flat(data[k], champ.chlgr_rating))
+            em2.add_field(name='Base Stats %', value=tabulate(flats, width=19, rotate=False, header_sep=False), inline=False)
+            em2.add_field(name='Shortcode', value=champ.short)
+            embeds.append(em)
+            embeds.append(em2)
+            try:
+                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                await menu.menu_start(embeds)                # for page in pages:
+            except:
+                print('PagesMenu failure')
+                await self.bot.say(embed=em)
 
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs: ChampConverterMult):
