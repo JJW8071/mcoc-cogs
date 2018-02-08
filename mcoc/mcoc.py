@@ -741,7 +741,7 @@ class MCOC(ChampionFactory):
         #                 continue
         # for em in embeds:
         #     await self.bot.say(embed=em)
-        await self.bot.say('\n'.join(selected.full_name))
+        await self.bot.say('\n'.join(s.full_name for s in selected))
 
     @commands.group(pass_context=True, aliases=['champs',])
     async def champ(self, ctx):
