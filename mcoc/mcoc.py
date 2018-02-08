@@ -731,7 +731,7 @@ class MCOC(ChampionFactory):
                 if champ.status != 'npc':
                     selected.append(champ.full_name)
                     em = discord.Embed(color=champ.class_color, title=champ.full_name, description='')
-                    em.set_thumbnail(champ.get_avatar)
+                    em.set_thumbnail(url=champ.get_avatar)
                     embeds.append(em)
         for em in embeds:
             await self.bot.say(embed=em)
