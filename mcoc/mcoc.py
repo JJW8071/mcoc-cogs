@@ -735,6 +735,8 @@ class MCOC(ChampionFactory):
                         em = discord.Embed(color=champ.class_color, title=champ.full_name)
                         em.set_thumbnail(url=champ.get_avatar())
                         embeds.append(em)
+                    except:
+                        continue
         for em in embeds:
             await self.bot.say(embed=em)
         await self.bot.say('\n'.join(selected.full_name))
