@@ -2201,12 +2201,11 @@ class PagesMenu:
             self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
                       )])
 
-        embedded = isinstance(page_list[0], discord.Embed)
         print('menu_pages is embedded: '+str(embedded))
 
         if self.add_pageof:
             for i, page in enumerate(page_list):
-                if embedded:
+                if isinstance(page, discord.embed):
                     ftr = page.footer
                     page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
                             i+1, page_length), icon_url=ftr.icon_url)
@@ -2218,7 +2217,7 @@ class PagesMenu:
 
     async def display_page(self, message, page):
         if not message:
-            if self.embedded == True:
+            if isinstance(page, discord.Embed) == True:
                 message = await self.bot.say(embed=self.page_list[page])
             else:
                 message = await self.bot.say(self.page_list[page])
