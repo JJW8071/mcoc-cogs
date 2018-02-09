@@ -509,6 +509,13 @@ class MCOCTools:
     #     '''Check Role Permissions'''
     #     message = await self.bot.say('initiate phase three')
 
+    @commands.command(pass_context=True, hidden=True)
+    async def awopp_calc(self, ctx, wr:int, gain:int, loss:int):
+        '''MutaMatt's War Opponent Calculator
+        https://en.wikipedia.org/wiki/Elo_rating_system
+        '''
+        playera = 1/(1+exp(10,(gain-loss)/400))
+        await self.bot.say('{}'.format(playera))
 
 def load_csv(filename):
     return csv.DictReader(open(filename))
