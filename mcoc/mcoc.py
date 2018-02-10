@@ -716,11 +716,15 @@ class MCOC(ChampionFactory):
                     'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
         await self.bot.say('Retrieval Complete')
 
-    async def retrieve_gsheet(self, key, gc=None):
+    async def retrieve_gsheet(self, key, gc=None, silent=True):
         if gc is None:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        if not silent:
+            msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
         gsdata = GSExport(self.bot, gc, **gsheet_files[key])
         await gsdata.retrieve_data()
+        if not silent:
+            await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
     @checks.admin_or_permissions(manage_server=True)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
@@ -991,115 +995,160 @@ class MCOC(ChampionFactory):
                 print('PagesMenu failure')
                 await self.bot.say(embed=em)
 
+    @champ.command(pass_context=True, name='update', hidden=True)
+    async def champ_update(self, ctx, *, args):
+        '''Not a real command'''
+        msg = '`{0}champ update` does not exist.\n' \
+            + '`{0}roster update` is probably what you meant to do'
+        prefixes = tuple(self.bot.settings.get_prefixes(ctx.message.server))
+        await self.bot.say(msg.format(prefixes[0]))
+
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs: ChampConverterMult):
         '''Champion(s) Synergies'''
         if len(champs)==1:
-            for champ in champs:
-                em = discord.Embed(color=champ.class_color, title='')
-                em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
-                em.set_thumbnail(url=champ.get_featured())
+            champ = champs[0]
+            em = discord.Embed(color=champ.class_color, title='')
+            em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
+            em.set_thumbnail(url=champ.get_featured())
         else:
             em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
         em = await self.get_synergies(champs, embed=em)
         em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='update', hidden=True)
-    async def champ_update(self, ctx, *, args):
-        '''Not a real command'''
-        msg = '`{}` does not exist.\n`{}` is probably what you meant to do'
-        prefixes = tuple(self.bot.settings.get_prefixes(ctx.message.server))
-        await self.bot.say(msg.format(
-                prefixes[0] + 'champ update',
-                prefixes[0] + 'roster update'))
+    @staticmethod
+    def syn_effect_data(syn_effect, rank):
+        rank = syn_effect['rank{}'.format(rank)]
+        try:
+            effect = [int(v) for v in rank.split(', ')]
+        except AttributeError:
+            effect = [rank]
+        return effect
 
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
-        sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
-        range_headers = 'Synergies!A1:M1'
-        range_body = 'Synergies!A2:M'
-        foldername = 'synergies'
-        filename = 'synergies'
         if champs[0].debug:
-            head_url = GS_BASE.format(sheet,range_headers)
-            body_url = GS_BASE.format(sheet,range_body)
-            champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-            message = await self.bot.say('Collecting Synergy data ...')
-            await self.bot.upload(self.shell_json.format(foldername,filename))
-        else:
-            getfile = self.shell_json.format(foldername, filename)
-            champ_synergies = dataIO.load_json(getfile)
+            await self.retrieve_gsheet('synergy', silent=False)
+        # sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
+        # range_headers = 'Synergies!A1:M1'
+        # range_body = 'Synergies!A2:M'
+        # foldername = 'synergies'
+        # filename = 'synergies'
+        # if champs[0].debug:
+        #     head_url = GS_BASE.format(sheet,range_headers)
+        #     body_url = GS_BASE.format(sheet,range_body)
+        #     champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
+        #     message = await self.bot.say('Collecting Synergy data ...')
+        #     await self.bot.upload(self.shell_json.format(foldername,filename))
+        # else:
+        #     getfile = self.shell_json.format(foldername, filename)
+        #     champ_synergies = dataIO.load_json(getfile)
+        #
+        # # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+        #
+        # range_headers = 'SynergyEffects!A1:G'
+        # range_body = 'SynergyEffects!A2:G'
+        # filename = 'effects'
+        # if champs[0].debug:
+        #     head_url = GS_BASE.format(sheet,range_headers)
+        #     body_url = GS_BASE.format(sheet,range_body)
+        #     synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
+        #     await self.bot.edit_message(message, 'Almost done ...')
+        #     await self.bot.upload(self.shell_json.format(foldername,filename))
+        #     await self.bot.edit_message(message, 'Synergies collected.')
+        # else:
+        #     getfile = self.shell_json.format(foldername, filename)
+        #     synlist = dataIO.load_json(getfile)
 
-        # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
-
-        range_headers = 'SynergyEffects!A1:G'
-        range_body = 'SynergyEffects!A2:G'
-        filename = 'effects'
-        if champs[0].debug:
-            head_url = GS_BASE.format(sheet,range_headers)
-            body_url = GS_BASE.format(sheet,range_body)
-            synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
-            await self.bot.edit_message(message, 'Almost done ...')
-            await self.bot.upload(self.shell_json.format(foldername,filename))
-            await self.bot.edit_message(message, 'Synergies collected.')
-        else:
-            getfile = self.shell_json.format(foldername, filename)
-            synlist = dataIO.load_json(getfile)
-
+        syn_data = dataIO.load_json(local_files['synergy'])
+        champ_set = {champ.full_name for champ in champs}
         synergy_package = []
         activated = set()
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
             for champ in champs:
-                for s in synlist: #try this with .keys()
-                    for i in range(1, 4):
-                        lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
-                        if lookup in champ_synergies:
-                            for c in champs:
-                                if lookup in activated:
-                                    continue
-                                elif '[{}]'.format(c.mattkraftid) in champ_synergies[lookup]['mtriggers']:
-                                    effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                                    effectsused[s].append(effect)
-                                    txt = champ_synergies[lookup]['text'].format(*effect)
-                                    activated.add(lookup)
-                                # synergy_package.append(txt)
-            # print(effectsused)
-            combined = {}
+                champ_synergies = syn_data['SynExport'][champ.full_name]
+                for lookup, data in champ_synergies.items():
+                    if champ.star != data['stars'] or lookup in activated:
+                        continue
+                    for trigger in data['triggers'].split(','):
+                        trigger = trigger.strip()
+                        #print(champ.full_name, trigger, lookup)
+                        if trigger in champ_set:
+                            activated.add(lookup)
+                            syneffect = syn_data['SynergyEffects'][data['synergycode']]
+                            if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
+                                continue
+                            effect = self.syn_effect_data(syneffect, data['rank'])
+                            effectsused[data['synergycode']].append(effect)
+
+                # for s in synlist: #try this with .keys()
+                #     for i in range(1, 4):
+                #         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+                #         if lookup in champ_synergies:
+                #             for c in champs:
+                #                 if lookup in activated:
+                #                     continue
+                #                 elif '[{}]'.format(c.mattkraftid) in champ_synergies[lookup]['mtriggers']:
+                #                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
+                #                     effectsused[s].append(effect)
+                #                     txt = champ_synergies[lookup]['text'].format(*effect)
+                #                     activated.add(lookup)
+                #                 # synergy_package.append(txt)
+            #print(effectsused)
             desc= []
             embed.description = ''.join(c.collectoremoji for c in champs)
             for k, v in effectsused.items():
-                combined[k] = [sum(row) for row in iter_rows(v, True)]
-                txt = synlist[k]['text'].format(*combined[k])
+                syn_effect = syn_data['SynergyEffects'][k]
+                array_sum = [sum(row) for row in iter_rows(v, True)]
+                txt = syn_effect['text'].format(*array_sum)
                 if embed is not None:
-                    embed.add_field(name=synlist[k]['synergyname'],value=txt,inline=False)
+                    embed.add_field(name=syn_effect['synergyname'],value=txt,inline=False)
                 else:
-                    desc.append('{}\n{}\n'.format(synlist[k]['synergyname'],txt))
+                    desc.append('{}\n{}\n'.format(syn_effect['synergyname'],txt))
             if embed is None:
                 embed='\n'.join(desc)
             return embed
         elif len(champs) == 1: ## If only 1 champ, display synergies available.
-            for champ in champs:
-                for s in synlist:
-                    for i in range(1, 4):
-                        lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
-                        if lookup in champ_synergies:
-                            selected = champ_synergies[lookup]
-                            triggers = selected['triggers']
-                            effect = selected['effect'].split(', ')
-                            # print(effect)
-                            try:
-                                txt = champ_synergies[lookup]['text'].format(*effect)
-                            except:
-                                print(champ_synergies[lookup]['text'], effect)
-                                raise
-                            if embed is not None:
-                                embed.add_field(name='{}'.format(synlist[s]['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
-                            synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
-            if champs[0].debug:
-                await self.bot.delete_message(message)
+            champ = champs[0]
+            champ_synergies = syn_data['SynExport'][champ.full_name]
+            for lookup, data in champ_synergies.items():
+                if champ.star != data['stars']:
+                    continue
+                syneffect = syn_data['SynergyEffects'][data['synergycode']]
+                triggers = data['triggers']
+                effect = self.syn_effect_data(syneffect, data['rank'])
+                # print(effect)
+                try:
+                    txt = syneffect['text'].format(*effect)
+                except:
+                    print(syneffect['text'], effect)
+                    raise
+                if embed is not None:
+                    embed.add_field(name='{}'.format(syneffect['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
+                synergy_package.append('{}\n{}: {}\n'.format(triggers, syneffect['synergyname'], txt))
+
+            # for champ in champs:
+            #     for s in synlist:
+            #         for i in range(1, 4):
+            #             lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
+            #             if lookup in champ_synergies:
+            #                 selected = champ_synergies[lookup]
+            #                 triggers = selected['triggers']
+            #                 effect = selected['effect'].split(', ')
+            #                 # print(effect)
+            #                 try:
+            #                     txt = champ_synergies[lookup]['text'].format(*effect)
+            #                 except:
+            #                     print(champ_synergies[lookup]['text'], effect)
+            #                     raise
+            #                 if embed is not None:
+            #                     embed.add_field(name='{}'.format(synlist[s]['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
+            #                 synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
+            #if champs[0].debug:
+                #await self.bot.delete_message(message)
             if embed is not None:
                 return embed
             else:
