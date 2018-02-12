@@ -744,7 +744,10 @@ class MCOC(ChampionFactory):
                     embeds.append(em)
         try:
             for em in embeds:
-                await self.bot.say(embed=em)
+                message = await self.bot.say(embed=em)
+                await self.bot.add_reaction(message=message, ':regional_indicator_n:')
+                await self.bot.add_reaction(message=message, ':regional_indicator_b:')
+                await self.bot.add_reaction(message=message, ':regional_indicator_s:')
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
