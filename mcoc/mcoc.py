@@ -745,9 +745,9 @@ class MCOC(ChampionFactory):
         try:
             for em in embeds:
                 message = await self.bot.say(embed=em)
-                await self.bot.add_reaction(message, ':regional_indicator_n:')
-                await self.bot.add_reaction(message, ':regional_indicator_b:')
-                await self.bot.add_reaction(message, ':regional_indicator_s:')
+                await self.bot.add_reaction(message, '🇳')
+                await self.bot.add_reaction(message, 'B')
+                await self.bot.add_reaction(message, 'S')
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
