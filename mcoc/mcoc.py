@@ -731,8 +731,8 @@ class MCOC(ChampionFactory):
     async def nerfbuffsell(self, ctx):
         selected = []
         embeds = []
-        em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
-        embeds.append(em)
+        # em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
+        # embeds.append(em)
         while len(selected) < 3:
             name_id = random.choice(list(self.champions.values()))
             champ = await self.get_champion(name_id.mattkraftid)
@@ -746,8 +746,8 @@ class MCOC(ChampionFactory):
             for em in embeds:
                 message = await self.bot.say(embed=em)
                 await self.bot.add_reaction(message, '🇳')
-                await self.bot.add_reaction(message, 'B')
-                await self.bot.add_reaction(message, 'S')
+                await self.bot.add_reaction(message, '🅱️')
+                await self.bot.add_reaction(message, '💲')
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
