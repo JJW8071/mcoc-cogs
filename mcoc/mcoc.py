@@ -726,12 +726,14 @@ class MCOC(ChampionFactory):
         if not silent:
             await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
-    @checks.admin_or_permissions(manage_server=True)
+    # @checks.admin_or_permissions(manage_server=True)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
+        '''Random draw of 3 champions.
+        Choose one to Nerf, one to Buff, and one to Sell'''
         selected = []
         embeds = []
-        emojis = [':regional_indicator_n:',':regional_indicator_b:',':regional_indicator_s:']
+        emojis = ['🇳','🇧','🇸']
         # em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
         # embeds.append(em)
         while len(selected) < 3:
@@ -746,9 +748,9 @@ class MCOC(ChampionFactory):
         try:
             for em in embeds:
                 message = await self.bot.say(embed=em)
-                # for emoji in emojis:
-                #     await self.bot.add_reaction(message=message, emoji=emoji)
-                #     await asyncio.sleep(1)
+                for emoji in emojis:
+                    await self.bot.add_reaction(message=message, emoji=emoji)
+                    # await asyncio.sleep(1)
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
