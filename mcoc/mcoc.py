@@ -745,7 +745,7 @@ class MCOC(ChampionFactory):
         try:
             messages=[]
             for em in embeds:
-                messages.append = await self.bot.say(embed=em)
+                messages.append(await self.bot.say(embed=em))
             for message in messages:
                 await self.bot.add_reaction(message=message, emoj='N')
         except:
