@@ -743,11 +743,11 @@ class MCOC(ChampionFactory):
                     em.set_thumbnail(url=champ.get_avatar())
                     embeds.append(em)
         try:
+            messages=[]
             for em in embeds:
-                message = await self.bot.say(embed=em)
-                await self.bot.add_reaction(message, '🇳')
-                await self.bot.add_reaction(message, '🅱️')
-                await self.bot.add_reaction(message, '💲')
+                messages.append = await self.bot.say(embed=em)
+            for message in messages:
+                await self.bot.add_reaction(message=message, emoj='N')
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
