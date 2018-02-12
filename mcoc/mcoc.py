@@ -731,6 +731,7 @@ class MCOC(ChampionFactory):
     async def nerfbuffsell(self, ctx):
         selected = []
         embeds = []
+        emojis = [':regional_indicator_n:',':regional_indicator_b:',':regional_indicator_s:']
         # em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
         # embeds.append(em)
         while len(selected) < 3:
@@ -746,10 +747,9 @@ class MCOC(ChampionFactory):
             messages=[]
             for em in embeds:
                 message = await self.bot.say(embed=em)
-                await asyncio.sleep(2)
-                await self.bot.add_reaction(message=message, emoji=':regional_indicator_n:')
-                await self.bot.add_reaction(message=message, emoji=':regional_indicator_b:')
-                await self.bot.add_reaction(message=message, emoji=':regional_indicator_s:')
+                for emoji in emojis:
+                    await self.bot.add_reaction(message=message, emoji=emoji)
+                    await asyncio.sleep(1)
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
