@@ -745,8 +745,8 @@ class MCOC(ChampionFactory):
         try:
             messages=[]
             for em in embeds:
-                messages.append(await self.bot.say(embed=em))
-            for message in messages:
+                message = await self.bot.say(embed=em)
+                await asyncio.sleep(2)
                 await self.bot.add_reaction(message=message, emoji=':regional_indicator_n:')
                 await self.bot.add_reaction(message=message, emoji=':regional_indicator_b:')
                 await self.bot.add_reaction(message=message, emoji=':regional_indicator_s:')
