@@ -747,7 +747,9 @@ class MCOC(ChampionFactory):
             for em in embeds:
                 messages.append(await self.bot.say(embed=em))
             for message in messages:
-                await self.bot.add_reaction(message=message, emoj='N')
+                await self.bot.add_reaction(message=message, emoji='N')
+                await self.bot.add_reaction(message=message, emoji=':b:')
+                await self.bot.add_reaction(message=message, emoji=':heavy_dollar_sign:')
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
