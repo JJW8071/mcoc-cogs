@@ -731,11 +731,15 @@ class MCOC(ChampionFactory):
     async def nerfbuffsell(self, ctx):
         '''Random draw of 3 champions.
         Choose one to Nerf, one to Buff, and one to Sell'''
+        colors=[discord.Color.teal(),discord.Color.dark_teal(),discord.Color.green(),,discord.Color.dark_green(),discord.Color.blue(),discord.Color.dark_blue(),
+                discord.Color.purple(),discord.Color.dark_purple(),discord.Color.magenta(),discord.Color.dark_magenta(),discord.Color.gold(),discord.Color.dark_gold(),
+                discord.Color.orange(),discord.Color.dark_orange(),discord.Color.red(),discord.Color.dark_red(),discord.Color.lighter_grey(),discord.Color.dark_grey(),discord.Color.light_grey(),discord.Color.darker_gre()]
+        rcolor=random.choice(colors)
         selected = []
         embeds = []
         emojis = ['🇳','🇧','🇸']
-        # em = discord.Embed(color=discord.Color.gold(),title='Nerf, Buff, or Sell')
-        # embeds.append(em)
+        em = discord.Embed(color=rcolor,title='Nerf, Buff, or Sell',description='Of the 3 following Champions, select one to 🇳 Nerf, one to 🇧 Buff, and one to 🇸 Sell')
+        embeds.append(em)
         while len(selected) < 3:
             name_id = random.choice(list(self.champions.values()))
             champ = await self.get_champion(name_id.mattkraftid)
@@ -745,6 +749,7 @@ class MCOC(ChampionFactory):
                     em = discord.Embed(color=champ.class_color, title=champ.full_name)
                     em.set_thumbnail(url=champ.get_avatar())
                     embeds.append(em)
+        embeds.append(discord.Embed(color=rcolor,title='Explain your choices'))
         try:
             for em in embeds:
                 message = await self.bot.say(embed=em)
