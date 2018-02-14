@@ -739,8 +739,9 @@ class MCOC(ChampionFactory):
         selected = []
         embeds = []
         emojis = ['🇳','🇧','🇸']
-        em = discord.Embed(color=rcolor,title='Nerf, Buff, or Sell',description='Of the 3 following Champions, select one to 🇳 Nerf, one to 🇧 Buff, and one to 🇸 Sell')
-        embeds.append(em)
+        em1 = discord.Embed(color=rcolor,title='Nerf, Buff, or Sell',description='Of the 3 following Champions, select one to 🇳 Nerf, one to 🇧 Buff, and one to 🇸 Sell')
+        em2 = discord.Embed(color=rcolor,title='Explain your choices'))
+
         while len(selected) < 3:
             name_id = random.choice(list(self.champions.values()))
             champ = await self.get_champion(name_id.mattkraftid)
@@ -750,13 +751,14 @@ class MCOC(ChampionFactory):
                     em = discord.Embed(color=champ.class_color, title=champ.full_name)
                     em.set_thumbnail(url=champ.get_avatar())
                     embeds.append(em)
-        embeds.append(discord.Embed(color=rcolor,title='Explain your choices'))
         try:
+            await self.bot.say(embed=em1)
             for em in embeds:
                 message = await self.bot.say(embed=em)
                 for emoji in emojis:
                     await self.bot.add_reaction(message=message, emoji=emoji)
                     # await asyncio.sleep(1)
+            await self.bot.say(embed=em2)
         except:
             await self.bot.say('\n'.join(s.full_name for s in selected))
 
