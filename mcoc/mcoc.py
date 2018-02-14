@@ -739,8 +739,8 @@ class MCOC(ChampionFactory):
         selected = []
         embeds = []
         emojis = ['🇳','🇧','🇸']
-        em1 = discord.Embed(color=rcolor,title='Nerf, Buff, or Sell',description='Of the 3 following Champions, select one to 🇳 Nerf, one to 🇧 Buff, and one to 🇸 Sell')
-        em2 = discord.Embed(color=rcolor,title='Explain your choices'))
+        em1 = discord.Embed(color=rcolor,title='Nerf, Buff, or Sell',description='')
+        em2 = discord.Embed(color=rcolor,title='Select one to Nerf, one to Buff, and one to Sell. Explain your choices', description='')
 
         while len(selected) < 3:
             name_id = random.choice(list(self.champions.values()))
