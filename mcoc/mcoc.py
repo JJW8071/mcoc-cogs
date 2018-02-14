@@ -731,9 +731,10 @@ class MCOC(ChampionFactory):
     async def nerfbuffsell(self, ctx):
         '''Random draw of 3 champions.
         Choose one to Nerf, one to Buff, and one to Sell'''
-        colors=[discord.Color.teal(),discord.Color.dark_teal(),discord.Color.green(),,discord.Color.dark_green(),discord.Color.blue(),discord.Color.dark_blue(),
-                discord.Color.purple(),discord.Color.dark_purple(),discord.Color.magenta(),discord.Color.dark_magenta(),discord.Color.gold(),discord.Color.dark_gold(),
-                discord.Color.orange(),discord.Color.dark_orange(),discord.Color.red(),discord.Color.dark_red(),discord.Color.lighter_grey(),discord.Color.dark_grey(),discord.Color.light_grey(),discord.Color.darker_gre()]
+        colors=[discord.Color.teal(),discord.Color.dark_teal(),discord.Color.green(),discord.Color.dark_green(),discord.Color.blue(),
+                discord.Color.dark_blue(),discord.Color.purple(),discord.Color.dark_purple(),discord.Color.magenta(),discord.Color.dark_magenta(),
+                discord.Color.gold(),discord.Color.dark_gold(),discord.Color.orange(),discord.Color.dark_orange(),discord.Color.red(),
+                discord.Color.dark_red(),discord.Color.lighter_grey(),discord.Color.dark_grey(),discord.Color.light_grey(),discord.Color.darker_grey()]
         rcolor=random.choice(colors)
         selected = []
         embeds = []
