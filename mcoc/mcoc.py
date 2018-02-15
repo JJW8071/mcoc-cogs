@@ -2305,7 +2305,7 @@ class PagesMenu:
 
         if self.add_pageof:
             for i, page in enumerate(page_list):
-                if isinstance(page, discord.embed):
+                if isinstance(page, discord.Embed):
                     ftr = page.footer
                     page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
                             i+1, page_length), icon_url=ftr.icon_url)
