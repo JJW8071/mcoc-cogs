@@ -2301,7 +2301,7 @@ class PagesMenu:
             self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
                       )])
 
-        print('menu_pages is embedded: '+str(embedded))
+        print('menu_pages is embedded: '+str(self.embedded))
 
         if self.add_pageof:
             for i, page in enumerate(page_list):
