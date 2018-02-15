@@ -532,7 +532,7 @@ class Hook:
         em0=discord.Embed(color=ucolor,title='No Roster detected!', description='There are several methods available to you to create your roster.  \nPlease note the paging buttons below to select your instruction set.')
         em0.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
         embeds.append(em0)
-        em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ``/roster add`` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n``/roster del`` allows you to remove a Champion.')
+        em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ```/roster add <champs>``` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n```/roster del <champs>``` allows you to remove a Champion.')
         em01.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
         embeds.append(em01)
         em=discord.Embed(color=ucolor, title='Champion CSV template', url='https://goo.gl/LaFrg7')
