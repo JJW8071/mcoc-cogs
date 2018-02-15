@@ -32,6 +32,8 @@ PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX2
 KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
 HOOK_URL='http://hook.github.io/champions/#/roster'
+GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'
+
 _default.default = JSONEncoder().default  # Save unmodified default.
 JSONEncoder.default = _default # replacemente
 ### Done with patch
@@ -526,19 +528,25 @@ class Hook:
 
     async def roster_kickback(self, ucolor = discord.Color.gold()):
         embeds=[]
+        em0=discord.Embed(color=ucolor,title='No Roster detected!', description='There are several methods available to you to create your roster.  \nPlease note the paging buttons below to select your instruction set.')
+        em0.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
+        embeds.append(em0)
+        em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ``/roster add`` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n``/roster del`` allows you to remove a Champion.')
+        em01.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
+        embeds.append(em01)
         em=discord.Embed(color=ucolor, title='Champion CSV template', url='https://goo.gl/LaFrg7')
         em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
         em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
-        em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
+        em.set_footer(text='CSV import',icon_url=GSHEET_ICON)
         embeds.append(em)
         em2=discord.Embed(color=ucolor,title='Import from Hook',url=HOOK_URL)
         em2.add_field(name='Hook instructions',value='1. Go to Hook/Champions webapp (blue text)\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
-        em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
+        em2.set_footer(text='hook/champions',icon_url=GITHUB_ICON)
         embeds.append(em2)
         em3=discord.Embed(color=ucolor,title='Import from Hook',url=HOOK_URL)
         em3.add_field(name='iOS + Hook instructions',value='1. Go to Hook/Champions webapp (blue text)\n2. Add Champions.\n3. Set Rank & Signature Ability level\n4. From the Menu > Export CSV > Copy Text from Safari\n5. In Google Sheets App > paste\n6. Download as \'champions.csv\'\n5. Upload to Collector.\n6. Select OK to confirm')
         em3.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
-        em3.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
+        em3.set_footer(text='hook + Google Sheets',icon_url=GSHEET_ICON)
         embeds.append(em3)
         return embeds
 

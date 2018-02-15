@@ -52,6 +52,7 @@ data_files = {
     }
 
 GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/{}/values/{}?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
+GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'
 SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffeOzKiaeQeqoUgaESknK-QpXTYV2GdJgbxQkeCjoSajuLjafKdJ5imE1ADPYeoh8QkAr/pubhtml?gid=1483787822&single=true'
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
@@ -815,7 +816,7 @@ class MCOC(ChampionFactory):
         em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='2OO2RC51\' Duel Targets',
-                icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png')
+                icon_url=GSHEET_ICON)
         target_found = False
         for star in range(3,7):
             for rank in range(1,6):
@@ -1389,7 +1390,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.magenta(), title=emtitle,url=PRESTIGE_SURVEY,
                 description='\n'.join([c.verbose_prestige_str for c in
                     sorted(pch, key=attrgetter('prestige'), reverse=True)]))
-        em.set_footer(icon_url='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png',text='mutamatt Prestige for Collector')
+        em.set_footer(icon_url=GSHEET_ICON,text='mutamatt Prestige for Collector')
         await self.bot.say(embed=em)
 
     @champ.command(name='aliases', aliases=('alias',))
