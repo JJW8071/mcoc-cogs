@@ -917,24 +917,22 @@ class MCOC(ChampionFactory):
         #     await self.bot.say(embed=em)
 
         for champ in champs:
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
-            em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(champ.basic4), inline=True)
-            # try:
-            #     print(champ.chance4)
-            # except:
-            #     pass
-            # chance = float(champ.chance4)*100
-            # pchance = chance*0.05
-            # em.add_field(name='PHC Odds', value='{}%'.format(pchance), inline=True)
-            #
-            # em.add_field(name='{0.star}{0.star_char} {1} Odds'.format(champ, champ.4fb), value='{}%'.format(chance),inline=True)
-            # if champ.5fsb != '':
-            #     em.add_field(name='{} Odds'.format(champ.5fsb), value='{}%'.format(round(float(champ.5chance)*100,2)),inline=True)
-            # if champ.6chance > 0:
-            #     em.add_field(name='6{} Basic Odds'.format(champ.star_char), value='{}%'.format(round(float(champ.6chance)*100,2)),inline=True)
+            em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(xref['basic4']), inline=True)
+            chance4 = float(xref['chance4')*100
+            pchance = chance4*0.05
+            em.add_field(name='PHC Odds', value='{}%'.format(pchance), inline=True)
+            em.add_field(name='{0.star}{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{}%'.format(chance),inline=True)
+            if xref['5fsb'] != '':
+                chance5=float(xref['chance5')*100
+                em.add_field(name='{} Odds'.format(xref['5fsb']), value='{}%'.format(chance5),inline=True)
+            if xref['chance6'] >0 :
+                chance6=float(xref['chance6')*100
+                em.add_field(name='6{} Basic Odds'.format(champ.star_char), value='{}%'.format(chance6),inline=True)
             em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
