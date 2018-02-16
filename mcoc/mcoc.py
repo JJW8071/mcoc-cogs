@@ -924,14 +924,14 @@ class MCOC(ChampionFactory):
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
             em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(xref['basic4']), inline=True)
             chance4 = float(xref['chance4'])*100
-            pchance = chance4*0.05
+            pchance = round(chance4*0.05,2)
             em.add_field(name='PHC Odds', value='{}%'.format(pchance), inline=True)
             em.add_field(name='{0.star}{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{}%'.format(chance4),inline=True)
             if xref['5fsb'] != '':
-                chance5=float(xref['chance5'])*100
+                chance5=round(float(xref['chance5'])*100,2)
                 em.add_field(name='{} Odds'.format(xref['5fsb']), value='{}%'.format(chance5),inline=True)
             if float(xref['chance6']) >0 :
-                chance6=float(xref['chance6'])*100
+                chance6=round(float(xref['chance6'])*100,2)
                 em.add_field(name='6{} Basic Odds'.format(champ.star_char), value='{}%'.format(chance6),inline=True)
             em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
