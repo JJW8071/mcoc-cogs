@@ -16,7 +16,7 @@ import json
 import pygsheets
 import random
 
-from pygsheets.utils import numericise_all
+from pygsheets.utils import numericise_all, numericise
 import asyncio
 from .utils.dataIO import dataIO
 from functools import wraps
@@ -279,86 +279,190 @@ class ChampConverterMult(ChampConverter):
             await bot.say(embed=em)
         return champs
 
+def strip_and_numericise(val):
+        return numericise(val.strip())
+
+def cell_to_list(cell):
+    return [strip_and_numericise(i) for i in cell.split(',')]
+
+def cell_to_dict(cell):
+    ret  = {}
+    for i in cell.split(','):
+        k, v = [strip_and_numericise(j) for j in i.split(':')]
+        ret[k] = v
+    return ret
+
+def remove_commas(cell):
+    return numericise(cell.replace(',', ''))
+
+def remove_NA(cell):
+    return None if cell in ("#N/A", "") else numericise(cell)
+
 class GSExport():
 
-    def __init__(self, bot, gc, *, gkey, local, **kwargs):
+    default_settings = dict(sheet_name=None,
+                            sheet_action='file',
+                            data_type='dict',
+                            range=None,
+                            include_empty=False,
+                            column_handler=None,
+                            row_handler=None,
+                            rc_priority='column',
+                            postprocess=None,
+                            prepare_function='numericise',
+                        )
+
+    default_cell_handlers = (
+                'cell_to_list',
+                'cell_to_dict',
+                'remove_commas',
+                'remove_NA',
+                'numericise'
+            )
+
+    def __init__(self, bot, gc, *, name, gkey, local, **kwargs):
         self.bot = bot
         self.gc = gc
+        self.name = name
         self.gkey = gkey
         self.local = local
         self.meta_sheet = kwargs.pop('meta_sheet', 'meta_sheet')
-        for k,v in kwargs.items():
-            setattr(self, k, v)
+        self.settings = self.default_settings.copy()
+        self.settings.update(kwargs)
         self.data = defaultdict(partial(defaultdict, dict))
+        self.cell_handlers = {}
+        module_namespace = globals()
+        for handler in self.default_cell_handlers:
+            self.cell_handlers[handler] = module_namespace[handler]
 
     async def retrieve_data(self):
-        ss = self.gc.open_by_key(self.gkey)
         try:
-            meta = ss.worksheet('title', self.meta_sheet)
-        except pygsheets.WorksheetNotFound:
-            await self.retrieve_sheet(ss, sheet_name=None, sheet_action='file', data_type='dict')
+            ss = self.gc.open_by_key(self.gkey)
+        except:
+            await self.bot.say("Error opening Spreadsheet <{}>".format(self.gkey))
+            return
+        if self.meta_sheet and self.settings['sheet_name'] is None:
+            try:
+                meta = ss.worksheet('title', self.meta_sheet)
+            except pygsheets.WorksheetNotFound:
+                meta = None
         else:
+            meta = None
+
+        if meta:
             for record in meta.get_all_records():
+                [record.update(((k,v),)) for k,v in self.settings.items() if k not in record or not record[k]]
                 await self.retrieve_sheet(ss, **record)
-        if hasattr(self, 'postprocess'):
-            await self.postprocess(self.bot, self.data)
+        else:
+            await self.retrieve_sheet(ss, **self.settings)
+
+        if self.settings['postprocess']:
+            try:
+                await self.settings['postprocess'](self.bot, self.data)
+            except Exception as err:
+                await self.bot.say("Runtime Error in postprocess of Spreadsheet "
+                        "'{}':\n\t{}".format( self.name, err))
         if self.local:
             dataIO.save_json(self.local, self.data)
         return self.data
 
     async def retrieve_sheet(self, ss, *, sheet_name, sheet_action, data_type, **kwargs):
-        if sheet_name:
-            sheet = ss.worksheet('title', sheet_name)
-        else:
-            sheet = ss.sheet1
-            sheet_name = sheet.title
-        if 'range' in kwargs and kwargs['range']:
-            rng = self.bound_range(sheet, kwargs['range'])
-            data = sheet.get_values(*rng, returnas='matrix',
-                    #include_empty=kwargs['include_empty'])
-                    include_empty=False)
-        else:
-            data = sheet.get_all_values(include_empty=False)
-            #data = sheet.get_all_values(include_empty=kwargs['include_empty'])
-        #data = sheet.get_all_values(include_empty=False)
+        sheet_name, sheet = await self.resolve_sheet_name(ss, sheet_name)
+        data = self.get_sheet_values(sheet, kwargs)
         header = data[0]
+
         if data_type.startswith('nested_list'):
             data_type, dlen = data_type.rsplit('::', maxsplit=1)
             dlen = int(dlen)
-
-        prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'))
+        #prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'), numericise_all)
+        prep_func = self.cell_handlers[kwargs['prepare_function']]
+        self.data['_headers'][sheet_name] = header
+        col_handlers = self.build_column_handlers(sheet_name, header,
+                            kwargs['column_handler'])
         if sheet_action == 'table':
             self.data[sheet_name] = [header]
         for row in data[1:]:
-            drow = numericise_all(prep_func(row), '')
-            rkey = drow[0]
+            clean_row = []
+            for cell_head, cell, c_hand in zip(header, row, col_handlers):
+                if c_hand:
+                    clean_row.append(c_hand(cell))
+                else:
+                    clean_row.append(prep_func(cell))
+            rkey = clean_row[0]
             if sheet_action == 'merge':
                 if data_type == 'nested_dict':
-                    pack = dict(zip(header[2:], drow[2:]))
-                    self.data[rkey][sheet_name][drow[1]] = pack
+                    pack = dict(zip(header[2:], clean_row[2:]))
+                    self.data[rkey][sheet_name][clean_row[1]] = pack
                     continue
                 if data_type == 'list':
-                    pack = drow[1:]
+                    pack = clean_row[1:]
                 elif data_type == 'nested_list':
-                    if len(drow[1:]) < dlen or not any(drow[1:]):
+                    if len(clean_row[1:]) < dlen or not any(clean_row[1:]):
                         pack = None
                     else:
-                        pack = [drow[i:i+dlen] for i in range(1, len(drow), dlen)]
+                        pack = [clean_row[i:i+dlen] for i in range(1, len(clean_row), dlen)]
                 self.data[rkey][sheet_name] = pack
             elif sheet_action in ('dict', 'file'):
                 if data_type == 'list':
-                    pack = drow[1:]
+                    pack = clean_row[1:]
                 elif data_type == 'dict':
-                    pack = dict(zip(header, drow))
+                    pack = dict(zip(header, clean_row))
                 if data_type == 'nested_dict':
-                    pack = dict(zip(header[2:], drow[2:]))
-                    self.data[sheet_name][rkey][drow[1]] = pack
+                    pack = dict(zip(header[2:], clean_row[2:]))
+                    self.data[sheet_name][rkey][clean_row[1]] = pack
                 elif sheet_action == 'dict':
                     self.data[sheet_name][rkey] = pack
                 elif sheet_action == 'file':
                     self.data[rkey] = pack
             elif sheet_action == 'table':
-                self.data[sheet_name].append(drow)
+                self.data[sheet_name].append(clean_row)
+
+    async def resolve_sheet_name(self, ss, sheet_name):
+        if sheet_name:
+            try:
+                sheet = ss.worksheet('title', sheet_name)
+            except pygsheets.WorksheetNotFound:
+                await self.bot.say("Cannot find worksheet '{}' in Spreadsheet '{}' ({})".format(
+                        sheet_name, ss.title, ss.id))
+        else:
+            sheet = ss.sheet1
+            sheet_name = sheet.title
+        return sheet_name, sheet
+
+    def get_sheet_values(self, sheet, kwargs):
+        if kwargs['range']:
+            rng = self.bound_range(sheet, kwargs['range'])
+            data = sheet.get_values(*rng, returnas='matrix',
+                    include_empty=kwargs['include_empty'])
+        else:
+            data = sheet.get_all_values(include_empty=kwargs['include_empty'])
+        return data
+
+    def build_column_handlers(self, sheet_name, header, column_handler_str):
+        if not column_handler_str:
+            return [None] * len(header)
+        col_handler = cell_to_dict(column_handler_str)
+        #print(col_handler)
+
+        #  Column Header check
+        invalid = set(col_handler.keys()) - set(header)
+        if invalid:
+            raise ValueError("Undefined Columns in column_handler for sheet "
+                    + "'{}':\n\t{}".format(sheet_name, ', '.join(invalid)))
+        #  Callback Cell Handler check
+        invalid = set(col_handler.values()) - set(self.cell_handlers.keys())
+        if invalid:
+            raise ValueError("Undefined CellHandler in column_handler for sheet "
+                    + "'{}':\n\t{}".format(sheet_name, ', '.join(invalid)))
+
+        handler_funcs = []
+        for column in header:
+            if column not in col_handler:
+                handler_funcs.append(None)
+            else:
+                handler_funcs.append(self.cell_handlers[col_handler[column]])
+        return handler_funcs
+
 
     @staticmethod
     def bound_range(sheet, rng_str):
@@ -722,7 +826,7 @@ class MCOC(ChampionFactory):
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
         if not silent:
             msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
-        gsdata = GSExport(self.bot, gc, **gsheet_files[key])
+        gsdata = GSExport(self.bot, gc, name=key, **gsheet_files[key])
         await gsdata.retrieve_data()
         if not silent:
             await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
@@ -1111,31 +1215,15 @@ class MCOC(ChampionFactory):
                 for lookup, data in champ_synergies.items():
                     if champ.star != data['stars'] or lookup in activated:
                         continue
-                    for trigger in data['triggers'].split(','):
-                        trigger = trigger.strip()
-                        #print(champ.full_name, trigger, lookup)
+                    for trigger in data['triggers']:
                         if trigger in champ_set:
                             activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
                                 continue
-                            effect = self.syn_effect_data(syneffect, data['rank'])
+                            effect = syneffect['rank{}'.format(data['rank'])]
                             effectsused[data['synergycode']].append(effect)
 
-                # for s in synlist: #try this with .keys()
-                #     for i in range(1, 4):
-                #         lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
-                #         if lookup in champ_synergies:
-                #             for c in champs:
-                #                 if lookup in activated:
-                #                     continue
-                #                 elif '[{}]'.format(c.mattkraftid) in champ_synergies[lookup]['mtriggers']:
-                #                     effect = [int(v) for v in champ_synergies[lookup]['effect'].split(', ')]
-                #                     effectsused[s].append(effect)
-                #                     txt = champ_synergies[lookup]['text'].format(*effect)
-                #                     activated.add(lookup)
-                #                 # synergy_package.append(txt)
-            #print(effectsused)
             desc= []
             embed.description = ''.join(c.collectoremoji for c in champs)
             for k, v in effectsused.items():
@@ -1143,9 +1231,10 @@ class MCOC(ChampionFactory):
                 array_sum = [sum(row) for row in iter_rows(v, True)]
                 txt = syn_effect['text'].format(*array_sum)
                 if embed is not None:
-                    embed.add_field(name=syn_effect['synergyname'],value=txt,inline=False)
+                    embed.add_field(name=syn_effect['synergyname'],
+                            value=txt, inline=False)
                 else:
-                    desc.append('{}\n{}\n'.format(syn_effect['synergyname'],txt))
+                    desc.append('{}\n{}\n'.format(syn_effect['synergyname'], txt))
             if embed is None:
                 embed='\n'.join(desc)
             return embed
@@ -1157,7 +1246,8 @@ class MCOC(ChampionFactory):
                     continue
                 syneffect = syn_data['SynergyEffects'][data['synergycode']]
                 triggers = data['triggers']
-                effect = self.syn_effect_data(syneffect, data['rank'])
+                effect = syneffect['rank{}'.format(data['rank'])]
+                #effect = self.syn_effect_data(syneffect, data['rank'])
                 # print(effect)
                 try:
                     txt = syneffect['text'].format(*effect)
@@ -1165,28 +1255,12 @@ class MCOC(ChampionFactory):
                     print(syneffect['text'], effect)
                     raise
                 if embed is not None:
-                    embed.add_field(name='{}'.format(syneffect['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
-                synergy_package.append('{}\n{}: {}\n'.format(triggers, syneffect['synergyname'], txt))
+                    embed.add_field(name='{}'.format(syneffect['synergyname']),
+                            value='+ **{}**\n{}\n'.format(', '.join(triggers), txt),
+                            inline=False)
+                synergy_package.append('{}\n{}: {}\n'.format(', '.join(triggers),
+                        syneffect['synergyname'], txt))
 
-            # for champ in champs:
-            #     for s in synlist:
-            #         for i in range(1, 4):
-            #             lookup = '{}-{}-{}-{}'.format(champ.star, champ.mattkraftid, s, i)
-            #             if lookup in champ_synergies:
-            #                 selected = champ_synergies[lookup]
-            #                 triggers = selected['triggers']
-            #                 effect = selected['effect'].split(', ')
-            #                 # print(effect)
-            #                 try:
-            #                     txt = champ_synergies[lookup]['text'].format(*effect)
-            #                 except:
-            #                     print(champ_synergies[lookup]['text'], effect)
-            #                     raise
-            #                 if embed is not None:
-            #                     embed.add_field(name='{}'.format(synlist[s]['synergyname']), value='+ **{}**\n{}\n'.format(triggers,txt), inline=False)
-            #                 synergy_package.append('{}\n{}: {}\n'.format(triggers, synlist[s]['synergyname'], txt))
-            #if champs[0].debug:
-                #await self.bot.delete_message(message)
             if embed is not None:
                 return embed
             else:
