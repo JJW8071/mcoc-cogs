@@ -1033,10 +1033,10 @@ class MCOC(ChampionFactory):
             em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{}%'.format(chance4),inline=True)
             if xref['5fsb'] != '':
                 chance5=round(float(xref['chance5'])*100,4)
-                em.add_field(name='5{0.star_char}{1} Odds'.format(champ, xref['5fsb']), value='{}%'.format(chance5),inline=True)
+                em.add_field(name='5{0.star_char} {1} Odds'.format(champ, xref['5fsb']), value='{}%'.format(chance5),inline=True)
             if float(xref['chance6']) >0 :
                 chance6=round(float(xref['chance6'])*100,4)
-                em.add_field(name='6{0.star} Basic Odds'.format(champ), value='{}%'.format(chance6),inline=True)
+                em.add_field(name='6{0.star_char} Basic Odds'.format(champ), value='{}%'.format(chance6),inline=True)
             em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
