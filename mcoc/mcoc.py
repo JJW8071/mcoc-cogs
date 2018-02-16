@@ -921,13 +921,13 @@ class MCOC(ChampionFactory):
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
             em.add_field(name='Release Date', value=champ.released, inline=True)
-            em.add_field(name='4★ Basic & PHC Date', value=champ.4basic, inline=True)
+            em.add_field(name='4{} Basic & PHC Date'.format(champ.star_char), value=champ.4basic, inline=True)
             em.add_field(name='PHC Odds', value='{}%'.format(round(0.005*float(champ.4chance)*100,2)),inline=True)
             em.add_field(name='{} Odds'.format(champ.4fb), value='{}%'.format(round(float(champ.4chance)*100,2)),inline=True)
             if champ.5fsb != '':
                 em.add_field(name='{} Odds'.format(champ.5fsb), value='{}%'.format(round(float(champ.5chance)*100,2)),inline=True)
             if champ.6chance > 0:
-                em.add_field(name='6★ Basic Odds'.format(champ.5fsb), value='{}%'.format(round(float(champ.6chance)*100,2)),inline=True)
+                em.add_field(name='6{} Basic Odds'.format(champ.star_char), value='{}%'.format(round(float(champ.6chance)*100,2)),inline=True)
             em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
