@@ -930,7 +930,7 @@ class MCOC(ChampionFactory):
             if xref['5fsb'] != '':
                 chance5=float(xref['chance5'])*100
                 em.add_field(name='{} Odds'.format(xref['5fsb']), value='{}%'.format(chance5),inline=True)
-            if xref['chance6'] >0 :
+            if float(xref['chance6']) >0 :
                 chance6=float(xref['chance6'])*100
                 em.add_field(name='6{} Basic Odds'.format(champ.star_char), value='{}%'.format(chance6),inline=True)
             em.add_field(name='Shortcode', value=champ.short, inline=True)
