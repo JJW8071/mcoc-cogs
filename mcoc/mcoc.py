@@ -921,7 +921,7 @@ class MCOC(ChampionFactory):
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
-            # em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(champ.basic4), inline=True)
+            em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(champ.basic4), inline=True)
             # try:
             #     print(champ.chance4)
             # except:
