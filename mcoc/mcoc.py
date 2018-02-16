@@ -922,8 +922,10 @@ class MCOC(ChampionFactory):
 
             em.add_field(name='Release Date', value='{}'.format(champ.released), inline=True)
             em.add_field(name='{0.star}{0.star_char} Basic | PHC Date'.format(champ), value='{}'.format(champ.4basic), inline=True)
-            em.add_field(name='PHC Odds', value='{}%'.format(round(0.005*float(champ.4chance)*100,2)), inline=True)
-            chance = round(float(champ.4chance)*100,2)
+            chance = champ.4chance*100
+            pchance = chance*0.05
+            em.add_field(name='PHC Odds', value='{}%'.format(pchance), inline=True)
+
             em.add_field(name='{0.star}{0.star_char} {1} Odds'.format(champ, champ.4fb), value='{}%'.format(chance),inline=True)
             # if champ.5fsb != '':
             #     em.add_field(name='{} Odds'.format(champ.5fsb), value='{}%'.format(round(float(champ.5chance)*100,2)),inline=True)
