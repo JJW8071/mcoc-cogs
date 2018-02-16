@@ -920,8 +920,8 @@ class MCOC(ChampionFactory):
             em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
-            em.add_field(name='Release Date', value=champ.released, inline=True)
-            em.add_field(name='4{} Basic & PHC Date'.format(champ.star_char), value=champ.4basic, inline=True)
+            em.add_field(name='Release Date', value='{}'.format(champ.released), inline=True)
+            em.add_field(name='4{} Basic & PHC Date'.format(champ.star_char), value='{}'.format(champ.4basic), inline=True)
             em.add_field(name='PHC Odds', value='{}%'.format(round(0.005*float(champ.4chance)*100,2)),inline=True)
             em.add_field(name='{} Odds'.format(champ.4fb), value='{}%'.format(round(float(champ.4chance)*100,2)),inline=True)
             if champ.5fsb != '':
