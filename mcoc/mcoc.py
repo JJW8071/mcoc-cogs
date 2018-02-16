@@ -859,7 +859,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='hashtags',
                     value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
         em.add_field(name='Shortcode', value=champ.short)
-        em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+        em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -892,29 +892,47 @@ class MCOC(ChampionFactory):
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
+        # for champ in champs:
+        #     xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+        #     em = discord.Embed(color=champ.class_color,
+        #             title='Release Dates & Est. Pull Chance',url=SPOTLIGHT_DATASET)
+        #     em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+        #     em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
+        #     em.add_field(name='4{0.star_char} Basic & \nPremium Hero Crystal'.format(champ), value=xref['4basic'],inline=False)
+        #     # em.add_field(name='5{0.star_char} Subfeature'.format(champ), value=xref['5subfeature'],inline=False)
+        #     em.add_field(name='5{0.star_char} Basic'.format(champ), value=xref['5basic'],inline=False)
+        #     state = xref['f/s/b']
+        #     if state == 'b':
+        #         em.add_field(name='Basic 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
+        #         em.add_field(name='Basic 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
+        #     elif state == 's':
+        #         em.add_field(name='Basic 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
+        #         em.add_field(name='Featured 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
+        #     elif state == 'f':
+        #         em.add_field(name='Featured 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
+        #         em.add_field(name='Featured 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
+        #     em.add_field(name='Shortcode', value=champ.short)
+        #     em.set_thumbnail(url=champ.get_featured())
+        #     em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
+        #     await self.bot.say(embed=em)
+
         for champ in champs:
-            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-            em = discord.Embed(color=champ.class_color,
-                    title='Release Dates & Est. Pull Chance',url=SPOTLIGHT_DATASET)
-            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-            em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-            em.add_field(name='4{0.star_char} Basic & \nPremium Hero Crystal'.format(champ), value=xref['4basic'],inline=False)
-            em.add_field(name='5{0.star_char} Subfeature'.format(champ), value=xref['5subfeature'],inline=False)
-            em.add_field(name='5{0.star_char} Basic'.format(champ), value=xref['5basic'],inline=False)
-            state = xref['f/s/b']
-            if state == 'b':
-                em.add_field(name='Basic 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
-                em.add_field(name='Basic 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
-            elif state == 's':
-                em.add_field(name='Basic 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
-                em.add_field(name='Featured 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
-            elif state == 'f':
-                em.add_field(name='Featured 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
-                em.add_field(name='Featured 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
-            em.add_field(name='Shortcode', value=champ.short)
+            em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
+            em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
+
+            em.add_field(name='Release Date', value=champ.released, inline=True)
+            em.add_field(name='4★ Basic & PHC Date', value=champ.4basic, inline=True)
+            em.add_field(name='PHC Odds', value='{}%'.format(round(0.005*float(champ.4chance)*100,2)),inline=True)
+            em.add_field(name='{} Odds'.format(champ.4fb), value='{}%'.format(round(float(champ.4chance)*100,2)),inline=True)
+            if champ.5fsb != '':
+                em.add_field(name='{} Odds'.format(champ.5fsb), value='{}%'.format(round(float(champ.5chance)*100,2)),inline=True)
+            if champ.6chance > 0:
+                em.add_field(name='6★ Basic Odds'.format(champ.5fsb), value='{}%'.format(round(float(champ.6chance)*100,2)),inline=True)
+            em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
-            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
             await self.bot.say(embed=em)
+
 
     @champ.command(pass_context=True, name='sig', aliases=['signature',])
     async def champ_sig(self, ctx, *, champ : ChampConverterSig):
@@ -974,7 +992,7 @@ class MCOC(ChampionFactory):
             embeds =[]
             em = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
             em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
-            em.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
             titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor Penetration', 'Block Penetration', 'Crit Resistance', 'Armor', 'Block Prof')
             keys = ('health', 'attack', 'critical', 'critdamage', 'armor_pen', 'block_pen', 'crit_resist', 'armor', 'blockprof')
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -1412,36 +1430,36 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
-    @commands.group(hidden=True, pass_context=True, aliases=['datamine',])
-    async def search(self, ctx):
+    @commands.group(hidden=True, pass_context=True, name='datamine')
+    async def ksearch(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @search.command(hidden=True, pass_context=True, name='masteries')
-    async def search_masteries(self, ctx, term: str = None):
+    @ksearch.command(hidden=True, pass_context=True, name='masteries')
+    async def ksearch_masteries(self, ctx, term: str = None):
         '''Search for keys or terms within masteries'''
         data =  load_kabam_json(kabam_masteries)
-        await self._search_paginate(data, term, None)           # for page in pages:
+        await self._ksearch_paginate(data, term, None)           # for page in pages:
 
-    @search.command(hidden=True, pass_context=True, name='special_attacks', aliases=['specials'],)
-    async def search_special_attacks(self, ctx, term: str = None):
+    @ksearch.command(hidden=True, pass_context=True, name='special_attacks', aliases=['specials'],)
+    async def ksearch_special_attacks(self, ctx, term: str = None):
         '''Search for keys or terms within special_attacks'''
         data =  load_kabam_json(kabam_special_attacks)
-        await self._search_paginate(data, term, None)           # for page in pages:
+        await self._ksearch_paginate(data, term, None)           # for page in pages:
 
-    @search.command(hidden=True, pass_context=True, name='bcg_stat_en',aliases=['bcg_stat',])
-    async def search_bcg_stat_en(self, ctx, term: str = None):
+    @ksearch.command(hidden=True, pass_context=True, name='bcg_stat_en',aliases=['bcg_stat',])
+    async def ksearch_bcg_stat_en(self, ctx, term: str = None):
         '''Search for keys or terms within bcg_stat_en'''
         data =  load_kabam_json(kabam_bcg_stat_en)
-        await self._search_paginate(data, term, None)           # for page in pages:
+        await self._ksearch_paginate(data, term, None)           # for page in pages:
     #
-    @search.command(hidden=True, pass_context=True, name='bcg_en', aliases=['bcg',])
-    async def search_bcg_en(self, ctx, term: str = None):
+    @ksearch.command(hidden=True, pass_context=True, name='bcg_en', aliases=['bcg',])
+    async def ksearch_bcg_en(self, ctx, term: str = None):
         '''Search for keys or terms within bcg_en'''
         data =  load_kabam_json(kabam_bcg_en)
-        await self._search_paginate(data, term, None)           # for page in pages:
+        await self._ksearch_paginate(data, term, None)           # for page in pages:
 
-    async def _search_paginate(self, data, term, v=None):
+    async def _ksearch_paginate(self, data, term, v=None):
         keylist = data.keys()
         if term is None:
             print(keylist)
@@ -1455,11 +1473,11 @@ class MCOC(ChampionFactory):
             if term in keylist:
                 await self.bot.say(self._bcg_recompile(data[term]))
             else:
-                searchlist = []
+                ksearchlist = []
                 for k in keylist:
                     if term in data[k]:
-                        searchlist.append('\n{}\n{}\n'.format(k, self._bcg_recompile(data[k])))
-                pages = chat.pagify('\n'.join(s for s in searchlist))
+                        ksearchlist.append('\n{}\n{}\n'.format(k, self._bcg_recompile(data[k])))
+                pages = chat.pagify('\n'.join(s for s in ksearchlist))
                 page_list = []
                 for page in pages:
                     page_list.append(chat.box(page))
