@@ -924,6 +924,8 @@ class MCOC(ChampionFactory):
             # em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(champ.4basic), inline=True)
             try:
                 print(champ.4chance)
+            except:
+                pass
             # chance = float(champ.4chance)*100
             # pchance = chance*0.05
             # em.add_field(name='PHC Odds', value='{}%'.format(pchance), inline=True)
