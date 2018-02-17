@@ -832,13 +832,18 @@ class MCOC(ChampionFactory):
             await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
-    async def modok_says(self, ctx, word):
+    async def modok_says(self, ctx, word:str):
         await self.bot.delete_message(ctx.message)
+        valid = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
+                'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
+                'pretender','sciencerules','science','simpleton','tincan','tremble','ugh','useless',
+                'modok01','modok02','modok03','modok04','modok05','modok06','modok07','modok08','modok09',
+                'modok10','modok11','modok12','modok13','modok14','modok15','modok16','modok17','modok18',
+                'modok19','modok20,','modok21','modok22','modok23','modok24','modok25']
         modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
-        checkpath='/data/mcoc/images/{}'.format(word)
-        champ = self.get_champion('modok')
-        if os.path.exists(checkpath):
-            em = discord.Embed(color=champ.class_color,title='M.O.D.O.K. says', description='')
+        print(modokimage)
+        if word in valid:
+            em = discord.Embed(color=self.class_color_codes['Science'],title='M.O.D.O.K. says', description='')
             em.set_image(modokimage)
             await self.bot.say(embed=em)
         else:
