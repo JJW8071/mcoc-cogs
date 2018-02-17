@@ -844,7 +844,7 @@ class MCOC(ChampionFactory):
         print(modokimage)
         if word in valid:
             em = discord.Embed(color=class_color_codes['Science'],title='M.O.D.O.K. says', description='')
-            em.set_image(modokimage)
+            em.set_image(url=modokimage)
             await self.bot.say(embed=em)
         else:
             return
