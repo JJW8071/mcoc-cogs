@@ -834,7 +834,7 @@ class MCOC(ChampionFactory):
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, word):
         await self.bot.delete_message(ctx.message)
-        modokimage='{}/images/modok/{}.png'.format(remote_data_basepath, word)
+        modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
         checkpath='/data/mcoc/images/{}'.format(word)
         champ = self.get_champion('modok')
         if os.path.exists(checkpath):
