@@ -831,6 +831,20 @@ class MCOC(ChampionFactory):
         if not silent:
             await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
+    @commands.command(pass_context=True, aliases=['modok',], hidden=True)
+    async def modok_says(self, ctx, word):
+        await self.bot.delete_message(ctx.message)
+        modokimage='{}/images/modok/{}.png'.format(remote_data_basepath, word)
+        checkpath='/data/mcoc/images/{}'.format(word)
+        champ = self.get_champion('modok')
+        if os.path.exists(checkpath):
+            em = discord.Embed(color=champ.class_color,title='M.O.D.O.K. says', description='')
+            em.set_image(modokimage)
+            await self.bot.say(embed=em)
+        else:
+            return
+
+
     # @checks.admin_or_permissions(manage_server=True)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
@@ -2384,7 +2398,7 @@ class PagesMenu:
         self.delete_onX = delete_onX
         self.embedded = True
 
-    async def menu_start(self, pages):
+    async def menu_start(self, pages:list):
         page_list = []
         if isinstance(pages, list):
             page_list = pages
@@ -2417,7 +2431,7 @@ class PagesMenu:
 
     async def display_page(self, message, page):
         if not message:
-            if isinstance(page, discord.Embed) == True:
+            if isinstance(self.page_list[page], discord.Embed) == True:
                 message = await self.bot.say(embed=self.page_list[page])
             else:
                 message = await self.bot.say(self.page_list[page])
