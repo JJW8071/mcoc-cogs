@@ -56,7 +56,7 @@ GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/g
 SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffeOzKiaeQeqoUgaESknK-QpXTYV2GdJgbxQkeCjoSajuLjafKdJ5imE1ADPYeoh8QkAr/pubhtml?gid=1483787822&single=true'
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
-COLLECTOR_ICON='https://images-ext-1.discordapp.net/external/drzqadqtDB3udEqQ-wOcOfNLZFpF7HR05_iiTieI2uQ/https/raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_collector.png'
+COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -831,6 +831,22 @@ class MCOC(ChampionFactory):
         if not silent:
             await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
+    @commands.command(pass_context=True, aliases=['modok',], hidden=True)
+    async def modok_says(self, ctx, *, word:str = None):
+        await self.bot.delete_message(ctx.message)
+        valid = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
+                'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
+                'pretender','sciencerules','silence','simpleton','tincan','tremble','ugh','useless']
+        if word is not None and word in valid:
+            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
+        else:
+            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, random.choice(valid))
+        em = discord.Embed(color=class_color_codes['Science'],title='M.O.D.O.K. says', description='')
+        em.set_image(url=modokimage)
+        await self.bot.say(embed=em)
+
+
+
     # @checks.admin_or_permissions(manage_server=True)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
@@ -1026,17 +1042,20 @@ class MCOC(ChampionFactory):
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
-            em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{}'.format(xref['basic4']), inline=True)
+            em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{0}'.format(xref['basic4']), inline=True)
             chance4 = round(float(xref['chance4'])*100,4)
             pchance = round(chance4*0.05,4)
-            em.add_field(name='PHC Odds', value='{0}%'.format(pchance), inline=True)
-            em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{}%'.format(chance4),inline=True)
-            if xref['5fsb'] != '':
-                chance5=round(float(xref['chance5'])*100,4)
-                em.add_field(name='5{0.star_char} {1} Odds'.format(champ, xref['5fsb']), value='{}%'.format(chance5),inline=True)
+            em.add_field(name='PHC 4{0.star_char} Odds'.format(champ), value='{0}%'.format(pchance), inline=True)
+            em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{0}%'.format(chance4),inline=True)
+            if xref['5b'] != '':
+                chance5=round(float(xref['chance5b'])*100,4)
+                em.add_field(name='5{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance5),inline=True)
+            if xref['5f'] != '':
+                chance5=round(float(xref['chance5f'])*100,4)
+                em.add_field(name='5{0.star_char} {1} Odds'.format(champ, xref['5f']), value='{0}%'.format(chance5),inline=True)
             if float(xref['chance6']) >0 :
                 chance6=round(float(xref['chance6'])*100,4)
-                em.add_field(name='6{0.star_char} Basic Odds'.format(champ), value='{}%'.format(chance6),inline=True)
+                em.add_field(name='6{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance6),inline=True)
             em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
@@ -1118,7 +1137,7 @@ class MCOC(ChampionFactory):
 
             em2 = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
             em2.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
-            em2.set_footer(text='[-SDF-] Spotlight Dataset', icon_url=icon_sdf)
+            em2.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
             # em2.set_thumbnail(url=champ.get_featured())
             flats = []
             flats.append(data[keys[0]])
@@ -2116,7 +2135,18 @@ class Champion:
         await self.bot.say(embed=em)
 
     async def process_sig_description(self, data=None, quiet=False, isbotowner=False):
-        sd = await self.retrieve_sig_data(data, isbotowner)
+        if data is None:
+            try:
+                sd = dataIO.load_json(local_files['signature'])[self.full_name]
+            except KeyError:
+                sd = self.init_sig_struct()
+            except FileNotFoundError:
+                if isbotowner:
+                    await self.bot.say("**DEPRECIATION WARNING**  "
+                            + "Couldn't load json file.  Loading csv files.")
+                sd = self.get_sig_data_from_csv()
+        else:
+            sd = data[self.full_name] if self.full_name in data else data
         brkt_re = re.compile(r'{([0-9])}')
         ktxt = sd['kabam_text']
         if self.debug:
@@ -2147,7 +2177,6 @@ class Champion:
         except (TypeError, KeyError):
             stats = {}
         stats_missing = False
-        x_var = self._sig_x_var(sd)
         for i in range(len(sd['effects'])):
             effect = sd['effects'][i]
             ckey = sd['locations'][i]
@@ -2156,7 +2185,7 @@ class Champion:
             if effect == 'rating':
                 sig_calcs[ckey] = raw_str.format(m * self.chlgr_rating + b)
                 continue
-            per_val = m * x_var + b
+            per_val = m * log(self.sig) + b
             if effect == 'flat':
                 sig_calcs[ckey] = per_str.format(
                         to_flat(per_val, self.chlgr_rating), per_val/100)
@@ -2190,33 +2219,6 @@ class Champion:
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
         return ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
-
-    async def retrieve_sig_data(self, data, isbotowner):
-        if data is None:
-            try:
-                sd = dataIO.load_json(local_files['signature'])[self.full_name]
-            except KeyError:
-                sd = self.init_sig_struct()
-            except FileNotFoundError:
-                if isbotowner:
-                    await self.bot.say("**DEPRECIATION WARNING**  "
-                            + "Couldn't load json file.  Loading csv files.")
-                sd = self.get_sig_data_from_csv()
-        else:
-            sd = data[self.full_name] if self.full_name in data else data
-        return sd
-
-    def _sig_x_var(self, sig_dict):
-        try:
-            fit_type = sig_dict['fit_type'][0]
-        except IndexError:
-            fit_type = 'log'
-        if fit_type == 'linear':
-            return float(self.sig)
-        elif fit_type == 'log':
-            return log(self.sig)
-        else:
-            raise AttributeError("Fit_type '{}' not valid".format(fit_type))
 
     def get_sig_data_from_csv(self):
         struct = self.init_sig_struct()
@@ -2398,7 +2400,7 @@ class PagesMenu:
         self.delete_onX = delete_onX
         self.embedded = True
 
-    async def menu_start(self, pages):
+    async def menu_start(self, pages:list):
         page_list = []
         if isinstance(pages, list):
             page_list = pages
@@ -2431,7 +2433,7 @@ class PagesMenu:
 
     async def display_page(self, message, page):
         if not message:
-            if isinstance(page, discord.Embed) == True:
+            if isinstance(self.page_list[page], discord.Embed) == True:
                 message = await self.bot.say(embed=self.page_list[page])
             else:
                 message = await self.bot.say(self.page_list[page])
