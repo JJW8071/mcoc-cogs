@@ -1,7 +1,7 @@
 {
     "AUTHOR" : "JJW & DeltaSigma",
     "INSTALL_MSG" : "Thanks for installing MCOC.",
-    "NAME" : "mcoc Utils",
+    "NAME" : "mcoc_utils",
     "SHORT" : "A Redbot Cog for Marvel's Contest of Champions",
-    "DESCRIPTION" : "MCOC is the core of a suite of tools designed for Marvel Contest of Champions."
+    "DESCRIPTION" : "Classes, Converters, and Exceptions for MCOC cog"
 }
