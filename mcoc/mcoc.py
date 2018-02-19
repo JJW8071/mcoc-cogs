@@ -2135,18 +2135,7 @@ class Champion:
         await self.bot.say(embed=em)
 
     async def process_sig_description(self, data=None, quiet=False, isbotowner=False):
-        if data is None:
-            try:
-                sd = dataIO.load_json(local_files['signature'])[self.full_name]
-            except KeyError:
-                sd = self.init_sig_struct()
-            except FileNotFoundError:
-                if isbotowner:
-                    await self.bot.say("**DEPRECIATION WARNING**  "
-                            + "Couldn't load json file.  Loading csv files.")
-                sd = self.get_sig_data_from_csv()
-        else:
-            sd = data[self.full_name] if self.full_name in data else data
+        sd = await self.retrieve_sig_data(data, isbotowner)
         brkt_re = re.compile(r'{([0-9])}')
         ktxt = sd['kabam_text']
         if self.debug:
@@ -2177,6 +2166,7 @@ class Champion:
         except (TypeError, KeyError):
             stats = {}
         stats_missing = False
+        x_var = self._sig_x_var(sd)
         for i in range(len(sd['effects'])):
             effect = sd['effects'][i]
             ckey = sd['locations'][i]
@@ -2185,7 +2175,7 @@ class Champion:
             if effect == 'rating':
                 sig_calcs[ckey] = raw_str.format(m * self.chlgr_rating + b)
                 continue
-            per_val = m * log(self.sig) + b
+            per_val = m * x_var + b
             if effect == 'flat':
                 sig_calcs[ckey] = per_str.format(
                         to_flat(per_val, self.chlgr_rating), per_val/100)
@@ -2219,6 +2209,33 @@ class Champion:
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
         return ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
+
+    async def retrieve_sig_data(self, data, isbotowner):
+        if data is None:
+            try:
+                sd = dataIO.load_json(local_files['signature'])[self.full_name]
+            except KeyError:
+                sd = self.init_sig_struct()
+            except FileNotFoundError:
+                if isbotowner:
+                    await self.bot.say("**DEPRECIATION WARNING**  "
+                            + "Couldn't load json file.  Loading csv files.")
+                sd = self.get_sig_data_from_csv()
+        else:
+            sd = data[self.full_name] if self.full_name in data else data
+        return sd
+
+    def _sig_x_var(self, sig_dict):
+        try:
+            fit_type = sig_dict['fit_type'][0]
+        except IndexError:
+            fit_type = 'log'
+        if fit_type == 'linear':
+            return float(self.sig)
+        elif fit_type == 'log':
+            return log(self.sig)
+        else:
+            raise AttributeError("Fit_type '{}' not valid".format(fit_type))
 
     def get_sig_data_from_csv(self):
         struct = self.init_sig_struct()
