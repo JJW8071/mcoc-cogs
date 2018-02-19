@@ -832,12 +832,12 @@ class MCOC(ChampionFactory):
             await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
-    async def modok_says(self, ctx, word:str):
+    async def modok_says(self, ctx, *, word:str = None):
         await self.bot.delete_message(ctx.message)
         valid = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
                 'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
                 'pretender','sciencerules','silence','simpleton','tincan','tremble','ugh','useless']
-        if word in valid:
+        if word is not None and word in valid:
             modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
         else:
             modokimage='{}images/modok/{}.png'.format(remote_data_basepath, random.choice(valid))
