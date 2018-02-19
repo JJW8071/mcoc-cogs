@@ -836,18 +836,15 @@ class MCOC(ChampionFactory):
         await self.bot.delete_message(ctx.message)
         valid = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
                 'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
-                'pretender','sciencerules','science','simpleton','tincan','tremble','ugh','useless',
-                'modok01','modok02','modok03','modok04','modok05','modok06','modok07','modok08','modok09',
-                'modok10','modok11','modok12','modok13','modok14','modok15','modok16','modok17','modok18',
-                'modok19','modok20,','modok21','modok22','modok23','modok24','modok25']
-        modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
-        print(modokimage)
+                'pretender','sciencerules','silence','simpleton','tincan','tremble','ugh','useless']
         if word in valid:
-            em = discord.Embed(color=class_color_codes['Science'],title='M.O.D.O.K. says', description='')
-            em.set_image(url=modokimage)
-            await self.bot.say(embed=em)
+            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
         else:
-            return
+            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, random.choice(valid))
+        em = discord.Embed(color=class_color_codes['Science'],title='M.O.D.O.K. says', description='')
+        em.set_image(url=modokimage)
+        await self.bot.say(embed=em)
+
 
 
     # @checks.admin_or_permissions(manage_server=True)
