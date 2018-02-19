@@ -57,6 +57,9 @@ SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffe
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
+MODOKSAYS = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
+        'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
+        'pretender','sciencerules','silence','simpleton','tincan','tremble','ugh','useless']
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -834,13 +837,10 @@ class MCOC(ChampionFactory):
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
         await self.bot.delete_message(ctx.message)
-        valid = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
-                'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
-                'pretender','sciencerules','silence','simpleton','tincan','tremble','ugh','useless']
-        if word is not None and word in valid:
+        if word is not None and word in MODOKSAYS:
             modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
         else:
-            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, random.choice(valid))
+            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, random.choice(MODOKSAYS))
         em = discord.Embed(color=class_color_codes['Science'],title='M.O.D.O.K. says', description='')
         em.set_image(url=modokimage)
         await self.bot.say(embed=em)
