@@ -88,12 +88,17 @@ gsheet_files = {
             'local': local_files['signature'],
             'postprocess': postprocess_sig_data,
             },
-    #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
-            #'local': 'data/mcoc/spotlight_test.json',
-            #},
-    #'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
-            #'local': 'data/mcoc/xref_test.json',
-            #},
+    'spotlight': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
+            'local': 'data/mcoc/spotlight_test.json',
+            'sheet_name': 'spotlight',
+            'range': 'E:L',
+            'data_type': 'list',
+            'include_empty': True,
+            'prepare_function': 'remove_commas',
+            },
+    'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
+            'local': 'data/mcoc/xref_test.json',
+            },
     'synergy': {'gkey': '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
             'local': local_files['synergy'],
             },
@@ -119,29 +124,8 @@ kabam_masteries=mcoc_dir+'masteries_en.json'
 #mcoc_special_attack_desc='ID_SPECIAL_ATTACK_DESCRIPTION_'
 
 
-class_color_codes = {
-        'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
-        'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
-        'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
-        'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
-        }
-class_emoji = {
-        'All':'<:all2:339511715920084993>',
-        'Cosmic':'<:cosmic2:339511716104896512>',
-        'Tech':'<:tech2:339511716197171200>',
-        'Mutant':'<:mutant2:339511716201365514>',
-        'Skill':'<:skill2:339511716549230592>',
-        'Science':'<:science2:339511716029267969>',
-        'Mystic':'<:mystic2:339511716150771712>',
-        }
 
-def from_flat(flat, ch_rating):
-    denom = 5 * ch_rating + 1500 + flat
-    return round(100*flat/denom, 2)
 
-def to_flat(per, ch_rating):
-    num = (5 * ch_rating + 1500) * per
-    return round(num/(100-per), 2)
 
 class QuietUserError(commands.UserInputError):
     pass
@@ -736,10 +720,6 @@ class MCOC(ChampionFactory):
         logger.info("MCOC Init")
         super().__init__()
 
-    @commands.command(aliases=('p2f',), hidden=True)
-    async def per2flat(self, per: float, ch_rating: int=100):
-        '''Convert Percentage to MCOC Flat Value'''
-        await self.bot.say(to_flat(per, ch_rating))
 
     @commands.command(name='flat', aliases=('f2p'))
     async def flat2per(self, *, m):
@@ -2135,18 +2115,7 @@ class Champion:
         await self.bot.say(embed=em)
 
     async def process_sig_description(self, data=None, quiet=False, isbotowner=False):
-        if data is None:
-            try:
-                sd = dataIO.load_json(local_files['signature'])[self.full_name]
-            except KeyError:
-                sd = self.init_sig_struct()
-            except FileNotFoundError:
-                if isbotowner:
-                    await self.bot.say("**DEPRECIATION WARNING**  "
-                            + "Couldn't load json file.  Loading csv files.")
-                sd = self.get_sig_data_from_csv()
-        else:
-            sd = data[self.full_name] if self.full_name in data else data
+        sd = await self.retrieve_sig_data(data, isbotowner)
         brkt_re = re.compile(r'{([0-9])}')
         ktxt = sd['kabam_text']
         if self.debug:
@@ -2177,6 +2146,7 @@ class Champion:
         except (TypeError, KeyError):
             stats = {}
         stats_missing = False
+        x_var = self._sig_x_var(sd)
         for i in range(len(sd['effects'])):
             effect = sd['effects'][i]
             ckey = sd['locations'][i]
@@ -2185,7 +2155,7 @@ class Champion:
             if effect == 'rating':
                 sig_calcs[ckey] = raw_str.format(m * self.chlgr_rating + b)
                 continue
-            per_val = m * log(self.sig) + b
+            per_val = m * x_var + b
             if effect == 'flat':
                 sig_calcs[ckey] = per_str.format(
                         to_flat(per_val, self.chlgr_rating), per_val/100)
@@ -2219,6 +2189,33 @@ class Champion:
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
         return ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
+
+    async def retrieve_sig_data(self, data, isbotowner):
+        if data is None:
+            try:
+                sd = dataIO.load_json(local_files['signature'])[self.full_name]
+            except KeyError:
+                sd = self.init_sig_struct()
+            except FileNotFoundError:
+                if isbotowner:
+                    await self.bot.say("**DEPRECIATION WARNING**  "
+                            + "Couldn't load json file.  Loading csv files.")
+                sd = self.get_sig_data_from_csv()
+        else:
+            sd = data[self.full_name] if self.full_name in data else data
+        return sd
+
+    def _sig_x_var(self, sig_dict):
+        try:
+            fit_type = sig_dict['fit_type'][0]
+        except IndexError:
+            fit_type = 'log'
+        if fit_type == 'linear':
+            return float(self.sig)
+        elif fit_type == 'log':
+            return log(self.sig)
+        else:
+            raise AttributeError("Fit_type '{}' not valid".format(fit_type))
 
     def get_sig_data_from_csv(self):
         struct = self.init_sig_struct()
@@ -2581,16 +2578,5 @@ def padd_it(word,max : int,opt='back'):
     else:
         logger.warn('Padding would be negative.')
 
-# avoiding cyclic importing
-from . import hook as hook
-
 def setup(bot):
-    if not hasattr(bot, '_command_error_orig'):
-        bot._command_error_orig = bot.on_command_error
-        @bot.event
-        async def on_command_error(error, ctx):
-            if isinstance(error, QuietUserError):
-                bot.logger.info('<{}> {}'.format(type(error).__name__, error))
-            else:
-                await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
