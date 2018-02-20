@@ -57,9 +57,10 @@ SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffe
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
-MODOKSAYS = ['alien','buffoon','charlatan','creature''die','disintegrate','evaporate',
-        'feelmypower','fool','fry','haha','iamscience','idiot','kill','oaf','peabrain',
-        'pretender','sciencerules','silence','simpleton','tincan','tremble','ugh','useless']
+MODOKSAYS = ['alien', 'buffoon', 'charlatan', 'creature', 'die', 'disintegrate',
+        'evaporate', 'feelmypower', 'fool', 'fry', 'haha', 'iamscience', 'idiot',
+        'kill', 'oaf', 'peabrain', 'pretender', 'sciencerules', 'silence',
+        'simpleton', 'tincan', 'tremble', 'ugh', 'useless']
 
 local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
@@ -152,6 +153,9 @@ class QuietUserError(commands.UserInputError):
 class AmbiguousArgError(QuietUserError):
     pass
 
+class MODOKError(QuietUserError):
+    pass
+
 class ChampConverter(commands.Converter):
     '''Argument Parsing class that geneartes Champion objects from user input'''
 
@@ -188,8 +192,9 @@ class ChampConverter(commands.Converter):
         token = self.parse_re.sub('', arg)
         if not token:
             err_str = "No Champion remains from arg '{}'".format(self.argument)
-            await bot.say(err_str)
-            raise commands.BadArgument(err_str)
+            #await bot.say(err_str)
+            #raise commands.BadArgument(err_str)
+            raise MODOKError(err_str)
         return (await self.get_champion(bot, token, attrs))
 
     async def get_champion(self, bot, token, attrs):
@@ -212,8 +217,9 @@ class ChampConverter(commands.Converter):
                 raise AmbiguousArgError('Multiple matches for arg "{}"'.format(token))
             else:
                 err_str = "Cannot resolve alias for '{}'".format(token)
-                await bot.say(err_str)
-                raise commands.BadArgument(err_str)
+                #await bot.say(err_str)
+                #raise commands.BadArgument(err_str)
+                raise MODOKError(err_str)
         return champ
 
 class ChampConverterSig(ChampConverter):
@@ -837,31 +843,31 @@ class MCOC(ChampionFactory):
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
         await self.bot.delete_message(ctx.message)
-        if word is not None and word in MODOKSAYS:
-            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
-        else:
-            modokimage='{}images/modok/{}.png'.format(remote_data_basepath, random.choice(MODOKSAYS))
-        em = discord.Embed(color=class_color_codes['Science'],title='M.O.D.O.K. says', description='')
-        em.set_image(url=modokimage)
-        await self.bot.say(embed=em)
-
-
+        await raw_modok_says(self.bot, ctx.message.channel, word)
 
     # @checks.admin_or_permissions(manage_server=True)
     @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
     async def nerfbuffsell(self, ctx):
         '''Random draw of 3 champions.
         Choose one to Nerf, one to Buff, and one to Sell'''
-        colors=[discord.Color.teal(),discord.Color.dark_teal(),discord.Color.green(),discord.Color.dark_green(),discord.Color.blue(),
-                discord.Color.dark_blue(),discord.Color.purple(),discord.Color.dark_purple(),discord.Color.magenta(),discord.Color.dark_magenta(),
-                discord.Color.gold(),discord.Color.dark_gold(),discord.Color.orange(),discord.Color.dark_orange(),discord.Color.red(),
-                discord.Color.dark_red(),discord.Color.lighter_grey(),discord.Color.dark_grey(),discord.Color.light_grey(),discord.Color.darker_grey()]
+        colors=[discord.Color.teal(), discord.Color.dark_teal(),
+                discord.Color.green(), discord.Color.dark_green(),
+                discord.Color.blue(), discord.Color.dark_blue(),
+                discord.Color.purple(), discord.Color.dark_purple(),
+                discord.Color.magenta(), discord.Color.dark_magenta(),
+                discord.Color.gold(), discord.Color.dark_gold(),
+                discord.Color.orange(), discord.Color.dark_orange(),
+                discord.Color.red(), discord.Color.dark_red(),
+                discord.Color.lighter_grey(), discord.Color.dark_grey(),
+                discord.Color.light_grey(), discord.Color.darker_grey()]
         rcolor=random.choice(colors)
         selected = []
         embeds = []
-        emojis = ['🇳','🇧','🇸']
-        em1 = discord.Embed(color=rcolor,title='Nerf, Buff, or Sell',description='')
-        em2 = discord.Embed(color=rcolor,title='Select one to Nerf, one to Buff, and one to Sell. Explain your choices', description='')
+        emojis = ['🇳', '🇧', '🇸']
+        em1 = discord.Embed(color=rcolor, title='Nerf, Buff, or Sell', description='')
+        em2 = discord.Embed(color=rcolor, description='',
+                title='Select one to Nerf, one to Buff, and one to Sell. Explain your choices',
+            )
 
         while len(selected) < 3:
             name_id = random.choice(list(self.champions.values()))
@@ -2600,16 +2606,29 @@ def padd_it(word,max : int,opt='back'):
     else:
         logger.warn('Padding would be negative.')
 
+async def raw_modok_says(bot, channel, word=None):
+    if not word or word not in MODOKSAYS:
+        word = random.choice(MODOKSAYS)
+    modokimage='{}images/modok/{}.png'.format(remote_data_basepath, word)
+    em = discord.Embed(color=class_color_codes['Science'],
+            title='M.O.D.O.K. says', description='')
+    em.set_image(url=modokimage)
+    await bot.send_message(channel, embed=em)
+
 # avoiding cyclic importing
 from . import hook as hook
 
 def setup(bot):
     if not hasattr(bot, '_command_error_orig'):
         bot._command_error_orig = bot.on_command_error
-        @bot.event
-        async def on_command_error(error, ctx):
-            if isinstance(error, QuietUserError):
-                bot.logger.info('<{}> {}'.format(type(error).__name__, error))
-            else:
-                await bot._command_error_orig(error, ctx)
+    @bot.event
+    async def on_command_error(error, ctx):
+        if isinstance(error, MODOKError):
+            bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+            await bot.send_message(ctx.message.channel, error)
+            await raw_modok_says(bot, ctx.message.channel)
+        elif isinstance(error, QuietUserError):
+            bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+        else:
+            await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
