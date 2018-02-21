@@ -39,7 +39,7 @@ class MCOCTools:
                 'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
                 '<https://alsciende.github.io/masteries/v10.0.1/#>',
-                '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v10.0.1/#)',
+                '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v17.0.2/#)',
                 'by u/alsciende',
                 'https://assets-cdn.github.com/favicon.ico'),
             'simulator': (
