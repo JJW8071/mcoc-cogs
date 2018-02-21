@@ -276,7 +276,7 @@ class RSS(object):
                         msg = await self.get_current_feed(server, chan_id,
                                                           name, items)
                         if msg is not None:
-                            await self.bot.send_message(channel, msg)
+                            await self.bot.send_message(channel, "\u200b{}".format(msg)) #Sinbad customization
             await asyncio.sleep(300)
 
 
