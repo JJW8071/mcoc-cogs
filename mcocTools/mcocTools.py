@@ -41,7 +41,7 @@ class MCOCTools:
                 '<https://alsciende.github.io/masteries/v10.0.1/#>',
                 '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v17.0.2/#)',
                 'by u/alsciende',
-                'https://assets-cdn.github.com/favicon.ico'),
+                'https://images-ext-2.discordapp.net/external/ymdMNrkhO9L5tUDupbFSEmu-JK0X2bpV0ZE-VYTBICc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/268829380262756357/b55ae7fc51d9b741450f949accd15fbe.webp?width=80&height=80'),
             'simulator': (
                 '<http://simians.tk/msimSDF>',
                 '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
