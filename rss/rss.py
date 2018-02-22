@@ -209,7 +209,7 @@ class RSS(object):
         message = await self.get_current_feed(server.id, channel.id,
                                               feed_name, items)
 
-        await self.bot.say(message)
+        await self.bot.say("\u200b{}".format(message))
 
     @rss.command(pass_context=True, name="remove")
     async def _rss_remove(self, ctx, name: str):
