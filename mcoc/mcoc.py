@@ -1048,7 +1048,7 @@ class MCOC(ChampionFactory):
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
-            em.add_field(name='{0.star}{0.star_char} Basic PHC Date'.format(champ), value='{0}'.format(xref['basic4']), inline=True)
+            em.add_field(name='4{0.star_char} Basic PHC Date'.format(champ), value='{0}'.format(xref['basic4']), inline=True)
             chance4 = round(float(xref['chance4'])*100,4)
             pchance = round(chance4*0.05,4)
             em.add_field(name='PHC 4{0.star_char} Odds'.format(champ), value='{0}%'.format(pchance), inline=True)
