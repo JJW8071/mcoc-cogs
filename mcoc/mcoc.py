@@ -1148,7 +1148,8 @@ class MCOC(ChampionFactory):
             flats = []
             flats.append(data[keys[0]])
             flats.append(data[keys[1]])
-            flats.append('% {}'.format(0.5+5*from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating)))
+            critrate=0.5+5*from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating))
+            flats.append('% {}'.format(critrate))
             for k in range(3,len(keys)):
                 flats.append('% {}'.format(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))))
             pcts = [[titles[i], flats[i]] for i in range(len(titles))]
