@@ -209,7 +209,7 @@ class RSS(object):
         message = await self.get_current_feed(server.id, channel.id,
                                               feed_name, items)
 
-        await self.bot.say("\u200b{}".format(message))
+        await self.bot.say(message)
 
     @rss.command(pass_context=True, name="remove")
     async def _rss_remove(self, ctx, name: str):
@@ -259,7 +259,7 @@ class RSS(object):
 
             self.feeds.update_time(
                 server, chan_id, name, curr_title)
-        return message
+        return "\u200b{}".format(message)
 
     async def read_feeds(self):
         await self.bot.wait_until_ready()
@@ -276,7 +276,7 @@ class RSS(object):
                         msg = await self.get_current_feed(server, chan_id,
                                                           name, items)
                         if msg is not None:
-                            await self.bot.send_message(channel, "\u200b{}".format(msg)) #Sinbad customization
+                            await self.bot.send_message(channel, msg)
             await asyncio.sleep(300)
 
 
