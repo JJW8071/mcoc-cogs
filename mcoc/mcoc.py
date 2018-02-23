@@ -1258,7 +1258,7 @@ class MCOC(ChampionFactory):
                     if champ.star != data['stars'] or lookup in activated:
                         continue
                     for trigger in data['triggers']:
-                        if trigger in champ_set or trigger in champ_class_set:
+                        if trigger in champ_set:
                             activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
