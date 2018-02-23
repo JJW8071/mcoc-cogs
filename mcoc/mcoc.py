@@ -1240,7 +1240,6 @@ class MCOC(ChampionFactory):
                 embed.description = ''.join(c.collectoremoji for c in champs)
             except:
                 print('Collector Emoji not found')
-                continue
             for k, v in effectsused.items():
                 syn_effect = syn_data['SynergyEffects'][k]
                 array_sum = [sum(row) for row in iter_rows(v, True)]
