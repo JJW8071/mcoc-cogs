@@ -309,18 +309,18 @@ def remove_NA(cell):
 
 class GSExport():
 
-    default_settings = dict(sheet_name=None,
-                            sheet_action='file',
-                            data_type='dict',
-                            range=None,
-                            include_empty=False,
-                            column_handler=None,
-                            row_handler=None,
-                            rc_priority='column',
-                            postprocess=None,
-                            prepare_function='numericise',
-                        )
-
+    default_settings = {
+                'sheet_name': None,
+                'sheet_action': 'file',
+                'data_type': 'dict',
+                'range': None,
+                'include_empty': False,
+                'column_handler': None,
+                'row_handler': None,
+                'rc_priority': 'column',
+                'postprocess': None,
+                'prepare_function': 'numericise',
+            }
     default_cell_handlers = (
                 'cell_to_list',
                 'cell_to_dict',
@@ -328,6 +328,10 @@ class GSExport():
                 'remove_NA',
                 'numericise'
             )
+    cell_handler_aliases = {
+                'to_list': 'cell_to_list',
+                'to_dict': 'cell_to_dict',
+            }
 
     def __init__(self, bot, gc, *, name, gkey, local, **kwargs):
         self.bot = bot
@@ -343,6 +347,8 @@ class GSExport():
         module_namespace = globals()
         for handler in self.default_cell_handlers:
             self.cell_handlers[handler] = module_namespace[handler]
+        for alias, handler in self.cell_handler_aliases.items():
+            self.cell_handlers[alias] = module_namespace[handler]
 
     async def retrieve_data(self):
         try:
@@ -398,6 +404,10 @@ class GSExport():
                 else:
                     clean_row.append(prep_func(cell))
             rkey = clean_row[0]
+            try:
+                hash(rkey)
+            except TypeError:
+                rkey = row[0]
             if sheet_action == 'merge':
                 if data_type == 'nested_dict':
                     pack = dict(zip(header[2:], clean_row[2:]))
@@ -437,6 +447,9 @@ class GSExport():
             sheet = ss.sheet1
             sheet_name = sheet.title
         return sheet_name, sheet
+
+    def get_prepare_function(self, kwargs):
+        prep_func_str = cell_to_list(kwargs['prepare_function'])
 
     def get_sheet_values(self, sheet, kwargs):
         if kwargs['range']:
@@ -2177,16 +2190,16 @@ class Champion:
         except (TypeError, KeyError):
             stats = {}
         stats_missing = False
-        x_var = self._sig_x_var(sd)
+        x_arr = self._sig_x_arr(sd)
         for i in range(len(sd['effects'])):
             effect = sd['effects'][i]
             ckey = sd['locations'][i]
-            m, b = sd['sig_coeff'][i]
+            y_arr = sd['sig_coeff'][i]
 
             if effect == 'rating':
                 sig_calcs[ckey] = raw_str.format(m * self.chlgr_rating + b)
                 continue
-            per_val = m * x_var + b
+            per_val = sumproduct(x_arr, y_arr)
             if effect == 'flat':
                 sig_calcs[ckey] = per_str.format(
                         to_flat(per_val, self.chlgr_rating), per_val/100)
@@ -2236,15 +2249,17 @@ class Champion:
             sd = data[self.full_name] if self.full_name in data else data
         return sd
 
-    def _sig_x_var(self, sig_dict):
+    def _sig_x_arr(self, sig_dict):
         try:
             fit_type = sig_dict['fit_type'][0]
         except IndexError:
             fit_type = 'log'
         if fit_type == 'linear':
-            return float(self.sig)
+            return float(self.sig), 1
+        elif fit_type == 'quadratic':
+            return float(self.sig**2), float(self.sig), 1
         elif fit_type == 'log':
-            return log(self.sig)
+            return log(self.sig), 1
         else:
             raise AttributeError("Fit_type '{}' not valid".format(fit_type))
 
@@ -2542,6 +2557,9 @@ def tabulate(table_data, width, rotate=True, header_sep=True, align_out=True):
     if header_sep:
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return chat.box('\n'.join(rows))
+
+def sumproduct(arr1, arr2):
+    return sum([x * y for x, y in zip(arr1, arr2)])
 
 def iter_rows(array, rotate):
     if not rotate:
