@@ -1246,6 +1246,7 @@ class MCOC(ChampionFactory):
 
         syn_data = dataIO.load_json(local_files['synergy'])
         champ_set = {champ.full_name for champ in champs}
+        champ_class_set = {champ.klass for champ in champs}
         synergy_package = []
         activated = set()
         # print('len champs: '+str(len(champs)))
@@ -1257,7 +1258,7 @@ class MCOC(ChampionFactory):
                     if champ.star != data['stars'] or lookup in activated:
                         continue
                     for trigger in data['triggers']:
-                        if trigger in champ_set:
+                        if trigger in champ_set or trigger in champ_class_set:
                             activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
