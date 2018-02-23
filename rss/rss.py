@@ -263,6 +263,10 @@ class RSS(object):
 
     async def read_feeds(self):
         await self.bot.wait_until_ready()
+        try:                                                    # <<<
+            broadcast=self.bot.get_cog('MultiWayRelay')         # <<<
+        except:                                                 # <<<
+            broadcast=None                                      # <<<
         while self == self.bot.get_cog('RSS'):
             feeds = self.feeds.get_copy()
             for server in feeds:
@@ -277,6 +281,8 @@ class RSS(object):
                                                           name, items)
                         if msg is not None:
                             await self.bot.send_message(channel, "\u200b{}".format(msg)) #Sinbad customization
+                            if broadcast is not None:           # <<<
+                                broadcast.send_broadcast(msg)   # <<<
             await asyncio.sleep(300)
 
 
