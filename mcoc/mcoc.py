@@ -908,12 +908,13 @@ class MCOC(ChampionFactory):
             await send_cmd_help(ctx)
 
     @champ.command(name='featured')
-    async def champ_featured(self, champ : ChampConverter):
+    async def champ_featured(self, *, champs : ChampConverterMult):
         '''Champion Featured image'''
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_featured())
-        await self.bot.say(embed=em)
+        for champ in champs:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+            em.set_image(url=champ.get_featured())
+            await self.bot.say(embed=em)
 
     @champ.command(name='portrait')
     async def champ_portrait(self, *, champs : ChampConverterMult):
