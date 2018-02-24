@@ -908,12 +908,13 @@ class MCOC(ChampionFactory):
             await send_cmd_help(ctx)
 
     @champ.command(name='featured')
-    async def champ_featured(self, champ : ChampConverter):
+    async def champ_featured(self, *, champs : ChampConverterMult):
         '''Champion Featured image'''
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_featured())
-        await self.bot.say(embed=em)
+        for champ in champs:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+            em.set_image(url=champ.get_featured())
+            await self.bot.say(embed=em)
 
     @champ.command(name='portrait')
     async def champ_portrait(self, *, champs : ChampConverterMult):
@@ -1213,39 +1214,9 @@ class MCOC(ChampionFactory):
         '''If Debug is sent, data will refresh'''
         if champs[0].debug:
             await self.retrieve_gsheet('synergy', silent=False)
-        # sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
-        # range_headers = 'Synergies!A1:M1'
-        # range_body = 'Synergies!A2:M'
-        # foldername = 'synergies'
-        # filename = 'synergies'
-        # if champs[0].debug:
-        #     head_url = GS_BASE.format(sheet,range_headers)
-        #     body_url = GS_BASE.format(sheet,range_body)
-        #     champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-        #     message = await self.bot.say('Collecting Synergy data ...')
-        #     await self.bot.upload(self.shell_json.format(foldername,filename))
-        # else:
-        #     getfile = self.shell_json.format(foldername, filename)
-        #     champ_synergies = dataIO.load_json(getfile)
-        #
-        # # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
-        #
-        # range_headers = 'SynergyEffects!A1:G'
-        # range_body = 'SynergyEffects!A2:G'
-        # filename = 'effects'
-        # if champs[0].debug:
-        #     head_url = GS_BASE.format(sheet,range_headers)
-        #     body_url = GS_BASE.format(sheet,range_body)
-        #     synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
-        #     await self.bot.edit_message(message, 'Almost done ...')
-        #     await self.bot.upload(self.shell_json.format(foldername,filename))
-        #     await self.bot.edit_message(message, 'Synergies collected.')
-        # else:
-        #     getfile = self.shell_json.format(foldername, filename)
-        #     synlist = dataIO.load_json(getfile)
-
         syn_data = dataIO.load_json(local_files['synergy'])
         champ_set = {champ.full_name for champ in champs}
+        champ_class_set = {champ.klass for champ in champs}
         synergy_package = []
         activated = set()
         # print('len champs: '+str(len(champs)))
@@ -1254,10 +1225,18 @@ class MCOC(ChampionFactory):
             for champ in champs:
                 champ_synergies = syn_data['SynExport'][champ.full_name]
                 for lookup, data in champ_synergies.items():
+                    activate = False
                     if champ.star != data['stars'] or lookup in activated:
                         continue
                     for trigger in data['triggers']:
-                        if trigger in champ_set:
+                        if trigger.startswith('#'):
+                            for trig_champ in champs:
+                                if champ == trig_champ:
+                                    continue
+                                if trigger in trig_champ.all_tags:
+                                    activate = True
+                                    break
+                        if trigger in champ_set or activate:
                             activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
@@ -1266,7 +1245,10 @@ class MCOC(ChampionFactory):
                             effectsused[data['synergycode']].append(effect)
 
             desc= []
-            embed.description = ''.join(c.collectoremoji for c in champs)
+            try:
+                embed.description = ''.join(c.collectoremoji for c in champs)
+            except:
+                print('Collector Emoji not found')
             for k, v in effectsused.items():
                 syn_effect = syn_data['SynergyEffects'][k]
                 array_sum = [sum(row) for row in iter_rows(v, True)]
