@@ -502,12 +502,10 @@ class GSHandler:
         self.service_file = service_file
         self.gsheets = {}
 
-    def register_gsheet(self, *, name, **kwargs):
+    def register_gsheet(self, *, name, gkey, local, **kwargs):
         if name in self.gsheets:
             raise KeyError("Key '{}' has already been registered".format(name))
-        assert 'gkey' in kwargs
-        assert 'local' in kwargs
-        self.gsheets[name] = kwargs
+        self.gsheets[name] = dict(gkey=gkey, local=local, **kwargs)
 
     async def cache_gsheets(self, key=None):
         gc = await self.authorize()
