@@ -382,32 +382,22 @@ class GSExport():
         return self.data
 
     async def retrieve_sheet(self, ss, *, sheet_name, sheet_action, data_type, **kwargs):
-        sheet_name, sheet = await self.resolve_sheet_name(ss, sheet_name)
+        sheet_name, sheet = await self._resolve_sheet_name(ss, sheet_name)
         data = self.get_sheet_values(sheet, kwargs)
         header = data[0]
 
         if data_type.startswith('nested_list'):
             data_type, dlen = data_type.rsplit('::', maxsplit=1)
             dlen = int(dlen)
-        #prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'), numericise_all)
         prep_func = self.cell_handlers[kwargs['prepare_function']]
         self.data['_headers'][sheet_name] = header
-        col_handlers = self.build_column_handlers(sheet_name, header,
+        col_handlers = self._build_column_handlers(sheet_name, header,
                             kwargs['column_handler'])
         if sheet_action == 'table':
             self.data[sheet_name] = [header]
         for row in data[1:]:
-            clean_row = []
-            for cell_head, cell, c_hand in zip(header, row, col_handlers):
-                if c_hand:
-                    clean_row.append(c_hand(cell))
-                else:
-                    clean_row.append(prep_func(cell))
+            clean_row = self._process_row(header, row, col_handlers, prep_func)
             rkey = clean_row[0]
-            try:
-                hash(rkey)
-            except TypeError:
-                rkey = row[0]
             if sheet_action == 'merge':
                 if data_type == 'nested_dict':
                     pack = dict(zip(header[2:], clean_row[2:]))
@@ -436,7 +426,7 @@ class GSExport():
             elif sheet_action == 'table':
                 self.data[sheet_name].append(clean_row)
 
-    async def resolve_sheet_name(self, ss, sheet_name):
+    async def _resolve_sheet_name(self, ss, sheet_name):
         if sheet_name:
             try:
                 sheet = ss.worksheet('title', sheet_name)
@@ -447,6 +437,16 @@ class GSExport():
             sheet = ss.sheet1
             sheet_name = sheet.title
         return sheet_name, sheet
+
+    def _process_row(self, header, row, col_handlers, prep_func):
+        clean_row = [row[0]]
+        # don't process first column.  Can't use list, dicts, or numbers as keys in json
+        for cell_head, cell, c_hand in zip(header[1:], row[1:], col_handlers[1:]):
+            if c_hand:
+                clean_row.append(c_hand(cell))
+            else:
+                clean_row.append(prep_func(cell))
+        return clean_row
 
     def get_prepare_function(self, kwargs):
         prep_func_str = cell_to_list(kwargs['prepare_function'])
@@ -460,7 +460,7 @@ class GSExport():
             data = sheet.get_all_values(include_empty=kwargs['include_empty'])
         return data
 
-    def build_column_handlers(self, sheet_name, header, column_handler_str):
+    def _build_column_handlers(self, sheet_name, header, column_handler_str):
         if not column_handler_str:
             return [None] * len(header)
         col_handler = cell_to_dict(column_handler_str)
@@ -485,7 +485,6 @@ class GSExport():
                 handler_funcs.append(self.cell_handlers[col_handler[column]])
         return handler_funcs
 
-
     @staticmethod
     def bound_range(sheet, rng_str):
         rng = rng_str.split(':')
@@ -495,17 +494,44 @@ class GSExport():
                 rng[i] = '{}{}'.format(rng[i], rows[i])
         return rng
 
-    @staticmethod
-    def do_nothing(row):
-        return row
 
-    @staticmethod
-    def remove_commas(row):
-        return [cell.replace(',', '') for cell in row]
+class GSHandler:
 
-    @staticmethod
-    def remove_NA(row):
-        return [None if cell in ("#N/A", "") else cell for cell in row]
+    def __init__(self, bot, service_file):
+        self.bot = bot
+        self.service_file = service_file
+        self.gsheets = {}
+
+    def register_gsheet(self, *, name, **kwargs):
+        if name in self.gsheets:
+            raise KeyError("Key '{}' has already been registered".format(name))
+        assert 'gkey' in kwargs
+        assert 'local' in kwargs
+        self.gsheets[name] = kwargs
+
+    async def cache_gsheets(self, key=None):
+        gc = await self.authorize()
+        if key and key not in self.gsheets:
+            raise KeyError("Key '{}' is not registered".format(key))
+        gfiles = self.gsheets.keys() if not key else (key,)
+
+        num_files = len(gfiles)
+        msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
+        for i, k in enumerate(gfiles):
+            gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
+            await gsdata.retrieve_data()
+            msg = await self.bot.edit_message(msg,
+                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+        await self.bot.say('Retrieval Complete')
+
+    async def authorize(self):
+        try:
+            return pygsheets.authorize(service_file=self.service_file, no_cache=True)
+        except FileNotFoundError:
+            err_msg = 'Cannot find credentials file.  Needs to be located:\n' \
+                    + self.service_file
+            await self.bot.say(err_msg)
+            raise FileNotFoundError(err_msg)
 
 
 class AliasDict(UserDict):
@@ -755,6 +781,25 @@ class MCOC(ChampionFactory):
         self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
         self.split_re = re.compile(', (?=\w+:)')
+        self.gsheet_handler = GSHandler(bot, gapi_service_creds)
+        self.gsheet_handler.register_gsheet(
+                name='signature',
+                gkey='1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
+                local=local_files['signature'],
+                postprocess=postprocess_sig_data,
+            )
+        self.gsheet_handler.register_gsheet(
+                name='synergy',
+                gkey='1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
+                local=local_files['synergy'],
+            )
+    #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
+            #'local': 'data/mcoc/spotlight_test.json',
+            #},
+    #'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
+            #'local': 'data/mcoc/xref_test.json',
+            #},
+
         logger.info("MCOC Init")
         super().__init__()
 
@@ -828,30 +873,31 @@ class MCOC(ChampionFactory):
 
     @commands.command(hidden=True, aliases=['cg',])
     async def cache_gsheets(self, key=None):
-        await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-                    + gapi_service_creds)
-            return
-        num_files = len(gsheet_files)
-        msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
-        for i, k in enumerate(gsheet_files.keys()):
-            await self.retrieve_gsheet(k, gc)
-            msg = await self.bot.edit_message(msg,
-                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
-        await self.bot.say('Retrieval Complete')
-
-    async def retrieve_gsheet(self, key, gc=None, silent=True):
-        if gc is None:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        if not silent:
-            msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
-        gsdata = GSExport(self.bot, gc, name=key, **gsheet_files[key])
-        await gsdata.retrieve_data()
-        if not silent:
-            await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
+         await self.update_local()
+         await self.gsheet_handler.cache_gsheets(key)
+    #     try:
+    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+    #     except FileNotFoundError:
+    #         await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+    #                 + gapi_service_creds)
+    #         return
+    #     num_files = len(gsheet_files)
+    #     msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
+    #     for i, k in enumerate(gsheet_files.keys()):
+    #         await self.retrieve_gsheet(k, gc)
+    #         msg = await self.bot.edit_message(msg,
+    #                 'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+    #     await self.bot.say('Retrieval Complete')
+    #
+    # async def retrieve_gsheet(self, key, gc=None, silent=True):
+    #     if gc is None:
+    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+    #     if not silent:
+    #         msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
+    #     gsdata = GSExport(self.bot, gc, name=key, **gsheet_files[key])
+    #     await gsdata.retrieve_data()
+    #     if not silent:
+    #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
@@ -1225,7 +1271,7 @@ class MCOC(ChampionFactory):
             for champ in champs:
                 champ_synergies = syn_data['SynExport'][champ.full_name]
                 for lookup, data in champ_synergies.items():
-                    activate = False
+                    trigger_in_tag = False
                     if champ.star != data['stars'] or lookup in activated:
                         continue
                     for trigger in data['triggers']:
@@ -1234,9 +1280,9 @@ class MCOC(ChampionFactory):
                                 if champ == trig_champ:
                                     continue
                                 if trigger in trig_champ.all_tags:
-                                    activate = True
+                                    trigger_in_tag = True
                                     break
-                        if trigger in champ_set or activate:
+                        if trigger in champ_set or trigger_in_tag:
                             activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
