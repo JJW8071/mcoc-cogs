@@ -1217,6 +1217,26 @@
             "vn": 14
         },
         {
+      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_LONG",
+      "v": "[64acff]Corvus Glaive:[-] Knock out an opponent with a Offensive Champion Tag. Once this mission is complete, Corvus will never lose more than 10% Health from a single hit when Glaive’s Immunity is active.\n[64acff]Vision, Thor Ragnarok[-] +{0}% Attack Rating at the start of the fight\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_TITLE",
+      "v": "MISSION 3: HUNT THE STRONGEST",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_LONG",
+      "v": "[64acff]Corvus Glaive:[-] Knock out an opponent with a Defensive Champion Tag. Once this mission is complete, the Ability Accuracy of the opponent’s Auto Block effects will be decreased by 100%.\n[64acff]Proxima Midnight[-]Ultimate Mission’s Combo Meter requirement goes down by 50 hits. Additionally, the duration of her Buffs is increased by {0}%\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_TITLE",
+      "v": "MISSION 4: DESTROY DEFENSES",
+      "vn": "17.2"
+    },
+    {
             "k": "ID_UI_HERO_SYNERGY_COSMIC_I",
             "v": "COSMIC SUPREMACY Lv. 1"
         },
@@ -1966,6 +1986,36 @@
             "vn": "16.1"
         },
         {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS",
+      "v": "DEBUG",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS_LONG",
+      "v": "[64acff]Proxima Midnight:[-] Starts the fight with a bar of Power and 3 of her Fury Buffs.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA",
+      "v": "DEBUG",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA_LONG",
+      "v": "[64acff]Proxima Midnight:[-] Each time a Fury Buff activates, the next one has {0}% increased Potency. Increases up to a maximum of 50%.\n[64acff]Gamora[-] Each Bleed inflicted makes the next Bleed 40% more potent. Increases up to a maximum of 200%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA",
+      "v": "DEBUG",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA_LONG",
+      "v": "[64acff]Proxima Midnight:[-] Against Tech opponents suffering from an Armor Break Debuff, Proxima Midnight inflicts Petrify when attacking with her spear, reducing the effectiveness of Power Gain and Regeneration by {0}% for 20 seconds. Max Stacks: 3\n[64acff]Nebula[-] Gains 3 Electroshock Charges whenever attacking opponents suffering from a Shock Debuff.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "17.1"
+    },
+    {
             "k": "ID_UI_HERO_SYNERGY_PUNYGOD",
             "v": "PUNY GOD",
             "vn": 17
