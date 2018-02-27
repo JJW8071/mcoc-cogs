@@ -1257,7 +1257,8 @@ class MCOC(ChampionFactory):
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         if champs[0].debug:
-            await self.retrieve_gsheet('synergy', silent=False)
+            await self.gshandler.cache_gsheets('synergy')
+            # await self.retrieve_gsheet('synergy', silent=False)
         syn_data = dataIO.load_json(local_files['synergy'])
         champ_set = {champ.full_name for champ in champs}
         champ_class_set = {champ.klass for champ in champs}
