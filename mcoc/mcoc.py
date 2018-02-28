@@ -2406,7 +2406,7 @@ class Champion:
             if x + '_SIMPLE' in sigs:
                 preamble = x
                 break
-            elif  x +'_SHORT' in sigs:
+            elif  x +'_SHORT' in sigs and champ.mcocsig=='BISH': #BISHOP
                 preamble = x
                 break
 
