@@ -2408,6 +2408,8 @@ class Champion:
                 preamble = x
                 break
             elif  x +'_SHORT' in sigs:
+                preamble = x
+                break
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
