@@ -2007,13 +2007,13 @@ class Champion:
         self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
-        image = '{}images/portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        image = '{}images/portraits/{}.png'.format(remote_data_basepath, self.mattkraftid)
         logger.debug(image)
         return image
 
     def get_featured(self):
-        image = '{}images/featured/GachaChasePrize_256x256_{}.png'.format(
-                    remote_data_basepath, self.mcocfeatured)
+        image = '{}images/featured/{}.png'.format(
+                    remote_data_basepath, self.mattkraftid)
         logger.debug(image)
         return image
 
