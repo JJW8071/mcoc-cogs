@@ -2588,7 +2588,8 @@ def tabulate(table_data, width, rotate=True, header_sep=True, align_out=True):
     return chat.box('\n'.join(rows))
 
 def sumproduct(arr1, arr2):
-    return sum([x * y for x, y in zip(arr1, arr2)])
+    # return sum([x * y for x, y in zip(arr1, arr2)])
+    return sum([float(x) * float(y) for x, y in zip(arr1, arr2)])
 
 def iter_rows(array, rotate):
     if not rotate:
