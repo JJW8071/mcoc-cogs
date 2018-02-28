@@ -51,6 +51,7 @@ class MCOCTools:
             #     #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
+    COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
     dataset = 'data/mcoc/masteries.csv'
 
@@ -63,7 +64,7 @@ class MCOCTools:
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
         else:
-            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
         return em
 
     @commands.command(pass_context=True,aliases={'collector','infocollector','about','info'})
