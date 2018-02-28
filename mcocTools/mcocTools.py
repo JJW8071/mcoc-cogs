@@ -159,13 +159,6 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
-    @commands.command(help=lookup_links['marvelsynergy'][0])
-    async def marvelsynergy(self):
-        x = 'marvelsynergy'
-        lookup = self.lookup_links[x]
-        await self.bot.say(embed=self.present(lookup))
-        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
-
     @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
     async def simulator(self):
         x = 'simulator'
@@ -179,13 +172,6 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
-
-    # @commands.command(help=lookup_links['streak'][0])
-    # async def streak(self):
-    #     x='streak'
-    #     lookup = self.lookup_links[x]
-    #     await self.bot.say(embed=self.present(lookup))
-    #     # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
