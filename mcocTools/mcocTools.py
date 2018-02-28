@@ -31,7 +31,7 @@ class MCOCTools:
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
                 '<http://simians.tk/MCoCspotlight>',
-                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[MCOC Spotlight on Discord](https://discord.gg/BwhgZxk)'),
+                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[CollectorDevTeam](https://discord.gg/BwhgZxk)'),
             'marvelsynergy': (
                 '<http://www.marvelsynergy.com/team-builder>',
                 '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
