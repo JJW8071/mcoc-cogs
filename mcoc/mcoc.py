@@ -2380,7 +2380,7 @@ class Champion:
                 title = x
 
         if title is None:
-            raise TitleError("'{}' title not found".format(mcocsig), mcocsig)
+            raise TitleError("'{}' title not found".format(mcocsig)),#, mcocsig)
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
