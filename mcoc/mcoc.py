@@ -574,6 +574,8 @@ class ChampionFactory():
             self.data_struct_init()
 
     def create_champion_class(self, bot, alias_set, **kwargs):
+        if not kwargs['champ'.strip()]: #empty line
+            return
         kwargs['bot'] = bot
         kwargs['alias_set'] = alias_set
         kwargs['klass'] = kwargs.pop('class', 'default')
