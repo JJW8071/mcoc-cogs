@@ -2356,8 +2356,7 @@ class Champion:
                 'DOC_OCK': ['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
                             'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
                             'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',
-                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C'],
-                'BISH':['ID_STAT_BISH_SIG_SHORT']
+                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C']
             }
 
         mcocsig = self.mcocsig
