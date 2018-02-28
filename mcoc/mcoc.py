@@ -2325,6 +2325,13 @@ class Champion:
                 kabam_text=self.get_kabam_sig_text())
 
     def get_kabam_sig_text(self, sigs=None, champ_exceptions=None):
+        '''required for signatures to work correctly
+        preamble
+        title = titlekey,
+        simplekey = preample + simple
+        descriptionkey = preamble + desc,
+        '''
+
         if sigs is None:
             sigs = load_kabam_json(kabam_bcg_stat_en)
         if champ_exceptions is None:
@@ -2396,7 +2403,7 @@ class Champion:
             )
 
         for x in preambles:
-            if x + '_SIMPLE' in sigs:
+            if x + '_SIMPLE' in sigs or x+'_SHORT' in sigs:
                 preamble = x
                 break
 
@@ -2408,6 +2415,8 @@ class Champion:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
+        if preamble + '_SHORT' in sigs:  #BISHOP 
+            simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
 
