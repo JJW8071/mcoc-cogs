@@ -2367,7 +2367,7 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
-            'ID_UI_STAT_{}_SIG_TITLE'.format(mcocsig), #added for Bishop
+            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for 
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
@@ -2380,7 +2380,7 @@ class Champion:
                 title = x
 
         if title is None:
-            raise TitleError("'{}' title not found".format(mcocsig)),#, mcocsig)
+            raise TitleError("'{}' title not found".format(mcocsig), mcocsig)
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
