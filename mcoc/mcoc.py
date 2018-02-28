@@ -2349,7 +2349,8 @@ class Champion:
                 'DOC_OCK': ['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
                             'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
                             'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',
-                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C']
+                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C'],
+                'BISH':['ID_STAT_BISH_SIG_SHORT']
             }
 
         mcocsig = self.mcocsig
@@ -2367,7 +2368,7 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
-            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for 
+            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
