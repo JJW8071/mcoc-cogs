@@ -281,7 +281,7 @@ class RSS(object):
                                                           name, items)
                         if msg is not None:
                             await self.bot.send_message(channel, "\u200b{}".format(msg)) #Sinbad customization
-                            if broadcast is not None:           # <<<
+                            # if broadcast is not None:           # <<<
                                 # broadcast.send_broadcast(msg)   # <<<
 
             await asyncio.sleep(300)
