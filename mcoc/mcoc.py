@@ -2374,12 +2374,12 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
-            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
             )
 
         for x in titles:
@@ -2399,16 +2399,16 @@ class Champion:
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}'.format(mcocsig),
-            'ID_STAT_{}_SIG'.format(mcocsig)  #bishop ID_STAT_BISH_SIG_SHORT
+            'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
             )
 
         for x in preambles:
             if x + '_SIMPLE' in sigs:
                 preamble = x
                 break
-            elif  x +'_SHORT' in sigs and mcocsig=='BISH': #BISHOP
-                preamble = x
-                break
+        if preamble is None:
+            if mcocsig == 'BISH':
+                preamble='ID_STAT_BISH_SIG'
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
@@ -2418,7 +2418,7 @@ class Champion:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
-        if preamble + '_SHORT' in sigs:  #BISHOP
+        if mcocsig == 'BISH' in sigs:  #BISHOP
             simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
