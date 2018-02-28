@@ -2396,6 +2396,7 @@ class Champion:
         preambles = ('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}'.format(mcocsig),
+            'ID_UI_STAT_{}_SIG_'.format(mcocsig),
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
@@ -2403,7 +2404,7 @@ class Champion:
             )
 
         for x in preambles:
-            if x + '_SIMPLE' in sigs or x+'_SHORT' in sigs:
+            if x + '_SIMPLE' in sigs or x +'_SHORT' in sigs:
                 preamble = x
                 break
 
@@ -2415,7 +2416,7 @@ class Champion:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
-        if preamble + '_SHORT' in sigs:  #BISHOP 
+        if preamble + '_SHORT' in sigs:  #BISHOP
             simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
