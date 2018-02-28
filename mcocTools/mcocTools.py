@@ -32,11 +32,11 @@ class MCOCTools:
             'spotlight': (
                 '<http://simians.tk/MCoCspotlight>',
                 '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[CollectorDevTeam](https://discord.gg/BwhgZxk)'),
-            'marvelsynergy': (
-                '<http://www.marvelsynergy.com/team-builder>',
-                '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
-                'Marvel Synergy',
-                'http://www.marvelsynergy.com/images/marvelsynergy.png'),
+            # 'marvelsynergy': (
+            #     '<http://www.marvelsynergy.com/team-builder>',
+            #     '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
+            #     'Marvel Synergy',
+            #     'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
                 '<https://alsciende.github.io/masteries/v10.0.1/#>',
                 '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v17.0.2/#)',
