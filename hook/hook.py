@@ -1,6 +1,7 @@
 import discord
 from discord.ext import commands
-from .mcoc import class_color_codes, ChampConverter, ChampConverterMult, QuietUserError
+from .mcoc import (class_color_codes, ChampConverter, ChampConverterMult,
+                  QuietUserError, override_error_handler)
 from .utils.dataIO import dataIO
 from .utils.dataIO import fileIO
 from .utils import checks
@@ -943,6 +944,7 @@ def check_folders():
 
 def setup(bot):
     check_folders()
+    override_error_handler(bot)
     n = Hook(bot)
     bot.add_cog(n)
     bot.add_listener(n._on_attachment, name='on_message')

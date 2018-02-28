@@ -578,6 +578,8 @@ class ChampionFactory():
         kwargs['alias_set'] = alias_set
         kwargs['klass'] = kwargs.pop('class', 'default')
 
+        if not kwargs['champ'].strip():  #empty line
+            return
         kwargs['full_name'] = kwargs['champ']
         kwargs['bold_name'] = chat.bold(' '.join(
                 [word.capitalize() for word in kwargs['full_name'].split(' ')]))
@@ -1257,7 +1259,8 @@ class MCOC(ChampionFactory):
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         if champs[0].debug:
-            await self.retrieve_gsheet('synergy', silent=False)
+            await self.gshandler.cache_gsheets('synergy')
+            # await self.retrieve_gsheet('synergy', silent=False)
         syn_data = dataIO.load_json(local_files['synergy'])
         champ_set = {champ.full_name for champ in champs}
         champ_class_set = {champ.klass for champ in champs}
@@ -1468,8 +1471,10 @@ class MCOC(ChampionFactory):
             em.add_field(name='Kabam Spotlight', value='No URL found')
         else:
             em.add_field(name='Kabam Spotlight', value=champ.infopage)
-        if xref['royal_writeup'] != '':
-            em.add_field(name='Royal Writeup', value=xref['royal_writeup'])
+        if xref['writeup_url'] !='':
+            em.add_field(name=xref['writeup'], value=xref['writeup_url'])
+        # if xref['royal_writeup'] != '':
+        #     em.add_field(name='Royal Writeup', value=xref['royal_writeup'])
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
@@ -2004,13 +2009,13 @@ class Champion:
         self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
-        image = '{}images/portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        image = '{}images/portraits/{}.png'.format(remote_data_basepath, self.mattkraftid)
         logger.debug(image)
         return image
 
     def get_featured(self):
-        image = '{}images/featured/GachaChasePrize_256x256_{}.png'.format(
-                    remote_data_basepath, self.mcocfeatured)
+        image = '{}images/featured/{}.png'.format(
+                    remote_data_basepath, self.mattkraftid)
         logger.debug(image)
         return image
 
@@ -2586,6 +2591,7 @@ def tabulate(table_data, width, rotate=True, header_sep=True, align_out=True):
 
 def sumproduct(arr1, arr2):
     return sum([x * y for x, y in zip(arr1, arr2)])
+    # return sum([float(x) * float(y) for x, y in zip(arr1, arr2)])
 
 def iter_rows(array, rotate):
     if not rotate:
@@ -2662,10 +2668,7 @@ async def raw_modok_says(bot, channel, word=None):
     em.set_image(url=modokimage)
     await bot.send_message(channel, embed=em)
 
-# avoiding cyclic importing
-from . import hook as hook
-
-def setup(bot):
+def override_error_handler(bot):
     if not hasattr(bot, '_command_error_orig'):
         bot._command_error_orig = bot.on_command_error
     @bot.event
@@ -2675,7 +2678,27 @@ def setup(bot):
             await bot.send_message(ctx.message.channel, error)
             await raw_modok_says(bot, ctx.message.channel)
         elif isinstance(error, QuietUserError):
+            print("I'm here")
             bot.logger.info('<{}> {}'.format(type(error).__name__, error))
         else:
             await bot._command_error_orig(error, ctx)
+
+# avoiding cyclic importing
+from . import hook as hook
+
+def setup(bot):
+    override_error_handler(bot)
+    # if not hasattr(bot, '_command_error_orig'):
+    #     bot._command_error_orig = bot.on_command_error
+    # @bot.event
+    # async def on_command_error(error, ctx):
+    #     if isinstance(error, MODOKError):
+    #         bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+    #         await bot.send_message(ctx.message.channel, error)
+    #         await raw_modok_says(bot, ctx.message.channel)
+    #     elif isinstance(error, QuietUserError):
+    #         print("I'm here")
+    #         bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+    #     else:
+    #         await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
