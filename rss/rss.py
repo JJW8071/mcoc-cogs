@@ -263,10 +263,10 @@ class RSS(object):
 
     async def read_feeds(self):
         await self.bot.wait_until_ready()
-        try:                                                    # <<<
-            broadcast=self.bot.get_cog('MultiWayRelay')         # <<<
-        except:                                                 # <<<
-            broadcast=None                                      # <<<
+        # try:                                                    # <<<
+        #     broadcast=self.bot.get_cog('MultiWayRelay')         # <<<
+        # except:                                                 # <<<
+        #     broadcast=None                                      # <<<
         while self == self.bot.get_cog('RSS'):
             feeds = self.feeds.get_copy()
             for server in feeds:
