@@ -2396,7 +2396,7 @@ class Champion:
         preambles = ('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIG_{}'.format(mcocsig),
-            'ID_UI_STAT_{}_SIG_'.format(mcocsig),
+            'ID_UI_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
@@ -2404,9 +2404,10 @@ class Champion:
             )
 
         for x in preambles:
-            if x + '_SIMPLE' in sigs or x +'_SHORT' in sigs:
+            if x + '_SIMPLE' in sigs:
                 preamble = x
                 break
+            elif  x +'_SHORT' in sigs:
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
