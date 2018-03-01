@@ -574,6 +574,8 @@ class ChampionFactory():
             self.data_struct_init()
 
     def create_champion_class(self, bot, alias_set, **kwargs):
+        if not kwargs['champ'.strip()]: #empty line
+            return
         kwargs['bot'] = bot
         kwargs['alias_set'] = alias_set
         kwargs['klass'] = kwargs.pop('class', 'default')
@@ -2325,6 +2327,13 @@ class Champion:
                 kabam_text=self.get_kabam_sig_text())
 
     def get_kabam_sig_text(self, sigs=None, champ_exceptions=None):
+        '''required for signatures to work correctly
+        preamble
+        title = titlekey,
+        simplekey = preample + simple
+        descriptionkey = preamble + desc,
+        '''
+
         if sigs is None:
             sigs = load_kabam_json(kabam_bcg_stat_en)
         if champ_exceptions is None:
@@ -2372,6 +2381,7 @@ class Champion:
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
             )
 
         for x in titles:
@@ -2390,13 +2400,17 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
-            'ID_STAT_SIGNATURE_{}'.format(mcocsig)
+            'ID_STAT_SIGNATURE_{}'.format(mcocsig),
+            'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
             )
 
         for x in preambles:
             if x + '_SIMPLE' in sigs:
                 preamble = x
                 break
+        if preamble is None:
+            if mcocsig == 'BISH':
+                preamble='ID_STAT_BISH_SIG'
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
@@ -2406,6 +2420,8 @@ class Champion:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
+        if mcocsig == 'BISH' in sigs:  #BISHOP
+            simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
 

@@ -1100,6 +1100,10 @@
         {
             "k": "ID_UI_SIG_ABILITY_TITLE",
             "v": "SIGNATURE ABILITY"
+    },
+    {
+      "k": "ID_UI_SIG_ABILITY_UNLOCK_DESC",
+      "v": "Collect duplicate Champions in the Collector's Crystal Vault to awaken powerful new Signature Abilities for your 2-Star and above Champions. Every duplicate found makes a Signature Ability stronger!"
         },
         {
             "k": "ID_UI_STAT_ATTIRBUTE_BONUS_ARMOR",
@@ -10653,6 +10657,16 @@
             "k": "ID_UI_STAT_FORMAT_POWERSTEAL_SIPHON_CUR",
             "v": "Launching this attack siphons off the opponent’s Power meter and steals {1}% of their current Power over {2} seconds.",
             "vn": 13
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PROXIMA_DMGREDUCTION",
+      "v": "{0}% chance to activate a Protection Buff when attacked by a projectile or beam, preventing Proxima Midnight from losing more than {1}% of her max Health from a single source for {2} seconds. This ability does not activate against Mystic Champions.",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PROXIMA_DMGREDUCTION_2",
+      "v": "Opponent’s have {2}% Offensive Ability Accuracy reduction when Proxima Midnight Blocks an Attack. Additionally, Critical Hits cannot be inflicted and she can Parry any Basic Attack, stunning opponents even if their attack is projectile based.",
+      "vn": "17.1"
         },
         {
             "k": "ID_UI_STAT_FORMAT_PROXIMA_DMGREDUCTION_TITLE",
@@ -10667,6 +10681,11 @@
         {
             "k": "ID_UI_STAT_FORMAT_PROXIMA_HVYATK_2",
             "v": "Against Tech opponents, Proxima Midnight inflicts Petrify whenever an Armor Break refreshes it’s duration, reducing the effectiveness of Power Gain and Regeneration by {1}% for {2} seconds. Max Stacks: 3",
+      "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_PROXIMA_SP2",
+      "v": "Gains a Fury Buff if the opponent has an active Regeneration effect, granting[16982bff]+{1}[-] Attack Rating for {2} seconds.",
             "vn": "17.1"
         },
         {
@@ -13772,6 +13791,11 @@
         {
             "k": "ID_UI_STAT_SIGNATURE_OLDMANLOGAN_TITLE_LOWER",
             "v": "Pop the Claws"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_PROXIMA_LONG",
+      "v": "At the end of her Special Attacks, Proxima Midnight converts {2} Fury Buffs to activate a different effect based on which Special Attack she activated.",
+      "vn": "17.1"
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_PROXIMA_SP1",

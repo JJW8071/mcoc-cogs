@@ -31,12 +31,12 @@ class MCOCTools:
                 'https://assets-cdn.github.com/favicon.ico'),
             'spotlight': (
                 '<http://simians.tk/MCoCspotlight>',
-                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[MCOC Spotlight on Discord](https://discord.gg/BwhgZxk)'),
-            'marvelsynergy': (
-                '<http://www.marvelsynergy.com/team-builder>',
-                '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
-                'Marvel Synergy',
-                'http://www.marvelsynergy.com/images/marvelsynergy.png'),
+                '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[CollectorDevTeam](https://discord.gg/BwhgZxk)'),
+            # 'marvelsynergy': (
+            #     '<http://www.marvelsynergy.com/team-builder>',
+            #     '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
+            #     'Marvel Synergy',
+            #     'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
                 '<https://alsciende.github.io/masteries/v10.0.1/#>',
                 '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v17.0.2/#)',
@@ -51,6 +51,7 @@ class MCOCTools:
             #     #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
+    COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
     dataset = 'data/mcoc/masteries.csv'
 
@@ -63,7 +64,7 @@ class MCOCTools:
         if len(lookup) > 2:
             em.set_footer(text=lookup[2],icon_url=lookup[3])
         else:
-            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
         return em
 
     @commands.command(pass_context=True,aliases={'collector','infocollector','about','info'})
@@ -158,13 +159,6 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
-    @commands.command(help=lookup_links['marvelsynergy'][0])
-    async def marvelsynergy(self):
-        x = 'marvelsynergy'
-        lookup = self.lookup_links[x]
-        await self.bot.say(embed=self.present(lookup))
-        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
-
     @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
     async def simulator(self):
         x = 'simulator'
@@ -178,13 +172,6 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
-
-    # @commands.command(help=lookup_links['streak'][0])
-    # async def streak(self):
-    #     x='streak'
-    #     lookup = self.lookup_links[x]
-    #     await self.bot.say(embed=self.present(lookup))
-    #     # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
     @commands.command(help=lookup_links['hook'][0])
     async def hook(self):
