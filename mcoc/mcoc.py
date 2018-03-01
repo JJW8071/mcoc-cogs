@@ -934,7 +934,7 @@ class MCOC(ChampionFactory):
             name_id = random.choice(list(self.champions.values()))
             champ = await self.get_champion(name_id.mattkraftid)
             if champ not in selected:
-                if champ.status != 'npc':
+                if champ.status == 'released':
                     selected.append(champ)
                     em = discord.Embed(color=champ.class_color, title=champ.full_name)
                     em.set_thumbnail(url=champ.get_avatar())
