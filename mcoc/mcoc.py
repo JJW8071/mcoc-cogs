@@ -377,6 +377,7 @@ class GSExport():
             except Exception as err:
                 await self.bot.say("Runtime Error in postprocess of Spreadsheet "
                         "'{}':\n\t{}".format( self.name, err))
+                raise
         if self.local:
             dataIO.save_json(self.local, self.data)
         return self.data
@@ -2410,7 +2411,7 @@ class Champion:
                 break
         if preamble is None:
             if mcocsig == 'BISH':
-                preamble='ID_STAT_BISH_SIG'
+                preamble = 'ID_STAT_BISH_SIG'
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
@@ -2420,7 +2421,7 @@ class Champion:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
-        if mcocsig == 'BISH' in sigs:  #BISHOP
+        elif mcocsig == 'BISH':  #BISHOP
             simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
