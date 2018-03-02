@@ -1,0 +1,9 @@
+{
+    "AUTHOR" : "JJW",
+    "DESCRIPTION" : "Read MCOC RSS Feeds",
+    "DISABLED" : false,
+    "SHORT" : "Read MCOC RSS Feeds",
+    "NAME" : "RSS",
+    "REQUIREMENTS" : ["feedparser"],
+    "INSTALL_MSG" : "This version of RSS.py has been modified to restrict access to the bot owner, and template altered.  Credit to Will/tekulvw for rss.py"
+}

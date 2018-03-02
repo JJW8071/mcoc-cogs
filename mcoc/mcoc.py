@@ -382,32 +382,22 @@ class GSExport():
         return self.data
 
     async def retrieve_sheet(self, ss, *, sheet_name, sheet_action, data_type, **kwargs):
-        sheet_name, sheet = await self.resolve_sheet_name(ss, sheet_name)
+        sheet_name, sheet = await self._resolve_sheet_name(ss, sheet_name)
         data = self.get_sheet_values(sheet, kwargs)
         header = data[0]
 
         if data_type.startswith('nested_list'):
             data_type, dlen = data_type.rsplit('::', maxsplit=1)
             dlen = int(dlen)
-        #prep_func = getattr(self, kwargs.get('prepare_function', 'do_nothing'), numericise_all)
         prep_func = self.cell_handlers[kwargs['prepare_function']]
         self.data['_headers'][sheet_name] = header
-        col_handlers = self.build_column_handlers(sheet_name, header,
+        col_handlers = self._build_column_handlers(sheet_name, header,
                             kwargs['column_handler'])
         if sheet_action == 'table':
             self.data[sheet_name] = [header]
         for row in data[1:]:
-            clean_row = []
-            for cell_head, cell, c_hand in zip(header, row, col_handlers):
-                if c_hand:
-                    clean_row.append(c_hand(cell))
-                else:
-                    clean_row.append(prep_func(cell))
+            clean_row = self._process_row(header, row, col_handlers, prep_func)
             rkey = clean_row[0]
-            try:
-                hash(rkey)
-            except TypeError:
-                rkey = row[0]
             if sheet_action == 'merge':
                 if data_type == 'nested_dict':
                     pack = dict(zip(header[2:], clean_row[2:]))
@@ -436,7 +426,7 @@ class GSExport():
             elif sheet_action == 'table':
                 self.data[sheet_name].append(clean_row)
 
-    async def resolve_sheet_name(self, ss, sheet_name):
+    async def _resolve_sheet_name(self, ss, sheet_name):
         if sheet_name:
             try:
                 sheet = ss.worksheet('title', sheet_name)
@@ -447,6 +437,16 @@ class GSExport():
             sheet = ss.sheet1
             sheet_name = sheet.title
         return sheet_name, sheet
+
+    def _process_row(self, header, row, col_handlers, prep_func):
+        clean_row = [row[0]]
+        # don't process first column.  Can't use list, dicts, or numbers as keys in json
+        for cell_head, cell, c_hand in zip(header[1:], row[1:], col_handlers[1:]):
+            if c_hand:
+                clean_row.append(c_hand(cell))
+            else:
+                clean_row.append(prep_func(cell))
+        return clean_row
 
     def get_prepare_function(self, kwargs):
         prep_func_str = cell_to_list(kwargs['prepare_function'])
@@ -460,7 +460,7 @@ class GSExport():
             data = sheet.get_all_values(include_empty=kwargs['include_empty'])
         return data
 
-    def build_column_handlers(self, sheet_name, header, column_handler_str):
+    def _build_column_handlers(self, sheet_name, header, column_handler_str):
         if not column_handler_str:
             return [None] * len(header)
         col_handler = cell_to_dict(column_handler_str)
@@ -485,7 +485,6 @@ class GSExport():
                 handler_funcs.append(self.cell_handlers[col_handler[column]])
         return handler_funcs
 
-
     @staticmethod
     def bound_range(sheet, rng_str):
         rng = rng_str.split(':')
@@ -495,17 +494,42 @@ class GSExport():
                 rng[i] = '{}{}'.format(rng[i], rows[i])
         return rng
 
-    @staticmethod
-    def do_nothing(row):
-        return row
 
-    @staticmethod
-    def remove_commas(row):
-        return [cell.replace(',', '') for cell in row]
+class GSHandler:
 
-    @staticmethod
-    def remove_NA(row):
-        return [None if cell in ("#N/A", "") else cell for cell in row]
+    def __init__(self, bot, service_file):
+        self.bot = bot
+        self.service_file = service_file
+        self.gsheets = {}
+
+    def register_gsheet(self, *, name, gkey, local, **kwargs):
+        if name in self.gsheets:
+            raise KeyError("Key '{}' has already been registered".format(name))
+        self.gsheets[name] = dict(gkey=gkey, local=local, **kwargs)
+
+    async def cache_gsheets(self, key=None):
+        gc = await self.authorize()
+        if key and key not in self.gsheets:
+            raise KeyError("Key '{}' is not registered".format(key))
+        gfiles = self.gsheets.keys() if not key else (key,)
+
+        num_files = len(gfiles)
+        msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
+        for i, k in enumerate(gfiles):
+            gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
+            await gsdata.retrieve_data()
+            msg = await self.bot.edit_message(msg,
+                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+        await self.bot.say('Retrieval Complete')
+
+    async def authorize(self):
+        try:
+            return pygsheets.authorize(service_file=self.service_file, no_cache=True)
+        except FileNotFoundError:
+            err_msg = 'Cannot find credentials file.  Needs to be located:\n' \
+                    + self.service_file
+            await self.bot.say(err_msg)
+            raise FileNotFoundError(err_msg)
 
 
 class AliasDict(UserDict):
@@ -550,10 +574,14 @@ class ChampionFactory():
             self.data_struct_init()
 
     def create_champion_class(self, bot, alias_set, **kwargs):
+        if not kwargs['champ'.strip()]: #empty line
+            return
         kwargs['bot'] = bot
         kwargs['alias_set'] = alias_set
         kwargs['klass'] = kwargs.pop('class', 'default')
 
+        if not kwargs['champ'].strip():  #empty line
+            return
         kwargs['full_name'] = kwargs['champ']
         kwargs['bold_name'] = chat.bold(' '.join(
                 [word.capitalize() for word in kwargs['full_name'].split(' ')]))
@@ -755,6 +783,25 @@ class MCOC(ChampionFactory):
         self.data_dir='data/mcoc/{}/'
         self.shell_json=self.data_dir + '{}.json'
         self.split_re = re.compile(', (?=\w+:)')
+        self.gsheet_handler = GSHandler(bot, gapi_service_creds)
+        self.gsheet_handler.register_gsheet(
+                name='signature',
+                gkey='1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
+                local=local_files['signature'],
+                postprocess=postprocess_sig_data,
+            )
+        self.gsheet_handler.register_gsheet(
+                name='synergy',
+                gkey='1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
+                local=local_files['synergy'],
+            )
+    #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
+            #'local': 'data/mcoc/spotlight_test.json',
+            #},
+    #'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
+            #'local': 'data/mcoc/xref_test.json',
+            #},
+
         logger.info("MCOC Init")
         super().__init__()
 
@@ -828,30 +875,31 @@ class MCOC(ChampionFactory):
 
     @commands.command(hidden=True, aliases=['cg',])
     async def cache_gsheets(self, key=None):
-        await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-                    + gapi_service_creds)
-            return
-        num_files = len(gsheet_files)
-        msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
-        for i, k in enumerate(gsheet_files.keys()):
-            await self.retrieve_gsheet(k, gc)
-            msg = await self.bot.edit_message(msg,
-                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
-        await self.bot.say('Retrieval Complete')
-
-    async def retrieve_gsheet(self, key, gc=None, silent=True):
-        if gc is None:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        if not silent:
-            msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
-        gsdata = GSExport(self.bot, gc, name=key, **gsheet_files[key])
-        await gsdata.retrieve_data()
-        if not silent:
-            await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
+         await self.update_local()
+         await self.gsheet_handler.cache_gsheets(key)
+    #     try:
+    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+    #     except FileNotFoundError:
+    #         await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+    #                 + gapi_service_creds)
+    #         return
+    #     num_files = len(gsheet_files)
+    #     msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
+    #     for i, k in enumerate(gsheet_files.keys()):
+    #         await self.retrieve_gsheet(k, gc)
+    #         msg = await self.bot.edit_message(msg,
+    #                 'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+    #     await self.bot.say('Retrieval Complete')
+    #
+    # async def retrieve_gsheet(self, key, gc=None, silent=True):
+    #     if gc is None:
+    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+    #     if not silent:
+    #         msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
+    #     gsdata = GSExport(self.bot, gc, name=key, **gsheet_files[key])
+    #     await gsdata.retrieve_data()
+    #     if not silent:
+    #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
@@ -908,12 +956,13 @@ class MCOC(ChampionFactory):
             await send_cmd_help(ctx)
 
     @champ.command(name='featured')
-    async def champ_featured(self, champ : ChampConverter):
+    async def champ_featured(self, *, champs : ChampConverterMult):
         '''Champion Featured image'''
-        em = discord.Embed(color=champ.class_color, title=champ.full_name)
-        em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-        em.set_image(url=champ.get_featured())
-        await self.bot.say(embed=em)
+        for champ in champs:
+            em = discord.Embed(color=champ.class_color, title=champ.full_name)
+            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+            em.set_image(url=champ.get_featured())
+            await self.bot.say(embed=em)
 
     @champ.command(name='portrait')
     async def champ_portrait(self, *, champs : ChampConverterMult):
@@ -1161,7 +1210,10 @@ class MCOC(ChampionFactory):
             flats = []
             flats.append(data[keys[0]])
             flats.append(data[keys[1]])
-            for k in range(2,len(keys)):
+            flats.append('% {}'.format(from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating))))
+            critdmg=round(0.5+5*from_flat(int(data[keys[3]].replace(',','')), int(champ.chlgr_rating)),2)
+            flats.append('% {}'.format(critdmg))
+            for k in range(4,len(keys)):
                 flats.append('% {}'.format(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))))
             pcts = [[titles[i], flats[i]] for i in range(len(titles))]
             em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
@@ -1209,40 +1261,11 @@ class MCOC(ChampionFactory):
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         if champs[0].debug:
-            await self.retrieve_gsheet('synergy', silent=False)
-        # sheet = '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY'
-        # range_headers = 'Synergies!A1:M1'
-        # range_body = 'Synergies!A2:M'
-        # foldername = 'synergies'
-        # filename = 'synergies'
-        # if champs[0].debug:
-        #     head_url = GS_BASE.format(sheet,range_headers)
-        #     body_url = GS_BASE.format(sheet,range_body)
-        #     champ_synergies = await self.gs_to_json(head_url, body_url, foldername, filename)
-        #     message = await self.bot.say('Collecting Synergy data ...')
-        #     await self.bot.upload(self.shell_json.format(foldername,filename))
-        # else:
-        #     getfile = self.shell_json.format(foldername, filename)
-        #     champ_synergies = dataIO.load_json(getfile)
-        #
-        # # GS_BASE='https://sheets.googleapis.com/v4/spreadsheets/1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY/values/Synergies!A2:L1250?key=AIzaSyBugcjKbOABZEn-tBOxkj0O7j5WGyz80uA&majorDimension=ROWS'
-        #
-        # range_headers = 'SynergyEffects!A1:G'
-        # range_body = 'SynergyEffects!A2:G'
-        # filename = 'effects'
-        # if champs[0].debug:
-        #     head_url = GS_BASE.format(sheet,range_headers)
-        #     body_url = GS_BASE.format(sheet,range_body)
-        #     synlist = await self.gs_to_json(head_url, body_url, foldername, filename)
-        #     await self.bot.edit_message(message, 'Almost done ...')
-        #     await self.bot.upload(self.shell_json.format(foldername,filename))
-        #     await self.bot.edit_message(message, 'Synergies collected.')
-        # else:
-        #     getfile = self.shell_json.format(foldername, filename)
-        #     synlist = dataIO.load_json(getfile)
-
+            await self.gshandler.cache_gsheets('synergy')
+            # await self.retrieve_gsheet('synergy', silent=False)
         syn_data = dataIO.load_json(local_files['synergy'])
         champ_set = {champ.full_name for champ in champs}
+        champ_class_set = {champ.klass for champ in champs}
         synergy_package = []
         activated = set()
         # print('len champs: '+str(len(champs)))
@@ -1251,10 +1274,18 @@ class MCOC(ChampionFactory):
             for champ in champs:
                 champ_synergies = syn_data['SynExport'][champ.full_name]
                 for lookup, data in champ_synergies.items():
+                    trigger_in_tag = False
                     if champ.star != data['stars'] or lookup in activated:
                         continue
                     for trigger in data['triggers']:
-                        if trigger in champ_set:
+                        if trigger.startswith('#'):
+                            for trig_champ in champs:
+                                if champ == trig_champ:
+                                    continue
+                                if trigger in trig_champ.all_tags:
+                                    trigger_in_tag = True
+                                    break
+                        if trigger in champ_set or trigger_in_tag:
                             activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
@@ -1263,7 +1294,10 @@ class MCOC(ChampionFactory):
                             effectsused[data['synergycode']].append(effect)
 
             desc= []
-            embed.description = ''.join(c.collectoremoji for c in champs)
+            try:
+                embed.description = ''.join(c.collectoremoji for c in champs)
+            except:
+                print('Collector Emoji not found')
             for k, v in effectsused.items():
                 syn_effect = syn_data['SynergyEffects'][k]
                 array_sum = [sum(row) for row in iter_rows(v, True)]
@@ -1439,8 +1473,10 @@ class MCOC(ChampionFactory):
             em.add_field(name='Kabam Spotlight', value='No URL found')
         else:
             em.add_field(name='Kabam Spotlight', value=champ.infopage)
-        if xref['royal_writeup'] != '':
-            em.add_field(name='Royal Writeup', value=xref['royal_writeup'])
+        if xref['writeup_url'] !='':
+            em.add_field(name=xref['writeup'], value=xref['writeup_url'])
+        # if xref['royal_writeup'] != '':
+        #     em.add_field(name='Royal Writeup', value=xref['royal_writeup'])
         em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
         em.set_thumbnail(url=champ.get_avatar())
@@ -1975,13 +2011,13 @@ class Champion:
         self.update_attrs({'sig': self.sig + self.dupe_levels[self.star]})
 
     def get_avatar(self):
-        image = '{}images/portraits/portrait_{}.png'.format(remote_data_basepath, self.mcocportrait)
+        image = '{}images/portraits/{}.png'.format(remote_data_basepath, self.mattkraftid)
         logger.debug(image)
         return image
 
     def get_featured(self):
-        image = '{}images/featured/GachaChasePrize_256x256_{}.png'.format(
-                    remote_data_basepath, self.mcocfeatured)
+        image = '{}images/featured/{}.png'.format(
+                    remote_data_basepath, self.mattkraftid)
         logger.debug(image)
         return image
 
@@ -2291,6 +2327,13 @@ class Champion:
                 kabam_text=self.get_kabam_sig_text())
 
     def get_kabam_sig_text(self, sigs=None, champ_exceptions=None):
+        '''required for signatures to work correctly
+        preamble
+        title = titlekey,
+        simplekey = preample + simple
+        descriptionkey = preamble + desc,
+        '''
+
         if sigs is None:
             sigs = load_kabam_json(kabam_bcg_stat_en)
         if champ_exceptions is None:
@@ -2338,6 +2381,7 @@ class Champion:
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
             )
 
         for x in titles:
@@ -2356,13 +2400,17 @@ class Champion:
             'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
-            'ID_STAT_SIGNATURE_{}'.format(mcocsig)
+            'ID_STAT_SIGNATURE_{}'.format(mcocsig),
+            'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
             )
 
         for x in preambles:
             if x + '_SIMPLE' in sigs:
                 preamble = x
                 break
+        if preamble is None:
+            if mcocsig == 'BISH':
+                preamble='ID_STAT_BISH_SIG'
 
         # if preamble is 'undefined':
         #     raise KeyError('DEBUG - Preamble not found')
@@ -2372,6 +2420,8 @@ class Champion:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
+        if mcocsig == 'BISH' in sigs:  #BISHOP
+            simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
 
@@ -2557,6 +2607,7 @@ def tabulate(table_data, width, rotate=True, header_sep=True, align_out=True):
 
 def sumproduct(arr1, arr2):
     return sum([x * y for x, y in zip(arr1, arr2)])
+    # return sum([float(x) * float(y) for x, y in zip(arr1, arr2)])
 
 def iter_rows(array, rotate):
     if not rotate:
@@ -2633,10 +2684,7 @@ async def raw_modok_says(bot, channel, word=None):
     em.set_image(url=modokimage)
     await bot.send_message(channel, embed=em)
 
-# avoiding cyclic importing
-from . import hook as hook
-
-def setup(bot):
+def override_error_handler(bot):
     if not hasattr(bot, '_command_error_orig'):
         bot._command_error_orig = bot.on_command_error
     @bot.event
@@ -2646,7 +2694,27 @@ def setup(bot):
             await bot.send_message(ctx.message.channel, error)
             await raw_modok_says(bot, ctx.message.channel)
         elif isinstance(error, QuietUserError):
+            print("I'm here")
             bot.logger.info('<{}> {}'.format(type(error).__name__, error))
         else:
             await bot._command_error_orig(error, ctx)
+
+# avoiding cyclic importing
+from . import hook as hook
+
+def setup(bot):
+    override_error_handler(bot)
+    # if not hasattr(bot, '_command_error_orig'):
+    #     bot._command_error_orig = bot.on_command_error
+    # @bot.event
+    # async def on_command_error(error, ctx):
+    #     if isinstance(error, MODOKError):
+    #         bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+    #         await bot.send_message(ctx.message.channel, error)
+    #         await raw_modok_says(bot, ctx.message.channel)
+    #     elif isinstance(error, QuietUserError):
+    #         print("I'm here")
+    #         bot.logger.info('<{}> {}'.format(type(error).__name__, error))
+    #     else:
+    #         await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
