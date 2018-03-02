@@ -36,11 +36,11 @@ class MCOCMaps:
 
     enigmatics = {
         'maestro':['Maestro','At the start of the fight, Maestro changes his class abilities depending on his Opponent.' \
-                    'vs. MYSTIC - Applies different Debuffs depending on specific actions taken by Maestro and his Opponents' \
-                    'vs. TECH - Receives random buffs throughout the fight.' \
-                    'vs. MUTANT - Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.' \
-                    'vs. SKILL - Reduces Opponent Effect Accuracy when attacked.' \
-                    'vs. SCIENCE - Shrugs off Debuffs'],
+                    '\nvs. MYSTIC - Applies different Debuffs depending on specific actions taken by Maestro and his Opponents' \
+                    '\nvs. TECH - Receives random buffs throughout the fight.' \
+                    '\nvs. MUTANT - Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.' \
+                    '\nvs. SKILL - Reduces Opponent Effect Accuracy when attacked.' \
+                    '\nvs. SCIENCE - Shrugs off Debuffs'],
         'colossus':['Colossus','When Blocking a Special 1 or 2, Colossus reflects his opponent\'s Attack damage back. Heavy attacks do damage equal to 1000\% of the opponent\'s max health.'],
         'spiderman':['Spider-Man','Spider-Man starts with 100\% chance to Evade passive, this is removed when he becomes Stunned. The Evade passive returns when Spider-Man activates his Special 2.'],
         'starlord':['Star-Lord','Every 15 Blocked attacks, Star-Lord receives a permanent Fury Stack, increasing his Attack by 100%'],
@@ -100,15 +100,14 @@ class MCOCMaps:
                 mapurl = '{}lolmap{}.png'.format(self.basepath, i)
                 print(mapurl)
                 lanes = self.lollanes[str(i)[0]]
-                print(lanes)
+                em = discord.Embed(color=discord.Color.gold(),title=maptitle) #, description = '\n'.join(desclist))
                 desclist = []
                 for l in lanes:
                     enigma = self.enigmatics[l]
                     print(enigma)
-                    desclist.append('{}\n{}\n\n'.format(enigma[0], enigma[1]))
-
+                    # desclist.append('{}\n{}\n\n'.format(enigma[0], enigma[1]))
+                    em.add_field(name='Enigmatic {}'.format(enigma[0]), value =enigma[1])
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
-                em = discord.Embed(color=discord.Color.gold(),title=maptitle, description = '\n'.join(desclist))
                 em.set_image(url=mapurl)
                 em.set_footer(text='Art: CollectorDevTeam, Plan: LabyrinthTeam',)
                 page_list.append(em)
