@@ -99,13 +99,14 @@ class MCOCMaps:
             for i in range(0, 8):
                 mapurl = '{}lolmap{}.png'.format(self.basepath, i)
                 print(mapurl)
-                lanes = self.lollanes[str(i)]
+                lanes = self.lollanes[str(i)[0]]
+                print(lanes)
                 desclist = []
                 for l in lanes:
                     desclist.append('{0}\n{1}\n\n'.format(self.enigmatics[l]))
 
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
-                em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+                em = discord.Embed(color=discord.Color.gold(),title=maptitle, description = '\n'.join(desclist))
                 em.set_image(url=mapurl)
                 em.set_footer(text='Art: CollectorDevTeam, Plan: LabyrinthTeam',)
                 page_list.append(em)
