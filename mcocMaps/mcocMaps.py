@@ -103,7 +103,9 @@ class MCOCMaps:
                 print(lanes)
                 desclist = []
                 for l in lanes:
-                    desclist.append('{0}\n{1}\n\n'.format(self.enigmatics[l]))
+                    enigma = self.enigmatics[l][0]
+                    print(engima)
+                    desclist.append('{0}\n{1}\n\n'.format(enigma))
 
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle, description = '\n'.join(desclist))
