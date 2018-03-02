@@ -97,18 +97,18 @@ class MCOCMaps:
         if maptype in self.lolmaps:
             page_list = []
             for i in range(0, 8):
+                maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
+                em = discord.Embed(color=discord.Color.gold(),title=maptitle) #, description = '\n'.join(desclist))
                 mapurl = '{}lolmap{}.png'.format(self.basepath, i)
+                em.set_image(url=mapurl)
                 print(mapurl)
                 lanes = self.lollanes[str(i)[0]]
-                em = discord.Embed(color=discord.Color.gold(),title=maptitle) #, description = '\n'.join(desclist))
-                desclist = []
+                # desclist = []
                 for l in lanes:
                     enigma = self.enigmatics[l]
                     print(enigma)
                     # desclist.append('{}\n{}\n\n'.format(enigma[0], enigma[1]))
                     em.add_field(name='Enigmatic {}'.format(enigma[0]), value =enigma[1])
-                maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
-                em.set_image(url=mapurl)
                 em.set_footer(text='Art: CollectorDevTeam, Plan: LabyrinthTeam',)
                 page_list.append(em)
             await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=120, page=int(maptype))
