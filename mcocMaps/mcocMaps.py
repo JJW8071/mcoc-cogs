@@ -104,7 +104,7 @@ class MCOCMaps:
                 desclist = []
                 for l in lanes:
                     enigma = self.enigmatics[l][0]
-                    print(engima)
+                    print(enigma)
                     desclist.append('{0}\n{1}\n\n'.format(enigma))
 
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
