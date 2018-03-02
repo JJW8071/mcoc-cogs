@@ -24,6 +24,52 @@ class MCOCMaps:
         '6':{'map':'6', 'maptitle': 'Exploration Path 6'},
         '7':{'map':'7', 'maptitle': 'Exploration Path 7'},}
 
+    lollanes = {'0':['colossus','maestro'],
+        '1':['spiderman','maestro'],
+        '2':['starlord','thorjanefoster','abomination','guillotine','venompool','drstrange','kamalakhan','rocket','maestro'],
+        '3':['colossus','magneto','daredevilnetflix','spidermanmorales','blackwidow','drstrange','moonknight','rocket','maestro'],
+        '4':['groot','vision','thor','electro','hulkbuster','blackwidow','cyclops90s','rhino','maestro'],
+        '5':['blackpanthercivilwar','vision','juggernaut','hulkbuster','drstrange','blackwidow','kamalakhan','rocket','maestro'],
+        '6':['starlord','agentvenom','daredevilnetflix','venompool','cyclops90s','ultronprime','maestro'],
+        '7':['colossus','x23','maestro']
+    }
+
+    enigmatics = {
+        'maestro':'At the start of the fight, Maestro changes his class abilities depending on his Opponent.' \
+                    'vs. MYSTIC - Applies different Debuffs depending on specific actions taken by Maestro and his Opponents' \
+                    'vs. TECH - Receives random buffs throughout the fight.' \
+                    'vs. MUTANT - Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.' \
+                    'vs. SKILL - Reduces Opponent Effect Accuracy when attacked.' \
+                    'vs. SCIENCE - Shrugs off Debuffs',
+        'colossus':'When Blocking a Special 1 or 2, Colossus reflects his opponent\'s Attack damage back. Heavy attacks do damage equal to 1000\% of the opponent\'s max health.',
+        'spiderman':'Spider-Man starts with 100\% chance to Evade passive, this is removed when he becomes Stunned. The Evade passive returns when Spider-Man activates his Special 2.',
+        'starlord':'Every 15 Blocked attacks, Star-Lord receives a permanent Fury Stack, increasing his Attack by 100%',
+        'thorjanefoster':'While Blocking an attack, Thor Shocks her opponent for 100\% of her attack over 3 seconds.',
+        'abomination':'At the beginning of the fight, Abomination excretes poison that has 100\% chance to permanently Poison the opponent for 25\% of his Attack every second.',
+        'guillotine':'At the beginning of the fight, Guillotine\'s ancestors slice the opponent with ghostly blades that have 100\% chance to permanently Bleed the opponent for 25\% of her Attack every second',
+        'venompool':'When enemies activate a Buff effect, Venompool copies that Buff. Any Debuff applied to Venompool is immediately removed.',
+        'drstrange':'When Blocked, Dr. Strange steals 5\% Power from his opponents. Buff duration is increased by 100\%.',
+        'kamalakhan':'Ms. Marvel has 100\% chance to convert a Debuff to a Fury stack, increasing her Attack by 10\%. A fury stack is removed when attacked with a Special.',
+        'rocket':'Upon reaching 2 bars of Power, Rocket becomes Unblockable until he attacks his opponent or is attacked with a Heavy Attack.',
+        'magneto':'Magneto begins the fight with 1 bar of Power. Enemies reliant on metal suffer 100\% reduced Ability Accuracy and ar Stunned for 5 seconds when magnetized.',
+        'daredevilnetflix':'While opponents of Daredevil ar Blocking, they take Degeneration damage every second equal to the percentage of their health lost.',
+        'spidermanmorales':'When Miles loses all his charges of Evasion, he gains Fury, Cruelty, Precision, and Resistances. These Enhancements are removed when his opponent activates a Special 1 or 2.',
+        'blackwidow':'When Black Widow activatesa Special 1 or 2, she receives an Electric Barrier for 3 seconds. If she receives an attack with the Electric Barrier active, the opponent is Stunned for 2 seconds.',
+        'moonknight':'When Moon Knight activates his Special, each attack that makes contact with his opponent, a Degeneration stack is applied that deals 0.1\% direct damage every second, stacks go up to 4. These stacks are removed when Moon Knight is attacked with a Special.',
+        'groot':'Groot begins Regeneration upon eneimes activation of their Regeneration Buffs. Groot\'s Regeneration lasts for 3 seconds and increases in strength the lower he is.',
+        'vision':'Opponents of Vision lose 5\% of their Power every time they Dash backwards. If they dash backwards with 0 Power, they become Stunned for 1 second. Vision has Unblockable Special 2.',
+        'thor':'When attacked, Thor has a 5% chance to apply a Stun timer stack, up to 3, to his opponent, lasting 30 seconds. These stacks are removed when attacked with a Heavy Attack. If the timer ends, the opponent is Stunned for 2 seconds.',
+        'electro':'Every 15 seconds, Electro\'s Static Shock is enhanced for 5 seconds.',
+        'hulkbuster':'While Blocking, Hulkbuster reflects direct damage that increases exponentially in power with every attack Blocked.',
+        'cyclops90s':'Upon reaching 1 bar of Power, Cyclops becomes Unblockable until he attacks his opponent or reaches 2 bars of power.',
+        'rhino':'Rhino has 90\% Physical Resistance and takes no Damage from Physical-based Special 1 & 2 attacks.',
+        'blackpanthercivilwar':'At the beginning of the fight, Black Panther recieves Physical and Energy Resistance Buffs. Every 10 attacks on Black Panther, the Resistance Buffs are removed for 10 seconds.',
+        'juggernaut':'Juggernaut\'s Unstoppable lasts until he is attacked with a Heavy Attack.',
+        'agentvenom':'Throughout the fight, when combatants strike their opponent, they apply a timer that lasts for 3 seconds. The only way to remove the timer is to strike back and transfer it to the attacked combatant. If the timer runs out the combatant with the timer receives a Debuff that Incinerates 25% of the opponent Health as direct damage over 3 seconds.',
+        'ultronprime':'Ultron has 90\% Energy Resistance and takes no damage from Energy-Based Special 1 & 2 attacks.',
+        'x23':'Every 15 seconds, Wolverine Regenerates 5\% of her Health over 3 seconds.'
+    }
+
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
 
@@ -58,7 +104,7 @@ class MCOCMaps:
                 em.set_image(url=mapurl)
                 em.set_footer(text='Art: CollectorDevTeam, Plan: LabyrinthTeam',)
                 page_list.append(em)
-            await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=int(maptype))
+            await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=120, page=int(maptype))
                 #await self.bot.say(embed=em)
 
     @commands.command(pass_context=True, aliases=['lolteam, kiryu'])
