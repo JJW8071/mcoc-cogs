@@ -99,7 +99,7 @@ class MCOCMaps:
             for i in range(0, 8):
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
                 em = discord.Embed(color=discord.Color.gold(),title=maptitle) #, description = '\n'.join(desclist))
-                mapurl = '{}lolmap{}v2.png'.format(self.basepath, i)
+                mapurl = '{}lolmap{}v3.png'.format(self.basepath, i)
                 em.set_image(url=mapurl)
                 print(mapurl)
                 lanes = self.lollanes[str(i)[0]]
