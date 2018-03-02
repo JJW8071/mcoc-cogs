@@ -36,11 +36,11 @@ class MCOCMaps:
 
     enigmatics = {
         'maestro':['Maestro','At the start of the fight, Maestro changes his class abilities depending on his Opponent.' \
-                    '\n     vs. MYSTIC - Applies different Debuffs depending on specific actions taken by Maestro and his Opponents\n' \
-                    '\n     vs. TECH - Receives random buffs throughout the fight.\n' \
-                    '\n     vs. MUTANT - Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.\n' \
-                    '\n     vs. SKILL - Reduces Opponent Effect Accuracy when attacked.\n' \
-                    '\n     vs. SCIENCE - Shrugs off Debuffs\n'],
+                    '**vs. MYSTIC** Applies different Debuffs depending on specific actions taken by Maestro and his Opponents' \
+                    '**vs. TECH** Receives random buffs throughout the fight.' \
+                    '**vs. MUTANT** Powerdrain when Blocked & receives Armor Up when activating a Special 1 or 2.' \
+                    '**vs. SKILL** Reduces Opponent Effect Accuracy when attacked.' \
+                    '**vs. SCIENCE** Shrugs off Debuffs'],
         'colossus':['Colossus','When Blocking a Special 1 or 2, Colossus reflects his opponent\'s Attack damage back. Heavy attacks do damage equal to 1000\% of the opponent\'s max health.'],
         'spiderman':['Spider-Man','Spider-Man starts with 100\% chance to Evade passive, this is removed when he becomes Stunned. The Evade passive returns when Spider-Man activates his Special 2.'],
         'starlord':['Star-Lord','Every 15 Blocked attacks, Star-Lord receives a permanent Fury Stack, increasing his Attack by 100%'],
