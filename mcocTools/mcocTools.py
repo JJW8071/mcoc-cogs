@@ -350,8 +350,10 @@ class MCOCTools:
     @checks.is_owner()
     @inspect.command(pass_context=True, hidden=True, name='roles')
     async def _inspect_roles(self, ctx, serverid : discord.Server = None):
-        if serverid is not None:
-        server = ctx.message.server
+        if serverid is None:
+            server = ctx.message.server
+        elif serverid in self.bot.servers:
+            server = serverid
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         positions = []
         for r in roles:
