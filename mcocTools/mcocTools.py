@@ -355,7 +355,7 @@ class MCOCTools:
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         positions = []
         for r in roles:
-            positions.append('{} = {}'.format(r.position, r.mention))
+            positions.append('{} = {}'.format(r.position, r.name))
         desc =  '\n'.join(positions)
         em = discord.Embed(color=discord.Color.red(), title='Collector Inspector: ROLES', description=desc)
         await self.bot.say(embed=em)
