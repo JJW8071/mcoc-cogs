@@ -259,8 +259,6 @@ class MCOCTools:
         if 'summoners' not in rolenames:
             summoners = await self.bot.create_role(server=server, name='summoners', color=discord.Color.lighter_grey(), hoist=True, mentionable=True)
 
-
-
         roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
         em = discord.Embed(color=discord.Color.red(), title='Guild Alliance Popup System', description='')
         positions = []
@@ -343,6 +341,25 @@ class MCOCTools:
         em.add_field(name='Set up Autorole', value='Default Role should be {}\n```/autorole role summoners```\n```/autorole toggle``` '.format(summoners.mention), inline=False)
         await self.bot.say(embed=em)
         await self.bot.delete_message(message2)
+
+    @checks.isbotowner()
+    @commands.group(pass_context=True, hidden=True)
+    async def inspect(self, ctx):
+
+
+    @checks.isbotowner()
+    @inspect.command(pass_context=True, hidden=True, name='roles')
+    async def _inspect_roles(self, ctx, serverid : discord.Server = None):
+        if serverid is not None:
+        server = ctx.message.server
+        roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
+        positions = []
+        for r in roles:
+            positions.append('{} = {}'.format(r.position, r.mention))
+        desc =  '\n'.join(positions)
+        em = discord.Embed(color=discord.Color.red(), title='Collector Inspector: ROLES', description=desc)
+        await self.bot.say(embed=em)
+
 
     @checks.admin_or_permissions(manage_roles=True)
     @commands.command(name='norole',pass_context=True,hidden=True)
