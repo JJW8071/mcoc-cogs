@@ -342,13 +342,14 @@ class MCOCTools:
         await self.bot.say(embed=em)
         await self.bot.delete_message(message2)
 
-    @checks.is_owner()
-    @commands.group(pass_context=True, hidden=True)
-    async def inspect(self, ctx):
+    # @checks.is_owner()
+    # @commands.group(pass_context=True, hidden=True)
+    # async def inspect(self, ctx):
 
 
+
     @checks.is_owner()
-    @inspect.command(pass_context=True, hidden=True, name='roles')
+    @commands.command(pass_context=True, hidden=True, name='inspectroles', aliases=['inspectrole', 'ir',])
     async def _inspect_roles(self, ctx, serverid : discord.Server = None):
         if serverid is None:
             server = ctx.message.server
