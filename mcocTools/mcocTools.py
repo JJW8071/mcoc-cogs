@@ -346,9 +346,7 @@ class MCOCTools:
     # @commands.group(pass_context=True, hidden=True)
     # async def inspect(self, ctx):
 
-
-
-    @checks.is_owner()
+    # @checks.is_owner()
     @commands.command(pass_context=True, hidden=True, name='inspectroles', aliases=['inspectrole', 'ir',])
     async def _inspect_roles(self, ctx):
         server = ctx.message.server
