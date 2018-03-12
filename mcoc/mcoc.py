@@ -1300,9 +1300,11 @@ class MCOC(ChampionFactory):
                 champ_synergies = syn_data['SynExport'][champ.full_name]
                 for lookup, data in champ_synergies.items():
                     trigger_in_tag = False
-                    if champ.star != data['stars'] or lookup in activated:
+                    if champ.star != data['stars']:
                         continue
                     for trigger in data['triggers']:
+                        if lookup in activated:
+                            continue
                         if trigger.startswith('#'):
                             for trig_champ in champs:
                                 if champ == trig_champ:
