@@ -1284,13 +1284,13 @@ class MCOC(ChampionFactory):
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         if champs[0].debug:
-            await self.gshandler.cache_gsheets('synergy')
+            await self.gsheet_handler.cache_gsheets('synergy')
             # await self.retrieve_gsheet('synergy', silent=False)
         syn_data = dataIO.load_json(local_files['synergy'])
         champ_set = {champ.full_name for champ in champs}
         champ_class_set = {champ.klass for champ in champs}
         synergy_package = []
-        activated = set()
+        activated = {}
         # print('len champs: '+str(len(champs)))
         if len(champs) > 1: ## If more than one champ, display synergies triggered
             effectsused = defaultdict(list)
@@ -1311,8 +1311,13 @@ class MCOC(ChampionFactory):
                                     trigger_in_tag = True
                                     break
                         if trigger in champ_set or trigger_in_tag:
-                            activated.add(lookup)
                             syneffect = syn_data['SynergyEffects'][data['synergycode']]
+                            activated[lookup] = {
+                                    'champ': champ,
+                                    'trigger': next(c for c in champs if c.full_name == trigger),
+                                    'rank': data['rank'],
+                                    'emoji': syneffect['emoji']
+                                }
                             if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
                                 continue
                             effect = syneffect['rank{}'.format(data['rank'])]
@@ -1332,6 +1337,15 @@ class MCOC(ChampionFactory):
                             value=txt, inline=False)
                 else:
                     desc.append('{}\n{}\n'.format(syn_effect['synergyname'], txt))
+            sum_field = []
+            sum_txt = '{0[champ].terse_star_str}{0[champ].collectoremoji} ' \
+                    + 'LVL{0[rank]} {0[emoji]} <:collectarrow:422077803937267713> ' \
+                    + '{0[trigger].terse_star_str}{0[trigger].collectoremoji} '
+            for v in activated.values():
+                sum_field.append(sum_txt.format(v))
+            if embed:
+                #embed.add_field(name='Synergy Breakdown', value='\n'.join(sum_field))
+                pass  # TODO: return list of embeds for pagination
             if embed is None:
                 embed='\n'.join(desc)
             return embed
@@ -1344,8 +1358,6 @@ class MCOC(ChampionFactory):
                 syneffect = syn_data['SynergyEffects'][data['synergycode']]
                 triggers = data['triggers']
                 effect = syneffect['rank{}'.format(data['rank'])]
-                #effect = self.syn_effect_data(syneffect, data['rank'])
-                # print(effect)
                 try:
                     txt = syneffect['text'].format(*effect)
                 except:
@@ -1571,21 +1583,13 @@ class MCOC(ChampionFactory):
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
-        if len(spch) < 5:
-            denom = len(spch)
-        else:
-            denom = 5
-        print(denom)
-        for i in range(0,denom):
-            chmp = spch[i]
-            print(str(i)+' '+chmp.full_name)
-            print(chmp.prestige)
-            numerator += int(chmp.prestige)
-        print(numerator)
-        emtitle='Prestige: {}'.format(numerator/denom)
-        em = discord.Embed(color=discord.Color.magenta(), title=emtitle,url=PRESTIGE_SURVEY,
-                description='\n'.join([c.verbose_prestige_str for c in
-                    sorted(pch, key=attrgetter('prestige'), reverse=True)]))
+        denom = min(len(spch), 5)
+        numerator = sum(spch[i].prestige for i in range(denom))
+        em = discord.Embed(color=discord.Color.magenta(),
+                title='Prestige: {}'.format(numerator/denom),
+                url=PRESTIGE_SURVEY,
+                description='\n'.join(c.verbose_prestige_str for c in spch)
+            )
         em.set_footer(icon_url=GSHEET_ICON,text='mutamatt Prestige for Collector')
         await self.bot.say(embed=em)
 
@@ -2119,6 +2123,10 @@ class Champion:
         return self.star_char * self.star
 
     @property
+    def terse_star_str(self):
+        return '{0.star}{0.star_char}'.format(self)
+
+    @property
     def star_char(self):
         if self.sig:
             return '★'
@@ -2478,7 +2486,8 @@ class Champion:
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
         else:
-            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D','_LONG','_LONG_2'):
+            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
+                      '_DESC_E','_LONG','_LONG_2'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
