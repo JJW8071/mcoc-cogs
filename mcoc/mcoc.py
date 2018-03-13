@@ -1135,8 +1135,8 @@ class MCOC(ChampionFactory):
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
             if xref['chanced'] != '':
                 dchance = round(daily4*float(xref['chanced'])*100, 4)
-                em.add_field(name='4{0.star_char} Odds {0.klass} Daily Special'.format(champ), value='{0}%'.format(dchance), inline=True)
                 em.add_field(name='4{0.star_char} Basic + PHC Date'.format(champ), value='{0}'.format(xref['basic4']), inline=True)
+                em.add_field(name='4{0.star_char} {0.klass} Special Odds'.format(champ), value='{0}%'.format(dchance), inline=True)
             if xref['chance4'] != '':
                 chance4 = round(float(xref['chance4'])*100,4)
                 pchance = round(chance4*p4,4)
