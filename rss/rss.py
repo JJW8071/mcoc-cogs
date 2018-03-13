@@ -259,7 +259,7 @@ class RSS(object):
 
             self.feeds.update_time(
                 server, chan_id, name, curr_title)
-        return "\u200b{}".format(message) if message is not None else message 
+        return "\u200C{}".format(message) if message is not None else message 
 
     async def read_feeds(self):
         await self.bot.wait_until_ready()

@@ -292,9 +292,11 @@ def strip_and_numericise(val):
         return numericise(val.strip())
 
 def cell_to_list(cell):
-    return [strip_and_numericise(i) for i in cell.split(',')]
+    return [strip_and_numericise(i) for i in cell.split(',')] if cell is not None else None
 
 def cell_to_dict(cell):
+    if cell is None:
+        return None
     ret  = {}
     for i in cell.split(','):
         k, v = [strip_and_numericise(j) for j in i.split(':')]
@@ -390,7 +392,8 @@ class GSExport():
         if data_type.startswith('nested_list'):
             data_type, dlen = data_type.rsplit('::', maxsplit=1)
             dlen = int(dlen)
-        prep_func = self.cell_handlers[kwargs['prepare_function']]
+        #prep_func = self.cell_handlers[kwargs['prepare_function']]
+        prep_func = self.get_prepare_function(kwargs)
         self.data['_headers'][sheet_name] = header
         col_handlers = self._build_column_handlers(sheet_name, header,
                             kwargs['column_handler'])
@@ -450,7 +453,19 @@ class GSExport():
         return clean_row
 
     def get_prepare_function(self, kwargs):
-        prep_func_str = cell_to_list(kwargs['prepare_function'])
+        prep_func = kwargs['prepare_function']
+        prep_list = cell_to_list(prep_func)
+        if prep_list[0] == prep_func:  # single prep
+            return self.cell_handlers[prep_func]
+
+        #  multiple prep
+        handlers = [self.cell_handlers[i] for i in prep_list]
+        def _curried(x):
+            ret = x
+            for func in handlers:
+                ret = func(ret)
+            return ret
+        return _curried
 
     def get_sheet_values(self, sheet, kwargs):
         if kwargs['range']:
@@ -935,7 +950,7 @@ class MCOC(ChampionFactory):
             name_id = random.choice(list(self.champions.values()))
             champ = await self.get_champion(name_id.mattkraftid)
             if champ not in selected:
-                if champ.status != 'npc':
+                if champ.status == 'released':
                     selected.append(champ)
                     em = discord.Embed(color=champ.class_color, title=champ.full_name)
                     em.set_thumbnail(url=champ.get_avatar())
@@ -1276,9 +1291,11 @@ class MCOC(ChampionFactory):
                 champ_synergies = syn_data['SynExport'][champ.full_name]
                 for lookup, data in champ_synergies.items():
                     trigger_in_tag = False
-                    if champ.star != data['stars'] or lookup in activated:
+                    if champ.star != data['stars']:
                         continue
                     for trigger in data['triggers']:
+                        if lookup in activated:
+                            continue
                         if trigger.startswith('#'):
                             for trig_champ in champs:
                                 if champ == trig_champ:
@@ -2211,7 +2228,7 @@ class Champion:
             if not quiet:
                 await self.missing_sig_ad()
         if self.sig == 0:
-            return ktxt['title']['v'], ktxt['simple']['v'], None
+            return self._get_sig_simple(ktxt)
 
         raw_str = '{:.2f}'
         raw_per_str = '{:.2%}'
@@ -2229,6 +2246,11 @@ class Champion:
             effect = sd['effects'][i]
             ckey = sd['locations'][i]
             y_arr = sd['sig_coeff'][i]
+            if y_arr is None:
+                await self.bot.say("**Data Processing Error**")
+                if not quiet:
+                    await self.missing_sig_ad()
+                return self._get_sig_simple(ktxt)
 
             if effect == 'rating':
                 sig_calcs[ckey] = raw_str.format(m * self.chlgr_rating + b)
@@ -2296,6 +2318,9 @@ class Champion:
             return log(self.sig), 1
         else:
             raise AttributeError("Fit_type '{}' not valid".format(fit_type))
+
+    def _get_sig_simple(self, ktxt):
+        return ktxt['title']['v'], ktxt['simple']['v'], None
 
     def get_sig_data_from_csv(self):
         struct = self.init_sig_struct()
