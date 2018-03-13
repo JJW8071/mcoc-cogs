@@ -1134,7 +1134,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='PHC Drop Rates', value='2{0.star_char} {1}%\n3{0.star_char} {2}%\n4{0.star_char} {3}%\n'.format(champ, round(p2*100,0), round(p3*100,0), round(p4*100),0))
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
             if xref['chanced'] != '':
-                dchance = round(daily4*float(xref['chanced']*100), 4)
+                dchance = round(daily4*float(xref['chanced'])*100, 4)
                 em.add_field(name='4{0.star_char} Odds {0.klass} Daily Special'.format(champ), value='{0}%'.format(dchance), inline=True)
                 em.add_field(name='4{0.star_char} Basic + PHC Date'.format(champ), value='{0}'.format(xref['basic4']), inline=True)
             if xref['chance4'] != '':
