@@ -1143,14 +1143,14 @@ class MCOC(ChampionFactory):
                 pchance = round(chance4*p4,4)
                 em.add_field(name='PHC 4{0.star_char} Odds'.format(champ), value='{0}%'.format(pchance), inline=True)
                 em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{0}%'.format(chance4),inline=True)
-            if float(xref['chance5']) >0 :
+            if float(xref['chance5b']) >0 :
                 chance5=round(float(xref['chance5b'])*100,4)
                 em.add_field(name='5{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance5),inline=True)
             if float(xref['chance5f']) >0 :
                 chance5=round(float(xref['chance5f'])*100,4)
                 em.add_field(name='5{0.star_char} {1} Odds'.format(champ, xref['5f']), value='{0}%'.format(chance5),inline=True)
-            if float(xref['chance6']) >0 :
-                chance6=round(float(xref['chance6'])*100,4)
+            if float(xref['chance6b']) >0 :
+                chance6=round(float(xref['chance6b'])*100,4)
                 em.add_field(name='6{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance6),inline=True)
             if float(xref['chance6f']) >0 :
                 chance6=round(float(xref['chance6f'])*100,4)
