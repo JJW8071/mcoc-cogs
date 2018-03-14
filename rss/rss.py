@@ -212,7 +212,7 @@ class RSS(object):
         except:                                                 # <<<
             rssrelay=None                                      # <<<
         if rssrelay is not None:           # <<<
-            rssrelay.relay_send(msg)   # <<<
+            rssrelay.relay_send(message)   # <<<
 
         await self.bot.say(message)
 
