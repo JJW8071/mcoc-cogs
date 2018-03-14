@@ -1133,24 +1133,29 @@ class MCOC(ChampionFactory):
             em.add_field(name='Daily Special Drop Rates', value='2{0.star_char} {1}%\n3{0.star_char} {2}%\n4{0.star_char} {3}%\n'.format(champ, round(daily2*100,0), round(daily3*100,0), round(daily4*100),0))
             em.add_field(name='PHC Drop Rates', value='2{0.star_char} {1}%\n3{0.star_char} {2}%\n4{0.star_char} {3}%\n'.format(champ, round(p2*100,0), round(p3*100,0), round(p4*100),0))
             em.add_field(name='Release Date', value='{0.released}'.format(champ))
-            if xref['chanced'] != '':
-                dchance = round(daily4*float(xref['chanced'])*100, 4)
+            if xref['basic4'] != '':
                 em.add_field(name='4{0.star_char} Basic + PHC Date'.format(champ), value='{0}'.format(xref['basic4']), inline=True)
+            if float(xref['chanced']) > 0:
+                dchance = round(daily4*float(xref['chanced'])*100, 4)
                 em.add_field(name='4{0.star_char} {0.klass} Special Odds'.format(champ), value='{0}%'.format(dchance), inline=True)
-            if xref['chance4'] != '':
+            if float(xref['chance4']) > 0:
                 chance4 = round(float(xref['chance4'])*100,4)
                 pchance = round(chance4*p4,4)
                 em.add_field(name='PHC 4{0.star_char} Odds'.format(champ), value='{0}%'.format(pchance), inline=True)
                 em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{0}%'.format(chance4),inline=True)
-            if xref['5b'] != '':
+            if float(xref['chance5']) >0 :
                 chance5=round(float(xref['chance5b'])*100,4)
                 em.add_field(name='5{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance5),inline=True)
-            if xref['5f'] != '':
+            if float(xref['chance5f']) >0 :
                 chance5=round(float(xref['chance5f'])*100,4)
                 em.add_field(name='5{0.star_char} {1} Odds'.format(champ, xref['5f']), value='{0}%'.format(chance5),inline=True)
             if float(xref['chance6']) >0 :
                 chance6=round(float(xref['chance6'])*100,4)
                 em.add_field(name='6{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance6),inline=True)
+            if float(xref['chance6f']) >0 :
+                chance6=round(float(xref['chance6f'])*100,4)
+                em.add_field(name='6{0.star_char} Featured Odds'.format(champ), value='{0}%'.format(chance6),inline=True)
+
             em.add_field(name='Shortcode', value=champ.short, inline=True)
             em.set_thumbnail(url=champ.get_featured())
             em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
