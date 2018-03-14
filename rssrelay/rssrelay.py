@@ -42,7 +42,7 @@ class RSSRelay:
                  'successes': []}
         await self.relay_send(ctx, msg)
 
-    async def rssrelay_send(self, ctx, msg):
+    async def relay_send(self, ctx, msg):
         if not isinstance(discord.Embed, msg):
             em = self.qform(msg)
 
