@@ -206,8 +206,13 @@ class RSS(object):
         items = copy.deepcopy(feeds[server.id][channel.id][feed_name])
         items['last'] = ''
 
-        message = await self.get_current_feed(server.id, channel.id,
-                                              feed_name, items)
+        message = await self.get_current_feed(server.id, channel.id,feed_name, items)
+        try:                                                    # <<<
+            rssrelay=self.bot.get_cog('RSSRelay')         # <<<
+        except:                                                 # <<<
+            rssrelay=None                                      # <<<
+        if rssrelay is not None:           # <<<
+            rssrelay.relay_send(msg)   # <<<
 
         await self.bot.say(message)
 
