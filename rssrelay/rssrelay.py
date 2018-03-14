@@ -43,9 +43,6 @@ class RSSRelay:
         await self.relay_send(ctx, msg)
 
     async def relay_send(self, ctx, msg):
-        if not isinstance(msg, discord.Embed):
-            em = self.qform(msg)
-
         for server_id in server_ids:
             if server_id in self.settings:
                 server = self.bot.get_server(server_id)
@@ -459,51 +456,6 @@ class RSSRelay:
                                    "server is <#{}>".format(output))
         else:
             await self.bot.say("This channel is not an announcement channel")
-
-    def role_mention_cleanup(self, message):
-
-        if message.server is None:
-            return message.content
-
-        transformations = {
-            re.escape('<@&{0.id}>'.format(role)): '@' + role.name
-            for role in message.role_mentions
-        }
-
-        def repl(obj):
-            return transformations.get(re.escape(obj.group(0)), '')
-
-        pattern = re.compile('|'.join(transformations.keys()))
-        result = pattern.sub(repl, message.content)
-
-        return result
-
-
-    def qform(self, message):
-        channel = message.channel
-        server = channel.server
-        content = self.role_mention_cleanup(message)
-        author = message.author
-        sname = server.name
-        cname = channel.name
-        avatar = author.avatar_url if author.avatar \
-            else author.default_avatar_url
-        footer = 'Said in {} #{}'.format(sname, cname)
-        em = discord.Embed(description=content, color=author.color,
-                           timestamp=message.timestamp)
-        em.set_author(name='{}'.format(author.name), icon_url=avatar)
-        em.set_footer(text=footer, icon_url=server.icon_url)
-        if message.attachments:
-            a = message.attachments[0]
-            fname = a['filename']
-            url = a['url']
-            if fname.split('.')[-1] in ['png', 'jpg', 'gif', 'jpeg']:
-                em.set_image(url=url)
-            else:
-                em.add_field(name='Message has an attachment',
-                             value='[{}]({})'.format(fname, url),
-                             inline=True)
-        return em
 
 def setup(bot):
     pathlib.Path(path).mkdir(parents=True, exist_ok=True)

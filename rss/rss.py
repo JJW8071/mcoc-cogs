@@ -259,14 +259,14 @@ class RSS(object):
 
             self.feeds.update_time(
                 server, chan_id, name, curr_title)
-        return "\u200b{}".format(message) if message is not None else message 
+        return "\u200b{}".format(message) if message is not None else message
 
     async def read_feeds(self):
         await self.bot.wait_until_ready()
-        # try:                                                    # <<<
-        #     broadcast=self.bot.get_cog('MultiWayRelay')         # <<<
-        # except:                                                 # <<<
-        #     broadcast=None                                      # <<<
+        try:                                                    # <<<
+            rssrelay=self.bot.get_cog('RSSRelay')         # <<<
+        except:                                                 # <<<
+            rssrelay=None                                      # <<<
         while self == self.bot.get_cog('RSS'):
             feeds = self.feeds.get_copy()
             for server in feeds:
@@ -281,8 +281,8 @@ class RSS(object):
                                                           name, items)
                         if msg is not None:
                             await self.bot.send_message(channel, msg) #Sinbad customization
-                            # if broadcast is not None:           # <<<
-                                # broadcast.send_broadcast(msg)   # <<<
+                            if rssrelay is not None:           # <<<
+                                rssrelay.relay_send(msg)   # <<<
 
             await asyncio.sleep(300)
 
