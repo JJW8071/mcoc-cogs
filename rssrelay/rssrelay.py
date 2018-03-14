@@ -54,7 +54,7 @@ class RSSRelay:
                     cases['not_found'].append(server)
                 elif channel.permissions_for(server.me).send_messages:
                     try:
-                        await self.bot.send_message(channel, embed=em)
+                        await self.bot.send_message(channel, msg)
                     except Exception:
                         cases['exceptions'].append(channel)
                     else:
