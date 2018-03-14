@@ -34,7 +34,7 @@ class RSSRelay:
     async def rssrelay(self, ctx, *, msg):
         """Announces a message to all channels configured."""
 
-        await self.relay_send(ctx, msg)
+        await self.relay_send(msg)
 
     async def relay_send(self, msg):
         server_ids = map(lambda s: s.id, self.bot.servers)
@@ -44,7 +44,7 @@ class RSSRelay:
                  'not_found': [],
                  'not_server': [],
                  'successes': []}
-                 
+
         for server_id in server_ids:
             if server_id in self.settings:
                 server = self.bot.get_server(server_id)
