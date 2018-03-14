@@ -43,7 +43,7 @@ class RSSRelay:
         await self.relay_send(ctx, msg)
 
     async def relay_send(self, ctx, msg):
-        if not isinstance(discord.Embed, msg):
+        if not isinstance(msg, discord.Embed):
             em = self.qform(msg)
 
         for server_id in server_ids:
