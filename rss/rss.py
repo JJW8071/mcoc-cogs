@@ -212,7 +212,7 @@ class RSS(object):
         except:                                                 # <<<
             rssrelay=None                                      # <<<
         if rssrelay is not None:           # <<<
-            rssrelay.relay_send(message)   # <<<
+            await rssrelay.relay_send(message)   # <<<
 
         await self.bot.say(message)
 
@@ -287,7 +287,7 @@ class RSS(object):
                         if msg is not None:
                             await self.bot.send_message(channel, msg) #Sinbad customization
                             if rssrelay is not None:           # <<<
-                                rssrelay.relay_send(msg)   # <<<
+                                await rssrelay.relay_send(msg)   # <<<
 
             await asyncio.sleep(300)
 
