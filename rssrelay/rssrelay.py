@@ -40,7 +40,7 @@ class RSSRelay:
                  'not_found': [],
                  'not_server': [],
                  'successes': []}
-        await self.relay_send(ctx, *, msg)
+        await self.relay_send(ctx, msg)
 
     async def rssrelay_send(self, ctx, *, msg)
         if not isinstance(discord.Embed, msg):
