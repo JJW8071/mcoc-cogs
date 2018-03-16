@@ -1096,30 +1096,6 @@ class MCOC(ChampionFactory):
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
-        # for champ in champs:
-        #     xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-        #     em = discord.Embed(color=champ.class_color,
-        #             title='Release Dates & Est. Pull Chance',url=SPOTLIGHT_DATASET)
-        #     em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        #     em.add_field(name='Feature Crystal', value=xref['released'],inline=False)
-        #     em.add_field(name='4{0.star_char} Basic & \nPremium Hero Crystal'.format(champ), value=xref['4basic'],inline=False)
-        #     # em.add_field(name='5{0.star_char} Subfeature'.format(champ), value=xref['5subfeature'],inline=False)
-        #     em.add_field(name='5{0.star_char} Basic'.format(champ), value=xref['5basic'],inline=False)
-        #     state = xref['f/s/b']
-        #     if state == 'b':
-        #         em.add_field(name='Basic 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
-        #         em.add_field(name='Basic 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
-        #     elif state == 's':
-        #         em.add_field(name='Basic 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
-        #         em.add_field(name='Featured 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
-        #     elif state == 'f':
-        #         em.add_field(name='Featured 4{0.star_char} Chance'.format(champ), value=xref['4chance'],inline=False)
-        #         em.add_field(name='Featured 5{0.star_char} Chance'.format(champ), value=xref['5chance'],inline=False)
-        #     em.add_field(name='Shortcode', value=champ.short)
-        #     em.set_thumbnail(url=champ.get_featured())
-        #     em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
-        #     await self.bot.say(embed=em)
-
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
