@@ -1016,7 +1016,7 @@ class MCOC(ChampionFactory):
         targets = []
         # names = {4: 'Duel', 5: 'Sparring'}
         DUEL_SPREADSHEET='https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/view#gid=61189525'
-        em = discord.Embed(color=champ.class_color, title='Duel & Spart Targets',url=DUEL_SPREADSHEET)
+        em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets',url=DUEL_SPREADSHEET)
         em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='2OO2RC51\' Duel Targets',
@@ -1235,7 +1235,7 @@ class MCOC(ChampionFactory):
                 print('PagesMenu failure')
                 await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='update', hidden=True)
+    @champ.command(pass_context=True, name='update', aliases=('add', 'dupe'), hidden=True)
     async def champ_update(self, ctx, *, args):
         '''Not a real command'''
         msg = '`{0}champ update` does not exist.\n' \
@@ -1243,123 +1243,132 @@ class MCOC(ChampionFactory):
         prefixes = tuple(self.bot.settings.get_prefixes(ctx.message.server))
         await self.bot.say(msg.format(prefixes[0]))
 
+    def set_collectordev_footer(self, pack):
+        try:
+            for embed in pack:
+                embed.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
+        except TypeError:
+            pack.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
+
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs: ChampConverterMult):
         '''Champion(s) Synergies'''
-        if len(champs)==1:
-            champ = champs[0]
-            em = discord.Embed(color=champ.class_color, title='')
-            em.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
-            em.set_thumbnail(url=champ.get_featured())
-        else:
-            em = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
-        em = await self.get_synergies(champs, embed=em)
-        em.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
-        await self.bot.say(embed=em)
-
-    @staticmethod
-    def syn_effect_data(syn_effect, rank):
-        rank = syn_effect['rank{}'.format(rank)]
-        try:
-            effect = [int(v) for v in rank.split(', ')]
-        except AttributeError:
-            effect = [rank]
-        return effect
+        pack = await self.get_synergies(champs)
+        self.set_collectordev_footer(pack)
+        menu = PagesMenu(self.bot, timeout=120)
+        await menu.menu_start(pack)
+        #await self.bot.say(embed=em)
 
     async def get_synergies(self, champs, embed=None):
         '''If Debug is sent, data will refresh'''
         if champs[0].debug:
             await self.gsheet_handler.cache_gsheets('synergy')
-            # await self.retrieve_gsheet('synergy', silent=False)
         syn_data = dataIO.load_json(local_files['synergy'])
-        champ_set = {champ.full_name for champ in champs}
-        champ_class_set = {champ.klass for champ in champs}
-        synergy_package = []
-        activated = {}
-        # print('len champs: '+str(len(champs)))
-        if len(champs) > 1: ## If more than one champ, display synergies triggered
-            effectsused = defaultdict(list)
-            for champ in champs:
-                champ_synergies = syn_data['SynExport'][champ.full_name]
-                for lookup, data in champ_synergies.items():
-                    trigger_in_tag = False
-                    if champ.star != data['stars']:
-                        continue
-                    for trigger in data['triggers']:
-                        if lookup in activated:
-                            continue
-                        if trigger.startswith('#'):
-                            for trig_champ in champs:
-                                if champ == trig_champ:
-                                    continue
-                                if trigger in trig_champ.all_tags:
-                                    trigger_in_tag = True
-                                    break
-                        if trigger in champ_set or trigger_in_tag:
-                            syneffect = syn_data['SynergyEffects'][data['synergycode']]
-                            activated[lookup] = {
-                                    'champ': champ,
-                                    'trigger': next(c for c in champs if c.full_name == trigger),
-                                    'rank': data['rank'],
-                                    'emoji': syneffect['emoji']
-                                }
-                            if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
-                                continue
-                            effect = syneffect['rank{}'.format(data['rank'])]
-                            effectsused[data['synergycode']].append(effect)
+        if len(champs) > 1:
+            return await self.get_multiple_synergies(champs, syn_data, embed)
+        elif len(champs) == 1:
+            return await self.get_single_synergies(champs[0], syn_data, embed)
 
-            desc= []
+    async def get_single_synergies(self, champ, syn_data, embed=None):
+        if embed is None:
+            embed = discord.Embed(color=champ.class_color, title='')
+            embed.set_author(name=champ.star_name_str, icon_url=champ.get_avatar())
+            embed.set_thumbnail(url=champ.get_featured())
+            return_single = False
+        else:
+            return_single = True
+        champ_synergies = syn_data['SynExport'][champ.full_name]
+        for lookup, data in champ_synergies.items():
+            if champ.star != data['stars']:
+                continue
+            syneffect = syn_data['SynergyEffects'][data['synergycode']]
+            triggers = data['triggers']
+            effect = syneffect['rank{}'.format(data['rank'])]
             try:
-                embed.description = ''.join(c.collectoremoji for c in champs)
+                txt = syneffect['text'].format(*effect)
             except:
-                print('Collector Emoji not found')
-            for k, v in effectsused.items():
-                syn_effect = syn_data['SynergyEffects'][k]
-                array_sum = [sum(row) for row in iter_rows(v, True)]
-                txt = syn_effect['text'].format(*array_sum)
-                if embed is not None:
-                    embed.add_field(name=syn_effect['synergyname'],
-                            value=txt, inline=False)
-                else:
-                    desc.append('{}\n{}\n'.format(syn_effect['synergyname'], txt))
-            sum_field = []
-            sum_txt = '{0[champ].terse_star_str}{0[champ].collectoremoji} ' \
-                    + 'LVL{0[rank]} {0[emoji]} <:collectarrow:422077803937267713> ' \
-                    + '{0[trigger].terse_star_str}{0[trigger].collectoremoji} '
-            for v in activated.values():
-                sum_field.append(sum_txt.format(v))
-            if embed:
-                #embed.add_field(name='Synergy Breakdown', value='\n'.join(sum_field))
-                pass  # TODO: return list of embeds for pagination
-            if embed is None:
-                embed='\n'.join(desc)
+                print(syneffect['text'], effect)
+                raise
+            embed.add_field(name='{}'.format(syneffect['synergyname']),
+                    value='+ **{}**\n{}\n'.format(', '.join(triggers), txt),
+                    inline=False)
+        if return_single:
             return embed
-        elif len(champs) == 1: ## If only 1 champ, display synergies available.
-            champ = champs[0]
+        else:
+            return [embed]
+
+    async def get_multiple_synergies(self, champs, syn_data, embed=None):
+        if embed is None:
+            embed = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+            return_single = False
+        else:
+            return_single = True
+        effectsused = defaultdict(list)
+        champ_set = {champ.full_name for champ in champs}
+        activated = {}
+        for champ in champs:
             champ_synergies = syn_data['SynExport'][champ.full_name]
             for lookup, data in champ_synergies.items():
+                trigger_in_tag = False
                 if champ.star != data['stars']:
                     continue
-                syneffect = syn_data['SynergyEffects'][data['synergycode']]
-                triggers = data['triggers']
-                effect = syneffect['rank{}'.format(data['rank'])]
-                try:
-                    txt = syneffect['text'].format(*effect)
-                except:
-                    print(syneffect['text'], effect)
-                    raise
-                if embed is not None:
-                    embed.add_field(name='{}'.format(syneffect['synergyname']),
-                            value='+ **{}**\n{}\n'.format(', '.join(triggers), txt),
-                            inline=False)
-                synergy_package.append('{}\n{}: {}\n'.format(', '.join(triggers),
-                        syneffect['synergyname'], txt))
+                for trigger in data['triggers']:
+                    if lookup in activated:
+                        continue
+                    if trigger.startswith('#'):
+                        for trig_champ in champs:
+                            if champ == trig_champ:
+                                continue
+                            if trigger in trig_champ.all_tags:
+                                trigger_in_tag = True
+                                break
+                    if trigger in champ_set or trigger_in_tag:
+                        syneffect = syn_data['SynergyEffects'][data['synergycode']]
+                        activated[lookup] = {
+                                'champ': champ,
+                                'trigger': next(c for c in champs if c.full_name == trigger),
+                                'rank': data['rank'],
+                                'emoji': syneffect['emoji'],
+                                'synergyname': syneffect['synergyname']
+                            }
+                        if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
+                            continue
+                        effect = syneffect['rank{}'.format(data['rank'])]
+                        effectsused[data['synergycode']].append(effect)
 
+        desc= []
+        try:
+            embed.description = ''.join(c.collectoremoji for c in champs)
+        except:
+            print('Collector Emoji not found')
+        for k, v in effectsused.items():
+            syn_effect = syn_data['SynergyEffects'][k]
+            array_sum = [sum(row) for row in iter_rows(v, True)]
+            txt = syn_effect['text'].format(*array_sum)
             if embed is not None:
-                return embed
+                embed.add_field(name=syn_effect['synergyname'],
+                        value=txt, inline=False)
             else:
-                desc = '\n'.join(synergy_package)
-                return desc
+                desc.append('{}\n{}\n'.format(syn_effect['synergyname'], txt))
+        arrows = '\u2192 \U0001f816 \u21d2 \u21a6 \U0001f826 \U0001f82a'.split()
+        sum_field = []
+        sum_txt = '{0[champ].terse_star_str}{0[champ].collectoremoji} ' \
+                + '{1} ' \
+                + '{0[trigger].terse_star_str}{0[trigger].collectoremoji} ' \
+                + '\u2503 {0[synergyname]} Level {0[rank]}'
+                #+ '<:collectarrow:422077803937267713> \u21e8 \u2192 \U0001f86a \U0001f87a' \
+                #+ 'LVL{0[rank]} {0[emoji]}'
+        for v in activated.values():
+            arrow = arrows[v['champ'].debug]
+            sum_field.append(sum_txt.format(v, arrow))
+        if return_single:
+            return embed
+        else:
+            pages = [embed]
+            embed = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+            embed.add_field(name='Synergy Breakdown', value='\n'.join(sum_field))
+            pages.append(embed)
+            return pages
 
     async def gs_to_json(self, head_url=None, body_url=None, foldername=None, filename=None, groupby_value=None):
         if head_url is not None:
@@ -2517,7 +2526,7 @@ class PagesMenu:
         self.delete_onX = delete_onX
         self.embedded = True
 
-    async def menu_start(self, pages:list):
+    async def menu_start(self, pages):
         page_list = []
         if isinstance(pages, list):
             page_list = pages
@@ -2525,6 +2534,9 @@ class PagesMenu:
             for page in pages:
                 page_list.append(page)
         page_length = len(page_list)
+        if page_length == 1:
+            await self.bot.say(embed=page_list[0])
+            return
         self.embedded = isinstance(page_list[0], discord.Embed)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
             self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
