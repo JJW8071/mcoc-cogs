@@ -1011,22 +1011,37 @@ class MCOC(ChampionFactory):
     @champ.command(name='duel')
     async def champ_duel(self, champ : ChampConverter):
         '''Duel & Spar Targets'''
-        dataset=data_files['duelist']['local']
-        # targets = defaultdict(list)
-        targets = []
-        # names = {4: 'Duel', 5: 'Sparring'}
+        #dataset=data_files['duelist']['local']
+        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        sh = gc.open_by_key('1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q')
+        ws = sh.worksheet('title', 'DataExport')
+        data = ws.get_all_records()
+        if not len(data):
+            await self.bot.say("Data did not get retrieved")
+            raise IndexError
+
         DUEL_SPREADSHEET='https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/view#gid=61189525'
         em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets',url=DUEL_SPREADSHEET)
         em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='2OO2RC51\' Duel Targets',
                 icon_url=GSHEET_ICON)
-        target_found = False
-        for star in range(3,7):
-            for rank in range(1,6):
-                key = '{0}-{1}-{2}'.format(star, champ.full_name, rank)
-                for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
-                    targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
+                
+        targets = []
+        for duel in data:    # single iteration through the data
+            uniq = duel['unique']
+            star, duel_champ, rank = int(uniq[:1]), uniq[2:-2], int(uniq[-1:])
+            if duel_champ == champ.full_name:
+                targets.append('{}{} {} {} : {}'.format(star, champ.star_char,
+                            duel['maxlevel'],
+                            champ.full_name,
+                            duel['username']))
+        targets.sort()
+        #for star in range(3,7):
+            #for rank in range(1,6):
+                #key = '{0}-{1}-{2}'.format(star, champ.full_name, rank)
+                #for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
+                    #targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
         if len(targets) > 0:
             em.description='\n'.join(targets)
         else:
