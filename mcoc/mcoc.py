@@ -1026,7 +1026,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_featured())
         em.set_footer(text='2OO2RC51\' Duel Targets',
                 icon_url=GSHEET_ICON)
-                
+
         targets = []
         for duel in data:    # single iteration through the data
             uniq = duel['unique']
@@ -1314,10 +1314,13 @@ class MCOC(ChampionFactory):
 
     async def get_multiple_synergies(self, champs, syn_data, embed=None):
         if embed is None:
-            embed = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
+            embed = discord.Embed(color=discord.Color.red(),
+                            title='Champion Synergies')
             return_single = False
         else:
             return_single = True
+        if len(champs) > 5:
+            raise MODOKError('No Synergy team can be greater than 5 champs')
         effectsused = defaultdict(list)
         champ_set = {champ.full_name for champ in champs}
         activated = {}
@@ -1365,23 +1368,28 @@ class MCOC(ChampionFactory):
                         value=txt, inline=False)
             else:
                 desc.append('{}\n{}\n'.format(syn_effect['synergyname'], txt))
-        arrows = '\u2192 \U0001f816 \u21d2 \u21a6 \U0001f826 \U0001f82a'.split()
-        sum_field = []
+        arrows = '\u2192 \u21d2 \u21a6 <:collectarrow:422077803937267713>'.split()
         sum_txt = '{0[champ].terse_star_str}{0[champ].collectoremoji} ' \
                 + '{1} ' \
                 + '{0[trigger].terse_star_str}{0[trigger].collectoremoji} ' \
-                + '\u2503 {0[synergyname]} Level {0[rank]}'
+                + '\u2503 Level {0[rank]}'
+                #+ '\u2503 {0[synergyname]} Level {0[rank]}'
                 #+ '<:collectarrow:422077803937267713> \u21e8 \u2192 \U0001f86a \U0001f87a' \
                 #+ 'LVL{0[rank]} {0[emoji]}'
+        sum_field = defaultdict(list)
         for v in activated.values():
-            arrow = arrows[v['champ'].debug]
-            sum_field.append(sum_txt.format(v, arrow))
+            arrow = arrows[min(v['champ'].debug, len(arrows)-1)]
+            sum_field[v['synergyname']].append(sum_txt.format(v, arrow))
         if return_single:
             return embed
         else:
             pages = [embed]
-            embed = discord.Embed(color=discord.Color.red(), title='Champion Synergies')
-            embed.add_field(name='Synergy Breakdown', value='\n'.join(sum_field))
+            embed = discord.Embed(color=discord.Color.red(),
+                    title='Champion Synergies',
+                    description='**Synergy Breakdown**')
+            for syn, lines in sum_field.items():
+                embed.add_field(name=syn, value='\n'.join(lines), inline=False)
+            #embed.add_field(name='Synergy Breakdown', value='\n'.join(sum_field))
             pages.append(embed)
             return pages
 
@@ -2748,7 +2756,7 @@ def override_error_handler(bot):
             await bot.send_message(ctx.message.channel, error)
             await raw_modok_says(bot, ctx.message.channel)
         elif isinstance(error, QuietUserError):
-            print("I'm here")
+            #await bot.send_message(ctx.message.channel, error)
             bot.logger.info('<{}> {}'.format(type(error).__name__, error))
         else:
             await bot._command_error_orig(error, ctx)
