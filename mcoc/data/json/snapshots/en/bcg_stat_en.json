@@ -14,6 +14,11 @@
     },
     "strings": [
         {
+          "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
+          "v": "{0}% chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect. Additionally each Cunning and Madness charge increases the damage inflicted by the Pumpkin Bomb by 10%.",
+          "vn": "14.1"
+        },
+        {
             "k": "ID_CHARACTER_BIOS_SENTINEL",
             "v": "Although the Sentinels were created by a Mutant elite, who had the goal of controlling the Champions of The Contest, 100 years in the future, they rebelled; killed their creator and subsequently engineered a way into the present day. The Mark-ISO evolved from these rogue Sentinels, adapting to the ISO-8 rich environment of the current Contest. Powered by an ISO fusion engine, the Mark-ISO Sentinel can quell any uprising within The Contest with extreme prejudice.",
             "vn": "17.1"
