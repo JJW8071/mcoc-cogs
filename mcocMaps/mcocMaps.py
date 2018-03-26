@@ -33,7 +33,7 @@ class MCOCMaps:
         '6.2':{'required':'Paths A & B\n- Poison Immune\nPath G\n- Power control\nPaths H & I\n- Bleed Immune',
             'energy': 'Paths A, B, E, H, & I move first\nPaths D, F, G move next\nPath C moves last',
             'tips':'Paths A & B\n- Poison Immune\nPath C\n- High Block Proficiency for Immunity enemies\nPath E\n-High Block Proficiency for Stun Immune tile 61\nPath F\n- Regen for tile tiles 49, 50, 51\nPath G\n- Power control for Power Gains and All or Nothing tiles.\nPaths H & I\n-Bleed Immune\nPaths A, B, C, D, & E\n- Daredevil for Enhanced range special tiles 73, 63.'},
-        '6.3'::{'required':'Path A\n- Poison Immune\nPaths B & C\n- Bleed Immune\nPath I\n-Power control\nPath J\n- Regeneration',
+        '6.3':{'required':'Path A\n- Poison Immune\nPaths B & C\n- Bleed Immune\nPath I\n-Power control\nPath J\n- Regeneration',
             'energy':'Paths D & E move first\nPaths C & F move second\nPaths A, B, G & I move third\nPaths H & J move last',
             'tips':'Path A\n- Poison Immune\nPaths B & C\n- Regneration for Degeneration & Starburst\nPath I\n- Power Control for Power gains\nPath J\n- Regeneration for Starburst\nPaths A, B, C\n- Power control for All or Nothing tile 118\nPaths F & J\n- Regeneration for tiles 79, 83'},
     }
