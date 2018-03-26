@@ -1,14 +1,14 @@
 {
     "meta": {
-        "format": "sparx",
-        "hash": "55d2c8cf5fc36ca5daa388a8e92b1711ebb76769",
         "language": "en",
-        "string_count": 250,
+        "hash": "577a1ddcea8178815caa5c1aae6b65e1ab7f4e09",
+        "format": "sparx",
+        "ts": 1520900974,
         "tagged": [
             "cutscenes",
             "client"
         ],
-        "ts": 1517421390
+        "string_count": 264
     },
     "strings": [
         {
@@ -585,82 +585,82 @@
         {
             "k": "ID_UI_CUTSCENE_BP",
             "v": "RISE OF THE BLACK PANTHER",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_01",
             "v": "Spider-Man completed his mission. The Chaos Stone is ours.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_02",
             "v": "I knew Peter could pull it off... but it was a bit too close for comfort, Strange.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_03",
             "v": "At least our team is tied with Thanos, with two stones each.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_04",
             "v": "We have two, yes. But Spider-Man got close to the Gauntlet. He said Thanos has secured a third stone, Turquoise in color.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_05",
             "v": "Son of a-",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_06",
             "v": "We’re playing a losing game, Tony. It’s in Thanos’ nature to complete the gauntlet. Even I can’t hide the stones from him forever.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_07",
             "v": "The Black Panther’s words… “We can’t out-swim a shark in the water.”",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_08",
             "v": "T’Challa went on a rogue mission to prevent the impeding war. I tried to contact him after he went silent about a month ago... But he’s nowhere.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_09",
             "v": "You mean he’s nowhere to be found.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_10",
             "v": "I mean he’s nowhere. After Guillotine got kidnapped, I placed tracking spells on each of the Illuminati. No matter where you are, dead or alive, I should be able to find you… ",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_11",
             "v": "….At least in this plane of existence.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_12",
             "v": "The Black Panther is locked in a battle too large for human comprehension. To find him, one needs to look beyond the traditional concepts of “place” and “time”.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_13",
             "v": "You’re going abstract again, Strange. Where’s the Black Panther?!",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_14",
             "v": "He’s all around us.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_BP_15",
             "v": "I think I’m gonna need a new armor...",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_CUTSCENE_CIVILWAR",
@@ -1147,6 +1147,76 @@
             "k": "ID_UI_CUTSCENE_YET_PG_24_01",
             "v": "…And she will.",
             "vn": "16.1"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_01",
+            "v": "Forgiveness Master... we have failed you.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_02",
+            "v": "The hated Champions of Earth... they have bested our army at every turn. They have stolen the Infinity Stones!",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_03",
+            "v": "NOT ALL OF THEM.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_04",
+            "v": "Master?",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_05",
+            "v": "YOU HAVE DONE WELL, MY CHILDREN... EVEN IF UNAWARE OF YOUR TRUE MISSION.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_06",
+            "v": "You have led the heroes through a ruse, deep into the mirror universe inside the Death Stone: an exact copy of our own reality, but dead and powerless…",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_07",
+            "v": "…as they will soon learn.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_08",
+            "v": "It’s time.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_09",
+            "v": "Meanwhile, in the “real” world, my Nameless marched unopposed…",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_10",
+            "v": "…gathering the true Infinity Stones… ",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_11",
+            "v": "…for their true master.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_12",
+            "v": "It’s as you said, Goddess of Death. Used in the right way, a single stone can be as dangerous as all of them combined.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_13",
+            "v": "Come with me. We have a multiverse to reshape… together.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYCHAOS_14",
+            "v": "TO BE CONCLUDED IN INFINITY NIGHTMARE",
+            "vn": "17.2"
         }
     ]
 }

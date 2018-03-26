@@ -1,16 +1,16 @@
 {
     "meta": {
-        "format": "sparx",
-        "hash": "b78469ffec5b412fb856b83e6872fe243debadfb",
         "language": "en",
+        "hash": "3b8fdf396406d38f254d05c407b5d119a01545aa",
+        "format": "sparx",
+        "ts": 1520555417,
+        "versionLock": "17.2",
         "post_processed": true,
-        "string_count": 800,
         "tagged": [
             "bcg",
             "client"
         ],
-        "ts": 1518652765,
-        "versionLock": "17.1"
+        "string_count": 807
     },
     "strings": [
         {
@@ -107,7 +107,7 @@
         },
         {
             "k": "ID_UI_BLUEPRINTS_NO_BLUEPRINTS",
-            "v": "You have no upgrade Items.Get more from Quests, Crystals,or Selling Champions!"
+            "v": "You have no upgrade Items. Get more from Quests, Crystals, or Selling Champions!"
         },
         {
             "k": "ID_UI_BLUEPRINTS_NO_BLUEPRINTS_STASH",
@@ -887,7 +887,7 @@
         {
             "k": "ID_UI_HEROACTION_EXCLUSIVE",
             "v": "[FF0000FF]LOCKED[-]",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_UI_HEROACTION_EXCLUSIVE_V2",
@@ -896,7 +896,7 @@
         {
             "k": "ID_UI_HEROACTION_NON_EXCLUSIVE",
             "v": "[165C97FF]AVAILABLE[-]",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_UI_HEROACTION_NON_EXCLUSIVE_V2",
@@ -1115,22 +1115,22 @@
         {
             "k": "ID_UI_HERO_SYNERGY_AV_TRYOUT",
             "v": "AVENGERS TRYOUT",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_AV_TRYOUT_DESC",
             "v": "[64acff]Spider-Man:[-] +15% Ability Accuracy while the A.I. is active.\n[64acff]Vulture:[-] +{0}% Incinerate Damage.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_BANEOFKITCHEN",
             "v": "BANE OF HELL'S KITCHEN",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_BANEOFKITCHEN_DESC",
             "v": "[64acff]Kingpin:[-] Heavy Attacks gain +{0}% Attack and cannot trigger a Passive Evade.\n[64acff]Daredevil:[-] +40% Armor Break duration.\n[64acff]Daredevil (Classic):[-] +40% Precision Buff duration.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_BELIEVER",
@@ -1148,7 +1148,6 @@
             "vn": "17.1"
         },
         {
-            "cn": "Black Panthers <-- this is correct we have two version under this synergy",
             "k": "ID_UI_HERO_SYNERGY_BLOODLUST_LONG",
             "v": "[64acff]Sabretooth:[-]Inflicting a Debuff reduces the opponent’s Ability Accuracy by 100% for 0.7 seconds.\n[64acff]Black Panthers, Killmonger:[-] +{0}% Power Rate when hitting opponents that are suffering from a Debuff.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
             "vn": "17.1"
@@ -1156,17 +1155,17 @@
         {
             "k": "ID_UI_HERO_SYNERGY_BLUE_I",
             "v": "IT AIN'T EASY Lv. 1",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_BLUE_II",
             "v": "IT AIN'T EASY Lv. 2",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_BLUE_III",
             "v": "IT AIN'T EASY Lv. 3",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_BONUS",
@@ -1187,12 +1186,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_COMPETITION",
             "v": "COMPETITION",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_COMPETITION_DESC",
             "v": "[64acff]Kingpin:[-] +{0}% Rage conversion chance.\n[64acff]The Hood:[-] +20% Invisibility Duration\n[64acff]Joe Fixit:[-] +{0}% Attack while the opponent has a Debuff\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_COMP_I",
@@ -1209,34 +1208,29 @@
         {
             "k": "ID_UI_HERO_SYNERGY_CONNOOBS",
             "v": "CONTEST NOOBS",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_CONNOOBS_DESC",
             "v": "[64acff]Spider-Man:[-] Stun, Shock and Ensnare Debuffs last {0}% longer.\n[64acff]Ms. Marvel (Kamala Khan):[-] Fury Buffs gain +{0}% Potency.\n[64acff]Spider-Man (Miles Morales):[-] Begin the fight with 2 additional Spider-Sense charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 14
+            "vn": "14"
         },
         {
-      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_LONG",
-      "v": "[64acff]Corvus Glaive:[-] Knock out an opponent with a Offensive Champion Tag. Once this mission is complete, Corvus will never lose more than 10% Health from a single hit when Glaive’s Immunity is active.\n[64acff]Vision, Thor Ragnarok[-] +{0}% Attack Rating at the start of the fight\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-      "vn": "17.2"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_TITLE",
-      "v": "MISSION 3: HUNT THE STRONGEST",
-      "vn": "17.2"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_LONG",
-      "v": "[64acff]Corvus Glaive:[-] Knock out an opponent with a Defensive Champion Tag. Once this mission is complete, the Ability Accuracy of the opponent’s Auto Block effects will be decreased by 100%.\n[64acff]Proxima Midnight[-]Ultimate Mission’s Combo Meter requirement goes down by 50 hits. Additionally, the duration of her Buffs is increased by {0}%\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-      "vn": "17.2"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_TITLE",
-      "v": "MISSION 4: DESTROY DEFENSES",
-      "vn": "17.2"
-    },
-    {
+            "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_LONG",
+            "v": "[64acff]Corvus Glaive:[-] Knockout a Mutant Champion. Once this mission is complete, Corvus receives Safeguard against the opponent’s Special 2 Attack if Glaive’s Immunity is active, preventing him from losing more 5% Health from a single hit.\n[64acff]Wolverine, X-23, Storm:[-] +{0}% Attack Rating at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_TITLE",
+            "v": "HUNT THE UNCANNY",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_TITLE",
+            "v": "CHALLENGE DEFENSES",
+            "vn": "17.2"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_COSMIC_I",
             "v": "COSMIC SUPREMACY Lv. 1"
         },
@@ -1316,12 +1310,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DEFDESTROYER",
             "v": "DEFENDERS DESTROYER",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DEFDESTROYER_DESC",
             "v": "[64acff]Kingpin:[-] +15% more power when struck by a Physical Attack.\n[64acff]Iron Fist:[-] +{0}% Armor Break duration.\n[64acff]Elektra:[-] +{0}% Bleed duration.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DEMONHUNTER",
@@ -1376,7 +1370,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_BLUE",
             "v": "All Champions gain +{0} Block Penetration",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_COMP",
@@ -1428,12 +1422,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_HELLLORDS",
             "v": "[64acff]Hela:[-] Begin the fight with 1 Bar of Power.\n[64acff]Dormammu:[-] Increases any Health gained while his Imbued Dimensional Link is active by {0}%\n[64acff]Mephisto:[-] Regain the first Soul spent to trigger his Soul Imprisonment each fight.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_HFH",
             "v": "All Champions gain +{1} Block Proficiency & Physical Resistance",
-            "vn": 12
+            "vn": "12"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_HIVEMIND",
@@ -1442,12 +1436,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_IMSOUL",
             "v": "[64acff]Hela:[-] Nullify effects against Hela have a {0}% reduced chance to trigger.\n[64acff]Loki:[-] While they are Cursed, Loki always counts as having more Health than his Opponent.\n[64acff]Thor (Ragnarok):[-] Gains +100% Perfect Block Chance, when Autoblocking.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_LULLABY",
             "v": "[64acff]Hulk (Ragnarok):[-] When Struck Hulk has a {0}% chance to ready a SMASH for his next attack.\n[64acff]Black Widow:[-] Evade chance increases by 100%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_MANAGAIN",
@@ -1477,8 +1471,8 @@
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_OFFLIMITS",
-            "v": "[64acff]Hulk (Ragnarok):[-] Hulk's chance to SMASH on All Attacks increases by {0}% while Face Me is active.\n[64acff]Hela:[-] Hela begins the first with 1 Fury Buff, and if she is ever without a Fury Buff for 10 seconds, she gains one.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 17
+            "v": "[64acff]Hulk (Ragnarok):[-] Hulk's chance to SMASH on All Attacks increases by {0}% while Face Me is active.\r\n[64acff]Hela:[-] Hela begins the fight with 1 Fury Buff, and if she is ever without a Fury Buff for 10 seconds, she gains one.\r\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_PERFECTBLOCK",
@@ -1500,12 +1494,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_PUNYGOD",
             "v": "[64acff]Hulk (Ragnarok):[-] +{0} Physical Resistance while Unstoppable.\n[64acff]Loki:[-] Basic Attacks against Loki have a 10% chance to miss, while his Opponent is under the effect of any Buff.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_QUEENOFHEL",
             "v": "Champions have a {0}% chance to instantly regain {0}% of their HP just before they’re knocked out. This chance increases by {0}% for each Champion on their team currently knocked out.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_SCIENCE",
@@ -1532,7 +1526,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_TEAMBUILDING",
             "v": "[64acff]Hulk (Ragnarok):[-] SMASH attacks have a {0}% chance to be Unblockable.\n[64acff]Thor (Ragnarok):[-] Special attacks becomes Unblockable while the Boon of the Gods Power Gain is active.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_TECH",
@@ -1603,17 +1597,17 @@
         {
             "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG",
             "v": "[64acff]Killmonger:[-] [16982bff]15%[-] chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] [16982bff]+{0}%[-] Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.\n[16982bff]This Synergy is enhanced in the next Tier.[-]",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG_B",
             "v": "[64acff]Killmonger:[-] [16982bff]30%[-] chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] [16982bff]+{0}%[-] Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.\n[16982bff]This Synergy is enhanced in the next Tier.[-]",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG_C",
             "v": "[64acff]Killmonger:[-] 100% chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] +{0}% Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_FAMILY_I",
@@ -1630,7 +1624,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_FEARLESS_LONG",
             "v": "[64acff]Killmonger:[-] If Vibranium Armor is active, Killmonger has a 35% chance to Purify a Debuff after a 0.5 second delay and then instantly Regenerate 4% Health per Debuff.\n[64acff]Void[-] Regenerates {0}% Health when inflicting his Intimidating Debuffs.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_FLORALCOLOSSUS_DESC",
@@ -1655,12 +1649,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_FRIENDFROMWORK",
             "v": "FRIEND FROM WORK",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_FRIENDFROMWORK_LONG",
             "v": "[64acff]Thor (Ragnarok):[-] +{0}% Attack when Thunder God’s Wrath is active.\n[64acff]Hulk[-] Becomes Indestructible for 5 seconds when below 20% Health.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_GRIPPEDBYFEAR",
@@ -1685,7 +1679,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_HELLLORDS",
             "v": "HELL LORDS",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_HFH",
@@ -1746,7 +1740,32 @@
         {
             "k": "ID_UI_HERO_SYNERGY_IMSOUL",
             "v": "IMMORTAL SOULS",
-            "vn": 16
+            "vn": "16"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_INFINITYENEMIES_LONG",
+            "v": "All Champions gain +{0}% Attack.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_INFINITYENEMIES_LV1",
+            "v": "INFINITY ENEMIES Lv. 1",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_INFINITYENEMIES_LV2",
+            "v": "INFINITY ENEMIES Lv. 2",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_INFINITYENEMIES_LV3",
+            "v": "INFINITY ENEMIES Lv. 4",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_INFINITYENEMIES_LV4",
+            "v": "INFINITY ENEMIES Lv. 4",
+            "vn": "17.2"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_INSEPARABLE",
@@ -1767,12 +1786,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_KNOWSHARE",
             "v": "KNOWLEDGE SHARE",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_KNOWSHARE_DESC",
             "v": "[64acff]Spider-Man:[-] A.I. Reboots {0}% faster.\n[64acff]Iron Man & Hulkbuster:[-] +{0}% Special Damage.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_LARCENY",
@@ -1815,12 +1834,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_LIKEOLDDAYS",
             "v": "LIKE OLD DAYS",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_LIKEOLDDAYS_LONG",
             "v": "[64acff]Thor (Ragnarok):[-] {0}% chance to activate a Combo Shield for 5 seconds if Thor maintained a combo of 1 or more hits when Struck.\n[64acff]Loki[-] Ascendant generates Power as long as Loki is below 2 bars.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_LOYALMINISTER",
@@ -1835,7 +1854,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_LULLABY",
             "v": "LULLABY",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_MASTERMIND_I",
@@ -1938,17 +1957,17 @@
         {
             "k": "ID_UI_HERO_SYNERGY_NOTAFRAIDOFDEATH",
             "v": "NOT AFRAID OF DEATH",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_NOTAFRAIDOFDEATH_LONG",
             "v": "[64acff]Thor (Ragnarok):[-] Regenerates {0}% of max Health when killing opponents.\n[64acff]Hela[-] Grants 100 Spirits of the Dead charges at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_OFFLIMITS",
             "v": "OFF LIMITS",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_OTHERHALF",
@@ -1986,44 +2005,39 @@
             "vn": "16.1"
         },
         {
-      "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS",
-      "v": "DEBUG",
-      "vn": "17.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS_LONG",
-      "v": "[64acff]Proxima Midnight:[-] Starts the fight with a bar of Power and 3 of her Fury Buffs.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-      "vn": "17.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA",
-      "v": "DEBUG",
-      "vn": "17.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA_LONG",
-      "v": "[64acff]Proxima Midnight:[-] Each time a Fury Buff activates, the next one has {0}% increased Potency. Increases up to a maximum of 50%.\n[64acff]Gamora[-] Each Bleed inflicted makes the next Bleed 40% more potent. Increases up to a maximum of 200%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-      "vn": "17.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA",
-      "v": "DEBUG",
-      "vn": "17.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA_LONG",
-      "v": "[64acff]Proxima Midnight:[-] Against Tech opponents suffering from an Armor Break Debuff, Proxima Midnight inflicts Petrify when attacking with her spear, reducing the effectiveness of Power Gain and Regeneration by {0}% for 20 seconds. Max Stacks: 3\n[64acff]Nebula[-] Gains 3 Electroshock Charges whenever attacking opponents suffering from a Shock Debuff.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
-      "vn": "17.1"
-    },
-    {
+            "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS",
+            "v": "SPECIAL ASSIST",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA",
+            "v": "ASGARDIAN HUNT",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA_LONG",
+            "v": "[64acff]Proxima Midnight:[-] Gains Combo Shield whenever she has less than {0} hits in her Combo Meter.\n[64acff]Thor (Ragnarok):[-] Activation of Boon of the Gods requires 10 less hits on the Combo Meter and 5 less hits whenever struck.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA",
+            "v": "UNMERCIFUL PUNISHMENT",
+            "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA_LONG",
+            "v": "[64acff]Proxima Midnight:[-] When True Accuracy is active, her Attack Rating is increased by {0}%.\n[64acff]Nebula[-] Starts the fight with 10 Electroshock Charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+            "vn": "17.2"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_PUNYGOD",
             "v": "PUNY GOD",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_QUEENOFHEL",
             "v": "QUEEN OF HEL",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_RIVAL_I",
@@ -2052,12 +2066,12 @@
         {
             "k": "ID_UI_HERO_SYNERGY_ROYALFAMILY",
             "v": "INHUMAN ROYAL FAMILY",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_ROYALFAMILY_BLACKBOLT",
             "v": "[64acff]Medusa:[-] Living Strands generates up to 6 Fury Buffs.\n[64acff]Black Bolt:[-] Provocation generates permanent Buffs instead of temporary Buffs.\n[64acff]Inhuman Royal Family:[-]+{0}% Attack at the start of the fight if Medusa, Black Bolt and Karnak are together in a team.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_SCIENCERESEARCH",
@@ -2182,7 +2196,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_TEAMBUILDING",
             "v": "TEAM BUILDING EXERCISE",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_TEAMMATES_I",
@@ -2270,52 +2284,52 @@
         {
             "k": "ID_UI_HITS_LSD_0",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_1",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_2",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_3",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_4",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_5",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_6",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_7",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_8",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_HITS_LSD_9",
             "v": "HITS!",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_UI_INCREDIBLE",

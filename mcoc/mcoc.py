@@ -2504,7 +2504,7 @@ class Champion:
             desc.append(preamble+'_DESC_MOD')
         else:
             for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
-                      '_DESC_E','_LONG','_LONG_2'):
+                      '_DESC_E','_LONG','_LONG_2', '_LONG_B', '_LONG_B_EXTRA'):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
