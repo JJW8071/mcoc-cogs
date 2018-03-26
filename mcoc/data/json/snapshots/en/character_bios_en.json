@@ -1,14 +1,14 @@
 {
     "meta": {
-        "format": "sparx",
-        "hash": "c2b8534d4cf73cdce291de455bffcd2a13aab315",
         "language": "en",
-        "string_count": 132,
+        "hash": "68dd45893d8b8d6f00adc46cf531fdc09d44afda",
+        "format": "sparx",
+        "ts": 1519781322,
         "tagged": [
             "character_bios",
             "client"
         ],
-        "ts": 1517953989
+        "string_count": 134
     },
     "strings": [
         {
@@ -105,6 +105,11 @@
             "v": "During an event known as Fear Itself, the X-Man known as Colossus touched the Crimson Gem of the demon Cyttorak, gaining the demon’s favor in place of his sister Magik. Attaining the same Mystical power that enhanced Juggernaut, Russia’s favorite mutant hero became an Unstoppable artist of destruction."
         },
         {
+            "k": "ID_CHARACTER_BIOS_CORVUSGLAIVE",
+            "v": "Corvus Glaive is Thanos’ right-hand man and the sly, cunning lieutenant of his army. The only thing deadlier than this master strategist’s tactical mind is the halberd he yields to swiftly slice through his enemies.",
+            "vn": "17.2"
+        },
+        {
             "k": "ID_CHARACTER_BIOS_CROSSBONES",
             "v": "Once a high-level agent at S.H.I.E.L.D., Brock Rumlow revealed his true colors as an enforcer for HYDRA when the evil agency threatened to destroy S.H.I.E.L.D. from within. Since the climactic battle, the dangerous mercenary now calling himself Crossbones has hidden underground, striking from the shadows and selling his skills to the highest bidder."
         },
@@ -140,7 +145,7 @@
         {
             "k": "ID_CHARACTER_BIOS_DORMAMMU",
             "v": "Dormammu was born to a race of powerful beings made of pure magical energy known as the Faltine, and has only one true desire: power. This desire drove him from his home world and brought him to the Dark Dimension, where he now rules and draws even greater power from the worship of his subjects. Now with the power of so many heroes concentrated in the Contest, Dormammu has come as one of the greatest mystical threats in the universe, undoubtedly to gain that power for himself.",
-            "vn": 12
+            "vn": "12"
         },
         {
             "k": "ID_CHARACTER_BIOS_DRAX",
@@ -207,7 +212,7 @@
         {
             "k": "ID_CHARACTER_BIOS_HELA",
             "v": "A creature from a primordial and sinister era of the universe, Hela’s power is unlike anything else in the Nine Realms. Armed with the ability to unleash unlimited weapons in astounding and deadly ways, Hela seeks vengeance against those who imprisoned her eons ago, ushering in a new era of cold brutality for Asgard and the universe at large.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_CHARACTER_BIOS_HOOD",
@@ -229,7 +234,7 @@
         {
             "k": "ID_CHARACTER_BIOS_HULK_RAGNAROK",
             "v": "Only Hulk truly knows how he ended up on Sakaar, fighting in the arena. But once he entered the arena, he was immediately a crowd favorite! By using his unique blend of savage rage, showmanship, and unstoppable strength to smash through some of the strongest beings in the galaxy, he became their Champion. After all, the only thing better than smashing, is smashing them while the crowd goes wild!",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_CHARACTER_BIOS_HULK_RED",
@@ -242,7 +247,7 @@
         {
             "k": "ID_CHARACTER_BIOS_ICEMAN",
             "v": "Iceman aka Robert \"Bobby\" Drake, was the second, and youngest member of the original X-men. His mutant powers give him the ability to lower his body's temperature, transform himself into organic ice, and freeze the air around him. When he was possessed by Emma Frost, she unleashed powers within Bobby far greater than he had before, such as freezing fluids inside another person's body, and traveling great distances as a liquid, solid, or gas. Iceman works towards the mastery of his powers and there's no telling where his limits lie.",
-            "vn": 12
+            "vn": "12"
         },
         {
             "k": "ID_CHARACTER_BIOS_IRONFIST",
@@ -291,12 +296,12 @@
         {
             "k": "ID_CHARACTER_BIOS_KILLMONGER",
             "v": "Erik Stevens’ ruthlessness and combat skill earned him the nickname “Killmonger” during his time as a black-ops soldier. While he has not set foot in Wakanda for a long time, he has returned with a plan that threatens to put Black Panther and all of Wakanda at risk. Using his charisma, combat prowess and his knowledge of Wakandan customs, Erik Killmonger is an imminent threat to all that T'Challa holds dear.",
-            "vn": 17
+            "vn": "17"
         },
         {
             "k": "ID_CHARACTER_BIOS_KINGPIN",
             "v": "Wilson Fisk, kingpin of crime in New York City, rules the underworld with ruthless efficiency. Gaining power through numerous illegal ventures and intimidation, Kingpin has gone toe-to-toe with the likes of Spider-Man and Daredevil and kept pace thanks to his incredible physical prowess and strength. Now the infamous crime lord has set his sights on the Contest and its rich supply of dangerous black ISO-8. For Fisk, the Contest is just another city to conquer.",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_CHARACTER_BIOS_LOKI",
@@ -325,7 +330,7 @@
         {
             "k": "ID_CHARACTER_BIOS_MEDUSA",
             "v": "Born into the Inhuman Royal Family of Attilan, Medusa was exposed to the mutagenic Terrigen Mists when she was only an infant. This transformation endowed her with tougher-than-steel hair and the ability to control each strand like an added appendage. Along with her husband, Black Bolt, Medusa leads her people as the Queen of the Inhumans in their search for a better place in the world.",
-            "vn": 15
+            "vn": "15"
         },
         {
             "k": "ID_CHARACTER_BIOS_MEPHISTO",
@@ -357,7 +362,7 @@
         {
             "k": "ID_CHARACTER_BIOS_NEBULA",
             "v": "Cybernetically enhanced at birth and trained to win at all costs, Nebula is one of the Mad Titan Thanos’ two adopted daughters and harbors a hatred of her sister, Gamora, after a personal bout left her broken and reeling. Now she has been brought back from the brink of death and seeks vengeance against Gamora, but her journey to exact justice on her sister may reveal more about herself than she expected...",
-            "vn": 13
+            "vn": "13"
         },
         {
             "k": "ID_CHARACTER_BIOS_NIGHTCRAWLER",
@@ -366,6 +371,11 @@
         {
             "k": "ID_CHARACTER_BIOS_PHOENIX",
             "v": "Though Jean Grey and the Phoenix Force have long been separated, their bond is unique. More than a mere host, Jean is a part of the Phoenix, as the Phoenix is a part of her. When Jean was brought to the Battlerealm and exposed to ISO-8, the highly mutagenic properties of ISO-8 reopened Jean’s latent connection to the universal force of life, and the Phoenix was reborn again, this time into the Contest of Champions!"
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_PROXIMAMIDNIGHT",
+            "v": "Thanos’ greatest warrior, Proxima Midnight is a formidable foe to anyone that crosses her. She’s a master combatant that is willing to deal death by her spear without a second thought.",
+            "vn": "17.2"
         },
         {
             "k": "ID_CHARACTER_BIOS_PSYLOCKE",
@@ -441,7 +451,7 @@
         {
             "k": "ID_CHARACTER_BIOS_SPIDERMAN_MOVIE",
             "v": "Most kids Peter Parker’s age rush home after school to play video games or do homework, but not New York’s friendly neighborhood Spider-Man. Donning his new suit with high-tech web shooters and some awesome upgrades courtesy of Tony Stark, Peter protects his home city of Queens. But a new threat has risen from the ashes caused by the Battle of New York, and Parker must look beyond his own desires and understand the true meaning of great responsibility.",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_CHARACTER_BIOS_STARLORD",
@@ -471,7 +481,7 @@
         {
             "k": "ID_CHARACTER_BIOS_THOR_RAGNAROK",
             "v": "When an ancient evil, lurking for eons, is released from its shackles, the Asgardian God of Thunder is thrown into a whirlwind of chaos. Ripped from his familiar surroundings and stripped of his powers, Thor's only hope is to summon the warrior within, and fight his way back against impossible odds. With his kingdom shattered and his people in dire need, Thor must discover what it means to be a true leader.",
-            "vn": 16
+            "vn": "16"
         },
         {
             "k": "ID_CHARACTER_BIOS_ULTRON",
@@ -529,12 +539,12 @@
         {
             "k": "ID_CHARACTER_BIOS_VULTURE",
             "v": "When a failed business opportunity left him desperate, Adrian Toomes became a black market power-player by scavenging the advanced tech and alien weapons left behind from previous Super Hero battles. From these scraps and leftovers, Toomes built himself a massive winged vehicle and retrofitted the rest into incredible weapons that he sells. Now seeking further profits and power, the Vulture has set his sights on even more advanced technology.",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_CHARACTER_BIOS_VULTURE_MOVIE",
             "v": "When a failed business opportunity left him desperate, Adrian Toomes became a black market power-player by scavenging the advanced tech and alien weapons left behind from previous Super Hero battles. From these scraps and leftovers, Toomes built himself a massive winged vehicle and retrofitted the rest into incredible weapons that he sells. Now seeking further profits and power, the Vulture has set his sights on even more advanced technology.",
-            "vn": 14
+            "vn": "14"
         },
         {
             "k": "ID_CHARACTER_BIOS_WARMACHINE",
@@ -567,7 +577,7 @@
         {
             "k": "ID_CHARACTER_BIOS_YONDU",
             "v": "Centaurian scoundrel Yondu Udonta may not seem like much of a threat at first glance, but when you hear a whistle and his deadly Yaka Arrow comes out to play, it's not advisable to make any rash decisions. Leader of the Ravagers and mentor to Star-Lord, Yondu is a stickler for honor, but not above breaking a rule or ten to get what he wants.",
-            "vn": 13
+            "vn": "13"
         }
     ]
 }
