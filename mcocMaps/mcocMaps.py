@@ -11,10 +11,33 @@ JPAGS = 'http://www.alliancewar.com'
 class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
 
-    aq_map = {'5':{'map': 'aq5', 'maptitle':'5'},
+    aq_map = {
+        '5':{'map': 'aq5', 'maptitle':'5'},
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
-        '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},}
+        '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},
+        '6':{'map': 'aq6', 'maptitle':'6'},
+        '6.1':{'map': 'aq61','maptitle':'6 Tier 1'},
+        '6.2':{'map':  'aq62', 'maptitle':'6 Tier 2'},
+        '6.3':{'map': 'aq63','maptitle':'6 Tier 3'},}
+
+    aq_map_tips = {
+        '5':{},
+        '5.1':{},
+        '5.2':{},
+        '5.3':{},
+        '6':{},
+        '6.1':{'required':'Path F\n- Power Control',
+            'energy':'Paths D & E move first\nPaths B, C, F, G move next\nPath A moves last.',
+            'tips':'Path A \n- Defense Ability Reduction for tile 22.\nPaths D & E \n- Defense Ability Reduction for Thorns tile 14\n- Regen for tile 19, 20.\nPath F\n- Power control for All or Nothing tile 9.\n-Defensive Ability Reduction for tile 10.\nPath G\n- Daredevil for Enhanced Raged Specials.'},
+        '6.2':{'required':'Paths A & B\n- Poison Immune\nPath G\n- Power control\nPaths H & I\n- Bleed Immune',
+            'energy': 'Paths A, B, E, H, & I move first\nPaths D, F, G move next\nPath C moves last',
+            'tips':'Paths A & B\n- Poison Immune\nPath C\n- High Block Proficiency for Immunity enemies\nPath E\n-High Block Proficiency for Stun Immune tile 61\nPath F\n- Regen for tile tiles 49, 50, 51\nPath G\n- Power control for Power Gains and All or Nothing tiles.\nPaths H & I\n-Bleed Immune\nPaths A, B, C, D, & E\n- Daredevil for Enhanced range special tiles 73, 63.'},
+        '6.3':{'required':'Path A\n- Poison Immune\nPaths B & C\n- Bleed Immune\nPath I\n-Power control\nPath J\n- Regeneration',
+            'energy':'Paths D & E move first\nPaths C & F move second\nPaths A, B, G & I move third\nPaths H & J move last',
+            'tips':'Path A\n- Poison Immune\nPaths B & C\n- Regneration for Degeneration & Starburst\nPath I\n- Power Control for Power gains\nPath J\n- Regeneration for Starburst\nPaths A, B, C\n- Power control for All or Nothing tile 118\nPaths F & J\n- Regeneration for tiles 79, 83'},
+    }
+
     lolmaps = {'0':{'map':'0', 'maptitle': 'Completion Path 0'},
         '1':{'map':'1', 'maptitle': 'Exploration Path 1'},
         '2':{'map':'2', 'maptitle': 'Exploration Path 2'},
@@ -81,13 +104,20 @@ class MCOCMaps:
         '''Select a Map
             aq maps : 5, 5.1, 5.2, 5.3
             /aq 5'''
+        embeds = {}
         if maptype in self.aq_map:
             mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+            if 'required' in self.aq_map_tips[maptype]:
+                em.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
+                em.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
+                em.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
             em.set_image(url=mapurl)
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
             await self.bot.say(embed=em)
+
+
 
     @commands.command(pass_context=True, aliases=['lol'])
     async def lolmap(self, ctx, *, maptype: str = '0'):
