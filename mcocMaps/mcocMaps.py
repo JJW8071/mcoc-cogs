@@ -109,7 +109,7 @@ class MCOCMaps:
             mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
-            if maptype in self.aq_map_tips:
+            if 'required' in self.aq_map_tips[maptype]:
                 em.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
                 em.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
                 em.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
