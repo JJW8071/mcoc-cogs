@@ -108,7 +108,7 @@ class MCOCMaps:
     @commands.command(pass_context=True, aliases=['aq'])
     async def aqmap(self, ctx, *, maptype: str):
         '''Select a Map
-            aq maps : 5, 5.1, 5.2, 5.3
+            aq maps : 5, 5.1, 5.2, 5.3, 6, 6.1, 6.2, 6.3
             /aq 5'''
         embeds = []
         if maptype in self.aq_map:
