@@ -33,7 +33,7 @@ class MCOCMaps:
             'energy':'',
             'tips':''},
         '6':{},
-        '6.1':{'required':'Path F\n- Power Control\nPath A\n- 2 players\nPath B\n- 2 players\nPath G\n- players',
+        '6.1':{'required':'Path F\n- Power Control\nPath A\n- 2 players\nPath B\n- 2 players\nPath G\n- 2 players',
             'energy':'Paths D & E move first\nPaths B, C, F, G move next\nPath A moves last.',
             'tips':'Path A \n- Defense Ability Reduction for tile 22.\nPaths D & E \n- Defense Ability Reduction for Thorns tile 14\n- Regen for tile 19, 20.\nPath F\n- Power control for All or Nothing tile 9.\n-Defensive Ability Reduction for tile 10.\nPath G\n- Daredevil for Enhanced Raged Specials.'},
         '6.2':{'required':'Paths A\n- Poison Immune\n- 2 players\nPath B\n- Poison Immune\nPath G\n- Power control\nPaths H\n- Bleed Immune\nPath I\n- Bleed Immune\n- 2 players',
