@@ -23,9 +23,15 @@ class MCOCMaps:
 
     aq_map_tips = {
         '5':{},
-        '5.1':{},
-        '5.2':{},
-        '5.3':{},
+        '5.1':{'required':'',
+            'energy':'',
+            'tips':''},
+        '5.2':{'required':'Path A\n- Bleed Immune\nPath H\n- Poison Immune',
+            'energy':'',
+            'tips':''},
+        '5.3':{'required':'',
+            'energy':'',
+            'tips':''},
         '6':{},
         '6.1':{'required':'Path F\n- Power Control',
             'energy':'Paths D & E move first\nPaths B, C, F, G move next\nPath A moves last.',
@@ -111,12 +117,13 @@ class MCOCMaps:
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            em2 = em
             embeds.append(em)
             if 'required' in self.aq_map_tips[maptype]:
-                em.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
-                em.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
-                em.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
-                embeds.append(em)
+                em2.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
+                em2.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
+                em2.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
+                embeds.append(em2)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120, page=0)
             # await self.bot.say(embed=em)
 
