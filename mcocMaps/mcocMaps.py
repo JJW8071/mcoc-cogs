@@ -117,14 +117,18 @@ class MCOCMaps:
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-            em2 = em
             embeds.append(em)
             if 'required' in self.aq_map_tips[maptype]:
+                mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
+                maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
+                em2 = discord.Embed(color=discord.Color.gold(),title=maptitle)
+                em2.set_image(url=mapurl)
+                em2.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
                 em2.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
                 em2.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
                 em2.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
                 embeds.append(em2)
-            await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120, page=0)
+            await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
             # await self.bot.say(embed=em)
 
 
