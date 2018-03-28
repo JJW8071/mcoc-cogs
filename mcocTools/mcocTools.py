@@ -75,6 +75,7 @@ class MCOCTools:
         server_url = "https://discord.gg/wJqpYGS"
         dpy_repo = "https://github.com/Rapptz/discord.py"
         python_url = "https://www.python.org/"
+        collectorpatreon = 'https://patreon.com/collectorbot'
         since = datetime.datetime(2016, 1, 2, 0, 0)
         days_since = (datetime.datetime.utcnow() - since).days
         dpy_version = "[{}]({})".format(discord.__version__, dpy_repo)
@@ -94,12 +95,14 @@ class MCOCTools:
             owner = "Unknown"
 
         about = (
-            "Collector is an instance of [Red, an open source Discord bot]({}) "
-            "created by [Twentysix]({}) and improved by many.\n\n"
+            "Collector is an instance of [Red, an open source Discord bot]({0}) "
+            "created by [Twentysix]({1}) and improved by many.\n\n"
             "The Collector Dev Team is backed by a passionate community who contributes and "
-            "creates content for everyone to enjoy. [Join us today]({}) "
+            "creates content for everyone to enjoy. [Join us today]({2}) "
             "and help us improve!\n\n"
-            "".format(red_repo, author_repo, server_url))
+            "★ If you would like to support the Collector, please visit {3}.\n"
+            "★ Patrons and Collaborators recieve priority support and secrety stuff."
+            "".format(red_repo, author_repo, server_url, collectorpatreon))
         devteam = ( "DeltaSigma#8530\n"
                     "JJW#8071\n"
                     )
@@ -111,7 +114,7 @@ class MCOCTools:
         embed.add_field(name="About Collector", value=about, inline=False)
         embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
         embed.add_field(name='DuelsPartner',value='2OO2RC51#4587',inline=True)
-        embed.add_field(name='MapsPartner',value='jpags#5202',inline=True)
+        embed.add_field(name='MapsPartners',value='jpags#5202\nBlooregarde#5848 ',inline=True)
         embed.add_field(name='LabyrinthTeam',value='Kiryu#5755\nre-1#7595',inline=True)
         embed.add_field(name='CollectorSupportTeam', value=supportteam,inline=True)
         embed.add_field(name="CollectorDevTeam",value=devteam,inline=True)
