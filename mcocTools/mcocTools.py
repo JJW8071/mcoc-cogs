@@ -101,17 +101,17 @@ class MCOCTools:
             "creates content for everyone to enjoy. [Join us today]({2}) "
             "and help us improve!\n\n"
             "★ If you would like to support the Collector, please visit {3}.\n"
-            "★ Patrons and Collaborators recieve priority support and secrety stuff."
+            "★ Patrons and Collaborators recieve priority support and secrety stuff.\n\n~ JJW"
             "".format(red_repo, author_repo, server_url, collectorpatreon))
         devteam = ( "DeltaSigma#8530\n"
                     "JJW#8071\n"
                     )
         supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\ntaoness#5565\n')
-        embed = discord.Embed(colour=discord.Colour.red(), title="About Collector", url=collectorpatreon)
+        embed = discord.Embed(colour=discord.Colour.red(), title="Collector", url=collectorpatreon)
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
         embed.add_field(name="discord.py", value=dpy_version)
-        embed.add_field(name="About Collector", value=about, inline=False)
+        embed.add_field(name="About", value=about, inline=False)
         embed.add_field(name="PrestigePartner",value='mutamatt#4704',inline=True)
         embed.add_field(name='DuelsPartner',value='2OO2RC51#4587',inline=True)
         embed.add_field(name='MapsPartners',value='jpags#5202\nBlooregarde#5848 ',inline=True)
