@@ -12,14 +12,15 @@ class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
 
     aq_map = {
-        '5':{'map': 'aq5', 'maptitle':'5'},
-        '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
-        '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
-        '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},
-        '6':{'map': 'aq6', 'maptitle':'6'},
-        '6.1':{'map': 'aq61','maptitle':'6 Tier 1'},
-        '6.2':{'map':  'aq62', 'maptitle':'6 Tier 2'},
-        '6.3':{'map': 'aq63','maptitle':'6 Tier 3'},}
+        '5':{'map': 'aq5', 'maptitle':'5', 'format':'png'},
+        '5.1':{'map': 'aq51','maptitle':'5 Tier 1', 'format':'png'},
+        '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2', 'format':'png'},
+        '5.3':{'map': 'aq53','maptitle':'5 Tier 3', 'format':'png'},
+        '6':{'map': 'aq6', 'maptitle':'6', 'format':'jpg'},
+        '6.1':{'map': 'aq61','maptitle':'6 Tier 1', 'format':'jpg'},
+        '6.2':{'map':  'aq62', 'maptitle':'6 Tier 2', 'format':'jpg'},
+        '6.3':{'map': 'aq63','maptitle':'6 Tier 3', 'format':'jpg'},
+        }
 
     aq_map_tips = {
         '5':{},
@@ -112,7 +113,7 @@ class MCOCMaps:
             /aq 5'''
         embeds = []
         if maptype in self.aq_map:
-            mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
+            mapurl = '{0}{1}.{2}'.format(self.basepath, self.aq_map[maptype]['map'], self.aq_map[maptype]['format'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
