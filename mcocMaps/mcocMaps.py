@@ -16,10 +16,10 @@ class MCOCMaps:
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},
-        '6':{'map': 'newaq6', 'maptitle':'6'},
-        '6.1':{'map': 'newaq61','maptitle':'6 Tier 1'},
-        '6.2':{'map':  'newaq62', 'maptitle':'6 Tier 2'},
-        '6.3':{'map': 'newaq63','maptitle':'6 Tier 3'},}
+        '6':{'map': 'dpi600aq6', 'maptitle':'6'},
+        '6.1':{'map': 'dpi600aq61','maptitle':'6 Tier 1'},
+        '6.2':{'map':  'dpi600aq62', 'maptitle':'6 Tier 2'},
+        '6.3':{'map': 'dpi600aq63','maptitle':'6 Tier 3'},}
 
     aq_map_tips = {
         '5':{},
