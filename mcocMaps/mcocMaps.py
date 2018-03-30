@@ -16,10 +16,10 @@ class MCOCMaps:
         '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},
-        '6':{'map': 'dpi600aq6', 'maptitle':'6'},
-        '6.1':{'map': 'dpi600aq61','maptitle':'6 Tier 1'},
-        '6.2':{'map':  'dpi600aq62', 'maptitle':'6 Tier 2'},
-        '6.3':{'map': 'dpi600aq63','maptitle':'6 Tier 3'},}
+        '6':{'map': 'aq6v3', 'maptitle':'6'},
+        '6.1':{'map': 'aq61v3','maptitle':'6 Tier 1'},
+        '6.2':{'map':  'aq62v3', 'maptitle':'6 Tier 2'},
+        '6.3':{'map': 'aq63v3','maptitle':'6 Tier 3'},}
 
     aq_map_tips = {
         '5':{},
@@ -101,6 +101,8 @@ class MCOCMaps:
 
     basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcocMaps/data/'
     icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+    COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
+
 
     def __init__(self, bot):
         self.bot = bot
@@ -116,7 +118,7 @@ class MCOCMaps:
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
             em.set_image(url=mapurl)
-            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
             embeds.append(em)
             if 'required' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
@@ -180,7 +182,7 @@ class MCOCMaps:
         mapTitle = 'Alliance War 2.0 Map'
         em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
         em.set_image(url=mapurl)
-        em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+        em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
 ### Beginning of Alliance Management Functions
