@@ -1616,6 +1616,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         champs_matched = set()
         for arg in args:
+            arg = arg.lower()
             if (arg.startswith("'") and arg.endswith("'")) or \
                     (arg.startswith('"') and arg.endswith('"')):
                 champs = await self.search_champions(arg[1:-1])
@@ -1789,10 +1790,13 @@ class MCOC(ChampionFactory):
             await self.bot.say('This server is unauthorized.')
             return
         else:
-            message = await self.bot.say('Submission registered.\nChampion: {0.verbose_str}\nPrestige: {1}\nPress OK to confirm.'.format(champ, observation))
+            message = await self.bot.say('Submission registered.\nChampion: ' +
+                    '{0.verbose_str}\nPrestige: {1}\nPress OK to confirm.'.format(
+                    champ, observation))
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
-            react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+            react = await self.bot.wait_for_reaction(message=message,
+                    user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
             if react is not None:
                 if react.reaction.emoji == '❌':
                     await self.bot.say('Submission canceled.')
@@ -1801,7 +1805,7 @@ class MCOC(ChampionFactory):
                     message2 = await self.bot.say('Submission in process.')
                     author = ctx.message.author
                     package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, champ.max_lvl, author.name, author.id]]
-                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')                # await self._process_submit_prestige(ctx, champ, observation)
+                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
                     if check:
                         await self.bot.edit_message(message2, 'Submission complete.')
                     else:
@@ -1814,10 +1818,12 @@ class MCOC(ChampionFactory):
     async def submit_duel_target(self, ctx, champ : ChampConverter, observation, pi:int = 0):
         guild = await self.check_guild(ctx)
         if not guild:
-            await self.bot.say('This server is unauthorized.')
+            await self.bot.say('\u26a0 This server is unauthorized.')
             return
         else:
-            message = await self.bot.say('Duel Target registered.\nChampion: {0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(champ, observation))
+            message = await self.bot.say('Duel Target registered.\nChampion: ' +
+                    '{0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(
+                    champ, observation))
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
             react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
@@ -1917,44 +1923,39 @@ class MCOC(ChampionFactory):
     async def check_guild(self, ctx):
         authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
         serverid = ctx.message.server.id
-        if serverid in authorized:
-            return True
-        else:
-            return False
+        return serverid in authorized
 
     async def _process_submission(self, package, GKEY, sheet):
-        #await self.update_local()
         try:
             gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+        except FileNotFoundError:
+            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+                + gapi_service_creds)
+            return False
+        else:
             sh = gc.open_by_key(key=GKEY, returnas='spreadsheet')
             worksheet = sh.worksheet(property='title',value=sheet)
             worksheet.append_table(start='A1',end=None, values=package, dimension='ROWS', overwrite=False)
             worksheet.sync()
             return True
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-            + gapi_service_creds)
-            return False
 
-
-    async def _process_submit_prestige(self, ctx, champ, observation):
-        GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
-        author = ctx.message.author
-        level = int(champ.rank)*10
-        if champ.star == 5:
-            level += 15
-        package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
-        #await self.update_local()
-        try:
-            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        except FileNotFoundError:
-            await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-            + gapi_service_creds)
-            return
-        sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
-        worksheet = sh.worksheet(property='title',value='collector_submit')
-        worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
-        worksheet.sync()
+    # async def _process_submit_prestige(self, ctx, champ, observation):
+    #     GKEY = '1HXMN7PseaWSvWpNJ3igUkV_VT-w4_7-tqNY7kSk0xoc'
+    #     author = ctx.message.author
+    #     level = int(champ.rank)*10
+    #     if champ.star == 5:
+    #         level += 15
+    #     package = [['{}'.format(champ.mattkraftid), champ.sig, observation, champ.star, champ.rank, level, author.name, author.id]]
+    #     try:
+    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+    #     except FileNotFoundError:
+    #         await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
+    #         + gapi_service_creds)
+    #         return
+    #     sh = gc.open_by_key(key=GKEY,returnas='spreadsheet')
+    #     worksheet = sh.worksheet(property='title',value='collector_submit')
+    #     worksheet.append_table(start='A2',end=None, values=package, dimension='ROWS', overwrite=False)
+    #     worksheet.sync()
 
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, hidden=True)
@@ -2753,7 +2754,7 @@ def override_error_handler(bot):
     async def on_command_error(error, ctx):
         if isinstance(error, MODOKError):
             bot.logger.info('<{}> {}'.format(type(error).__name__, error))
-            await bot.send_message(ctx.message.channel, error)
+            await bot.send_message(ctx.message.channel, "\u26a0 " + str(error))
             await raw_modok_says(bot, ctx.message.channel)
         elif isinstance(error, QuietUserError):
             #await bot.send_message(ctx.message.channel, error)
