@@ -77,9 +77,9 @@ class Leveler:
 
 
     @commands.cooldown(1, 10, commands.BucketType.user)
-    @commands.command(name = "level", pass_context=True, no_pm=True)
-    async def level(self,ctx, *, user : discord.Member=None):
-        """Displays a user level."""
+    @commands.command(name = "level_profile", pass_context=True, no_pm=True)
+    async def level_profile(self,ctx, *, user : discord.Member=None):
+        """Displays a user level_profile."""
         if user == None:
             user = ctx.message.author
         channel = ctx.message.channel
@@ -97,21 +97,21 @@ class Leveler:
 
         # no cooldown for text only
         if "text_only" in self.settings and server.id in self.settings["text_only"]:
-            em = await self.level_text(user, server, userinfo)
+            em = await self.level_profile_text(user, server, userinfo)
             await self.bot.send_message(channel, '', embed = em)
         else:
-            await self.draw_level(user, server)
+            await self.draw_level_profile(user, server)
             await self.bot.send_typing(channel)
-            await self.bot.send_file(channel, 'data/leveler/temp/{}_level.png'.format(user.id), content='**User level for {}**'.format(self._is_mention(user)))
+            await self.bot.send_file(channel, 'data/leveler/temp/{}_level_profile.png'.format(user.id), content='**User level_profile for {}**'.format(self._is_mention(user)))
             db.users.update_one({'user_id':user.id}, {'$set':{
-                    "level_block": curr_time,
+                    "level_profile_block": curr_time,
                 }}, upsert = True)
             try:
-                os.remove('data/leveler/temp/{}_level.png'.format(user.id))
+                os.remove('data/leveler/temp/{}_level_profile.png'.format(user.id))
             except:
                 pass
 
-    async def level_text(self, user, server, userinfo):
+    async def level_profile_text(self, user, server, userinfo):
         def test_empty(text):
             if text == '':
                 return "None"
@@ -137,7 +137,7 @@ class Leveler:
         em.add_field(name="Credits: ", value = "${}".format(credits))
         em.add_field(name="Info: ", value = test_empty(userinfo["info"]))
         em.add_field(name="Badges: ", value = test_empty(", ".join(userinfo["badges"])).replace("_", " "))
-        em.set_author(name="level for {}".format(user.name), url = user.avatar_url)
+        em.set_author(name="level_profile for {}".format(user.name), url = user.avatar_url)
         em.set_thumbnail(url=user.avatar_url)
         return em
 
@@ -367,7 +367,7 @@ class Leveler:
 
     @commands.command(pass_context=True, no_pm=True)
     async def lvlinfo(self, ctx, user : discord.Member = None):
-        """Gives more specific details about user level image."""
+        """Gives more specific details about user level_profile image."""
 
         if not user:
             user = ctx.message.author
@@ -394,13 +394,13 @@ class Leveler:
         msg += "Server Exp: {}\n".format(total_server_exp)
         msg += "Total Exp: {}\n".format(userinfo["total_exp"])
         msg += "Info: {}\n".format(userinfo["info"])
-        msg += "level background: {}\n".format(userinfo["level_background"])
+        msg += "level_profile background: {}\n".format(userinfo["level_profile_background"])
         msg += "Rank background: {}\n".format(userinfo["rank_background"])
         msg += "Levelup background: {}\n".format(userinfo["levelup_background"])
-        if "level_info_color" in userinfo.keys() and userinfo["level_info_color"]:
-            msg += "level info color: {}\n".format(self._rgb_to_hex(userinfo["level_info_color"]))
-        if "level_exp_color" in userinfo.keys() and userinfo["level_exp_color"]:
-            msg += "level exp color: {}\n".format(self._rgb_to_hex(userinfo["level_exp_color"]))
+        if "level_profile_info_color" in userinfo.keys() and userinfo["level_profile_info_color"]:
+            msg += "level_profile info color: {}\n".format(self._rgb_to_hex(userinfo["level_profile_info_color"]))
+        if "level_profile_exp_color" in userinfo.keys() and userinfo["level_profile_exp_color"]:
+            msg += "level_profile exp color: {}\n".format(self._rgb_to_hex(userinfo["level_profile_exp_color"]))
         if "rep_color" in userinfo.keys() and userinfo["rep_color"]:
             msg += "Rep section color: {}\n".format(self._rgb_to_hex(userinfo["rep_color"]))
         if "badge_col_color" in userinfo.keys() and userinfo["badge_col_color"]:
@@ -415,7 +415,7 @@ class Leveler:
         msg += ", ".join(userinfo["badges"])
 
         em = discord.Embed(description=msg, colour=user.colour)
-        em.set_author(name="level Information for {}".format(user.name), icon_url = user.avatar_url)
+        em.set_author(name="level_profile Information for {}".format(user.name), icon_url = user.avatar_url)
         await self.bot.say(embed = em)
 
     def _rgb_to_hex(self, rgb):
@@ -424,14 +424,14 @@ class Leveler:
 
     @commands.group(name = "lvlset", pass_context=True)
     async def lvlset(self, ctx):
-        """level Configuration Options"""
+        """level_profile Configuration Options"""
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
             return
 
-    @lvlset.group(name = "level", pass_context=True)
-    async def levelset(self, ctx):
-        """level options"""
+    @lvlset.group(name = "level_profile", pass_context=True)
+    async def level_profileset(self, ctx):
+        """level_profile options"""
         if ctx.invoked_subcommand is None or \
                 isinstance(ctx.invoked_subcommand, commands.Group):
             await send_cmd_help(ctx)
@@ -453,9 +453,9 @@ class Leveler:
             await send_cmd_help(ctx)
             return
 
-    @levelset.command(name = "color", pass_context=True, no_pm=True)
-    async def levelcolors(self, ctx, section:str, color:str):
-        """Set info color. e.g [p]lvlset level color [exp|rep|badge|info|all] [default|white|hex|auto]"""
+    @level_profileset.command(name = "color", pass_context=True, no_pm=True)
+    async def level_profilecolors(self, ctx, section:str, color:str):
+        """Set info color. e.g [p]lvlset level_profile color [exp|rep|badge|info|all] [default|white|hex|auto]"""
         user = ctx.message.author
         server = ctx.message.server
         # creates user if doesn't exist
@@ -482,11 +482,11 @@ class Leveler:
         if section == "rep":
             section_name = "rep_color"
         elif section == "exp":
-            section_name = "level_exp_color"
+            section_name = "level_profile_exp_color"
         elif section == "badge":
             section_name = "badge_col_color"
         elif section == "info":
-            section_name = "level_info_color"
+            section_name = "level_profile_info_color"
         elif section == "all":
             section_name = "all"
         else:
@@ -506,7 +506,7 @@ class Leveler:
             elif section == "all":
                 color_ranks = [random.randint(2,3), random.randint(2,3), 0, random.randint(0,2)]
 
-            hex_colors = await self._auto_color(userinfo["level_background"], color_ranks)
+            hex_colors = await self._auto_color(userinfo["level_profile_background"], color_ranks)
             set_color = []
             for hex_color in hex_colors:
                 color_temp = self._hex_to_rgb(hex_color, default_a)
@@ -534,32 +534,32 @@ class Leveler:
         if section == "all":
             if len(set_color) == 1:
                 db.users.update_one({'user_id':user.id}, {'$set':{
-                        "level_exp_color": set_color[0],
+                        "level_profile_exp_color": set_color[0],
                         "rep_color": set_color[0],
                         "badge_col_color": set_color[0],
-                        "level_info_color": set_color[0]
+                        "level_profile_info_color": set_color[0]
                     }})
             elif color == "default":
                 db.users.update_one({'user_id':user.id}, {'$set':{
-                        "level_exp_color": default_exp,
+                        "level_profile_exp_color": default_exp,
                         "rep_color": default_rep,
                         "badge_col_color": default_badge,
-                        "level_info_color": default_info_color
+                        "level_profile_info_color": default_info_color
                     }})
             elif color == "auto":
                 db.users.update_one({'user_id':user.id}, {'$set':{
-                        "level_exp_color": set_color[0],
+                        "level_profile_exp_color": set_color[0],
                         "rep_color": set_color[1],
                         "badge_col_color": set_color[2],
-                        "level_info_color": set_color[3]
+                        "level_profile_info_color": set_color[3]
                     }})
-            await self.bot.say("**Colors for level set.**")
+            await self.bot.say("**Colors for level_profile set.**")
         else:
             print("update one")
             db.users.update_one({'user_id':user.id}, {'$set':{
                     section_name: set_color[0]
                 }})
-            await self.bot.say("**Color for level {} set.**".format(section))
+            await self.bot.say("**Color for level_profile {} set.**".format(section))
 
     @rankset.command(name = "color", pass_context=True, no_pm=True)
     async def rankcolors(self, ctx, section:str, color:str = None):
@@ -769,7 +769,7 @@ class Leveler:
         return tuple(new_colors)
 
 
-    @levelset.command(pass_context=True, no_pm=True)
+    @level_profileset.command(pass_context=True, no_pm=True)
     async def info(self, ctx, *, info):
         """Set your user info."""
         user = ctx.message.author
@@ -814,9 +814,9 @@ class Leveler:
         else:
             await self.bot.say("That is not a valid bg. See available bgs at `{}backgrounds levelup`".format(prefix[0]))
 
-    @levelset.command(name = "bg", pass_context=True, no_pm=True)
-    async def levelbg(self, ctx, *, image_name:str):
-        """Set your level background"""
+    @level_profileset.command(name = "bg", pass_context=True, no_pm=True)
+    async def level_profilebg(self, ctx, *, image_name:str):
+        """Set your level_profile background"""
         user = ctx.message.author
         server = ctx.message.server
         # creates user if doesn't exist
@@ -832,12 +832,12 @@ class Leveler:
             return
 
 
-        if image_name in self.backgrounds["level"].keys():
+        if image_name in self.backgrounds["level_profile"].keys():
             if await self._process_purchase(ctx):
-                db.users.update_one({'user_id':user.id}, {'$set':{"level_background": self.backgrounds["level"][image_name]}})
-                await self.bot.say("**Your new level background has been succesfully set!**")
+                db.users.update_one({'user_id':user.id}, {'$set':{"level_profile_background": self.backgrounds["level_profile"][image_name]}})
+                await self.bot.say("**Your new level_profile background has been succesfully set!**")
         else:
-            await self.bot.say("That is not a valid bg. See available bgs at `{}backgrounds level`".format(prefix[0]))
+            await self.bot.say("That is not a valid bg. See available bgs at `{}backgrounds level_profile`".format(prefix[0]))
 
     @rankset.command(name = "bg", pass_context=True, no_pm=True)
     async def rankbg(self, ctx, *, image_name:str):
@@ -864,7 +864,7 @@ class Leveler:
         else:
             await self.bot.say("That is not a valid bg. See available bgs at `{}backgrounds rank`".format(prefix[0]))
 
-    @levelset.command(pass_context=True, no_pm=True)
+    @level_profileset.command(pass_context=True, no_pm=True)
     async def title(self, ctx, *, title):
         """Set your title."""
         user = ctx.message.author
@@ -1363,7 +1363,7 @@ class Leveler:
 
     @badge.command(name="set", pass_context=True, no_pm=True)
     async def set(self, ctx, name:str, priority_num:int):
-        '''Set a badge to level. -1(invis), 0(not on level), max: 5000.'''
+        '''Set a badge to level_profile. -1(invis), 0(not on level_profile), max: 5000.'''
         user = ctx.message.author
         server = ctx.message.author
         await self._create_user(user, server)
@@ -1473,7 +1473,7 @@ class Leveler:
                 'badges': badges['badges']
                 }})
 
-            # go though all users and update the badge. Doing it this way because dynamic does more accesses when doing level
+            # go though all users and update the badge. Doing it this way because dynamic does more accesses when doing level_profile
             for user in db.users.find({}):
                 try:
                     user = self._badge_convert_dict(user)
@@ -1787,16 +1787,16 @@ class Leveler:
 
     @checks.is_owner()
     @lvladminbg.command(no_pm=True)
-    async def addlevelbg(self, name:str, url:str):
-        """Add a level background. Proportions: (290px x 290px)"""
-        if name in self.backgrounds["level"].keys():
-            await self.bot.say("**That level background name already exists!**")
+    async def addlevel_profilebg(self, name:str, url:str):
+        """Add a level_profile background. Proportions: (290px x 290px)"""
+        if name in self.backgrounds["level_profile"].keys():
+            await self.bot.say("**That level_profile background name already exists!**")
         elif not await self._valid_image_url(url):
             await self.bot.say("**That is not a valid image url!**")
         else:
-            self.backgrounds["level"][name] = url
+            self.backgrounds["level_profile"][name] = url
             fileIO('data/leveler/backgrounds.json', "save", self.backgrounds)
-            await self.bot.say("**New level background(`{}`) added.**".format(name))
+            await self.bot.say("**New level_profile background(`{}`) added.**".format(name))
 
     @checks.is_owner()
     @lvladminbg.command(no_pm=True)
@@ -1828,11 +1828,11 @@ class Leveler:
     @lvladminbg.command(no_pm=True, pass_context=True)
     async def setcustombg(self, ctx, bg_type:str, user_id:str, img_url:str):
         """Set one-time custom background"""
-        valid_types = ['level', 'rank', 'levelup']
+        valid_types = ['level_profile', 'rank', 'levelup']
         type_input = bg_type.lower()
 
         if type_input not in valid_types:
-            await self.bot.say('**Please choose a valid type: `level`, `rank`, `levelup`.')
+            await self.bot.say('**Please choose a valid type: `level_profile`, `rank`, `levelup`.')
             return
 
         # test if valid user_id
@@ -1850,14 +1850,14 @@ class Leveler:
 
     @checks.is_owner()
     @lvladminbg.command(no_pm=True)
-    async def dellevelbg(self, name:str):
-        '''Delete a level background.'''
-        if name in self.backgrounds["level"].keys():
-            del self.backgrounds["level"][name]
+    async def dellevel_profilebg(self, name:str):
+        '''Delete a level_profile background.'''
+        if name in self.backgrounds["level_profile"].keys():
+            del self.backgrounds["level_profile"][name]
             fileIO('data/leveler/backgrounds.json', "save", self.backgrounds)
-            await self.bot.say("**The level background(`{}`) has been deleted.**".format(name))
+            await self.bot.say("**The level_profile background(`{}`) has been deleted.**".format(name))
         else:
-            await self.bot.say("**That level background name doesn't exist.**")
+            await self.bot.say("**That level_profile background name doesn't exist.**")
 
     @checks.is_owner()
     @lvladminbg.command(no_pm=True)
@@ -1883,7 +1883,7 @@ class Leveler:
 
     @commands.command(name = 'backgrounds', pass_context=True, no_pm=True)
     async def disp_backgrounds(self, ctx, type:str = None):
-        '''Gives a list of backgrounds. [p]backgrounds [level|rank|levelup]'''
+        '''Gives a list of backgrounds. [p]backgrounds [level_profile|rank|levelup]'''
         server = ctx.message.server
         user = ctx.message.author
         max_all = 18
@@ -1907,9 +1907,9 @@ class Leveler:
                 em.add_field(name = category.upper(), value = bgs, inline = False)
             await self.bot.say(embed = em)
         else:
-            if type.lower() == "level":
-                em.set_author(name="level Backgrounds for {}".format(self.bot.user.name), icon_url = self.bot.user.avatar_url)
-                bg_key = "level"
+            if type.lower() == "level_profile":
+                em.set_author(name="level_profile Backgrounds for {}".format(self.bot.user.name), icon_url = self.bot.user.avatar_url)
+                bg_key = "level_profile"
             elif type.lower() == "rank":
                 em.set_author(name="Rank Backgrounds for {}".format(self.bot.user.name), icon_url = self.bot.user.avatar_url)
                 bg_key = "rank"
@@ -1936,9 +1936,9 @@ class Leveler:
                     await self.bot.say(embed = em)
                     counter += 1
             else:
-                await self.bot.say("**Invalid Background Type. (level, rank, levelup)**")
+                await self.bot.say("**Invalid Background Type. (level_profile, rank, levelup)**")
 
-    async def draw_level(self, user, server):
+    async def draw_level_profile(self, user, server):
         font_thin_file = 'data/leveler/fonts/Uni_Sans_Thin.ttf'
         font_heavy_file = 'data/leveler/fonts/Uni_Sans_Heavy.ttf'
         font_file = 'data/leveler/fonts/SourceSansPro-Regular.ttf'
@@ -1971,8 +1971,8 @@ class Leveler:
         userinfo = db.users.find_one({'user_id':user.id})
         self._badge_convert_dict(userinfo)
         userinfo = db.users.find_one({'user_id':user.id}) ##############################################
-        bg_url = userinfo["level_background"]
-        level_url = user.avatar_url
+        bg_url = userinfo["level_profile_background"]
+        level_profile_url = user.avatar_url
 
         # COLORS
         white_color = (240,240,240,255)
@@ -1986,15 +1986,15 @@ class Leveler:
             badge_fill = (128,151,165,230)
         else:
             badge_fill = tuple(userinfo["badge_col_color"])
-        if "level_info_color" in userinfo.keys():
-            info_fill = tuple(userinfo["level_info_color"])
+        if "level_profile_info_color" in userinfo.keys():
+            info_fill = tuple(userinfo["level_profile_info_color"])
         else:
             info_fill = (30, 30 ,30, 220)
         info_fill_tx = (info_fill[0], info_fill[1], info_fill[2], 150)
-        if "level_exp_color" not in userinfo.keys() or not userinfo["level_exp_color"]:
+        if "level_profile_exp_color" not in userinfo.keys() or not userinfo["level_profile_exp_color"]:
             exp_fill = (255, 255, 255, 230)
         else:
-            exp_fill = tuple(userinfo["level_exp_color"])
+            exp_fill = tuple(userinfo["level_profile_exp_color"])
         if badge_fill == (128,151,165,230):
             level_fill = white_color
         else:
@@ -2002,23 +2002,23 @@ class Leveler:
 
         # create image objects
         bg_image = Image
-        level_image = Image
+        level_profile_image = Image
 
         async with aiohttp.get(bg_url) as r:
             image = await r.content.read()
-        with open('data/leveler/temp/{}_temp_level_bg.png'.format(user.id),'wb') as f:
+        with open('data/leveler/temp/{}_temp_level_profile_bg.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
-            async with aiohttp.get(level_url) as r:
+            async with aiohttp.get(level_profile_url) as r:
                 image = await r.content.read()
         except:
             async with aiohttp.get(default_avatar_url) as r:
                 image = await r.content.read()
-        with open('data/leveler/temp/{}_temp_level_level.png'.format(user.id),'wb') as f:
+        with open('data/leveler/temp/{}_temp_level_profile_level_profile.png'.format(user.id),'wb') as f:
             f.write(image)
 
-        bg_image = Image.open('data/leveler/temp/{}_temp_level_bg.png'.format(user.id)).convert('RGBA')
-        level_image = Image.open('data/leveler/temp/{}_temp_level_level.png'.format(user.id)).convert('RGBA')
+        bg_image = Image.open('data/leveler/temp/{}_temp_level_profile_bg.png'.format(user.id)).convert('RGBA')
+        level_profile_image = Image.open('data/leveler/temp/{}_temp_level_profile_level_profile.png'.format(user.id)).convert('RGBA')
 
         # set canvas
         bg_color = (255,255,255,0)
@@ -2044,7 +2044,7 @@ class Leveler:
         gap = 3
 
         draw.rectangle([(0,134), (340, 325)], fill=info_fill_tx) # general content
-        # draw level circle
+        # draw level_profile circle
         multiplier = 8
         lvl_circle_dia = 116
         circle_left = 14
@@ -2065,16 +2065,16 @@ class Leveler:
         lvl_bar_mask = mask.resize((lvl_circle_dia, lvl_circle_dia), Image.ANTIALIAS)
         process.paste(lvl_circle, (circle_left, circle_top), lvl_bar_mask)
 
-        # put in level picture
+        # put in level_profile picture
         total_gap = 6
         border = int(total_gap/2)
-        level_size = lvl_circle_dia - total_gap
-        raw_length = level_size * multiplier
-        output = ImageOps.fit(level_image, (raw_length, raw_length), centering=(0.5, 0.5))
-        output = output.resize((level_size, level_size), Image.ANTIALIAS)
-        mask = mask.resize((level_size, level_size), Image.ANTIALIAS)
-        level_image = level_image.resize((level_size, level_size), Image.ANTIALIAS)
-        process.paste(level_image, (circle_left + border, circle_top + border), mask)
+        level_profile_size = lvl_circle_dia - total_gap
+        raw_length = level_profile_size * multiplier
+        output = ImageOps.fit(level_profile_image, (raw_length, raw_length), centering=(0.5, 0.5))
+        output = output.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        mask = mask.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        level_profile_image = level_profile_image.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        process.paste(level_profile_image, (circle_left + border, circle_top + border), mask)
 
         # write label text
         white_color = (240,240,240,255)
@@ -2254,15 +2254,15 @@ class Leveler:
 
         result = Image.alpha_composite(result, process)
         result = self._add_corners(result, 25)
-        result.save('data/leveler/temp/{}_level.png'.format(user.id),'PNG', quality=100)
+        result.save('data/leveler/temp/{}_level_profile.png'.format(user.id),'PNG', quality=100)
 
         # remove images
         try:
-            os.remove('data/leveler/temp/{}_temp_level_bg.png'.format(user.id))
+            os.remove('data/leveler/temp/{}_temp_level_profile_bg.png'.format(user.id))
         except:
             pass
         try:
-            os.remove('data/leveler/temp/{}_temp_level_level.png'.format(user.id))
+            os.remove('data/leveler/temp/{}_temp_level_profile_level_profile.png'.format(user.id))
         except:
             pass
 
@@ -2344,24 +2344,24 @@ class Leveler:
         userinfo = db.users.find_one({'user_id':user.id})
         # get urls
         bg_url = userinfo["rank_background"]
-        level_url = user.avatar_url
+        level_profile_url = user.avatar_url
         server_icon_url = server.icon_url
 
         # create image objects
         bg_image = Image
-        level_image = Image
+        level_profile_image = Image
 
         async with aiohttp.get(bg_url) as r:
             image = await r.content.read()
         with open('data/leveler/temp/{}_temp_rank_bg.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
-            async with aiohttp.get(level_url) as r:
+            async with aiohttp.get(level_profile_url) as r:
                 image = await r.content.read()
         except:
             async with aiohttp.get(default_avatar_url) as r:
                 image = await r.content.read()
-        with open('data/leveler/temp/{}_temp_rank_level.png'.format(user.id),'wb') as f:
+        with open('data/leveler/temp/{}_temp_rank_level_profile.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
             async with aiohttp.get(server_icon_url) as r:
@@ -2373,7 +2373,7 @@ class Leveler:
             f.write(image)
 
         bg_image = Image.open('data/leveler/temp/{}_temp_rank_bg.png'.format(user.id)).convert('RGBA')
-        level_image = Image.open('data/leveler/temp/{}_temp_rank_level.png'.format(user.id)).convert('RGBA')
+        level_profile_image = Image.open('data/leveler/temp/{}_temp_rank_level_profile.png'.format(user.id)).convert('RGBA')
         server_image = Image.open('data/leveler/temp/{}_temp_server_icon.png'.format(user.id)).convert('RGBA')
 
         # set canvas
@@ -2447,14 +2447,14 @@ class Leveler:
         # draws mask
         total_gap = 10
         border = int(total_gap/2)
-        level_size = lvl_circle_dia - total_gap
-        raw_length = level_size * multiplier
-        # put in level picture
-        output = ImageOps.fit(level_image, (raw_length, raw_length), centering=(0.5, 0.5))
-        output = output.resize((level_size, level_size), Image.ANTIALIAS)
-        mask = mask.resize((level_size, level_size), Image.ANTIALIAS)
-        level_image = level_image.resize((level_size, level_size), Image.ANTIALIAS)
-        process.paste(level_image, (circle_left + border, circle_top + border), mask)
+        level_profile_size = lvl_circle_dia - total_gap
+        raw_length = level_profile_size * multiplier
+        # put in level_profile picture
+        output = ImageOps.fit(level_profile_image, (raw_length, raw_length), centering=(0.5, 0.5))
+        output = output.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        mask = mask.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        level_profile_image = level_profile_image.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        process.paste(level_profile_image, (circle_left + border, circle_top + border), mask)
 
         # draw level box
         level_left = 274
@@ -2486,8 +2486,8 @@ class Leveler:
         server_image = server_image.resize((server_size*multiplier, server_size*multiplier), Image.ANTIALIAS)
         server_image = self._add_corners(server_image, int(radius*multiplier/2)-10)
         server_image = server_image.resize((server_size, server_size), Image.ANTIALIAS)
-        process.paste(draw_server_border, (circle_left + level_size + 2*border + 8, content_top + 3), draw_server_border)
-        process.paste(server_image, (circle_left + level_size + 2*border + 10, content_top + 5), server_image)
+        process.paste(draw_server_border, (circle_left + level_profile_size + 2*border + 8, content_top + 3), draw_server_border)
+        process.paste(server_image, (circle_left + level_profile_size + 2*border + 10, content_top + 5), server_image)
 
         # name
         left_text_align = 130
@@ -2552,24 +2552,24 @@ class Leveler:
         userinfo = db.users.find_one({'user_id':user.id})
         # get urls
         bg_url = userinfo["rank_background"]
-        level_url = user.avatar_url
+        level_profile_url = user.avatar_url
         server_icon_url = server.icon_url
 
         # create image objects
         bg_image = Image
-        level_image = Image
+        level_profile_image = Image
 
         async with aiohttp.get(bg_url) as r:
             image = await r.content.read()
         with open('data/leveler/temp/test_temp_rank_bg.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
-            async with aiohttp.get(level_url) as r:
+            async with aiohttp.get(level_profile_url) as r:
                 image = await r.content.read()
         except:
             async with aiohttp.get(default_avatar_url) as r:
                 image = await r.content.read()
-        with open('data/leveler/temp/test_temp_rank_level.png'.format(user.id),'wb') as f:
+        with open('data/leveler/temp/test_temp_rank_level_profile.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
             async with aiohttp.get(server_icon_url) as r:
@@ -2581,7 +2581,7 @@ class Leveler:
             f.write(image)
 
         bg_image = Image.open('data/leveler/temp/test_temp_rank_bg.png'.format(user.id)).convert('RGBA')
-        level_image = Image.open('data/leveler/temp/test_temp_rank_level.png'.format(user.id)).convert('RGBA')
+        level_profile_image = Image.open('data/leveler/temp/test_temp_rank_level_profile.png'.format(user.id)).convert('RGBA')
         server_image = Image.open('data/leveler/temp/test_temp_server_icon.png'.format(user.id)).convert('RGBA')
 
         # set canvas
@@ -2649,7 +2649,7 @@ class Leveler:
             exp_fill = tuple(userinfo["rank_exp_color"])"""
         exp_fill = (255, 255, 255, 230)
 
-        # put on level circle background
+        # put on level_profile circle background
         lvl_circle = lvl_circle.resize((lvl_circle_dia, lvl_circle_dia), Image.ANTIALIAS)
         lvl_bar_mask = mask.resize((lvl_circle_dia, lvl_circle_dia), Image.ANTIALIAS)
         process.paste(lvl_circle, (circle_left, circle_top), lvl_bar_mask)
@@ -2657,14 +2657,14 @@ class Leveler:
         # draws mask
         total_gap = 6
         border = int(total_gap/2)
-        level_size = lvl_circle_dia - total_gap
-        raw_length = level_size * multiplier
-        # put in level picture
-        output = ImageOps.fit(level_image, (raw_length, raw_length), centering=(0.5, 0.5))
-        output = output.resize((level_size, level_size), Image.ANTIALIAS)
-        mask = mask.resize((level_size, level_size), Image.ANTIALIAS)
-        level_image = level_image.resize((level_size, level_size), Image.ANTIALIAS)
-        process.paste(level_image, (circle_left + border, circle_top + border), mask)
+        level_profile_size = lvl_circle_dia - total_gap
+        raw_length = level_profile_size * multiplier
+        # put in level_profile picture
+        output = ImageOps.fit(level_profile_image, (raw_length, raw_length), centering=(0.5, 0.5))
+        output = output.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        mask = mask.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        level_profile_image = level_profile_image.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        process.paste(level_profile_image, (circle_left + border, circle_top + border), mask)
 
         # draw text
         grey_color = (100,100,100,255)
@@ -2732,27 +2732,27 @@ class Leveler:
         userinfo = db.users.find_one({'user_id':user.id})
         # get urls
         bg_url = userinfo["levelup_background"]
-        level_url = user.avatar_url
+        level_profile_url = user.avatar_url
 
         # create image objects
         bg_image = Image
-        level_image = Image
+        level_profile_image = Image
 
         async with aiohttp.get(bg_url) as r:
             image = await r.content.read()
         with open('data/leveler/temp/{}_temp_level_bg.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
-            async with aiohttp.get(level_url) as r:
+            async with aiohttp.get(level_profile_url) as r:
                 image = await r.content.read()
         except:
             async with aiohttp.get(default_avatar_url) as r:
                 image = await r.content.read()
-        with open('data/leveler/temp/{}_temp_level_level.png'.format(user.id),'wb') as f:
+        with open('data/leveler/temp/{}_temp_level_level_profile.png'.format(user.id),'wb') as f:
             f.write(image)
 
         bg_image = Image.open('data/leveler/temp/{}_temp_level_bg.png'.format(user.id)).convert('RGBA')
-        level_image = Image.open('data/leveler/temp/{}_temp_level_level.png'.format(user.id)).convert('RGBA')
+        level_profile_image = Image.open('data/leveler/temp/{}_temp_level_level_profile.png'.format(user.id)).convert('RGBA')
 
         # set canvas
         width = 175
@@ -2804,14 +2804,14 @@ class Leveler:
         # draws mask
         total_gap = 6
         border = int(total_gap/2)
-        level_size = lvl_circle_dia - total_gap
-        raw_length = level_size * multiplier
-        # put in level picture
-        output = ImageOps.fit(level_image, (raw_length, raw_length), centering=(0.5, 0.5))
-        output = output.resize((level_size, level_size), Image.ANTIALIAS)
-        mask = mask.resize((level_size, level_size), Image.ANTIALIAS)
-        level_image = level_image.resize((level_size, level_size), Image.ANTIALIAS)
-        process.paste(level_image, (circle_left + border, circle_top + border), mask)
+        level_profile_size = lvl_circle_dia - total_gap
+        raw_length = level_profile_size * multiplier
+        # put in level_profile picture
+        output = ImageOps.fit(level_profile_image, (raw_length, raw_length), centering=(0.5, 0.5))
+        output = output.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        mask = mask.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        level_profile_image = level_profile_image.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        process.paste(level_profile_image, (circle_left + border, circle_top + border), mask)
 
         # fonts
         level_fnt2 = ImageFont.truetype('data/leveler/fonts/font_bold.ttf', 19)
@@ -2838,27 +2838,27 @@ class Leveler:
 
         # get urls
         bg_url = userinfo["levelup_background"]
-        level_url = user.avatar_url
+        level_profile_url = user.avatar_url
 
         # create image objects
         bg_image = Image
-        level_image = Image
+        level_profile_image = Image
 
         async with aiohttp.get(bg_url) as r:
             image = await r.content.read()
         with open('data/leveler/temp/{}_temp_level_bg.png'.format(user.id),'wb') as f:
             f.write(image)
         try:
-            async with aiohttp.get(level_url) as r:
+            async with aiohttp.get(level_profile_url) as r:
                 image = await r.content.read()
         except:
             async with aiohttp.get(default_avatar_url) as r:
                 image = await r.content.read()
-        with open('data/leveler/temp/{}_temp_level_level.png'.format(user.id),'wb') as f:
+        with open('data/leveler/temp/{}_temp_level_level_profile.png'.format(user.id),'wb') as f:
             f.write(image)
 
         bg_image = Image.open('data/leveler/temp/{}_temp_level_bg.png'.format(user.id)).convert('RGBA')
-        level_image = Image.open('data/leveler/temp/{}_temp_level_level.png'.format(user.id)).convert('RGBA')
+        level_profile_image = Image.open('data/leveler/temp/{}_temp_level_level_profile.png'.format(user.id)).convert('RGBA')
 
         # set canvas
         width = 176
@@ -2909,14 +2909,14 @@ class Leveler:
         lvl_bar_mask = mask.resize((lvl_circle_dia, lvl_circle_dia), Image.ANTIALIAS)
         process.paste(lvl_circle, (circle_left, circle_top), lvl_bar_mask)
 
-        level_size = lvl_circle_dia - total_gap
-        raw_length = level_size * multiplier
-        # put in level picture
-        output = ImageOps.fit(level_image, (raw_length, raw_length), centering=(0.5, 0.5))
-        output = output.resize((level_size, level_size), Image.ANTIALIAS)
-        mask = mask.resize((level_size, level_size), Image.ANTIALIAS)
-        level_image = level_image.resize((level_size, level_size), Image.ANTIALIAS)
-        process.paste(level_image, (circle_left + border, circle_top + border), mask)
+        level_profile_size = lvl_circle_dia - total_gap
+        raw_length = level_profile_size * multiplier
+        # put in level_profile picture
+        output = ImageOps.fit(level_profile_image, (raw_length, raw_length), centering=(0.5, 0.5))
+        output = output.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        mask = mask.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        level_profile_image = level_profile_image.resize((level_profile_size, level_profile_size), Image.ANTIALIAS)
+        process.paste(level_profile_image, (circle_left + border, circle_top + border), mask)
 
         # write label text
         white_text = (250,250,250,255)
@@ -3140,7 +3140,7 @@ class Leveler:
                     "username" : user.name,
                     "servers": {},
                     "total_exp": 0,
-                    "level_background": self.backgrounds["level"]["default"],
+                    "level_profile_background": self.backgrounds["level_profile"]["default"],
                     "rank_background": self.backgrounds["rank"]["default"],
                     "levelup_background": self.backgrounds["levelup"]["default"],
                     "title": "",
@@ -3152,7 +3152,7 @@ class Leveler:
                     "badge_col_color": [],
                     "rep_block": 0,
                     "chat_block": 0,
-                    "level_block": 0,
+                    "level_profile_block": 0,
                     "rank_block": 0
                 }
                 db.users.insert_one(new_account)
@@ -3241,7 +3241,7 @@ def check_files():
         fileIO(settings_path, "save", default)
 
     bgs = {
-            "level": {
+            "level_profile": {
                 "alice": "http://i.imgur.com/MUSuMao.png",
                 "bluestairs": "http://i.imgur.com/EjuvxjT.png",
                 "lamp": "http://i.imgur.com/0nQSmKX.jpg",
