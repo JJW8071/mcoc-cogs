@@ -26,8 +26,8 @@ except:
 import time
 
 # fonts
-font_file = 'data/leveler/fonts/font.ttf'
-font_bold_file = 'data/leveler/fonts/font_bold.ttf'
+font_file = 'data/leveler/fonts/Eurostile-Normal.ttf'
+font_bold_file = 'data/leveler/fonts/Hanzel-Condensed-Bold-Italic-Font.ttf'
 font_unicode_file = 'data/leveler/fonts/unicode.ttf'
 
 # Credits (None)
