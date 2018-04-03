@@ -12,10 +12,10 @@ class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
 
     aq_map = {
-        '5':{'map': 'aq5', 'maptitle':'5'},
-        '5.1':{'map': 'aq51','maptitle':'5 Tier 1'},
-        '5.2':{'map':  'aq52', 'maptitle':'5 Tier 2'},
-        '5.3':{'map': 'aq53','maptitle':'5 Tier 3'},
+        '5':{'map': 'aq5v4', 'maptitle':'5'},
+        '5.1':{'map': 'aq51v4','maptitle':'5 Tier 1'},
+        '5.2':{'map':  'aq52v4', 'maptitle':'5 Tier 2'},
+        '5.3':{'map': 'aq53v4','maptitle':'5 Tier 3'},
         '6':{'map': 'aq6v4', 'maptitle':'6'},
         '6.1':{'map': 'aq61v4','maptitle':'6 Tier 1'},
         '6.2':{'map':  'aq62v4', 'maptitle':'6 Tier 2'},
