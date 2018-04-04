@@ -26,6 +26,10 @@ class MCOCMaps:
         '6.3':{'map': 'aq63v4','maptitle':'6 Tier 3'},}
 
     aq_map_tips = {
+        'cheatsheet':{},
+        'cheat':{},
+        'sentinel':{},
+        'sucks':{},
         '5':{},
         '5.1':{'required':'',
             'energy':'',
