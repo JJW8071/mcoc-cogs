@@ -1024,7 +1024,7 @@ class MCOC(ChampionFactory):
         em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets',url=DUEL_SPREADSHEET)
         em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
         em.set_thumbnail(url=champ.get_featured())
-        em.set_footer(text='2OO2RC51\' Duel Targets',
+        em.set_footer(text='2OO2RC51\' Duel Targets + Notsu X',
                 icon_url=GSHEET_ICON)
 
         targets = []
