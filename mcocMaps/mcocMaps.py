@@ -26,7 +26,7 @@ class MCOCMaps:
         'cheatsheet':{
             'required':'',
             'energy':'',
-            'tips':'Sentinel monitors the target, when they repeat the same action consecutively, Sentinel gains 4 Analysis Charges. Actions include Light Attacks, Medium Attacks, Heavy Attacks, Dashing, Dodging, and Blocking an attack. Analysis Charges stack up to 100 max.\n\nMM combo = 8 Analysis Charges\nMLLM = 8 Analysis Charges\nMLLLL = 24 Analysis Charges\nMLML = 0 Analysis Charges\n\n~ RobShiBob'},
+            'tips':'Sentinel gains 1 Adaptation charge(s) when an Opponent performs the same action consecutively. Actions include Light Attacks, Medium Attacks, Heavy Attacks, Dashing, Dodging, and Blocking an Attack. Max: 50 charges.\n\nMM combo = 2 Analysis Charges\nMLLM = 2 Analysis Charges\nMLLLL = 3 Analysis Charges\nLMLM = 0 Analysis Charges\n\n~ RobShiBob'},
         '5':{},
         '5.1':{'required':'',
             'energy':'',
