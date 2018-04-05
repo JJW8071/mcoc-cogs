@@ -12,7 +12,7 @@ class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
 
     aq_map = {
-        'cheatsheet':{'map':'newcheatsheet', 'maptitle':'Season 4 Cheat Sheet'},
+        'cheatsheet':{'map':'cheatsheetv2', 'maptitle':'Season 4 Cheat Sheet'},
         '5':{'map': 'aq5v4', 'maptitle':'5'},
         '5.1':{'map': 'aq51v4','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52v4', 'maptitle':'5 Tier 2'},
