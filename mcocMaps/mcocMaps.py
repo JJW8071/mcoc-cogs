@@ -13,9 +13,6 @@ class MCOCMaps:
 
     aq_map = {
         'cheatsheet':{'map':'cheatsheet', 'maptitle':'Season 4 Cheat Sheet'},
-        'sentinel':{'map':'cheatsheet', 'maptitle':'Season 4 Cheat Sheet'},
-        'cheat':{'map':'cheatsheet', 'maptitle':'Season 4 Cheat Sheet'},
-        'sucks':{'map':'cheatsheet', 'maptitle':'Season 4 Cheat Sheet'},
         '5':{'map': 'aq5v4', 'maptitle':'5'},
         '5.1':{'map': 'aq51v4','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52v4', 'maptitle':'5 Tier 2'},
@@ -118,7 +115,7 @@ class MCOCMaps:
     @commands.command(pass_context=True, aliases=['aq'])
     async def aqmap(self, ctx, *, maptype: str):
         '''Select a Map
-            cheatsheet : cheatsheet, cheat, sentinel
+            cheatsheet : cheatsheet
             aq maps : 5, 5.1, 5.2, 5.3, 6, 6.1, 6.2, 6.3
             /aq 5'''
         embeds = []
