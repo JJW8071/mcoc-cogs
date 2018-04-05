@@ -26,10 +26,10 @@ class MCOCMaps:
         '6.3':{'map': 'aq63v4','maptitle':'6 Tier 3'},}
 
     aq_map_tips = {
-        'cheatsheet':{},
-        'cheat':{},
-        'sentinel':{},
-        'sucks':{},
+        'cheatsheet':{
+            'required':'',
+            'energy':'',
+            'tips':'Sentinel monitors the target, when they repeat the same action consecutively, Sentinel gains 4 Analysis Charges. Actions include Light Attacks, Medium Attacks, Heavy Attacks, Dashing, Dodging, and Blocking an attack. Analysis Charges stack up to 100 max.\n\nMM combo = 8 Analysis Charges\nMLLM = 8 Analysis Charges\nMLLLL = 24 Analysis Charges\nMLML = 0 Analysis Charges\n\n~ RobShiBob'},
         '5':{},
         '5.1':{'required':'',
             'energy':'',
@@ -129,15 +129,18 @@ class MCOCMaps:
             em.set_image(url=mapurl)
             em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
             embeds.append(em)
-            if 'required' in self.aq_map_tips[maptype]:
+            if 'tips' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
                 em2 = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em2.set_image(url=mapurl)
-                em2.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
-                em2.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
-                em2.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
-                em2.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
+                em2.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
+                if self.aq_map_tips[maptype]['required'] != '':
+                    em2.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
+                if self.aq_map_tips[maptype]['energy'] != '':
+                    em2.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
+                if self.aq_map_tips[maptype]['tips'] != '':
+                    em2.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
                 embeds.append(em2)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
             # await self.bot.say(embed=em)
