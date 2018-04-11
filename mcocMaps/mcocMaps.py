@@ -187,7 +187,7 @@ class MCOCMaps:
     @commands.command(pass_context=True, aliases=('aw'))
     async def warmap(self, ctx):
         '''Alliance War 2.0 Map'''
-        mapurl = '{}warmap_2.png'.format(self.basepath)
+        mapurl = '{}warmap_2v2.png'.format(self.basepath)
         mapTitle = 'Alliance War 2.0 Map'
         em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
         em.set_image(url=mapurl)
