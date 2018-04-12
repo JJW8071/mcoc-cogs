@@ -1739,6 +1739,65 @@ class MCOC(ChampionFactory):
     async def submit(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
+
+    @submit.command(pass_context=True, name='stats')
+    async def submit_stats(self, ctx, champ : ChampConverter, stats):
+
+        hp = 0 # Health
+        atk = 0 # Attack
+        cr = 0 # Critical Rate
+        cd = 0 # Critical Damage
+        armorpen = 0 # Armor Penetration
+        blockpen = 0 # Blcok Proficiency
+        critresist = 0 # Critical Resistance
+        armor = 0 # Armor
+        bp = 0 # Block Proficiency
+
+        parse_re = re.compile(r'''(?:hp(?P<hp>/d{1,6}))
+            |(?:atk(?P<atk>/d{1,4}))
+            |(?:cr(?P<cr>/d{1,4}))
+            |(?:cd(?P<cd>/d{1,4}))
+            |(?:armorpen(?P<armopen>/d{1,4}))
+            |(?:blockpen(?P<blockpen>/d{1,4}))
+            |(?:critresist(?P<critresist>/d{1,4}))
+            |(?:armor(?P<armor>/d{1,4}))
+            |(?:bp(?P<bp>/d{1,5}))
+            ''',re.X)
+
+        guild = await self.check_guild(ctx)
+        if not guild:
+            await self.bot.say('This server is unauthorized.')
+            return
+        else:
+            message = await self.bot.say('Submission registered.\nChampion: ' + champ.verbose_str
+                    'Health: ' + hp
+                    'Attack: ' + atk
+                    'Critical Rate: ' + cr
+                    'Critical Damage: ' + cd
+                    'Armor Penetration: ' + armorpen
+                    'Critical Resistance: ' + critresist
+                    'Armor: ' + armor
+                    'Block Proficiency: ' + bp
+                    '\nPress OK to confirm.')
+            await self.bot.add_reaction(message, '❌')
+            await self.bot.add_reaction(message, '🆗')
+            react = await self.bot.wait_for_reaction(message=message,
+                    user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+            if react is not None:
+                if react.reaction.emoji == '❌':
+                    await self.bot.say('Submission canceled.')
+                elif react.reaction.emoji == '🆗':
+                    GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
+                    message2 = await self.bot.say('Submission in process.')
+                    author = ctx.message.author
+                    package = [[str(ctx.message.timestamp), author.name, champ.full_name, champ.star, champ.rank, hp, attack, cr, cd, armorpen, blockpen, critresist, armor, bp, author.id ]]
+                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
+                    if check:
+                        await self.bot.edit_message(message2, 'Submission complete.')
+                    else:
+                        await self.bot.edit_message(message2, 'Submission failed.')
+            else:
+                await self.bot.say('Ambiguous response.  Submission canceled')
     # @submit.command(pass_context=True, name='stats')
     # async def submit_stats(self, ctx, args):
     #     # Need to split out hp atk cr cd armor bp
