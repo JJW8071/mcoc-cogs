@@ -1748,15 +1748,15 @@ class MCOC(ChampionFactory):
             return
         else:
             default = {
-                hp : 0, # Health
-                atk : 0, # Attack
-                cr : 0, # Critical Rate
-                cd : 0, # Critical Damage
-                blockpen : 0, # Blcok Proficiency
-                armorpen : 0, # Armor Penetration
-                critresist : 0, # Critical Resistance
-                armor : 0, # Armor
-                bp : 0, # Block Proficiency
+                'hp' : 0, # Health
+                'atk' : 0, # Attack
+                'cr' : 0, # Critical Rate
+                'cd' : 0, # Critical Damage
+                'blockpen' : 0, # Blcok Proficiency
+                'critresist' : 0, # Critical Resistance
+                'armorpen' : 0, # Armor Penetration
+                'armor' : 0, # Armor
+                'bp' : 0, # Block Proficiency
             }
 
             parse_re = re.compile(r'''(?:hp(?P<hp>/d{1,6}))
