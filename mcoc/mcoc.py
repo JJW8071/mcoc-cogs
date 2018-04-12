@@ -1771,8 +1771,8 @@ class MCOC(ChampionFactory):
                 ''',re.X)
 
             dangling_arg = None
-            for arg in self.stats.lower().split(' '):
-                for m in self.parse_re.finditer(arg):
+            for arg in stats.lower().split(' '):
+                for m in parse_re.finditer(arg):
                     default[m.lastgroup] = int(m.group(m.lastgroup))
 
             message = await self.bot.say('Submission registered.\nChampion: ' + champ.verbose_str +
