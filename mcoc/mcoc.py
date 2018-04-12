@@ -1742,55 +1742,39 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='stats')
     async def submit_stats(self, ctx, champ : ChampConverter, stats):
-
-        default = {
-            hp : 0, # Health
-            atk : 0, # Attack
-            cr : 0, # Critical Rate
-            cd : 0, # Critical Damage
-            blockpen : 0, # Blcok Proficiency
-            armorpen : 0, # Armor Penetration
-            critresist : 0, # Critical Resistance
-            armor : 0, # Armor
-            bp : 0, # Block Proficiency
-        }
-        hp, cr, cd, armorpen, blockpen, critresist, armor, bp = 0
-
-        parse_re = re.compile(r'''(?:hp(?P<hp>/d{1,6}))
-            |(?:atk(?P<atk>/d{1,4}))
-            |(?:cr(?P<cr>/d{1,4}))
-            |(?:cd(?P<cd>/d{1,4}))
-            |(?:armorpen(?P<armopen>/d{1,4}))
-            |(?:blockpen(?P<blockpen>/d{1,4}))
-            |(?:critresist(?P<critresist>/d{1,4}))
-            |(?:armor(?P<armor>/d{1,4}))
-            |(?:bp(?P<bp>/d{1,5}))
-            ''',re.X)
-
-        dangling_arg = None
-        for arg in self.stats.lower().split(' '):
-            attrs = default.copy()
-            for m in self.parse_re.finditer(arg):
-                attrs[m.lastgroup] = int(m.group(m.lastgroup))
-            token = self.parse_re.sub('', arg)
-            if token != '':
-                champ = await self.get_champion(bot, token, attrs)
-                dangling_arg = None
-                champs.append(champ)
-            else:
-                default.update(attrs)
-                dangling_arg = arg
-        if dangling_arg:
-            em = discord.Embed(title='Dangling Argument',
-                    description="Last argument '{}' is unused.\n".format(dangling_arg)
-                        + "Place **before** the champion or **without a space**.")
-
-
         guild = await self.check_guild(ctx)
         if not guild:
             await self.bot.say('This server is unauthorized.')
             return
         else:
+            default = {
+                hp : 0, # Health
+                atk : 0, # Attack
+                cr : 0, # Critical Rate
+                cd : 0, # Critical Damage
+                blockpen : 0, # Blcok Proficiency
+                armorpen : 0, # Armor Penetration
+                critresist : 0, # Critical Resistance
+                armor : 0, # Armor
+                bp : 0, # Block Proficiency
+            }
+
+            parse_re = re.compile(r'''(?:hp(?P<hp>/d{1,6}))
+                |(?:atk(?P<atk>/d{1,4}))
+                |(?:cr(?P<cr>/d{1,4}))
+                |(?:cd(?P<cd>/d{1,4}))
+                |(?:armorpen(?P<armopen>/d{1,4}))
+                |(?:blockpen(?P<blockpen>/d{1,4}))
+                |(?:critresist(?P<critresist>/d{1,4}))
+                |(?:armor(?P<armor>/d{1,4}))
+                |(?:bp(?P<bp>/d{1,5}))
+                ''',re.X)
+
+            dangling_arg = None
+            for arg in self.stats.lower().split(' '):
+                for m in self.parse_re.finditer(arg):
+                    default[m.lastgroup] = int(m.group(m.lastgroup))
+
             message = await self.bot.say('Submission registered.\nChampion: ' + champ.verbose_str +
                     '\nHealth: {0.hp}'
                     '\nAttack: {0.atk}'
