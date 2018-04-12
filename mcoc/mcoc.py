@@ -1770,14 +1770,14 @@ class MCOC(ChampionFactory):
             return
         else:
             message = await self.bot.say('Submission registered.\nChampion: ' + champ.verbose_str +
-                    'Health: ' + hp +
-                    'Attack: ' + atk +
-                    'Critical Rate: ' + cr +
-                    'Critical Damage: ' + cd +
-                    'Armor Penetration: ' + armorpen +
-                    'Critical Resistance: ' + critresist +
-                    'Armor: ' + armor +
-                    'Block Proficiency: ' + bp +
+                    'Health: ' + str(hp) +
+                    'Attack: ' + str(atk) +
+                    'Critical Rate: ' + str(cr) +
+                    'Critical Damage: ' + str(cd) +
+                    'Armor Penetration: ' + str(armorpen) +
+                    'Critical Resistance: ' + str(critresist) +
+                    'Armor: ' + str(armor) +
+                    'Block Proficiency: ' + str(bp) +
                     '\nPress OK to confirm.')
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
