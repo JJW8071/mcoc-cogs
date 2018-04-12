@@ -1791,7 +1791,7 @@ class MCOC(ChampionFactory):
                     message2 = await self.bot.say('Submission in process.')
                     author = ctx.message.author
                     package = [[str(ctx.message.timestamp), author.name, champ.full_name, champ.star, champ.rank, hp, attack, cr, cd, armorpen, blockpen, critresist, armor, bp, author.id ]]
-                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
+                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='submit_stats')
                     if check:
                         await self.bot.edit_message(message2, 'Submission complete.')
                     else:
