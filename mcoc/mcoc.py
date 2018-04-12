@@ -1741,7 +1741,7 @@ class MCOC(ChampionFactory):
             await send_cmd_help(ctx)
 
     @submit.command(pass_context=True, name='stats')
-    async def submit_stats(self, ctx, champ : ChampConverter, stats):
+    async def submit_stats(self, ctx, champ : ChampConverter, *, stats):
         guild = await self.check_guild(ctx)
         if not guild:
             await self.bot.say('This server is unauthorized.')
