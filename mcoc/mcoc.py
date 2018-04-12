@@ -1769,15 +1769,15 @@ class MCOC(ChampionFactory):
             await self.bot.say('This server is unauthorized.')
             return
         else:
-            message = await self.bot.say('Submission registered.\nChampion: ' + champ.verbose_str
-                    'Health: ' + hp
-                    'Attack: ' + atk
-                    'Critical Rate: ' + cr
-                    'Critical Damage: ' + cd
-                    'Armor Penetration: ' + armorpen
-                    'Critical Resistance: ' + critresist
-                    'Armor: ' + armor
-                    'Block Proficiency: ' + bp
+            message = await self.bot.say('Submission registered.\nChampion: ' + champ.verbose_str +
+                    'Health: ' + hp +
+                    'Attack: ' + atk +
+                    'Critical Rate: ' + cr +
+                    'Critical Damage: ' + cd +
+                    'Armor Penetration: ' + armorpen +
+                    'Critical Resistance: ' + critresist +
+                    'Armor: ' + armor +
+                    'Block Proficiency: ' + bp +
                     '\nPress OK to confirm.')
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
