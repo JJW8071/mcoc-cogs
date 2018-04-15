@@ -1965,7 +1965,8 @@ class MCOC(ChampionFactory):
         GKEY = '1RoofkyYgFu6XOypoe_IPVHivvToEuLL2Vqv1KDQLGlA' #100 hit challenge
         SHEETKEY = 'collector_submit'
         pct = round(((547774-wintersoldier_hp)/547774)*100, 4)
-        package = [[author.name, champ.unique, champ.full_name, champ.star, champ.rank, wintersoldier_hp, hits, pct]]
+        now = str(ctx.message.timestamp)
+        package = [[author.name, champ.unique, champ.full_name, champ.star, champ.rank, wintersoldier_hp, hits, pct, now]]
         print('package built')
         if react is not None:
             if react.reaction.emoji == '❌':
