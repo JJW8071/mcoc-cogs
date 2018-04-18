@@ -139,7 +139,7 @@ class MCOCMaps:
                 embeds.append(em2)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
             # await self.bot.say(embed=em)
-            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
             await self.bot.say(embed=em)
 
 
