@@ -17,10 +17,10 @@ class MCOCMaps:
         '5.1':{'map': 'aq51v4','maptitle':'5 Tier 1'},
         '5.2':{'map':  'aq52v4', 'maptitle':'5 Tier 2'},
         '5.3':{'map': 'aq53v4','maptitle':'5 Tier 3'},
-        '6':{'map': 'aq6v6', 'maptitle':'6'},
-        '6.1':{'map': 'aq61v6','maptitle':'6 Tier 1'},
-        '6.2':{'map':  'aq62v4', 'maptitle':'6 Tier 2'},
-        '6.3':{'map': 'aq63v4','maptitle':'6 Tier 3'},}
+        '6':{'map': 'aq6v7', 'maptitle':'6'},
+        '6.1':{'map': 'aq61v7','maptitle':'6 Tier 1'},
+        '6.2':{'map':  'aq62v7', 'maptitle':'6 Tier 2'},
+        '6.3':{'map': 'aq63v7','maptitle':'6 Tier 3'},}
 
     aq_map_tips = {
         'cheatsheet':{
@@ -28,20 +28,14 @@ class MCOCMaps:
             'energy':'',
             'tips':'Sentinel gains 1 Adaptation charge(s) when an Opponent performs the same action consecutively. Actions include Light Attacks, Medium Attacks, Heavy Attacks, Dashing, Dodging, and Blocking an Attack. Max: 50 charges.\n\nMM combo = 2 Analysis Charges\nMLLM = 2 Analysis Charges\nMLLLL = 3 Analysis Charges\nLMLM = 0 Analysis Charges\n\n~ RobShiBob'},
         '5':{},
-        '5.1':{'required':'',
-            'energy':'',
-            'tips':''},
-        '5.2':{'required':'Path A\n- Bleed Immune\nPath H\n- Poison Immune',
-            'energy':'',
-            'tips':''},
-        '5.3':{'required':'',
-            'energy':'',
-            'tips':''},
+        '5.1':{},
+        '5.2':{},
+        '5.3':{},
         '6':{},
         '6.1':{'required':'Path F\n- Power Control\nPath A\n- 2 players\nPath B\n- 2 players\nPath G\n- 2 players',
             'energy':'Paths D & E move first\nPaths B, C, F, G move next\nPath A moves last.',
             'tips':'Path A \n- Defense Ability Reduction for tile 22.\nPaths D & E \n- Defense Ability Reduction for Thorns tile 14\n- Regen for tile 19, 20.\nPath F\n- Power control for All or Nothing tile 9.\n-Defensive Ability Reduction for tile 10.\nPath G\n- Daredevil for Enhanced Raged Specials.'},
-        '6.2':{'required':'Paths A\n- Poison Immune\n- 2 players\nPath B\n- Poison Immune\nPath G\n- Power control\nPaths H\n- Bleed Immune\nPath I\n- Bleed Immune\n- 2 players',
+        '6.2':{'required':'Paths A & B\n- Poison Immune\nPath G\n- Power control\nPaths H & I\n- Bleed Immune',
             'energy': 'Paths A, B, E, H, & I move first\nPaths D, F, G move next\nPath C moves last',
             'tips':'Paths A & B\n- Poison Immune\nPath C\n- High Block Proficiency for Immunity enemies\nPath E\n-High Block Proficiency for Stun Immune tile 61\nPath F\n- Regen for tile tiles 49, 50, 51\nPath G\n- Power control for Power Gains and All or Nothing tiles.\nPaths H & I\n-Bleed Immune\nPaths A, B, C, D, & E\n- Daredevil for Enhanced range special tiles 73, 63.'},
         '6.3':{'required':'Path A\n- Poison Immune\nPaths B & C\n- Bleed Immune\nPath I\n-Power control\nPath J\n- Regeneration',
@@ -118,12 +112,17 @@ class MCOCMaps:
             cheatsheet : cheatsheet
             aq maps : 5, 5.1, 5.2, 5.3, 6, 6.1, 6.2, 6.3
             /aq 5'''
-        embeds = []
+        embeds = {}
         if maptype in self.aq_map:
             mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
             em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+            if 'required' in self.aq_map_tips[maptype]:
+                em.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
+                em.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
+                em.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
             em.set_image(url=mapurl)
+<<<<<<< Updated upstream
             em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
             embeds.append(em)
             if 'tips' in self.aq_map_tips[maptype]:
@@ -141,6 +140,10 @@ class MCOCMaps:
                 embeds.append(em2)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
             # await self.bot.say(embed=em)
+=======
+            em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
+            await self.bot.say(embed=em)
+>>>>>>> Stashed changes
 
 
 
