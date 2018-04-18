@@ -122,7 +122,6 @@ class MCOCMaps:
                 em.add_field(name='Energy', value=self.aq_map_tips[maptype]['energy'])
                 em.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
             em.set_image(url=mapurl)
-<<<<<<< Updated upstream
             em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
             embeds.append(em)
             if 'tips' in self.aq_map_tips[maptype]:
@@ -140,10 +139,8 @@ class MCOCMaps:
                 embeds.append(em2)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
             # await self.bot.say(embed=em)
-=======
             em.set_footer(text='Presented by [-SDF-]',icon_url=self.icon_sdf)
             await self.bot.say(embed=em)
->>>>>>> Stashed changes
 
 
 
