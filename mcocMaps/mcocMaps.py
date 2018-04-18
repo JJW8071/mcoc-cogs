@@ -112,7 +112,7 @@ class MCOCMaps:
             cheatsheet : cheatsheet
             aq maps : 5, 5.1, 5.2, 5.3, 6, 6.1, 6.2, 6.3
             /aq 5'''
-        embeds = {}
+        embeds = []
         if maptype in self.aq_map:
             mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
