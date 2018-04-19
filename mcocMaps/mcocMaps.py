@@ -149,7 +149,7 @@ class MCOCMaps:
             if 'miniboss' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
-                miniboss = self.aq_map_tips[maptype]['miniboss'][0]
+                miniboss = self.aq_map_tips[maptype]['miniboss']
                 em3 = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em3.set_image(url=mapurl)
                 em3.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
