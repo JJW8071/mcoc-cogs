@@ -47,7 +47,7 @@ class MCOCMaps:
             'miniboss':['Void 2','Champion Boost - +300% Attack & Health\nHealth - +200% Health\nLimber - Each time this enemy is Stunned they reduce the duraction of Stuns by 10%\nUnblockable Finale - Attacks are unblockable as long as Health remains below 25%']},
         '6.3':{'required':'A - Poison Immune\nB - Bleed Immune\nC - Bleed Immune\nD - Regeneration\nE - Regeneration\nF - Power Control, Regeneration\nG - Power Control\nI - Power control\nJ - Regeneration',
             'energy':'D & E move first\nC & F move second\nA, B, G & I move third\nH & J move last',
-            'tips':'A - Poison\nB - Caltrops\nC - Caltrops\nA, B & C - All or Nothing tile 118\nD - Degeneration\nE - Degeneration & Starburst\nF - Starburst & Power Gain\nG - Power Gain\nH \nI - Power Gain\nJ - Starburst'
+            'tips':'A - Poison\nB - Caltrops\nC - Caltrops\nA, B & C - All or Nothing tile 118\nD - Degeneration\nE - Degeneration & Starburst\nF - Starburst & Power Gain\nG - Power Gain\nH \nI - Power Gain\nJ - Starburst',
             'miniboss':['Dormamu','Champion Boost - +575% Attack & Health''Health - +200% Health\nDimensional Anchor - Dormammu gains both Dimensional Link, and Imbued Dimensional Link for the entire fight. If either of these Buffs are nullified they will retrigger after 10 seconds\nHeal Block - Prevent the target from recovering health\nLimber - Each time this enemy is Stunned, they reduce the duration of Stuns by 20%\nPower Gain - Increase all Power Gain by 50%\nUnblockable - All Special Attacks are Unblockable.']},
     }
 
