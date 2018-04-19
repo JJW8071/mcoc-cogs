@@ -66,6 +66,8 @@ local_files = {
     'sig_coeff': 'data/mcoc/sig_coeff.csv',
     'effect_keys': 'data/mcoc/effect_keys.csv',
     'signature': 'data/mcoc/signature.json',
+    'sig_coeff_4star': 'data/mcoc/sig_coeff_4star.json',
+    'sig_coeff_5star': 'data/mcoc/sig_coeff_5star.json',
     'synergy': 'data/mcoc/synergy.json',
 }
 
@@ -91,6 +93,12 @@ gsheet_files = {
     'signature': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
             'local': local_files['signature'],
             'postprocess': postprocess_sig_data,
+            },
+    'sig_coeff_4star': {'gkey': '1WrAj9c41C4amzP8-jY-QhyKurO8mIeclk9C1pSvmWsk',
+            'local': local_files['sig_coeff_4star'],
+            },
+    'sig_coeff_5star': {'gkey': '1VHi9MioEGAsLoZneYQm37gPkmbD8mx7HHa-zuMiwWns',
+            'local': local_files['sig_coeff_5star'],
             },
     #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
             #'local': 'data/mcoc/spotlight_test.json',
@@ -288,8 +296,19 @@ class ChampConverterMult(ChampConverter):
             await bot.say(embed=em)
         return champs
 
+async def warn_bold_say(bot, msg):
+    await bot.say('\u26a0 ' + chat.bold(msg))
+
+def numericise_bool(val):
+    if val == "TRUE":
+        return True
+    elif val == "FALSE":
+        return False
+    else:
+        return numericise(val)
+
 def strip_and_numericise(val):
-        return numericise(val.strip())
+        return numericise_bool(val.strip())
 
 def cell_to_list(cell):
     return [strip_and_numericise(i) for i in cell.split(',')] if cell is not None else None
@@ -304,10 +323,10 @@ def cell_to_dict(cell):
     return ret
 
 def remove_commas(cell):
-    return numericise(cell.replace(',', ''))
+    return numericise_bool(cell.replace(',', ''))
 
 def remove_NA(cell):
-    return None if cell in ("#N/A", "") else numericise(cell)
+    return None if cell in ("#N/A", "") else numericise_bool(cell)
 
 class GSExport():
 
@@ -321,14 +340,15 @@ class GSExport():
                 'row_handler': None,
                 'rc_priority': 'column',
                 'postprocess': None,
-                'prepare_function': 'numericise',
+                'prepare_function': 'numericise_bool',
             }
     default_cell_handlers = (
                 'cell_to_list',
                 'cell_to_dict',
                 'remove_commas',
                 'remove_NA',
-                'numericise'
+                'numericise',
+                'numericise_bool'
             )
     cell_handler_aliases = {
                 'to_list': 'cell_to_list',
@@ -409,11 +429,17 @@ class GSExport():
                     continue
                 if data_type == 'list':
                     pack = clean_row[1:]
+                elif data_type == 'dict':
+                    pack = dict(zip(header[1:],clean_row[1:]))
                 elif data_type == 'nested_list':
                     if len(clean_row[1:]) < dlen or not any(clean_row[1:]):
                         pack = None
                     else:
                         pack = [clean_row[i:i+dlen] for i in range(1, len(clean_row), dlen)]
+                else:
+                    await self.bot.say("Unknown data type '{}' for worksheet '{}' in spreadsheet '{}'".format(
+                            data_type, sheet_name, self.name))
+                    return
                 self.data[rkey][sheet_name] = pack
             elif sheet_action in ('dict', 'file'):
                 if data_type == 'list':
@@ -533,7 +559,11 @@ class GSHandler:
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
         for i, k in enumerate(gfiles):
             gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
-            await gsdata.retrieve_data()
+            try:
+                await gsdata.retrieve_data()
+            except:
+                await self.bot.say("Error while pulling '{}'".format(k))
+                raise
             msg = await self.bot.edit_message(msg,
                     'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
         await self.bot.say('Retrieval Complete')
@@ -805,6 +835,16 @@ class MCOC(ChampionFactory):
                 gkey='1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
                 local=local_files['signature'],
                 postprocess=postprocess_sig_data,
+            )
+        self.gsheet_handler.register_gsheet(
+                name='sig_coeff_4star',
+                gkey='1WrAj9c41C4amzP8-jY-QhyKurO8mIeclk9C1pSvmWsk',
+                local=local_files['sig_coeff_4star'],
+            )
+        self.gsheet_handler.register_gsheet(
+                name='sig_coeff_5star',
+                gkey='1VHi9MioEGAsLoZneYQm37gPkmbD8mx7HHa-zuMiwWns',
+                local=local_files['sig_coeff_5star'],
             )
         self.gsheet_handler.register_gsheet(
                 name='synergy',
@@ -1156,9 +1196,6 @@ class MCOC(ChampionFactory):
     @champ.command(pass_context=True, name='sig', aliases=['signature',])
     async def champ_sig(self, ctx, *, champ : ChampConverterSig):
         '''Champion Signature Ability'''
-        if champ.star >= 5:
-            await self.say_user_error("Sorry.  {0.star}{0.star_char} data for any champion is not currently available".format(champ))
-            return
         appinfo = await self.bot.application_info()
         try:
             title, desc, sig_calcs = await champ.process_sig_description(
@@ -1730,10 +1767,6 @@ class MCOC(ChampionFactory):
             await self.bot.say('Residual keys:\n\t' + '\n\t'.join(dump))
         await self.bot.say('Done')
 
-#My intention was to create a hook command group. If nothing is specified, then drop the URL
-
-    #def _prepare_signature_data(self):
-        #raw_data = load_csv(local_files['sig_coeff'])
     @commands.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @commands.group(pass_context=True, aliases=['donate',], hidden=True)
     async def submit(self, ctx):
@@ -2066,6 +2099,7 @@ class Champion:
     default_stars[6] = {'rank': 1, 'sig': 200}
 
     def __init__(self, attrs=None):
+        self.warn_bold_say = partial(warn_bold_say, self.bot)
         if attrs is None:
             attrs = {}
         self.debug = attrs.pop('debug', 0)
@@ -2323,12 +2357,27 @@ class Champion:
                             for d in ktxt['desc']['v']])
             await self.bot.say(chat.box('\n'.join(dbg_str)))
 
-        if not sd['effects'] or not sd['sig_coeff']:
+        #if not sd['effects'] or not sd['sig_coeff']:
+        if 'error_codes' not in sd or sd['error_codes']['undefined_key']:
+            await self.warn_bold_say('Champion Signature data is not defined')
             self.update_attrs(dict(sig=0))
-            if not quiet:
-                await self.missing_sig_ad()
+        elif sd['error_codes']['no_curve']:
+            await self.warn_bold_say('{} '.format(self.star_name_str)
+                    + 'does not have enough data points to create a curve')
+            self.update_attrs(dict(sig=0))
+        elif sd['error_codes']['low_count']:
+            await self.warn_bold_say('{} '.format(self.star_name_str)
+                    + 'has low data count.  Unknown estimate quality')
+        elif sd['error_codes']['poor_fit']:
+            await self.warn_bold_say('{} '.format(self.star_name_str)
+                    + 'has poor curve fit.  Data is known to contain errors.')
+
         if self.sig == 0:
             return self._get_sig_simple(ktxt)
+
+            #self.update_attrs(dict(sig=0))
+            #if not quiet:
+                #await self.missing_sig_ad()
 
         raw_str = '{:.2f}'
         raw_per_str = '{:.2%}'
@@ -2340,6 +2389,7 @@ class Champion:
             stats = sd['spotlight_trunc'][self.unique]
         except (TypeError, KeyError):
             stats = {}
+        print(stats)
         stats_missing = False
         x_arr = self._sig_x_arr(sd)
         for i in range(len(sd['effects'])):
@@ -2401,23 +2451,29 @@ class Champion:
                     await self.bot.say("**DEPRECIATION WARNING**  "
                             + "Couldn't load json file.  Loading csv files.")
                 sd = self.get_sig_data_from_csv()
+            cfile = 'sig_coeff_4star' if self.star < 5 else 'sig_coeff_5star'
+            coeff = dataIO.load_json(local_files[cfile])
+            sd.update(coeff[self.full_name])
         else:
             sd = data[self.full_name] if self.full_name in data else data
         return sd
 
     def _sig_x_arr(self, sig_dict):
-        try:
-            fit_type = sig_dict['fit_type'][0]
-        except IndexError:
-            fit_type = 'log'
-        if fit_type == 'linear':
-            return float(self.sig), 1
-        elif fit_type == 'quadratic':
-            return float(self.sig**2), float(self.sig), 1
-        elif fit_type == 'log':
-            return log(self.sig), 1
+        fit_type = sig_dict['fit_type'][0]
+        if fit_type.startswith('lin'):
+            x_var = float(self.sig)
+        elif fit_type.startswith('log'):
+            x_var = log(self.sig)
         else:
-            raise AttributeError("Fit_type '{}' not valid".format(fit_type))
+            raise AttributeError("Unknown fit_type, '{}' for champion {}".format(
+                    fit_type, self.full_name ))
+        if fit_type.endswith('quad'):
+            return x_var**2, x_var, 1
+        elif fit_type.endswith('lin'):
+            return x_var, 1
+        else:
+            raise AttributeError("Unknown fit_type, '{}' for champion {}".format(
+                    fit_type, self.full_name ))
 
     def _get_sig_simple(self, ktxt):
         return ktxt['title']['v'], ktxt['simple']['v'], None
