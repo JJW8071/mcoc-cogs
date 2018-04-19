@@ -125,7 +125,7 @@ class MCOCMaps:
             # if 'required' in self.aq_map_tips[maptype]:
             #     em.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
             if self.aq_map_tips[maptype]['required'] != '':
-                em1.add_field(name='Required', value=self.aq_map_tips[maptype]['required'])
+                em.add_field(name='Required', value=self.aq_map_tips[maptype]['required'])
             #     em.add_field(name='Suggestions', value=self.aq_map_tips[maptype]['tips'])
             em.set_image(url=mapurl)
             em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
