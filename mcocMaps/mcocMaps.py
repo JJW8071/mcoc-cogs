@@ -48,7 +48,7 @@ class MCOCMaps:
         '6.3':{'required':'A - Poison Immune\nB - Bleed Immune\nC - Bleed Immune\nD - Regeneration\nE - Regeneration\nF - Power Control, Regeneration\nG - Power Control\nI - Power control\nJ - Regeneration',
             'energy':'D & E move first\nC & F move second\nA, B, G & I move third\nH & J move last',
             'tips':'A - Poison\nB - Caltrops\nC - Caltrops\nA, B & C - All or Nothing tile 118\nD - Degeneration\nE - Degeneration & Starburst\nF - Starburst & Power Gain\nG - Power Gain\nH \nI - Power Gain\nJ - Starburst'
-            'miniboss':['Dormamu','Champion Boost - +575% Attack & Health\nHealth - +200% Health\nDimensional Anchor - Dormammu gains both Dimensional Link, and Imbued Dimensional Link for the entire fight. If either of these Buffs are nullified they will retrigger after 10 seconds\nHeal Block - Prevent the target from recovering health\nLimber - Each time this enemy is Stunned, they reduce the duration of Stuns by 20%\nPower Gain - Increase all Power Gain by 50%\nUnblockable - All Special Attacks are Unblockable.']},
+            'miniboss':['Dormamu','Champion Boost - +575% Attack & Health''Health - +200% Health\nDimensional Anchor - Dormammu gains both Dimensional Link, and Imbued Dimensional Link for the entire fight. If either of these Buffs are nullified they will retrigger after 10 seconds\nHeal Block - Prevent the target from recovering health\nLimber - Each time this enemy is Stunned, they reduce the duration of Stuns by 20%\nPower Gain - Increase all Power Gain by 50%\nUnblockable - All Special Attacks are Unblockable.']},
     }
 
     lolmaps = {'0':{'map':'0', 'maptitle': 'Completion Path 0'},
@@ -149,10 +149,11 @@ class MCOCMaps:
             if 'miniboss' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
+                miniboss = self.aq_map_tips[maptype]['miniboss'][0]
                 em3 = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em3.set_image(url=mapurl)
                 em3.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
-                em3.add_field(name=self.aq_map_tips[maptype]['miniboss'][0],value=self.aq_map_tips[maptype]['miniboss'][1])
+                em3.add_field(name=miniboss[0],value=miniboss[1])
                 embeds.append(em3)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
