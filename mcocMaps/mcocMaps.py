@@ -29,26 +29,33 @@ class MCOCMaps:
             'tips':'Sentinel gains 1 Adaptation charge(s) when an Opponent performs the same action consecutively. Actions include Light Attacks, Medium Attacks, Heavy Attacks, Dashing, Dodging, and Blocking an Attack. Max: 50 charges.\n\nMM combo = 2 Analysis Charges\nMLLM = 2 Analysis Charges\nMLLLL = 3 Analysis Charges\nLMLM = 0 Analysis Charges\n\n~ RobShiBob'},
         '5.1':{'required':'',
             'energy':'',
-            'tips':''},
+            'tips':'',
+            'miniboss':[['Morningstar 1','250% Champion Boost\n200% Health\nEnhanced Bleed\nOppressive Curse'],
+                ['Green Goblin 1','250% Champion Boost\n200% Health\nEnhanced Abilities\nRecovery 100%'],
+                ['Nightcrawler 1','250% Champion Boost\n200% Health\nLimber (10%)\nDefensive'],]},
         '5.2':{'required':'Path A\n- Bleed Immune\nPath H\n- Poison Immune',
             'energy':'',
-            'tips':''},
+            'tips':'',
+            'miniboss':[['Morningstar 2','250% Champion Boost\n300% Health\nEnhanced Bleed\nOppressive Curse\nPower Gain 100%'],
+                ['Green Goblin 2','250% Champion Boost\n300% Health\nEnhanced Abilities\nRecovery 150%\nEnhanced Special 1'],
+                ['Nightcrawler 2','250% Champion Boost\n300% Health\nLimber (10%)\nDefensive\nSpecial 1 Bias'],]},
         '5.3':{'required':'',
             'energy':'',
-            'tips':''},
+            'tips':'',
+            'miniboss':[['Dormamu','+???% Champion Boost\n+200% Health\nDimensional Anchor\nHeal Block\nLimber (20%)\n+50% Power Gain\nUnblockable'],]},
         '6':{},
         '6.1':{'required':'A - 2 players\nB - 2 players\nF - Power Control\nG - 2 players',
             'energy':'D & E move first\nB, C, F, G move next\nA moves last.',
-            'tips':'A - Defense Ability Reduction for tile 22.\nD  - Thorns, Degeneration\nE - Thorns, Starburst\nF - All or Nothing 9\nG - Enhanced Raged Specials.',
-            'miniboss':['Void 1','Champion Boost - +300% Attack & Health\nHealth - +300% Health\nLimber - Each time this enemy is Stunned they reduce the duraction of Stuns by 10%\nUnblockable Finale - Attacks are unblockable as long as Health remains below 25%']},
+            'tips':'A - Defense Ability Reduction for tile 22.\nD  - Thorns, Degeneration\nE - Thorns, Starburst\nF - All or Nothing 9\nG - Enhanced Raged Specials',
+            'miniboss':[['Void 1','+300% Champion Boost\n+200% Health\nLimber (10%)\nUnblockable Finale (<25% HP)'],]},
         '6.2':{'required':'A - 2 players, Poison Immune\nB - Poison Immune\nG - Power control\nH - Bleed Immune\nI - 2 players, Bleed Immune',
             'energy': 'A, B, E, H, & I move first\nD, F, G move next\nC moves last',
             'tips':'A - Poison\nB - Poison\nC - Immunity, Stun Immunity\nE - Power Gain, Stun Immunity\nA, B, C, D, & E - Daredevil for Enhanced range special tiles 73, 63\nF - Degeneration\nG - Power Gain, All or Nothing\nH - Bleed Immune\nI -Bleed Immune',
-            'miniboss':['Void 2','Champion Boost - +300% Attack & Health\nHealth - +200% Health\nLimber - Each time this enemy is Stunned they reduce the duraction of Stuns by 10%\nUnblockable Finale - Attacks are unblockable as long as Health remains below 25%']},
+            'miniboss':[['Void 1','+300% Champion Boost\n+300% Health\nLimber (10%)\nUnblockable Finale (<25% HP)'],]},
         '6.3':{'required':'A - Poison Immune\nB - Bleed Immune\nC - Bleed Immune\nD - Regeneration\nE - Regeneration\nF - Power Control, Regeneration\nG - Power Control\nI - Power control\nJ - Regeneration',
             'energy':'D & E move first\nC & F move second\nA, B, G & I move third\nH & J move last',
             'tips':'A - Poison\nB - Caltrops\nC - Caltrops\nA, B & C - All or Nothing tile 118\nD - Degeneration\nE - Degeneration & Starburst\nF - Starburst & Power Gain\nG - Power Gain\nH \nI - Power Gain\nJ - Starburst',
-            'miniboss':['Dormamu','Champion Boost - +575% Attack & Health''Health - +200% Health\nDimensional Anchor - Dormammu gains both Dimensional Link, and Imbued Dimensional Link for the entire fight. If either of these Buffs are nullified they will retrigger after 10 seconds\nHeal Block - Prevent the target from recovering health\nLimber - Each time this enemy is Stunned, they reduce the duration of Stuns by 20%\nPower Gain - Increase all Power Gain by 50%\nUnblockable - All Special Attacks are Unblockable.']},
+            'miniboss':[['Dormamu','+575% Champion Boost\n+200% Health\nDimensional Anchor\nHeal Block\nLimber (20%)\n+50% Power Gain\nUnblockable'],]},
     }
 
     lolmaps = {'0':{'map':'0', 'maptitle': 'Completion Path 0'},
@@ -149,11 +156,11 @@ class MCOCMaps:
             if 'miniboss' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
-                miniboss = self.aq_map_tips[maptype]['miniboss']
                 em3 = discord.Embed(color=discord.Color.gold(),title=maptitle)
                 em3.set_image(url=mapurl)
                 em3.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
-                em3.add_field(name=miniboss[0],value=miniboss[1])
+                for miniboss in self.aq_map_tips[maptype]['miniboss']:
+                    em3.add_field(name=miniboss[0],value=miniboss[1])
                 embeds.append(em3)
             await self.pages_menu(ctx=ctx, embed_list=embeds, timeout=120)
 
