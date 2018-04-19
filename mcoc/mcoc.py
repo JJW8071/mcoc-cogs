@@ -1954,7 +1954,7 @@ class MCOC(ChampionFactory):
             else:
                 await self.bot.edit_message(message2, 'Submission failed.')
 
-    @submit.command(pass_context=True, name='100hits')
+    @submit.command(pass_context=True, name='100hits', aliases=['50hits',])
     async def submit_100hitchallenge(self, ctx, champ : ChampConverter, hits : int, wintersoldier_hp : int, author : discord.User = None):
         if author is None:
             author = ctx.message.author
