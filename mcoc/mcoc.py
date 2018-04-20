@@ -2098,6 +2098,9 @@ class Champion:
     default_stars[5] = {'rank': 5, 'sig': 200}
     default_stars[6] = {'rank': 1, 'sig': 200}
 
+    sig_raw_per_str = '{:.2%}'
+    sig_per_str = '{:.2f} ({:.2%})'
+
     def __init__(self, attrs=None):
         self.warn_bold_say = partial(warn_bold_say, self.bot)
         if attrs is None:
@@ -2345,7 +2348,6 @@ class Champion:
 
     async def process_sig_description(self, data=None, quiet=False, isbotowner=False):
         sd = await self.retrieve_sig_data(data, isbotowner)
-        brkt_re = re.compile(r'{([0-9])}')
         ktxt = sd['kabam_text']
         if self.debug:
             dbg_str = ['Title:  ' + ktxt['title']['k']]
@@ -2357,81 +2359,31 @@ class Champion:
                             for d in ktxt['desc']['v']])
             await self.bot.say(chat.box('\n'.join(dbg_str)))
 
-        #if not sd['effects'] or not sd['sig_coeff']:
-        if 'error_codes' not in sd or sd['error_codes']['undefined_key']:
-            await self.warn_bold_say('Champion Signature data is not defined')
-            self.update_attrs(dict(sig=0))
-        elif sd['error_codes']['no_curve']:
-            await self.warn_bold_say('{} '.format(self.star_name_str)
-                    + 'does not have enough data points to create a curve')
-            self.update_attrs(dict(sig=0))
-        elif sd['error_codes']['low_count']:
-            await self.warn_bold_say('{} '.format(self.star_name_str)
-                    + 'has low data count.  Unknown estimate quality')
-        elif sd['error_codes']['poor_fit']:
-            await self.warn_bold_say('{} '.format(self.star_name_str)
-                    + 'has poor curve fit.  Data is known to contain errors.')
-
+        await self._sig_error_code_handling(sd)
         if self.sig == 0:
             return self._get_sig_simple(ktxt)
 
-            #self.update_attrs(dict(sig=0))
-            #if not quiet:
-                #await self.missing_sig_ad()
-
-        raw_str = '{:.2f}'
-        raw_per_str = '{:.2%}'
-        per_str = '{:.2f} ({:.2%})'
         sig_calcs = {}
-        ftypes = {}
-        #print(json.dumps(sd, indent='  '))
         try:
             stats = sd['spotlight_trunc'][self.unique]
         except (TypeError, KeyError):
             stats = {}
-        print(stats)
-        stats_missing = False
+        self.stats_missing = False
         x_arr = self._sig_x_arr(sd)
-        for i in range(len(sd['effects'])):
-            effect = sd['effects'][i]
-            ckey = sd['locations'][i]
-            y_arr = sd['sig_coeff'][i]
-            if y_arr is None:
+        for effect, ckey, coeffs in zip(sd['effects'], sd['locations'], sd['sig_coeff']):
+            if coeffs is None:
                 await self.bot.say("**Data Processing Error**")
                 if not quiet:
                     await self.missing_sig_ad()
                 return self._get_sig_simple(ktxt)
+            y_norm = sumproduct(x_arr, coeffs)
+            sig_calcs[ckey] = self._sig_effect_decode(effect, y_norm, stats)
 
-            if effect == 'rating':
-                sig_calcs[ckey] = raw_str.format(m * self.chlgr_rating + b)
-                continue
-            per_val = sumproduct(x_arr, y_arr)
-            if effect == 'flat':
-                sig_calcs[ckey] = per_str.format(
-                        to_flat(per_val, self.chlgr_rating), per_val/100)
-            elif effect == 'attack':
-                if 'attack' not in stats:
-                    stats_missing = True
-                    sig_calcs[ckey] = raw_per_str.format(per_val/100)
-                    continue
-                sig_calcs[ckey] = per_str.format(
-                        stats['attack'] * per_val / 100, per_val/100)
-            elif effect == 'health':
-                if 'health' not in stats:
-                    stats_missing = True
-                    sig_calcs[ckey] = raw_per_str.format(per_val/100)
-                    continue
-                sig_calcs[ckey] = per_str.format(
-                        stats['health'] * per_val / 100, per_val/100)
-            else:
-                if per_val.is_integer():
-                    sig_calcs[ckey] = '{:.0f}'.format(per_val)
-                else:
-                    sig_calcs[ckey] = raw_str.format(per_val)
-
-        if stats_missing:
+        if self.stats_missing:
             await self.bot.say(('Missing Attack/Health info for '
                     + '{0.full_name} {0.star_str}').format(self))
+
+        brkt_re = re.compile(r'{([0-9])}')
         fdesc = []
         for i, txt in enumerate(ktxt['desc']['v']):
             fdesc.append(brkt_re.sub(r'{{d[{0}-\1]}}'.format(i),
@@ -2458,6 +2410,21 @@ class Champion:
             sd = data[self.full_name] if self.full_name in data else data
         return sd
 
+    async def _sig_error_code_handling(self, sd):
+        if 'error_codes' not in sd or sd['error_codes']['undefined_key']:
+            await self.warn_bold_say('Champion Signature data is not defined')
+            self.update_attrs(dict(sig=0))
+        elif sd['error_codes']['no_curve']:
+            await self.warn_bold_say('{} '.format(self.star_name_str)
+                    + 'does not have enough data points to create a curve')
+            self.update_attrs(dict(sig=0))
+        elif sd['error_codes']['low_count']:
+            await self.warn_bold_say('{} '.format(self.star_name_str)
+                    + 'has low data count.  Unknown estimate quality')
+        elif sd['error_codes']['poor_fit']:
+            await self.warn_bold_say('{} '.format(self.star_name_str)
+                    + 'has poor curve fit.  Data is known to contain errors.')
+
     def _sig_x_arr(self, sig_dict):
         fit_type = sig_dict['fit_type'][0]
         if fit_type.startswith('lin'):
@@ -2465,15 +2432,43 @@ class Champion:
         elif fit_type.startswith('log'):
             x_var = log(self.sig)
         else:
-            raise AttributeError("Unknown fit_type, '{}' for champion {}".format(
+            raise AttributeError("Unknown fit_type '{}' for champion {}".format(
                     fit_type, self.full_name ))
         if fit_type.endswith('quad'):
             return x_var**2, x_var, 1
         elif fit_type.endswith('lin'):
             return x_var, 1
         else:
-            raise AttributeError("Unknown fit_type, '{}' for champion {}".format(
+            raise AttributeError("Unknown fit_type '{}' for champion {}".format(
                     fit_type, self.full_name ))
+
+    def _sig_effect_decode(self, effect, y_norm, stats):
+        if effect == 'raw':
+            if y_norm.is_integer():
+                calc = '{:.0f}'.format(y_norm)
+            else:
+                calc = '{:.2f}'.format(y_norm)
+        elif effect == 'flat':
+            calc = self.sig_per_str.format(
+                    to_flat(y_norm, self.chlgr_rating), y_norm/100)
+        elif effect == 'attack':
+            if 'attack' not in stats:
+                self.stats_missing = True
+                calc = self.sig_raw_per_str.format(y_norm/100)
+            else:
+                calc = self.sig_per_str.format(
+                        stats['attack'] * y_norm / 100, y_norm/100)
+        elif effect == 'health':
+            if 'health' not in stats:
+                self.stats_missing = True
+                calc = self.sig_raw_per_str.format(y_norm/100)
+            else:
+                calc = self.sig_per_str.format(
+                        stats['health'] * y_norm / 100, y_norm/100)
+        else:
+            raise AttributeError("Unknown effect '{}' for {}".format(
+                    effect, self.full_name))
+        return calc
 
     def _get_sig_simple(self, ktxt):
         return ktxt['title']['v'], ktxt['simple']['v'], None
