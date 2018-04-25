@@ -2566,7 +2566,7 @@ class Champion:
                 title = x
 
         if title is None:
-            raise TitleError("'{}' title not found".format(mcocsig), mcocsig)
+            raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
@@ -2623,7 +2623,8 @@ class Champion:
             desc.append(preamble+'_DESC_MOD')
         else:
             for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
-                      '_DESC_E','_LONG','_LONG_2', '_LONG_B', '_LONG_B_EXTRA'):
+                      '_DESC_E','_DESC_F','_DESC_FALT','_DESC_G','_LONG','_LONG_2', '_LONG_B', '_LONG_B_EXTRA',
+                      '_TITLE_LONG','_TITLE_LONG2','_TITLE_LONG2B','_TITLE_LONG2C','_TITLE_LONG2D',):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
