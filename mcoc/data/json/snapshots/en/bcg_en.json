@@ -1,16 +1,16 @@
 {
     "meta": {
         "language": "en",
-        "hash": "3b8fdf396406d38f254d05c407b5d119a01545aa",
+        "hash": "388a07a1cb0472b7eed8731ea39153a01622bd28",
         "format": "sparx",
-        "ts": 1520555417,
-        "versionLock": "17.2",
+        "ts": 1522689498,
+        "versionLock": "18.0",
         "post_processed": true,
         "tagged": [
             "bcg",
             "client"
         ],
-        "string_count": 807
+        "string_count": 825
     },
     "strings": [
         {
@@ -507,9 +507,19 @@
             "vn": "17.1"
         },
         {
+            "k": "ID_UI_CATALYST_T6_CHEMICAL_DESC",
+            "v": "A Tier 6 Science Catalyst is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_CATALYST_T6_COSMIC",
             "v": "TIER 6 COSMIC CATALYST",
             "vn": "17.1"
+        },
+        {
+            "k": "ID_UI_CATALYST_T6_COSMIC_DESC",
+            "v": "A Tier 6 Science Cosmic is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
         },
         {
             "k": "ID_UI_CATALYST_T6_GENERIC",
@@ -517,9 +527,19 @@
             "vn": "17.1"
         },
         {
+            "k": "ID_UI_CATALYST_T6_GENERIC_DESC",
+            "v": "A Tier 6 Basic Catalyst is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_CATALYST_T6_MUTANT",
             "v": "TIER 6 MUTANT CATALYST",
             "vn": "17.1"
+        },
+        {
+            "k": "ID_UI_CATALYST_T6_MUTANT_DESC",
+            "v": "A Tier 6 Mutant Catalyst is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
         },
         {
             "k": "ID_UI_CATALYST_T6_MYSTIC",
@@ -527,14 +547,29 @@
             "vn": "17.1"
         },
         {
+            "k": "ID_UI_CATALYST_T6_MYSTIC_DESC",
+            "v": "A Tier 6 Mystic Catalyst is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_CATALYST_T6_TECH",
             "v": "TIER 6 TECH CATALYST",
             "vn": "17.1"
         },
         {
+            "k": "ID_UI_CATALYST_T6_TECH_DESC",
+            "v": "A Tier 6 Tech Catalyst is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_CATALYST_T6_TRAINED",
             "v": "TIER 6 SKILL CATALYST",
             "vn": "17.1"
+        },
+        {
+            "k": "ID_UI_CATALYST_T6_TRAINED_DESC",
+            "v": "A Tier 6 Skill Catalyst is required to Rank Up your Champion. Find more in Special Events!",
+            "vn": "18"
         },
         {
             "k": "ID_UI_CATALYST_UNCOMMON_CHEMICAL",
@@ -1231,6 +1266,11 @@
             "vn": "17.2"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_COSMICPOWER",
+            "v": "COSMIC POWER",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_COSMIC_I",
             "v": "COSMIC SUPREMACY Lv. 1"
         },
@@ -1382,6 +1422,11 @@
             "v": "Cosmic Champions gain +{0}% longer Fury"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_DESC_COSMICPOWER",
+            "v": "Cosmic Champions increase their Buff Duration by +{0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_DESC_COSMIC_NEW",
             "v": "Cosmic Champions gain +{0}% Duration for all Fury, Precision, Cruelty, and Armor Up Buffs"
         },
@@ -1466,12 +1511,22 @@
             "v": "Mutants gain +{0}% Special Attack Damage"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_DESC_MUTANTEVOLUTION",
+            "v": "Mutant Champions gain a permanent Passive +{0}% Prowess.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_DESC_MYSTIC",
             "v": "Mystic Champions gain +{0}% Energy Resistance"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_DESC_MYSTICCRAFT",
+            "v": "Mystic Champions deal {0}% of their Attack as Direct Damage to their Opponent when Nullifying one of their Buffs.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_DESC_OFFLIMITS",
-            "v": "[64acff]Hulk (Ragnarok):[-] Hulk's chance to SMASH on All Attacks increases by {0}% while Face Me is active.\r\n[64acff]Hela:[-] Hela begins the fight with 1 Fury Buff, and if she is ever without a Fury Buff for 10 seconds, she gains one.\r\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "v": "[64acff]Hulk (Ragnarok):[-] Hulk's chance to SMASH on All Attacks increases by {0}% while Face Me is active.\n[64acff]Hela:[-] Hela begins the fight with 1 Fury Buff, and if she is ever without a Fury Buff for 10 seconds, she gains one.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
             "vn": "17"
         },
         {
@@ -1506,6 +1561,11 @@
             "v": "Science Champions gain +{0}% Block Proficiency"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_DESC_SCIENCEEXPERIMENT",
+            "v": "Science Champions place a Passive Weakness on the Opponent reducing their Attack by {0}% except while being struck by them.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_DESC_SGM",
             "v": "Venom and Carnage gain +{0} to their maximum number of Genetic Memory or Hyper Mutation Buffs.",
             "vn": "13.1"
@@ -1513,6 +1573,11 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_SKILL",
             "v": "Skill Champions deal +{0}% Bleed Damage"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_DESC_SKILLTRAINING",
+            "v": "Skill Champions gain +{0} Critical Rating on Basic Attacks.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_STUN",
@@ -1531,6 +1596,11 @@
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_TECH",
             "v": "Tech Champions gain +{0}% longer Armor Up"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_DESC_TECHBREAKTHROUGH",
+            "v": "Tech Champions drain {0}% of the Opponent’s Max Power after the Opponent uses a Special Attack.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_DESC_TECH_NEW",
@@ -1899,6 +1969,11 @@
             "vn": "16.1"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_MUTANTEVOLUTION",
+            "v": "MUTANT EVOLUTION",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_MUTANTPURSUIT",
             "v": "MUTANT PURSUIT",
             "vn": "17.1"
@@ -1919,6 +1994,11 @@
         {
             "k": "ID_UI_HERO_SYNERGY_MUTANT_III",
             "v": "MUTANT AGENDA Lv. 3"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_MYSTICCRAFT",
+            "v": "MYSTIC CRAFT",
+            "vn": "18"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_MYSTICOBSERVATION",
@@ -2074,6 +2154,11 @@
             "vn": "15"
         },
         {
+            "k": "ID_UI_HERO_SYNERGY_SCIENCEEXPERIMENT",
+            "v": "SCIENCE EXPERIMENT",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_HERO_SYNERGY_SCIENCERESEARCH",
             "v": "SCIENCE RESEARCH",
             "vn": "17.1"
@@ -2144,7 +2229,7 @@
         {
             "k": "ID_UI_HERO_SYNERGY_SKILLTRAINING",
             "v": "SKILL TRAINING",
-            "vn": "17.1"
+            "vn": "18"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_SKILLTRAINING_LONG",
@@ -2219,6 +2304,11 @@
             "k": "ID_UI_HERO_SYNERGY_TECHADVANCEMENT_LONG",
             "v": "[64acff]Sentinel:[-] Abilities that cause Sentinel to lose Power are {0}% less effective when facing a target of the Tech Class.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
             "vn": "17.1"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_TECHBREAKTHROUGH",
+            "v": "TECH BREAKTHROUGH",
+            "vn": "18"
         },
         {
             "k": "ID_UI_HERO_SYNERGY_TECH_I",

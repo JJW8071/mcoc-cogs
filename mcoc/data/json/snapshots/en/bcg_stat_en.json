@@ -1,16 +1,16 @@
 {
     "meta": {
         "language": "en",
-        "hash": "182ae462f57f9b459a9b738c5879f0dc77b5078c",
+        "hash": "65bd3209707700653f556213db5428b8093eaf4b",
         "format": "sparx",
-        "ts": 1520973289,
-        "versionLock": "17.2",
+        "ts": 1522689500,
+        "versionLock": "18.0",
         "post_processed": true,
         "tagged": [
             "bcg_stat",
             "client"
         ],
-        "string_count": 3567
+        "string_count": 3707
     },
     "strings": [
         {
@@ -92,6 +92,21 @@
             "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FLUX",
             "v": "Flux Passive",
             "vn": "16.1"
+        },
+        {
+            "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MOLATK",
+            "v": "Molecular Arsenal",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MOLDEF",
+            "v": "Molecular Armor Passive",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_REPULSOR",
+            "v": "Repulsor Attacks",
+            "vn": "18"
         },
         {
             "k": "ID_STAT_BISHOP_ABSORB_SHORT",
@@ -302,6 +317,231 @@
             "k": "ID_STAT_BLOCK_PEN_PCT",
             "v": "This attack ignores [16982bff]{1}%[-] of the opponent's Block Proficiency.",
             "vn": "16.1"
+        },
+        {
+            "k": "ID_STAT_IMI1",
+            "v": "Tony Stark’s Model 50 suit uses state-of-the-art nanotechnology to change form and mass at will, providing extreme adaptability and a wide array of weaponry including Blade Arm, Hammer Arm, and point-blank Repulsor attacks.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI10",
+            "v": "Repulsor hits don’t make contact, cannot be evaded, and deal Energy Damage instead of Physical.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI10B",
+            "v": "Repulsor hits don’t make contact and reduce enemy Evade chance by 100%.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI11",
+            "v": "Repulsor hits that strike an opponent suffering from both Shock and Incinerate fuse those two Debuffs into a new Plasma Passive that has the properties of both.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI12",
+            "v": "Repulsor hits refresh Incinerate Debuffs and Plasma Passives on opponents.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI13",
+            "v": "Repulsor hits that strike an opponent suffering from a Shock or Plasma effect generate zero Power in opponents and drain up to {1}% of their current Power based on the damage dealt.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI14",
+            "v": "The first Repulsor hit has all the properties of a Repulsor Attack and has [16982bff]+{1}[-] Attack Rating.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI15",
+            "v": "The second hit employs a Hammer Arm and has a {0}% chance to inflict Armor Break on the opponent, removing one Armor Up and then reducing Armor by [16982bff]{1}[-] for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI16",
+            "v": "The third and final hit employs an Unblockable Blade Arm and inflicts Heal Block for {2} second(s) against targets under the effects of Regeneration.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI16B",
+            "v": "The third and final hit employs an Unblockable Blade Arm and inflicts Heal Block for {2} second(s).",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI17",
+            "v": "The first hit employs an Unblockable Blade Arm and inflicts Heal Block for {2} second(s) against targets under the effects of Regeneration.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI17B",
+            "v": "The first hit employs an Unblockable Blade Arm and inflicts Heal Block for {2} second(s).",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI18",
+            "v": "Each energy projectile has all the properties of a Repulsor attack and generates zero Power in opponents.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI19",
+            "v": "{0}% chance to leave opponents Shocked for [16982bff]{1}[-] Energy Damage over {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI2",
+            "v": "Up to {0}% chance to activate an Armor Passive when attacking or struck by an attack, increasing Armor by [16982bff]{1}[-] for {2} seconds. The chance to trigger is reduced for each active Armor Passive.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI20",
+            "v": "Shock duration increases by up to {1}% based on the opponents’ current Power.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI21",
+            "v": "The first two hits are Hammer Arm Attacks. Each has a {0}% chance to inflict Armor Break on the opponent, removing one Armor Up and then reducing Armor by [16982bff]{1}[-] for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI22",
+            "v": "The missile barrage has a {0}% chance to ignite the target, inflicting Incinerate for [16982bff]{1}[-] damage over {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI23",
+            "v": "If the target does not ignite, they are instead inflicted by Armor Break, removing one Armor Up and then reducing Armor by [16982bff]{1}[-] for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI24",
+            "v": "{0}% chance to inflict Armor Break on the opponent, removing one Armor Up and then reducing Armor by [16982bff]{1}[-] for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI25",
+            "v": "{0}% chance to instantly ignite and electrify the target, inflicting a Plasma Passive that deals [16982bff]{1}[-] damage over {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI26",
+            "v": "{1}% chance for each active Armor Break on the opponent to inflict Stun for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI27",
+            "v": "Molecular Armor provides full immunity to Bleed and Coldsnap effects while active.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI28",
+            "v": "Repulsor hits that strike an opponent suffering from a Shock or Plasma effect generate zero Power in opponents and drain up to {1}% of their current stored Power based on the damage dealt.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI29",
+            "v": "The chance to inflict Plasma decreases by {1}% for each Plasma effect already active on the target.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI3",
+            "v": "Start the fight with {1} stack(s) of Molecular Armor.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI4",
+            "v": "Each Armor effect active on Iron Man reduces the effectiveness of Power Drain, Power Steal, and Power Burn effects by {1}%.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI5",
+            "v": "After achieving {1} stacks of any Armor effect, Iron Man has a {0}% chance to Auto-Block the next attack and then consume {2} Armor effect(s). This Auto-Block triggers Parry.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI5B",
+            "v": "After achieving {1} stacks of any Armor effect, Iron Man has a {0}% chance to Auto-Block the next attack and then consume {2} Armor effect(s). This Auto-Block cannot trigger Parry.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI6",
+            "v": "A stack of Armor is lost each time Iron Man is inflicted by an Armor Break effect.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI6B",
+            "v": "A stack of Armor is lost each time Iron Man is inflicted by an Armor Break effect or struck by Armor-bypassing effects of a True Damage or True Strike attack.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI7",
+            "v": "Molecular Armor provides full immunity to Bleed and Coldsnap effects.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI7B",
+            "v": "Molecular Armor provides full immunity to Bleed and Cold effects.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI8",
+            "v": "Critical Resistance increases by [16982bff]{1}[-] for each active Armor effect.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI9",
+            "v": "The first Medium hit, the first Heavy hit, and the second and fourth Light attacks employ point-blank Repulsor blasts.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_MOLDEF_SHORT",
+            "v": "[808080ff]Molecular Armor[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_PLASMA_SHORT",
+            "v": "[808080ff]Plasma[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE",
+            "v": "DEFLECTOR PROTOCOL",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_LONG1",
+            "v": "Once per fight, Iron Man’s Model 50 suit executes an emergency protocol if attacked while {0}% Health or less remains, creating a hardened exterior by instantly granting [16982bff]{1}[-] stack(s) of Molecular Armor.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_LONG2",
+            "v": "While {0}% Health or less remains and Iron Man is under the effects of an Armor effect, the suit generates [16982bff]{1}%[-] Power per second and has a {2}% chance to Auto-Block attacks without consuming Armor. This Auto-Block triggers Parry.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_LONG2B",
+            "v": "While {0}% Health or less remains and Iron Man is under the effects of an Armor effect, the suit generates [16982bff]{1}%[-] Power per second and has a {2}% chance to Auto-Block attacks without consuming Armor. This Auto-Block does not trigger Parry.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_LONG2C",
+            "v": "While {0}% Health or less remains and Iron Man is under the effects of an Armor effect, the suit generates [16982bff]{1}%[-] Power per second and has a {2}% chance to Auto-Block attacks. This Auto-Block does not trigger Parry.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_LONG2D",
+            "v": "While {0}% Health or less remains and Iron Man is under the effects of an Armor effect, the suit generates [16982bff]{1}%[-] Power per second and has a {2}% chance to Auto-Block attacks. This Auto-Block triggers Parry.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_LOW",
+            "v": "Deflector Protocol {0}",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_IMI_SIG_TITLE_SIMPLE",
+            "v": "Iron Man’s Model 50 suit protects him with Armor, Power, and Auto-Block while Health is low.",
+            "vn": "18"
         },
         {
             "k": "ID_STAT_MODOK_BURN",
@@ -559,6 +799,11 @@
             "vn": "16.1"
         },
         {
+            "k": "ID_STAT_PLASMA_HUD",
+            "v": "PLASMA",
+            "vn": "18"
+        },
+        {
             "k": "ID_STAT_PROWESS_SHORT",
             "v": "[808080ff]Prowess[-]",
             "vn": "17.1"
@@ -624,6 +869,16 @@
             "vn": "16.1"
         },
         {
+            "k": "ID_STAT_SYNERGY_AIUPGRADE",
+            "v": "A.I. UPGRADE",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_AIUPGRADE_LONG",
+            "v": "All teammates recover from Armor Break up to {0}% faster.",
+            "vn": "18"
+        },
+        {
             "k": "ID_STAT_SYNERGY_CHRONAL",
             "v": "CHRONAL ANCHOR",
             "vn": "17.1"
@@ -657,6 +912,16 @@
             "k": "ID_STAT_SYNERGY_CHRONAL_V",
             "v": "CHRONAL ANCHOR Lv. 5",
             "vn": "17.1"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_COVERT",
+            "v": "COVERT INSIGHT",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_COVERT_LONG",
+            "v": "[64acff]Everyone:[-] Enemies are {0}% less likely to evade Basic Attacks.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
         },
         {
             "k": "ID_STAT_SYNERGY_ECONDUIT",
@@ -717,6 +982,36 @@
             "k": "ID_STAT_SYNERGY_ECONDUIT_STORM_LONG_II",
             "v": "[64acff]Bishop:[-] Start the fight with +2 Prowess and +{0}% Power.\n[64acff]Storm:[-] +8% Energy Resistance.",
             "vn": "17.1"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_ESOTERIC",
+            "v": "ESOTERIC INSIGHT",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_ESOTERIC_LONG",
+            "v": "[64acff]Iron Man:[-] Molecular Armor is {0}% more effective at reducing Power Drain, Power Steal, and Power Burn effectiveness.\n[64acff]Vision:[-] Power Burn deals 20% more damage.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_FAMILIAR",
+            "v": "FAMILIAR INSIGHT",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_FAMILIAR_LONG",
+            "v": "[64acff]Iron Man:[-] Blocking reduces {0}% more damage.\n[64acff]Captain America:[-] Weakness, Fatigue, Bleed, and Petrify Debuffs last 15% longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_WAKANDAN",
+            "v": "WAKANDAN INSIGHT",
+            "vn": "18"
+        },
+        {
+            "k": "ID_STAT_SYNERGY_WAKANDAN_LONG",
+            "v": "[64acff]Everyone:[-] Each active Armor effect also increases Critical Resistance by {0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+            "vn": "18"
         },
         {
             "k": "ID_UI_ATTIRBUTE_AL",
@@ -1810,6 +2105,11 @@
             "v": "[b310e8]Enervation VII[-]"
         },
         {
+            "k": "ID_UI_STAT_ATTRIBUTE_BACKUPREC_HUD",
+            "v": "BACKUP RECOVERY",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_ATTRIBUTE_BARRICADE_HUD",
             "v": "BARRICADE",
             "vn": "13.1"
@@ -2097,6 +2397,161 @@
             "k": "ID_UI_STAT_ATTRIBUTE_CABLE_TOTENTACLES_I_AO",
             "v": "{0}% Chance to Degen non-robotic opponents for up to {1} Direct Damage over {2} seconds.",
             "vn": "12"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_A",
+            "v": "As long as Cap has at least {1} Kinetic Potential, he’s is considered to be Kinetically Charged, and gains the following bonuses as Passive effects:",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_B",
+            "v": "[16982bff]+{1}[-] Attack",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_B_ALT",
+            "v": "+{1}% chance to cause Opponent’s attacks to Glance.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_C",
+            "v": "[16982bff]+{1}[-] Physical Resist",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_D",
+            "v": "[16982bff]+{1}[-] Energy Resist",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_E",
+            "v": "+{1}% chance to cause Opponent’s attacks to Glance. Glancing Hits cannot be Critical, deal 50% reduced damage, and suffer -100% Offensive Ability Accuracy. This chance increases by {0}% against Mystic Champions.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_E_ALT",
+            "v": "+{1}% chance to cause Opponent’s attacks to Glance. Glancing Hits cannot be Critical, deal 50% reduced damage, and suffer -100% Offensive Ability Accuracy.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KC_F",
+            "v": "{1}% chance to Nullify Unstoppable Buffs when striking the Opponent.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KD",
+            "v": "Beginning to charge a Heavy Attack grants a Passive Fury granting [16982bff]+{1}[-] Attack per Kinetic Potential, lasting for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KP_A",
+            "v": "Captain America’s vibranium vambraces can store up to {1} Kinetic Potential charges. He will not generate any new Kinetic Charges while at this limit.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KP_B",
+            "v": "{0}% Chance when Struck to gain {1} Kinetic Potential(s).",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KP_C",
+            "v": "{0}% Chance when Blocking to gain +{1} Kinetic Potential. This chance increases to 100% on a Well Timed Block.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KP_D",
+            "v": "{0}% Chance when Stunned to gain +{1} Kinetic Potential.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_KP_E",
+            "v": "Kinetic Potential falls off over time, falling off faster the longer its been since it last increased.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_A",
+            "v": "An excellent leader, Captain America learns from his teammates gaining a unique effect, while Kinetically Charged, for each class represented on his team, excluding himself.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_B",
+            "v": "Mutant: [16982bff]{0}%[-] chance on triggering a Special Attack to gain +{1} Kinetic Charge(s).",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_C",
+            "v": "Skill: [16982bff]{0}%[-] whenever a Debuff is gained, Consume {1} Kinetic Charge to Purify it.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_D",
+            "v": "Science: [16982bff]{0}%[-] chance on a Well-Timed Block to place a {1}% Weakness Debuff on the Opponent for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_E",
+            "v": "Mystic: [16982bff]{0}%[-] chance to gain {1} Kinetic Charge each time a Buff Expires or is Nullified on the Opponent.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_F",
+            "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_F_ALT",
+            "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] per Kinetic Charge for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_G",
+            "v": "Tech: [16982bff]{0}%[-] chance on a Well Timed Block to place a {1}% Petrify Debuff on the Opponent for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_SIMPLE",
+            "v": "Captain America is a great leader, and like a great leader, he learns as many lessons from his team as he teaches them. Then he puts those lessons into practice.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_TITLE",
+            "v": "LEADERSHIP",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_TITLE_LOWER",
+            "v": "Leadership",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_TITLE_SHORT",
+            "v": "Leadership {0}",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SP",
+            "v": "After any special Attack, Cap consumes all Kinetic Potential.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SP1",
+            "v": "Reduces Opponent’s Defensive Ability Accuracy by {1}% if Kinetically Charged.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SP2",
+            "v": "Each Kinetic Potential charge grants +{1} Attack and +{2} second(s) Stun Duration.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SP3_A",
+            "v": "If Kinetically Charged gains +{1} Attack for each different Class on Cap’s team, not including himself.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SP3_B",
+            "v": "Gain {1} Non-Consumable Kinetic Potential charge which lasts {2} seconds.",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_A",
@@ -3271,6 +3726,11 @@
             "v": "[b310e8]Shared Pain VII[-]"
         },
         {
+            "k": "ID_UI_STAT_ATTRIBUTE_ENC_STUN_HUD",
+            "v": "ENCROACHING STUN",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_ATTRIBUTE_ENERGYRESIST_HUD",
             "v": "ENERGY RESIST"
         },
@@ -3627,6 +4087,11 @@
             "k": "ID_UI_STAT_ATTRIBUTE_FINALSTRIKE_AO",
             "v": "While the opponent has less than {0}% Health, this Champion strikes with guaranteed Critical Hits.",
             "vn": "12"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_FISTICUFFS_HUD",
+            "v": "FISTICUFFS",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_FLAMES_AGAMOTTO",
@@ -4385,6 +4850,11 @@
         {
             "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_INCINERATE_REDHULK_B",
             "v": "Red Hulk expends two Heat Charges to Incinerate his opponent, dealing [16982bff]{1}%[-] of his Attack as Energy Damage over {2} seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by {0}% while it’s active."
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_KINETICALLYCHARGED_HUD",
+            "v": "KINETICALLY CHARGED",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_MANA_BURN",
@@ -5861,6 +6331,11 @@
             "v": "HEAVY ATTACK"
         },
         {
+            "k": "ID_UI_STAT_ATTRIBUTE_HEAVYONLY_HUD",
+            "v": "HEAVY ATTACKS ONLY",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_ATTRIBUTE_HELA_HVY",
             "v": "While charging her Heavy Attack, Hela continually gains Fury Buffs granting [16982bff]+{1}[-] Attack.",
             "vn": "16"
@@ -6529,6 +7004,11 @@
             "v": "[b310e8]Judgment VII[-]"
         },
         {
+            "k": "ID_UI_STAT_ATTRIBUTE_KINETICPOTENTIAL_SHORT",
+            "v": "KINETIC POTENTIAL",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_ATTRIBUTE_KREEPHY_I",
             "v": "[808080ff]Kree Physiology[-]"
         },
@@ -6993,6 +7473,11 @@
         {
             "k": "ID_UI_STAT_ATTRIBUTE_MORDOFXACC",
             "v": "Mordo’s astral form ensures that every ability properly activates, resisting against Ability Accuracy effects."
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MORDOFXACC_NEW",
+            "v": "Mordo's astral form grants him immunity to passive Ability Accuracy reduction effects.",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_MORDOPW",
@@ -7663,6 +8148,11 @@
             "k": "ID_UI_STAT_ATTRIBUTE_PHYSRESIST_WAX_AO",
             "v": "This champion gains and loses permanent Resist Physical Buffs throughout the fight, each increasing Physical Resistance by {1}.",
             "vn": "12"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_PILFER_HUD",
+            "v": "PILFERED",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_POISON_ABOM",
@@ -9271,9 +9761,59 @@
             "vn": "16.1"
         },
         {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLET",
+            "v": "Infinity Gauntlet",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLETENDSP1",
+            "v": "Special 1 - Evolution Stone",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLETENDSP2",
+            "v": "Special 2 - Nightmare Stone",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLETENDSP3",
+            "v": "Special 3 - Death Stone",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLETSP1",
+            "v": "Special 1 - Genesis Stone",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLETSP2",
+            "v": "Special 2 - Chaos Stone",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GAUNTLETSP3",
+            "v": "Special 3 - War Stone",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GOD",
             "v": "Goddess of Death - Passive",
             "vn": "16"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_INFINITYCLASS",
+            "v": "Infinity Class",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_KINETICALLYCHARGED",
+            "v": "Kinetically Charged - Passive",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_KINETICPOTENTIAL",
+            "v": "Kinetic Potential - Passive",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_LEARNTHEFOE",
@@ -9289,6 +9829,16 @@
             "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MEDIUMHEAVY",
             "v": "Medium and Heavy Attacks",
             "vn": "15"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MOLATK",
+            "v": "Molecular Arsenal",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MOLDEF",
+            "v": "Molecular Armor Passive",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_NEUROTOXIN",
@@ -9759,6 +10309,11 @@
             "vn": "17.1"
         },
         {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_REPULSOR",
+            "v": "Repulsor Attacks",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMACKTALK",
             "v": "Smack-Talk"
         },
@@ -10057,6 +10612,36 @@
         {
             "k": "ID_UI_STAT_BASIC_PHYS",
             "v": "Deals Physical damage."
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_ABREAK",
+            "v": "{0}% chance to inflict Armor Break, reducing Armor rating by [16982bff]{1}[-] for {2} seconds. The duration is doubled against Non-Robot Male Champions. [f1c232]#LowBlow #SorryNotSorry[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_BUFFS",
+            "v": "Deadpool receives an important call from the game designers, then threatens them to give him a couple of random Buffs. [f1c232]I don’t care if the Buffs don’t make sense! Fork ‘em over![-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_BUFFS_B",
+            "v": "The first buff has a 100% chance to activate, the second 75%, the third 50% and the fourth 25%.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_PROWESS",
+            "v": "If Deadpool completes his dance after this attack he gains Prowess, increasing Special Attack rating by [16982bff]{1}[-] for {2} seconds. [f1c232]Wait...am I the only dancing…? Weird...[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_RGN",
+            "v": "Once per fight, Deadpool has a {0}% chance to gain Regeneration, recovering [16982bff]{1}[-] Health over {2} seconds. [f1c232]Leave me alone Black Widow! You too Crossbones![-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_STN",
+            "v": "{0}% chance to Stun the opponent for {2} seconds. Against Non-Robot Male Champions, this chance is doubled. [f1c232]Cup Check![-]",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_FORMAT_AFTERSHOCK_DIZZY",
@@ -11540,6 +12125,326 @@
             "v": "Opponents that make contact with you receive a Shock for [16982bff]{1}%[-] of the damage they inflicted as Energy Damage over [16982bff]{2}[-] seconds. This damage is Science based, dealing increased damage to Mystic Champions and reduced damage to Skill Champions."
         },
         {
+            "k": "ID_UI_STAT_FORMAT_THANOS_AUTOBLOCK",
+            "v": "AUTO BLOCK",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_DEATH_1",
+            "v": "Thanos gains Deathtouch for {2} seconds. Killing opponents instantly if he lands any attack.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_DEATH_1_EASY",
+            "v": "Thanos gains Deathtouch for {2} seconds. Killing opponents instantly if he lands any attack.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_DEATH_HUD",
+            "v": "DEATHTOUCH",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_EVOLUTION_1",
+            "v": "Thanos activates Evolution Armor for {2} seconds. Whenever the opponent’s attacks make contact with his Evolved Armor, {1}% of the damage taken will be dealt back as Bleed Damage.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_EVOLUTION_2",
+            "v": "When Evolution Armor is active, Thanos will Auto-Block the opponent’s Special Attacks and regenerate {1} Health for each attack Auto-Blocked.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_EVOLUTION_2_EXTRA",
+            "v": "When Evolution Armor is active, every {0} seconds Thanos will activate Auto-Block for {2} second(s). and regenerate {1}% of max Health for each attack Auto-Blocked.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_EVOLUTION_2_EXTRA2",
+            "v": "When Evolution Armor is active, Thanos will Auto-Block the opponent’s Special Attacks.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_EVOLUTION_2_EXTRA3",
+            "v": "When Evolution Armor is active, every {0} seconds Thanos will activate Auto-Block for {2} second(s).",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_EVOLUTION_ARMOR_HUD",
+            "v": "EVOLUTION ARMOR",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_IMMUNITY_LONG",
+            "v": "Thanos’s Gauntlet grants him immunity to his opponent’s Power manipulation and Ability Accuracy reduction effects.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY1_LONG",
+            "v": "Thanos permanently generates Power after activating an Infinity Stone, at the rate of 1 bar of Power over {1} seconds. This is the only way Thanos gains Power in this fight.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY2_END_LONG",
+            "v": "When dropping below 95% Health, Thanos activates his Evolution Stone and has a maximum of 1 bar of Power.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY2_LONG",
+            "v": "When dropping below 95% Health, Thanos activates his Genesis Stone and has a maximum of 1 bar of Power.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY3_END_LONG",
+            "v": "When dropping below 65% Health, Thanos activates his Nightmare Stone, instantly filling his first bar of Power and increasing his maximum Power to 2 bars.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY3_LONG",
+            "v": "When dropping below 65% Health, Thanos activates his Chaos Stone, instantly filling his first bar of Power and increasing his maximum Power to 2 bars.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY4_END_LONG",
+            "v": "When dropping below 30% Health, Thanos activates his Death Stone, instantly filling his first 2 bars of Power and increasing his maximum Power to 3 bars.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY4_LONG",
+            "v": "When dropping below 30% Health, Thanos activates his War Stone, instantly filling his first 2 bars of Power and increasing his maximum Power to 3 bars.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY5_LONG",
+            "v": "All of Thanos’s Special Attacks cost only 1 bar of Power to activate, and he will only activate a Special Attack when reaching his current maximum Power.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYARMOR_LONG",
+            "v": "Thanos’s armor passively grants him {1} Armor Rating and {0}% Critical Resistance. Armor Break disables those effects for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYCLASS_HUD",
+            "v": "CLASS ADVANTAGE",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYCLASS_LONG",
+            "v": "All Champions have Class Disadvantage when fighting against Thanos.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYCLASS_LONG_2",
+            "v": "After fighting against him for {2} seconds, Avengers will turn the tide of battle and receive Class Advantage for the rest of the fight.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_2_LONG",
+            "v": "When below 85% Health, this Special Attack is Unblockable.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_AURA_HUD",
+            "v": "GENESIS AURA",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_LONG",
+            "v": "Thanos activates his Genesis Aura, inflicting [16982bff]{1}[-] damage per second to nearby opponents. All damage dealt by his Genesis Aura will be transferred to Thanos as Health.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_LONG_EXTRASTUN",
+            "v": "Genesis Aura is disabled for {2} seconds when Thanos is Stunned.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_STUN_HUD",
+            "v": "AURA DISABLED",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMAREILLUSION_HUD",
+            "v": "ILLUSION",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMARE_1",
+            "v": "This Special Attack is Unblockable.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMARE_2",
+            "v": "Some projectiles in this Special Attack are nothing more than a mere illusion.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMARE_3",
+            "v": "{1}% chance to Evade the opponent’s attacks for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMARE_4",
+            "v": "Degeneration will drain {1}% of the opponent’s current Health in {2} seconds. {0}% of the Health lost by this ability is granted back when this effect expires.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMARE_EVD_EXTRA",
+            "v": "When the opponent is suffering from Degeneration, every {0} seconds Thanos will be able to Evade the opponent’s attacks for {2} second(s).",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_NIGHTMARE_EVD_EXTRA2",
+            "v": "When the opponent is suffering from Degeneration, every {0} seconds Thanos will be able to Evade the opponent’s attacks for {2} second(s). When Evading, Thanos leaves the opponents Stunned for {1} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_BUFFS_LONG",
+            "v": "Thanos activates True Strike, Fury and Safeguard Buffs for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_CHAOSEND",
+            "v": "NORMAL CONTROLS",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_CHAOSINVERSION_THANOS",
+            "v": "CHAOS INVERSION",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_FURY_LONG",
+            "v": "Fury increases his Attack Rating by [16982bff]{1}[-].",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_INVERSION_HUD",
+            "v": "INVERTED CONTROLS",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_INVERSION_LONG",
+            "v": "Chaos Inversion is inflicted, inverting the opponent’s controls for {2} seconds. This effect is immediately removed if the opponent is able to land a hit.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_INVERSION_LONG_EXTRA",
+            "v": "Chaos Inversion is inflicted, inverting the opponent’s Dodge and Dash controls for {2} seconds. This effect is immediately removed if the opponent is able to land a hit.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_INVERSION_LONG_EXTRA2",
+            "v": "Chaos Inversion is inflicted, inverting the opponent’s controls for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_INVERSION_SHORT",
+            "v": "[808080ff]Inversion[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_PETRIFY_LONG",
+            "v": "Petrify is inflicted when this Special Attack activates, reducing the effectiveness of the opponent’s Regeneration and Power Gain effects by {1}% for {2} seconds.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_PROTECTION_HUD",
+            "v": "SAFEGUARD",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_PROTECTION_LONG",
+            "v": "Safeguard prevents him from losing more than {1}% of his max Health from a single source.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP2_TRUESTRIKE_LONG",
+            "v": "True Strike allows him to ignore Armor, Resistances, Evade and Auto-Block effects.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP3_AVENGERS_LONG",
+            "v": "Members of the Avengers won’t lose more than 10% of their max Health when hit by this Special Attack.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP3_INTERCEPTPROTECTION_LONG",
+            "v": "When intercepting Thanos’s Dash Attack, the opponent gains Safeguard, preventing them from losing more than {1}% of their max Health the next time they get hit.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP3_INTERCEPT_LONG",
+            "v": "When Unstoppable War is active, Thanos is Unstoppable unless he is dashing towards the opponent. Additionally, when opponents intercept his Dash attack, his Unstoppable effect is disabled for their duration of the current combo.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP3_UNSTOPPABLEDISABLE_HUD",
+            "v": "WAR DISABLED",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP3_UNSTOPPABLE_HUD",
+            "v": "UNSTOPPABLE WAR",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_SP3_UNSTOPPABLE_LONG",
+            "v": "Unstoppable War activates for {2} seconds. While this effect is active, Thanos is Unstoppable unless he is dashing towards the opponent. This effect is immediately removed if opponents intercept Thanos’s Dash attack.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_STAGE1",
+            "v": "GENESIS STONE",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_STAGE2",
+            "v": "CHAOS STONE",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_STAGE3",
+            "v": "WAR STONE",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_STUNIMMUNE_LONG",
+            "v": "While Thanos is below {1}% Health, he is immune to Stun effects.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_TITLE_CHAOS",
+            "v": "[808080ff]Chaos Inversion[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_TITLE_DEATH",
+            "v": "[808080ff]Deathtouch[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_TITLE_EVOLUTION",
+            "v": "[808080ff]Evolution Armor[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_TITLE_GENESIS",
+            "v": "[808080ff]Genesis Aura[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_TITLE_NIGHTMARE",
+            "v": "[808080ff]Illusionary nightmare[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_THANOS_TITLE_WAR",
+            "v": "[808080ff]Unstoppable War[-]",
+            "vn": "18"
+        },
+        {
             "k": "ID_UI_STAT_FORMAT_UNSTOP",
             "v": "{0}% chance to gain an Unstoppable Buff which lasts for {2} seconds.",
             "vn": "15"
@@ -12571,6 +13476,26 @@
             "k": "ID_UI_STAT_SIGNATURE_DORMAMMU_TITLE",
             "v": "SOUL LEECH",
             "vn": "11.2"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_DPLGOLD_DESC",
+            "v": "A second Regen! [f1c232]And if those Skill Champs even TRY and mess with it, I'll just reach into the programming code myself and give it a second try.[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_DPLGOLD_SHORT",
+            "v": "Double Regen = Double Fun {0}",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_DPLGOLD_SIMPLE",
+            "v": "Once per fight, Deadpool gains Regeneration, recovering [16982bff]{1}[-] Health over {2} seconds. If this ability is suppressed by a Skill Champion, Deadpool reaches into his script code and tries once more to activate it after 2 seconds. [f1c232]Mutant beats Trained...I mean...Skill[-]",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_DPLGOLD_TITLE",
+            "v": "DOUBLE REGEN = DOUBLE FUN",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_DPO_COS_DESC",
@@ -14548,7 +15473,7 @@
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_SENTRY_LONG_1",
-            "v": "At the start of a fight, if Health is above [16982bff]{1}[-]%, Reality Warps persist with Sentry from the previous fight.",
+            "v": "\tAt the start of a fight, if Health is above [16982bff]{1}[-]%, Reality Warps persist with Sentry from the previous fight.",
             "vn": "16.1"
         },
         {
@@ -14563,7 +15488,7 @@
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_SENTRY_SIMPLE",
-            "v": "Reality Warps persist from fight to fight and Sentry has a chance to gain Indestructible when he loses a Combo.",
+            "v": "\tReality Warps persist from fight to fight and Sentry has a chance to gain Indestructible when he loses a Combo.",
             "vn": "16.1"
         },
         {
@@ -14869,6 +15794,26 @@
         {
             "k": "ID_UI_STAT_SIGNATURE_SYMBIOID_TITLE",
             "v": "SYMBIOSIS"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_THANOSBOSS_LONG",
+            "v": "Abilities activated through his Special Attacks have [16982bff]{1}%[-] increased duration.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_THANOSBOSS_SHORT",
+            "v": "Infinity Power {0}",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_THANOSBOSS_SIMPLE",
+            "v": "Abilities activated by his Special Attacks have increased duration.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_THANOSBOSS_TITLE",
+            "v": "INFINITY POWER",
+            "vn": "18"
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_THANOS_DESC",

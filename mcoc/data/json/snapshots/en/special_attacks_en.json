@@ -1,14 +1,14 @@
 {
     "meta": {
         "language": "en",
-        "hash": "f7df7b1c2259a5d43c12efdf029ef080df0e14d7",
+        "hash": "6a997e69696e839ed5cc99892f933a965f883666",
         "format": "sparx",
-        "ts": 1520975448,
+        "ts": 1521241000,
         "tagged": [
             "special_attacks",
             "client"
         ],
-        "string_count": 810
+        "string_count": 828
     },
     "strings": [
         {
@@ -201,6 +201,21 @@
             "v": "American Justice"
         },
         {
+            "k": "ID_SPECIAL_ATTACK_CAPTAINAMERICA_MOVIE_0",
+            "v": "My Ally's Claws",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_CAPTAINAMERICA_MOVIE_1",
+            "v": "Kinetic Discharge",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_CAPTAINAMERICA_MOVIE_2",
+            "v": "Lead from the Front",
+            "vn": "18"
+        },
+        {
             "k": "ID_SPECIAL_ATTACK_CAPTAINAMERICA_WW2_0",
             "v": "Shield Bash"
         },
@@ -289,7 +304,7 @@
         },
         {
             "k": "ID_SPECIAL_ATTACK_CORVUSGLAIVE_0",
-            "v": "Corvus’s glaive splits atoms in the air, launching a cosmic blast towards the opponent.",
+            "v": "Atomic Fissure",
             "vn": "17.2"
         },
         {
@@ -575,6 +590,21 @@
         {
             "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CAPTAINAMERICA_2",
             "v": "An up-close and personal view of Cap's shield. Don't blink, or you'll miss it."
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CAPTAINAMERICA_MOVIE_0",
+            "v": "Cap shows his new vibranium hardware is good for offence as well as defence.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CAPTAINAMERICA_MOVIE_1",
+            "v": "Smashing together his vambraces Cap unleashes a wave of kinetic energy.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CAPTAINAMERICA_MOVIE_2",
+            "v": "Cap leads by example, sending his enemy crashing to the mat!",
+            "vn": "18"
         },
         {
             "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CAPTAINAMERICA_WW2_0",
@@ -1143,6 +1173,36 @@
         {
             "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_2",
             "v": "A rocket-boosted uppercut sends his opponent airborne, where they're subjected to an array of Iron Man's weaponry."
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_INFINITYWAR_0",
+            "v": "Tapping into an esoteric energy source, the suit morphs to fire debilitating blasts.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_INFINITYWAR_1",
+            "v": "Nanoparticles reform into wings that rain down repeated missile strikes.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_INFINITYWAR_2",
+            "v": "Adapting to both worldly and otherworldly threats, detainment drones deploy and the Model 50 unleashes its entire arsenal.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_MOVIE_0",
+            "v": "Tapping into an esoteric energy source, the suit morphs to fire debilitating blasts.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_MOVIE_1",
+            "v": "Nanoparticles reform into wings that rain down repeated missile strikes.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_MOVIE_2",
+            "v": "Adapting to both worldly and otherworldly threats, detainment drones deploy while the Model 50 unleashes its entire arsenal.",
+            "vn": "18"
         },
         {
             "k": "ID_SPECIAL_ATTACK_DESCRIPTION_IRONMAN_SUPERIOR_0",
@@ -2476,6 +2536,36 @@
         {
             "k": "ID_SPECIAL_ATTACK_IRONMAN_2",
             "v": "Billion-Dollar Punch"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_IRONMAN_INFINITYWAR_0",
+            "v": "Zero-point Blasts",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_IRONMAN_INFINITYWAR_1",
+            "v": "Micro-missile Array",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_IRONMAN_INFINITYWAR_2",
+            "v": "Infinity Break",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_IRONMAN_MOVIE_0",
+            "v": "Zero-point Blasts",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_IRONMAN_MOVIE_1",
+            "v": "Micro-missile Array",
+            "vn": "18"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_IRONMAN_MOVIE_2",
+            "v": "Infinity Break",
+            "vn": "18"
         },
         {
             "k": "ID_SPECIAL_ATTACK_IRONMAN_SUPERIOR_0",

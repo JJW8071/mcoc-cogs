@@ -1,14 +1,14 @@
 {
     "meta": {
         "language": "en",
-        "hash": "68dd45893d8b8d6f00adc46cf531fdc09d44afda",
+        "hash": "426f6ca83d9ccf4f1ddc38e971ddbabedf045377",
         "format": "sparx",
-        "ts": 1519781322,
+        "ts": 1522182836,
         "tagged": [
             "character_bios",
             "client"
         ],
-        "string_count": 134
+        "string_count": 137
     },
     "strings": [
         {
@@ -78,6 +78,11 @@
         {
             "k": "ID_CHARACTER_BIOS_CAPTAINAMERICA",
             "v": "Steve Rogers' body may have been too weak to become a soldier, but his heart was too strong to quit. By a miracle of science, Steve was transformed into Captain America, Sentinel of Liberty. Possessing super strength, speed, reflexes, and his unbreakable shield, Cap is a born leader of humans, heroes, and gods."
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_CAPTAINAMERICA_MOVIE",
+            "v": "Since opposing the Sokovia Accords, the super-soldier has lost his shield and been forced underground. But with the help of friends new and old, he’s managed to re-equip and remain under the radar; all the while while continuing to do what he believes is right — saving the world one clandestine mission at a time.",
+            "vn": "18"
         },
         {
             "k": "ID_CHARACTER_BIOS_CAPTAINAMERICA_WW2",
@@ -262,6 +267,16 @@
             "v": "Genius. Billionaire. Playboy. Philanthropist. Tony Stark may be a visionary, but he didn't realize his life-saving invention would transform him into Iron Man! In his sleek suit, Stark can fly, shoot repulsor rays, and access an array of cutting edge technology to combat the enemies of the Avengers"
         },
         {
+            "k": "ID_CHARACTER_BIOS_IRONMAN_INFINITYWAR",
+            "v": "After being an integral part of the Avengers team from the start, Tony Stark finds himself divided from Earth’s Mightiest Heroes. But now, faced with an imminent, deadly threat unlike any he has ever encountered, Stark will be forced to call upon some familiar faces as well as do battle alongside some new allies.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_IRONMAN_MOVIE",
+            "v": "After being an integral part of the Avengers team from the start, Tony Stark finds himself divided from Earth’s Mightiest Heroes. But now, faced with an imminent, deadly threat unlike any he has ever encountered, Stark will be forced to call upon some familiar faces as well as do battle alongside some new allies.",
+            "vn": "18"
+        },
+        {
             "k": "ID_CHARACTER_BIOS_IRONMAN_SUPERIOR",
             "v": "Tony Stark has always had an impressive ego, but following an inversion spell during the “Axis” event which brought out the worst aspects of his personality, he moved to San Francisco with a new brand of self-worth. To reflect his latest \"superior\" outlook, he built the Model 51, a liquid suit of adaptive Armor based off the Cosmic entities known as symbiotes."
         },
@@ -425,7 +440,7 @@
         },
         {
             "k": "ID_CHARACTER_BIOS_SENTRY",
-            "v": "Robert Reynolds left his previous ordinary life behind the day he imbibed a mysterious laboratory liquid. Little did Robert know, the concoction was an enhanced version of the Super-Soldier Serum and it transformed him into the Golden Guardian, Sentry. With the power of a million exploding suns, Sentry combats the forces of evil and destruction, whether they come from abroad, or from Sentry himself...",
+            "v": "        Robert Reynolds left his previous ordinary life behind the day he imbibed a mysterious laboratory liquid. Little did Robert know, the concoction was an enhanced version of the Super-Soldier Serum and it transformed him into the Golden Guardian, Sentry. With the power of a million exploding suns, Sentry combats the forces of evil and destruction, whether they come from abroad, or from Sentry himself...",
             "vn": "16.1"
         },
         {

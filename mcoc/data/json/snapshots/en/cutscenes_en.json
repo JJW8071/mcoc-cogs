@@ -1,14 +1,14 @@
 {
     "meta": {
         "language": "en",
-        "hash": "577a1ddcea8178815caa5c1aae6b65e1ab7f4e09",
+        "hash": "b536d51be98408283917b93e6ad38a8dc80d3d72",
         "format": "sparx",
-        "ts": 1520900974,
+        "ts": 1521580598,
         "tagged": [
             "cutscenes",
             "client"
         ],
-        "string_count": 264
+        "string_count": 272
     },
     "strings": [
         {
@@ -667,6 +667,11 @@
             "v": "CIVIL WAR EPILOGUE"
         },
         {
+            "k": "ID_UI_CUTSCENE_INFINITYCHAOS",
+            "v": "INFINITY CHAOS",
+            "vn": "17.2"
+        },
+        {
             "k": "ID_UI_CUTSCENE_INTRO",
             "v": "PROLOGUE"
         },
@@ -1217,6 +1222,41 @@
             "k": "ID_UI_CUT_INFINITYCHAOS_14",
             "v": "TO BE CONCLUDED IN INFINITY NIGHTMARE",
             "vn": "17.2"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_01",
+            "v": "Beautiful, isn’t it?",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_02",
+            "v": "The first time I saw the Battlerealm, I thought it was the most perfect jewel in all creation.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_03",
+            "v": "But I now realize it’s nothing but a cosmic trap... one that neither man nor god can escape.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_04",
+            "v": "We will not die here. I promise you.",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_05",
+            "v": "And how do mere humans plan to succeed, where cosmic entities have failed?",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_06",
+            "v": "Same way we’ve always done it...",
+            "vn": "18"
+        },
+        {
+            "k": "ID_UI_CUT_INFINITYNIGHT_07",
+            "v": "...Together.",
+            "vn": "18"
         }
     ]
 }
