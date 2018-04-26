@@ -2585,14 +2585,14 @@ class Champion:
         for x in preambles:
             if x + '_SIMPLE' in sigs:
                 preamble = x
-                print('SIGN PREAMBLE is : ' + x)
+                print('SIG PREAMBLE is : ' + x)
                 break
         # if preamble is None:
         #     if mcocsig == 'BISH':
         #         preamble = 'ID_STAT_BISH_SIG'
 
-        # if preamble is 'undefined':
-        #     raise KeyError('DEBUG - Preamble not found')
+        if preamble is None:
+            raise KeyError('DEBUG - Preamble not found')
         if preamble + '_SIMPLE_NEW2' in sigs:
             simple = preamble + '_SIMPLE_NEW2'
         if preamble + '_SIMPLE_NEW' in sigs:
