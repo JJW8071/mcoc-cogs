@@ -1667,7 +1667,7 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
-    @commands.group(hidden=True, pass_context=True, name='datamine')
+    @commands.group(hidden=True, pass_context=True, name='datamine',aliases=('dm','datasearch'))
     async def ksearch(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
