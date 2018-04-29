@@ -2405,7 +2405,10 @@ class Champion:
                 sd = self.get_sig_data_from_csv()
             cfile = 'sig_coeff_4star' if self.star < 5 else 'sig_coeff_5star'
             coeff = dataIO.load_json(local_files[cfile])
-            sd.update(coeff[self.full_name])
+            try:
+                sd.update(coeff[self.full_name])
+            except KeyError:
+                sd = self.init_sig_struct()
         else:
             sd = data[self.full_name] if self.full_name in data else data
         return sd
@@ -2592,7 +2595,7 @@ class Champion:
         #         preamble = 'ID_STAT_BISH_SIG'
 
         if preamble is None:
-            raise KeyError('DEBUG - Preamble not found')
+            raise TitleError("'{}' preamble not found".format(mcocsig))
         if preamble + '_SIMPLE_NEW2' in sigs:
             simple = preamble + '_SIMPLE_NEW2'
         if preamble + '_SIMPLE_NEW' in sigs:
