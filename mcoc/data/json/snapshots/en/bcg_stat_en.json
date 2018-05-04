@@ -2485,37 +2485,37 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_B",
-      "v": "Mutant: [16982bff]{0}%[-] chance on triggering a Special Attack to gain +{1} Kinetic Potential.",
+      "v": "Mutant: [16982bff]{0}%[-] chance on triggering a Special Attack to gain +1 Kinetic Potential.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_C",
-      "v": "Skill: [16982bff]{0}%[-] whenever a Debuff is gained, Consume {1} Kinetic Potential to Purify it.",
+      "v": "Skill: [16982bff]{0}%[-] whenever a Debuff is gained, Consume 1 Kinetic Potential to Purify it.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_D",
-      "v": "Science: [16982bff]{0}%[-] chance on a Well-Timed Block to place a {1}% Weakness Debuff on the Opponent for {2} seconds.",
+      "v": "Science: [16982bff]{0}%[-] chance on a Well-Timed Block to place a 10% Weakness Debuff on the Opponent for 10 seconds.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_E",
-      "v": "Mystic: [16982bff]{0}%[-] chance to gain {1} Kinetic Potential each time a Buff Expires or is Nullified on the Opponent.",
+      "v": "Mystic: [16982bff]{0}%[-] chance to gain 1 Kinetic Potential each time a Buff Expires or is Nullified on the Opponent.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_F",
-      "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] for {2} seconds.",
+      "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] for 10 seconds.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_F_ALT",
-      "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] per Kinetic Charge for {2} seconds.",
+      "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] per Kinetic Charge for 10 seconds.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_G",
-      "v": "Tech: [16982bff]{0}%[-] chance on a Well Timed Block to place a {1}% Petrify Debuff on the Opponent for {2} seconds.",
+      "v": "Tech: [16982bff]{0}%[-] chance on a Well Timed Block to place a {1}% Petrify Debuff on the Opponent for 10 seconds.",
       "vn": 18
     },
     {
