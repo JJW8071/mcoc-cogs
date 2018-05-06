@@ -1,7 +1,7 @@
 import re
 from datetime import datetime, timedelta
 from textwrap import wrap
-from collections import UserDict, defaultdict, Mapping, namedtuple, OrderedDict
+from collections import UserDict, defaultdict, ChainMap, namedtuple, OrderedDict
 from functools import partial
 from math import log2
 from math import *
@@ -72,7 +72,7 @@ local_files = {
 }
 
 async def postprocess_sig_data(bot, struct):
-    sigs = load_kabam_json(kabam_bcg_stat_en)
+    sigs = load_kabam_json(kabam_bcg_stat_en, aux=struct.get('bcg_stat_en_aux'))
     mcoc = bot.get_cog('MCOC')
     missing = []
     for key in struct.keys():
@@ -86,7 +86,7 @@ async def postprocess_sig_data(bot, struct):
         except TitleError as e:
             missing.append(e.champ)
     if missing:
-        bot.say("Skipped Champs due to Kabam Key Errors: {}".format(', '.join(missing)))
+        await bot.say("Skipped Champs due to Kabam Key Errors: {}".format(', '.join(missing)))
 
 gapi_service_creds = 'data/mcoc/mcoc_service_creds.json'
 gsheet_files = {
@@ -453,8 +453,19 @@ class GSExport():
                     self.data[sheet_name][rkey] = pack
                 elif sheet_action == 'file':
                     self.data[rkey] = pack
+            elif sheet_action == 'list':
+                if data_type == 'list':
+                    pack = clean_row[0:]
+                elif data_type == 'dict':
+                    pack = dict(zip(header, clean_row))
+                if sheet_name not in self.data:
+                    self.data[sheet_name] = []
+                self.data[sheet_name].append(pack)
             elif sheet_action == 'table':
                 self.data[sheet_name].append(clean_row)
+            else:
+                raise KeyError("Unknown sheet_action '{}' for worksheet '{}' in spreadsheet '{}'".format(
+                            sheet_action, sheet_name, self.name))
 
     async def _resolve_sheet_name(self, ss, sheet_name):
         if sheet_name:
@@ -2408,7 +2419,7 @@ class Champion:
             try:
                 sd.update(coeff[self.full_name])
             except KeyError:
-                sd = self.init_sig_struct()
+                sd.update(dict(effects=[], locations=[], sig_coeff=[]))
         else:
             sd = data[self.full_name] if self.full_name in data else data
         return sd
@@ -2567,7 +2578,7 @@ class Champion:
         for x in titles:
             if x in sigs:
                 title = x
-                print('SIG TITLE is : ' + x)
+                #print('SIG TITLE is : ' + x)
 
         if title is None:
             raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
@@ -2583,18 +2594,17 @@ class Champion:
             'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
+            'ID_STAT_{}_SIG_TITLE'.format(mcocsig),
             )
 
         for x in preambles:
             if x + '_SIMPLE' in sigs:
                 preamble = x
-                print('SIG PREAMBLE is : ' + x)
+                #print('SIG PREAMBLE is : ' + x)
                 break
-        # if preamble is None:
-        #     if mcocsig == 'BISH':
-        #         preamble = 'ID_STAT_BISH_SIG'
-
-        if preamble is None:
+        if preamble is None and mcocsig == 'BISH':
+            preamble = 'ID_STAT_BISH_SIG'
+        elif preamble is None:
             raise TitleError("'{}' preamble not found".format(mcocsig))
         if preamble + '_SIMPLE_NEW2' in sigs:
             simple = preamble + '_SIMPLE_NEW2'
@@ -2628,8 +2638,10 @@ class Champion:
             desc.append(preamble+'_DESC_MOD')
         else:
             for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
-                      '_DESC_E','_DESC_F','_DESC_FALT','_DESC_G','_LONG','_LONG_2', '_LONG_B', '_LONG_B_EXTRA',
-                      '_TITLE_LONG','_TITLE_LONG2','_TITLE_LONG2B','_TITLE_LONG2C','_TITLE_LONG2D',):
+                      '_DESC_E','_DESC_F','_DESC_G',
+                      '_LONG','_LONG_1','_LONG_2','_LONG_3','_LONG_4','_LONG_5',
+                      '_LONG1','_LONG2','_LONG3','_LONG4','_LONG5',
+                      '_LONG_B', '_LONG_C',):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
@@ -2807,11 +2819,12 @@ def iter_rows(array, rotate):
                 row.append(array[i][j])
             yield row
 
-def load_kabam_json(file):
+def load_kabam_json(file, aux=None):
     raw_data = dataIO.load_json(file)
-    data = {}
-    for d in raw_data['strings']:
-        data[d['k']] = d['v']
+    data = ChainMap()
+    aux = aux if aux is not None else []
+    for dlist in aux, raw_data['strings']:
+        data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
 def _truncate_text(self, text, max_length):
