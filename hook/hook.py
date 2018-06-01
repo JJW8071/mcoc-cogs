@@ -483,7 +483,8 @@ class Hook:
 
     def __init__(self, bot):
         self.bot = bot
-        self.champ_re = re.compile(r'champ.*\.csv')
+        self.champ_re = re.compile(r'.*hamp.*\.csv')
+        # self.champ_re = re.compile(r'champ.*\.csv')
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
 
