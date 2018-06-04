@@ -1,14 +1,16 @@
 {
     "meta": {
         "language": "en",
-        "hash": "426f6ca83d9ccf4f1ddc38e971ddbabedf045377",
+        "hash": "f8942080a7721fed21160c72ed3e5637b6cc5579",
         "format": "sparx",
-        "ts": 1522182836,
+        "ts": 1527014138,
+        "versionLock": "18.1",
+        "post_processed": true,
         "tagged": [
             "character_bios",
             "client"
         ],
-        "string_count": 137
+        "string_count": 142
     },
     "strings": [
         {
@@ -81,7 +83,7 @@
         },
         {
             "k": "ID_CHARACTER_BIOS_CAPTAINAMERICA_MOVIE",
-            "v": "Since opposing the Sokovia Accords, the super-soldier has lost his shield and been forced underground. But with the help of friends new and old, he’s managed to re-equip and remain under the radar; all the while while continuing to do what he believes is right — saving the world one clandestine mission at a time.",
+            "v": "Since opposing the Sokovia Accords, the super-soldier has lost his shield and been forced underground. But with the help of friends new and old, he’s managed to re-equip and remain under the radar; all the while continuing to do what he believes is right — saving the world one clandestine mission at a time.",
             "vn": "18"
         },
         {
@@ -139,6 +141,10 @@
             "v": "Hey, you wanna be cool like me? Then put down the stupid video game and get off your sorry butt! Oh, get cool red threads, big guns, and train like a billion hours until you're a master of sword, fist, and firearm. If you think you REALLY got what it takes, then annoy Wolverine and live to tell the tale! Fat chance gamer. There's only one 'Merc with a Mouth!"
         },
         {
+            "k": "ID_CHARACTER_BIOS_DEADPOOL_GOLD",
+            "v": "Granted an undescended healing factor at the hands of the Weapon X Program, Wade...[f1c232] Blah blah blah, step aside game designer chump. Let me show you how it’s done. In a world where a bunch of super-heroes fight each other for the amusement of gamers with too much time on their hands, one kick-butt dude with super sweet swords and unmatched dance skills rises up to...to uhh...wait...what’s the point of the Contest? ISO-Sphere? Is it shiny? Whatever, I want it.[-]",
+        },
+        {
             "k": "ID_CHARACTER_BIOS_DEADPOOL_XFORCE",
             "v": "Wade Winston Wilson (a.k.a Deadpool) joined X-Force, a black ops team running covert missions to eliminate threats to the muta-- Hold up -- didn’t we do this whole bio thing already? You know, with the other, less-cool version of me? I’m the hot one! That red-suited scab factory just copies Spider-Man! I’ve got skills, suckahs!"
         },
@@ -146,6 +152,10 @@
             "k": "ID_CHARACTER_BIOS_DOC_OCK",
             "v": "Otto Octavius came from a troubled home. Determined not to follow in his abusive father’s footsteps, Otto devoted himself to his studies. Despite years of derision from his peers, he became a nuclear physicist. But after he had to have the mechanical arms he designed and built surgically removed following an accident Otto finally had enough. Assuming the derogatory name his co-coworkers had coined for him, Otto began a life of crime as Doctor Octopus.",
             "vn": "14.1"
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_DOMINO",
+            "v": "Neena Thurman a.k.a. Domino is the lucky result of an unlucky government weapons program designed to breed the perfect weapon. After escaping a top-secret facility with her mother, she honed her Mutant ability to manipulate probabilities and joined the mercenary group known as X-Force.",
         },
         {
             "k": "ID_CHARACTER_BIOS_DORMAMMU",
@@ -341,6 +351,10 @@
         {
             "k": "ID_CHARACTER_BIOS_MAGNETO_MARVELNOW",
             "v": "The Master of Magnetism has embraced a self-proclaimed role of detective, judge, jury, and executioner against those who harm mutants. One of the greatest Marvel anti-heroes ever, Magneto exacts his own form of mutant justice, by any means necessary."
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_MASACRE",
+            "v": "Deadpool once visited a church in Mexico, stopping to give confession. The priest who took his confession was convinced by it that the world needed to be punished, becoming the mercenary Masacre. Extracting information from the reluctant Inspector Jaime Gordón, Masacre tracks down and takes out the crime lord Calavera de Jade. The very next day Masacre rides off to New York, joining Deadpool’s Mercs for Money.",
         },
         {
             "k": "ID_CHARACTER_BIOS_MEDUSA",

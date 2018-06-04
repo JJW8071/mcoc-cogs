@@ -1,14 +1,16 @@
 {
   "meta": {
+        "language": "en",
+        "hash": "9a78d087cfb0f08551bba0d482466651b6a6c2ed",
     "format": "sparx",
-    "hash": "6a997e69696e839ed5cc99892f933a965f883666",
-    "language": "en",
-    "string_count": 828,
+        "ts": 1527014138,
+        "versionLock": "18.1",
+        "post_processed": true,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1521241000
+        "string_count": 852
   },
   "strings": [
     {
@@ -391,6 +393,18 @@
       "v": "Hold Up"
     },
     {
+            "k": "ID_SPECIAL_ATTACK_DEADPOOL_GOLD_0",
+            "v": "Golden Groin Punch",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DEADPOOL_GOLD_1",
+            "v": "Sparkly Sword Attack",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DEADPOOL_GOLD_2",
+            "v": "Important Call",
+        },
+        {
       "k": "ID_SPECIAL_ATTACK_DEADPOOL_XFORCE_0",
       "v": "Spinnin' Groin Punch"
     },
@@ -782,6 +796,18 @@
       "v": "I've really gotta take this..."
     },
     {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DEADPOOL_GOLD_0",
+            "v": "A fancy spin followed by a not-so-fancy cheap shot.",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DEADPOOL_GOLD_1",
+            "v": "Jump, spin, slash, pause for dance break!",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DEADPOOL_GOLD_2",
+            "v": "Goldpool receives a call from...me? Wait...what!?",
+        },
+        {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DEADPOOL_XFORCE_0",
       "v": "A fancy way to punch a certain someone where it counts."
     },
@@ -819,6 +845,18 @@
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DOC_OCK_2",
       "v": "After much careful study and experimentation, Doc Ock can now mathematically prove that your defeat is inevitable.",
       "vn": "14.1"
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DOMINO_0",
+            "v": "Domino fires a bullet that strikes a grenade at exactly the right angle to maximize damage.",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DOMINO_1",
+            "v": "Domino fires four shots in style while upside down and airborne.",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DOMINO_2",
+            "v": "After two shots, Domino kicks her pistol at the opponent then unleashes a larger weapon.",
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DORMAMMU_0",
@@ -1405,6 +1443,18 @@
       "v": "Encased in a metal prison, Magneto's target implodes. Peace was never an option."
     },
     {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MASACRE_0",
+            "v": "Masacre gives his opponent a face full of ground chillies before aggressively applying his machetes while they’re distracted.",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MASACRE_1",
+            "v": "Masacre opens fire with his powerful if sometimes unreliable shotguns, and if all else fails, they’re heavy...",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MASACRE_2",
+            "v": "Hurling his opponent away, Masacre self serves a bottle of his own special recipe, line driving it into his opponent to explosive effect.",
+        },
+        {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_MEDUSA_0",
       "v": "Medusa individually controls each strand of her hair to subdue opponents with a 4-hit combo.",
       "vn": 15
@@ -2182,6 +2232,18 @@
       "vn": "14.1"
     },
     {
+            "k": "ID_SPECIAL_ATTACK_DOMINO_0",
+            "v": "Stroke of Luck",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DOMINO_1",
+            "v": "Auspicious Onslaught",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_DOMINO_2",
+            "v": "Soldier of Fortune",
+        },
+        {
       "k": "ID_SPECIAL_ATTACK_DORMAMMU_0",
       "v": "Soul Fire",
       "vn": "11.2"
@@ -2767,6 +2829,18 @@
       "v": "Cold-Blooded Fusion"
     },
     {
+            "k": "ID_SPECIAL_ATTACK_MASACRE_0",
+            "v": "Fuel for the Fire",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_MASACRE_1",
+            "v": "Sawed Off Thunder",
+        },
+        {
+            "k": "ID_SPECIAL_ATTACK_MASACRE_2",
+            "v": "Special Sauce",
+        },
+        {
       "k": "ID_SPECIAL_ATTACK_MEDUSA_0",
       "v": "Split Ends",
       "vn": 15

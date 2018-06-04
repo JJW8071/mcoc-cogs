@@ -1,16 +1,16 @@
 {
   "meta": {
+        "language": "en",
+        "hash": "5b74bfce3d8e08c1f691758dc7d052b4edf90893",
     "format": "sparx",
-    "hash": "be7217ade19d2431bc21336bd607ee1d8009272d",
-    "language": "en",
+        "ts": 1527113949,
+        "versionLock": "18.1",
     "post_processed": true,
-    "string_count": 3735,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1523922844,
-    "versionLock": "18.0"
+        "string_count": 3939
   },
   "strings": [
         {
@@ -111,12 +111,10 @@
     {
       "k": "ID_STAT_BISHOP_ABSORB_SHORT",
       "v": "[808080ff]Energy Absorption[-]",
-      "vn": "17.1"
     },
     {
       "k": "ID_STAT_BISHOP_NRGDMG_SHORT",
       "v": "[808080ff]Energy Damage[-]",
-      "vn": "17.1"
     },
     {
       "k": "ID_STAT_BISHOP_PV_SHORT",
@@ -319,6 +317,206 @@
       "vn": "16.1"
     },
     {
+            "k": "ID_STAT_DOM1",
+            "v": "At the start of the fight, opponents lose [16982bff]{1}[-] Critical Rating and Domino gains the same amount.",
+        },
+        {
+            "k": "ID_STAT_DOM10",
+            "v": "Benefit from up to [16982bff]+{1}[-] Block Proficiency selected at random.",
+        },
+        {
+            "k": "ID_STAT_DOM11",
+            "v": "A Block with [16982bff]{1}[-] Block Proficiency or higher results in a Perfect Block, reducing incoming attack damage to zero and granting {0}% maximum Power instantly.",
+        },
+        {
+            "k": "ID_STAT_DOM12",
+            "v": "{0}% chance for Domino to gain a Lucky Passive. {1}% of Domino’s current Combo Meter count is added to this chance.",
+        },
+        {
+            "k": "ID_STAT_DOM13",
+            "v": "{0}% chance for opponents to suffer an Unlucky Passive. {1}% of the opponents’ current Combo Meter count is added to this chance.",
+        },
+        {
+            "k": "ID_STAT_DOM14",
+            "v": "Lucky and Unlucky effects last for a random duration between {0} and {1} seconds plus {2} additional second(s) for each full Bar of Power at the time of activation.",
+        },
+        {
+            "k": "ID_STAT_DOM15",
+            "v": "Skill Champions are always Unlucky.",
+        },
+        {
+            "k": "ID_STAT_DOM16",
+            "v": "Tech Champions are never Unlucky.",
+        },
+        {
+            "k": "ID_STAT_DOM17",
+            "v": "[16982bff]+{1}[-] Critical Rating.",
+        },
+        {
+            "k": "ID_STAT_DOM18",
+            "v": "[16982bff]+{1}[-] Critical Damage Rating.",
+        },
+        {
+            "k": "ID_STAT_DOM19",
+            "v": "+{1}% Ability Accuracy.",
+        },
+        {
+            "k": "ID_STAT_DOM2",
+            "v": "At the start of the fight, opponents lose {0}% Ability Accuracy. Whenever one of Domino’s abilities fails to trigger, she gains +{1}% Ability Accuracy for {2} seconds.",
+        },
+        {
+            "k": "ID_STAT_DOM20",
+            "v": "[16982bff]+{1}[-] Block Proficiency.",
+        },
+        {
+            "k": "ID_STAT_DOM21",
+            "v": "{1}% chance to Evade attacks.",
+        },
+        {
+            "k": "ID_STAT_DOM22",
+            "v": "Stun expires {1}% faster.",
+        },
+        {
+            "k": "ID_STAT_DOM23",
+            "v": "Domino is more likely to earn a higher roll when selecting Attack Rating, Critical Damage Rating, and Block Proficiency bonuses at random.",
+        },
+        {
+            "k": "ID_STAT_DOM24",
+            "v": "[16982bff]-{1}[-] Critical Rating.",
+        },
+        {
+            "k": "ID_STAT_DOM25",
+            "v": "[16982bff]-{1}[-] Critical Damage Rating.",
+        },
+        {
+            "k": "ID_STAT_DOM26",
+            "v": "[16982bff]-{1}[-] Critical Resistance.",
+        },
+        {
+            "k": "ID_STAT_DOM27",
+            "v": "-{1}% Ability Accuracy.",
+        },
+        {
+            "k": "ID_STAT_DOM28",
+            "v": "[16982bff]-{1}[-] Block Proficiency.",
+        },
+        {
+            "k": "ID_STAT_DOM29",
+            "v": "{1}% chance for Evade or the Dexterity Mastery to fail.",
+        },
+        {
+            "k": "ID_STAT_DOM3",
+            "v": "Domino’s Bleed abilities tend to strike vital points and have a chance to benefit from her Critical Damage bonuses equal to her Critical Chance.",
+        },
+        {
+            "k": "ID_STAT_DOM30",
+            "v": "Bleed abilities deal {1}% less damage.",
+        },
+        {
+            "k": "ID_STAT_DOM4",
+            "v": "Opponents’ Bleed abilities tend to graze and have a {0}% chance to expire after only {2} second(s). Whenever a Bleed expires prematurely, Domino is inspired and gains {1}% of her maximum Power instantly.",
+        },
+        {
+            "k": "ID_STAT_DOM5",
+            "v": "Benefit from up to [16982bff]+{1}[-] Attack Rating selected at random.",
+        },
+        {
+            "k": "ID_STAT_DOM6",
+            "v": "Benefit from up to [16982bff]+{1}[-] Critical Damage selected at random.",
+        },
+        {
+            "k": "ID_STAT_DOM7",
+            "v": "A Critical Hit with a maximum roll in both Attack and Critical Damage Ratings results in a Perfect Critical Hit that inflicts Stun for {1} to {2} second(s).",
+        },
+        {
+            "k": "ID_STAT_DOM8",
+            "v": "If the opponent is Stunned, inflict Incinerate for [16982bff]{1}[-] Energy Damage over {2} seconds.",
+        },
+        {
+            "k": "ID_STAT_DOM8B",
+            "v": "If the opponent is Stunned, Attack Rating is increased by [16982bff]+{1}[-] for this attack.",
+        },
+        {
+            "k": "ID_STAT_DOM9",
+            "v": "These attacks are {1}% less likely to trigger enemy abilities.",
+        },
+        {
+            "k": "ID_STAT_DOM_BLD",
+            "v": "{0}% chance to inflict Bleed, dealing [16982bff]{1}[-] Direct Damage over {2} seconds.",
+        },
+        {
+            "k": "ID_STAT_DOM_BLD2",
+            "v": "Each hit has {0}% chance to inflict Bleed, dealing [16982bff]{1}[-] Direct Damage over {2} seconds.",
+        },
+        {
+            "k": "ID_STAT_DOM_CRBLD_HUD",
+            "v": "CRITICAL BLEED",
+        },
+        {
+            "k": "ID_STAT_DOM_CRITBLD_SHORT",
+            "v": "[b4b4b4ff]Critical Bleed[-]"
+        },
+        {
+            "k": "ID_STAT_DOM_CRITDMG_SHORT",
+            "v": "[b4b4b4ff]Critical Damage[-]"
+        },
+        {
+            "k": "ID_STAT_DOM_LUCKBAD_HUD",
+            "v": "UNLUCKY",
+        },
+        {
+            "k": "ID_STAT_DOM_LUCK_HUD",
+            "v": "LUCKY",
+        },
+        {
+            "k": "ID_STAT_DOM_LUCK_SHORT",
+            "v": "[b4b4b4ff]Luck[-]"
+        },
+        {
+            "k": "ID_STAT_DOM_PERF_HUD",
+            "v": "PERFECT",
+        },
+        {
+            "k": "ID_STAT_DOM_SIG_TITLE",
+            "v": "CRITICAL FAILURE",
+        },
+        {
+            "k": "ID_STAT_DOM_SIG_TITLE_LONG",
+            "v": "Opponents take up to [16982bff]{1}[-] Energy Damage over {2} second(s) whenever their abilities fail to trigger. Potency decreases temporarily for consecutive triggers.",
+        },
+        {
+            "k": "ID_STAT_DOM_SIG_TITLE_LOW",
+            "v": "Critical Failure {0}",
+        },
+        {
+            "k": "ID_STAT_DOM_SIG_TITLE_SIMPLE",
+            "v": "Opponents take Energy Damage whenever their abilities fail to trigger.",
+        },
+        {
+            "k": "ID_STAT_DOM_SP1_2",
+            "v": "If Domino is Lucky, this attack refreshes all Stun and Bleed effects on the opponent.",
+        },
+        {
+            "k": "ID_STAT_DOM_SP1_3",
+            "v": "If the opponent is Unlucky, this attack has [16982bff]+{1}[-] Attack Rating for each second that passed since the last time Domino hit with a Special Attack this fight.",
+        },
+        {
+            "k": "ID_STAT_DOM_SP2_2",
+            "v": "If Domino is Lucky, this attack has [16982bff]+{1}[-] Attack Rating if Domino suffered from Bleed at least once this fight.",
+        },
+        {
+            "k": "ID_STAT_DOM_SP2_3",
+            "v": "If the opponent is Unlucky, they’re Taunted by this flashy attack. Taunted opponents have their Attack reduced by [16982bff]{1}[-] and have a {0}% higher chance to activate a Special Attack.",
+        },
+        {
+            "k": "ID_STAT_DOM_SP3_2",
+            "v": "If Domino is Lucky, this attack has [16982bff]+{1}[-] Attack Rating for every Critical Hit that occured this fight by either Domino or her opponent. (Max: {2} Critical Hits)",
+        },
+        {
+            "k": "ID_STAT_DOM_SP3_3",
+            "v": "If the opponent is Unlucky, this attack inflicts Armor Break, removing one Armor Up and reducing Armor by [16982bff]{1}[-] for {2} seconds.",
+        },
+        {
       "k": "ID_STAT_IMI1",
       "v": "Tony Stark’s Model 50 suit uses state-of-the-art nanotechnology to change form and mass at will, providing extreme adaptability and a wide array of weaponry including Blade Arm, Hammer Arm, and point-blank Repulsor attacks.",
       "vn": 18
@@ -439,6 +637,10 @@
       "vn": 18
     },
     {
+            "k": "ID_STAT_IMI28B",
+            "v": "Repulsor hits that strike an opponent suffering from a Shock or Plasma effect generate zero Power in opponents and drain up to {1}% of their current stored Power.",
+        },
+        {
       "k": "ID_STAT_IMI29",
       "v": "The chance to inflict Plasma decreases by {1}% for each Plasma effect already active on the target.",
       "vn": 18
@@ -569,7 +771,6 @@
       "vn": "16.1"
     },
     {
-      "cn": "charge(s)",
       "k": "ID_STAT_MODOK_FF3",
       "v": "Start the fight with {0} Force Field charge(s), each Auto-Blocking one attack with [16982bff]+{1}[-] Block Proficiency. Force Fields cannot trigger Parry.",
       "vn": "16.1"
@@ -587,7 +788,6 @@
     {
       "k": "ID_STAT_MODOK_FF_SHORT",
       "v": "[808080ff]Force Field[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_STAT_MODOK_FLUX",
@@ -632,7 +832,6 @@
     {
       "k": "ID_STAT_MODOK_FLUX_SHORT",
       "v": "[808080ff]Flux[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_STAT_MODOK_HUD1",
@@ -807,7 +1006,78 @@
     {
       "k": "ID_STAT_PROWESS_SHORT",
       "v": "[808080ff]Prowess[-]",
-      "vn": "17.1"
+        },
+        {
+            "k": "ID_STAT_SB_DOM_AIM",
+            "v": "NOT SO ADVANCED IDEA MECHANICS",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_AIM2",
+            "v": "BETTER LUCK NEXT TIME",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_AIM2_DESC",
+            "v": "[64acff]Domino:[-] If Domino never hit with a Special Attack while both Lucky and Unlucky were active, then she has +{0}% chance to activate them during her next fight.[-]\n[64acff]M.O.D.O.K. or Taskmaster:[-] Bleed abilities last {0} second(s) longer.[-]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_AIM_DESC",
+            "v": "[64acff]Domino:[-] Start the fight with either Lucky or Unlucky active for 7 seconds.\n[64acff]M.O.D.O.K. or Taskmaster:[-] Bleed abilities last {0} second(s) longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_CODERED",
+            "v": "CODE RED REVELATIONS",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_CODERED_DESC",
+            "v": "[64acff]Domino:[-] Heavy Attacks inflict an Incinerate that deals damage equal to that Heavy Attack’s damage over 2 second(s).\n[64acff]Red Hulk:[-] Special 2 Regeneration consumes 1 less Heat Charge and recovers {0}% more Health.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_IC",
+            "v": "IT'S COMPLICATED",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_IC2_DESC",
+            "v": "[64acff]Domino:[-] Start the fight with either Lucky or Unlucky active for 7 seconds.[-]\n[64acff]All Teammates:[-] All Teammates have +{0} Armor Rating and +3% Power Gain.[-]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_IC_DESC",
+            "v": "All Teammates gain +{0} Armor Rating and 3% Power Gain.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_MERCS",
+            "v": "MERCS FOR MONEY",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_MERCS_DESC",
+            "v": "[64acff]Masacre:[-] When Ignited expires, gain between 1 and 5 Ignition Charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_ROMANCE_DESC",
+            "v": "All Teammates gain +{0}% Power Gain.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_SIXPACK",
+            "v": "SIX PACK",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_SIXPACK_DESC",
+            "v": "[64acff]Domino:[-] +10% damage against Champions that aren’t female or robots.\n[64acff]Deadpool:[-] Special 1 has a {0}% chance to Stun Champions that aren’t female or robots for 2 second(s).\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_WEPX",
+            "v": "WEAPON X STRIKE TEAM",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_WEPX_DESC",
+            "v": "[64acff]Domino:[-] Each time Domino avoids an attack by Dashing Back, the chance for her to be Lucky increases by +{0}% the next time she fills a Bar of Power.\n[64acff]Old Man Logan or Sabretooth:[-] Regeneration and Fury are 12% more effective.[-]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_XFORCE",
+            "v": "X-FORCE",
+        },
+        {
+            "k": "ID_STAT_SB_DOM_XFORCE_DESC",
+            "v": "[64acff]Domino:[-] Each time Domino performs a well-timed Block, the chance for her to be Lucky increases by +{0}% the next time she fills a Bar of Power.\n[64acff]Deadpool:[-] Bleed deals 20% more damage.[-]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
     },
     {
       "k": "ID_STAT_SIGNATURE_MODOK_LONG",
@@ -1266,6 +1536,14 @@
       "v": "Percentages displayed are based on facing a 4-Star Rank 5 Champion (Challenge Rating 100)."
     },
     {
+            "k": "ID_UI_HERO_SYNERGY_ANNOYANCES",
+            "v": "ANNOYANCES! ASSEMBLE!",
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_ANNOYANCES_DESC",
+            "v": "[64acff]Goldpool:[-] Bleed Debuffs becomes Passive Bleeds. \n[64acff]Agent Venom:[-] +{0}% Bleed Debuff damage. \n[64acff]Mordo:[-] +{0}% Fury Buff Duration. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+        },
+        {
       "k": "ID_UI_HERO_SYNERGY_BECOMEONE",
       "v": "BECOME ONE",
       "vn": "16.1"
@@ -1281,7 +1559,14 @@
       "vn": "14.1"
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-63343",
+            "k": "ID_UI_HERO_SYNERGY_BROKENMINDS",
+            "v": "All Champions gain +{0} Armor Rating while Stunned",
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_BROKENMINDS_DESC",
+            "v": "BROKEN MINDS",
+        },
+        {
       "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_LONG",
       "v": "[64acff]Corvus Glaive:[-] Use a Heavy or Special Attack to knock down an opponent that used Evade or Auto-Block in a fight. Once this mission is complete, his True Damage becomes True Strike.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": "17.2"
@@ -1367,12 +1652,19 @@
       "vn": 17
     },
     {
+            "k": "ID_UI_HERO_SYNERGY_GOLDSTANDARD",
+            "v": "THE GOLD STANDARD",
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_GOLDSTANDARD_DESC",
+            "v": "All Champions gain +{0}% Special Attack rating.",
+        },
+        {
       "k": "ID_UI_HERO_SYNERGY_PARTICLEPHYSICS",
       "v": "PARTICLE PHYSICS",
       "vn": "14.1"
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-63343",
       "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS_LONG",
       "v": "[64acff]Proxima Midnight:[-] Ultimate Mission’s Combo Meter requirement goes down to {0} hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": "17.2"
@@ -1386,6 +1678,14 @@
       "k": "ID_UI_HERO_SYNERGY_SEETHINGHATRED_DESC",
       "v": "[64acff]Green Goblin:[-] +{0}% Pumpkin Bomb damage for each Cunning and Madness charge.\n[64acff]Spider-Man Champions:[-] Critical Hits generate {0}% more Power.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_TEAMDEADPOOLAWESOME",
+            "v": "TEAM DEADPOOL AWESOME-FORCE",
+        },
+        {
+            "k": "ID_UI_HERO_SYNERGY_TEAMDEADPOOLAWESOME_DESC",
+            "v": "Deadpool Champions take -{0}% Bleed Damage.",
     },
     {
       "k": "ID_UI_HERO_SYNERGY_WAKANDA",
@@ -1424,9 +1724,12 @@
       "v": "SIGNATURE ABILITY"
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-62133",
       "k": "ID_UI_SIG_ABILITY_UNLOCK_DESC",
       "v": "Collect duplicate Champions in the Collector's Crystal Vault to awaken powerful new Signature Abilities for your 2-Star and above Champions. Every duplicate found makes a Signature Ability stronger!"
+        },
+        {
+            "k": "ID_UI_SIG_ABILITY_UNLOCK_NEW_DESC",
+            "v": "Collect duplicate Champions to awaken new Signature Abilities for your 2-Star and above Champions! You can also collect rare Awakening Gems to unlock Signature Abilities!",
     },
     {
       "k": "ID_UI_STAT_ATTIRBUTE_BONUS_ARMOR",
@@ -1671,7 +1974,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_AMMO_I",
       "v": "[808080ff]Ammo Stockpile[-]",
-      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_AMMO_INC",
@@ -1799,7 +2101,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ARMORSHATTERED",
       "v": "[808080ff]Armor Shattered[-]",
-      "vn": 15
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ARMOR_UP_HUD",
@@ -2185,7 +2486,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BLEEDRESISTANCE_I",
-      "v": "[5baefc]Bleed Resistance[-]"
+            "v": "[b4b4b4ff]Bleed Resistance[-]"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BLEEDRESISTANCE_LONGDESC",
@@ -2210,6 +2511,10 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BLEED_IV",
       "v": "[fede49]Bleed IV[-]"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_BLEED_PROWESS",
+            "v": "{0}% chance to inflict Bleed, dealing [16982bff]{1}[-] direct damage over {2} seconds. This Bleed is affected by Prowess Buffs.",
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_BLEED_V",
@@ -2376,7 +2681,6 @@
       "v": "{0}% Chance to gain True Strike for [16982bff]{2}[-] seconds, allowing this Champion to ignore Armor, Resistances, and Passive Evade effects."
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-62566",
       "k": "ID_UI_STAT_ATTRIBUTE_CABLE_SP3_UPDATED",
       "v": "{0}% Chance to gain True Strike for [16982bff]{2}[-] seconds, allowing this Champion to ignore Armor, Resistances, Auto-Block and all Evade effects.",
       "vn": "17.2"
@@ -2485,37 +2789,37 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_B",
-      "v": "Mutant: [16982bff]{0}%[-] chance on triggering a Special Attack to gain +1 Kinetic Potential.",
+            "v": "Mutant: [16982bff]{0}%[-] chance on triggering a Special Attack to gain +{1} Kinetic Potential.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_C",
-      "v": "Skill: [16982bff]{0}%[-] whenever a Debuff is gained, Consume 1 Kinetic Potential to Purify it.",
+            "v": "Skill: [16982bff]{0}%[-] chance whenever a Debuff is gained, Consume {1} Kinetic Potential to Purify it.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_D",
-      "v": "Science: [16982bff]{0}%[-] chance on a Well-Timed Block to place a 10% Weakness Debuff on the Opponent for 10 seconds.",
+            "v": "Science: [16982bff]{0}%[-] chance on a Well-Timed Block to place a {1}% Weakness Debuff on the Opponent for {2} seconds.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_E",
-      "v": "Mystic: [16982bff]{0}%[-] chance to gain 1 Kinetic Potential each time a Buff Expires or is Nullified on the Opponent.",
+            "v": "Mystic: [16982bff]{0}%[-] chance to gain {1} Kinetic Potential each time a Buff Expires or is Nullified on the Opponent.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_F",
-      "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] for 10 seconds.",
+            "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] for {2} seconds.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_F_ALT",
-      "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] per Kinetic Charge for 10 seconds.",
+            "v": "Cosmic: [16982bff]{0}%[-] chance on a Well Timed Block to place an Armor Break Debuff on the Opponent, reducing their Armor by [16982bff]{1}[-] per Kinetic Charge for {2} seconds.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CAPTAINAMERICA_MOVIE_SIGNATURE_DESC_G",
-      "v": "Tech: [16982bff]{0}%[-] chance on a Well Timed Block to place a {1}% Petrify Debuff on the Opponent for 10 seconds.",
+            "v": "Tech: [16982bff]{0}%[-] chance on a Well Timed Block to place a {1}% Petrify Debuff on the Opponent for {2} seconds.",
       "vn": 18
     },
     {
@@ -2778,7 +3082,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_COLDSNAP",
       "v": "[808080ff]Coldsnap[-]",
-      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_COLDSNAP_DMG",
@@ -2793,7 +3096,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_COLLECTOR_RELICS",
       "v": "[808080ff]Ancient Relics[-]",
-      "vn": 13
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_COLLECTOR_RELICS_A",
@@ -3322,6 +3624,10 @@
       "v": "[b310e8]Direct Damage VII[-]"
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_DISORIENTED_SHORT",
+            "v": "Disorient",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_DIZZINESS_HUD",
       "v": "CONCUSSION"
     },
@@ -3784,7 +4090,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ENERVATE_I",
       "v": "[808080ff]Enervate[-]",
-      "vn": "11.2"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ENERVATE_II",
@@ -3813,7 +4118,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ENGRESDOWN",
       "v": "[808080ff]Energy Vulnerability[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ENGRESDOWN_HUD",
@@ -4672,6 +4976,10 @@
       "vn": 12
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_DISORIENTED_HUD",
+            "v": "DISORIENTED",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_EFFECTACC_CROSSBONES",
       "v": "For each Fury effect active, Crossbones overpowers his opponent, decreasing their Defensive Ability Accuracy by [16982bff]{1}%[-] per Fury."
     },
@@ -4839,6 +5147,10 @@
       "vn": 12
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_IGNITED_HUD",
+            "v": "IGNITED",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_INCINERATE",
       "v": "This attack Incinerates the enemy, dealing [16982bff]{1}%[-] of your Attack as Energy Damage over {2} seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by {0}% while it’s active.",
       "vn": "11.2"
@@ -5710,7 +6022,6 @@
       "v": "[16982bff]{0}%[-] chance to inflict Weakness, decreasing the target's Attack by [16982bff]{1}%[-] for [16982bff]{2}[-] seconds."
     },
     {
-      "cn": "Taskmaster",
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_WE_HUD",
       "v": "WEAKNESS EXPLOITED",
       "vn": "16.1"
@@ -5764,7 +6075,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FROSTBITE",
       "v": "[808080ff]Frost Bite[-]",
-      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FROSTBITE_APPLY",
@@ -6772,6 +7082,10 @@
       "v": "Eternal physiology grants immunity to all known poisons within the Battlerealm."
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_IGNITED_SHORT",
+            "v": "Ignite",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_IMMUNITY_HUD",
       "v": "IMMUNE"
     },
@@ -6811,7 +7125,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_INDESTRUCTIBLE",
       "v": "[808080ff]Indestructible[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_INIT",
@@ -6840,7 +7153,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_INVISIBILITY_I",
       "v": "[808080ff]Invisibility[-]",
-      "vn": "11.2"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_INVISIBILITY_II",
@@ -7381,6 +7693,102 @@
       "v": "[b310e8]Power Lock VII[-]"
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_BLOCK_PEN",
+            "v": "Bat attacks have [16982bff]{1}[-] Block Penetration. This doubles when the bat is Ignited.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_FLAM_A",
+            "v": "Each time Masacre’s bat either lands a Critical Hit, Hits a Block, or Hits an Incinerated opponent it begins to ignite, gaining an Ignition Charge which lasts {2} seconds.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_FLAM_B",
+            "v": "Bat attacks that are also Critical Hits deal an additional [16982bff]{1}%[-] of damage dealt as a burst of Energy Damage for each Ignition Charge.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_HVY",
+            "v": "Each bat hit against an Incinerated Opponent, grants an additional Ignition Charge.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_IGNT_A",
+            "v": "Upon reaching {1} Ignition Charges all the charges are consumed and Ignites Masacre’s bat, for {2} seconds.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_IGNT_B",
+            "v": "While Ignited Masacre cannot gain additional Ignition Charges.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_IGNT_C",
+            "v": "Each strike of the Bat places an Incinerate Debuff on the opponent causing [16982bff]{1}[-] energy damage over {2} seconds, removing Perfect Block Chance, and reducing Block Proficiency by 50%.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_IGNT_D",
+            "v": "These Incinerate Debuffs have their Duration increased by {1} seconds for each Incinerate Debuff on the opponent, up to a maximum of +{2} seconds.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_IGNT_E",
+            "v": "Each time an Incinerate effect fails to apply due to an Immunity, the target instead takes [16982bff]{1}[-] Energy Damage.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_IGNT_F",
+            "v": "Gain Power when striking a Block as if landing a Hit",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_DESC_A",
+            "v": "Masacre loves his job, gaining bonuses when striking an Opponent who has no Debuffs on them.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_DESC_B",
+            "v": "[16982bff]{1}%[-] additional Power from landing hits.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_DESC_C",
+            "v": "[16982bff]+{1}[-] Critical Rating.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_SIMPLE",
+            "v": "Masacre feels very strongly about what he’s doing. Everyone should have a job they love right?",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_TITLE",
+            "v": "ENTHUSIASTIC PUNISHMENT",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_TITLE_LOWER",
+            "v": "Enthusiastic Punishment",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SIGNATURE_TITLE_SHORT",
+            "v": "Enthusiastic Punishment {0}",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP1_A",
+            "v": "The first hit places a Disoriented Debuff on the Opponent reducing their Defensive Ability Accuracy and Block Proficiency by {1}% for {2} seconds, and Refreshing the Duration of any Incinerate Debuffs active on the Opponent. This Duration doubles against an incinerated Opponent.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP1_B",
+            "v": "Machete Hits have a {0}% chance to cause the target to Bleed for [16982bff]{1}[-] Direct Damage over {2} seconds.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP2_A",
+            "v": "[16982bff]+{1}[-] Attack.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP2_B",
+            "v": "[16982bff]+{1}[-] Attack if Blocked.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP2_C",
+            "v": "This attack loses [16982bff]{1}[-] Attack after each use, up to {2} times.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP2_D",
+            "v": "Blocks Proficiency is increased by [16982bff]+{1}[-] against this attack.",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_MASACRE_SP2_E",
+            "v": "If this attack strikes a Block Masacre will avoid any incoming attacks for {2} seconds.",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_MEDIUMATTACK_HUD",
       "v": "MEDIUM ATTACK"
     },
@@ -7744,7 +8152,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_NEUROTOXIN",
       "v": "[808080ff]Neurotoxin[-]",
-      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_NEUROTOXIN_HUD",
@@ -7851,7 +8258,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ORGANICICE",
       "v": "[808080ff]Organic Ice[-]",
-      "vn": 12
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ORGANICICE_ARMOR",
@@ -8071,7 +8477,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_PHYRESDOWN",
       "v": "[808080ff]Physical Vulnerability[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_PHYRESDOWN_HUD",
@@ -8637,7 +9042,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_REALITYWARP",
       "v": "[808080ff]Reality Warp[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_REFLECT",
@@ -9360,7 +9764,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_STATEOFMIND",
       "v": "[808080ff]State of Mind[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_STATIC_I",
@@ -9757,6 +10160,18 @@
       "vn": "14.1"
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DOMFIELD",
+            "v": "Probability Field Passive",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DOMLUCK",
+            "v": "Lucky Passive",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DOMLUCKBAD",
+            "v": "Unlucky Passive",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_EXPLOITWEAKNESS",
       "v": "Exploit Weakness - Passive",
       "vn": "16.1"
@@ -9772,6 +10187,10 @@
       "vn": "16.1"
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FLAMMABLE",
+            "v": "Flammable - Passive",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FLUX",
       "v": "Flux Passive",
       "vn": "16.1"
@@ -9817,6 +10236,10 @@
       "vn": 16
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_IGNITED",
+            "v": "Ignited - Passive",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_INFINITYCLASS",
       "v": "Infinity Class",
       "vn": 18
@@ -9914,9 +10337,21 @@
       "vn": 17
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBELOW15HEALTH",
+            "v": "When brought below 15% Max Health",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBELOW35HEALTH",
+            "v": "When brought below 35% Max Health",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBIO",
       "v": "Biology - Research Category",
       "vn": "14.1"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLEEDDEBUFFS",
+            "v": "Bleed Effects",
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCK",
@@ -9944,6 +10379,22 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCHEM",
       "v": "Chemistry - Research Category",
       "vn": "14.1"
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCOMBO10",
+            "v": "Land 10 Hits Without Being Struck",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCOMBO15",
+            "v": "Land 15 Hits Without Being Struck",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCOMBO20",
+            "v": "Land 20 Hits Without Being Struck",
+        },
+        {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCOMBO25",
+            "v": "Land 25 Hits Without Being Struck",
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCOMBOENDMED",
@@ -10325,6 +10776,10 @@
       "vn": "17.1"
     },
     {
+            "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_PWRFILL",
+            "v": "When Filling a Bar of Power",
+        },
+        {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_REPULSOR",
       "v": "Repulsor Attacks",
       "vn": 18
@@ -10365,7 +10820,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRUACCURACY_I",
       "v": "[808080ff]True Accuracy[-]",
-      "vn": "17.2"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRUSTRIKE_I",
@@ -10630,6 +11084,58 @@
       "v": "Deals Physical damage."
     },
     {
+            "k": "ID_UI_STAT_DPLGOLD_ABREAK",
+            "v": "{0}% chance to inflict Armor Break, reducing Armor rating by [16982bff]{1}[-] for {2} seconds. The duration is doubled against Non-Robot Male Champions. [f1c232]#LowBlow #SorryNotSorry[-]",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_BLDRES",
+            "v": "Goldpool’s accelerated healing factor reduces the damage of incoming Bleed effects by {1}%.",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_BUFFS",
+            "v": "Goldpool receives a call from the game devs, and then annoys them into Refreshing his Prowess and Regeneration Buffs.",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_BUFFS_B",
+            "v": "The first buff has a 100% chance to activate, the second 75%, the third 50% and the fourth 25%.",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_MANA_HUD",
+            "v": "RUDE !",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_PROWESS",
+            "v": "If Goldpool completes his dance after this attack he gains Prowess, increasing Special Attack damage by {1}% for {2} seconds. If he is interrupted he instead gains {0}% Power. [f1c232]Dance break![-]",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_RGN",
+            "v": "Once per fight, Goldpool has a {0}% chance to gain Regeneration, recovering [16982bff]{1}[-] Health over {2} seconds. [f1c232]Leave my Regen alone Black Widow! You too Crossbones![-]",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_RGN_HUD",
+            "v": "SCAB POWER",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_STN",
+            "v": "{0}% chance to Stun the opponent for {2} seconds. Against Non-Robot Male Champions, this chance is doubled. [f1c232]Cup Check![-]",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_STN_B",
+            "v": "{0}% chance to Stun the opponent for {2} seconds. The first time this attack is used each fight, the chance is {1}%.",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_STN_HUD",
+            "v": "CUP CHECK",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_TAUNT",
+            "v": "Goldpool’s confidence soars and he begins throwing out childish barbs to annoy his opponent, Taunting them for {2} seconds which reduces their Attack by {1}% and increases their chance of launching a Special Attack by {0}%. [f1c232]Childish!? Hey! Words hurt![-]",
+        },
+        {
+            "k": "ID_UI_STAT_DPLGOLD_TAUNT_REF",
+            "v": "A boot to the face is always funny, and allows Goldpool to Refresh an active Taunt Debuff. [f1c232]Pow! Right in the...well...[-]",
+        },
+        {
       "k": "ID_UI_STAT_FORMAT_AFTERSHOCK_DIZZY",
       "v": "Inflicts Concussion, reducing the opponent’s Ability Accuracy by [16982bff]{1}%[-] for [16982bff]{2}[-] seconds when the Aftershock Scale is higher than [16982bff]{0}[-] points."
     },
@@ -10663,7 +11169,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_AGILITYDEBUFF_TITLE",
       "v": "[808080ff]Agility Debuff[-]",
-      "vn": "17.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_ARMORBUFFSCONVERT",
@@ -10705,7 +11210,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_BLADE_DANGERSENSE",
       "v": "[808080ff]Danger Sense[-]",
-      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_BLADE_DANGERSENSE_HUD",
@@ -10754,7 +11258,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_COLDIMMUNITY_TITLE",
       "v": "[808080ff]Cold Immunity[-]",
-      "vn": "17.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_CORVUS_ARMBREAK",
@@ -10777,7 +11280,10 @@
       "vn": "17.2"
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-63346",
+            "k": "ID_UI_STAT_FORMAT_CORVUS_BLKCRIT",
+            "v": "Corvus Glaive can trigger Critical Hits through an enemy Block.",
+        },
+        {
       "k": "ID_UI_STAT_FORMAT_CORVUS_GLAIVECHARGE",
       "v": "At the start of the fight, Corvus gains {1} permanent Glaive charges, granting him True Damage and guaranteed Critical Hits with his glaive as long as Glaive’s Immunity is active. A charge is spent every time Corvus hits with Basic Attack using his glaive.",
       "vn": "17.2"
@@ -10793,7 +11299,6 @@
       "vn": "17.2"
     },
     {
-      "cn": "Final Version: https://jira.kabaminc.com/browse/MARVEL-63326",
       "k": "ID_UI_STAT_FORMAT_CORVUS_IMMUNITY",
       "v": "Corvus Glaive does not take damage from Cold Snap, Bleed and Shock Debuffs while Glaive’s Immunity is active. When Glaive’s immunity reactivates or is disabled, all Debuffs listed above are Purified and Corvus takes [16982bff]{1}[-] damage.",
       "vn": "17.2"
@@ -10806,7 +11311,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_CORVUS_IMMUNITY_TITLE",
       "v": "[808080ff]Glaive’s Immunity[-]",
-      "vn": "17.2"
     },
     {
       "k": "ID_UI_STAT_FORMAT_CORVUS_KNOCKEDDOWN",
@@ -10849,7 +11353,6 @@
       "vn": "17.2"
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-63364",
       "k": "ID_UI_STAT_FORMAT_CORVUS_SP2",
       "v": "When Glaive’s Immunity is active, this Special Attack is Unblockable and instantly drains 20% of the opponent’s Power if they are at max Power.\n",
       "vn": "17.2"
@@ -10888,6 +11391,10 @@
     {
       "k": "ID_UI_STAT_FORMAT_EARTHQUAKE_STUNIMMUNE",
       "v": "Stun immunity is ineffective against Stuns inflicted by Earthquakes and Aftershocks."
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ELTOUCH_HUD",
+            "v": "ELECTRIC TOUCH",
     },
     {
       "k": "ID_UI_STAT_FORMAT_ENERGYDMG",
@@ -10966,7 +11473,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING",
       "v": "[808080ff]Cunning[-]",
-      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_GOBLIN_CUNNING_A",
@@ -11001,7 +11507,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS",
       "v": "[808080ff]Madness[-]",
-      "vn": "14.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_A",
@@ -11105,7 +11610,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_KILLM_INDESTRUCTIBLE_SHORT",
       "v": "[808080ff]Indestructible[-]",
-      "vn": 17
     },
     {
       "k": "ID_UI_STAT_FORMAT_KILLM_SP3",
@@ -11169,7 +11673,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_OVPWR_SHORT",
       "v": "[808080ff]Overpower[-]",
-      "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_RAGE_A",
@@ -11194,7 +11697,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_RAGE_SHORT",
       "v": "[808080ff]Rage[-]",
-      "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_RUTHLESS_A",
@@ -11391,7 +11893,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_MEPHISTO_SOULPRISON_TITLE",
       "v": "[808080ff]Soul Imprisonment[-]",
-      "vn": "15.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP1",
@@ -11421,7 +11922,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_PETRIFYDEBUFF_TITLE",
       "v": "[808080ff]Petrify[-]",
-      "vn": "17.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_POWERSTEALINFO",
@@ -11442,9 +11942,8 @@
       "vn": 13
     },
     {
-      "cn": "https://jira.kabaminc.com/browse/MARVEL-63383",
       "k": "ID_UI_STAT_FORMAT_PROXIMA_BLACKORDER",
-      "v": "Proxima Midnight has {0} missions to accomplish, granted in random order.",
+            "v": "Proxima Midnight has {0} missions to accomplish, one at a time, in random order.",
       "vn": "17.2"
     },
     {
@@ -11465,7 +11964,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_PROXIMA_DMGREDUCTION_TITLE",
       "v": "[808080ff]Safeguard[-]",
-      "vn": "17.2"
     },
     {
       "k": "ID_UI_STAT_FORMAT_PROXIMA_FRY",
@@ -11525,7 +12023,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_PROXIMA_PETRIFY_TITLE",
       "v": "[808080ff]Petrify[-]",
-      "vn": "17.2"
     },
     {
       "k": "ID_UI_STAT_FORMAT_PROXIMA_PROWESS_POWER",
@@ -11665,7 +12162,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_NAME",
       "v": "[808080ff]Nano-Tech[-]",
-      "vn": "13.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_PUN2099_NTB_OVR_A",
@@ -11694,7 +12190,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_RAGTHOR_AUTOBLOCK_TITLE",
       "v": "[808080ff]Auto-Block[-]",
-      "vn": 16
     },
     {
       "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON",
@@ -11841,7 +12336,6 @@
       "vn": "17.1"
     },
     {
-      "cn": "Switched to Sentinel instead - By V",
       "k": "ID_UI_STAT_FORMAT_SENTINELOID_BASE",
       "v": "Sentinel gains {2} Adaptation charge(s) when an Opponent performs the same action consecutively. Actions include Light Attacks, Medium Attacks, Heavy Attacks, Dashing, Dodging, and Blocking an Attack. Max: 50 charges.",
       "vn": "17.1"
@@ -12000,7 +12494,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_SHOCK_TITLE",
       "v": "[808080ff]Shock[-]",
-      "vn": "17.2"
     },
     {
       "k": "ID_UI_STAT_FORMAT_SP3BUFFS",
@@ -12049,7 +12542,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_ENSNARE_SHORT",
       "v": "[808080ff]Ensnare[-]",
-      "vn": 14
     },
     {
       "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_EVADE",
@@ -12089,7 +12581,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_SHORT",
       "v": "[808080ff]Poise[-]",
-      "vn": 14
     },
     {
       "k": "ID_UI_STAT_FORMAT_SPMAN_MCU_SMACKTLK_TAUNT",
@@ -12116,6 +12607,10 @@
       "v": "Opponents that make contact with you receive a Shock for [16982bff]{1}%[-] of the damage they inflicted as Energy Damage over [16982bff]{2}[-] seconds. This damage is Science based, dealing increased damage to Mystic Champions and reduced damage to Skill Champions."
     },
     {
+            "k": "ID_UI_STAT_FORMAT_TAUNT_SHORT",
+            "v": "[b4b4b4ff]Taunt[-]"
+        },
+        {
       "k": "ID_UI_STAT_FORMAT_THANOS_AUTOBLOCK",
       "v": "AUTO BLOCK",
       "vn": 18
@@ -12171,7 +12666,6 @@
       "vn": 18
     },
     {
-      "cn": "From a infinity stone to an Infinity Stone instead",
       "k": "ID_UI_STAT_FORMAT_THANOS_INFINITY1_LONG",
       "v": "Thanos permanently generates Power after activating an Infinity Stone, at the rate of 1 bar of Power over {1} seconds. This is the only way Thanos gains Power in this fight.",
       "vn": 18
@@ -12243,12 +12737,12 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_LONG",
-      "v": "Thanos activates his Genesis Aura, inflicting [16982bff]{1}[-] damage per second to nearby opponents. All damage dealt by his Genesis Aura will be transferred to Thanos as Health.",
+            "v": "Thanos activates his Genesis Aura for 5 seconds, inflicting [16982bff]{1}[-] damage per second to nearby opponents. All damage dealt by his Genesis Aura will be transferred to Thanos as Health.",
       "vn": 18
     },
     {
       "k": "ID_UI_STAT_FORMAT_THANOS_INFINITYSP1_LONG_EASY",
-      "v": "Thanos activates his Genesis Aura, regenerating [16982bff]{1}[-] Health per second when opponents are nearby him.",
+            "v": "Thanos activates his Genesis Aura for 5 seconds, regenerating [16982bff]{1}[-] Health per second when opponents are nearby him.",
       "vn": 18
     },
     {
@@ -12509,17 +13003,14 @@
     {
       "k": "ID_UI_STAT_FORMAT_UNSTOPPABLE_SHORT",
       "v": "[808080ff]Unstoppable[-]",
-      "vn": 15
     },
     {
       "k": "ID_UI_STAT_FORMAT_VOID_DARKSTING_TITLE",
       "v": "[808080ff]Dark Sting[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_VOID_DIRECTDAMAGE_TITLE",
       "v": "[808080ff]Direct Damage[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_VOID_INCINERATE",
@@ -12569,7 +13060,6 @@
     {
       "k": "ID_UI_STAT_FORMAT_VOID_INTIMIDATING_TITLE",
       "v": "[808080ff]Intimidating Presence[-]",
-      "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_VOID_OPPDEBUFFED_DMG",
@@ -13027,7 +13517,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_BLACKPANTHER_UNSTOPPABLE_DESC",
-      "v": "Black Panther begins the fight with his Reflective state active. Additionally, Black Panther's Armor passively has a [16982bff]{0}%[-] chance to absorb heavy attack impacts by consuming {1} Armor Up effects."
+            "v": "Black Panther begins the fight with his Reflective state active. Additionally, Black Panther's Armor passively has a [16982bff]{0}%[-] chance to absorb heavy attack impacts by going Unstoppable for {2} seconds, and consuming {1} Armor Up effects.",
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_BLACKPANTHER_UNSTOPPABLE_HUD",
@@ -13536,7 +14026,7 @@
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_DPLGOLD_DESC",
-            "v": "A second Regen! [f1c232]And if those Skill Champs even TRY and mess with it, I'll just reach into the programming code myself and give it a second try.[-]",
+            "v": "Once per fight, Goldpool gains Regeneration, recovering [16982bff]{1}[-] Health over {2} seconds. If this ability is suppressed by a Skill Champion, Goldpool reaches into his script code and tries once more to activate it after 2 seconds. [f1c232]Mutant beats Trained...I mean...Skill[-]",
             "vn": "18"
         },
         {
@@ -13546,7 +14036,7 @@
         },
         {
             "k": "ID_UI_STAT_SIGNATURE_DPLGOLD_SIMPLE",
-            "v": "Once per fight, Deadpool gains Regeneration, recovering [16982bff]{1}[-] Health over {2} seconds. If this ability is suppressed by a Skill Champion, Deadpool reaches into his script code and tries once more to activate it after 2 seconds. [f1c232]Mutant beats Trained...I mean...Skill[-]",
+            "v": "A second Regen! [f1c232]And if those Skill Champs even TRY to mess with it, I'll just reach into the programming code myself and give it a second try.[-]",
             "vn": "18"
         },
         {
