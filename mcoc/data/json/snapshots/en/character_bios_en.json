@@ -1,11 +1,7 @@
 {
     "meta": {
         "language": "en",
-        "hash": "f8942080a7721fed21160c72ed3e5637b6cc5579",
         "format": "sparx",
-        "ts": 1527014138,
-        "versionLock": "18.1",
-        "post_processed": true,
         "tagged": [
             "character_bios",
             "client"
