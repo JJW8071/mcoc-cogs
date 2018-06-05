@@ -2185,9 +2185,9 @@ class Champion:
 
     async def get_bio(self):
         bios = load_kabam_json(kabam_bio)
-        key = 'ID_CHARACTER_BIOS_' + self.mcocjson
+        key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         if self.debug:
-            dbg_str = 'BIO:  ' + key
+            dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
         if key not in bios:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
