@@ -63,16 +63,16 @@ MODOKSAYS = ['alien', 'buffoon', 'charlatan', 'creature', 'die', 'disintegrate',
         'simpleton', 'tincan', 'tremble', 'ugh', 'useless']
 
 local_files = {
-    'sig_coeff': 'data/mcoc/sig_coeff.csv',
-    'effect_keys': 'data/mcoc/effect_keys.csv',
-    'signature': 'data/mcoc/signature.json',
-    'sig_coeff_4star': 'data/mcoc/sig_coeff_4star.json',
-    'sig_coeff_5star': 'data/mcoc/sig_coeff_5star.json',
-    'synergy': 'data/mcoc/synergy.json',
+    "sig_coeff": "data/mcoc/sig_coeff.csv",
+    "effect_keys": "data/mcoc/effect_keys.csv",
+    "signature": "data/mcoc/signature.json",
+    "sig_coeff_4star": "data/mcoc/sig_coeff_4star.json",
+    "sig_coeff_5star": "data/mcoc/sig_coeff_5star.json",
+    "synergy": "data/mcoc/synergy.json",
 }
 
 async def postprocess_sig_data(bot, struct):
-    sigs = load_kabam_json(kabam_bcg_stat_en, aux=struct.get('bcg_stat_en_aux'))
+    sigs = load_kabam_json(kabam_bcg_stat_en, aux=struct.get("bcg_stat_en_aux'))
     mcoc = bot.get_cog('MCOC')
     missing = []
     for key in struct.keys():
@@ -88,7 +88,7 @@ async def postprocess_sig_data(bot, struct):
     if missing:
         await bot.say("Skipped Champs due to Kabam Key Errors: {}".format(', '.join(missing)))
 
-gapi_service_creds = 'data/mcoc/mcoc_service_creds.json'
+gapi_service_creds = "data/mcoc/mcoc_service_creds.json"
 gsheet_files = {
     'signature': {'gkey': '1kNvLfeWSCim8liXn6t0ksMAy5ArZL5Pzx4hhmLqjukg',
             'local': local_files['signature'],
@@ -111,24 +111,24 @@ gsheet_files = {
             },
 }
 
-star_glyph = '★'
-lolmap_path='data/mcoc/maps/lolmap.png'
-file_checks_json = 'data/mcoc/file_checks.json'
-remote_data_basepath = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/'
-icon_sdf = 'https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png'
+star_glyph = "★"
+lolmap_path="data/mcoc/maps/lolmap.png"
+file_checks_json = "data/mcoc/file_checks.json"
+remote_data_basepath = "https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/"
+icon_sdf = "https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png"
 
 ###### KEYS for MCOC JSON Data Extraction
-mcoc_dir='data/mcoc/json/snapshots/en/'
-kabam_bio = mcoc_dir + 'character_bios_en.json'
-kabam_special_attacks = mcoc_dir+'special_attacks_en.json'
-kabam_bcg_stat_en = mcoc_dir+'bcg_stat_en.json'
-kabam_bcg_en= mcoc_dir+'bcg_en.json'
-kabam_masteries=mcoc_dir+'masteries_en.json'
+mcoc_dir="data/mcoc/json/snapshots/en/"
+kabam_bio = mcoc_dir + "character_bios_en.json"
+kabam_special_attacks = mcoc_dir+"special_attacks_en.json"
+kabam_bcg_stat_en = mcoc_dir+"bcg_stat_en.json"
+kabam_bcg_en= mcoc_dir+"bcg_en.json"
+kabam_masteries=mcoc_dir+"masteries_en.json"
 ##### Special attacks require:
-## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack title
-#mcoc_special_attack='ID_SPECIAL_ATTACK_'
-## mcoc_files mcoc_special_attack_desc + <champ.mcocjson> + {'_0','_1','_2'} ---> Special Attack Short description
-#mcoc_special_attack_desc='ID_SPECIAL_ATTACK_DESCRIPTION_'
+## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {"_0","_1","_2"} ---> Special Attack title
+#mcoc_special_attack="ID_SPECIAL_ATTACK_"
+## mcoc_files mcoc_special_attack_desc + <champ.mcocjson> + {"_0","_1","_2"} ---> Special Attack Short description
+#mcoc_special_attack_desc="ID_SPECIAL_ATTACK_DESCRIPTION_"
 
 
 class_color_codes = {
@@ -837,8 +837,8 @@ class MCOC(ChampionFactory):
                 'table_width': 9,
                 'sig_inc_zero': False,
                 }
-        self.data_dir='data/mcoc/{}/'
-        self.shell_json=self.data_dir + '{}.json'
+        self.data_dir="data/mcoc/{}/"
+        self.shell_json=self.data_dir + "{}.json"
         self.split_re = re.compile(', (?=\w+:)')
         self.gsheet_handler = GSHandler(bot, gapi_service_creds)
         self.gsheet_handler.register_gsheet(
@@ -1513,7 +1513,7 @@ class MCOC(ChampionFactory):
                 continue
             dump[champ.mattkraftid] = item
             print(champ.full_name)
-        with open('sig_data_4star.json', encoding='utf-8', mode="w") as fp:
+        with open("sig_data_4star.json", encoding='utf-8', mode="w") as fp:
             json.dump(dump, fp, indent='\t', sort_keys=True)
         await self.bot.say('Hopefully dumped')
 
@@ -1522,7 +1522,7 @@ class MCOC(ChampionFactory):
         if champ.star != 4 or champ.rank != 5:
             await self.bot.say('This function only checks 4* rank5 champs')
             return
-        jfile = dataIO.load_json('sig_data_4star.json')
+        jfile = dataIO.load_json("sig_data_4star.json")
         title, desc, sig_calcs = await champ.process_sig_description(quiet=True)
         jsig = jfile[champ.mattkraftid]
         em = discord.Embed(title='Check for {}'.format(champ.full_name))
@@ -1548,9 +1548,9 @@ class MCOC(ChampionFactory):
             struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
                     champ_class, sigs=sigs,
                     champ_exceptions=struct['kabam_key_override'])
-        with open('data/mcoc/gs_json_test.json', encoding='utf-8', mode='w') as fp:
+        with open("data/mcoc/gs_json_test.json", encoding='utf-8', mode='w') as fp:
             json.dump(struct, fp, indent='  ', sort_keys=True)
-        await self.bot.upload('data/mcoc/gs_json_test.json')
+        await self.bot.upload("data/mcoc/gs_json_test.json")
 
     @champ.command(name='use', aliases=('howto','htf',))
     async def champ_use(self, *, champs :ChampConverterMult):
@@ -2185,7 +2185,7 @@ class Champion:
 
     async def get_bio(self):
         bios = load_kabam_json(kabam_bio)
-        key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
+        key = 'ID_CHARACTER_BIOS_' + self.mcocjson
         if self.debug:
             dbg_str = 'BIO:  ' + key
             await self.bot.say('```{}```'.format(dbg_str))
