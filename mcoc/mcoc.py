@@ -72,7 +72,7 @@ local_files = {
 }
 
 async def postprocess_sig_data(bot, struct):
-    sigs = load_kabam_json(kabam_bcg_stat_en, aux=struct.get("bcg_stat_en_aux'))
+    sigs = load_kabam_json(kabam_bcg_stat_en, aux=struct.get("bcg_stat_en_aux"))
     mcoc = bot.get_cog('MCOC')
     missing = []
     for key in struct.keys():
