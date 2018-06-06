@@ -1,16 +1,16 @@
 {
   "meta": {
-        "language": "en",
-        "hash": "65734c990bb9e543f45dec609228dcb16a6fc783",
     "format": "sparx",
-        "ts": 1527012706,
-        "versionLock": "18.1",
+    "hash": "65734c990bb9e543f45dec609228dcb16a6fc783",
+    "language": "en",
     "post_processed": true,
+    "string_count": 847,
     "tagged": [
       "bcg",
       "client"
     ],
-        "string_count": 847
+    "ts": 1527012706,
+    "versionLock": "18.1"
   },
   "strings": [
     {
@@ -1462,10 +1462,11 @@
       "vn": "11.2"
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_DESC_GETINTHEPOOL",
-            "v": "[64acff]Masacre:[-] Ignited’s Duration increases by {0}%. \n[64acff]Gwenpool:[-] Incinerate Debuffs have their Durations increased by {0}%. \n[64acff]Venompool:[-] Debuffs and Buffs have their Durations increased by {0}%. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_DESC_GETINTHEPOOL",
+      "v": "[64acff]Masacre:[-] Ignited’s Duration increases by {0}%. \n[64acff]Gwenpool:[-] Incinerate Debuffs have their Durations increased by {0}%. \n[64acff]Venompool:[-] Debuffs and Buffs have their Durations increased by {0}%. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_HEALTH",
       "v": "All Champions gain +{0}% Health"
     },
@@ -1489,10 +1490,11 @@
       "vn": 16
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_DESC_INSPIRATION",
-            "v": "[64acff]Masacre, Deadpool, Deadpool (X-Force), Goldpool:[-] Increase Critical Rating by {0} while the Opponent is Bleeding.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_DESC_INSPIRATION",
+      "v": "[64acff]Masacre, Deadpool, Deadpool (X-Force), Goldpool:[-] Increase Critical Rating by {0} while the Opponent is Bleeding.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_LULLABY",
       "v": "[64acff]Hulk (Ragnarok):[-] When Struck Hulk has a {0}% chance to ready a SMASH for his next attack.\n[64acff]Black Widow:[-] Evade chance increases by 100%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 17
@@ -1511,10 +1513,11 @@
       "vn": "15.1"
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_DESC_MERCSFORMONEY",
-            "v": "[64acff]Masacre:[-] At the start of the fight, and when Ignited expires, gain between 1 and 5 Ignition Charges.\n[64acff]Domino:[-] Debuffs last {0} seconds longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_DESC_MERCSFORMONEY",
+      "v": "[64acff]Masacre:[-] At the start of the fight, and when Ignited expires, gain between 1 and 5 Ignition Charges.\n[64acff]Domino:[-] Debuffs last {0} seconds longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_MOSTLYAVERAGE",
       "v": "[64acff]Taskmaster:[-] If Taskmaster’s Current Exploit Weakness target attack is a Special Attack, all his Special Attacks become Unblockable.\n[64acff]Hawkeye:[-]Special 3 gains a 100% chance to trigger Hemorrhage, without counting towards Hawkeye’s Hemorrhage activation limit.\n[ff4d4d]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "16.1"
@@ -1549,10 +1552,11 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_PERFECTBLOCK_FALCON",
       "v": "All Champions gain +{0}% Perfect Block Chance and Redwing's Recon Bonus"
-        },
-        {
-            "k": "ID_UI_HERO_SYNERGY_DESC_PLAYINGWITHFIRE",
-            "v": "[64acff]Masacre:[-] Blocking a contact attack while Ignited places an Incinerate on the Opponent as if they had been Struck by Masacre’s bat.\n[64acff]Red Hulk:[-] Start the fight with {0} Heat Charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_PLAYINGWITHFIRE",
+      "v": "[64acff]Masacre:[-] Blocking a contact attack while Ignited places an Incinerate on the Opponent as if they had been Struck by Masacre’s bat.\n[64acff]Red Hulk:[-] Start the fight with {0} Heat Charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "18.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_PROFESSORSINCRIME",
@@ -1595,10 +1599,11 @@
       "k": "ID_UI_HERO_SYNERGY_DESC_SKILLTRAINING",
       "v": "Skill Champions gain +{0} Critical Rating on Basic Attacks.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_HERO_SYNERGY_DESC_SPIRITUALSTRENGTH",
-            "v": "[64acff]Masacre:[-] Gain a 10% chance to Evade, against an Incinerated Opponent, while not Blocking.\n[64acff]Daredevil:[-] Evading a Projectile grants a Passive Precision, increasing Crit Rate by {0} for 10 seconds.\n[64acff]Daredevil (Netflix):[-] Armor Break Debuffs have their Duration increased by 25%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_SPIRITUALSTRENGTH",
+      "v": "[64acff]Masacre:[-] Gain a 10% chance to Evade, against an Incinerated Opponent, while not Blocking.\n[64acff]Daredevil:[-] Evading a Projectile grants a Passive Precision, increasing Crit Rate by {0} for 10 seconds.\n[64acff]Daredevil (Netflix):[-] Armor Break Debuffs have their Duration increased by 25%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "18.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_STUN",
@@ -1748,10 +1753,11 @@
       "vn": 16
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_GETINTHEPOOL",
-            "v": "GET IN THE POOL",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_GETINTHEPOOL",
+      "v": "GET IN THE POOL",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_GRIPPEDBYFEAR",
       "v": "GRIPPED BY FEAR",
       "vn": "16.1"
@@ -1879,10 +1885,11 @@
       "v": "INSEPARABLE Lv. 3"
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_INSPIRATION",
-            "v": "INSPIRATION",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_INSPIRATION",
+      "v": "INSPIRATION",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_KNOWSHARE",
       "v": "KNOWLEDGE SHARE",
       "vn": 14
@@ -1973,10 +1980,11 @@
       "vn": "15.1"
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_MERCSFORMONEY",
-            "v": "MERCS FOR MONEY",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_MERCSFORMONEY",
+      "v": "MERCS FOR MONEY",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_DESC",
       "v": "All champions gain +{0} Block Penetration.",
       "vn": "12.1"
@@ -2113,10 +2121,11 @@
       "vn": "15.1"
     },
     {
-            "k": "ID_UI_HERO_SYNERGY_PLAYINGWITHFIRE",
-            "v": "PLAYING WITH FIRE",
-        },
-        {
+      "k": "ID_UI_HERO_SYNERGY_PLAYINGWITHFIRE",
+      "v": "PLAYING WITH FIRE",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_PROFESSORSINCRIME",
       "v": "PROFESSORS IN CRIME",
       "vn": "16.1"
@@ -2305,10 +2314,11 @@
       "k": "ID_UI_HERO_SYNERGY_SPIRITOFJUSTICE_LONG",
       "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Villain Champions.\n[64acff]Ghost Rider:[-] +{0}% chance to place a Judgment.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
-        },
-        {
-            "k": "ID_UI_HERO_SYNERGY_SPIRITUALSTRENGTH",
-            "v": "SPIRITUAL STRENGTH",
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_SPIRITUALSTRENGTH",
+      "v": "SPIRITUAL STRENGTH",
+      "vn": "18.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_SPLITPERSON",
