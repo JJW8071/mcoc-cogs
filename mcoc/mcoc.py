@@ -1022,7 +1022,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @champ.command(name='featured')
+    @champ.command(name='featured',aliases=['feature',])
     async def champ_featured(self, *, champs : ChampConverterMult):
         '''Champion Featured image'''
         for champ in champs:
@@ -1031,7 +1031,7 @@ class MCOC(ChampionFactory):
             em.set_image(url=champ.get_featured())
             await self.bot.say(embed=em)
 
-    @champ.command(name='portrait')
+    @champ.command(name='portrait', aliases=['avatar',])
     async def champ_portrait(self, *, champs : ChampConverterMult):
         '''Champion portraits'''
         for champ in champs:
