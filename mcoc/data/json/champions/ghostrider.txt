@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Judgments
 Ghost Rider can see his opponent’s transgressions and place Judgments upon them. Each Judgment can only be applied once and lasts indefinitely.
@@ -13,30 +13,29 @@ Heavy Attacks
 Judgment of Malice: 80% Chance
 Secondary: Gain a Life Steal Passive effect for 6.5 seconds, allowing Ghost Rider to steal 34.5% Health with each attack.
 
-Special 1: Retribution
+Special 1 - Retribution
 Judgment of Pride: 70% Chance.
 Secondary: Fate Seals the opponent, Nullifying all Buffs for 5.1 seconds.
 
-Special 2: Hellfire Blast
+Special 2 - Hellfire Blast
 Judgment of Anger: 80% Chance
 Secondary: Drains 17% of the opponent’s Power over 2 seconds.
 
-Special 3: Penance Stare
+Special 3 - Penance Stare
 Judgment of Guilt: 100% Chance
 Secondary: Inflicts Damnation upon the opponent through the Penance Stare for 3.5 seconds, dealing 40% of Ghost Rider’s Attack as Direct Damage. Opponents under Damnation are also Power Locked, Heal Blocked and Fate Sealed.
 When Damnation ends, all Judgments are removed from the opponent and can be applied again.
 
-Evil’s Bane – Passive
+Passive - Evil’s Bane
 Against Villain opponents, Ghost Rider’s chance to place a Judgment is increased by 20%. Additionally, his Armor and Critical Chance are increased by 16.5%
 
-Bleed Immunity – Passive
+Passive - Bleed Immunity
 A lack of Blood provides full immunity to Bleed effects.
 
-Signature Ability – Spirit of Vengeance
+Signature Ability – SPIRIT OF VENGEANCE
 Finish a 5 Hit Combo with a Medium Attack
 Judgment of Corruption: 65% Chance
 Secondary: Ghost Rider gains a burst of  (25 – 100%) Attack for 7.5 seconds.
-
 
 Recommended Masteries
 Parry: Landing a Heavy Attack is paramount to gaining Ghost Rider’s Life Steal effect. Grabbing this Mastery will allow you to Stun your opponent long enough to land a Heavy Attack.

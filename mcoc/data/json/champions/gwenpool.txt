@@ -1,28 +1,32 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Bleed, Ennervate, Incinerate, Armor Break
 
-Basic Attacks:
+Basic Attacks
 25% chance to inflict Bleed, dealing 70% of your Attack as direct damage over 5 seconds.
 3% chance to Stun per Bleed active on target, lasting for 0.75 seconds.
 
-Heavy Attacks:
+Heavy Attacks
 If the target isn’t Bleeding when the last strike hits, it has a 50% chance to cause Bleed, doing 70% of Gwen’s attack over 5 seconds.
 If the target is already Bleeding, the attack instead gains a 100% chance to convert 1 existing Bleed to cause 450% of Gwen’s attack as direct damage, over 23 seconds.
 
-Special 1: Slice, Slice, Bang! – Swords and guns! What more could you ask for?
+Special 1 - Slice, Slice, Bang!
+Swords and guns! What more could you ask for?
 100% chance to Incinerate the target, dealing 98% of your Attack as Energy Damage for 14 seconds. This effect also removes Perfect Block chance and reduces Block Proficiency by 50% while active.
 When this effect expires, it has a 100% chance to consume 1 Bleed off the opponent to re-apply itself.
 
-Special 2: Down, Set, Boom! – Explosives strapped on a football, and kicked right at your opponent’s face! Catch!
+Special 2 - Down, Set, Boom!
+Explosives strapped on a football, and kicked right at your opponent’s face! Catch!
 100% chance to Enervate the target, preventing them from gaining Power when struck for 6 seconds.
 When this effect expires, it has a 100% chance to consume 1 Bleed off the opponent to re-apply itself.
 
-Special 3: Watch This! – In the immortal words of anyone about to do something really cool, that in no way could go horribly wrong!
+Special 3 - Watch This!
+In the immortal words of anyone about to do something really cool, that in no way could go horribly wrong!
 100% chance to Armor Break, removing enemy Armor and applying a 115% Armor reduction for 14 seconds.
 When this effect expires, it has a 100% chance to consume 1 Bleed off the opponent to re-apply itself.
 
-Signature Ability – Plot Armor: Gwenpool’s read enough comics to know that the main character doesn’t die, preventing her from losing more than 65% of her current health per hit from Special Attacks. She also reduces her opponent’s Defensive Ability Accuracy, based on her current combo count.
+Signature Ability – PLOT ARMOR
+Gwenpool’s read enough comics to know that the main character doesn’t die, preventing her from losing more than 65% of her current health per hit from Special Attacks. She also reduces her opponent’s Defensive Ability Accuracy, based on her current combo count.
 
 Recommended Masteries
 Deep Wounds: This one is a bit of a given. A lot of Gwenpool’s damage comes from her Bleed abilities. Increasing the duration, especially of the shorter bleeds, greatly increases the chance one will be active to refresh one of the Special Attack debuffs.

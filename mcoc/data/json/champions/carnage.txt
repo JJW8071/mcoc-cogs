@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Resist Physical, Precision, Fury, Cruelty, Bleed
 
@@ -21,16 +21,19 @@ If the target is already Bleeding, gain a 80% Chance to Bleed dealing 44.06 dama
 Heavy Attacks
 100% Chance to Bleed dealing 538.45 damage over 10 seconds.
 
-Special 1: Frenzied Assault – Carnage hurls himself at his opponent, rending with limbs and tentacles alike.
+Special 1 - Frenzied Assault
+Carnage hurls himself at his opponent, rending with limbs and tentacles alike.
 This attack receives +998.5 additional Critical Rate.
 
-Special 2: Rabid Onslaught – Carnage uses his tentacles to suddenly propel himself towards his target while he strikes with his claws.
+Special 2 - Rabid Onslaught
+Carnage uses his tentacles to suddenly propel himself towards his target while he strikes with his claws.
 This attack receives +1529.33 Critical Damage Rating.
 
-Special 3: Aberrant Soul – Carnage uses his tentacles to pin his opponent in place, allowing him take the time to revel in the carnage he creates.
+Special 3 - Aberrant Soul
+Carnage uses his tentacles to pin his opponent in place, allowing him take the time to revel in the carnage he creates.
 100% chance to cause the Opponent to Bleed, dealing 3671.25 direct damage over 20 seconds.
 
-Signature Ability: Bloodlust
+Signature Ability - BLOODLUST
 The sight and smell of blood triggers Carnage’s bloodlust, granting him up to +19.99% increased Power Gain, while his Opponent is Bleeding.
 The longer the Opponent has been continuously Bleeding the greater the bonus, reaching the maximum after 20 seconds.
 
@@ -40,7 +43,7 @@ Block Proficiency: Carnage’s base stats look pretty low and that’s because t
 Willpower: Willpower helps keep Carnage viable over several fights. His HP is on the lower end, and he a takes a little while to build a few Buffs and really get rolling, though his Signature Ability helps with this. The Willpower healing helps him keep rolling after taking some chip damage at the beginning of fights, before he gets his Block Proficiency high enough to Parry without taking damage.
 
 Strong Match-Ups
-Howard the Duck: Howard’s defences are based heavily around his Armor Up effects, and Carnage’s Bleeds don’t care about that armor at all! And if Howard survives long enough for his Armor Ups begin to fall off, Carnage will be gaining more and more Buffs.
+Howard the Duck: Howard’s defenses are based heavily around his Armor Up effects, and Carnage’s Bleeds don’t care about that armor at all! And if Howard survives long enough for his Armor Ups begin to fall off, Carnage will be gaining more and more Buffs.
 Black Widow: Ironically in this matchup, Black Widow’s Signature Ability can actually benefit Carnage, as its Ability Accuracy Reduction can prevent him from swapping his passives. This makes it easier to avoid swapping to a defensive Passive effect, just before converting to a permanent Buff.
 Electro: Carnage focuses on doing big damage with his Bleed effects. Since Electro does damage back based on your hits to him, Carnage can minimize the amount of damage returned to him due to the Bleed.
 

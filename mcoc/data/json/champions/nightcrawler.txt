@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Passive – Combat Mode
 By Dodging back and holding Block for 2 seconds, Nightcrawler can shift his tactics and switch his Combat Mode.
@@ -18,20 +18,24 @@ Critical Hits – Bleed (Deep Wound)
 Nightcrawler’s cutlass has a 67% chance to strike a Deep Wound, dealing 48% of his Attack as Bleed damage instantly.
 The chance to score a Deep Wound increases by up to 10% based on how low the opponent’s Armor is.
 
-Special 1: Displacement Strikes – Slash! Bamf! Kick!
+Special 1 - Displacement Strikes
+Slash! Bamf! Kick!
 Using this attack increases Nightcrawler’s chance to Evade by 29% for 10 seconds if in Neyaphem Mode.
 Using this attack increases Nightcrawler’s Critical Damage by 37% for 10 seconds if in Swashbuckling Mode.
 
-Special 2: Unglaublich Acrobatics – Let’s see what the amazing Nightcrawler learned during his time in the circus.
+Special 2 - Unglaublich Acrobatics
+Let’s see what the amazing Nightcrawler learned during his time in the circus.
 This attack reduces enemy Block Proficiency by 37% while in Neyaphem Mode.
 The chance to score a Deep Wound with this attack is increased by 28% while in Swashbuckling Mode.
 These abilities are instantaneous and do not linger as a Debuff.
 
-Special 3: Bamf! Bamf! Bamf! – He’s coming in from every direction. Lieber Gott!
+Special 3 - Bamf! Bamf! Bamf!
+He’s coming in from every direction. Lieber Gott!
 This attack disorients the opponent, granting Nightcrawler a permanent 23% increased chance to score a Deep Wound.
 This effect stacks infinitely, increasing the chance to score a Deep Wound each time a Special 3 is activated.
 
-Signature Ability – NEYAPHEM HERITAGE: Nightcrawler’s unique heritage, coupled with his X-Men training, allows him to switch his combat mode 0.3 seconds faster. Additionally, anytime he strikes a Deep Wound, he gains (15 – 35%) increased Attack for 7 seconds.
+Signature Ability – NEYAPHEM HERITAGE
+Nightcrawler’s unique heritage, coupled with his X-Men training, allows him to switch his combat mode 0.3 seconds faster. Additionally, anytime he strikes a Deep Wound, he gains (15 – 35%) increased Attack for 7 seconds.
 This effect stacks up to 3 times.
 
 Recommended Masteries

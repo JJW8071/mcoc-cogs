@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Power Lock, Heal Block, Armor Up
 
@@ -27,18 +27,21 @@ Breakthrough: Applies an Armor Up Buff, granting 2000 Armor for 5 seconds.
 Heavy Attacks
 Remove all currently active Breakthroughs dealing 1047 damage per Breakthrough removed.
 
-Special 1 – Thesis – Doc Ock has a theory, that he’s better than you are. If you don’t believe him he’ll be happy to demonstrate that fact for you.
+Special 1 – Thesis
+Doc Ock has a theory, that he’s better than you are. If you don’t believe him he’ll be happy to demonstrate that fact for you.
 Reset the duration of any currently active Breakthrough Effect.
 If no Breakthroughs are currently active, it triggers the Breakthrough of whichever category is currently highest.
 
-Special 2 – Experiment – Like any good scientist, Doc Ock will need to put his hypothesis to the test, much to the detriment of his test subjects.
+Special 2 – Experiment
+Like any good scientist, Doc Ock will need to put his hypothesis to the test, much to the detriment of his test subjects.
 Trigger the Breakthrough effect of all Research Categories currently at 100, and reset the duration of all Breakthroughs to 3.5 seconds per Category currently at 100.
 
-Special 3 – Proof – After much careful study and experimentation, Doc Ock can now mathematically prove that your defeat is inevitable.
+Special 3 – Proof
+After much careful study and experimentation, Doc Ock can now mathematically prove that your defeat is inevitable.
 Duplicate 1 currently active Breakthrough with a duration of 5 seconds.
 This Duration increases by 10 seconds per currently active Breakthrough.
 
-Signature Ability – Academic Background
+Signature Ability – ACADEMIC BACKGROUND
 Doctor Octopus’s extensive academic background lets him start the fight with each of his Research Categories at 60 and each Breakthrough is replaced by a new effect.
 Physics: Drain 100% of Power Gained and Steal 10% of the Power Drained.
 Chemistry: Deal Direct Damage equal to 100% of health gained and Lifesteal 20% of the damage done.
@@ -49,12 +52,12 @@ Block Proficiency: Doc Ock builds Block Proficiency with his Chemistry Research,
 Parry: Parry is very useful for Doc Ock. It allows for quickly building his Chemistry Research Category, and aggressive use of Parry allows him to string together combos quickly, key for building up his Breakthroughs.
 Recovery: Once his Signature Ability is unlocked, the Recovery Mastery increases the amount of Health absorbed during a Chemistry Breakthrough.
 
-Strong Match-Ups:
+Strong Match-Ups
 Cable: Doc Ock has a great matchup against Cable. When Cable triggers a Power Gain it will feed Doc Ock’s Physics Category pushing him towards the Power Lock, and reducing Cable’s opportunity to trigger more Power Gains or Regeneration.
 Wolverine: Wolverine’s repeated Regenerations are an ideal target for Doc Ock’s Heal Block. This only gets better when his Signature Ability is unlocked, and Doc Ock can steal some of that Regeneration for himself.
 Cyclops (Blue Team): Blue Team Cyclops gets a lot of his damage from his Special Attacks, and gains additional Power while below 1 bar. Doc Ock can steal some of that bonus Power, as well as reduce the damage from those Specials.
 
-Weak Match-Ups:
+Weak Match-Ups
 Crossbones: Crossbones is a tough match for the good Doctor. His ability to convert two of Doc’s three Breakthroughs to his own Furies will take away much of Doc’s strength.
 Yondu: Yondu’s ability to reduce his opponent’s Power Gain with Debuffs can make it difficult for Doc Ock to use his Special Attacks to get his Breakthroughs rolling effectively, and this repeated use of Special Attacks will charge up Yondu’s Special 2 Attack.
 Ronan: If Ronan can get on the offensive, he can force Doc Ock into triggering his Biology Breakthrough, then he has the Armor Break to remove it, and his Special Attack Stuns to keep Doc Ock locked down.

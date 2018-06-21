@@ -1,8 +1,8 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Invisibility, Hex Magic, Stagger, Shock, Bleed
 
-Dash Back and Hold Block for 1.5 Seconds
+Dash Back and Hold Block for 1.5 Seconds - Invisibility
 The Hood gains Invisibility for 8 seconds. While Invisible, incoming attacks have a 45% chance to miss. Non-contact attacks have double this chance.
 While Invisible, The Hood deals 105% increased Critical Damage and his attacks ignore 75% Armor and Block Proficiency.
 
@@ -12,18 +12,22 @@ Critical Hits
 Heavy Attack
 Refreshes any Shock, Hex, Stagger or Bleed The Hood has placed on the opponent.
 
-Special 1: Eldritch Arc – Reaching deep into his granted power, The Hood casts out an arc of chaotic lightning.
+Special 1 - Eldritch Arc
+Reaching deep into his granted power, The Hood casts out an arc of chaotic lightning.
 Shocks the opponent, dealing 130% of the Hood’s Attack as Energy Damage over 7.5 seconds. When the Shock expires, the opponent is Stunned for 0.75 seconds. This effect cannot interrupt Special Attacks.
 
-Special 2: Occult Onslaught – Calling forth his supernatural handguns, The Hood creates a bit of distance and empties the clips into his target.
+Special 2 - Occult Onslaught
+Calling forth his supernatural handguns, The Hood creates a bit of distance and empties the clips into his target.
 Hexes the opponent, reducing Ability Accuracy by 56% and Fate Sealing for 6.5 seconds. When the Hex expires, it deals a burst of Energy Damage equal to 85% of the Hood’s attack.
 This attack triggers Invisibility.
 
-Special 3: Dark Pact – Overwhelmed by the dark power inside him, Parker begins to transform into something else entirely.
+Special 3 - Dark Pact
+Overwhelmed by the dark power inside him, Parker begins to transform into something else entirely.
 This attack deals 65% increased damage for each full bar of power the opponent has at time of impact.
 100% chance to inflict Bleed, dealing 130% of your Attack as direct damage over 6 seconds.
 
-Signature Ability – With some help from Dormammu, The Hood learns to better harness his demonic equipment. While his Invisibility is in cool down, the Hood becomes Stun Immune and his basic attacks have a 50% chance to Steal 10% of the opponent’s Power.
+Signature Ability - DARK DEALINGS
+With some help from Dormammu, The Hood learns to better harness his demonic equipment. While his Invisibility is in cool down, the Hood becomes Stun Immune and his basic attacks have a 50% chance to Steal 10% of the opponent’s Power.
 
 Recommended Masteries
 Mystic Dispersion: The Hood’s Fate Seal on his Special 2 allows him to trigger Mystic Dispersion multiple times with a single ability. Combine it with Stagger for even more triggers. Once his Signature Ability has been unlocked and he gains Power Steal, he’ll be rolling in Power!

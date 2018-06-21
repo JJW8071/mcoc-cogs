@@ -1,26 +1,30 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
-Special 1: Rout – Strike with overwhelming power.
-100% chance for Fury, increasing your Attack by 45% for 8.5 seconds.
-
-Special 2: Incendiary Assault – With a special mix of White Phosphorus rounds, let them burn.
-This attack Incinerates the enemy, dealing 107% of your Attack as Energy Damage over 10 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it’s active.
-
-Special 3: Eye for an Eye – It’s time to make them pay for what they’ve done.
-This attack instantly refreshes the cooldown timer on Overrun.
 
 Passive – Fury
 Crossbones’ hydraulic gauntlets allow him to overpower his enemies. Whenever he would strike with a Critical Hit, he instead gains Fury, increasing his Attack by 45% for 8.5 seconds.
 The Potency of Crossbones’ Fury effects are increased by up to 20% based on his Critical Damage. As his Critical Damage climbs, his Fury effects becomes more powerful.
 For each Fury effect active, Crossbones overpowers his opponent, decreasing their Defensive Ability Accuracy by 23% per Fury.
-*Crossbones’ Fury effects stack infinitely.
+Crossbones’ Fury effects stack infinitely.
 
 Overrun
 To begin Overrun, Dodge back and hold Block for 2 seconds. Once activated, Overrun lasts 8 seconds before it must cool down.
 When Crossbones enters Overrun, he gains 3 Fury effects and suffers 50% reduced Armor and Block Proficiency for the duration of the Overrun.
 While Crossbones is in Overrun, his Offensive Power Gain increases by 40% and his Defensive Power Gain decreases by the same amount.
-*Offensive Power Gain is the amount of Power gained from striking the opponent.
-*Defensive Power Gain is the amount of Power gained while being struck or while blocking.
+Offensive Power Gain is the amount of Power gained from striking the opponent.
+Defensive Power Gain is the amount of Power gained while being struck or while blocking.
+
+Special 1 - Rout
+Strike with overwhelming power.
+100% chance for Fury, increasing your Attack by 45% for 8.5 seconds.
+
+Special 2 - Incendiary Assault
+With a special mix of White Phosphorus rounds, let them burn.
+This attack Incinerates the enemy, dealing 107% of your Attack as Energy Damage over 10 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it’s active.
+
+Special 3 - Eye for an Eye
+It’s time to make them pay for what they’ve done.
+This attack instantly refreshes the cooldown timer on Overrun.
 
 Signature Ability - HYDRA TRAINING
 Whenever Brock Rumlow gets a Debuff, his brutal HYDRA training kicks in and allows him a (15 – 25%) chance to shrug it off and convert it into a Fury effect. The chance is increased by 15% when fighting Science Champions, and decreased by 15% when fighting Mutant Champions.

@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Heavy Attacks - Heal Block
 95% chance to inflict Heal Block, preventing the target from recovering Health for 3 seconds. This has one potential trigger chance during the final strike of the heavy attack.
@@ -23,7 +23,8 @@ Depletes up to 59% of the target’s max Power.
 Special 3: Overload – “I must end it at any cost.”
 100% chance to Power Drain, depleting up to 54% of the target’s max Power. If the target is reduced to zero Power from this attack, they also become Power Locked for 6 seconds.
 
-Signature Ability – ARC SHIELD: An upgrade to Civil Warrior’s Arc Shield grants him 2 Armor Up charges at the start of the fight. Additionally, he receives (9 – 20%) Special Damage resistance while Blocking.
+Signature Ability – ARC SHIELD
+An upgrade to Civil Warrior’s Arc Shield grants him 2 Armor Up charges at the start of the fight. Additionally, he receives (9 – 20%) Special Damage resistance while Blocking.
 
 Recommended Masteries
 Parry: One of Civil Warrior’s greatest strengths is his ability to apply a Heal Block with his Heavy attack. By triggering Parry then going into a Heavy Attack, Civil Warrior can keep these short Heal Block effects active throughout the fight.
@@ -33,5 +34,5 @@ Strong Match-Ups
 Deadpool, Wolverine, Wolverine (X-23), Ultron Prime: Civil Warrior’s ability to keep frequent Heal Block effects active allows him to deny these Champions their much needed Regeneration effects.
 Cyclops, Storm: In addition to a class advantage, Civil Warrior’s ability to perform strong Power Drain effects denies these Champions their ability to perform their much needed special attacks. Additionally, his ability to reduce enemy Offensive Ability Accuracy means that these Champions cannot trigger their Armor Break and Stun effects.
 
-Poor Match-Ups
+Weak Match-Ups
 Iron Fist, Spider-Man (Symbiote), Ms. Marvel (Kamala Khan): These Champions have a reliable way to strip away Civil Warrior’s Armor Up effects and do not rely on Offensive Ability Accuracy for their damage output as much as other Champions.

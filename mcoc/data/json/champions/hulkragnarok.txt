@@ -1,4 +1,4 @@
-*All stats based on 5-Star, Rank 5, Level 65, Signature Level 200
+All stats based on 5-Star, Rank 5, Level 65, Signature Level 200
 
 Basic Abilities: Poison Immunity, Heal Block, Stun, Enervate
 

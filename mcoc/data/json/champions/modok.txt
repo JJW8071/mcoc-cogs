@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Flux, Force Field, Bleed, Incinerate
 
@@ -20,19 +20,22 @@ Every 7th attack is guaranteed to be Critical, but Critical Rating is ignored. I
 Heavy Attacks
 40% chance to Incinerate for 703 damage over 4 seconds. The chance to trigger and the overall damage is influenced by the state of Flux at the time this ability is activated. Land a Heavy Attack while Flux is high for maximum impact.
 
-Special Attacks:
-Special 1: SILENCE! – M.O.D.O.K. fires a Mental Bolt from the jewel on his forehead.
+Special 1 - SILENCE!
+M.O.D.O.K. fires a Mental Bolt from the jewel on his forehead.
 Enemy abilities that grant Power or Health are reversed for the duration of this attack. Up to 150% of what they would have gained is lost instead. This amount stacks with the Power Gain Rate reduced by Flux, so performing a Special 1 at max Flux can easily drain Champions like Vision or Doctor Strange to zero. This effect lasts only about 3 seconds but does not require this attack to hit.
 This attack does not generate any Power for opponents, so even if they don’t have any Power Gain or Regeneration effects active, you can still sneak it in without worrying about filling their Power Meter.
 
-Special 2: Doomsday Blades – A pinnacle of both Science and Technology, the Doomsday Chair uses a mechanized arm to fling two sawblades at opponents.
+Special 2 - Doomsday Blades
+A pinnacle of both Science and Technology, the Doomsday Chair uses a mechanized arm to fling two sawblades at opponents.
 Each blade has a 60% chance to inflict Bleed for 703 damage over 6 seconds.
 Bleed duration is increased by up to 100% based on Flux. This increases to +125% duration (and damage) with the Chair Larceny Synergy Bonus, making the total damage output at maximum Flux more than four times greater than when at minimum Flux…just watch out for enemies that can easily deal with Bleed damage.
 
-Special 3: Thermodynamics – Opponents submit to M.O.D.O.K.’s superior mind as he experiments with rockets designed only for killing.
+Special 3 - Thermodynamics
+Opponents submit to M.O.D.O.K.’s superior mind as he experiments with rockets designed only for killing.
 Each of the five rockets has an 72% chance to inflict a random non-unique Debuff. Debuffs like Bleed or Exhaustion are more common, while Heal Block and Stun are much more rare. A total of ten different Debuffs are possible: Bleed, Incinerate, Fatigue, Exhaustion, Weakness, Poison, Armor Break, Heal Block, Concussion, and Stun.
 
-Signature Ability: Master Plan – Blocking and Auto-Blocking are enhanced, especially if M.O.D.O.K. has already defeated an enemy of the same Class
+Signature Ability - MASTER PLAN
+Blocking and Auto-Blocking are enhanced, especially if M.O.D.O.K. has already defeated an enemy of the same Class
 
 Force Fields have +128 Block Proficiency for each Class defeated within the same Quest, plus a unique Block bonus for subsequent fights against that Class:
 Mutant Champions: Take 16% less Special Attack damage.
@@ -44,38 +47,19 @@ Skill Champions: Why bother? They’re not even superhuman!
 Check ahead on longer Quests for difficult fights. It would be wise to find and defeat an opponent of the same Class earlier in the Quest so that M.O.D.O.K. enters tougher fights with the Class-specific bonus active.
 
 
-Recommended Masteries:
-Block Proficiency, Perfect Block, and Stand Your Ground
-M.O.D.O.K. has more Block uptime than any other Champion in the game thanks to his Force Field counting as an automatic block. He also naturally reaches high Block Proficiency levels due to Flux, Force Field, and his Signature “Master Plan” Ability. Anything you can do to enhance blocking provides a lot of mileage as a result.
+Recommended Masteries
+Block Proficiency, Perfect Block, and Stand Your Ground: M.O.D.O.K. has more Block uptime than any other Champion in the game thanks to his Force Field counting as an automatic block. He also naturally reaches high Block Proficiency levels due to Flux, Force Field, and his Signature “Master Plan” Ability. Anything you can do to enhance blocking provides a lot of mileage as a result.
+Greater Vitality, Suture, and Coagulate: Increasing his naturally high Health pool provides great returns, especially when considering his weak Class match-up against Skill Champions who often inflict Bleed with the Deep Wounds Mastery. Suture and Coagulate combine to help mitigate one of his greatest weaknesses, and further increasing his Health minimizes the effectiveness of enemies’ Deep Wounds Mastery in addition to a general increase in durability.
+Despair: M.O.D.O.K. is able to inflict Debuffs reliably off of his Heavy and Special 2 and up to five different Debuffs from his Special 3. Despair helps these Debuffs work against Willpower and other Regeneration abilities. The Health Penalty from Despair also combines with the reversal effect of his Special 1, further damaging enemies based on the amount they would have healed.
+Limber: Force Field cannot trigger while M.O.D.O.K. is Stunned, so get those Stuns off you as fast as you can!
+Deep Wounds: The Bleed from his Special 2 can be devastating when used while Flux is high. Given his large base Health pool, it should also be fairly easy to meet the “more Health points than your opponent” clause of Deep Wounds. It’s especially important to activate his Special 2 Attack while Flux is high because it increases the Bleed damage and duration by up to 100% each (125% if the Chair Larceny Synergy is active) and increases the chance to trigger a Bleed. Each Bleed triggers the Deep Wounds bonus Health Loss effect. If you’re lucky enough to trigger both Bleeds, then a maximum Flux Special 2 Bleed is well over four times more powerful than a minimum Flux Special 2!
 
-Greater Vitality, Suture, and Coagulate
-Increasing his naturally high Health pool provides great returns, especially when considering his weak Class match-up against Skill Champions who often inflict Bleed with the Deep Wounds Mastery. Suture and Coagulate combine to help mitigate one of his greatest weaknesses, and further increasing his Health minimizes the effectiveness of enemies’ Deep Wounds Mastery in addition to a general increase in durability.
+Strengths
+Enemies with Power Gain abilities.: Vision, Hyperion, the Mystic Dispersion Mastery, and especially Doctor Strange are all passively mitigated by M.O.D.O.K.’s abilities, and then actively reversed by M.O.D.O.K.’s Special 1 Attack. Since Doctor Strange has constant Power Gain, it also helps communicate when M.O.D.O.K.’s Flux is at its highest. During maximum Flux, Doctor Strange won’t gain any Power at all.
+Enemies with short bursts of Regeneration.: Mephisto, Iron Man, Ultron, and Deadpool all trigger a brief but powerful burst of Regeneration. A well-timed Special 1 Attack from M.O.D.O.K. reverses these effects, causing them to deal damage instead. This effect was previously exclusive to Guillotine. Although M.O.D.O.K.’s effect is much shorter than Guillotine’s, it’s also much more potent and doesn’t require the Special Attack to hit.
 
-Despair
-M.O.D.O.K. is able to inflict Debuffs reliably off of his Heavy and Special 2 and up to five different Debuffs from his Special 3. Despair helps these Debuffs work against Willpower and other Regeneration abilities. The Health Penalty from Despair also combines with the reversal effect of his Special 1, further damaging enemies based on the amount they would have healed.
-
-Limber
-Force Field cannot trigger while M.O.D.O.K. is Stunned, so get those Stuns off you as fast as you can!
-
-Deep Wounds
-The Bleed from his Special 2 can be devastating when used while Flux is high. Given his large base Health pool, it should also be fairly easy to meet the “more Health points than your opponent” clause of Deep Wounds. It’s especially important to activate his Special 2 Attack while Flux is high because it increases the Bleed damage and duration by up to 100% each (125% if the Chair Larceny Synergy is active) and increases the chance to trigger a Bleed. Each Bleed triggers the Deep Wounds bonus Health Loss effect. If you’re lucky enough to trigger both Bleeds, then a maximum Flux Special 2 Bleed is well over four times more powerful than a minimum Flux Special 2!
-
-Strong Match-ups:
-Enemies with Power Gain abilities.
-Vision, Hyperion, the Mystic Dispersion Mastery, and especially Doctor Strange are all passively mitigated by M.O.D.O.K.’s abilities, and then actively reversed by M.O.D.O.K.’s Special 1 Attack. Since Doctor Strange has constant Power Gain, it also helps communicate when M.O.D.O.K.’s Flux is at its highest. During maximum Flux, Doctor Strange won’t gain any Power at all.
-
-Enemies with short bursts of Regeneration.
-Mephisto, Iron Man, Ultron, and Deadpool all trigger a brief but powerful burst of Regeneration. A well-timed Special 1 Attack from M.O.D.O.K. reverses these effects, causing them to deal damage instead. This effect was previously exclusive to Guillotine. Although M.O.D.O.K.’s effect is much shorter than Guillotine’s, it’s also much more potent and doesn’t require the Special Attack to hit.
-
-Weak Match-ups:
-Black Widow
-Black Widow’s Signature Subtlety ability is able to bypass Force Field and set it to recharge without having triggered at all. She can comfortably attack into M.O.D.O.K. and regularly sneak past his Force Field.
-
-Quake
-Quake’s Concussion ability is able to prevent M.O.D.O.K.’s Force Field from re-charging; however Force Field will continue to attempt to recharge, so Quake will have to make sure the Concussions are well-timed.
-
-Taskmaster
-Heavy Attacks are naturally unblockable, which break M.O.D.O.K.’s Force Field, and Taskmaster’s Exploit Weakness ability can juice up his Heavy Attack to hit really hard and be really reliable in the process. Taskmaster can also achieve an above average Perfect Block chance which increases the duration of Parry’s Stun, therefore less Force Field uptime and easier Heavy Attacks. Once awakened, the Concussion from Taskmaster further inhibits M.O.D.O.K.’s Force Field, making Taskmaster one of the most ideal counters.
-
-Enemies that deal burst damage
-Anyone can make his Force Field drop, but Champions like Storm that can deal massive amounts of damage in short windows are able to take full advantage of his Force Field being offline.
+Weaknesses
+Black Widow: Black Widow’s Signature Subtlety ability is able to bypass Force Field and set it to recharge without having triggered at all. She can comfortably attack into M.O.D.O.K. and regularly sneak past his Force Field.
+Quake: Quake’s Concussion ability is able to prevent M.O.D.O.K.’s Force Field from re-charging; however Force Field will continue to attempt to recharge, so Quake will have to make sure the Concussions are well-timed.
+Taskmaster: Heavy Attacks are naturally unblockable, which break M.O.D.O.K.’s Force Field, and Taskmaster’s Exploit Weakness ability can juice up his Heavy Attack to hit really hard and be really reliable in the process. Taskmaster can also achieve an above average Perfect Block chance which increases the duration of Parry’s Stun, therefore less Force Field uptime and easier Heavy Attacks. Once awakened, the Concussion from Taskmaster further inhibits M.O.D.O.K.’s Force Field, making Taskmaster one of the most ideal counters.
+Enemies that deal burst damage: Anyone can make his Force Field drop, but Champions like Storm that can deal massive amounts of damage in short windows are able to take full advantage of his Force Field being offline.

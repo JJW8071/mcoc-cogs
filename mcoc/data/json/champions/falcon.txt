@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Recon
 To begin a Recon Scan, Dodge back and hold Block for 2 seconds. While Locked On, the opponent’s Defensive Ability Accuracy is reduced by 100% for 10 seconds.
@@ -6,26 +6,29 @@ Defensive Ability Accuracy refers to abilities that are triggered by the Champio
 Redwing remains Locked On to Science Champions for 20% longer than normal. Additionally, Redwing remains Locked On to Mutant Champions for 20% shorter than normal.
 Lock On is a Passive effect and does not trigger Willpower and other abilities that trigger from Debuffs.
 
-Recalibrate – Passive
+Passive - Recalibrate
 Falcon’s scanning system in his goggles recalibrates each time the opponent triggers a Passive Evade, increasing Falcon’s Critical Damage by 37% until his next Critical Hit.
 This ability only triggers from a Passive Evade and will not trigger when the opponent uses the Dexterity mastery to evade an attack.
 The Cruelty Buffs gained are Passive and cannot be Nullified. Additionally, they stack infinitely until the next Critical Hit.
 
-Redwing Assist – Passive
+Passive - Redwing Assist
 Falcon sends out Redwing to scout for his teammates and provide intel. Each of Falcon’s synergies provides an additional 9% Physical Resistance penetration and Critical Damage.
 
-Special 1: Fading Barrage – With a quick jet blast, Falcon kicks his foe, then lets loose a barrage from his twin SMGs.
+Special 1 - Fading Barrage
+With a quick jet blast, Falcon kicks his foe, then lets loose a barrage from his twin SMGs.
 85% chance to inflict Bleed, dealing 103% of your Attack as direct damage over 3.5 seconds. The chance to trigger Bleed is increased by 15% if Redwing is Locked On.
 This Bleed has 1 potential trigger and stacks infinitely.
 
-Special 2: Raptor Strike – Guided by Redwing’s recon, Falcon dives in on his target for a massive strike.
+Special 2 - Raptor Strike
+Guided by Redwing’s recon, Falcon dives in on his target for a massive strike.
 This attack ignores Physical Resistance and has 15% increased Critical Hit Chance if Redwing is locked on.
 
-Special 3: Tango Down – Calling in a strafing run. Firing guided missiles. Target down.
+Special 3 - Tango Down
+Calling in a strafing run. Firing guided missiles. Target down.
 This attack Incinerates the enemy, dealing 98% of your Attack as Energy Damage over 10 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it’s active. If Redwing is Locked On, an additional 20% Block Proficiency is removed.
 
-Signature Ability – EXO-8: Redwing begins each fight ready to go. Additionally, Redwing’s Lock On lasts 2 seconds longer and provides an additional (5 – 16.5%) Critical Hit Chance.
-
+Signature Ability – EXO-8
+Redwing begins each fight ready to go. Additionally, Redwing’s Lock On lasts 2 seconds longer and provides an additional (5 – 16.5%) Critical Hit Chance.
 
 Recommended Masteries
 Parry: By utilizing this Mastery correctly, players can Stun their opponent, then use the time to dodge back and start Redwing’s Recon Scan consistently.

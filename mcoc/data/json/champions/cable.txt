@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Regeneration, Incinerate, Concussion, True Strike
 
@@ -16,14 +16,17 @@ Heavy Attack – Techno Organic Strike
 100% Chance to Degenerate Non-Robotic opponents for up to 400% of your Attack over 15 seconds.
 Strength of Degenerate scales inverse of your Opponent’s current Power.
 
-Special 1: Short Controlled Bursts – Cable knocks back his opponent, making space to use his plasma rifle!
+Special 1 - Short Controlled Bursts
+Cable knocks back his opponent, making space to use his plasma rifle!
 This attack is Unblockable if you are currently under the effects of a True Strike Buff.
 
-Special 2: Charge Shot – A telekinetic wave, followed up by a high energy charged blast from his rifle!
+Special 2 - Charge Shot
+A telekinetic wave, followed up by a high energy charged blast from his rifle!
 This attack Incinerates the enemy, dealing 100% of your Attack as Energy Damage over 10 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50%
 This attack has a 84% chance to give the opponent a Concussion, reducing their Ability Accuracy by 78% for 11 seconds. The potency of this effect is affected by Class relationships.
 
-Special 3: TK Rifle – Cable uses his powers to enhances his plasma rifle, locks on his target, and unleashes a withering barrage of firepower.
+Special 3 - TK Rifle
+Cable uses his powers to enhances his plasma rifle, locks on his target, and unleashes a withering barrage of firepower.
 100% Chance to grant True Strike for 15 seconds. This allows him to ignore Armor, Resistances, and Evasion.
 
 Signature Ability – Techno Organic Virus Suppression
@@ -38,8 +41,8 @@ Strong Match-Ups
 Black Panther: Boy did Mr Panther show up to the wrong fight! With all the Bleed effects Black Panther triggers, he’s going to be Degenerating a lot! Combine that with Cable’s natural class advantage, and it’s a pretty safe bet of who’s coming out ahead here.
 Gwenpool: Gwenpool wants to make you bleed all over yourself, which is right up Cable’s alley! His Signature Power Gain will help him slip around Gwenpool’s Ennervate ability. Where Gwenpool’s Plot Armor won’t let your Special Attacks touch, Cable’s Degeneration will knock off those last stubborn few percentage points off her health bar.
 Abomination: Abomination is a great target as his Poison effect, while strong over time, needs to trigger repeatedly. This allows Cable to quickly drive his Poison duration reduction to 100%, while giving him a sizable boost for his Special Attack Damage.
-Weak Match-Ups
 
+Weak Match-Ups
 Guillotine: A regular semi-predictable regeneration is usually a great thing to have, unless your opponent can make it run in reverse! And given that Cable can’t avoid triggering that Regeneration if he wants to, means Guillotine will always have a target here.
 Vision (Both): Power Drain to prevent Regeneration from triggering, and Heal Block to prevent it from doing anything if it does. They’re also Robots, and as such not susceptible to Cable’s Degeneration.
 Magik: Magik is all up in your Power Bar, and as such, Cable can struggle against her. Power Lock keeps Cable’s Signature Ability in check, and reduces the number of chances he has to Regenerate.

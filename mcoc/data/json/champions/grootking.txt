@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Passive – Fury
 King Groot begins each fight with 2 Fury Buffs, each increasing his Attack by 241 for 12 seconds.
@@ -9,13 +9,16 @@ When King Groot’s Cool Down ends, he immediately gains 2 Fury Buffs, plus any 
 Passive – Bleed Immunity
 A lack of blood provides full immunity to Bleeding.
 
-Special 1: Floral Ferocity – The monarch of Planet X smashes his opponent into the unforgiving Earth with two mighty slams.
-90% chance to Armor Break the target, reducing Armor by 272 for 8 seconds. If King Groot has a Fury Buff, he consumes it to make the Armor Break permanent. [Max: 9 Stacks]
+Special 1 - Floral Ferocity
+The monarch of Planet X smashes his opponent into the unforgiving Earth with two mighty slams.
+90% chance to Armor Break the target, reducing Armor by 272 for 8 seconds. If King Groot has a Fury Buff, he consumes it to make the Armor Break permanent. [Max - 9 Stacks]
 
-Special 2: Internal Toxicity – King Groot pours forth a toxic wave of plant-based venoms.
+Special 2 - Internal Toxicity
+King Groot pours forth a toxic wave of plant-based venoms.
 100% chance to Poison the opponent, dealing 1666 direct damage over 8 seconds. If King Groot has a Fury Buff, he consumes it to apply an additional Poison effect.
 
-Special 3: Savagery Unleashed – King Groot sends out his plant material to envelope his opponent and crush them.
+Special 3 - Savagery Unleashed
+King Groot sends out his plant material to envelope his opponent and crush them.
 King Groot overloads his floral cells to gain a Regeneration Buff, recovering 1991 Health over 3 seconds. If King Groot has a Fury Buff, he consumes it to increase the duration of the Regeneration by 50%.
 
 Signature Ability – Unyielding Might
