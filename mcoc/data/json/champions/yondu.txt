@@ -25,7 +25,7 @@ A strafing run from a Ravager M-Ship peppers the arena with Yondu’s secret spi
 • +424 Block Penetration
 • +174 Attack for each Special Attack activated by the enemy this fight. Max: x15
 
-Special 3  Yaka Attacka
+Special 3 - Yaka Attacka
 Yondu’s Yaka Arrow is like a deadly snake as it mesmerizes, then strikes.
 • 100% chance to boost Critical Rating by 666 for 10 seconds.
 • Severely damaged by the Yaka Arrow, enemies are unable to trigger abilities during their next Special Attack.
