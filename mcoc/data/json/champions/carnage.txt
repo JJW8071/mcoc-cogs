@@ -3,39 +3,39 @@ All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 Basic Abilities: Resist Physical, Precision, Fury, Cruelty, Bleed
 
 Passive
-The Carnage Symbiote changes form creating weapons and armor providing Passive bonuses based on Carnage’s current needs.
-Struck: +998.5 Physical Resistance
-Block: +998.5 Block Proficiency
-Light Attack: +998.5 Critical Rate
-Medium Attack: +391.6 Attack
-Heavy Attack: +1508.77 Critical Damage Rate
+• The Carnage Symbiote changes form creating weapons and armor providing Passive bonuses based on Carnage’s current needs.
+-- Struck: +998.5 Physical Resistance
+-- Block: +998.5 Block Proficiency
+-- Light Attack: +998.5 Critical Rate
+-- Medium Attack: +391.6 Attack
+-- Heavy Attack: +1508.77 Critical Damage Rate
 
 Special Attacks
-Each time Carnage activates a Special Attack he begins to Mutate for 10 seconds.
-Once his mutation ends, he copies his current Symbiotic Creation as a Permanent Buff.
-He can have a Maximum of 5 Permanent Buffs.
+• Each time Carnage activates a Special Attack he begins to Mutate for 10 seconds.
+• Once his mutation ends, he copies his current Symbiotic Creation as a Permanent Buff.
+• He can have a Maximum of 5 Permanent Buffs.
 
 Critical Hits
-If the target is already Bleeding, gain a 80% Chance to Bleed dealing 44.06 damage over 0.5 seconds.
+• If the target is already Bleeding, gain a 80% Chance to Bleed dealing 44.06 damage over 0.5 seconds.
 
 Heavy Attacks
-100% Chance to Bleed dealing 538.45 damage over 10 seconds.
+• 100% Chance to Bleed dealing 538.45 damage over 10 seconds.
 
 Special 1 - Frenzied Assault
 Carnage hurls himself at his opponent, rending with limbs and tentacles alike.
-This attack receives +998.5 additional Critical Rate.
+• This attack receives +998.5 additional Critical Rate.
 
 Special 2 - Rabid Onslaught
 Carnage uses his tentacles to suddenly propel himself towards his target while he strikes with his claws.
-This attack receives +1529.33 Critical Damage Rating.
+• This attack receives +1529.33 Critical Damage Rating.
 
 Special 3 - Aberrant Soul
 Carnage uses his tentacles to pin his opponent in place, allowing him take the time to revel in the carnage he creates.
-100% chance to cause the Opponent to Bleed, dealing 3671.25 direct damage over 20 seconds.
+• 100% chance to cause the Opponent to Bleed, dealing 3671.25 direct damage over 20 seconds.
 
 Signature Ability - BLOODLUST
 The sight and smell of blood triggers Carnage’s bloodlust, granting him up to +19.99% increased Power Gain, while his Opponent is Bleeding.
-The longer the Opponent has been continuously Bleeding the greater the bonus, reaching the maximum after 20 seconds.
+• The longer the Opponent has been continuously Bleeding the greater the bonus, reaching the maximum after 20 seconds.
 
 Recommended Masteries
 Deep Wounds: Carnage has the ability to trigger additional short duration Bleeds when he lands a Critical Hit on an Opponent who is already Bleeding. This is really potent when combined with Deep Wounds, as the flat Duration increase results in a lot more damage from short Bleeds. It does even more damage when you factor in the percent Health damage, and the fact that his Special 1, not only boosts Critical Rating, but also hits up to 7 times!

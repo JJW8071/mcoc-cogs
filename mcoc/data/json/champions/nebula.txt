@@ -1,38 +1,38 @@
 All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Passive - Self-Repair
-Nebula starts the fight with 2 Self-Repair charges that activate when the opponent deals more than 110% of their Attack in a single hit, repairing the damage over 5 seconds. If Stunned during her Self-Repair, the Repair stops.
+• Nebula starts the fight with 2 Self-Repair charges that activate when the opponent deals more than 110% of their Attack in a single hit, repairing the damage over 5 seconds. If Stunned during her Self-Repair, the Repair stops.
 
 Passive - Electroshock
-Ability Accuracy of Robots is reduced by 20% per active Electroshock Charge.
+• Ability Accuracy of Robots is reduced by 20% per active Electroshock Charge.
 
 Passive - Robotics
-Advanced Robotics provides full immunity to Poison and Bleed effects.
+• Advanced Robotics provides full immunity to Poison and Bleed effects.
 
 Hold Block
-Charges her weapon, generating a passive Electroshock charge every 0.9 seconds.
+• Charges her weapon, generating a passive Electroshock charge every 0.9 seconds.
 
 Well-Timed Block
-Nebula spends all Electroshock charges to Shock her opponent, dealing 486.4 Energy Damage over 6 seconds.
+• Nebula spends all Electroshock charges to Shock her opponent, dealing 486.4 Energy Damage over 6 seconds.
 
 Heavy Attacks
-Shocks her opponent, dealing 486.4 Energy Damage over 6 seconds.
+• Shocks her opponent, dealing 486.4 Energy Damage over 6 seconds.
 
 Special 1 - Electric Encore
 Striking first with her electroshock batons, Nebula then forms them into a staff for a devastating second strike.
-Inflicts Power Lock, severing the targets flow of Power for 1 second per active Shock Debuff on the opponent.
-Inflicts Power Drain, depleting up to 3.5% of the target’s max Power per Shock Debuff on the opponent.
+• Inflicts Power Lock, severing the targets flow of Power for 1 second per active Shock Debuff on the opponent.
+• Inflicts Power Drain, depleting up to 3.5% of the target’s max Power per Shock Debuff on the opponent.
 
 Special 2 - Shock and Awe
 Nebula puts some space between her and her opponent before unleashing a concentrated burst of electricity.
-Doubles the amount of Shock Debuffs on the opponent, dealing 972.8 Energy Damage per Shock Debuff over 6 seconds.
+• Doubles the amount of Shock Debuffs on the opponent, dealing 972.8 Energy Damage per Shock Debuff over 6 seconds.
 
 Special 3 - Galaxy-Class Killer
 Death by a thousand cuts, faster than you can bat an eye.
-Nebula overcharges her power generator for 10 seconds, inflicting Shock when in contact with the opponent, dealing 486.4 Energy Damage over 3 seconds.
+• Nebula overcharges her power generator for 10 seconds, inflicting Shock when in contact with the opponent, dealing 486.4 Energy Damage over 3 seconds.
 
 Signature Ability – CYBERNETIC ENHANCEMENTS
-When Nebula is out of Self-Repair charges, she tries to recalibrate her implants, granting her a 80.18% chance to regain a charge every 10 seconds.
+• When Nebula is out of Self-Repair charges, she tries to recalibrate her implants, granting her a 80.18% chance to regain a charge every 10 seconds.
 
 Recommended Masteries
 Recovery: While the Salve Mastery requirement won’t work on Nebula as she is classified as a Robot, the Recovery Mastery will increase the Potency of Nebula’s Self-Repair charges, giving her some much needed survivability.

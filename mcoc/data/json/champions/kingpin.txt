@@ -3,36 +3,36 @@ All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 Basic Abilities: Rage, Overpower, Unstoppable
 
 Passive – Rage
-Whenever Kingpin gains a Debuff he has a 50% chance to convert it into a permanent Rage which has no effect.
-Each Debuff and Rage on Kingpin only strengthens his resolve, increasing his Attack by 292.75 and Power Gain Rate by 5%.
-Whenever the Opponent Evades one of Kingpin’s attacks, he gains a Rage. Cooldown: 1.5 seconds.
+• Whenever Kingpin gains a Debuff he has a 50% chance to convert it into a permanent Rage which has no effect.
+• Each Debuff and Rage on Kingpin only strengthens his resolve, increasing his Attack by 292.75 and Power Gain Rate by 5%.
+• Whenever the Opponent Evades one of Kingpin’s attacks, he gains a Rage. Cooldown: 1.5 seconds.
 
 Buff – Overpower
-If Kingpin’s Debuffs and Rages combine to equal 8, he converts them into an Overpower Buff, lasting 12 seconds and increases his attack by 2927.5.
-While in Overpower mode, Kingpin’s Special Attacks become Unblockable and he cannot gain Rage.
+• If Kingpin’s Debuffs and Rages combine to equal 8, he converts them into an Overpower Buff, lasting 12 seconds and increases his attack by 2927.5.
+• While in Overpower mode, Kingpin’s Special Attacks become Unblockable and he cannot gain Rage.
 
 Heavy Attacks
-While charging a Heavy Attack, Kingpin becomes Unstoppable for 0.8 seconds and has 1333.33 additional Physical Resistance.
-If Kingpin lands 3 Heavy Attacks within 2.5 seconds of each other he gains Fury, increasing his Attack by 878.25 for 10 seconds.
-While Kingpin has this Fury Buff, he cannot become Unstoppable.
+• While charging a Heavy Attack, Kingpin becomes Unstoppable for 0.8 seconds and has 1333.33 additional Physical Resistance.
+• If Kingpin lands 3 Heavy Attacks within 2.5 seconds of each other he gains Fury, increasing his Attack by 878.25 for 10 seconds.
+• While Kingpin has this Fury Buff, he cannot become Unstoppable.
 
 Special 1 - Dirty Deeds
 Nothing’s illegal in The Contest. Especially not a concentrated dose of toxic Black ISO-8.
-Infects the opponent with Black ISO-8, dealing 1756.5 direct damage over 12 seconds. Opponents under Black ISO-8 suffer 45% reduced Defensive Ability Accuracy and Attack.
+• Infects the opponent with Black ISO-8, dealing 1756.5 direct damage over 12 seconds. Opponents under Black ISO-8 suffer 45% reduced Defensive Ability Accuracy and Attack.
 
 Special 2 - Eliminate the Competition
 It’s nothing personal…it’s just good business.
-100% chance to gain an Unstoppable Buff which lasts for 6.50 seconds.
-While Unstoppable, each hit landed on Kingpin has a 100% chance to grant a Rage.
+• 100% chance to gain an Unstoppable Buff which lasts for 6.50 seconds.
+• While Unstoppable, each hit landed on Kingpin has a 100% chance to grant a Rage.
 
 Special 3 - Self Made Man
 Such disrespect and insolence towards the Kingpin of crime. It’s time Fisk got his hands dirty…
-Kingpin gains 2 Rage. If he’s in Overpower mode, he instead refreshes the duration of Overpower mode.
+• Kingpin gains 2 Rage. If he’s in Overpower mode, he instead refreshes the duration of Overpower mode.
 
 Signature Ability - TRUE NATURE
 Fisk sets his ill intent upon the Contest, beginning the fight with Rage Debuffs already active on himself. He also gains the ability to recover some Rage after finishing his Overpower mode.
-Kingpin begins the fight with 2 Rages.
-When exiting Overpower mode, Kingpin has a chance to gain up to 4 Rages, each having a 82.44% chance to active.
+• Kingpin begins the fight with 2 Rages.
+• When exiting Overpower mode, Kingpin has a chance to gain up to 4 Rages, each having a 82.44% chance to active.
 
 Recommended Masteries
 Extended/Enhanced Fury: Kingpin’s Overpower Buff counts as a Fury and as such, it benefits from these Masteries. It’s also rather a large bonus so there are benefits of improving it.

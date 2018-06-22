@@ -1,10 +1,10 @@
 All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Passive - Bleed Immunity
-A lack of blood provides full immunity to Bleeding.
+• A lack of blood provides full immunity to Bleeding.
 
 Passive - Captured Souls
-Over the course of a quest, Morningstar’s weapon captures Souls and stored up to 5 of them, empowering both her and itself. Captured Souls travel with them from fight-to-fight.
+• Over the course of a quest, Morningstar’s weapon captures Souls and stored up to 5 of them, empowering both her and itself. Captured Souls travel with them from fight-to-fight.
 1 Soul: When struck with a Physical Contact attack, Morningstar has a 50% chance to cause her opponent to Bleed for 574 damage over 5 seconds.
 2 Souls: Special 1 Triggers Unstoppable for 2.5 Seconds
 3 Souls: Special 2 becomes Unblockable
@@ -12,27 +12,27 @@ Over the course of a quest, Morningstar’s weapon captures Souls and stored up 
 5 Souls: 20% chance on Hit to Life Steal 50% of the Damage done to the Opponent.
 
 Heavy Attacks
-100% Chance to trigger a Power Gain granting 5% of Max Power per Captured Soul over 15 seconds. Max: 1 Stack
+• 100% Chance to trigger a Power Gain granting 5% of Max Power per Captured Soul over 15 seconds. Max: 1 Stack
 
 Special 1 - Strength of Languria
 Morningstar strikes with her weapon, as it glows with the power of the souls contained within.
-Each hit of this attack deal 315 Bonus Energy Damage per Captured Soul. This Damage increases with Critical Hits.
+• Each hit of this attack deal 315 Bonus Energy Damage per Captured Soul. This Damage increases with Critical Hits.
 
 Special 2 - Maiden’s Furnace
 Morningstar channels her pain, rage, and hatred into a beam of pure power.
-Each hit of this attack deals 861 Bonus Energy Damage per Buff active on the Opponent, when the attack is triggered.
-100% Chance to Nullify all Buffs
+• Each hit of this attack deals 861 Bonus Energy Damage per Buff active on the Opponent, when the attack is triggered.
+• 100% Chance to Nullify all Buffs
 
 Special 3 - Soul Chains
 Morningstar lets her weapon taste the soul of her enemy.
-Morningstar begins to pull her opponent’s soul from their body, place a counter on herself.
-Damage to the opponent increases the counter, Damage to Morningstar reduces it.
-If the counter reaches 100, she captures the Soul. If it reaches 0, her opponent reclaims their soul.
-Morningstar can capture only 1 Soul per fight.
+• Morningstar begins to pull her opponent’s soul from their body, place a counter on herself.
+• Damage to the opponent increases the counter, Damage to Morningstar reduces it.
+• If the counter reaches 100, she captures the Soul. If it reaches 0, her opponent reclaims their soul.
+• Morningstar can capture only 1 Soul per fight.
 
 Signature Ability - SOUL LINK
 Morningstar’s weapon grants her a link to her Opponent’s soul, allowing her to feed on its power, strengthening herself, while weakening them.
-If Morningstar has less than 1 Captured Soul at the start of a fight, she gains 1.
+• If Morningstar has less than 1 Captured Soul at the start of a fight, she gains 1.
 
 Morningstar’s Weapon grants her a link to her Opponent’s Soul, allowing her to siphon away a portion of the power from any Fury, Power Gain, or Regeneration Buffs they trigger, reducing their potency by 50%, and granting her own Buff.
 Fury: +631 Attack for 15 Seconds.

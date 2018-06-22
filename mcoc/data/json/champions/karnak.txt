@@ -1,31 +1,31 @@
 All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Passive - Martial Focus
-Given time to study his opponent, Karnak becomes Focused, gaining 66% Critical Hit Chance. Whenever he is struck, Karnak loses Focus for 9 seconds.
+• Given time to study his opponent, Karnak becomes Focused, gaining 66% Critical Hit Chance. Whenever he is struck, Karnak loses Focus for 9 seconds.
 
 Passive - Resist Physical
-Covered in a dense callus, Karnak has toughened his skin and gains 21% increased Physical Resistance.
+• Covered in a dense callus, Karnak has toughened his skin and gains 21% increased Physical Resistance.
 
 Passive
-Every 5 seconds, Karnak reduces his Class Disadvantage by 2% until it’s gone.
-This only affects the Attack penalty from a class Disadvantage, it does not affect Karnak’s opponent’s Class Advantage.
+• Every 5 seconds, Karnak reduces his Class Disadvantage by 2% until it’s gone.
+• This only affects the Attack penalty from a class Disadvantage, it does not affect Karnak’s opponent’s Class Advantage.
 
 Special 1 - Distortion & Focus
 Create distance, then focus to see the flaws.
-This attack allows Karnak to be become Focused instantly.
-Karnak discovers his opponent’s stress points, gaining True Strike for 8.5 seconds. This allows him to ignore Armor, Resistances, and Evasion.
-True Strike is a passive effect and cannot be nullified or removed.
+• This attack allows Karnak to be become Focused instantly.
+• Karnak discovers his opponent’s stress points, gaining True Strike for 8.5 seconds. This allows him to ignore Armor, Resistances, and Evasion.
+• True Strike is a passive effect and cannot be nullified or removed.
 
 Special 2 - The Three Worlds
 Through focus, understanding and strength, Karnak demonstrates his worlds philosophy.
-Damage from this attack increases by up to 48% based on how low the opponent’s Health is at the time of impact.
+• Damage from this attack increases by up to 48% based on how low the opponent’s Health is at the time of impact.
 
 Special 3 - Blind Time
 All of humanity is as nothing. The universe will not notice when Karnak’s foe is no longer.
-Karnak Dazes his foes with his strike, reducing their Defensive Ability Accuracy by 80% for 40 seconds.
+• Karnak Dazes his foes with his strike, reducing their Defensive Ability Accuracy by 80% for 40 seconds.
 
 Signature Ability – SECOND TOWER TRAINING
-Karnak’s Inhuman metabolism and Autonomic Function Control allows him to shrug off non-damaging Debuff effects (20 – 50%) faster than normal and reduces damage from Poison by 65%.
+• Karnak’s Inhuman metabolism and Autonomic Function Control allows him to shrug off non-damaging Debuff effects (20 – 50%) faster than normal and reduces damage from Poison by 65%.
 
 Recommended Masteries
 Lesser Cruelty / Cruelty: While in his Focused state, Karnak has one of the highest Critical Hit chances in the game. Grabbing one or both of these masteries can increase Karnak’s damage output by quite a bit.

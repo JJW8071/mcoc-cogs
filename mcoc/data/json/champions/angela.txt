@@ -3,36 +3,36 @@ All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 Basic Abilities: Fury, Armor Up, Precision, Regeneration
 
 Passive - Regeneration
-For each 10% of Max Health taken in damage, immediately gain a Resilience counter.
-When below 100% Max Health without an active Regeneration Buff, convert a Resilience counter into a Regeneration Buff, recovering 691.75 Health over 10 seconds.
+• For each 10% of Max Health taken in damage, immediately gain a Resilience counter.
+• When below 100% Max Health without an active Regeneration Buff, convert a Resilience counter into a Regeneration Buff, recovering 691.75 Health over 10 seconds.
 
 Passive
-Angela gains a Buff based on her current Power level.
-Each time Angela lands a Critical Hit she duplicates the Buff she’s being granted by her current Power level. This Buff has a Duration of 15 seconds, and a maximum of 1 stack(s) of each Buff can be Duplicated.
-Less than Special 1: Armor Up increasing Armor Rating by 666.67
-Special 1: Fury increasing Attack by 899.25
-Special 2: Precision increasing Critical Rating by 2000
-Special 3 : Aptitude increasing the effect of all Fury, Armor, and Precision Buffs by 50%.
+• Angela gains a Buff based on her current Power level.
+• Each time Angela lands a Critical Hit she duplicates the Buff she’s being granted by her current Power level. This Buff has a Duration of 15 seconds, and a maximum of 1 stack(s) of each Buff can be Duplicated.
+• Less than Special 1: Armor Up increasing Armor Rating by 666.67
+• Special 1: Fury increasing Attack by 899.25
+• Special 2: Precision increasing Critical Rating by 2000
+• Special 3 : Aptitude increasing the effect of all Fury, Armor, and Precision Buffs by 50%.
 
 Heavy Attacks
-This attack receives 2000 additional Critical Rating.
+• This attack receives 2000 additional Critical Rating.
 
 Special 1 - Sword of the Stars
 Angela unleashes a powerful series of strikes with her sword Xiphos.
-100% chance for Fury, increasing your Attack by 899.25 for 5 seconds.
-If there is already a Fury active on Angela, this effects lasts for 20 seconds instead.
+• 100% chance for Fury, increasing your Attack by 899.25 for 5 seconds.
+• If there is already a Fury active on Angela, this effects lasts for 20 seconds instead.
 
 Special 2 - Blades of Ichor
 Angela dashes forward to employ the Blades separated, before combining them to strike again.
-100% chance to Armor Up, increasing Armor Rating by 666.67 for 5 seconds.
-If there is already an Armor Up active on Angela, this effects lasts for 20 seconds instead.
+• 100% chance to Armor Up, increasing Armor Rating by 666.67 for 5 seconds.
+• If there is already an Armor Up active on Angela, this effects lasts for 20 seconds instead.
 
 Special 3 - Martial Mastery
 Angela strikes with the Sword of the Stars forcing her opponent back, before drawing the Blades of Ichor to finish them.
-Angela’s Attack is increased by 599.5 for each Buff active on her during this attack.
+• Angela’s Attack is increased by 599.5 for each Buff active on her during this attack.
 
 Signature Ability - Battle Focus
-As Angela enters combat she gains greater and greater focus, allowing each Buff active on her to reduce all Nullify abilities chance to trigger against her by 25%.
+• As Angela enters combat she gains greater and greater focus, allowing each Buff active on her to reduce all Nullify abilities chance to trigger against her by 25%.
 
 Recommended Masteries
 Recovery: Angela’s Resilience ability allows her to Regenerate a portion of the damage she’s taken this fight. Recovery enhances this Regeneration keeping her in the fight longer.

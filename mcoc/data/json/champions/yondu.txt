@@ -1,33 +1,37 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Bleed, Armor Break, Heal Block, Precision
 
-Yaka Arrow Hits:
-25% chance to poke holes in fleshy targets, making them Bleed for 1159 Damage over 7 seconds.
-If the target is immune to Bleed, they suffer a -222 Armor Break for 7 seconds instead.
-+424 Armor and Block Penetration
-The strength and precision of Yondu’s Yaka Arrow allow it to trigger Critical Hits and Abilities through an enemy Block.
+Yaka Arrow Hits
+• 25% chance to poke holes in fleshy targets, making them Bleed for 1159 Damage over 7 seconds.
+• If the target is immune to Bleed, they suffer a -222 Armor Break for 7 seconds instead.
+• +424 Armor and Block Penetration
+• The strength and precision of Yondu’s Yaka Arrow allow it to trigger Critical Hits and Abilities through an enemy Block.
 
-All Attacks:
-Yondu has a 25% chance to steal the target’s Armor, which he might be able to trade for Units later.
-Generate 10% less Power in the target for each Debuff they suffer from. Max: -50%.
+All Attacks
+• Yondu has a 25% chance to steal the target’s Armor, which he might be able to trade for Units later.
+• Generate 10% less Power in the target for each Debuff they suffer from. Max: -50%.
 
-Heavy Attack:
-+50% Offensive Ability Accuracy for this attack.
+Heavy Attacks
+• +50% Offensive Ability Accuracy for this attack.
 
-Special 1: Quick Draw – One whistle, and Yondu’s Yaka arrow pokes a hole right through you. Don’t wait for the second whistle.
-+100% Offensive Ability Accuracy for this attack.
-100% chance to Heal Block for 10 seconds. If the target is Regenerating, inflict Heal Block for 20 seconds.
+Special 1 - Quick Draw
+One whistle, and Yondu’s Yaka arrow pokes a hole right through you. Don’t wait for the second whistle.
+• +100% Offensive Ability Accuracy for this attack.
+• 100% chance to Heal Block for 10 seconds. If the target is Regenerating, inflict Heal Block for 20 seconds.
 
-Special 2: A Little Help From My Friends – A strafing run from a Ravager M-Ship peppers the arena with Yondu’s secret spice mix.
-+424 Block Penetration
-+174 Attack for each Special Attack activated by the enemy this fight. Max: x15
+Special 2 - A Little Help From My Friends
+A strafing run from a Ravager M-Ship peppers the arena with Yondu’s secret spice mix.
+• +424 Block Penetration
+• +174 Attack for each Special Attack activated by the enemy this fight. Max: x15
 
-Special 3: Yaka Attacka – Yondu’s Yaka Arrow is like a deadly snake as it mesmerizes, then strikes.
-100% chance to boost Critical Rating by 666 for 10 seconds.
-Severely damaged by the Yaka Arrow, enemies are unable to trigger abilities during their next Special Attack.
+Special 3  Yaka Attacka
+Yondu’s Yaka Arrow is like a deadly snake as it mesmerizes, then strikes.
+• 100% chance to boost Critical Rating by 666 for 10 seconds.
+• Severely damaged by the Yaka Arrow, enemies are unable to trigger abilities during their next Special Attack.
 
-Signature Ability – Centaurian Archery: Yondu’s high-octave vocal range gives him precise control over his yaka arrows. Enemies activating a Special Attack suffer Weakness for each Debuff effect they’re suffering from at the time of the activation, reducing Attack by 30% for 5 seconds.
+Signature Ability – CENTAURIAN ARCHERY
+Yondu’s high-octave vocal range gives him precise control over his yaka arrows. Enemies activating a Special Attack suffer Weakness for each Debuff effect they’re suffering from at the time of the activation, reducing Attack by 30% for 5 seconds.
 
 Recommended Masteries
 Collar Tech: The Power Reduction provided by Collar Tech, combines with Yondu’s Power Reduction while the Opponent is Debuffed to combine for a big reduction in the Opponent’s Power generation.

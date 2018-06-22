@@ -3,34 +3,34 @@ All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 Basic Abilities: Regeneration, Incinerate, Concussion, True Strike
 
 Passive – Techno Organic Repairs
-15% chance to Regenerate 15% Health for 10 seconds, each time a bar of Power is filled. This ability stops working below 25% Health.
+• 15% chance to Regenerate 15% Health for 10 seconds, each time a bar of Power is filled. This ability stops working below 25% Health.
 
 Passive –  Belle
-Future Poison durations are reduced by 20% each time a poison is triggered on Cable.
-Once his Poison Durations are reduced to 0, Cable gains a Passive 50% bonus to Special Damage
+• Future Poison durations are reduced by 20% each time a poison is triggered on Cable.
+• Once his Poison Durations are reduced to 0, Cable gains a Passive 50% bonus to Special Damage
 
 Passive – Techno Organic Infection
-When caused to Bleed, Cable has a 100% chance to trigger his Heavy Attack Degeneration on his Opponent
+• When caused to Bleed, Cable has a 100% chance to trigger his Heavy Attack Degeneration on his Opponent
 
 Heavy Attack – Techno Organic Strike
-100% Chance to Degenerate Non-Robotic opponents for up to 400% of your Attack over 15 seconds.
-Strength of Degenerate scales inverse of your Opponent’s current Power.
+• 100% Chance to Degenerate Non-Robotic opponents for up to 400% of your Attack over 15 seconds.
+• Strength of Degenerate scales inverse of your Opponent’s current Power.
 
 Special 1 - Short Controlled Bursts
 Cable knocks back his opponent, making space to use his plasma rifle!
-This attack is Unblockable if you are currently under the effects of a True Strike Buff.
+• This attack is Unblockable if you are currently under the effects of a True Strike Buff.
 
 Special 2 - Charge Shot
 A telekinetic wave, followed up by a high energy charged blast from his rifle!
-This attack Incinerates the enemy, dealing 100% of your Attack as Energy Damage over 10 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50%
-This attack has a 84% chance to give the opponent a Concussion, reducing their Ability Accuracy by 78% for 11 seconds. The potency of this effect is affected by Class relationships.
+• This attack Incinerates the enemy, dealing 100% of your Attack as Energy Damage over 10 seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50%
+• This attack has a 84% chance to give the opponent a Concussion, reducing their Ability Accuracy by 78% for 11 seconds. The potency of this effect is affected by Class relationships.
 
 Special 3 - TK Rifle
 Cable uses his powers to enhances his plasma rifle, locks on his target, and unleashes a withering barrage of firepower.
-100% Chance to grant True Strike for 15 seconds. This allows him to ignore Armor, Resistances, and Evasion.
+• 100% Chance to grant True Strike for 15 seconds. This allows him to ignore Armor, Resistances, and Evasion.
 
 Signature Ability – Techno Organic Virus Suppression
-Cable’s immense mutant powers are hampered by having to constantly keep the techno organic virus in check. As the strength of the virus wanes, Cable has a 40% chance to gain 16.5% Power over 10 seconds, each time he fills a bar of power.
+• Cable’s immense mutant powers are hampered by having to constantly keep the techno organic virus in check. As the strength of the virus wanes, Cable has a 40% chance to gain 16.5% Power over 10 seconds, each time he fills a bar of power.
 
 Recommended Masteries
 Recovery: Cable has a strong regeneration ability, which is only improved once his Signature is unlocked. Increasing the amount of HP regenerated each time it triggers will help keep Cable in the the fight longer.
