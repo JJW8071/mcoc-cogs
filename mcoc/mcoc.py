@@ -1602,7 +1602,8 @@ class MCOC(ChampionFactory):
                 for page in pages:
                     # print(page)
                     # await self.bot.say(page)
-                    em = discord.Embed(color=champ.class_color, title='Abilities', descritpion=page)
+                    em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
+                    em.description = page
                     em.add_field(name='Ability Keywords', value=champ.abilities)
                     em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
                     if len(extended_abilities) > 1:
