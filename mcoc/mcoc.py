@@ -1591,6 +1591,8 @@ class MCOC(ChampionFactory):
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities']
+        counters=xref['counters'].split(', ')
+        hashtags=xref['hashtags'].split(' #')
         if champ.debug:
             if os.path.exists(ability_desc.format(champ.mattkraftid)):
                 ability_file = open(ability_desc.format(champ.mattkraftid),"r", encoding='utf-8')
@@ -1598,36 +1600,30 @@ class MCOC(ChampionFactory):
                 pages = chat.pagify(text=ability_file.read(), escape=False, page_length=1000)
                 embeds = []
                 for page in pages:
-                    print(page)
-                    await self.bot.say(page)
-
-                #     counters=xref['counters'].split(', ')
-                #     hashtags=xref['hashtags'].split(' #')
-                #     em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
-                #     em.description = champ.abilities
-                #     em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-                #     if len(extended_abilities) > 1:
-                #         em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
-                #     em.add_field(name='Ability Description', value=page)
-                #     if len(counters) > 1:
-                #         em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-                #     em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-                #     em.add_field(name='Shortcode', value=champ.short)
-                #     em.add_field(name='Champion Number', value=champ.champNumber)
-                #     em.set_thumbnail(url=champ.get_avatar())
-                #     em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-                #     embeds.append(em)
-                # if len(embeds) > 1:
-                    # menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-
-                #     await menu.menu_start(embeds)
-                # else:
-                #     await self.bot.say(embed=em)
+                    # print(page)
+                    # await self.bot.say(page)
+                    em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
+                    em.description = champ.abilities
+                    em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                    if len(extended_abilities) > 1:
+                        em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
+                    em.add_field(name='Ability Description', value=page)
+                    if len(counters) > 1:
+                        em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+                    em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+                    em.add_field(name='Shortcode', value=champ.short)
+                    em.add_field(name='Champion Number', value=champ.champNumber)
+                    em.set_thumbnail(url=champ.get_avatar())
+                    em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+                    embeds.append(em)
+                if len(embeds) > 1:
+                    menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                    await menu.menu_start(embeds)
+                else:
+                    await self.bot.say(embed=em)
             else:
                 self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
         else:
-            counters=xref['counters'].split(', ')
-            hashtags=xref['hashtags'].split(' #')
             em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
             em.description = champ.abilities
             em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
