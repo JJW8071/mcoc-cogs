@@ -1598,7 +1598,7 @@ class MCOC(ChampionFactory):
                 pages = chat.pagify(text=ability_file.read(), page_length=500)
                 embeds = []
                 for page in pages:
-                    # await self.bot.say(page)
+                    print(page)
                     counters=xref['counters'].split(', ')
                     hashtags=xref['hashtags'].split(' #')
                     em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
@@ -1615,8 +1615,11 @@ class MCOC(ChampionFactory):
                     em.set_thumbnail(url=champ.get_avatar())
                     em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                     embeds.append(em)
-                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-                await menu.menu_start(embeds)
+                if len(embeds) > 1:
+                    menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                    await menu.menu_start(embeds)
+                else:
+                    await self.bot.say(embed=em)
             else:
                 self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
         else:
