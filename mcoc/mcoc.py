@@ -1593,7 +1593,7 @@ class MCOC(ChampionFactory):
         extended_abilities=xref['extended_abilities']
         if champ.debug:
             if os.path.exists(ability_desc.format(champ.mattkraftid)):
-                ability_file = open(ability_desc.format(champ.mattkraftid),"r")
+                ability_file = open(ability_desc.format(champ.mattkraftid),"r", encoding='utf-8')
                 # print(ability_file.read())
                 pages = chat.pagify(text=ability_file.read(), escape=False, page_length=1000)
                 embeds = []
