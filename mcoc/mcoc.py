@@ -1598,7 +1598,7 @@ class MCOC(ChampionFactory):
                 pages = chat.pagify(text=ability_file.read(), page_length=500)
                 embeds = []
                 for page in pages:
-                    self.bot.say(page)
+                    await self.bot.say(page)
                 #     counters=xref['counters'].split(', ')
                 #     hashtags=xref['hashtags'].split(' #')
                 #     em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
