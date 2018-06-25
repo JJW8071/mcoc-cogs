@@ -679,7 +679,8 @@ class Hook:
         rand = randint(1000, 9999)
         path, ext = os.path.split(roster.champs_file)
         tmp_file = '{}-{}.tmp'.format(path, rand)
-        with open(tmp_file, 'w') as fp:
+        # with open(tmp_file, 'w') as fp:
+        with open(tmp_file, 'w', encoding='utf-8') as fp:
             writer = csv.DictWriter(fp, fieldnames=roster.fieldnames,
                     extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
