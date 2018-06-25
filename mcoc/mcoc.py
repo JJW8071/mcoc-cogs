@@ -124,6 +124,7 @@ kabam_special_attacks = mcoc_dir+"special_attacks_en.json"
 kabam_bcg_stat_en = mcoc_dir+"bcg_stat_en.json"
 kabam_bcg_en= mcoc_dir+"bcg_en.json"
 kabam_masteries=mcoc_dir+"masteries_en.json"
+ability_desc = "data/mcoc/ability-desc/{}.txt"
 ##### Special attacks require:
 ## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {"_0","_1","_2"} ---> Special Attack title
 #mcoc_special_attack="ID_SPECIAL_ATTACK_"
@@ -1585,27 +1586,52 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @champ.command(name='abilities')
-    async def champ_abilities(self, *, champ : ChampConverter):
+    async def champ_abilities(self, *, champ : ChampConverterDebug):
         '''Champion Abilities'''
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=xref['abilities'].split(', ')
         extended_abilities=xref['extended_abilities']
+        if champ.debug:
+            if os.path.exists(ability_desc.format(champ.mattkraftid)):
+                ability_file = open(ability_desc.format(champ.mattkraftid),"r")
+                pages = chat.pagify(text=ability_file, page_length=500)
+                embeds = []
+                for page in pages:
+                    counters=xref['counters'].split(', ')
+                    hashtags=xref['hashtags'].split(' #')
+                    em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
+                    em.description = champ.abilities
+                    em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                    if len(extended_abilities) > 1:
+                        em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
+                    em.add_field(name='Ability Description', value=page)
+                    if len(counters) > 1:
+                        em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+                    em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+                    em.add_field(name='Shortcode', value=champ.short)
+                    em.add_field(name='Champion Number', value=champ.champNumber)
+                    em.set_thumbnail(url=champ.get_avatar())
+                    em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+                    embeds.append(em)
 
-        counters=xref['counters'].split(', ')
-        hashtags=xref['hashtags'].split(' #')
-        em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
-        em.description = champ.abilities
-        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        if len(extended_abilities) > 1:
-            em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
-        if len(counters) > 1:
-            em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-        em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-        em.add_field(name='Shortcode', value=champ.short)
-        em.add_field(name='Champion Number', value=champ.champNumber)
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        await self.bot.say(embed=em)
+            else
+                self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
+        else:
+            counters=xref['counters'].split(', ')
+            hashtags=xref['hashtags'].split(' #')
+            em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
+            em.description = champ.abilities
+            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+            if len(extended_abilities) > 1:
+                em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
+            if len(counters) > 1:
+                em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+            em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+            em.add_field(name='Shortcode', value=champ.short)
+            em.add_field(name='Champion Number', value=champ.champNumber)
+            em.set_thumbnail(url=champ.get_avatar())
+            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            await self.bot.say(embed=em)
 
     @champ.command(name='specials', aliases=['special',])
     async def champ_specials(self, champ : ChampConverter):
