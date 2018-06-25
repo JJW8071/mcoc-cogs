@@ -1597,24 +1597,25 @@ class MCOC(ChampionFactory):
                 pages = chat.pagify(text=ability_file, page_length=500)
                 embeds = []
                 for page in len(pages):
-                    counters=xref['counters'].split(', ')
-                    hashtags=xref['hashtags'].split(' #')
-                    em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
-                    em.description = champ.abilities
-                    em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-                    if len(extended_abilities) > 1:
-                        em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
-                    em.add_field(name='Ability Description', value=page)
-                    if len(counters) > 1:
-                        em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-                    em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-                    em.add_field(name='Shortcode', value=champ.short)
-                    em.add_field(name='Champion Number', value=champ.champNumber)
-                    em.set_thumbnail(url=champ.get_avatar())
-                    em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-                    embeds.append(em)
-                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-                await menu.menu_start(embeds)
+                    self.bot.say(page)
+                #     counters=xref['counters'].split(', ')
+                #     hashtags=xref['hashtags'].split(' #')
+                #     em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
+                #     em.description = champ.abilities
+                #     em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                #     if len(extended_abilities) > 1:
+                #         em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
+                #     em.add_field(name='Ability Description', value=page)
+                #     if len(counters) > 1:
+                #         em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+                #     em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+                #     em.add_field(name='Shortcode', value=champ.short)
+                #     em.add_field(name='Champion Number', value=champ.champNumber)
+                #     em.set_thumbnail(url=champ.get_avatar())
+                #     em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+                #     embeds.append(em)
+                # menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                # await menu.menu_start(embeds)
             else:
                 self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
         else:
