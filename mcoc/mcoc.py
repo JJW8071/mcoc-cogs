@@ -1613,8 +1613,9 @@ class MCOC(ChampionFactory):
                     em.set_thumbnail(url=champ.get_avatar())
                     em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                     embeds.append(em)
-
-            else
+                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                await menu.menu_start(embeds)
+            else:
                 self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
         else:
             counters=xref['counters'].split(', ')
