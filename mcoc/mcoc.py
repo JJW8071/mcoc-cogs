@@ -1597,22 +1597,21 @@ class MCOC(ChampionFactory):
             if os.path.exists(ability_desc.format(champ.mattkraftid)):
                 ability_file = open(ability_desc.format(champ.mattkraftid),"r", encoding='utf-8')
                 # print(ability_file.read())
-                pages = chat.pagify(text=ability_file.read(), escape=False, page_length=1000)
+                pages = chat.pagify(text=ability_file.read(), delims="\n\n", escape=False, page_length=1000)
                 embeds = []
                 for page in pages:
                     # print(page)
                     # await self.bot.say(page)
-                    em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
-                    em.description = champ.abilities
-                    em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                    em = discord.Embed(color=champ.class_color, title='Abilities', descritpion=page)
+                    em.add_field(name='Ability Keywords', value=champ.abilities)
+                    em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
                     if len(extended_abilities) > 1:
-                        em.add_field(name='Extended Abilities', value=extended_abilities, inline=False)
-                    em.add_field(name='Ability Description', value=page)
+                        em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
                     if len(counters) > 1:
                         em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
                     em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-                    em.add_field(name='Shortcode', value=champ.short)
-                    em.add_field(name='Champion Number', value=champ.champNumber)
+                    # em.add_field(name='Shortcode', value=champ.short)
+                    # em.add_field(name='Champion Number', value=champ.champNumber)
                     em.set_thumbnail(url=champ.get_avatar())
                     em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                     embeds.append(em)
