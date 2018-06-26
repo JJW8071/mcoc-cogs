@@ -1,0 +1,50 @@
+Originally Posted 10-14-2015
+
+*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+
+Passive - Gambler’s Ruin
+• At the beginning of the fight and whenever he lands a Heavy attack, Joe gains a random poker suit and lets loose a different aspect of the gamma irradiated gangster he is.
+• The effect lasts indefinitely and will only be replaced when Joe lands another Heavy Attack and rerolls
+• This effect cannot be nullified as it is a passive ability.
+
+♥: Joe triggers his accelerated healing ability, granting 15% health recovery per minute.
+♦: He may not be as big as the Hulk, but you still won’t like him when he’s angry. Joe gains up to 40% Attack based on lost health.
+This effect works the same as Hulk’s Signature Rage effect and becomes more effective the more Health Joe has lost
+♠: Mr. Fixit is morally ambiguous at best and knows how to make his punches hurt. Each attack has a 14% chance to Weaken or Fatigue the opponent, reducing attack by 10% and Critical Hit Rate by 5%.
+Each attack has a 14% chance to trigger Weakness and a 14% chance to trigger Fatigue. A single attack can trigger both and each of the effects stack up to two times each.
+♣: Joe isn’t some dumb brute and he’s smart enough to take advantage of anyone who thinks he is, granting 10% Critical Hit rate for every 5 hits of his combo meter.
+The increased Critical Hit Rate actually increases by 2% for each hit of the combo meter, making each successful attack count.
+
+Special 1 - Place Your Bets
+• 55% chance to inflict Bleed, dealing 33% of your Attack as direct damage over 5 seconds.
+• This attack has 6 potential Bleed triggers and allows up to 6 stacks of Bleed
+
+Special 2 - Shorten the Odds
+• 100% chance to Stun the opponent for 3 seconds.
+
+Special 3 - The House Always Wins
+• 100% chance to inflict Bleed, dealing 245% of your Attack as direct damage over 3 seconds.
+• This attack has 1 potential Bleed trigger and allows up to 1 stack of Bleed
+
+Signature Ability - Double Down
+• Mr. Fixit knows how to play the tables and swing the odds in his favor. Each time he rolls on Gambler’s Ruin, he has a (50 - 85%) chance to Double Down and gain a second poker suit for 7 seconds.
+• The secondary effect only lasts 7 seconds.
+• The secondary effect is just as strong as a standard effect from Gambler’s Ruin.
+• Double Down has a chance to trigger each time you re-roll on Gambler’s Ruin. More rolls means more effect.
+• Each Double Down effect will be unique from the first effect, meaning you won’t ever get 2 stacks of Hearts, Spades, Diamonds or Clubs.
+
+Recommended Masteries
+Parry: Joe Fixit needs to land Heavy Attacks in order to gain full advantage of Gambler’s Ruin and Double Down and Parry helps him do this. By landing that block and Stunning the opponent, Joe can quickly follow up with a Heavy Attack and reroll Gambler’s Ruin against tougher AI opponents.
+Recovery - Hearts: As his Hearts ability allows constant Regeneration, Recovery increases the amount of health regained by a sizable portion, allowing Joe to stick around in the fight longer.
+Courage - Diamonds: As Mr. Fixit gains Attack when he at lower Health, Courage allows him to increase his Damage output even more and stack on from the Diamond’s effect.
+Inequity - Spades: With the high chance to trigger Weakness and Fatigue, Inequity will trigger frequently and allow Joe more survivability against very tough opponents in Alliance Quests.
+Cruelty - Clubs: As Joe builds up his combo meter, his base Critical Hit chance increases with it. As a result, increasing Critical Hit Damage has a much larger effect for Joe, especially if his combo meter can be reliably maintained.
+
+Strengths
+Mr. Fixit has a wide variety of effects that cannot be nullified, allowing him to maintain very powerful effects for the duration of the fight.
+Gambler’s Ruin allows Joe to have an answer to many different type of enemies that can be encountered. If an enemy showcases that they have the Willpower mastery, Joe can reroll and get a different effect to bypass it. If Joe starts a fight at low Health during an Alliance Quest, he can reroll until he hits Hearts to heal up a small amount during easier fights before a boss or mini-boss.
+Joe’s frequent and powerful Bleed effects on his Special 1 and 3 allow him to bypass Armor reliant opponents such as the Iron Men and Rhino.
+With a guaranteed Stun effect on his Special 2, Joe can take advantage of this scenario and land a needed Heavy Attack to re-roll on Gambler’s Ruin in order to switch up his abilities at a needed time.
+
+Weaknesses
+Mr. Fixit is a gambling man, and sometimes the tables turn against him. His largely random effects can sometimes leave Joe in a tight spot, getting effects that aren’t right for the situation. As an example, getting Diamonds early on in a fight when Joe is still at high health won’t do nearly as much as Spades or Clubs would do at that same time.

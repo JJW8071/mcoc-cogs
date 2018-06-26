@@ -1,0 +1,47 @@
+Originally Posted 03-02-2016
+
+*All stats based on 4 Star, Rank 5, Level 50
+
+Passive - Poison Immunity
+
+All Special Attacks
+• She-Hulk’s extensive weight training allows her Special Attacks up to 18% increased chance to Stun based on how large the opposing champion is.
+• The full 18% chance to Stun is against giant champions such as Juggernaut and Hulk-Buster, while small champions will see a much smaller Stun increase chance.
+• This Stun increase chance is a flat increase on the base. Meaning a Special 3 against a giant champion will be 83% chance (65% + 18%)
+
+Heavy Attacks - Pummel
+• She-Hulk attempts to knock some sense into Stunned champions, striking with 146% increased Attack and removing the Stun effect.
+• This effect can be used to great effect against champions with Willpower to immediately remove the Stun effect and strike with a large burst of damage, denying them their health regeneration.
+• This effect can also be used as part of a Parry strategy against champions with high power gain rate (from link or local nodes). As a full combo will cause the opponent to get a large chunk of Power, using Parry - Heavy Attack can deny them their Power Gain and still output a sizable amount of damage.
+
+Special 1 - Objection!
+• 45% chance to Stun the opponent for 3 seconds.
+
+Special 2 - Found in Contempt
+• 55% chance to Stun the opponent for 4 seconds.
+
+Special 3 - Clear the Courtroom
+• 65% chance to Stun the opponent for 4.25 seconds.
+
+Signature Ability - Citing Precedent
+• Jennifer Walters relentless studying and research on her opponent allows her to place a Passive effect on them, reducing a specific stat by (5% - 20%) based on which Class they are.
+• This effect is a Passive effect and does not interact with effects such as Nullify, Purge or Willpower.
+•The effects are as follows for the various classes:
+• Science = Physical Resistance
+• Mystic = Power Gain Rate
+• Cosmic = Buff Duration
+• Tech = Ability Accuracy
+• Mutant = Special Damage
+• Skill = Critical Hit Damage
+
+Recommended Masteries
+Stupefy / Pacify / Petrify: She-Hulk has some of the longest Stun durations in the game, and amplifying her Stun effects can allow her to destroy her opponent’s when used correctly. Stupefy increases the duration of her Stun effects, while Pacify & Petrify deny them most of their defensive power while she wails on them.
+Parry: As She-Hulk can remove Stun effects for large bursts of damage, giving her Parry can allow her to frequently get this damage boost when timed correctly.
+
+Strengths
+She-Hulk’s powerful Stun effects combined with her Pummel, allow smart players to play with strong combos. Instead of simply mashing attacks while the enemy is Stunned, try instead to mix it up with a couple of medium attacks, then switching into a Heavy attack for the Pummel boost.
+She-Hulk’s strong passive effects from her signature ability allows her to fight with more impunity that other champions, as she can reliably bypass some of their strongest abilities.
+She-Hulk fights very well against giant champions due to her increased Stun chance. Try bringing her in against Juggernaut and the Hulk to get those chain Stuns and Pummel effects going.
+
+Weaknesses
+As She-Hulk is reliant on her Stun effects for her damage output, she performs poorly against champions that can shrug off these effects (such as Groot), or champions that are Stun immune from local and linked nodes.
