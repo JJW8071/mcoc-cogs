@@ -1597,7 +1597,7 @@ class MCOC(ChampionFactory):
             if os.path.exists(ability_desc.format(champ.mattkraftid)):
                 ability_file = open(ability_desc.format(champ.mattkraftid),"r", encoding='utf-8')
                 # print(ability_file.read())
-                pages = chat.pagify(text=ability_file.read(), delims=["\n\n"], escape=False, page_length=1000)
+                pages = chat.pagify(text=ability_file.read(), delims=["\n\n"], escape=False, page_length=1500)
                 embeds = []
                 for page in pages:
                     print(page)
