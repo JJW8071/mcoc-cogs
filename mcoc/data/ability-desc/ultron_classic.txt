@@ -1,26 +1,33 @@
-Ultron (Classic)
+All stats based on 5 Star, Rank 4, Level 55, Signature Level 47
 
-*All stats based on 5 Star, Rank 4, Level 55, Signature Level 200 (No Masteries)
+Basic Abilities: Armor, Poison, Heal Block, Fury, Stun, Evade, Robotics
 
-Basic Abilities: Robotics, Armor, Poison, Heal Block, Fury, Stun, Evade
-
-Passive Abilities
-• Robot - immune to Poison and Bleed effects
-• Armor increases by 70% for 8 seconds every 15% Health lost.
-• Will evade the next attack every 7 seconds.
-
+Passive - Armor
+```• function Armor(4783.33 Armor Rating Increase, 8 seconds, every 15% Health lost)```
+Passive - Evade
+```• function Evade(every 7 seconds)```
+Passive - Robotics
+```• Advanced robotics provides full immunity to Poison and Bleed effects.```
 Blocking
-• Blocking an attack has a 25% chance to reduce incoming damage by 5% for 15 seconds.
-
+```• function Armor(25% chance, 107.89 rating increase, 15 seconds)```
 Basic Attacks
-• Basic attacks have 18% chance to do 34% of Attack as Poison damage over 6.5 seconds.
-
-Special Attacks
-• Special attacks will remove any poison effects and add Heal Block for 1.5 seconds per Poison stack removed.
-• Special attacks have 40% chance of 3 second stun.
-
+```• function Radiation(636.77 Poison damage, 6.50 seconds, 19% chance)```
+Special attacks
+```• function Heal Block(remove all Poison effect, 1.50 seconds per Poison removed)
+• function Stun(40% chance, 3 seconds)```
 All Attacks
-• Stack of Fury (25% attack increase for 6 seconds) every 5 attacks.
+```• function Fury(430.25 attack increase, 6 seconds, every 5 attacks)```
 
-Signature Ability: Nano-Inhibitors
-• For each Armor Up effect active, Ultron releases more Nano-Inhibitors, reducing his opponent's Offensive Ability Accuracy by 28% per stack.
+Special 1 - Encephalo-Ray
+A powerful blast to knock back any opponent foolish enough to be in its way.
+```• function Stun(40% chance, 3 seconds)```
+Special 2 - Attack Routine 11010100 
+You don't need advanced algorithms to understand what Ultron is communicating here.
+```• function Stun(40% chance, 3 seconds)```
+Special 3 - Eradication
+Ultron believes that peace can only be achieved by eradicating humanity.
+```• function Stun(40% chance, 3 seconds)```
+
+Signature Ability: NANO-INHIBITORS
+Passive - Reduce Offensive Ability Accuracy
+```• For each Armor Up effect active, Ultron releases more Nano-Inhibitors, reducing his opponent's Offensive Ability Accuracy by 28% per stack.```
