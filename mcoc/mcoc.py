@@ -1631,7 +1631,7 @@ class MCOC(ChampionFactory):
                 else:
                     await self.bot.say(embed=em)
             else:
-                self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
+                await self.bot.say("Pardons Summoner. No Champion Ability file is registered.")
         else:
             em = discord.Embed(color=champ.class_color, title='Champion Abilities', descritpion='')
             em.description = champ.abilities
