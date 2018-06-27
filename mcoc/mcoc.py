@@ -1611,21 +1611,21 @@ class MCOC(ChampionFactory):
                 em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                 em.description = page
                 embeds.append(em)
-            appinfo = await self.bot.application_info()
-            sigtitle, sigdesc, sig_calcs = await champ.process_sig_description(isbotowner=appinfo.owner)
-            description = sigdesc.format(d=sig_calcs)
-            if sigtitle is not None:
-                em = discord.Embed(color=champ.class_color, title='Signature Ability: {}'.format(sigtitle), descritpion=description)
-                em.add_field(name='Ability Keywords', value=champ.abilities)
-                em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
-                if len(extended_abilities) > 1:
-                    em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
-                if len(counters) > 1:
-                    em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-                em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-                em.set_thumbnail(url=champ.get_avatar())
-                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-                embeds.append(em)
+        appinfo = await self.bot.application_info()
+        sigtitle, sigdesc, sig_calcs = await champ.process_sig_description(isbotowner=appinfo.owner)
+        if sigtitle is not None:
+            em = discord.Embed(color=champ.class_color, title='Signature Ability: {}'.format(sigtitle), descritpion='')
+            em.description=sigdesc.format(d=sig_calcs)
+            em.add_field(name='Ability Keywords', value=champ.abilities)
+            em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
+            if len(extended_abilities) > 1:
+                em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
+            if len(counters) > 1:
+                em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+            em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+            em.set_thumbnail(url=champ.get_avatar())
+            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            embeds.append(em)
         # else:
         #     embeds.append(em)
         if len(embeds) > 0:
