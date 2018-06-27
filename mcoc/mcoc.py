@@ -1613,8 +1613,9 @@ class MCOC(ChampionFactory):
                     print(page)
                     em.description = page
                     embeds.append(em)
+                appinfo = await self.bot.application_info()
                 title, desc, sig_calcs = await champ.process_sig_description(
-                            isbotowner=ctx.message.author == appinfo.owner)
+                            isbotowner=appinfo.owner)
                 if title is not None:
                     em.title = title
                     em.description=desc.format(d=sig_calcs)
