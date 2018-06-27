@@ -25,5 +25,4 @@ Signature Ability - ENTHRALL
 All Attacks - Attack
 ```• Fury fascinates The Destroyer, granting a fixed 12% chance to cumulatively increase Attack by 541.96 for 6 seconds with each activation.```
 
-updated 6/26/2018
-- these are 3 star colossus values.
+updated 6/26/2018 - jjw
