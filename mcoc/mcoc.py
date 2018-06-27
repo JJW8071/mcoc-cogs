@@ -1619,7 +1619,7 @@ class MCOC(ChampionFactory):
             #     em.title = title
             #     em.description=desc.format(d=sig_calcs)
             #     embeds.append(em)
-        if len(embeds) > 1:
+        if len(embeds) > 0:
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
             await menu.menu_start(embeds)
         else:
