@@ -1613,15 +1613,12 @@ class MCOC(ChampionFactory):
                     print(page)
                     em.description = page
                     embeds.append(em)
-                try:
-                    title, desc, sig_calcs = await champ.process_sig_description(
+                title, desc, sig_calcs = await champ.process_sig_description(
                             isbotowner=ctx.message.author == appinfo.owner)
-                    if title is not None:
-                        em.title = title
-                        em.description=desc.format(d=sig_calcs)
-                        embeds.append(em)
-                except:
-                    continue
+                if title is not None:
+                    em.title = title
+                    em.description=desc.format(d=sig_calcs)
+                    embeds.append(em)
                 if len(embeds) > 1:
                     menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                     await menu.menu_start(embeds)
