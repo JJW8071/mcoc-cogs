@@ -19,12 +19,7 @@ Special 3 - Clear the Courtroom
 Opponent found guilty. Case closed.
 ```• 65% chance to Stun the opponent for 4.25 seconds.```
 
-Signature Ability - Citing Precedent
-Passive
-```• Jennifer Walters relentless studying and research on her opponent allows her to place a Passive effect on them, reducing a specific stat by 19.98% based on which Class they are.
-• This effect is a Passive effect and does not interact with effects such as Nullify, Purge or Willpower.
-
-The effects are as follows for the various classes:
+The Citing Precedent effects are as follows for the various classes:
 • Science = Physical Resistance
 • Mystic = Power Gain Rate
 • Cosmic = Buff Duration

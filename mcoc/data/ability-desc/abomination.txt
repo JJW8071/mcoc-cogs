@@ -16,8 +16,4 @@ Abomination lets loose his rage and unleashes a savage beatdown on his opponent.
 Special 3 - Gamma Bomb
 What the Abomination hits into the air, the Abomination hits back down.
 
-Irradiate
-When Attacked
-```• Contact with the Abomination's gamma-irradiated body has a 14.99% chance to Poison the target, reducing their Health recovery by 30% and dealing 809.72 Direct Damage over 12 seconds.```
-
 updated 6/26/2018 - suprmatt

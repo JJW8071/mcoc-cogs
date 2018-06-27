@@ -21,10 +21,4 @@ Black Bolt's power is so immense that a mere whisper is enough to send his enemi
 ```• 90% chance to Stun for 4.50 seconds.
 • 80% chance to Armor Break, removing an enemy Armor Up and applying 666.67 Armor Rating reduction for 5.50 seconds.```
 
-Signature Ability - PROVOCATION
-Critical Hits
-```• Combat tests Blackagar Boltagon's restraint. Each time he is struck by a Critical Hit, he has a chance to gain a permanent Cruelty or Fury Buff. Each time he strikes one with his own Critical Hit, he has a chance to gain a Fury or Cruelty Buff for 6.50 seconds.
-• Fury Buffs increase Attack by 242.96
-• Cruelty Buffs increase Critical Damage Rating by 88.4```
-
-updated 6/26/2018 - jjw 
+updated 6/26/2018 - jjw

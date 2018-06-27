@@ -17,8 +17,4 @@ Encased in a metal prison, Magneto's target implodes. Peace was never an option.
 ```• 100% chance to Armor Break, removing an enemy Armor Up and applying 1333.33 Armor Rating reduction for 8 seconds.
 • 100% chance to inflict Heal Block, preventing the target from recovering Health for 10 seconds```
 
-Refraction
-When Attacked
-```• Magneto bends a dense electromagnetic field around his body to create a personal force field, preventing him from losing more than 14.27% Health from a single source.```
-
 updated 6/26/2018 - suprmatt
