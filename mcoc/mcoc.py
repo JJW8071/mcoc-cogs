@@ -1615,7 +1615,7 @@ class MCOC(ChampionFactory):
         sigtitle, sigdesc, sig_calcs = await champ.process_sig_description(isbotowner=appinfo.owner)
         if sigtitle is not None:
             em = discord.Embed(color=champ.class_color, title='Signature Ability: {}'.format(sigtitle), descritpion='')
-            em.description=sigdesc.format(d=sig_calcs)
+            em.description='```'+sigdesc.format(d=sig_calcs)+'```'
             em.add_field(name='Ability Keywords', value=champ.abilities)
             em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
             if len(extended_abilities) > 1:
