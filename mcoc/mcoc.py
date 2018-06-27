@@ -1616,12 +1616,7 @@ class MCOC(ChampionFactory):
                 try:
                     title, desc, sig_calcs = await champ.process_sig_description(
                             isbotowner=ctx.message.author == appinfo.owner)
-                except KeyError:
-                    await champ.missing_sig_ad()
-                    # raise
-                    # return
                 if title is not None:
-                    # em.title='Signature Level {}'.format(champ.sig)
                     em.title = title
                     em.description=desc.format(d=sig_calcs)
                     embeds.append(em)
