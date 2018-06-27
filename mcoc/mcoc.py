@@ -1599,22 +1599,31 @@ class MCOC(ChampionFactory):
                 # print(ability_file.read())
                 pages = chat.pagify(text=ability_file.read(), delims=["\n\n"], escape=False, page_length=1500)
                 embeds = []
+                em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
+                em.add_field(name='Ability Keywords', value=champ.abilities)
+                em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                if len(extended_abilities) > 1:
+                    em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
+                if len(counters) > 1:
+                    em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+                em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+                em.set_thumbnail(url=champ.get_avatar())
+                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                 for page in pages:
                     print(page)
-                    # await self.bot.say(page)
-                    em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
                     em.description = page
-                    em.add_field(name='Ability Keywords', value=champ.abilities)
-                    em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
-                    if len(extended_abilities) > 1:
-                        em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
-                    if len(counters) > 1:
-                        em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-                    em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-                    # em.add_field(name='Shortcode', value=champ.short)
-                    # em.add_field(name='Champion Number', value=champ.champNumber)
-                    em.set_thumbnail(url=champ.get_avatar())
-                    em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+                    embeds.append(em)
+                try:
+                    title, desc, sig_calcs = await champ.process_sig_description(
+                            isbotowner=ctx.message.author == appinfo.owner)
+                except KeyError:
+                    await champ.missing_sig_ad()
+                    # raise
+                    # return
+                if title is not None:
+                    # em.title='Signature Level {}'.format(champ.sig)
+                    em.title = title
+                    em.description=desc.format(d=sig_calcs))
                     embeds.append(em)
                 if len(embeds) > 1:
                     menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)

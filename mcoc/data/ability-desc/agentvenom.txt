@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50
+All stats based on 4 Star, Rank 5, Level 50
 
 Passive - Symbiote Stealth
 ```• The Venom Symbiote works with Flash’s training to reduce enemy Evasion chance by 50%.```
