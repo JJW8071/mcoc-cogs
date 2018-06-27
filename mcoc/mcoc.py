@@ -1601,7 +1601,7 @@ class MCOC(ChampionFactory):
                 # print(page)
                 em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
                 em.add_field(name='Ability Keywords', value=champ.abilities)
-                em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                em.set_author(name='Champion #{0.champNumber} : {0.full_name}'.format(champ), icon_url=champ.get_avatar())
                 if len(extended_abilities) > 1:
                     em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
                 if len(counters) > 1:
@@ -1614,7 +1614,7 @@ class MCOC(ChampionFactory):
         appinfo = await self.bot.application_info()
         sigtitle, sigdesc, sig_calcs = await champ.process_sig_description(isbotowner=appinfo.owner)
         if sigtitle is not None:
-            em = discord.Embed(color=champ.class_color, title='Signature Ability: {}'.format(sigtitle), descritpion='')
+            em = discord.Embed(color=champ.class_color, title='Signature Ability s{0.sig}: {1}'.format(champ, sigtitle), descritpion='')
             em.description='```'+sigdesc.format(d=sig_calcs)+'```'
             em.add_field(name='Ability Keywords', value=champ.abilities)
             em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
