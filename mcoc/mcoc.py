@@ -1623,7 +1623,7 @@ class MCOC(ChampionFactory):
                 if title is not None:
                     # em.title='Signature Level {}'.format(champ.sig)
                     em.title = title
-                    em.description=desc.format(d=sig_calcs))
+                    em.description=desc.format(d=sig_calcs)
                     embeds.append(em)
                 if len(embeds) > 1:
                     menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
