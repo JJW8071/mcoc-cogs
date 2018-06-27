@@ -1595,34 +1595,54 @@ class MCOC(ChampionFactory):
         hashtags=xref['hashtags'].split(' #')
 
         embeds = []
-        em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
-        em.add_field(name='Ability Keywords', value=champ.abilities)
-        em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        if len(extended_abilities) > 1:
-            em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
-        if len(counters) > 1:
-            em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
-        em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+        # em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
+        # em.add_field(name='Ability Keywords', value=champ.abilities)
+        # em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
+        # if len(extended_abilities) > 1:
+        #     em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
+        # if len(counters) > 1:
+        #     em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+        # em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+        # em.set_thumbnail(url=champ.get_avatar())
+        # em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         if os.path.exists(ability_desc.format(champ.mattkraftid)):
             ability_file = open(ability_desc.format(champ.mattkraftid),"r", encoding='utf-8')
             pages = chat.pagify(text=ability_file.read(), delims=["\n\n"], escape=False, page_length=1500)
             for page in pages:
                 # print(page)
+                em = discord.Embed(color=champ.class_color, title='Abilities', descritpion='')
+                em.add_field(name='Ability Keywords', value=champ.abilities)
+                em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                if len(extended_abilities) > 1:
+                    em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
+                if len(counters) > 1:
+                    em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+                em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+                em.set_thumbnail(url=champ.get_avatar())
+                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                 em.description = page
                 embeds.append(em)
             appinfo = await self.bot.application_info()
             title, desc, sig_calcs = await champ.process_sig_description(
                         isbotowner=appinfo.owner)
             if title is not None:
-                em.title = title
+                em = discord.Embed(color=champ.class_color, title='Signature Ability: {}'.format(title), descritpion='')
+                em.add_field(name='Ability Keywords', value=champ.abilities)
+                em.set_author(name='#{0.champNumber}: {0.full_name}'.format(champ), icon_url=champ.get_avatar())
+                if len(extended_abilities) > 1:
+                    em.add_field(name='Extended Keywords', value=extended_abilities, inline=False)
+                if len(counters) > 1:
+                    em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
+                em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
+                em.set_thumbnail(url=champ.get_avatar())
+                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                 em.description=desc.format(d=sig_calcs)
                 embeds.append(em)
-        else:
-            embeds.append(em)
-        menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-        await menu.menu_start(embeds)
+        # else:
+        #     embeds.append(em)
+        if len(embeds) > 0:
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(embeds)
         # else:
         #     await self.bot.say(embed=em)
         # else:
