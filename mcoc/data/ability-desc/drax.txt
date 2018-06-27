@@ -17,8 +17,8 @@ Drax demonstrates mastery of Dwi Theet martial arts with dual knives. Hope you l
 ```• 40% chance to inflict Bleed, dealing 1854.4 Direct Damage over 4 seconds.
 • 100% chance for Fury, increasing your attack by 347.7 for 8 seconds.```
 Special 3 -The Destroyer
-Rage consumes Drax, as he slices and kicks with unmatched power. 
-``• 100% chance to inflict Bleed, dealing 2549.8 Direct Damage over 5.50 seconds.
+Rage consumes Drax, as he slices and kicks with unmatched power.
+```• 100% chance to inflict Bleed, dealing 2549.8 Direct Damage over 5.50 seconds.
 • 100% chance for Fury, increasing your attack by 347.7 for 8 seconds.```
 
 Signature Ability - ENTHRALL
