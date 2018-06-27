@@ -1610,7 +1610,7 @@ class MCOC(ChampionFactory):
                 em.set_thumbnail(url=champ.get_avatar())
                 em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                 for page in pages:
-                    print(page)
+                    # print(page)
                     em.description = page
                     embeds.append(em)
                 # appinfo = await self.bot.application_info()
