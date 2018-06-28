@@ -9,7 +9,6 @@ Scientific Method – Passive
 • Each Category grants a Passive effect which scales as its category builds.
 • When a Category reaches 100, it triggers a Breakthrough as long as there isn’t one already active.
 • When a Breakthrough effect expires, all Research Categories reset to 0.```
-
 Physics – Research Category
 ```• Builds when your Opponent Gains Power
 • Scaling Effect: Opponent’s Special Attack Damage reduced by up to 50%.
@@ -34,12 +33,6 @@ Special 3 – Proof
 After much careful study and experimentation, Doc Ock can now mathematically prove that your defeat is inevitable.
 ```• Duplicate 1 currently active Breakthrough with a duration of 5 seconds.
 • This Duration increases by 10 seconds per currently active Breakthrough.```
-
-Signature Ability – ACADEMIC BACKGROUND
-Doctor Octopus’s extensive academic background lets him start the fight with each of his Research Categories at 60 and each Breakthrough is replaced by a new effect.
-```• Physics: Drain 100% of Power Gained and Steal 10% of the Power Drained.
-• Chemistry: Deal Direct Damage equal to 100% of health gained and Lifesteal 20% of the damage done.
-• Biology: Gain the standard Biology Breakthrough Armor Up and 578 Armor Penetration while it’s active.```
 
 Recommended Masteries
 ```Block Proficiency: Doc Ock builds Block Proficiency with his Chemistry Research, but his natural Block Proficiency is quite low. This Mastery will help remove this point of weakness.

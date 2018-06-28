@@ -17,11 +17,6 @@ Special 2 -Thermite Breach
 Special 3 -Shock & Awe
 ```• Any Bleed effect has an additional 21% chance to trigger.```
 
-Signature Ability - Klyntar Rage
-```• At the beginning of the fight, and whenever Flash loses 50% of his Max Health, he temporarily loses control of the Venom symbiote, increasing Attack and Critical Damage by (8 - 32%). This effect is lost once he is struck 5 times.
-• Agent Venom only counts as being struck if he is hit while he isn’t blocking.```
-• Klyntar Rage is a passive effect and cannot be Nullified, but does interact with Ability Accuracy and can be denied the effect by an awakened Black Widow.
-
 Recommended Masteries
 ```Dexterity: In order to keep the large damage output from Klyntar Rage, you’ll have to dodge and block just right to avoid incoming attacks. Picking up this mastery will help avoid those incoming attacks entirely and keep up Klyntar Rage longer.
 Precision: As Klyntar Rage boosts Critical Damage while it’s active, picking up this Mastery to boost Agent Venom’s Critical Hit Rate will make the most of this ability and increase his damage output even further while the effect is active.```
