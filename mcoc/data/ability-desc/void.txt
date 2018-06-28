@@ -1,8 +1,8 @@
-All stats based on 5-Star, Rank 5, Level 65, Signature Level 200
+All stats based on 4-Star, Rank 5, Level 50, Signature Level 99
 
 Basic Abilities: Incinerate Immunity, Intimidating Presence, Direct Damage, Dark Sting
 
-Passive
+Passive - Incinerate Immunity
 ```• A suffocating, choking, and all-consuming Void provides full immunity to Incinerate effects.
 • Every 10 seconds, Void’s Intimidating Presence inflicts 1 random Debuff. +4 seconds on the timer if at least one Intimidating Presence Debuff is already active.```
 
