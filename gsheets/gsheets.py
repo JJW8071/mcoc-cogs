@@ -198,9 +198,9 @@ class GSheets:
         if not table:
             await self.bot.say("That range is empty.")
             return
-        # headers = table.pop(0)
-        # msg = '\n%s\n' % tabulate(table, headers)
-        msg = '\n%s\n' % tabulate(table)
+        headers = table.pop(0)
+        msg = '\n%s\n' % tabulate(table, headers)
+        # msg = '\n%s\n' % tabulate(table)
         page_list=[]
         pages = pagify(msg, page_length=1000)
         for page in pages:
@@ -244,8 +244,9 @@ class GSheets:
         if not table:
             await self.bot.say("That range is empty.")
             return
-        headers = table.pop(0)
-        msg = '\n%s\n' % tabulate(table, headers)
+        msg = '\n%s\n' % tabulate(table)
+        # headers = table.pop(0)
+        # msg = '\n%s\n' % tabulate(table, headers)
         page_list=[]
         pages = pagify(msg, page_length=1000)
         for page in pages:
