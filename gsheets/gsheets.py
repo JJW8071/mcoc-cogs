@@ -162,7 +162,7 @@ class GSheets:
         await self.bot.say("Couldn't find a sheet with that name in your scope.")
 
     @commands.command(pass_context=True, no_pm=True)
-    async def gettable(self, ctx: commands.Context, sheet_name: str, *ranges: str):
+    async def gettable(self, ctx: commands.Context, sheet_name: str, *ranges: str, box: bool = TRUE):
         """Get a range from a sheet and display it as a table.
         The top row is displayed as headers.
         Arguments:
@@ -202,8 +202,11 @@ class GSheets:
         msg = '\n%s\n' % tabulate(table, headers)
         page_list=[]
         pages = pagify(msg, page_length=1000)
-        for page in pages:
-            page_list.append(box(page))
+        if box == TRUE:
+            for page in pages:
+                page_list.append(box(page))
+        else:
+            for page in pages:page_list.append(page))
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
