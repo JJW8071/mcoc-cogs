@@ -162,7 +162,7 @@ class GSheets:
         await self.bot.say("Couldn't find a sheet with that name in your scope.")
 
     @commands.command(pass_context=True, no_pm=True)
-    async def gettable(self, ctx: commands.Context, sheet_name: str, *ranges: str, boxed=True):
+    async def gettable(self, ctx: commands.Context, sheet_name: str, *ranges: str):
         """Get a range from a sheet and display it as a table.
         The top row is displayed as headers.
         Arguments:
@@ -202,12 +202,53 @@ class GSheets:
         msg = '\n%s\n' % tabulate(table, headers)
         page_list=[]
         pages = pagify(msg, page_length=1000)
-        if boxed:
-            for page in pages:
-                page_list.append(box(page))
-        else:
-            for page in pages:
-                page_list.append(page)
+        for page in pages:
+            page_list.append(box(page))
+        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
+        @commands.command(pass_context=True, no_pm=True)
+
+    async def getrange(self, ctx: commands.Context, sheet_name: str, *ranges: str):
+        """Get a range from a sheet and display it as a table.
+        The top row is displayed as headers.
+        Arguments:
+         - <sheet_name> The name of the sheet
+         - <ranges> The range(s) to retrieve in A! format
+         - <worksheet> (optional) The worksheet to retrieve the range from. Defaults to the first worksheet."""
+        if self.gc is None:
+            await self.bot.say("You must authorize the cog first. See `[p]authsheets`.")
+            return
+        channel = ctx.message.channel
+        sheet_id = self.get_sheet_id(channel, sheet_name)
+        if sheet_id is None:
+            await self.bot.say("Couldn't find a sheet with that name in your scope.")
+            return
+        table = []
+        for range in ranges:
+            try:
+                if not table:
+                    table = await self.gc.get_range(sheet_id, range)
+                else:
+                    temp_table = await self.gc.get_range(sheet_id, range)
+                    i = 0
+                    for row in temp_table:
+                        if i == len(table):
+                            # Make new row. Initialise new row as the length of the previous row before
+                            # temp_table[i] was added (maintain correct alignment)
+                            table.append([""]*(len(table[i-1]) - len(row)))
+                        table[i] += row
+                        i += 1
+            except HttpError as e:
+                await self.bot.say(e._get_reason())
+                return
+        if not table:
+            await self.bot.say("That range is empty.")
+            return
+        headers = table.pop(0)
+        msg = '\n%s\n' % tabulate(table, headers)
+        page_list=[]
+        pages = pagify(msg, page_length=1000)
+        for page in pages:
+            page_list.append(page)
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
