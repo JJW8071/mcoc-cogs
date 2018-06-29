@@ -162,7 +162,7 @@ class GSheets:
         await self.bot.say("Couldn't find a sheet with that name in your scope.")
 
     @commands.command(pass_context=True, no_pm=True)
-    async def gettable(self, ctx: commands.Context, sheet_name: str, *ranges: str, box: bool = TRUE):
+    async def gettable(self, ctx: commands.Context, sheet_name: str, *ranges: str, boxed=True):
         """Get a range from a sheet and display it as a table.
         The top row is displayed as headers.
         Arguments:
@@ -202,7 +202,7 @@ class GSheets:
         msg = '\n%s\n' % tabulate(table, headers)
         page_list=[]
         pages = pagify(msg, page_length=1000)
-        if box == TRUE:
+        if boxed:
             for page in pages:
                 page_list.append(box(page))
         else:
