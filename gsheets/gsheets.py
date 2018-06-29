@@ -206,7 +206,8 @@ class GSheets:
             for page in pages:
                 page_list.append(box(page))
         else:
-            for page in pages:page_list.append(page))
+            for page in pages:
+                page_list.append(page)
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
