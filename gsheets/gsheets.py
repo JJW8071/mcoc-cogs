@@ -205,8 +205,8 @@ class GSheets:
         for page in pages:
             page_list.append(box(page))
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60)
-        @commands.command(pass_context=True, no_pm=True)
 
+    @commands.command(pass_context=True, no_pm=True)
     async def getrange(self, ctx: commands.Context, sheet_name: str, *ranges: str):
         """Get a range from a sheet and display it as a table.
         The top row is displayed as headers.
