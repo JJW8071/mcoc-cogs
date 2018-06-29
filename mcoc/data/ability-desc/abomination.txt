@@ -11,8 +11,10 @@ Passive
 
 Special 1 - Skull Bash
 The Abomination uses his head...literally.
+
 Special 2 - Overwhelm
 Abomination lets loose his rage and unleashes a savage beatdown on his opponent.
+
 Special 3 - Gamma Bomb
 What the Abomination hits into the air, the Abomination hits back down.
 
