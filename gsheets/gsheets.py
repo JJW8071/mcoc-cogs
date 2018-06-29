@@ -200,7 +200,7 @@ class GSheets:
             return
         # headers = table.pop(0)
         # msg = '\n%s\n' % tabulate(table, headers)
-        msg = table
+        msg = '\n%s\n' % tabulate(table)
         page_list=[]
         pages = pagify(msg, page_length=1000)
         for page in pages:
