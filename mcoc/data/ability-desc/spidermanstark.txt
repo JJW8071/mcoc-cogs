@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 When Attacked
 • Spider-Man’s burgeoning Spider-Sense grants him a Passive 3% chance to Evade an incoming attack.
