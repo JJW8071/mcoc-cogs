@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "f8942080a7721fed21160c72ed3e5637b6cc5579",
+    "hash": "99447bc3684b1791b8cad4f88ce02b0d0010106e",
     "language": "en",
     "post_processed": true,
-    "string_count": 142,
+    "string_count": 143,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1527014138,
-    "versionLock": "18.1"
+    "ts": 1529360469,
+    "versionLock": "19.0"
   },
   "strings": [
     {
@@ -583,6 +583,11 @@
       "v": "James “Rhodey” Rhodes, decorated U.S. Air Force pilot and longtime ally of Tony Stark, combats evil and injustice as the armored War Machine. True to his codename, Rhodes’ armor delivers heavy metal power via its wrist-mounted machine guns and shoulder-mounted artillery cannon."
     },
     {
+      "k": "ID_CHARACTER_BIOS_WASP",
+      "v": "Empowered with a new cutting-edge Wasp suit, Hope van Dyne is ready to make up for lost time as a Super Hero. Like Ant-Man, she can reduce herself to the size of an insect while disproportionately increasing her strength and durability. Couple this with the ability to fly at impressive speeds and evade enemy attacks and you have one deadly Wasp.",
+      "vn": 19
+    },
+    {
       "k": "ID_CHARACTER_BIOS_WINTERSOLDIER",
       "v": "In the heat of World War II, Bucky Barnes gave his life for his country – or so Captain America thought. His frozen body was recovered by the Soviets, who turned him into an unstoppable, fearsome assassin – and their puppet! Freed from Russian control, Bucky now fights on the side of the just and righteous."
     },
@@ -610,6 +615,11 @@
       "k": "ID_CHARACTER_BIOS_YONDU",
       "v": "Centaurian scoundrel Yondu Udonta may not seem like much of a threat at first glance, but when you hear a whistle and his deadly Yaka Arrow comes out to play, it's not advisable to make any rash decisions. Leader of the Ravagers and mentor to Star-Lord, Yondu is a stickler for honor, but not above breaking a rule or ten to get what he wants.",
       "vn": 13
+    },
+    {
+      "k": "●\tID_CHARACTER_BIOS_WASP",
+      "v": "Empowered with a new cutting-edge Wasp suit, Hope van Dyne is ready to make up for lost time as a Super Hero. Like Ant-Man, she can reduce herself to the size of an insect while disproportionately increasing her strength and durability. Couple this with the ability to fly at impressive speeds and evade enemy attacks and you have one deadly Wasp.",
+      "vn": 19
     }
   ]
 }

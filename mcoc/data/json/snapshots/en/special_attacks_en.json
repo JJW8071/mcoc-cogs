@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "9a78d087cfb0f08551bba0d482466651b6a6c2ed",
+    "hash": "037757949267ea7fb86f7023e809e8ae6bcd58ae",
     "language": "en",
     "post_processed": true,
-    "string_count": 852,
+    "string_count": 856,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1527014138,
-    "versionLock": "18.1"
+    "ts": 1529515194,
+    "versionLock": "19.0"
   },
   "strings": [
     {
@@ -2142,6 +2142,21 @@
       "v": "War Machine lets fly everything he has, punishing his opponent with a massive barrage of .50 rounds, iron-clad punches, and a single high-explosive bunker buster artillery shell."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_WASP_0",
+      "v": "Wasp shrinks down to the size of an insect, knocking down the opponent with a flurry of attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_WASP_1",
+      "v": "Losing sight of Wasp even for a moment will result in a series of painful stings.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_WASP_2",
+      "v": "Wasp uses her Pym Particle Disks to blow up a bubble gum package to the size of a car, crushing opponents upon impact.",
+      "vn": 19
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_WINTERSOLDIER_0",
       "v": "After a flurry of attacks, the Winter Soldier finishes off his opponent with a little help from his friends."
     },
@@ -3531,6 +3546,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_WARMACHINE_2",
       "v": "Heavy Ordnance"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_WASP_0",
+      "v": "Insect Size",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_WASP_1",
+      "v": "Quick Sting",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_WASP_2",
+      "v": "Titanic Treat",
+      "vn": 19
     },
     {
       "k": "ID_SPECIAL_ATTACK_WINTERSOLDIER_0",

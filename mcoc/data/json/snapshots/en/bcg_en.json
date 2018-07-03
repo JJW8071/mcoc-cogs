@@ -1365,7 +1365,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DEMONHUNTER_LONG",
-      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Mystic Champions. \n[64acff]Mephisto, Dormammu:[-] Opponent's Energy Resistance is reduced by {0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Mystic Champions. Danger Sense's Ability Accuracy reduction does not ignore the Immunities from Mystic Champions.\n[64acff]Mephisto, Dormammu:[-] Opponent's Energy Resistance is reduced by {0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {
@@ -1743,6 +1743,16 @@
       "vn": "12.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_FORMIDABLEFOE",
+      "v": "FORMIDABLE FOE",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_FORMIDABLEFOE_LONG",
+      "v": "[64acff]Ghost:[-] +{0}% Attack for each Buff on Ghost.\n[64acff]Ant-Man:[-] +{0}% Attack for each Debuff on the opponent.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_FRIENDFROMWORK",
       "v": "FRIEND FROM WORK",
       "vn": 16
@@ -1985,6 +1995,16 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_MICROSCOPICOBSERVATION",
+      "v": "MICROSCOPIC OBSERVATION",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_MICROSCOPICOBSERVATION_LONG",
+      "v": "[64acff]Ghost:[-] Special Attacks are Unblockable when triggered while Phasing.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_DESC",
       "v": "All champions gain +{0} Block Penetration.",
       "vn": "12.1"
@@ -2131,9 +2151,29 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_ADVANCEDTECH",
+      "v": "ADVANCED TECH",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_ADVANCEDTECH_LONG",
+      "v": "[64acff]Wasp:[-] When she intercepts the opponent’s Dash Attack and Petrify is not active on the opponent, Petrify is inflicted, reducing the effectiveness of Power Gain and Regeneration by 100% for 8 seconds. This can activate 3 times in a fight.\n[64acff]Iron Man, Iron Man(Infinity War):[-] Armor Up effects last for an additional {0} seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_PROXIMA_CORVUS",
       "v": "SPECIAL ASSIST",
       "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_DEADLYSTING",
+      "v": "DEADLY STING",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_DEADLYSTING_LONG",
+      "v": "[64acff]Wasp:[-] When she intercepts the opponent’s Dash Attack and Concussion is not active on the opponent, Concussion is inflicted, reducing the opponent’s Ability Accuracy by 100% for 8 seconds. This can activate 3 times in a fight.\n[64acff]Yellowjacket:[-] {0}% chance to reactivate a Power Sting when it’s timer expires.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 19
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA",
@@ -2144,6 +2184,16 @@
       "k": "ID_UI_HERO_SYNERGY_PROXIMA_GAMORA_LONG",
       "v": "[64acff]Proxima Midnight:[-] Gains Combo Shield whenever she has less than {0} hits in her Combo Meter.\n[64acff]Thor (Ragnarok):[-] Activation of Boon of the Gods requires 10 less hits on the Combo Meter and 5 less hits whenever struck.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_HARDTOHIT",
+      "v": "HARD TO HIT",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_PROXIMA_HARDTOHIT_LONG",
+      "v": "[64acff]Wasp:[-] Counter Sting is never disabled when Wasp is below {0}% Health.\n[64acff]Ant-Man:[-] When Glancing Hits, he gains 25% increased Attack for 12 seconds.\n[64acff]Wasp, Ant-Man, Ghost:[-] +25% Attack at the start of the fight if Wasp, Ant-Man and Ghost are together in a team.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 19
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PROXIMA_NEBULA",
@@ -2312,7 +2362,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_SPIRITOFJUSTICE_LONG",
-      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Villain Champions.\n[64acff]Ghost Rider:[-] +{0}% chance to place a Judgment.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Villain Champions. Danger Sense's Ability Accuracy reduction does not ignore the Immunities from Villain Champions.\n[64acff]Ghost Rider:[-] +{0}% chance to place a Judgment.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {
@@ -2378,6 +2428,16 @@
       "k": "ID_UI_HERO_SYNERGY_TERMINATIONCONTRACT",
       "v": "TERMINATION CONTRACT",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_THEUNTOUCHABLES",
+      "v": "THE UNTOUCHABLES",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_THEUNTOUCHABLES_LONG",
+      "v": "[64acff]Ghost:[-] Take no damage while Phasing.\n[64acff]The Hood:[-] Start the fight Invisible.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 19
     },
     {
       "k": "ID_UI_HERO_SYNERGY_THUND",

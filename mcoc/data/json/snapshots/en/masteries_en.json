@@ -1,14 +1,14 @@
 {
     "meta": {
-        "language": "en",
-        "hash": "57bc24af0b36fb8530f6c4ca2a848f0d16c8eb39",
-        "format": "sparx",
-        "ts": 1488833790,
-        "tagged": [
-            "masteries",
-            "client"
-        ],
-        "string_count": 137
+    "format": "sparx",
+    "hash": "57bc24af0b36fb8530f6c4ca2a848f0d16c8eb39",
+    "language": "en",
+    "string_count": 137,
+    "tagged": [
+      "masteries",
+      "client"
+    ],
+    "ts": 1488833790
     },
     "strings": [
         {
