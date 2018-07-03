@@ -197,6 +197,16 @@
       "v": "The most dangerous woman in the galaxy is a title hard to earn, and harder to keep. But Gamora has brawled and battled her way across the cosmos enough times to make that title stick. She's stronger than you, faster than you, and tougher than anyone. She is the adopted daughter of Thanos, but fiercely loyal to her comrades in the Guardians of the Galaxy."
     },
     {
+      "k": "ID_CHARACTER_BIOS_SENTINEL",
+      "v": "Although the Sentinels were created by a Mutant elite, who had the goal of controlling the Champions of The Contest, 100 years in the future, they rebelled; killed their creator and subsequently engineered a way into the present day. The Mark-ISO evolved from these rogue Sentinels, adapting to the ISO-8 rich environment of the current Contest. Powered by an ISO fusion engine, the Mark-ISO Sentinel can quell any uprising within The Contest with extreme prejudice.",
+      "vn": "17.1"
+    },
+    {
+          "k": "ID_CHARACTER_BIOS_GHOST",
+      "v": "You can't fight what you don't know, and nobody seems to know anything about who Ghost is or how she can do the things she can do. Feared and admired in the criminal underworld for her ability to phase through solid walls, Ghost's true intentions are as elusive as she is, though one thing is for sure: she's interested in getting her hands on all the Pym Tech she can find. Her advanced technology combined with her skill in combat make her a force to be reckoned with.​",
+      "vn": 19
+    },
+    {
       "k": "ID_CHARACTER_BIOS_GHOSTRIDER",
       "v": "Tricked by the demonic being Mephisto into selling his soul to save a loved one, stunt cyclist Johnny Blaze soon found himself bonded to the Spirit of Vengeance, a being of almost unlimited power from Hell itself. With the power to control Hellfire as well as his mystical Hell Cycle and Hell Chains, Ghost Rider has turned against Mephisto’s purpose and instead uses his newfound abilities to protect the innocent and cast judgment upon the wicked."
     },
