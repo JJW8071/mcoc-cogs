@@ -2670,7 +2670,7 @@ class Champion:
                       '_DESC_E','_DESC_F','_DESC_G',
                       '_LONG','_LONG_1','_LONG_2','_LONG_3','_LONG_4','_LONG_5',
                       '_LONG1','_LONG2','_LONG3','_LONG4','_LONG5',
-                      '_LONG_B', '_LONG_C',):
+                      '_LONG_A','_LONG_B', '_LONG_C',):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
