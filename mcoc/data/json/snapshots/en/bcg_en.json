@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "65734c990bb9e543f45dec609228dcb16a6fc783",
+    "hash": "16ed7a24bc384eddd9f2610b686504549f6cec28",
     "language": "en",
     "post_processed": true,
-    "string_count": 847,
+    "string_count": 863,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1527012706,
-    "versionLock": "18.1"
+    "ts": 1530031747,
+    "versionLock": "19.0"
   },
   "strings": [
     {
@@ -1248,7 +1248,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_CONNOOBS_DESC",
-      "v": "[64acff]Spider-Man:[-] Stun, Shock and Ensnare Debuffs last {0}% longer.\n[64acff]Ms. Marvel (Kamala Khan):[-] Fury Buffs gain +{0}% Potency.\n[64acff]Spider-Man (Miles Morales):[-] Begin the fight with 2 additional Spider-Sense charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Spider Man (Stark Enhanced):[-] Stun, Shock and Ensnare Debuffs last {0}% longer.\n[64acff]Ms. Marvel (Kamala Khan):[-] Fury Buffs gain +{0}% Potency.\n[64acff]Spider-Man (Miles Morales):[-] Begin the fight with 2 additional Spider-Sense charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 14
     },
     {
