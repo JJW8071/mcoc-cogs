@@ -2600,6 +2600,7 @@ class Champion:
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
+            'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),#added for WASP
             )
 
         for x in titles:
@@ -2622,6 +2623,7 @@ class Champion:
             'ID_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
             'ID_STAT_{}_SIG_TITLE'.format(mcocsig),
+            'ID_UI_STAT_FORMAT_{}_SIG'.format(mcocsig), # added for wasp
             )
 
         for x in preambles:
