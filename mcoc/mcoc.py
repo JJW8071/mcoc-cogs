@@ -878,7 +878,7 @@ class MCOC(ChampionFactory):
         '''Convert Percentage to MCOC Flat Value'''
         await self.bot.say(to_flat(per, ch_rating))
 
-    @commands.command(name='flat', aliases=('f2p'))
+    @commands.command(name='flat'): #, aliases=('f2p')) --> this was translating as "flat | f | 2 | p"
     async def flat2per(self, *, m):
         '''Convert MCOC Flat Value to Percentge
         <equation> [challenger rating = 100]'''
