@@ -1,4 +1,4 @@
-*All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
+All stats based on 4 Star, Rank 5, Level 50, Signature Level 99
 
 Passive - Sensory Weave
 ```• Spider-Gwen enters the fight in Hunter Spider mode and may switch combat modes by dashing back and holding Block for 1.50 seconds.```

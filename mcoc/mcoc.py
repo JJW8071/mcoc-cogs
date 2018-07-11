@@ -878,7 +878,7 @@ class MCOC(ChampionFactory):
         '''Convert Percentage to MCOC Flat Value'''
         await self.bot.say(to_flat(per, ch_rating))
 
-    @commands.command(name='flat', aliases=('f2p'))
+    @commands.command(name='flat') #, aliases=('f2p')) --> this was translating as "flat | f | 2 | p"
     async def flat2per(self, *, m):
         '''Convert MCOC Flat Value to Percentge
         <equation> [challenger rating = 100]'''
@@ -2600,6 +2600,7 @@ class Champion:
             'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
+            'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),#added for WASP
             )
 
         for x in titles:
@@ -2622,6 +2623,7 @@ class Champion:
             'ID_STAT_SIGNATURE_{}'.format(mcocsig),
             'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
             'ID_STAT_{}_SIG_TITLE'.format(mcocsig),
+            'ID_UI_STAT_FORMAT_{}_SIG'.format(mcocsig), # added for wasp
             )
 
         for x in preambles:
@@ -2668,7 +2670,7 @@ class Champion:
                       '_DESC_E','_DESC_F','_DESC_G',
                       '_LONG','_LONG_1','_LONG_2','_LONG_3','_LONG_4','_LONG_5',
                       '_LONG1','_LONG2','_LONG3','_LONG4','_LONG5',
-                      '_LONG_B', '_LONG_C',):
+                      '_LONG_A','_LONG_B', '_LONG_C',):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:

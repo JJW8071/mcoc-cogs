@@ -1,27 +1,2762 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "5b74bfce3d8e08c1f691758dc7d052b4edf90893",
+    "hash": "48a9848b61bba3ec7ab3cce4ec1f9e53c60d5b0d",
     "language": "en",
     "post_processed": true,
-    "string_count": 3939,
+    "string_count": 4672,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1527113949,
-    "versionLock": "18.1"
+    "ts": 1530031887,
+    "versionLock": "19.0"
   },
   "strings": [
-        {
-          "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_DESC",
-          "v": "{0}% chance per bar of Power to activate a Super Bomb which causes all Bag of Tricks effects to trigger instead of the standard Pumpkin Bomb effect. Additionally each Cunning and Madness charge increases the damage inflicted by the Pumpkin Bomb by 10%.",
-          "vn": "14.1"
-        },
+    {
+      "k": "ID_ABTH50D",
+      "v": "Special Attack 2 is unblockable and has increased damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ABTH50T",
+      "v": "[b4b4b4ff]Absolute Strength[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC149D",
+      "v": "Acrobatic Chain 1. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC149T",
+      "v": "[b4b4b4ff]Acrobatic Combo 1[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC250D",
+      "v": "Acrobatic Chain 2. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC250T",
+      "v": "[b4b4b4ff]Acrobatic Combo 2[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC351D",
+      "v": "Acrobatic Chain 3. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC351T",
+      "v": "[b4b4b4ff]Acrobatic Combo 3[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC452D",
+      "v": "Acrobatic Chain 4. Perform a Medium Attack next to end the combo and increase Critical Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AC452T",
+      "v": "[b4b4b4ff]Acrobatic Combo 4[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACED97D",
+      "v": "This Champion must wait before starting a new combo.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACED97T",
+      "v": "[b4b4b4ff]Acrobatic Combo Failed[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACEE51D",
+      "v": "Acrobatic Chain 3. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACEE51T",
+      "v": "[b4b4b4ff]Acrobatic Combo Three[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACNE49D",
+      "v": "Acrobatic Chain 1. Perform a Medium Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACNE49T",
+      "v": "[b4b4b4ff]Acrobatic Combo One[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACNG75D",
+      "v": "Dash back and hold Block to activate Cosmic Healing.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACNG75T",
+      "v": "[b4b4b4ff]Activating Cosmic Healing[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACRM97D",
+      "v": "Beast reduces incoming Physical Critical Hit Damage and his attacks generate less Power in opponents.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACRM97T",
+      "v": "[b4b4b4ff]Acrobatic Form[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACSS97D",
+      "v": "This Champion must wait before starting a new combo.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACSS97T",
+      "v": "[b4b4b4ff]Acrobatic Combo Success[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACTY75D",
+      "v": "Dash back and hold Block to activate Invisibility.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACTY75T",
+      "v": "[b4b4b4ff]Activating Invisibility[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACUR52D",
+      "v": "Acrobatic Chain 4. Perform a Medium Attack next to end the combo and generate less Power in opponents.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACUR52T",
+      "v": "[b4b4b4ff]Acrobatic Combo Four[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACWO50D",
+      "v": "Acrobatic Chain 2. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ACWO50T",
+      "v": "[b4b4b4ff]Acrobatic Combo Two[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ADCE75D",
+      "v": "Periodically remove Resistance effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ADCE75T",
+      "v": "[b4b4b4ff]Adjusting Resistance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AED8240D",
+      "v": "You must wait before Stark Tech A.I. may reactivate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AED8240T",
+      "v": "[b4b4b4ff]A.I. Disabled[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AGHT107D",
+      "v": "Increases Attack and Critical Ratings.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AGHT107T",
+      "v": "[b4b4b4ff]Agamotto's Insight[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ANGE42D",
+      "v": "Charges acquired when opponents repeat the same actions. Sentinel's attacks and abilities become much stronger after reaching 100 charges.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ANGE42T",
+      "v": "[b4b4b4ff]Analysis Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ANGE80D",
+      "v": "Charges acquired when opponents repeat the same actions. Increases Armor, Crit Resistance, Attack Rating, and Special Attacks recoup a portion of their Power cost. Sentinel's attacks and abilities become much stronger after reaching 100 charges.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ANGE80T",
+      "v": "[b4b4b4ff]Analysis Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ANTE42D",
+      "v": "Increases Armor, Crit Resistance, Attack Rating, and Special Attacks recoup a portion of their Power cost. Abilities trigger through Block. Sentinel's Debuffs last longer. Heavy Attacks are Unstoppable.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ANTE42T",
+      "v": "[b4b4b4ff]Analysis Complete[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_APDE338D",
+      "v": "Increases the effectiveness of Fury, Armor, and Precision Buffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_APDE338T",
+      "v": "[b4b4b4ff]Aptitude[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_APDE8224D",
+      "v": "Increases the effectiveness of Fury, Armor, and Precision Buffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_APDE8224T",
+      "v": "[b4b4b4ff]Aptitude[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AR.075D",
+      "v": "Periodically grants Armor and Regeneration over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AR075D",
+      "v": "Periodically grants Armor and Regeneration over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AR075T",
+      "v": "[b4b4b4ff]Arc Overload 2.0[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARAK64D",
+      "v": "Removes an Armor Up and then Decreases Armor to increase damage from attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARAK64T",
+      "v": "[b4b4b4ff]Armor Break[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARAK_D",
+      "v": "Removes an Armor Up and then reduces Armor to amplify damage from attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARAK_T",
+      "v": "Armor Break",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARED97D",
+      "v": "Activates to increase Armor if a Debuff is inflicted.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARED97T",
+      "v": "[b4b4b4ff]Armor Up Deactivated[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARMO64D",
+      "v": "Attacks ignore opponents' Armor.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARMO64T",
+      "v": "[b4b4b4ff]Armor Piercing Ammo[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARUP113D",
+      "v": "Increases Armor to reduce damage taken from attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARUP113T",
+      "v": "[b4b4b4ff]Armor Up[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARUP97D",
+      "v": "Increases Armor to reduce damage taken from attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARUP97T",
+      "v": "[b4b4b4ff]Armor Up[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARUP_D",
+      "v": "Increases Armor to reduce attack damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ARUP_T",
+      "v": "Armor Up",
+      "vn": 19
+    },
+    {
+      "k": "ID_ASAR66D",
+      "v": "Block Proficiency has reached zero, preventing Blocking from reducing any attack damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ASAR66T",
+      "v": "[b4b4b4ff]Aspect of War[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ASIS108D",
+      "v": "Regenerates Health over time and nearby Attackers Degenerate or Regenerate the inverse amount.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ASIS108T",
+      "v": "[b4b4b4ff]Aspect of Genesis[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_AUER75D",
+      "v": "Mephisto periodically activates his Aura of Incineration.",
+      "vn": 19
+    },
+    {
+      "k": "ID_AUER75T",
+      "v": "[b4b4b4ff]Aura of Incineration Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BAER75D",
+      "v": "Suffer from Degeneration if unable to land a hit successfully.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BAER75T",
+      "v": "[b4b4b4ff]Bane Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BELE38D",
+      "v": "Each time a Poison affects Cable, the duration of all Poisons is reduced. Once the durations of all Poisons reaches zero, Cable gains increases Special Attack Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BELE38T",
+      "v": "[b4b4b4ff]Belle[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BICH72D",
+      "v": "Builds when landing hits or being struck. Increases Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BICH72T",
+      "v": "[b4b4b4ff]Biology Research[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BISS124D",
+      "v": "Increases Special Attack damage whenever Bishop absorbs Energy Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BISS124T",
+      "v": "[b4b4b4ff]Bishop's Prowess[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLCY66D",
+      "v": "Decreases the damage from blocked attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLCY66T",
+      "v": "[b4b4b4ff]Block Proficiency[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLED98D",
+      "v": "Inflicts Direct Damage over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLED98T",
+      "v": "[b4b4b4ff]Bleed[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLED_D",
+      "v": "Deals Armor-ignoring damage over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLED_T",
+      "v": "Bleed",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLON219D",
+      "v": "Inflicts Direct Damage over time and decreases defensive Ability Accuracy and Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLON219T",
+      "v": "[b4b4b4ff]Black ISO-8 Infection[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLTY81D",
+      "v": "Immune to all Bleed effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BLTY81T",
+      "v": "[b4b4b4ff]Bleed Immunity[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BODS221D",
+      "v": "Generates Power over time. Ends of Thor is knocked down by a Special Attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BODS221T",
+      "v": "[b4b4b4ff]Boon of the Gods[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BOON78D",
+      "v": "Boon of the Gods activates when Thor is struck 20 times.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BOON78T",
+      "v": "[b4b4b4ff]Boon Preparation[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BRFS244D",
+      "v": "Increased Ability Accuracy and Buff durations.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BRFS244T",
+      "v": "[b4b4b4ff]Brother Daniel: Buffs[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BUER75D",
+      "v": "Periodically, Buffs triggered by the Attacker are immediately removed. Each time this effect triggers they Regenerate Health.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BUER75T",
+      "v": "[b4b4b4ff]Buffet Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_BULD66D",
+      "v": "Each Blocked attack Decreases Block Proficiency. After 10 stacks, the next attack is Unblockable.",
+      "vn": 19
+    },
+    {
+      "k": "ID_BULD66T",
+      "v": "[b4b4b4ff]Bubble Shield[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CAON192D",
+      "v": "When the mutation ends, Carnage copies his current Symbiotic Creation as a permanent Buff.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CAON192T",
+      "v": "[b4b4b4ff]Carnage Mutation[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CAPS74D",
+      "v": "Inflicts Direct Damage over time each time you Dash backwards.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CAPS74T",
+      "v": "[b4b4b4ff]Caltrops[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_GHOST",
+      "v": "You can't fight what you don't know, and nobody seems to know anything about who Ghost is or how she can do the things she can do. Feared and admired in the criminal underworld for her ability to phase through solid walls, Ghost's true intentions are as elusive as she is, though one thing is for sure: she's interested in getting her hands on all the Pym Tech she can find. Her advanced technology combined with her skill in combat make her a force to be reckoned with.​",
+      "vn": 19
+    },
     {
       "k": "ID_CHARACTER_BIOS_SENTINEL",
       "v": "Although the Sentinels were created by a Mutant elite, who had the goal of controlling the Champions of The Contest, 100 years in the future, they rebelled; killed their creator and subsequently engineered a way into the present day. The Mark-ISO evolved from these rogue Sentinels, adapting to the ISO-8 rich environment of the current Contest. Powered by an ISO fusion engine, the Mark-ISO Sentinel can quell any uprising within The Contest with extreme prejudice.",
       "vn": "17.1"
+    },
+    {
+      "k": "ID_CHCH103D",
+      "v": "Builds when Blocking. Increases Block Proficiency.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHCH103T",
+      "v": "[b4b4b4ff]Chemistry Research[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHGE75D",
+      "v": "Vulture's Chitauri Armor is recharging.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHGE75T",
+      "v": "[b4b4b4ff]Chitauri Armor Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHGY195D",
+      "v": "Acquired by landing Critical Hits and spent to empower Vulture's abilities.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHGY195T",
+      "v": "[b4b4b4ff]Chitauri Energy[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHOS8482D",
+      "v": "Random Buffs or Debuffs are assigned to both Champions whenever either Champion activates a Special Attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHOS8482T",
+      "v": "[b4b4b4ff]Chaos[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHTE69D",
+      "v": "Attacks ignore Armor and Evasion.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CHTE69T",
+      "v": "[b4b4b4ff]Checkmate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CLBS353D",
+      "v": "Increases Critical Rating based on the Combo Meter.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CLBS353T",
+      "v": "[b4b4b4ff]Clubs[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COAP58403D",
+      "v": "Inflicts Energy Damage over time and prevents enemies from Evading.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COAP58403T",
+      "v": "[b4b4b4ff]Coldsnap[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COGE75D",
+      "v": "This Champion must wait before activating Cosmic Healing.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COGE75T",
+      "v": "[b4b4b4ff]Cosmic Healing Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COGE8222D",
+      "v": "Maestro gains random Buffs periodically.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COGE8222T",
+      "v": "[b4b4b4ff]Cosmic Advantage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COGE92D",
+      "v": "Increases Attack Rating. Increases Physical Resistance.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COGE92T",
+      "v": "[b4b4b4ff]Cosmic Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COIP45D",
+      "v": "Periodically, either Regeneration or Degeneration is applied to both Champions.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COIP45T",
+      "v": "[b4b4b4ff]Coin Flip[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COLD119D",
+      "v": "The Combo Meter is not reset when struck by an attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COLD220D",
+      "v": "The Combo Meter is not reset when struck by an attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COLD220T",
+      "v": "[b4b4b4ff]Combo Shield[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CONG114D",
+      "v": "Recovers Health over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CONG114T",
+      "v": "[b4b4b4ff]Cosmic Healing[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CONT198D",
+      "v": "Reduces Buff duration.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CONT198T",
+      "v": "[b4b4b4ff]Cosmic Precedent[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COON91D",
+      "v": "Decreases the chance for abilities to trigger.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COON93D",
+      "v": "Decreases the chance for abilities to trigger.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COON93T",
+      "v": "[b4b4b4ff]Concussion[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COON_D",
+      "v": "Reduces the chance for abilities to trigger.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COON_T",
+      "v": "Concussion",
+      "vn": 19
+    },
+    {
+      "k": "ID_COTY38D",
+      "v": "Immune to Bleed, Poison, Stun, and Power Lock effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_COTY38T",
+      "v": "[b4b4b4ff]Collector's Immunity[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_COUNTERP_PAUSE_SHORT",
+      "v": "[b4b4b4ff]Counterpunch Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CREL209D",
+      "v": "Grants Hulk Attack Rating that increases the more excited the Crowd gets.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CREL209T",
+      "v": "[b4b4b4ff]Crowd Excitement Level[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRGE_D",
+      "v": "Increases the damage bonus applied to a Critical Hit.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRGE_T",
+      "v": "Critical Damage",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRRE8250D",
+      "v": "Inflicts Energy Damage whenever an ability had a chance to activate but didn't.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRRE8250T",
+      "v": "[b4b4b4ff]Critical Failure[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRRE_D",
+      "v": "Deals Energy Damage whenever an ability could have activated but didn't.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRRE_T",
+      "v": "Critical Failure",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRTY68D",
+      "v": "Increases the damage bonus of Critical Hits.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRTY68T",
+      "v": "[b4b4b4ff]Cruelty[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRZY209D",
+      "v": "Grants Hulk Attack Rating and makes all of his attacks SMASH.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CRZY209T",
+      "v": "[b4b4b4ff]Crowd Frenzy[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CUNG56D",
+      "v": "With more Cunning than Madness, or if the two are equal, the opponent generates less Power and Green Goblin gains increases Special Attack damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CUNG56T",
+      "v": "[b4b4b4ff]Cunning[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_CUSE241D",
+      "v": "Inflicts Energy Damage over time, grants a chance to inflict Stun when struck by Loki's Basic Attacks, guarantees that Loki's Heavy Attack is a Critical Hit, and automatically steals any Buffs that activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_CUSE241T",
+      "v": "[b4b4b4ff]Curse[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DAGY8224D",
+      "v": "Gained each time the opponent's Power Level decreases. Attacking with 100 Dark Energy stacks triggers an Imbued effect.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DAGY8224T",
+      "v": "[b4b4b4ff]Dark Energy[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DAON58D",
+      "v": "While Blocking, Colossus reflects a portion of the Special Attack damage dealt to him.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DAON58T",
+      "v": "[b4b4b4ff]Damage Reflection[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DASE221D",
+      "v": "Dimensional Beings lose Ability Accuracy and Blade has increased Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DASE221T",
+      "v": "[b4b4b4ff]Danger Sense[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DEON94D",
+      "v": "Inflicts Direct Damage over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DEON94T",
+      "v": "[b4b4b4ff]Degeneration[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DEON_D",
+      "v": "Health is lost over time. Bypasses Armor and Resistances.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DEON_T",
+      "v": "Degeneration",
+      "vn": 19
+    },
+    {
+      "k": "ID_DEOY100D",
+      "v": "The next attack against Vulture is guaranteed to miss.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DEOY100T",
+      "v": "[b4b4b4ff]Decoy[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DETE109D",
+      "v": "Decreases the amount of Power gained by attacking or being attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DETE109T",
+      "v": "[b4b4b4ff]Decreased Power Rate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DETY81D",
+      "v": "Immune to all Debuff effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DETY81T",
+      "v": "[b4b4b4ff]Debuff Immunity[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DETY88D",
+      "v": "Immune to all Debuff effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DETY88T",
+      "v": "[b4b4b4ff]Debuff Immunity[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DICH37D",
+      "v": "Steadfast Approach did not activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DICH37T",
+      "v": "[b4b4b4ff]Disabled Steadfast Approach[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DIDE220D",
+      "v": "Unyielding Fortitude did not activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DIDE220T",
+      "v": "[b4b4b4ff]Disabled Unyielding Fortitude[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DIDS8250D",
+      "v": "Increases Attack Rating based on missing Health.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DIDS8250T",
+      "v": "[b4b4b4ff]Diamonds[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DIHT49D",
+      "v": "Overpowering Light did not activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DIHT49T",
+      "v": "[b4b4b4ff]Disabled Overpowering Light[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DINK192D",
+      "v": "Continuously gain Dark Energy over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DINK192T",
+      "v": "[b4b4b4ff]Dimensional Link[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DITE221D",
+      "v": "Inflicts Direct Damage over time and reduces Power Gain Rate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DITE221T",
+      "v": "[b4b4b4ff]Disintegrate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DITH50D",
+      "v": "Absolute Strength did not activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DITH50T",
+      "v": "[b4b4b4ff]Disabled Absolute Strength[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_DOGE98D",
+      "v": "Summoner Mastery. Inflicts Direct Damage over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_DOGE98T",
+      "v": "[b4b4b4ff]Double Edge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ELNG75D",
+      "v": "Holding Block generates Electroshock Charges.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ELNG75T",
+      "v": "[b4b4b4ff]Electroshock Charging[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_EMNK192D",
+      "v": "Continuously gain Dark Energy over time. Regenerate a portion of the damage dealt by the Soul Bond detonation.",
+      "vn": 19
+    },
+    {
+      "k": "ID_EMNK192T",
+      "v": "[b4b4b4ff]Empowered Dimensional Link[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENCE116D",
+      "v": "Decreases damage taken from energy attacks like beams, electricity, or fire.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENCE116T",
+      "v": "[b4b4b4ff]Energy Resistance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENCE118D",
+      "v": "Decreases damage taken from energy attacks like beams, electricity, or fire.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENCE118T",
+      "v": "[b4b4b4ff]Energy Resistance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENCK75D",
+      "v": "Static Shock damage is increased.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENCK75T",
+      "v": "[b4b4b4ff]Enhanced Static Shock[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENED376D",
+      "v": "The Enrage Timer has expired! Grants Unstoppable, Unblockable, and Power Gain.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENED376T",
+      "v": "[b4b4b4ff]Enraged[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENED94D",
+      "v": "The Enrage Timer has expired! Grants Attack Rating, Ability Accuracy, Critical Rate, and Critical Damage",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENED94T",
+      "v": "[b4b4b4ff]Enraged[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENER376D",
+      "v": "When this timer expires, become Enraged and gain Unstoppable, Unblockable, and Power Gain.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENER376T",
+      "v": "[b4b4b4ff]Enrage Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENER94D",
+      "v": "When this timer expires, become Enraged and gain additional Attack Rating, Ability Accuracy, Critical Rate, and Critical Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENER94T",
+      "v": "[b4b4b4ff]Enrage Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENLS242D",
+      "v": "Precision abilities are more potent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENLS242T",
+      "v": "[b4b4b4ff]Enhanced Criticals[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENRE194D",
+      "v": "Reduces Ability Accuracy and prevents passive Evade effects from triggering.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENRE194T",
+      "v": "[b4b4b4ff]Ensnare[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENTE109D",
+      "v": "Prevents Power from being generated when struck.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ENTE109T",
+      "v": "[b4b4b4ff]Enervate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_EVON101D",
+      "v": "Provides a chance to Evade incoming attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_EVON101T",
+      "v": "[b4b4b4ff]Evasion[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_EXON35D",
+      "v": "Decreases Critical Damage and reduces the effects of abilities that grant Power.",
+      "vn": 19
+    },
+    {
+      "k": "ID_EXON35T",
+      "v": "[b4b4b4ff]Exhaustion[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_EXRY166D",
+      "v": "Fury effects last longer.",
+      "vn": 19
+    },
+    {
+      "k": "ID_EXRY166T",
+      "v": "[b4b4b4ff]Extended Fury[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAAL8216D",
+      "v": "Nullifies all Buffs and prevents new Buffs from activating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAAL8216T",
+      "v": "[b4b4b4ff]Fate Seal[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAAL_D",
+      "v": "Nullifies all Buffs, and prevents new Buffs from activating",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAAL_T",
+      "v": "Fate Seal",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAME61D",
+      "v": "Hulk reacts to cowardly Passive Damage Over Time effects by increasing Attack Rating, Regenerating a portion of the damage taken, and increasing the opponents' likelihood to activate Special Attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAME61T",
+      "v": "[b4b4b4ff]Face Me[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAUE106D",
+      "v": "Decreases the chance to land Critical Hits.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAUE106T",
+      "v": "[b4b4b4ff]Fatigue[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAUE35D",
+      "v": "Decreases the chance to land Critical Hits.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAUE_D",
+      "v": "Reduces the chance to score a Critical Hit.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FAUE_T",
+      "v": "Fatigue",
+      "vn": 19
+    },
+    {
+      "k": "ID_FEID58373D",
+      "v": "Fear of the Void combines Agility, Weakness, and Petrify effects. Increases Attack Rating of opponents.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FEID58373T",
+      "v": "[b4b4b4ff]Fear of the Void[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FIFS37D",
+      "v": "Neither Champion may activate Buffs or Debuffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FIFS37T",
+      "v": "[b4b4b4ff]Fisticuffs[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR149D",
+      "v": "Freestyle Chain 1. Perform a Medium Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR149T",
+      "v": "[b4b4b4ff]Freestyle Combo 1[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR250D",
+      "v": "Freestyle Chain 2. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR250T",
+      "v": "[b4b4b4ff]Freestyle Combo 2[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR351D",
+      "v": "Freestyle Chain 3. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR351T",
+      "v": "[b4b4b4ff]Freestyle Combo 3[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR452D",
+      "v": "Freestyle Chain 4. Perform a Medium Attack next to end the combo and generate less Power in opponents.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FR452T",
+      "v": "[b4b4b4ff]Freestyle Combo 4[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRED213D",
+      "v": "This Champion must wait before starting a new combo.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRED213T",
+      "v": "[b4b4b4ff]Freestyle Combo Failed[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FREE51D",
+      "v": "Freestyle Chain 3. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FREE51T",
+      "v": "[b4b4b4ff]Freestyle Combo Three[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRNE49D",
+      "v": "Freestyle Chain 1. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRNE49T",
+      "v": "[b4b4b4ff]Freestyle Combo One[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRRM213D",
+      "v": "Beast's Critical Hits inflict Bleed.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRRM213T",
+      "v": "[b4b4b4ff]Freestyle Form[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRSS213D",
+      "v": "This Champion must wait before starting a new combo.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRSS213T",
+      "v": "[b4b4b4ff]Freestyle Combo Success[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRTE58403D",
+      "v": "Inflicts Energy Damage upon expiry.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRTE58403T",
+      "v": "[b4b4b4ff]Frostbite[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRUR52D",
+      "v": "Freestyle Chain 4. Perform a Medium Attack next to end the combo and increase Critical Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRUR52T",
+      "v": "[b4b4b4ff]Freestyle Combo Four[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRWO50D",
+      "v": "Freestyle Chain 2. Perform a Light Attack next.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FRWO50T",
+      "v": "[b4b4b4ff]Freestyle Combo Two[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FUED107D",
+      "v": "Activates to increase Attack Rating if a Debuff is inflicted.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FUED107T",
+      "v": "[b4b4b4ff]Fury Deactivated[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FUON165D",
+      "v": "Under the light of the Full Moon, Moon Knight's Critical Hits have a chance to Stun.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FUON165T",
+      "v": "[b4b4b4ff]Full Moon[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FURY102D",
+      "v": "Increases Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FURY107D",
+      "v": "Increases Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FURY107T",
+      "v": "[b4b4b4ff]Fury[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_FURY8220D",
+      "v": "Increases Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FURY_D",
+      "v": "Increases Attack Rating which governs most damage-dealing abilities.",
+      "vn": 19
+    },
+    {
+      "k": "ID_FURY_T",
+      "v": "Fury",
+      "vn": 19
+    },
+    {
+      "k": "ID_GATE8482D",
+      "v": "Random Buffs or Debuffs are assigned to both Champions at the start of the fight.",
+      "vn": 19
+    },
+    {
+      "k": "ID_GATE8482T",
+      "v": "[b4b4b4ff]Gambler's Fate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_GEWL75D",
+      "v": "When this timer ends, both Champions become Unstoppable.",
+      "vn": 19
+    },
+    {
+      "k": "ID_GEWL75T",
+      "v": "[b4b4b4ff]Get Ready to Brawl[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_GIOA242D",
+      "v": "Attacks have a chance to inflict Power Burn.",
+      "vn": 19
+    },
+    {
+      "k": "ID_GIOA242T",
+      "v": "[b4b4b4ff]Gift of the Loa[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_GLED121D",
+      "v": "Glaive's Immunity is briefly disabled if Corvus is knocked down by a Heavy or Special Attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_GLED121D_GLAIVE",
+      "v": "Grants him True Damage and guaranteed Critical Hits with his glaive. A charge is spent every time Corvus Glaive hits with Basic Attack using his glaive.",
+      "vn": "15.1"
+    },
+    {
+      "k": "ID_GLED121T",
+      "v": "[b4b4b4ff]Glaive's Immunity Damaged[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_GLED121T_GLAIVE",
+      "v": "[b4b4b4ff]Glaive Charges[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HEAL196D",
+      "v": "Healing effects like Regeneration deal damage instead of recover Health.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HEAL196T",
+      "v": "[b4b4b4ff]Heal Reversal[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HEAL78D",
+      "v": "Attacks generate Health relative to their damage dealt.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HEAL78T",
+      "v": "[b4b4b4ff]Health Steal[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HECK90D",
+      "v": "Prevents Health from being recovered by abilities like Regeneration. Does not affect Adrenaline.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HECK90T",
+      "v": "[b4b4b4ff]Heal Block[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HECK_D",
+      "v": "Prevents Health from being recovered by abilities like Regeneration.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HECK_T",
+      "v": "Heal Block",
+      "vn": 19
+    },
+    {
+      "k": "ID_HEEX196D",
+      "v": "Decreases Ability Accuracy. Prevents Buffs from activating. Deals Energy Damage upon expiry.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HEEX196T",
+      "v": "[b4b4b4ff]Hex[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HETS104D",
+      "v": "Recovers Health over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HETS104T",
+      "v": "[b4b4b4ff]Hearts[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HOMO98D",
+      "v": "Attacks inflict longer Bleed.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HOMO98T",
+      "v": "[b4b4b4ff]Hollow Point Ammo[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HOOM78D",
+      "v": "Attacks grant Power and steal Health.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HOOM78T",
+      "v": "[b4b4b4ff]Hoggoth's Wisdom[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HUER193D",
+      "v": "Attacks inflict Armor Break. Dash back and hold Block to switch modes.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HUER193T",
+      "v": "[b4b4b4ff]Hunter Spider[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_HUNS74D",
+      "v": "While Blocking, Hulkbuster inflicts damage when attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_HUNS74T",
+      "v": "[b4b4b4ff]Hulkbuster's Thorns[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ICGE75D",
+      "v": "Once shattered, you must wait for Ice Armor to reform.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ICGE75T",
+      "v": "[b4b4b4ff]Ice Armor Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ICOR58404D",
+      "v": "Increases Armor. Caps damage to 5% of Ice Man's max Health but then expires. Prevents the next Stun effect but then expires.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ICOR58404T",
+      "v": "[b4b4b4ff]Ice Armor[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INAN75D",
+      "v": "Dodge back and hold Block to activate a Recon Scan.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INAN75T",
+      "v": "[b4b4b4ff]Initiating Recon Scan[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INCE75D",
+      "v": "Void periodically inflicts a random Debuff.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INCE75T",
+      "v": "[b4b4b4ff]Intimidating Presence[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INES47D",
+      "v": "Attack Rating, Critical Rating, Critical Damage, Physical Resistance, and Energy Resistance are increased.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INES47T",
+      "v": "[b4b4b4ff]Increased Attributes[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INGE206D",
+      "v": "This Champion must wait before Indestructible activates again.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INGE206T",
+      "v": "[b4b4b4ff]Indestructible Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INGE75D",
+      "v": "This Champion must wait before activating Invisibility.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INGE75T",
+      "v": "[b4b4b4ff]Invisibility Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INLE206D",
+      "v": "Won't take damage from any source. Still reacts to being struck by attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INLE206T",
+      "v": "[b4b4b4ff]Indestructible[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INLE710D",
+      "v": "Cannot be struck by an attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INLE710T",
+      "v": "[b4b4b4ff]Invulnerable[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INLS35D",
+      "v": "Swiping right causes your Champion to Dash backwards. Swiping left causes them to Dash forwards.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INLS35T",
+      "v": "[b4b4b4ff]Inverted Controls[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INMO211D",
+      "v": "Attacks have a chance to Incinerate opponents.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INMO211T",
+      "v": "[b4b4b4ff]Incendiary Ammo[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTE211D",
+      "v": "Inflicts Energy Damage over time, decreases Block proficiency by half, and prevents Perfect Blocks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTE211T",
+      "v": "[b4b4b4ff]Incinerate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTE212D",
+      "v": "Inflicts Energy Damage over time, decreases Block proficiency by half, and prevents Perfect Blocks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTE_D",
+      "v": "Deals Energy Damage over time, reduces Block proficiency by half, and prevents a Perfect Block.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTE_T",
+      "v": "Incinerate",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTY100D",
+      "v": "Incoming attacks have a chance to miss. Increases Critical Damage. Attacks ignore a portion of Armor and Block Proficiency.",
+      "vn": 19
+    },
+    {
+      "k": "ID_INTY100T",
+      "v": "[b4b4b4ff]Invisibility[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ISER8217D",
+      "v": "Increases Armor to reduce damage taken from attacks. Has a chance to be removed when struck.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ISER8217T",
+      "v": "[b4b4b4ff]ISO-Loader[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ISON219D",
+      "v": "Reduces Armor, Critical Rate, Critical Damage, Block Proficiency, Attack Rating, Physical Resistance, Energy Resistance, and Ability Accuracy.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ISON219T",
+      "v": "[b4b4b4ff]ISO-8 Inversion[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_JUNT196D",
+      "v": "Ghost Rider places Judgements upon opponents to amplify his abilities.",
+      "vn": 19
+    },
+    {
+      "k": "ID_JUNT196T",
+      "v": "[b4b4b4ff]Judgement[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_KIAL82D",
+      "v": "Increases Attack Rating, Physical Resistance, Energy Resistance. Nullifies enemy Unstoppable Buffs. Enemy attacks have a chance to Glance.",
+      "vn": 19
+    },
+    {
+      "k": "ID_KIAL82T",
+      "v": "[b4b4b4ff]Kinetic Potential[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_KICK75D",
+      "v": "Landing successive Heavy Attacks increases Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_KICK75T",
+      "v": "[b4b4b4ff]Kingpin's Heavy Attack[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_KIGE75D",
+      "v": "Grants Fury upon expiry. Attacks have a chance to increase the amount of Fury gained when the recharge ends.",
+      "vn": 19
+    },
+    {
+      "k": "ID_KIGE75T",
+      "v": "[b4b4b4ff]King Groot Fury Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_KIGE8482D",
+      "v": "Heavy Attacks convert Kinetic Charges to Prowess. Striking Gambit with a combo-ending attack has a chance to remove all Kinetic Charges.",
+      "vn": 19
+    },
+    {
+      "k": "ID_KIGE8482T",
+      "v": "[b4b4b4ff]Kinetic Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_KING75D",
+      "v": "Gambit charges his weapons to generate Kinetic Charges as long as he isn't attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_KING75T",
+      "v": "[b4b4b4ff]Kinetic Charging[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_KLGE192D",
+      "v": "Increases Attack Rating and Critical Damage until struck 5 times.",
+      "vn": 19
+    },
+    {
+      "k": "ID_KLGE192T",
+      "v": "[b4b4b4ff]Klyntar Rage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIBO75D",
+      "v": "Inflicts Energy Damage over time and any damage Magik takes during this period is rewound when the effect expires.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIBO75T",
+      "v": "[b4b4b4ff]Limbo[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIDE8217D",
+      "v": "This Champion is under the effects of a nearby Linked Node.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIDE8217T",
+      "v": "[b4b4b4ff]Linked Node[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIGE122D",
+      "v": "Summoner Mastery. Inflicts Poison, dealing Direct Damage over time and reducing the effectiveness of healing.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIGE122T",
+      "v": "[b4b4b4ff]Liquid Courage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIOR8217D",
+      "v": "Armor is increased by a nearby Linked Node.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LIOR8217T",
+      "v": "[b4b4b4ff]Linked Armor[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LODE8221D",
+      "v": "This Champion is under the effects of a Local Node.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LODE8221T",
+      "v": "[b4b4b4ff]Local Node[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LOOA195D",
+      "v": "This Buff has no functionality on it's own.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LOOA195T",
+      "v": "[b4b4b4ff]Loa[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LUCK402D",
+      "v": "Increases Ability Accuracy.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LUCK402T",
+      "v": "[b4b4b4ff]Luck[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LUIC165D",
+      "v": "Moon Knight gains the benefits of a Full Moon during any Moon phase.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LUIC165T",
+      "v": "[b4b4b4ff]Lunatic[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_LUKY58409D",
+      "v": "Increases Critical Rating, Critical Damage, Ability Accuracy, Block Proficiency, and grants a chance to Evade.",
+      "vn": 19
+    },
+    {
+      "k": "ID_LUKY58409T",
+      "v": "[b4b4b4ff]Lucky[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MACE100D",
+      "v": "Masacre avoids all incoming attacks except for Special Attack 3.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MACE100T",
+      "v": "[b4b4b4ff]Masacre's Avoidance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MAED44D",
+      "v": "Decreases the Ability Accuracy of metallic opponents.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MAED44T",
+      "v": "[b4b4b4ff]Magnetized[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MAED75D",
+      "v": "When this effect ends, the next Debuff is removed and Regeneration is granted.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MAED75T",
+      "v": "[b4b4b4ff]Masochism Disabled[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MASS57D",
+      "v": "With more Madness than Cunning, or if the two are equal, Green Goblin recovers a portion of Basic Attack damage and opponents' Special Attack damage is decreased.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MASS57T",
+      "v": "[b4b4b4ff]Madness[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MAVE78D",
+      "v": "Punisher 2099 gains Power Gain each time his Nano-Tech Battery fills to a multiple of 25%.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MAVE78T",
+      "v": "[b4b4b4ff]Maximum Overdrive[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MIEE46D",
+      "v": "Grants increased Attack Rating, Unstoppable, and Immunity to Debuffs while performing a Dash attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MIEE46T",
+      "v": "[b4b4b4ff]Mighty Charge Three[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MIGE46D",
+      "v": "Grants Unstoppable and Immunity to Debuffs while performing a Dash attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MIGE46T",
+      "v": "[b4b4b4ff]Mighty Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MINE46D",
+      "v": "Grants Immunity to Debuffs while performing a Dash attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MINE46T",
+      "v": "[b4b4b4ff]Mighty Charge One[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MIWO46D",
+      "v": "Grants Unstoppable and Immunity to Debuffs while performing a Dash attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MIWO46T",
+      "v": "[b4b4b4ff]Mighty Charge Two[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MOGE75D",
+      "v": "This Champion must wait before Mordo's Power Gain activates again.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MOGE75T",
+      "v": "[b4b4b4ff]Mordo's Power Gain Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MOIN78D",
+      "v": "Mordo generates Power over time. This effect ends prematurely if Mordo is struck by an attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MOIN78T",
+      "v": "[b4b4b4ff]Mordo's Power Gain[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MUGE8230D",
+      "v": "Maestro reduces enemy Ability Accuracy when struck.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MUGE8230T",
+      "v": "[b4b4b4ff]Mutant Advantage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MUNT197D",
+      "v": "Reduces Special Attack damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MUNT197T",
+      "v": "[b4b4b4ff]Mutant Precedent[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MYGE8224D",
+      "v": "Maestro's attacks Nullify opponents, even if Blocked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MYGE8224T",
+      "v": "[b4b4b4ff]Mystic Advantage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_MYNT202D",
+      "v": "Reduces the effectiveness of abilities that generate Power.",
+      "vn": 19
+    },
+    {
+      "k": "ID_MYNT202T",
+      "v": "[b4b4b4ff]Mystic Precedent[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_NARY223D",
+      "v": "Punisher 2099 powers up several abilities by charging or spending his Nano-Tech Battery.",
+      "vn": 19
+    },
+    {
+      "k": "ID_NARY223T",
+      "v": "[b4b4b4ff]Nano-Tech Battery[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEDE196D",
+      "v": "Adds a chance to Evade, especially against physical attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEDE196T",
+      "v": "[b4b4b4ff]Neyaphem Mode[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEGE8240D",
+      "v": "Nebula is overcharged and inflicts Shock when in contact with the opponent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEGE8240T",
+      "v": "[b4b4b4ff]Nebula's Overcharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEIN112D",
+      "v": "Inflicts Direct Damage over time and inflicts Stun upon expiry.",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEIN112T",
+      "v": "[b4b4b4ff]Neurotoxin[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEON166D",
+      "v": "In the darkness of a New Moon, Moon Knight has a chance to evade attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_NEON166T",
+      "v": "[b4b4b4ff]New Moon[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_NICH75D",
+      "v": "Dash back and hold Block to switch Combat Modes.",
+      "vn": 19
+    },
+    {
+      "k": "ID_NICH75T",
+      "v": "[b4b4b4ff]Nightcrawler's Mode Switch[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_OSGE97D",
+      "v": "Increases Armor and Block Proficiency.",
+      "vn": 19
+    },
+    {
+      "k": "ID_OSGE97T",
+      "v": "[b4b4b4ff]Oshtur's Refuge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_OVGE75D",
+      "v": "This Champion must wait before Overrun can be activated again.",
+      "vn": 19
+    },
+    {
+      "k": "ID_OVGE75T",
+      "v": "[b4b4b4ff]Overrun Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_OVHT49D",
+      "v": "Special Attack 1 is unblockable and has increased damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_OVHT49T",
+      "v": "[b4b4b4ff]Overpowering Light[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PARY62D",
+      "v": "Summoner Mastery. Well-timed Blocks inflict Stun against basic attacks that make contact.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PARY62T",
+      "v": "[b4b4b4ff]Parry[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PASM121D",
+      "v": "Increased whenever the enemy activates a Special Attack or Old Man Logan loses 10% Health. Each Pacifism charge gained has a chance to convert all Pacifism charges into Fury and Cruelty Buffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PASM217D",
+      "v": "Gained when struck by a Critical Hit or when the opponent activates a Special Attack. Each Pacifism gained has a chance to convert all Pacifism into increased Attack Rating and Critical Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PASM217T",
+      "v": "[b4b4b4ff]Pacifism[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PAUSE_NEBULAHEAL_LONG",
+      "v": "Self-Repair charges activate when the opponent deals a lot of damage in a single hit, repairing the damage taken over time. If Stunned during her Self-Repair, the Repair stops.",
+      "vn": 13
+    },
+    {
+      "k": "ID_PAUSE_NEBULAHEAL_TITLE",
+      "v": "[b4b4b4ff]Self-Repair Charges[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PAZE60D",
+      "v": "Prevents moving, attacking, or defending and decreases the effectiveness of abilities that generate Power or Health.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PAZE60T",
+      "v": "[b4b4b4ff]Paralyze[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PECK66D",
+      "v": "Increases the chance that a Block is Perfect, which reduces all incoming damage to zero.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PECK66T",
+      "v": "[b4b4b4ff]Perfect Block[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PEFY58372D",
+      "v": "Decreases the effectiveness of abilities that grant Power or Health.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PEFY58372T",
+      "v": "[b4b4b4ff]Petrify[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PERY107D",
+      "v": "Increases Attack Rating for the remainder of the fight or until removed.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PERY107T",
+      "v": "[b4b4b4ff]Permanent Fury[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHASE_D",
+      "v": "Incoming attacks Miss and Damage Over Time Debuffs convert to Fury Passives.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHCE117D",
+      "v": "Decreases damage taken from physical attacks like punches, kicks, or sword slashes.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHCE117T",
+      "v": "[b4b4b4ff]Physical Resistance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHCE235D",
+      "v": "Grants Phoenix periodic Fury Buffs. The more Phoenix Force, the faster the Buffs are granted.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHCE235T",
+      "v": "[b4b4b4ff]Phoenix Force[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHCH92D",
+      "v": "Builds as the opponent gains Power. Decreases opponents' Special Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PHCH92T",
+      "v": "[b4b4b4ff]Physics Research[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PLND75D",
+      "v": "Periodically drains all of the attacker's Power.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PLND75T",
+      "v": "[b4b4b4ff]Plagued Mind[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PM1_LONG",
+      "v": "Perform 6 well timed blocks. Proxima gains True Accuracy and Prowess when completing a mission.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PM1_TITLE",
+      "v": "[b4b4b4ff]Mission 1: Parry Offense[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PM2_LONG",
+      "v": "Perform 4 intercepts against a dashing opponent. Proxima gains True Accuracy and Prowess when completing a mission.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PM2_TITLE",
+      "v": "[b4b4b4ff]Mission 2: Intercept Attack[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PM3_LONG",
+      "v": "Knockdown the opponent 5 times using a Heavy or Special Attack. Proxima gains True Accuracy and Prowess when completing a mission.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PM3_TITLE",
+      "v": "[b4b4b4ff]Mission 3: Incapacitate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAK109D",
+      "v": "Power is lost over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAK109T",
+      "v": "[b4b4b4ff]Power Leak[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAK243D",
+      "v": "Power is lost over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAK243T",
+      "v": "[b4b4b4ff]Power Leak[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAK78T",
+      "v": "[b4b4b4ff]Power Leak[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAL78D",
+      "v": "Power is drained from the opponent and a portion of the stolen amount is granted to the attacker.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POAL78T",
+      "v": "[b4b4b4ff]Power Steal[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POCH243D",
+      "v": "Power is stolen over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POCH243T",
+      "v": "[b4b4b4ff]Power Leech[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POCK109D",
+      "v": "Prevents Power generation.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POCK109T",
+      "v": "[b4b4b4ff]Power Lock[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POED78D",
+      "v": "Activates to generated Power over time if a Debuff is inflicted.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POED78T",
+      "v": "[b4b4b4ff]Power Gain Deactivated[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POGE75D",
+      "v": "This Champion must wait before Power Gain reactivates.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POGE75T",
+      "v": "[b4b4b4ff]Power Gain Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POIN78D",
+      "v": "Generates Power over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POIN78T",
+      "v": "[b4b4b4ff]Power Gain[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POLD118D",
+      "v": "Basic Attacks deal no damage but still generate Power. Their Special Attacks deal increased damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POLD118T",
+      "v": "[b4b4b4ff]Power Shield[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PONG91D",
+      "v": "Inflicts Direct Damage if a Special Attack is activated.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PONG91T",
+      "v": "[b4b4b4ff]Power Sting[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POON112D",
+      "v": "Inflicts Direct Damage over time and applies a stacking 30% reduction to all healing effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POON122D",
+      "v": "Inflicts Direct Damage over time and applies a stacking 30% reduction to all healing effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POON122T",
+      "v": "[b4b4b4ff]Poison[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POSE193D",
+      "v": "Increases Attack Rating and empowers Spider-Man's abilities.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POSE193T",
+      "v": "[b4b4b4ff]Poise[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POTE77D",
+      "v": "Increases the amount of Power gained by attacking or being attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POTE77T",
+      "v": "[b4b4b4ff]Power Rate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POTE78D",
+      "v": "Increases the amount of Power gained by attacking or being attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POTE78T",
+      "v": "[b4b4b4ff]Power Rate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POTY38D",
+      "v": "Immune to all Poison effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POTY38T",
+      "v": "[b4b4b4ff]Poison Immunity[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_POVE78D",
+      "v": "A portion of the Power spent to activate a Special Attack is recuperated.",
+      "vn": 19
+    },
+    {
+      "k": "ID_POVE78T",
+      "v": "[b4b4b4ff]Power Reserve[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRED88D",
+      "v": "This Champion must wait for the Protection ability to activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRED88T",
+      "v": "[b4b4b4ff]Protection Disabled[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRON80D",
+      "v": "Increases the chance to land Critical Hits.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRON80T",
+      "v": "[b4b4b4ff]Precision[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRON88D",
+      "v": "Damage over a specified amount is clamped to only deal that amount and no more.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRON88T",
+      "v": "[b4b4b4ff]Protection[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRON_D",
+      "v": "Increase the chance for a Critical Hit.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRON_T",
+      "v": "Precision",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRSS83D",
+      "v": "Increases Special Attack damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRSS83T",
+      "v": "[b4b4b4ff]Prowess[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRUN62D",
+      "v": "Proxima Midnight is able to Stun opponents with the Parry Mastery even against attacks that don't make contact.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PRUN62T",
+      "v": "[b4b4b4ff]Proxima's Parry Stun[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_PSGE196D",
+      "v": "Empowers Psylocke's abilities, especially when attacking opponents who have zero Power.",
+      "vn": 19
+    },
+    {
+      "k": "ID_PSGE196T",
+      "v": "[b4b4b4ff]Psi-Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_QAFTSCALE_LONG",
+      "v": "For every point in the Aftershock Scale, Aftershock inflicts an amount of damage, Concussion and has a chance to Stun when this effect expires.",
+      "vn": 19
+    },
+    {
+      "k": "ID_QAFTSCALE_TITLE",
+      "v": "[b4b4b4ff]Aftershock Scale[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REAN42D",
+      "v": "Decreases defensive Ability Accuracy.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REAN42T",
+      "v": "[b4b4b4ff]Recon Scan[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REED114D",
+      "v": "Recovers Health over time if inflicted by a Debuff.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REED114T",
+      "v": "[b4b4b4ff]Regeneration Deactivated[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REER72D",
+      "v": "Converted into a Regeneration Buff when damaged and not already under the effects of Regeneration.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REER72T",
+      "v": "[b4b4b4ff]Resilience Counter[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REGE37D",
+      "v": "Stored damage will be released when Black Panther hits.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REGE37T",
+      "v": "[b4b4b4ff]Reflective Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REGE75D",
+      "v": "Falcon must wait before activating another Recon Scan.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REGE75T",
+      "v": "[b4b4b4ff]Recon Scan Recharge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REON114D",
+      "v": "Recovers Health over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REON114T",
+      "v": "[b4b4b4ff]Regeneration[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REON58D",
+      "v": "Reflects damage back to the opponent when Killmonger Blocks or is struck by an attack. The higher Killmonger's current stored Power at the time of activation, the more damage reflected.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REON58T",
+      "v": "[b4b4b4ff]Reverberation[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_REON_D",
+      "v": "Recovers Health over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REON_T",
+      "v": "Regeneration",
+      "vn": 19
+    },
+    {
+      "k": "ID_REOR47D",
+      "v": "Damage is stored and then released when Black Panther hits.",
+      "vn": 19
+    },
+    {
+      "k": "ID_REOR47T",
+      "v": "[b4b4b4ff]Reflective Armor[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_RETE83D",
+      "v": "Special Attacks have a chance to replicate enemy Buffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_RETE83T",
+      "v": "[b4b4b4ff]Replicate[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_ROER75D",
+      "v": "If Rogue doesn't hit the opponent within the allotted time, then she loses all stolen Buffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_ROER75T",
+      "v": "[b4b4b4ff]Rogue's Buff Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SARD206D",
+      "v": "Damage over a specified amount is clamped to only deal that amount and no more.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SARD206T",
+      "v": "[b4b4b4ff]Safeguard[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SCGE8225D",
+      "v": "Maestro punishes enemy actions by inflicting Debuffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SCGE8225T",
+      "v": "[b4b4b4ff]Science Advantage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SCNT201D",
+      "v": "Reduces Physical Resistance.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SCNT201T",
+      "v": "[b4b4b4ff]Science Precedent[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SEVE75D",
+      "v": "Spider-Gwen is switching between Hunter Spider and Trap Spider combat modes.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SEVE75T",
+      "v": "[b4b4b4ff]Sensory Weave[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SHCK79D",
+      "v": "Inflicts Energy Damage over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SHCK79T",
+      "v": "[b4b4b4ff]Shock[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SHCK_D",
+      "v": "Deals Energy Damage over time.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SHCK_T",
+      "v": "Shock",
+      "vn": 19
+    },
+    {
+      "k": "ID_SHNG75D",
+      "v": "Rocket generates a random shield to provide Physical Resistance, Armor, or Special Attack Resistance.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SHNG75T",
+      "v": "[b4b4b4ff]Shield Charging[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SIGE67D",
+      "v": "Each time the opponent gains Power, a portion of that Power is drained and Vulture gains Chitauri Energy.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SIGE67T",
+      "v": "[b4b4b4ff]Siphon Charge[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SKGE710D",
+      "v": "Maestro is immune to Debuffs.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SKGE710T",
+      "v": "[b4b4b4ff]Skill Advantage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SKNT200D",
+      "v": "Reduces Critical Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SKNT200T",
+      "v": "[b4b4b4ff]Skill Precedent[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SMDY37D",
+      "v": "Hulk's next attack will SMASH, making him Unstoppable, and increasing Attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SMDY37T",
+      "v": "[b4b4b4ff]SMASH Ready[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SMSH37D",
+      "v": "All of the Hulk's attacks have a chance to SMASH, making him Unstoppable, and granting additional Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SMSH37T",
+      "v": "[b4b4b4ff]SMASH[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SOON195D",
+      "v": "Decreases the chance for Buffs to activate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SOON195T",
+      "v": "[b4b4b4ff]Soul Prison[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SORE195D",
+      "v": "Morningstar is attempting to capture the opponent's soul by dealing damage. Deal damage to Morningstar to stop the capture.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SORE195T",
+      "v": "[b4b4b4ff]Soul Capture[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SOUL195D",
+      "v": "Increases Critical Damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SOUL195T",
+      "v": "[b4b4b4ff]Soul[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPAD208D",
+      "v": "Fury Buffs have an infinite duration as long as Hela has Spirits of the Dead.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPAD208T",
+      "v": "[b4b4b4ff]Spirits of the Dead[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPCE8240D",
+      "v": "Decreases damage taken from Special Attacks.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPCE8240T",
+      "v": "[b4b4b4ff]Special Attack Resistance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_GHOST_0",
+      "v": "Ghost unleashes a flurry of precise attacks before advancing into a backflip kick.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_GHOST_1",
+      "v": "Ghost catches the opponent off guard with kicks to the chest ending with a drop kick from above.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_GHOST_2",
+      "v": "Ghost advances on the opponent, quickly Phasing in and out, avoiding their attacks and countering with her own.",
+      "vn": 19
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SENTINEL_0",
@@ -54,6 +2789,21 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_GHOST_0",
+      "v": "Spectral Strike",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_GHOST_1",
+      "v": "Exploit Weakness",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_GHOST_2",
+      "v": "Relentless Onslaught",
+      "vn": 19
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_SENTINEL_0",
       "v": "ISO Fusion",
       "vn": "17.1"
@@ -82,6 +2832,26 @@
       "k": "ID_SPECIAL_ATTACK_SENTRY_2",
       "v": "Channel the Void",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_SPER75D",
+      "v": "A lingering ancestral curse periodically reverses the effects of all healing abilities.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPER75T",
+      "v": "[b4b4b4ff]Spectre Timer[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPES8482D",
+      "v": "Attacks have a chance to inflict Weakness or Fatigue.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SPES8482T",
+      "v": "[b4b4b4ff]Spades[-]",
+      "vn": 19
     },
     {
       "k": "ID_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_FF",
@@ -1046,6 +3816,16 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_STAT_PAUSESTIRNGID",
+      "v": "$$Placeholder icon description. Second sentence that may wrap into a new line.$$",
+      "vn": 19
+    },
+    {
+      "k": "ID_STAT_PAUSETITLEID",
+      "v": "$$PLACEHOLDER ICON TITLE$$",
+      "vn": 19
+    },
+    {
       "k": "ID_STAT_PLASMA_HUD",
       "v": "PLASMA",
       "vn": 18
@@ -1091,7 +3871,7 @@
     },
     {
       "k": "ID_STAT_SB_DOM_IC2_DESC",
-      "v": "[64acff]Domino:[-] Start the fight with either Lucky or Unlucky active for 7 seconds.[-]\n[64acff]All Teammates:[-] All Teammates have +{0} Armor Rating and +3% Power Gain.[-]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Domino:[-] Start the fight with either Lucky or Unlucky active for 7 seconds.[-]\n[64acff]Cable:[-] +{0} Armor Rating and +3% Power Gain.[-]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "18.1"
     },
     {
@@ -1350,6 +4130,276 @@
       "vn": 18
     },
     {
+      "k": "ID_STCH37D",
+      "v": "Heavy Attack damage is increased and all Blocks are Perfect.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCH37T",
+      "v": "[b4b4b4ff]Steadfast Approach[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK104D",
+      "v": "Joe Fixit's Double Down ability becomes permanent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK104T",
+      "v": "[b4b4b4ff]Stacked Deck[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK353D",
+      "v": "Joe Fixit's Double Down ability becomes permanent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK353T",
+      "v": "[b4b4b4ff]Stacked Deck[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK8250D",
+      "v": "Joe Fixit's Double Down ability becomes permanent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK8250T",
+      "v": "[b4b4b4ff]Stacked Deck[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK8482D",
+      "v": "Joe Fixit's Double Down ability becomes permanent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STCK8482T",
+      "v": "[b4b4b4ff]Stacked Deck[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STED8240D",
+      "v": "This Champion must wait before Stark Tech A.I. may reactivate.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STED8240T",
+      "v": "[b4b4b4ff]Stark Tech A.I. Disabled[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STER8216D",
+      "v": "The next time a Buff would activate, it doesn't activate and Stagger ends.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STER8216T",
+      "v": "[b4b4b4ff]Stagger[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STFY60D",
+      "v": "Stun lasts twice as long.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STFY60T",
+      "v": "[b4b4b4ff]Stupefy[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STI8240D",
+      "v": "Increases the chance to Evade Special Attacks. Removed when struck by a Cosmic Champion or a Heavy Attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STI8240T",
+      "v": "[b4b4b4ff]Stark Tech A.I.[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STSE110D",
+      "v": "Bishop's attack damage is reduced and replaced by bursts of Energy Damage. This damage increases with each Prowess Bishop had at the time his Special Attack 1 was activated.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STSE110T",
+      "v": "[b4b4b4ff]Steady Release[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STTY62D",
+      "v": "Immune to all Stun effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STTY62T",
+      "v": "[b4b4b4ff]Stun Immunity[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STUN115D",
+      "v": "Prevents moving, attacking, or defending.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STUN115T",
+      "v": "[b4b4b4ff]Stun[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_STUN_D",
+      "v": "Prevents movement or attacking.",
+      "vn": 19
+    },
+    {
+      "k": "ID_STUN_T",
+      "v": "Stun",
+      "vn": 19
+    },
+    {
+      "k": "ID_SUCE107D",
+      "v": "Uses Special Attacks in consecutive order from 1 to 3, restarting from the beginning after Special 3.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SUCE107T",
+      "v": "[b4b4b4ff]Surging Vengeance[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SWDE87D",
+      "v": "Periodically grants Precision, which increases Critical Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SWDE87T",
+      "v": "[b4b4b4ff]Swashbuckling Mode[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SWMO75D",
+      "v": "Activate a Special Attack or Dash back and hold Block to switch Ammo types.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SWMO75T",
+      "v": "[b4b4b4ff]Switching Ammo[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SYDE109D",
+      "v": "Decreases Power Rate, providing less Power when attacking or being attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SYDE109T",
+      "v": "[b4b4b4ff]Synodic Tide[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_SYDE77D",
+      "v": "Moon Knight's Power Rate is increased, providing additional Power when attacking or being attacked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_SYDE77T",
+      "v": "[b4b4b4ff]Synodic Tide[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TANT193D",
+      "v": "Reduces Attack Rating and increases the likelihood that a Special Attack is activated.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TANT193T",
+      "v": "[b4b4b4ff]Taunt[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TEGE8240D",
+      "v": "Maestro's Block drains opponents' Power, and Special Attacks grant Maestro Armor.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TEGE8240T",
+      "v": "[b4b4b4ff]Tech Advantage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TENT199D",
+      "v": "Reduces Ability Accuracy.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TENT199T",
+      "v": "[b4b4b4ff]Tech Precedent[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_THCK110D",
+      "v": "Inflicts Energy Damage over time. Ends prematurely if Howard is Stunned.",
+      "vn": 19
+    },
+    {
+      "k": "ID_THCK110T",
+      "v": "[b4b4b4ff]Thunderquack[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_THCK235D",
+      "v": "Each time the opponent gains Power, a portion of that Power is drained and they suffer Direct Damage based on the amount of Power lost.",
+      "vn": 19
+    },
+    {
+      "k": "ID_THCK235T",
+      "v": "[b4b4b4ff]Thermal Feedback[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TRER194D",
+      "v": "Heavy Attacks are Unstoppable and inflict Weakness. Dash back and hold Block to switch modes.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TRER194T",
+      "v": "[b4b4b4ff]Trap Spider[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TRGE251D",
+      "v": "Attacks ignore Armor and Resistances.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TRGE251T",
+      "v": "[b4b4b4ff]True Damage[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TRKE69D",
+      "v": "Attacks ignore Armor, Resistances, Auto-Block, and Evade effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TRKE69T",
+      "v": "[b4b4b4ff]True Strike[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_TYNY109D",
+      "v": "Villains in this arena attain absolute Power. Heroes do not gain Power.",
+      "vn": 19
+    },
+    {
+      "k": "ID_TYNY109T",
+      "v": "[b4b4b4ff]Tyranny[-]",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_ATTIRBUTE_AL",
       "v": "ARMOR"
     },
@@ -1586,6 +4636,26 @@
     {
       "k": "ID_UI_ATTRIBUTE_UNIVERSE",
       "v": "Champion Tags:"
+    },
+    {
+      "k": "ID_UI_BUFFPAUSE_BUFF",
+      "v": "Buff:",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_BUFFPAUSE_DEBUFF",
+      "v": "Debuff:",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_BUFFPAUSE_FORMAT",
+      "v": "{0} {1}",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_BUFFPAUSE_PASSIVE",
+      "v": "Passive:",
+      "vn": 19
     },
     {
       "k": "ID_UI_COMMON_DETAILS",
@@ -8578,6 +11648,11 @@
       "v": "[b310e8]Phasing VII[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_PHASING",
+      "v": "[b4b4b4ff]Phasing[-]",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_PHOENIX_OVERLOAD_HUD",
       "v": "OVERLOAD",
       "vn": "13.1"
@@ -10348,11 +13423,6 @@
       "vn": 16
     },
     {
-      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_IGNITED",
-      "v": "Ignited - Passive",
-      "vn": "18.1"
-    },
-    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_INFINITYCLASS",
       "v": "Infinity Class",
       "vn": 18
@@ -10560,6 +13630,11 @@
       "vn": "11.2"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONDASHBACK1",
+      "v": "Dash Back",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONELEMENTGUN",
       "v": "Element Gun Effects",
       "vn": 12
@@ -10748,6 +13823,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPERSISTENTCHARGE",
       "v": "Persistent Charge",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPHASE",
+      "v": "Phasing",
+      "vn": 19
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPHOENIXFORCEEMPOWERED",
@@ -12063,6 +15143,11 @@
       "v": "[b4b4b4ff]Petrify[-]"
     },
     {
+      "k": "ID_UI_STAT_FORMAT_PETRIFY_HUD",
+      "v": "PETRIFY",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_POWERSTEALINFO",
       "v": "{0}% Chance per hit to Power Steal, taking [16982bff]{1}%[-] of their Power as your own."
     },
@@ -13197,6 +16282,136 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_UI_STAT_FORMAT_WASP_ATKBONUS",
+      "v": "[16982bff]+{1}[-] Attack Rating for each hit on her Combo Meter.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_CONCUSSION",
+      "v": "Concussion, reducing the opponent’s Ability Accuracy by {1}% for each hit on her Combo Meter for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_COUNTER_STING",
+      "v": "Wasp has a {0}% chance to shrug off all Damaging Debuffs other than Bleed, then shrink to Counter Attack, Evading the opponent’s attack and inflicting Shock, dealing [16982bff]{1}[-] Energy Damage over {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_HVY_STUN",
+      "v": "When Wasp charges a Heavy Attack while hitting with a Basic Attack Combo, the opponent loses sight of her and passively gets Stunned for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_HVY_WEAKNESS",
+      "v": "Inflicts Weakness for {2} seconds if this attack was chained while hitting with a Basic Attack Combo, reducing the opponent’s Attack Rating by {1}%.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_PASSIVE1",
+      "v": "Whenever Wasp shrinks down, her next 2 hits will be critical, with [16982bff]+{1}[-] Attack Rating for each Debuff active on the opponent. Additionally, Counter Attack is disabled for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_PASSIVE2",
+      "v": "When Wasp has Class Advantage, all of her abilities that are based on the Combo Meter receive an additional bonus equivalent to {1} more hits on her Combo Meter.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_PETRIFY",
+      "v": "Sting will Petrify opponents after lasting its full duration, reducing the effectiveness of Power Gain and Regeneration by {1}% for each hit on Wasp’s Combo Meter for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_SIG_LONG",
+      "v": "{0}% increased chance to shrink and Counter Attack when attacked by the opponent. Additionally, the duration that Counter Attack is disabled after shrinking is reduced by [16982bff]{1}%[-].",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_SIG_SHORT",
+      "v": "Quantum Evade {0}",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_SIG_SIMPLE",
+      "v": "Increased chance to shrink and Counter Attack when attacked by the opponent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_SIG_TITLE",
+      "v": "QUANTUM EVADE",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_WASP_STING",
+      "v": "Stings the opponent for {2} seconds. An opponent with sting takes [16982bff]{1}[-] damage when activating a special attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_ABL_A",
+      "v": "Critical Hits cannot be Evaded.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_ABL_B",
+      "v": "Non-Critical Hits have a {0}% chance to gain a Cruelty Buff increasing Critical Damage Rating by [16982bff]{1}[-] for {2} seconds. Cruelty Buffs stack up to 5.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_ABL_C",
+      "v": "The chance to gain a Cruelty Buff on a Heavy Non-Critical Hit increases the longer the Heavy Attack is charged.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_ABL_D",
+      "v": "When the opponent Evades, gain a Precision Passive for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_DASH_A",
+      "v": "Begin Phasing for {2} seconds. Phasing won’t activate if Ghost is afflicted with an Armor Break Debuff or has a Precision Passive.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_PHASE_A",
+      "v": "While Phasing, incoming attacks have a {0}% chance to Miss and each Damage Over Time Debuff on Ghost converts to a Fury Passive increasing Attack Rating by [16982bff]{1}[-] for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_PHASE_B",
+      "v": "Upon Phasing, gain a Precision Passive for {2} seconds which guarantees the next hit to be Critical and consumes the Precision Passive. Ghost can only land Critical Hits through her abilities.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_PHASE_C",
+      "v": "Phasing is immediately deactivated when Ghost initiates an attack or Blocks an attack.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_PHASE_HUD",
+      "v": "PHASE",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_SP1_A",
+      "v": "Gain 3 Precision Passives for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_SP2_A",
+      "v": "Gain a Cruelty Buff increasing Critical Damage Rating by [16982bff]{1}[-] for {2} seconds, then refresh all Cruelty Buffs generated by Ghost.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_SP3_A",
+      "v": "Each Cruelty Buff generated by Ghost converts to a permanent Cruelty Passive. Cruelty Passives stack up to 5.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_GHOST_SP_A",
+      "v": "When triggered immediately upon Phasing, each hit is a guaranteed Critical.",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_STAT_IMMUNITY_ARMORBREAK",
       "v": "[5baefc]Armor Break Immunity[-]"
     },
@@ -13480,6 +16695,11 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_ABOMINATION_TITLE_LOWER",
       "v": "Irradiate"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_ADPH",
+      "v": "After each Special Attack become Unstoppable for [16982bff]{2}[-] seconds.",
+      "vn": 19
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_AGENTVENOM_DESC",
@@ -14708,6 +17928,31 @@
       "v": "SPIRIT OF VENGEANCE"
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_GHOST_LONG_A",
+      "v": "At the start of the fight, begin Phasing for {2} seconds.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GHOST_LONG_B",
+      "v": "When opponents Miss, generate [16982bff]{1}%[-] of Max Power per Miss.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GHOST_SHORT",
+      "v": "Quantum Augmentation {0}",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GHOST_SIMPLE",
+      "v": "Improved technology provides Ghost greater control over Phasing. She begins the fight Phasing and while it’s active, opponent’s Missed attacks provide her Power.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_GHOST_TITLE",
+      "v": "QUANTUM AUGMENTATION",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_GREENGOBLIN_HUD",
       "v": "SUPER BOMB",
       "vn": "14.1"
@@ -15678,7 +18923,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_NEBULA_LONG",
-      "v": "When Nebula is out of Self-Repair charges, she tries to recalibrate her implants granting her a [16982bff]{0}%[-] to regain a charge every {2} seconds.",
+      "v": "When Nebula is out of Self-Repair charges, she tries to recalibrate her implants granting her a [16982bff]{0}%[-] chance to regain a charge every {2} seconds.",
       "vn": 13
     },
     {
@@ -17136,6 +20381,146 @@
     {
       "k": "ID_UI_STAT_SPECIAL_PHYS_ONCE",
       "v": "Strikes once for [16982bff]{1}%[-] of your Attack as Physical damage."
+    },
+    {
+      "k": "ID_UI_WASP_COUNTER_STING_PAUSE",
+      "v": "Wasp Counter Attack Recharge",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_WASP_COUNTER_STING_PAUSE_LONG",
+      "v": "Wasp must wait before being able to shrink and Counter Attack when attacked by the opponent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNDE220D",
+      "v": "Sentry's Combo Meter is not reset when he is struck.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNDE220T",
+      "v": "[b4b4b4ff]Unyielding Fortitude[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNKY58416D",
+      "v": "Decreases Critical Rating, Critical Damage, Critical Resistance, Ability Accuracy, Block Proficiency, Bleed effectiveness, and prevents Evade or Dexterity from triggering.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNKY58416T",
+      "v": "[b4b4b4ff]Unlucky[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNLE33D",
+      "v": "Won't react when struck by an attack. Still receives any damage dealt.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNLE33T",
+      "v": "[b4b4b4ff]Unstoppable[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNLE83D",
+      "v": "Attacks cannot be Blocked.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNLE83T",
+      "v": "[b4b4b4ff]Unblockable[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNLE_D",
+      "v": "Won't react when struck by an attack. Still takes the damage.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNLE_T",
+      "v": "Unstoppable",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNRT75D",
+      "v": "Sabretooth is losing Regeneration stacks because he did not recently hit or get struck by the opponent.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UNRT75T",
+      "v": "[b4b4b4ff]Untamed Heart[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_VECK110D",
+      "v": "Contact with Venompool reflects a portion of the damage dealt back to attackers.",
+      "vn": 19
+    },
+    {
+      "k": "ID_VECK110T",
+      "v": "[b4b4b4ff]Venompool's Static Shock[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_VIOR75D",
+      "v": "This Champion Regenerates Health unless it loses 25% Health before this effect expires.",
+      "vn": 19
+    },
+    {
+      "k": "ID_VIOR75T",
+      "v": "[b4b4b4ff]Vigor[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_VIOR97D",
+      "v": "Increases Armor and grants Power when a Debuff is inflicted. Disabled by Armor Break.",
+      "vn": 19
+    },
+    {
+      "k": "ID_VIOR97T",
+      "v": "[b4b4b4ff]Vibranium Armor[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_WAON163D",
+      "v": "As the Moon wanes, Moon Knight has a chance to gain Fury.",
+      "vn": 19
+    },
+    {
+      "k": "ID_WAON163T",
+      "v": "[b4b4b4ff]Waning Moon[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_WAON164D",
+      "v": "As the Moon waxes, Moon Knight has a chance to gain Precision.",
+      "vn": 19
+    },
+    {
+      "k": "ID_WAON164T",
+      "v": "[b4b4b4ff]Waxing Moon[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_WESS99D",
+      "v": "Decreases Attack Rating.",
+      "vn": 19
+    },
+    {
+      "k": "ID_WESS99T",
+      "v": "[b4b4b4ff]Weakness[-]",
+      "vn": 19
+    },
+    {
+      "k": "ID_WESS_D",
+      "v": "Reduces Attack Rating which governs most damage-dealing effects.",
+      "vn": 19
+    },
+    {
+      "k": "ID_WESS_T",
+      "v": "Weakness",
+      "vn": 19
     }
   ]
 }
