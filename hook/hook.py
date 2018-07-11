@@ -594,7 +594,7 @@ class Hook:
     #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
         """Displays a user roster with tag filtering
         ex.
-        /roster [user] [#mutuant #bleed]"""
+        /roster [user] [#mutant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         await hargs.roster.display(hargs.tags)
 
