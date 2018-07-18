@@ -16,7 +16,7 @@ class MCOCTools:
     lookup_links = {
             'event': (
                 '<http://simians.tk/MCOC-Sched>',
-                '[Tiny MCoC Schedule](http://simians.tk/MCOC-Sched)',
+                '[Tiny MCoC Schedule](https://docs.google.com/spreadsheets/d/e/2PACX-1vT5A1MOwm3CvOGjn7fMvYaiTKDuIdvKMnH5XHRcgzi3eqLikm9SdwfkrSuilnZ1VQt8aSfAFJzZ02zM/pubhtml?gid=390226786)',
                 'Josh Morris Schedule',
                 'https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'),
             'rttl':(
