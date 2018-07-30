@@ -2602,12 +2602,13 @@ class Champion:
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
             'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),#added for WASP
+            'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             )
 
         for x in titles:
             if x in sigs:
                 title = x
-                #print('SIG TITLE is : ' + x)
+                print('SIG TITLE is : ' + x)
 
         if title is None:
             raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
@@ -2671,7 +2672,8 @@ class Champion:
                       '_DESC_E','_DESC_F','_DESC_G',
                       '_LONG','_LONG_1','_LONG_2','_LONG_3','_LONG_4','_LONG_5',
                       '_LONG1','_LONG2','_LONG3','_LONG4','_LONG5',
-                      '_LONG_A','_LONG_B', '_LONG_C',):
+                      '_LONG_A','_LONG_B', '_LONG_C',
+                      '_0','_1',):
                 if preamble + k + '_UPDATED' in sigs:
                     k = k + '_UPDATED'
                 if preamble + k in sigs:
