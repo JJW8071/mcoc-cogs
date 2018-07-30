@@ -1,13 +1,13 @@
 All stats based on 4 Star, Rank 5, Level 50
 
-Crowd Excitement
-```• Eventually grants Korg Unstoppable. Can be consumed through the Heavy Attack in order to inflict Armor Break.
-• Eventually grants Korg Unstoppable and Unblockable. Can be consumed through the Heavy Attack in order to inflict Armor Break.```
 
 Easter Eggs
 ```• PISS OFF GHOST!
 • FOR DOUG!!```
 
+Crowd Excitement
+```• Eventually grants Korg Unstoppable. Can be consumed through the Heavy Attack in order to inflict Armor Break.
+• Eventually grants Korg Unstoppable and Unblockable. Can be consumed through the Heavy Attack in order to inflict Armor Break.```
 Rock Anatomy
 ```• Rock anatomy provides Korg immunity to Bleed, Shock and additional Critical Resistance but decreases his Energy Resistance by 20%.```
 Crowd Excitement
@@ -16,6 +16,7 @@ Crowd Excitement
 • When Crowd Excitement reaches {0} or more, Korg becomes Unstoppable for {2} seconds.
 • Miek expels fluids on opponents when hitting with a Heavy Attack, creeping out the crowd and consuming all Crowd Excitement to inflict Armor Break, reducing their Armor Rating by {1} for each Crowd Excitement charge for {2} seconds.
 • The crowd dislikes cowards, cheering for Korg when opponents Evade or Dexterity his Basic Attacks, increasing Crowd Excitement by {1} for {2} seconds. Only {0} Crowd Excitement charges can be gained through this ability.```
+
 Rock Shield
 ```• While Rock Shield is active, powerful enemy attacks cannot deal more than {1}% of the opponent's Attack Rating in a single hit. Special 3 Attacks cannot deal more than 120% of the opponent's Attack instead.
 • While Rock Shield is active, Korg has a {0}% chance to shrug off Debuffs and gain one Rock Shield charge for each Debuff shrugged off this way.
