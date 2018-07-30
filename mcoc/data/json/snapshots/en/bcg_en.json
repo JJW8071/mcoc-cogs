@@ -1,7 +1,7 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "16ed7a24bc384eddd9f2610b686504549f6cec28",
+    "hash": "0a5e2601403a8b6ae85fc388f769443a0e232047",
     "language": "en",
     "post_processed": true,
     "string_count": 863,
@@ -9,8 +9,8 @@
       "bcg",
       "client"
     ],
-    "ts": 1530031747,
-    "versionLock": "19.0"
+    "ts": 1532035627,
+    "versionLock": "19.1"
   },
   "strings": [
     {
@@ -1247,11 +1247,6 @@
       "vn": 14
     },
     {
-      "k": "ID_UI_HERO_SYNERGY_CONNOOBS_DESC",
-      "v": "[64acff]Spider Man (Stark Enhanced):[-] Stun, Shock and Ensnare Debuffs last {0}% longer.\n[64acff]Ms. Marvel (Kamala Khan):[-] Fury Buffs gain +{0}% Potency.\n[64acff]Spider-Man (Miles Morales):[-] Begin the fight with 2 additional Spider-Sense charges.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
-      "vn": 14
-    },
-    {
       "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION2_LONG",
       "v": "[64acff]Corvus Glaive:[-] Knockout a Mutant Champion. Once this mission is complete, Corvus receives Safeguard against the opponent’s Special 2 Attack if Glaive’s Immunity is active, preventing him from losing more 5% Health from a single hit.\n[64acff]Wolverine, X-23, Storm:[-] +{0}% Attack Rating at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": "17.2"
@@ -1371,11 +1366,6 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DEMONHUNTER",
       "v": "DEMON HUNTER",
-      "vn": "15.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_DEMONHUNTER_LONG",
-      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Mystic Champions. Danger Sense's Ability Accuracy reduction does not ignore the Immunities from Mystic Champions.\n[64acff]Mephisto, Dormammu:[-] Opponent's Energy Resistance is reduced by {0}%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {
@@ -2425,11 +2415,6 @@
     {
       "k": "ID_UI_HERO_SYNERGY_SPIRITOFJUSTICE",
       "v": "SPIRIT OF JUSTICE",
-      "vn": "15.1"
-    },
-    {
-      "k": "ID_UI_HERO_SYNERGY_SPIRITOFJUSTICE_LONG",
-      "v": "[64acff]Blade:[-] Danger Sense bonuses expand to include all Villain Champions. Danger Sense's Ability Accuracy reduction does not ignore the Immunities from Villain Champions.\n[64acff]Ghost Rider:[-] +{0}% chance to place a Judgment.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {

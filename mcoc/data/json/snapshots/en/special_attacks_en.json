@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "037757949267ea7fb86f7023e809e8ae6bcd58ae",
+    "hash": "55afe4bc415a02af1243a318c5771ce6229c0d8c",
     "language": "en",
     "post_processed": true,
-    "string_count": 856,
+    "string_count": 864,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1529515194,
-    "versionLock": "19.0"
+    "ts": 1530823141,
+    "versionLock": "20.0"
   },
   "strings": [
     {
@@ -1698,18 +1698,6 @@
       "v": "Quake generates a powerful earthquake, opening the ground and trapping the opponent before she deals her final vibration pulse attack."
     },
     {
-      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_REDSKULL_0",
-      "v": "A signature attack is unleashed on the opponent."
-    },
-    {
-      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_REDSKULL_1",
-      "v": "A signature attack is unleashed on the opponent."
-    },
-    {
-      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_REDSKULL_2",
-      "v": "A signature attack is unleashed on the opponent."
-    },
-    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_RHINO_0",
       "v": "When the Rhino puts his foot down, everyone listens."
     },
@@ -3133,18 +3121,6 @@
     {
       "k": "ID_SPECIAL_ATTACK_QUAKE_2",
       "v": "Epicenter"
-    },
-    {
-      "k": "ID_SPECIAL_ATTACK_REDSKULL_0",
-      "v": "Special Attack 1"
-    },
-    {
-      "k": "ID_SPECIAL_ATTACK_REDSKULL_1",
-      "v": "Special Attack 2"
-    },
-    {
-      "k": "ID_SPECIAL_ATTACK_REDSKULL_2",
-      "v": "Special Attack 3"
     },
     {
       "k": "ID_SPECIAL_ATTACK_RHINO_0",
