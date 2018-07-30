@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "48a9848b61bba3ec7ab3cce4ec1f9e53c60d5b0d",
+    "hash": "fd6fba690c117d84d1ef39cbda6173bbb1f5cfd5",
     "language": "en",
     "post_processed": true,
-    "string_count": 4672,
+    "string_count": 4836,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1530031887,
-    "versionLock": "19.0"
+    "ts": 1532376296,
+    "versionLock": "19.1"
   },
   "strings": [
     {
@@ -349,6 +349,11 @@
       "vn": 19
     },
     {
+      "k": "ID_BACSD",
+      "v": "Opponents gain less Power when striking or getting struck by Beast.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_BAER75D",
       "v": "Suffer from Degeneration if unable to land a hit successfully.",
       "vn": 19
@@ -367,6 +372,11 @@
       "k": "ID_BELE38T",
       "v": "[b4b4b4ff]Belle[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_BFSCSD",
+      "v": "Increases Critical Damage.",
+      "vn": "19.1"
     },
     {
       "k": "ID_BICH72D",
@@ -459,6 +469,16 @@
       "vn": 19
     },
     {
+      "k": "ID_BRDFS244D",
+      "v": "Decreased Ability Accuracy and increased Debuff durations.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_BRDFS244T",
+      "v": "[b4b4b4ff]Brother Daniel: Debuffs[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_BRFS244D",
       "v": "Increased Ability Accuracy and Buff durations.",
       "vn": 19
@@ -477,6 +497,11 @@
       "k": "ID_BUER75T",
       "v": "[b4b4b4ff]Buffet Timer[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_BUERD",
+      "v": "Periodically, Buffs triggered by the Attacker are immediately removed. Each time this effect triggers, the Defender Regenerates Health.",
+      "vn": "19.1"
     },
     {
       "k": "ID_BULD66D",
@@ -512,6 +537,11 @@
       "k": "ID_CHARACTER_BIOS_GHOST",
       "v": "You can't fight what you don't know, and nobody seems to know anything about who Ghost is or how she can do the things she can do. Feared and admired in the criminal underworld for her ability to phase through solid walls, Ghost's true intentions are as elusive as she is, though one thing is for sure: she's interested in getting her hands on all the Pym Tech she can find. Her advanced technology combined with her skill in combat make her a force to be reckoned with.​",
       "vn": 19
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_REDSKULL",
+      "v": "The Red Skull has managed to orchestrate the assassinations of his enemies, manipulate his way to power, and lead HYDRA in a plan to devastate the world's most influential countries. Using his scientific talents and knowledge of the occult to research what others considered only a myth: the Cosmic Cube. Now armed with knowledge of its deepest secrets, The Red Skull has been able to harness it to power his suit of Hydra armor.",
+      "vn": "19.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_SENTINEL",
@@ -699,11 +729,6 @@
       "vn": 19
     },
     {
-      "k": "ID_COUNTERP_PAUSE_SHORT",
-      "v": "[b4b4b4ff]Counterpunch Charge[-]",
-      "vn": 19
-    },
-    {
       "k": "ID_CREL209D",
       "v": "Grants Hulk Attack Rating that increases the more excited the Crowd gets.",
       "vn": 19
@@ -742,6 +767,26 @@
       "k": "ID_CRRE_T",
       "v": "Critical Failure",
       "vn": 19
+    },
+    {
+      "k": "ID_CRSBAD",
+      "v": "Dash backwards and hold Block to activate Overrun.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_CRSBAT",
+      "v": "[b4b4b4ff]Overrun Activation[-]",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_CRSBOD",
+      "v": "Grants Fury and Offensive Power Gain but reduces Crossbones' Armor, Block Proficiency, and Defensive Power Gain.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_CRSBOT",
+      "v": "[b4b4b4ff]Overrun[-]",
+      "vn": "19.1"
     },
     {
       "k": "ID_CRTY68D",
@@ -954,6 +999,41 @@
       "vn": 19
     },
     {
+      "k": "ID_DOM191_1",
+      "v": "Opponents lose {1}% Ability Accuracy. This reduction has no effect against abilities that trigger at the start of a fight.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_DOM191_2",
+      "v": "Whenever one of Domino’s abilities fails to trigger, she gains +{1}% Ability Accuracy for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_DOM191_3",
+      "v": "[64acff]Domino:[-] Start the fight with either Lucky or Unlucky active for 7 seconds.\n[64acff]Cable:[-] +{0}% Armor Rating and +3% Power Gain.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_DOM191_4",
+      "v": "[64acff]Domino:[-] If Domino never hit with a Special Attack while both Lucky and Unlucky were active, then she has +20% chance to activate them during her next fight. [64acff]M.O.D.O.K. or Taskmaster:[-] Bleed abilities last {0} second(s) longer. [f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_DOM191_5",
+      "v": "Domino uses her pistol for her first Light hit, her second Medium hit, and her final Heavy hit. These hits do not make contact with opponents.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_DSBD",
+      "v": "No effect on their own, Soul Bonds may be detonated by Dormammu's Heavy Attack.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_DSBT",
+      "v": "[b4b4b4ff]Soul Bond[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_ELNG75D",
       "v": "Holding Block generates Electroshock Charges.",
       "vn": 19
@@ -1004,6 +1084,21 @@
       "vn": 19
     },
     {
+      "k": "ID_ENCKT",
+      "v": "When this timer ends, Enhanced Static Shock activates.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_ENCRD",
+      "v": "Periodically, the Attacker becomes Stunned unless they are performing a Special Attack when the timer expires. During this Stun, the Attacker's Armor Rating is doubled.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_ENCRT",
+      "v": "[b4b4b4ff]Encroaching Stun[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_ENED376D",
       "v": "The Enrage Timer has expired! Grants Unstoppable, Unblockable, and Power Gain.",
       "vn": 19
@@ -1042,6 +1137,16 @@
       "k": "ID_ENER94T",
       "v": "[b4b4b4ff]Enrage Timer[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_ENHCRD",
+      "v": "Increases the chance to land Critical Hits.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_ENHCRT",
+      "v": "[b4b4b4ff]Enhanced Critical Rate[-]",
+      "vn": "19.1"
     },
     {
       "k": "ID_ENLS242D",
@@ -1384,11 +1489,6 @@
       "vn": 19
     },
     {
-      "k": "ID_GLED121D_GLAIVE",
-      "v": "Grants him True Damage and guaranteed Critical Hits with his glaive. A charge is spent every time Corvus Glaive hits with Basic Attack using his glaive.",
-      "vn": "15.1"
-    },
-    {
       "k": "ID_GLED121T",
       "v": "[b4b4b4ff]Glaive's Immunity Damaged[-]",
       "vn": 19
@@ -1447,6 +1547,26 @@
       "k": "ID_HEEX196T",
       "v": "[b4b4b4ff]Hex[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_HEIMAUCNT_D",
+      "v": "When reaching 100 Armor Charges are converted into an Armor Up Buff.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_HEIMAUCNT_T",
+      "v": "[b4b4b4ff]Armor Charges[-]",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_HEIMFRYCNT_D",
+      "v": "When reaching 100 Fury Charges are converted into an Fury Buff.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_HEIMFRYCNT_T",
+      "v": "[b4b4b4ff]Fury Charges[-]",
+      "vn": "19.1"
     },
     {
       "k": "ID_HETS104D",
@@ -1734,6 +1854,26 @@
       "vn": 19
     },
     {
+      "k": "ID_KORG_ROCKSHATT_HUD",
+      "v": "SHIELD SHATTERED",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_KORG_ROCKS_HUD",
+      "v": "ROCK SHIELD",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_KPRD",
+      "v": "Increases Attack Rating and Power Gain Rate.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_KPRT",
+      "v": "[b4b4b4ff]Rage[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_LIBO75D",
       "v": "Inflicts Energy Damage over time and any damage Magik takes during this period is rewound when the effect expires.",
       "vn": 19
@@ -1874,6 +2014,46 @@
       "vn": 19
     },
     {
+      "k": "ID_MDED",
+      "v": "Summoner Mastery. Increases Attack Rating but inflicts Direct Damage over time.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MDKFFD",
+      "v": "Auto-Block the next attack with increased Block Proficiency, then recharge. As long as a Force Field is active, opponents' Power Gain Rate is reduced by M.O.D.O.K.'s Flux.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MDKFFT",
+      "v": "[b4b4b4ff]Force Field[-]",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MEPHAD",
+      "v": "Mephisto generates Power through his passive Power Gain. Also, for each stack, nearby opponents take Incinerate Energy Damage per second.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MEPHAT",
+      "v": "[b4b4b4ff]Aura of Incinerate[-]",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MGKLBD",
+      "v": "Opponents take Energy Damage over time and any damage Magik takes during this period is rewound when the effect expires.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MICD",
+      "v": "Applies Energy Damage whenever Masacre lands a Critical Hit.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_MICT",
+      "v": "[b4b4b4ff]Ignition Charge[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_MIEE46D",
       "v": "Grants increased Attack Rating, Unstoppable, and Immunity to Debuffs while performing a Dash attack.",
       "vn": 19
@@ -1912,6 +2092,11 @@
       "k": "ID_MIWO46T",
       "v": "[b4b4b4ff]Mighty Charge Two[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_MLCD",
+      "v": "Summoner Mastery. Increases Attack Rating but inflicts Poison, dealing Direct Damage over time and reducing the effectiveness of healing.",
+      "vn": "19.1"
     },
     {
       "k": "ID_MOGE75D",
@@ -2089,16 +2274,6 @@
       "vn": 19
     },
     {
-      "k": "ID_PAUSE_NEBULAHEAL_LONG",
-      "v": "Self-Repair charges activate when the opponent deals a lot of damage in a single hit, repairing the damage taken over time. If Stunned during her Self-Repair, the Repair stops.",
-      "vn": 13
-    },
-    {
-      "k": "ID_PAUSE_NEBULAHEAL_TITLE",
-      "v": "[b4b4b4ff]Self-Repair Charges[-]",
-      "vn": 19
-    },
-    {
       "k": "ID_PAZE60D",
       "v": "Prevents moving, attacking, or defending and decreases the effectiveness of abilities that generate Power or Health.",
       "vn": 19
@@ -2181,36 +2356,6 @@
     {
       "k": "ID_PLND75T",
       "v": "[b4b4b4ff]Plagued Mind[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_PM1_LONG",
-      "v": "Perform 6 well timed blocks. Proxima gains True Accuracy and Prowess when completing a mission.",
-      "vn": 19
-    },
-    {
-      "k": "ID_PM1_TITLE",
-      "v": "[b4b4b4ff]Mission 1: Parry Offense[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_PM2_LONG",
-      "v": "Perform 4 intercepts against a dashing opponent. Proxima gains True Accuracy and Prowess when completing a mission.",
-      "vn": 19
-    },
-    {
-      "k": "ID_PM2_TITLE",
-      "v": "[b4b4b4ff]Mission 2: Intercept Attack[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_PM3_LONG",
-      "v": "Knockdown the opponent 5 times using a Heavy or Special Attack. Proxima gains True Accuracy and Prowess when completing a mission.",
-      "vn": 19
-    },
-    {
-      "k": "ID_PM3_TITLE",
-      "v": "[b4b4b4ff]Mission 3: Incapacitate[-]",
       "vn": 19
     },
     {
@@ -2454,14 +2599,24 @@
       "vn": 19
     },
     {
-      "k": "ID_QAFTSCALE_LONG",
-      "v": "For every point in the Aftershock Scale, Aftershock inflicts an amount of damage, Concussion and has a chance to Stun when this effect expires.",
-      "vn": 19
+      "k": "ID_PWR75D",
+      "v": "This Champion must wait before Power Gain activates again.",
+      "vn": "19.1"
     },
     {
-      "k": "ID_QAFTSCALE_TITLE",
-      "v": "[b4b4b4ff]Aftershock Scale[-]",
-      "vn": 19
+      "k": "ID_PWR75T",
+      "v": "[b4b4b4ff]Power Gain Recharge[-]",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_PWR78D",
+      "v": "Generates Power over time. This effect ends prematurely if struck by an attack.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_PWR78T",
+      "v": "[b4b4b4ff]Power Gain[-]",
+      "vn": "19.1"
     },
     {
       "k": "ID_REAN42D",
@@ -2759,6 +2914,21 @@
       "vn": 19
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_REDSKULL_0",
+      "v": "Red Skull strikes his opponent before passing through space to quickly catch them off-guard with two quick hits.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_REDSKULL_1",
+      "v": "Manipulating the power of the Cosmic Cube, Red Skull unleashes multiple projectile attacks.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_REDSKULL_2",
+      "v": "The opponent is helpless in the presence of such raw power. Red Skull bends them to his will before unleashing the full force of the Cosmic Cube upon them.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SENTINEL_0",
       "v": "REGULATION: when superheated ISO exceeds safety regulations, disperse towards aggressors.",
       "vn": "17.1"
@@ -2802,6 +2972,21 @@
       "k": "ID_SPECIAL_ATTACK_GHOST_2",
       "v": "Relentless Onslaught",
       "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_REDSKULL_0",
+      "v": "Transmit Force",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_REDSKULL_1",
+      "v": "Harness Power",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_REDSKULL_2",
+      "v": "Kneel Before Me!",
+      "vn": "19.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_SENTINEL_0",
@@ -3290,8 +3475,8 @@
     },
     {
       "k": "ID_STAT_DOM_SIG_TITLE_LONG",
-      "v": "Opponents take up to [16982bff]{1}[-] Energy Damage over {2} second(s) whenever their abilities fail to trigger. Potency decreases temporarily for consecutive triggers.",
-      "vn": "18.1"
+      "v": "Opponents take up to [16982bff]{1}[-] Base Energy Damage over {2} second(s) whenever their abilities fail to trigger. Potency decreases temporarily for consecutive triggers.",
+      "vn": "19.1"
     },
     {
       "k": "ID_STAT_DOM_SIG_TITLE_LOW",
@@ -3816,16 +4001,6 @@
       "vn": "16.1"
     },
     {
-      "k": "ID_STAT_PAUSESTIRNGID",
-      "v": "$$Placeholder icon description. Second sentence that may wrap into a new line.$$",
-      "vn": 19
-    },
-    {
-      "k": "ID_STAT_PAUSETITLEID",
-      "v": "$$PLACEHOLDER ICON TITLE$$",
-      "vn": 19
-    },
-    {
       "k": "ID_STAT_PLASMA_HUD",
       "v": "PLASMA",
       "vn": 18
@@ -4270,6 +4445,16 @@
       "vn": 19
     },
     {
+      "k": "ID_SWARPD",
+      "v": "At the start of a fight and after every 40 Hits in a Combo, Sentry gains a Reality Warp. Reality Warps stack up to 5 max. Reality Warps are used as a multiplier for his abilities.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_SWARPT",
+      "v": "[b4b4b4ff]Reality Warp[-]",
+      "vn": 19
+    },
+    {
       "k": "ID_SWDE87D",
       "v": "Periodically grants Precision, which increases Critical Rating.",
       "vn": 19
@@ -4358,6 +4543,16 @@
       "k": "ID_THCK235T",
       "v": "[b4b4b4ff]Thermal Feedback[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_TMEWD",
+      "v": "Taskmaster spots a weakness in his opponent’s last attack which can be exploited by striking his opponent with that same attack.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_TMEWT",
+      "v": "[b4b4b4ff]Exploit Weakness[-]",
+      "vn": "19.1"
     },
     {
       "k": "ID_TRER194D",
@@ -4802,6 +4997,41 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY01_LONG",
+      "v": "[64acff]Thor Ragnarok, Korg:[-] +15% Attack Rating and +{0}% Fury Buff for 8 seconds when using a Medium Attack to end a Basic Attack Combo while their opponent is pinned against the wall.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY01_TITLE",
+      "v": "Pit Fighters",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY02_LONG",
+      "v": "[64acff]Hulk Ragnarok:[-] Crowd Excitement is locked at 100 for an additional {0} seconds.\n[64acff]Korg:[-] When Korg spends 13 or more Crowd Excitement charges through his Heavy Attack, the Armor Break inflicted is permanent. Max Stack: 1.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY02_LONG_B",
+      "v": "[64acff]Hulk Ragnarok:[-] Crowd Excitement is locked at 100 for an additional {0} seconds.\n[64acff]Korg:[-] When Korg spends 13 or more Crowd Excitement charges through his Heavy Attack, the Armor Break lasts 20 seconds instead. Max Stack: 1.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY02_TITLE",
+      "v": "Grandmaster’s Champions",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY03_LONG",
+      "v": "[64acff]Iceman:[-] While Ice Armor is reforming, Iceman’s Attack Rating is increased by 15% as long as he does not get hit.\n[64acff]Korg:[-] If Korg is awakened, +{0}% chance to shrug off a Debuff while Rock Shield is active.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_KORG_SY03_TITLE",
+      "v": "Elemental Hide",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_PARTICLEPHYSICS",
       "v": "PARTICLE PHYSICS",
       "vn": "14.1"
@@ -4841,6 +5071,21 @@
       "k": "ID_UI_HERO_SYNERGY_WAKANDA_LONG",
       "v": "[64acff]Killmonger:[-] Starts the fight with 3 of his Indestructible and Counterpunch Charges.\n[64acff]Black Panther CW[-] Well Timed Blocks provides a +{0}% Fury Buff for 15 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": 17
+    },
+    {
+      "k": "ID_UI_KORG_MIEK_PAUSE_LONG",
+      "v": "Eventually grants Korg Unstoppable and Unblockable. Can be consumed through the Heavy Attack in order to inflict Armor Break.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_KORG_MIEK_PAUSE_LONG_B",
+      "v": "Eventually grants Korg Unstoppable. Can be consumed through the Heavy Attack in order to inflict Armor Break.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_KORG_MIEK_PAUSE_TITLE",
+      "v": "[b4b4b4ff]Crowd Excitement[-]",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_MASTERIES_HUD_TRUE_ACCURACY",
@@ -5018,6 +5263,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ACROBATIC_HUD",
       "v": "ACROBATIC"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_ADPHPWTIMER",
+      "v": "Every {2} seconds, trigger a Power Gain Buff, granting one bar of Power over {1} seconds. This Power Gain is removed if Struck.",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_AFTERSHOCK_HUD",
@@ -12755,6 +13005,11 @@
       "vn": 12
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_SHOCK_I",
+      "v": "[b4b4b4ff]Shock[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_SIPHONCHARGE_HUD",
       "v": "SIPHON CHARGE",
       "vn": 14
@@ -13423,6 +13678,11 @@
       "vn": 16
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_IGNITED",
+      "v": "Ignited - Passive",
+      "vn": "18.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_INFINITYCLASS",
       "v": "Infinity Class",
       "vn": 18
@@ -13542,6 +13802,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCK",
       "v": "Blocking"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCKBASIC",
+      "v": "Blocking a Basic Attack",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBLOCKED",
@@ -13763,6 +14028,11 @@
       "v": "Medium Attacks"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONMIEK",
+      "v": "Crowd Excitement",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONMISSION1",
       "v": "Mission 1: Eliminate the Avengers",
       "vn": "17.2"
@@ -13820,6 +14090,11 @@
       "v": "Overrun"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONOVERWHELM",
+      "v": "Overwhelming Presence - Passive",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPERSISTENTCHARGE",
       "v": "Persistent Charge",
       "vn": "15.1"
@@ -13872,6 +14147,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONREALITYWARP",
       "v": "Reality Warp - Passive",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONROCKSHIELD",
+      "v": "Passive - Rock Shield",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONSCIENTIFICMETHOD",
@@ -13927,6 +14207,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONTARANALYSIS",
       "v": "Target Analysis - Passive",
       "vn": "17.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONTHORNS",
+      "v": "When Attacked - Thorns",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONTYPEACTIVATE",
@@ -14002,6 +14287,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_STARKAI",
       "v": "Stark Tech AI"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_TRUESIGHT",
+      "v": "True Sight - Passive",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_UNRELENTING",
@@ -14864,6 +15154,167 @@
       "k": "ID_UI_STAT_FORMAT_KILLM_VIBRANIUM_PURIFY",
       "v": "At the start of the fight, Vibranium Armor provides [16982bff]{1}[-] Armor Rating and Killmonger gains {2}% of his missing Power each time a Debuff is inflicted against him. Vibranium Armor is disabled if he is suffering from an Armor Break effect.",
       "vn": 17
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_EASTEREGG",
+      "v": "PISS OFF GHOST!",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_EASTEREGG_B",
+      "v": "FOR DOUG!!",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_IMMU_0",
+      "v": "Rock anatomy provides Korg immunity to Bleed, Shock and additional Critical Resistance but decreases his Energy Resistance by 20%.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_IMMU_TITLE",
+      "v": "Rock Anatomy",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_MIEK_0",
+      "v": "The crowd goes crazy when Miek makes an appearance while Korg is blocking an attack, increasing Crowd Excitement by 1 for {2} seconds. +{0} on Well Timed Blocks. Only {1} Crowd Excitement charges can be gained through this ability.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_MIEK_1",
+      "v": "When Crowd Excitement reaches {0} or more, Korg becomes Unstoppable and Unblockable for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_MIEK_1_B",
+      "v": "When Crowd Excitement reaches {0} or more, Korg becomes Unstoppable for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_MIEK_2",
+      "v": "Miek expels fluids on opponents when hitting with a Heavy Attack, creeping out the crowd and consuming all Crowd Excitement to inflict Armor Break, reducing their Armor Rating by [16982bff]{1}[-] for each Crowd Excitement charge for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "cn": null,
+      "k": "ID_UI_STAT_FORMAT_KORG_MIEK_EVD",
+      "v": "The crowd dislikes cowards, cheering for Korg when opponents Evade or Dexterity his Basic Attacks, increasing Crowd Excitement by {1} for {2} seconds. Only {0} Crowd Excitement charges can be gained through this ability.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_MIEK_TITLE",
+      "v": "Crowd Excitement",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_0",
+      "v": "While Rock Shield is active, powerful enemy attacks cannot deal more than {1}% of the opponent's Attack Rating in a single hit. Special 3 Attacks cannot deal more than 120% of the opponent's Attack instead.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_1",
+      "v": "While Rock Shield is active, Korg has a [16982bff]{0}%[-] chance to shrug off Debuffs and gain one Rock Shield charge for each Debuff shrugged off this way.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_2",
+      "v": "When all charges are consumed, Rock Shield is shattered and it takes between {2} and {0} seconds to reform. Each time Rock Shield reforms it starts with 1 less charge.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_LONG_UI",
+      "v": "Korg begins the fight with {1} Rock Shield charges which are removed each time he is struck. An additional charge is removed when Korg’s Dash Attack is interrupted by a Light Attack and if Struck by a Special Attack 3, all Rock Shield charges are removed instead.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_PAUSE_LONG",
+      "v": "Prevents opponents from inflicting huge amounts damage on a single hit and shrugs off Debuffs.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_PAUSE_TITLE",
+      "v": "[b4b4b4ff]Rock Shield[-]",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_ROCK_TITLE",
+      "v": "Rock Shield",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SIG_0",
+      "v": "While Rock Shield is active and Korg is struck by a Medium, Heavy or Special Attack that makes contact, [16982bff]{1}[-] Physical Damage is inflicted to the opponent. This ability does not activate if the opponent’s hit deals Energy Damage and Mutant Champions take 25% less damage.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SIG_1",
+      "v": "When Korg is not suffering from Class Disadvantage, the opponent’s Offensive Ability Accuracy is decreased by [16982bff]{1}%[-] when hitting Korg.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SIG_SHORT",
+      "v": "Rock Hard Thorns {0}",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SIG_SIMPLE",
+      "v": "While Rock Shield is active and Korg is struck by a Medium, Heavy or Special Attack that makes contact, Physical Damage is inflicted to the opponent.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SIG_TITLE",
+      "v": "ROCK HARD THORNS",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP1_0",
+      "v": "Inflicts Incinerate, dealing [16982bff]{1}[-] Energy Damage over {2} seconds. When the opponent is suffering from an Armor Break, double Incinerate stacks are inflicted.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP1_EVD",
+      "v": "Opponents cannot Evade this attack.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP1_UNBLK",
+      "v": "This attack is Unblockable if Crowd Excitement is greater than 1.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP2_0",
+      "v": "[16982bff]+{1}[-] Attack Rating for {2} seconds if Korg is Unblockable.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP2_1",
+      "v": "Inflicts Bleed, dealing [16982bff]{1}[-] Direct Damage over {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP2_B",
+      "v": "[16982bff]+{1}[-] Attack Rating for {2} seconds if Korg is Unstoppable.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_SP3_0",
+      "v": "Crowd Excitement goes up by {1} for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_STRUCK_0",
+      "v": "When above {2}% Health, Korg activates Thorns when hit by a Physical Attack, inflicting [16982bff]{1}[-] Physical Damage.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_STRUCK_1",
+      "v": "Opponents with an active Regeneration Buff or Passive are able to instantly recover {1}% of the damage taken by Thorns and if the opponent’s hit deals Energy Damage through an ability, Thorns does not activate.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_KORG_STRUCK_TITLE",
+      "v": "Thorns",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_KPIN_BLACKISO_HUD",
@@ -16302,18 +16753,8 @@
       "vn": 19
     },
     {
-      "k": "ID_UI_STAT_FORMAT_WASP_HVY_WEAKNESS",
-      "v": "Inflicts Weakness for {2} seconds if this attack was chained while hitting with a Basic Attack Combo, reducing the opponent’s Attack Rating by {1}%.",
-      "vn": 19
-    },
-    {
       "k": "ID_UI_STAT_FORMAT_WASP_PASSIVE1",
       "v": "Whenever Wasp shrinks down, her next 2 hits will be critical, with [16982bff]+{1}[-] Attack Rating for each Debuff active on the opponent. Additionally, Counter Attack is disabled for {2} seconds.",
-      "vn": 19
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_WASP_PASSIVE2",
-      "v": "When Wasp has Class Advantage, all of her abilities that are based on the Combo Meter receive an additional bonus equivalent to {1} more hits on her Combo Meter.",
       "vn": 19
     },
     {
@@ -16412,6 +16853,82 @@
       "vn": 19
     },
     {
+      "k": "ID_UI_STAT_HEIM_AU_BUFF",
+      "v": "On Reaching {0} charges they convert into an Armor Up Buff increasing Armor by [16982bff]{1}[-] lasting {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_AU_TRIG",
+      "v": "When Struck by or Blocking an Opponent’s attack, Heimdall gains Passive Armor Charges.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_FURY_BUFF",
+      "v": "On reaching {0} charges they convert into a Fury Buff increasing Attack by [16982bff]{1}[-] lasting {2} seconds",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_FURY_TRIG",
+      "v": "When Striking or being Blocked by an Opponent, Heimdall gains Passive Fury charges",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_HVY_CONV",
+      "v": "Convert {1} active Fury, Armor Up, Precision, or Aptitude Buff, triggered by Heimdall’s abilities, into one with an infinite Duration.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_HVY_MAX",
+      "v": "Heimdall can have a maximum of {1} of these Buffs at a time.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_SP1_AB",
+      "v": "{0}% chance to Armor Break the Opponent once for each Fury Buff more than Armor Up Buff currently active on Heimdall. These Armor Breaks reduce Armor by [16982bff]{1}[-] and last for {2} seconds",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_SP1_PG",
+      "v": "{0}% chance to gain a Power Gain Buff for each Armor Up Buff more than Fury Buff active on Heimdall. These Power Gains grant {1}% of his Max Power, over {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_SP2_STUN",
+      "v": "{0}% Chance to Stun for {2} seconds if you have at least {1} Fury Buff.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_SP2_UNBLK",
+      "v": "{0}% Chance to be Unblockable if you have least {1} Armor Up Buff.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_SP3_APT",
+      "v": "{0}% Chance to grant an Aptitude Buff, increasing the potency of Armor, Fury, and Precision Buffs by {1}% lasting for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "cn": null,
+      "k": "ID_UI_STAT_HEIM_TS_ACT",
+      "v": "While True Strike is active Heimdall’s Attacks cannot be avoided with Dexterity, he can trigger the Parry Mastery against projectiles, and has a {0}% chance to Auto-Block Basic Attacks, this will trigger Parry.",
+      "vn": 19
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_TS_ACT_ALT",
+      "v": "While True Strike is active Heimdall’s Attacks cannot be avoided with Dexterity, he can trigger the Parry Mastery against projectiles.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_TS_TRIG",
+      "v": "While True Strike is active Heimdall’s Attacks cannot be avoided with Dexterity, he can Parry projectiles, and has a {0}% chance to Auto-Block Basic Attacks, this will trigger Parry.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_HEIM_TS_TRIG_ALT",
+      "v": "Every time he activates a Special Attack, Heimdall gains a permanent True Strike Buff as long as he doesn’t already have one active. This Buff is lost if Heimdall is Struck.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_STAT_IMMUNITY_ARMORBREAK",
       "v": "[5baefc]Armor Break Immunity[-]"
     },
@@ -16474,6 +16991,56 @@
     {
       "k": "ID_UI_STAT_IMMUNITY_WEAKNESS",
       "v": "[5baefc]Weakness Immunity[-]"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_ABL00_01",
+      "v": "Red Skull and the Cosmic Cube emit a presence that opponents cannot overcome. This greatly boosts Red Skulls chances to trigger abilities and provides passive bonuses.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_ABL01_01",
+      "v": "Gain +[16982bff]{1}[-] Critical Resistance and +[16982bff]{1}[-] Energy Resistance for each Buff on Red Skull.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_ABL02_01",
+      "v": "The opponent’s Power Rate is reduced by {1}% for each Debuff on them",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_ABL03_01",
+      "v": "Gain 5 Armor Up Buffs, each increasing Armor Rating by [16982bff]{1}[-]. Armor Up Buffs stack up to 10.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_ABL04_01",
+      "v": "Gain an Armor Up Buff.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_ABL05_01",
+      "v": "Consume one Armor Up Buff generated by Red Skull to Power Drain 10% of the opponent’s Max Power and inflict [16982bff]{1}[-] as Direct Damage for each Buff on Red Skull.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_HVY_01",
+      "v": "If the opponent is Stunned, Heal Block them for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_SP1_01",
+      "v": "The final hit refreshes all Shocks on the opponent inflicted through Red Skull’s abilities and Stuns the opponent for {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_SP2_01",
+      "v": "Each hit Shocks the opponent, dealing [16982bff]{1}[-] Energy damage over {2} seconds. Shock duration is increased by 50% for each Buff on Red Skull. These Shock Debuffs stack up to 5.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_RSKULL_SP3_01",
+      "v": "Drain all of the opponent’s Power. For every {1}% of Power drained this way, gain an Armor Up Buff.",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_SENTINEL_A",
@@ -17356,6 +17923,11 @@
       "vn": 12
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_DORMAMMU_DESC_AO_NEW",
+      "v": "Dormammu uses his opponent's powers as a link to reach deep within their soul. Each time a Buff Ends on his opponent Dormammu has up to a {0}% chance to Degenerate them for [16982bff]{1}[-] direct damage, over {2} seconds. The chance of this ability triggering increases the longer it's been since it was last triggered.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_DORMAMMU_SHORT",
       "v": "Soul Leech {0}",
       "vn": "11.2"
@@ -18073,6 +18645,31 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_HAWKEYE_TITLE_LOWER",
       "v": "Hemorrhage"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_HEIM_LONG_A",
+      "v": "Heimdall gains a {0}% chance to trigger a Precision Buff increasing Critical Rating by [16982bff]{1}[-] and lasting for {2} seconds, each time a True Strike Buff activates on him.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_HEIM_LONG_B",
+      "v": "Heimdall converts all of the Buffs active on him at the end of the previous fight into Power. Start the fight with a Power Gain Buff granting [16982bff]{1}[-]% of his Max Power per Buff converted at the beginning of the fight, over {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_HEIM_SHORT",
+      "v": "All Seeing {0}",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_HEIM_SIMPLE",
+      "v": "Heimdall's senses allow him to prepare for threats before they come, and strike with deadly accuracy when they arrive.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_HEIM_TITLE",
+      "v": "ALL SEEING",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_HOOD_DESC",
@@ -18922,11 +19519,6 @@
       "v": "Energy Absorption"
     },
     {
-      "k": "ID_UI_STAT_SIGNATURE_NEBULA_LONG",
-      "v": "When Nebula is out of Self-Repair charges, she tries to recalibrate her implants granting her a [16982bff]{0}%[-] chance to regain a charge every {2} seconds.",
-      "vn": 13
-    },
-    {
       "k": "ID_UI_STAT_SIGNATURE_NEBULA_SHORT",
       "v": "Cybernetic Enhancements {0}",
       "vn": 13
@@ -19188,6 +19780,31 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_REDHULK_TITLE",
       "v": "SECOND STRIKE"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_REDSKULL_LONG_A",
+      "v": "While Heavy Charging, generate [16982bff]{1}%[-] Power per second and Heavy Charging can be held for an extended duration.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_REDSKULL_LONG_B",
+      "v": "Landing a Heavy Attack when the opponent Dashes in, Shocks the opponent, dealing [16982bff]{1}[-] Energy damage over {2} seconds.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_REDSKULL_SHORT",
+      "v": "Cube Affinity {0}",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_REDSKULL_SIMPLE",
+      "v": "The Cosmic Cube aligns its ambition with Red Skull, providing him additional power when utilized.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_REDSKULL_TITLE",
+      "v": "CUBE AFFINITY",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_RHINO_DESC",
@@ -20453,6 +21070,16 @@
       "vn": 19
     },
     {
+      "k": "ID_VDAD",
+      "v": "Reduces the Ability Accuracy of Evade and the Dexterity Mastery.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_VDAT",
+      "v": "[b4b4b4ff]Agility[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_VECK110D",
       "v": "Contact with Venompool reflects a portion of the damage dealt back to attackers.",
       "vn": 19
@@ -20483,6 +21110,16 @@
       "vn": 19
     },
     {
+      "k": "ID_VSIGED",
+      "v": "Whenever Power is gained, a portion of that Power is drained and Vulture gains Chitauri Energy.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_VTHCKD",
+      "v": "Whenever Power is gained, a portion of that Power is drained and Direct Damage is inflicted based on the amount of Power lost.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_WAON163D",
       "v": "As the Moon wanes, Moon Knight has a chance to gain Fury.",
       "vn": 19
@@ -20503,6 +21140,16 @@
       "vn": 19
     },
     {
+      "k": "ID_WAXN164D",
+      "v": "As the Moon waxes, Moon Knight has a chance to gain Precision.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_WAXN164T",
+      "v": "[b4b4b4ff]Waxing Moon[-]",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_WESS99D",
       "v": "Decreases Attack Rating.",
       "vn": 19
@@ -20521,6 +21168,21 @@
       "k": "ID_WESS_T",
       "v": "Weakness",
       "vn": 19
+    },
+    {
+      "k": "ID_WSAHD",
+      "v": "Special Attacks inflict longer Bleed.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_WSAID",
+      "v": "Special Attacks have a chance to Incinerate opponents.",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_WSAPD",
+      "v": "Special Attacks ignore opponents' Armor.",
+      "vn": "19.1"
     }
   ]
 }
