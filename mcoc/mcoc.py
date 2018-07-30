@@ -1813,6 +1813,7 @@ class MCOC(ChampionFactory):
 
     @submit.command(pass_context=True, name='stats')
     async def submit_stats(self, ctx, champ : ChampConverter, *, stats):
+        '''hp, atk, cr, cd, blockpen, critresist, armorpen, armor, bp'''
         guild = await self.check_guild(ctx)
         if not guild:
             await self.bot.say('This server is unauthorized.')
@@ -1860,7 +1861,7 @@ class MCOC(ChampionFactory):
             await self.bot.add_reaction(message, '❌')
             await self.bot.add_reaction(message, '🆗')
             react = await self.bot.wait_for_reaction(message=message,
-                    user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+                    user=ctx.message.author, timeout=60, emoji=['❌', '🆗'])
             if react is not None:
                 if react.reaction.emoji == '❌':
                     await self.bot.say('Submission canceled.')
