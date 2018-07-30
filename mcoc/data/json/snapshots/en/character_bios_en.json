@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "99447bc3684b1791b8cad4f88ce02b0d0010106e",
+    "hash": "073e5bac0ff42dd7f841b26406525188d31b5a58",
     "language": "en",
     "post_processed": true,
-    "string_count": 143,
+    "string_count": 145,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1529360469,
-    "versionLock": "19.0"
+    "ts": 1531517601,
+    "versionLock": "19.1"
   },
   "strings": [
     {
@@ -237,6 +237,11 @@
       "v": "Clint Barton – a regular guy amongst super soldiers, armored geniuses, and gods of thunder. Known as the World's Greatest Marksman, he's mastered the bow and arrow, and the ability to transform nearly any projectile into an accurate weapon. Tenacious, brave, and heroic, Hawkeye stands tall amongst the mighty Avengers!"
     },
     {
+      "k": "ID_CHARACTER_BIOS_HEIMDALL",
+      "v": "One of the greatest warriors of Asgard, Heimdall was appointed Guardian of the Rainbow Bridge for all time, by Odin All-Father. His eyes can see all of creation, and his ears can hear a whisper from anywhere in the Nine Realms. Heimdall has many times saved Asgard, detecting threats long before they can become a danger, and either dispatching the threat himself or sounding Gjallarhorn to call forth the other defenders of Asgard.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_CHARACTER_BIOS_HELA",
       "v": "A creature from a primordial and sinister era of the universe, Hela’s power is unlike anything else in the Nine Realms. Armed with the ability to unleash unlimited weapons in astounding and deadly ways, Hela seeks vengeance against those who imprisoned her eons ago, ushering in a new era of cold brutality for Asgard and the universe at large.",
       "vn": 16
@@ -339,6 +344,11 @@
       "k": "ID_CHARACTER_BIOS_KINGPIN",
       "v": "Wilson Fisk, kingpin of crime in New York City, rules the underworld with ruthless efficiency. Gaining power through numerous illegal ventures and intimidation, Kingpin has gone toe-to-toe with the likes of Spider-Man and Daredevil and kept pace thanks to his incredible physical prowess and strength. Now the infamous crime lord has set his sights on the Contest and its rich supply of dangerous black ISO-8. For Fisk, the Contest is just another city to conquer.",
       "vn": 15
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_KORG",
+      "v": "Oh, hey there, my name is Korg. As you can see… I am made of rocks. Perishable rocks though, so don’t put me into fights thinking I am invincible, unless my opponent is made of scissors. Ha! … Anyway, Miek is here too and wants to help , so instead of blocking with my rock arms, I let Miek taste some of the action! After all, that’s what friends are for!",
+      "vn": "19.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_LOKI",
@@ -467,7 +477,7 @@
     },
     {
       "k": "ID_CHARACTER_BIOS_SENTRY",
-      "v": "        Robert Reynolds left his previous ordinary life behind the day he imbibed a mysterious laboratory liquid. Little did Robert know, the concoction was an enhanced version of the Super-Soldier Serum and it transformed him into the Golden Guardian, Sentry. With the power of a million exploding suns, Sentry combats the forces of evil and destruction, whether they come from abroad, or from Sentry himself...",
+      "v": "Robert Reynolds left his previous ordinary life behind the day he imbibed a mysterious laboratory liquid. Little did Robert know, the concoction was an enhanced version of the Super-Soldier Serum and it transformed him into the Golden Guardian, Sentry. With the power of a million exploding suns, Sentry combats the forces of evil and destruction, whether they come from abroad, or from Sentry himself...",
       "vn": "16.1"
     },
     {
