@@ -1395,7 +1395,7 @@ class MCOC(ChampionFactory):
                                 'champ': champ,
                                 'trigger': next(c for c in champs if c.full_name == trigger),
                                 'rank': data['rank'],
-                                'emoji': syneffect['emoji']&" ",
+                                'emoji': syneffect['emoji'],
                                 'synergyname': syneffect['synergyname']
                             }
                         if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
