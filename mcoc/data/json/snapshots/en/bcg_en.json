@@ -1339,6 +1339,16 @@
       "vn": "11.2"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DARKILLUMINATI",
+      "v": "DARK ILLUMINATI",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DARKILLUMINATI_LONG",
+      "v": "All Villains gain +{0}% Armor.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DECIMATION",
       "v": "DECIMATION",
       "vn": "17.1"
@@ -1462,6 +1472,11 @@
       "vn": "11.2"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_ENCHANTEDBLADES",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Precision Buff increasing Critical Rate by {0}.",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_GETINTHEPOOL",
       "v": "[64acff]Masacre:[-] Ignited’s Duration increases by {0}%. \n[64acff]Gwenpool:[-] Incinerate Debuffs have their Durations increased by {0}%. \n[64acff]Venompool:[-] Debuffs and Buffs have their Durations increased by {0}%. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "18.1"
@@ -1495,6 +1510,12 @@
       "vn": "18.1"
     },
     {
+      "cn": null,
+      "k": "ID_UI_HERO_SYNERGY_DESC_LOSTDAUGHTERS",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Fury Buff increasing Attack by {0}% of Base Attack.",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_LULLABY",
       "v": "[64acff]Hulk (Ragnarok):[-] When Struck Hulk has a {0}% chance to ready a SMASH for his next attack.\n[64acff]Black Widow:[-] Evade chance increases by 100%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 17
@@ -1514,7 +1535,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_MERCSFORMONEY",
-      "v": "[64acff]Masacre:[-] At the start of the fight, and when Ignited expires, gain between 1 and 5 Ignition Charges.\n[64acff]Domino:[-] Debuffs last {0} seconds longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Masacre:[-] At the start of the fight, and when Ignited expires, gain between 1 and 5 Ignition Charges.\n[64acff]Domino:[-] Debuffs last {0} second(s) longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "18.1"
     },
     {
@@ -1576,6 +1597,11 @@
       "k": "ID_UI_HERO_SYNERGY_DESC_QUEENOFHEL",
       "v": "Champions have a {0}% chance to instantly regain {0}% of their HP just before they’re knocked out. This chance increases by {0}% for each Champion on their team currently knocked out.\n[f79f0e]Unique Synergy[-] Does not stack with duplicate synergies.",
       "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_RAINBOWGUARDIAN",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, the first time when you would be knocked out gain both an Indestructible and an Unstoppable Buff which last for 3 seconds.",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_SCIENCE",
@@ -1652,6 +1678,12 @@
       "vn": "15.1"
     },
     {
+      "cn": null,
+      "k": "ID_UI_HERO_SYNERGY_DESC_WARRIORSOFASGARD",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to Regenerate {0}% of missing Health instantly.",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_EARTH_DEFENDER_I",
       "v": "COSMIC PARTNERS Lv. 1"
     },
@@ -1672,6 +1704,11 @@
       "k": "ID_UI_HERO_SYNERGY_ELECTRICCHARGE_DESC",
       "v": "[64acff]Green Goblin:[-] +{0}% Bag of Tricks Potency.\n[64acff]Electro:[-] While under a Shock Debuff, +30% Attack.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ENCHANTEDBLADES",
+      "v": "Enchanted Blades",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_ENEMY_I",
@@ -1704,6 +1741,16 @@
       "k": "ID_UI_HERO_SYNERGY_ENHANCEDSOLDIER_LONG_C",
       "v": "[64acff]Killmonger:[-] 100% chance to activate True Strike when intercepting the opponent’s Dash.\n[64acff]Winter Soldier[-] +{0}% Attack for each hit of the Combo Meter to maximum of 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ETERNALADVERSARIES",
+      "v": "ETERNAL ADVERSARIES",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ETERNALADVERSARIES_LONG",
+      "v": "[64acff]Red Skull:[-] Well-Timed Blocks have +10% chance to Perfect Block for each Buff on Red Skull.\n[64acff]Captain America (WW2):[-] Well-Timed Blocks generate a Fury Buff increasing Base Attack by {0}% for 5 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_FAMILY_I",
@@ -1776,6 +1823,16 @@
       "k": "ID_UI_HERO_SYNERGY_GRIPPEDBYFEAR_LONG",
       "v": "[64acff]Void:[-] When charging Heavy Attacks, Void can gain up to 3 Fury Buffs, each enhancing his Attack Rating by {0}% for 8 seconds.\n[64acff]Hulk:[-] Gains 1 bar of Power when below {0}% Health. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_HAILHYDRA!",
+      "v": "HAIL HYDRA!",
+      "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_HAILHYDRA!_LONG",
+      "v": "[64acff]Red Skull:[-] Intercepts Heal Block the opponent for 7.5 seconds.\n[64acff]Punisher 2099:[-] Duration of Heal Block, Armor Break, and Power Lock Debuffs are increased by {0}%\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_HEIGHTENEDSENSES",
@@ -1956,6 +2013,11 @@
       "k": "ID_UI_HERO_SYNERGY_LIKEOLDDAYS_LONG",
       "v": "[64acff]Thor (Ragnarok):[-] {0}% chance to activate a Combo Shield for 5 seconds if Thor maintained a combo of 1 or more hits when Struck.\n[64acff]Loki[-] Ascendant generates Power as long as Loki is below 2 bars.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 16
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_LOSTDAUGHTERS",
+      "v": "Lost Daughters of Asgard",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_LOYALMINISTER",
@@ -2217,6 +2279,11 @@
       "vn": 16
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_RAINBOWGUARDIAN",
+      "v": "Guardian of the Rainbow Bridge",
+      "vn": "19.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_RIVAL_I",
       "v": "RIVALS Lv. 1"
     },
@@ -2470,6 +2537,11 @@
       "k": "ID_UI_HERO_SYNERGY_WARRIORQUEENS",
       "v": "WARRIOR QUEENS",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_WARRIORSOFASGARD",
+      "v": "Warriors of Asgard",
+      "vn": "19.1"
     },
     {
       "k": "ID_UI_HERO_TILE_LEVEL_FORMAT",
