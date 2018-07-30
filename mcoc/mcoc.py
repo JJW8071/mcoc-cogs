@@ -1395,7 +1395,7 @@ class MCOC(ChampionFactory):
                                 'champ': champ,
                                 'trigger': next(c for c in champs if c.full_name == trigger),
                                 'rank': data['rank'],
-                                'emoji': syneffect['emoji'],
+                                'emoji': syneffect['emoji']&" ",
                                 'synergyname': syneffect['synergyname']
                             }
                         if syneffect['is_unique'] == 'TRUE' and data['synergycode'] in effectsused:
@@ -2602,7 +2602,6 @@ class Champion:
             'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
             'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
             'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),#added for WASP
-            'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),
             )
 
         for x in titles:
