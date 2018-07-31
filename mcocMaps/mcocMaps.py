@@ -291,28 +291,28 @@ class MCOCMaps:
         '''Report Node information.'''
         season = 2
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        boosts = json.loads(requests.get(boosturl).text)
+        await boosts = json.loads(requests.get(boosturl).text)
         if boosts is not None:
             # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         if tier in ['expert','hard','challenger','normal','advanced']:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-            paths = json.loads(requests.get(pathurl).text)
+            await paths = json.loads(requests.get(pathurl).text)
             if paths is not None:
+                nodedetails = paths['boosts'][str(nodeNumber)]
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-        em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
-        nodedetails = paths['boosts'][str(nodeNumber)]
-        for n in nodedetails:
-            if ':' in n:
-                nodename, bump = n.split(':')
-                em.add_field(name=boosts[nodename], value=boosts['text'.format(bump)])
-            else:
-                nodename = n
-                em.add_field(name=boosts[nodename], value=boosts['text'])
-            # await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
-        #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
-        # em.set_thumbnail(url=img)
-        em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
-        await self.bot.say(embed=em)
+                em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
+                for n in nodedetails:
+                    if ':' in n:
+                        nodename, bump = n.split(':')
+                        em.add_field(name=boosts[nodename], value=boosts['text'.format(bump)])
+                    else:
+                        nodename = n
+                        em.add_field(name=boosts[nodename], value=boosts['text'])
+                    # await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
+                #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
+                # em.set_thumbnail(url=img)
+                em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
+                await self.bot.say(embed=em)
 
 
 
