@@ -282,7 +282,7 @@ class MCOCMaps:
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
             await self.bot.say(embed=em)
 
-    @commands.group(pass_context=True)
+    @commands.group(pass_context=True, aliass=['aw',])
     async def alliancewar(self, ctx):
         '''Alliancewar.com Commands [WIP]'''
 
@@ -294,12 +294,13 @@ class MCOCMaps:
         boosts = json.loads(requests.get(boosturl).text)
         # if boosts is not None:
             # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
-        if tier in ['expert','hard','challenger','normal','advanced']:
+        tiers = [{'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'normal':discord.Color.green(),'advanced':discord.Color.blue()}]
+        if tier in tiers:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
             paths = json.loads(requests.get(pathurl).text)
             # if paths is not None:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-            em = discord.Embed(color=discord.Color.gold(), title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
+            em = discord.Embed(color=tiers[teir], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
             for nodename in nodedetails:
                 if ':' in nodename:
