@@ -301,13 +301,14 @@ class MCOCMaps:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
             em = discord.Embed(color=discord.Color.gold(), title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
-            for n in nodedetails:
+            for nodename in nodedetails:
                 if ':' in n:
-                    nodename, bump = n.split(':')
+                    nodename, bump = nodename.split(':')
                     em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump))
-                else:
-                    nodename = n
+                elif nodename in boosts:
                     em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'])
+                else:
+                    em.add_field(name=nodename, value='Boost text unknown.')
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
