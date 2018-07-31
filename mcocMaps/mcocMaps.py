@@ -259,6 +259,8 @@ class MCOCMaps:
                 await self.bot.remove_reaction(message, '❌')
                 await self.bot.remove_reaction(message, '🆗')
                 return True
+
+
 ### Beginning of AllianceWar.com integration
 
     @commands.command(pass_context=True, hidden=True)
@@ -297,13 +299,13 @@ class MCOCMaps:
             await self.bot.say('data loaded')
             boosts = json.loads(data)
             await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
-        if tier in ['expert','hard','challenger','normal','advanced']
+        if tier in ['expert','hard','challenger','normal','advanced']:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-        data2 = urllib.urlopen(pathurl).read()
-        if data is not None:
-            await self.bot.say('data loaded')
-            paths = json.loads(data2)
-            await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
+            data2 = urllib.urlopen(pathurl).read()
+            if data is not None:
+                await self.bot.say('data loaded')
+                paths = json.loads(data2)
+                await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
         # if os.path.exists('data/mcocMaps/boosts.json'):
         #     boosts = dataIO.load_json('data/mcocMaps/boosts.json')
 
