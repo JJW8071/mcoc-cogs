@@ -302,7 +302,7 @@ class MCOCMaps:
             em = discord.Embed(color=discord.Color.gold(), title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
             for nodename in nodedetails:
-                if ':' in n:
+                if ':' in nodename:
                     nodename, bump = nodename.split(':')
                     em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump))
                 elif nodename in boosts:
