@@ -299,7 +299,7 @@ class MCOCMaps:
             paths = json.loads(requests.get(pathurl).text)
             # if paths is not None:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-            em = discord.Embed(color=discord.Color.gold(), title='{} Node {} Boosts'.format(tier.title, nodeNumber), descritpion='', url=JPAGS)
+            em = discord.Embed(color=discord.Color.gold(), title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
             for n in nodedetails:
                 if ':' in n:
