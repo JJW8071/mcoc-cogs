@@ -266,18 +266,8 @@ class MCOCMaps:
 
     @commands.command(pass_context=True, hidden=True)
     async def boost_info(self, ctx, boost):
-        # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        # data = urllib.urlopen(boosturl).read()
-        # if os.path.exists('data/mcocMaps/boosts.json'):
-        #     boosts = dataIO.load_json('data/mcocMaps/boosts.json')
-            # await self.bot.say('data loaded')
-        # boosts = json.loads(data)
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        data = urllib.request.urlopen(boosturl).read()
-        if data is not None:
-            await self.bot.say('data loaded')
-            boosts = json.loads(data)
-
+        boosts = json.loads(requests.get(boosturl).text)
         keys = boosts.keys()
         if boost not in keys:
             await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
@@ -294,10 +284,11 @@ class MCOCMaps:
 
     @commands.group(pass_context=True)
     async def alliancewar(self, ctx):
-        '''Alliancewar.com Commands'''
+        '''Alliancewar.com Commands [WIP]'''
 
     @alliancewar.command(pass_context=True, hidden=True, name="node")
-    async def _node_info(self, ctx, node, tier = 'expert'):
+    async def _node_info(self, ctx, nodeNumber, tier = 'expert'):
+        '''Report Node information.'''
         season = 2
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
@@ -308,6 +299,13 @@ class MCOCMaps:
             paths = json.loads(requests.get(pathurl).text)
             if paths is not None:
                 await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
+        nodedetails = paths['boosts'][str(nodeNumber)]
+        for n in nodedetails:
+            nodename, bump = n.split(':')
+            await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
+
+
+
         # if os.path.exists('data/mcocMaps/boosts.json'):
         #     boosts = dataIO.load_json('data/mcocMaps/boosts.json')
 
