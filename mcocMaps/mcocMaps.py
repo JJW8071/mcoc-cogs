@@ -293,41 +293,28 @@ class MCOCMaps:
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
         if boosts is not None:
-            await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
+            # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         if tier in ['expert','hard','challenger','normal','advanced']:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
             paths = json.loads(requests.get(pathurl).text)
             if paths is not None:
-                await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
+                # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
+
+        em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
+        em.set_thumbnail(url=img)
+
         nodedetails = paths['boosts'][str(nodeNumber)]
         for n in nodedetails:
             if ':' in n:
                 nodename, bump = n.split(':')
+                em.add_field(name=boosts[nodename], value=boosts['text'.format(bump)])
             else:
                 nodename = n
-                bump = ''
-            await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
-
-
-
-        # if os.path.exists('data/mcocMaps/boosts.json'):
-        #     boosts = dataIO.load_json('data/mcocMaps/boosts.json')
-
-        # keys = boosts.keys()
-        #
-        # if boost not in keys:
-        #     await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
-        # else:
-        #     info = boosts[boost]
-        #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, info['img'])
-        #     title = info['title']
-        #     text = info['text']
-        #
-        #     em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
-        #     em.set_thumbnail(url=img)
-        #     em.add_field(name=title, value=text)
-        #     em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
-        #     await self.bot.say(embed=em)
+                em.add_field(name=boosts[nodename], value=boosts['text'])
+            # await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
+        #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
+        em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
+        await self.bot.say(embed=em)
 
 
 
