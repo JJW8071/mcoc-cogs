@@ -304,7 +304,7 @@ class MCOCMaps:
             for n in nodedetails:
                 if ':' in n:
                     nodename, bump = n.split(':')
-                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'.format(bump)])
+                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump))
                 else:
                     nodename = n
                     em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'])
