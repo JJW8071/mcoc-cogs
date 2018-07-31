@@ -213,8 +213,12 @@ class MCOCMaps:
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=team-1)
 
     @commands.command(pass_context=True, aliases=('aw'))
-    async def warmap(self, ctx):
-        '''Alliance War 2.0 Map'''
+    async def warmap(self, ctx, *, maptype: str = 'expert'):
+        '''Alliance War 2.0 Map
+        '''
+        warmaps = {
+            'expert' : '_expert'
+        }
         mapurl = '{}warmap_2v2.png'.format(self.basepath)
         mapTitle = 'Alliance War 2.0 Map'
         em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
@@ -279,6 +283,45 @@ class MCOCMaps:
             em.add_field(name=title, value=text)
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
             await self.bot.say(embed=em)
+
+    @commands.group(pass_context=True)
+    async def alliancewar(self, ctx):
+        '''Alliancewar.com Commands'''
+
+    @alliancewar.command(pass_context=True, hidden=True, name="node")
+    async def _node_info(self, ctx, node, tier = 'expert'):
+        season = 2
+        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
+        data = urllib.urlopen(boosturl).read()
+        if data is not None:
+            await self.bot.say('data loaded')
+            boosts = json.loads(data)
+            await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
+        if tier in ['expert','hard','challenger','normal','advanced']
+            pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
+        data2 = urllib.urlopen(pathurl).read()
+        if data is not None:
+            await self.bot.say('data loaded')
+            paths = json.loads(data2)
+            await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
+        # if os.path.exists('data/mcocMaps/boosts.json'):
+        #     boosts = dataIO.load_json('data/mcocMaps/boosts.json')
+
+        # keys = boosts.keys()
+        #
+        # if boost not in keys:
+        #     await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
+        # else:
+        #     info = boosts[boost]
+        #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, info['img'])
+        #     title = info['title']
+        #     text = info['text']
+        #
+        #     em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
+        #     em.set_thumbnail(url=img)
+        #     em.add_field(name=title, value=text)
+        #     em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
+        #     await self.bot.say(embed=em)
 
 
 
