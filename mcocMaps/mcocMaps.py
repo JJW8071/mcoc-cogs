@@ -303,13 +303,14 @@ class MCOCMaps:
             em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
             for nodename in nodedetails:
-                if nodename not in boosts:
-                    em.add_field(name=nodename, value='Undocumented boost.  Please submit to Jpags.')
-                elif ':' in nodename:
+                if ':' in nodename:
                     nodename, bump = nodename.split(':')
-                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
+                    if nodename in boosts:
+                        em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
+                elif nodename in boosts:
+                        em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
                 else:
-                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
+                    em.add_field(name=nodename, value='Undocumented boost.  Please submit to Jpags.')
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
