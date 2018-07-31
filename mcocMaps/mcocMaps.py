@@ -304,10 +304,10 @@ class MCOCMaps:
             for n in nodedetails:
                 if ':' in n:
                     nodename, bump = n.split(':')
-                    em.add_field(name=boosts[nodename], value=boosts['text'.format(bump)])
+                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'.format(bump)])
                 else:
                     nodename = n
-                    em.add_field(name=boosts[nodename], value=boosts['text'])
+                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'])
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
