@@ -2,6 +2,7 @@ import discord
 import asyncio
 import urllib, json #For fetching JSON from alliancewar.com
 import os
+import requests
 from .utils.dataIO import dataIO
 from discord.ext import commands
 
@@ -299,15 +300,13 @@ class MCOCMaps:
     async def _node_info(self, ctx, node, tier = 'expert'):
         season = 2
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        data = urllib.request.urlopen(boosturl).read()
-        if data is not None:
-            boosts = json.loads(data.readall().decode('utf8'))
+        boosts = json.loads(requests.get(boosturl).text)
+        if boosts is not None:
             await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         if tier in ['expert','hard','challenger','normal','advanced']:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-            data2 = urllib.request.request(pathurl).read()
-            if data2 is not None:
-                paths = json.loads(data.readall().decode('utf8'))
+            paths = json.loads(requests.get(pathurl).text)
+            if paths is not None:
                 await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
         # if os.path.exists('data/mcocMaps/boosts.json'):
         #     boosts = dataIO.load_json('data/mcocMaps/boosts.json')
