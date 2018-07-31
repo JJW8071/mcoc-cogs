@@ -294,14 +294,14 @@ class MCOCMaps:
     async def _node_info(self, ctx, node, tier = 'expert'):
         season = 2
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        data = urllib.urlopen(boosturl).read()
+        data = urllib.request.urlopen(boosturl).read()
         if data is not None:
             await self.bot.say('data loaded')
             boosts = json.loads(data)
             await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         if tier in ['expert','hard','challenger','normal','advanced']:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-            data2 = urllib.urlopen(pathurl).read()
+            data2 = urllib.request.request(pathurl).read()
             if data is not None:
                 await self.bot.say('data loaded')
                 paths = json.loads(data2)
