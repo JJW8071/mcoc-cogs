@@ -308,7 +308,7 @@ class MCOCMaps:
                 elif ':' in nodename:
                     nodename, bump = nodename.split(':')
                     em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
-                else nodename in boosts:
+                else:
                     em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
