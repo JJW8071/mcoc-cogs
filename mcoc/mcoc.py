@@ -1185,7 +1185,7 @@ class MCOC(ChampionFactory):
                 chance4 = round(float(xref['chance4'])*100,4)
                 pchance = round(chance4*p4,4)
                 em.add_field(name='PHC 4{0.star_char} Odds'.format(champ), value='{0}%'.format(pchance), inline=True)
-                em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4fb']), value='{0}%'.format(chance4),inline=True)
+                em.add_field(name='4{0.star_char} {1} Odds'.format(champ, xref['4b']), value='{0}%'.format(chance4),inline=True)
             if float(xref['chance5b']) >0 :
                 chance5=round(float(xref['chance5b'])*100,4)
                 em.add_field(name='5{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance5),inline=True)
