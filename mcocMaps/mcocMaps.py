@@ -282,7 +282,7 @@ class MCOCMaps:
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
             await self.bot.say(embed=em)
 
-    @commands.group(pass_context=True, aliass=['aw',])
+    @commands.group(pass_context=True, aliases=['aw',])
     async def alliancewar(self, ctx):
         '''Alliancewar.com Commands [WIP]'''
 
@@ -300,7 +300,7 @@ class MCOCMaps:
             paths = json.loads(requests.get(pathurl).text)
             # if paths is not None:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-            em = discord.Embed(color=tiers[teir], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
+            em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
             for nodename in nodedetails:
                 if ':' in nodename:
