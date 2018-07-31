@@ -299,10 +299,7 @@ class MCOCMaps:
             paths = json.loads(requests.get(pathurl).text)
             if paths is not None:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-
         em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
-        em.set_thumbnail(url=img)
-
         nodedetails = paths['boosts'][str(nodeNumber)]
         for n in nodedetails:
             if ':' in n:
@@ -313,6 +310,7 @@ class MCOCMaps:
                 em.add_field(name=boosts[nodename], value=boosts['text'])
             # await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
         #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
+        # em.set_thumbnail(url=img)
         em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
         await self.bot.say(embed=em)
 
