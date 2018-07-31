@@ -307,6 +307,7 @@ class MCOCMaps:
                     nodename, bump = nodename.split(':')
                     if nodename in boosts:
                         em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
+                        print('nodename: '+nodename + ' title: ' + boosts[nodename]['title']+' bump: '+bump + ' text: ' boosts[nodename]['text'])
                 elif nodename in boosts:
                         em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
                 else:
