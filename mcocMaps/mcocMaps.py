@@ -304,9 +304,9 @@ class MCOCMaps:
             for nodename in nodedetails:
                 if ':' in nodename:
                     nodename, bump = nodename.split(':')
-                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump))
+                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
                 elif nodename in boosts:
-                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'])
+                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
                 else:
                     em.add_field(name=nodename, value='Boost text unknown.')
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
