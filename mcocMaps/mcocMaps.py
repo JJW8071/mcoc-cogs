@@ -301,7 +301,11 @@ class MCOCMaps:
                 await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
         nodedetails = paths['boosts'][str(nodeNumber)]
         for n in nodedetails:
-            nodename, bump = n.split(':')
+            if ':' in n:
+                nodename, bump = n.split(':')
+            else:
+                nodename = n
+                bump = ''
             await self.bot.say('DEBUG: nodename = {}, bump = {}'.format(nodename,bump))
 
 
