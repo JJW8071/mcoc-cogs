@@ -302,15 +302,17 @@ class MCOCMaps:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
             em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
-            for nodename in nodedetails:
-                if ':' in nodename:
-                    nodename, bump = nodename.split(':')
+            for n in nodedetails:
+                if ':' in n:
+                    nodename, bump = n.split(':')
                     if nodename in boosts:
-                        em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
                         print('nodname: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
-                elif nodename in boosts:
-                        em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
+                        em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
+                elif n in boosts:
+                    nodename = n
+                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
                 else:
+                    nodename = n
                     em.add_field(name=nodename, value='Undocumented boost.  Please submit to Jpags.')
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
