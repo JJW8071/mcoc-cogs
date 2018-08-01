@@ -303,7 +303,7 @@ class MCOCMaps:
             em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
             nodedetails = paths['boosts'][str(nodeNumber)]
             for n in nodedetails:
-                title, text = '',''
+                title, text = '','No description. Report to @jpags#5202'
                 if ':' in n:
                     nodename, bump = n.split(':')
                 else:
