@@ -306,7 +306,8 @@ class MCOCMaps:
                 if ':' in n:
                     nodename, bump = n.split(':')
                 else:
-                    nodename = n, bump = None
+                    nodename = n
+                    bump = 0
                 if nodename in boosts:
                     title = boosts[nodename]['title']
                     if boosts[nodename]['text'] is not '':
