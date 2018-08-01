@@ -305,15 +305,22 @@ class MCOCMaps:
             for n in nodedetails:
                 if ':' in n:
                     nodename, bump = n.split(':')
-                    if nodename in boosts:
-                        print('nodname: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
-                        em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'].format(bump), inline=False)
-                elif n in boosts:
-                    nodename = n
-                    em.add_field(name=boosts[nodename]['title'], value=boosts[nodename]['text'], inline=False)
                 else:
-                    nodename = n
-                    em.add_field(name=nodename, value='Undocumented boost.  Please submit to Jpags.')
+                    nodename = n, bump = None
+                if nodename in boosts:
+                    title = boosts[nodename]['title']
+                    if boosts[nodename]['text'] is not '':
+                        text = boosts[nodename]['text']
+                        print('nodname: {}\ntitle: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], boosts[nodename]['text']))
+                        if bump is not None:
+                            text = text.format(bump)
+                            print('nodname: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
+                    else:
+                        text = 'Description text is missing from alliancwar.com.  Report to @japgs'
+                else:
+                    title = 'Error: {}'.format(nodename)
+                    value = 'Boost details for {} missing from alliancewar.com.  Report to @japgs.'.format(nodename)
+                em.add_field(name=title, value=text, inline=False)
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
             em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
