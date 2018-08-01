@@ -314,7 +314,10 @@ class MCOCMaps:
                         text = boosts[nodename]['text']
                         print('nodname: {}\ntitle: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], boosts[nodename]['text']))
                         if bump is not None:
-                            text = text.format(bump)
+                            try:
+                                text = text.format(bump)
+                            except:  #wrote specifically for limber_percent
+                                text = text.replace('}%}','}%').format(bump)  #wrote specifically for limber_percent
                             print('nodname: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
                     else:
                         text = 'Description text is missing from alliancwar.com.  Report to @jpags#5202.'
