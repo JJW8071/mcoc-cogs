@@ -317,10 +317,10 @@ class MCOCMaps:
                             text = text.format(bump)
                             print('nodname: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
                     else:
-                        text = 'Description text is missing from alliancwar.com.  Report to @japgs'
+                        text = 'Description text is missing from alliancwar.com.  Report to @jpags#5202.'
                 else:
                     title = 'Error: {}'.format(nodename)
-                    value = 'Boost details for {} missing from alliancewar.com.  Report to @japgs.'.format(nodename)
+                    value = 'Boost details for {} missing from alliancewar.com.  Report to @jpags#5202.'.format(nodename)
                 em.add_field(name=title, value=text, inline=False)
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
