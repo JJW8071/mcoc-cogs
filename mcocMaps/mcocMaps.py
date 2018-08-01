@@ -279,7 +279,7 @@ class MCOCMaps:
             em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
             em.set_thumbnail(url=img)
             em.add_field(name=title, value=text)
-            em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
+            em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
             await self.bot.say(embed=em)
 
     @commands.group(pass_context=True, aliases=['aw',])
@@ -297,11 +297,11 @@ class MCOCMaps:
         tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
         if tier in tiers:
             pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-            paths = json.loads(requests.get(pathurl).text)
+            pathdata = json.loads(requests.get(pathurl).text)
             # if paths is not None:
                 # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
             em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
-            nodedetails = paths['boosts'][str(nodeNumber)]
+            nodedetails = pathdata['boosts'][str(nodeNumber)]
             for n in nodedetails:
                 title, text = '','No description. Report to @jpags#5202'
                 if ':' in n:
@@ -313,13 +313,13 @@ class MCOCMaps:
                     title = boosts[nodename]['title']
                     if boosts[nodename]['text'] is not '':
                         text = boosts[nodename]['text']
-                        print('nodname: {}\ntitle: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], boosts[nodename]['text']))
+                        print('nodename: {}\ntitle: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], boosts[nodename]['text']))
                         if bump is not None:
                             try:
                                 text = text.format(bump)
                             except:  #wrote specifically for limber_percent
                                 text = text.replace('}%}','}%').format(bump)  #wrote specifically for limber_percent
-                            print('nodname: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
+                            print('nodename: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
                     else:
                         text = 'Description text is missing from alliancwar.com.  Report to @jpags#5202.'
                 else:
@@ -328,10 +328,37 @@ class MCOCMaps:
                 em.add_field(name=title, value=text, inline=False)
             #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
             # em.set_thumbnail(url=img)
-            em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='JPAGS & AllianceWar.com')
+            em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
+
+    @alliancewar.command(pass_context=True, hidden=True, name="path", aliases=('tracks','track','paths'))
+    async def _path_info(self, ctx, track='A', tier = 'expert'):
+        '''Report AW track information.'''
+        season = 2
+        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
+        boosts = json.loads(requests.get(boosturl).text)
+        # if boosts is not None:
+            # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
+        tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
+        tracks = {'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9}
+        if tier in tiers:
+            pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
+            pathdata = json.loads(requests.get(pathurl).text)
+            page_list = []
+            for t in tracks:
+                em = discord.Embed(color=tiers[tier], title='{} Alliance War Path {}'.format(tier.title(), track), descritpion='', url=JPAGS)
+                em.add_field(name='node placeholder',value='boosts placeholders')
+                em.add_field(name='node placeholder',value='boosts placeholders')
+                em.add_field(name='node placeholder',value='boosts placeholders')
+                mapurl = '{}warmap_2v2.png'.format(self.basepath)
+                em.set_image(url=mapurl)
+                em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
+                page_list.append(em)
+
+        await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=tracks[track]-1)
+
 
 
 
