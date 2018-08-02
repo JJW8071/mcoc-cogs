@@ -1290,7 +1290,7 @@ class MCOC(ChampionFactory):
                 flats.append('x')
             else:
                 critdmg=round(0.5+5*from_flat(int(data[keys[3]].replace(',','')), int(champ.chlgr_rating)),2)
-            flats.append('% {}'.format(critdmg))
+                flats.append('% {}'.format(critdmg))
             for k in range(4,len(keys)):
                 if data[keys[k]] == 'x':
                     flats.append('x')
