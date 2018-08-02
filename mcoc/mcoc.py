@@ -1306,8 +1306,6 @@ class MCOC(ChampionFactory):
             except:
                 print('PagesMenu failure')
                 await self.bot.say(embed=em)
-            if 'x' in data[keys]:
-                await self.bot.say('Summoner! Notice missing data? Do you want to help?\nClick the blue text above for a link to the Spotlight Survey!')
 
     @champ.command(pass_context=True, name='update', aliases=('add', 'dupe'), hidden=True)
     async def champ_update(self, ctx, *, args):
