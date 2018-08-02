@@ -220,7 +220,7 @@ class MCOCMaps:
         warmaps = {
             'expert' : '_expert'
         }
-        mapurl = '{}warmap_2v2.png'.format(self.basepath)
+        mapurl = '{}warmap_3_expert.png'.format(self.basepath)
         mapTitle = 'Alliance War 2.0 Map'
         em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
         em.set_image(url=mapurl)
@@ -332,6 +332,27 @@ class MCOCMaps:
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
+
+    @alliancewar.command(pass_context=True, hidden=True, name="map")
+    async def _map(self, ctx, tier = 'expert'):
+        '''Report AW track information.'''
+        season = 2
+        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
+        boosts = json.loads(requests.get(boosturl).text)
+        # if boosts is not None:
+            # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
+        tiers = {'expert': discord.Color.gold(),'bosskill': discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(), 'advanced':discord.Color.green(), 'normal':discord.Color.green(), 'easy':discord.Color.green()}
+        if tier.lower() in tiers:
+            mapTitle = 'Alliance War 3.0 {} Map'.format(tier.title())
+            if tier.lower()=='advanced' or tier.lower()=='easy':
+                tier ='normal'
+            mapurl = '{}warmap_3_{}.png'.format(self.basepath,tier)
+            em = discord.Embed(color=tiers[tier],title=mapTitle)
+        em.set_image(url=mapurl)
+        em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
+        await self.bot.say(embed=em)
+
+
 
     @alliancewar.command(pass_context=True, hidden=True, name="path", aliases=('tracks','track','paths'))
     async def _path_info(self, ctx, track='A', tier = 'expert'):
