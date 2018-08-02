@@ -7,7 +7,7 @@ from .utils.dataIO import dataIO
 from discord.ext import commands
 
 JPAGS = 'http://www.alliancewar.com'
-
+PATREON = 'https://patreon.com/collectorbot'
 
 class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
@@ -127,8 +127,12 @@ class MCOCMaps:
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(pass_context=True, aliases=['aq'])
-    async def aqmap(self, ctx, *, maptype: str):
+    @commands.group(pass_context=True, aliases=['aq',])
+    async def alliancequest(self, ctx):
+        '''Alliance Quest Commands [WIP]'''
+
+    @alliancequest.command(pass_context=True, name='map')
+    async def _aq_map(self, ctx, *, maptype: str):
         '''Select a Map
             cheatsheet : cheatsheet
             aq maps : 5, 5.1, 5.2, 5.3, 6, 6.1, 6.2, 6.3
@@ -137,7 +141,7 @@ class MCOCMaps:
         if maptype in self.aq_map:
             mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
             maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
-            em = discord.Embed(color=discord.Color.gold(),title=maptitle)
+            em = discord.Embed(color=discord.Color.gold(),title=maptitle,url=PATREON)
             # if 'required' in self.aq_map_tips[maptype]:
             #     em.add_field(name='Required',value=self.aq_map_tips[maptype]['required'])
             if self.aq_map_tips[maptype]['required'] != '':
@@ -149,7 +153,7 @@ class MCOCMaps:
             if 'tips' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
-                em2 = discord.Embed(color=discord.Color.gold(),title=maptitle)
+                em2 = discord.Embed(color=discord.Color.gold(),title=maptitle,url=PATREON)
                 em2.set_image(url=mapurl)
                 em2.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
                 if self.aq_map_tips[maptype]['required'] != '':
@@ -162,7 +166,7 @@ class MCOCMaps:
             if 'miniboss' in self.aq_map_tips[maptype]:
                 mapurl = '{}{}.png'.format(self.basepath, self.aq_map[maptype]['map'])
                 maptitle = 'Alliance Quest {}'.format(self.aq_map[maptype]['maptitle'])
-                em3 = discord.Embed(color=discord.Color.gold(),title=maptitle)
+                em3 = discord.Embed(color=discord.Color.gold(),title=maptitle,url=PATREON)
                 em3.set_image(url=mapurl)
                 em3.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
                 for miniboss in self.aq_map_tips[maptype]['miniboss']:
@@ -182,7 +186,7 @@ class MCOCMaps:
             page_list = []
             for i in range(0, 8):
                 maptitle = 'Labyrinth of Legends: Kiryu\'s {}'.format(self.lolmaps[str(i)]['maptitle'])
-                em = discord.Embed(color=discord.Color.gold(),title=maptitle) #, description = '\n'.join(desclist))
+                em = discord.Embed(color=discord.Color.gold(),title=maptitle,url=PATREON) #, description = '\n'.join(desclist))
                 mapurl = '{}lolmap{}v3.png'.format(self.basepath, i)
                 em.set_image(url=mapurl)
                 print(mapurl)
@@ -207,13 +211,13 @@ class MCOCMaps:
             imgurl = '{}kiryu{}.png'.format(self.basepath, i)
             print(imgurl)
             imgtitle = 'Labyrinth of Legends: Kiryu\'s Teams #{}'.format(i)
-            em = discord.Embed(color=discord.Color.gold(),title=imgtitle)
+            em = discord.Embed(color=discord.Color.gold(),title=imgtitle,url=PATREON)
             em.set_image(url=imgurl)
             em.set_footer(text='Art: CollectorDevTeam Plan: LabyrinthTeam',)
             page_list.append(em)
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=team-1)
 
-    @commands.command(pass_context=True, aliases=('aw'))
+    @commands.command(pass_context=True)
     async def warmap(self, ctx, *, maptype: str = 'expert'):
         '''Alliance War 2.0 Map
         '''
@@ -221,18 +225,18 @@ class MCOCMaps:
             'expert' : '_expert'
         }
         mapurl = '{}warmap_3_expert.png'.format(self.basepath)
-        mapTitle = 'Alliance War 2.0 Map'
-        em = discord.Embed(color=discord.Color.gold(),title=mapTitle)
+        mapTitle = 'Alliance War 3.0 Map'
+        em = discord.Embed(color=discord.Color.gold(),title=mapTitle,url=PATREON)
         em.set_image(url=mapurl)
         em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
         await self.bot.say(embed=em)
 
 ### Beginning of Alliance Management Functions
-    @commands.group(pass_context=True)
+    @commands.group(pass_context=True, hidden=True)
     async def alliance(self, ctx):
         '''Alliance Commands'''
 
-    @alliance.command(pass_context=True, name='setalliancerole')
+    @alliance.command(pass_context=True, name='setalliancerole', hidden=True)
     async def _set_alliance_role(self, ctx, role : discord.Role):
         '''Alliance Set subcommands'''
         server = ctx.message.server
@@ -347,7 +351,7 @@ class MCOCMaps:
             if tier.lower()=='advanced' or tier.lower()=='easy':
                 tier ='normal'
             mapurl = '{}warmap_3_{}.png'.format(self.basepath,tier)
-            em = discord.Embed(color=tiers[tier],title=mapTitle)
+            em = discord.Embed(color=tiers[tier],title=mapTitle,url=PATREON)
         em.set_image(url=mapurl)
         em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
         await self.bot.say(embed=em)
