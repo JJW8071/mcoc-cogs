@@ -1300,13 +1300,14 @@ class MCOC(ChampionFactory):
             em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
             em2.add_field(name='Shortcode', value=champ.short)
             embeds.append(em2)
-
             try:
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 await menu.menu_start(embeds)                # for page in pages:
             except:
                 print('PagesMenu failure')
                 await self.bot.say(embed=em)
+            if 'x' is in data[keys]:
+                await self.bot.say('Summoner! Notice missing data? Do you want to help?\nClick the blue text above for a link to the Spotlight Survey!')
 
     @champ.command(pass_context=True, name='update', aliases=('add', 'dupe'), hidden=True)
     async def champ_update(self, ctx, *, args):
