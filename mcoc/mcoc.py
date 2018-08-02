@@ -1282,11 +1282,20 @@ class MCOC(ChampionFactory):
             flats = []
             flats.append(data[keys[0]])
             flats.append(data[keys[1]])
-            flats.append('% {}'.format(from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating))))
-            critdmg=round(0.5+5*from_flat(int(data[keys[3]].replace(',','')), int(champ.chlgr_rating)),2)
+            if data[keys[2]] == 'x':
+                flats.append('x')
+            else:
+                flats.append('% {}'.format(from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating))))
+            if data[keys[3]] == 'x':
+                flats.append('x')
+            else:
+                critdmg=round(0.5+5*from_flat(int(data[keys[3]].replace(',','')), int(champ.chlgr_rating)),2)
             flats.append('% {}'.format(critdmg))
             for k in range(4,len(keys)):
-                flats.append('% {}'.format(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))))
+                if: data[keys[k]] == 'x'
+                    flats.append('x')
+                else:
+                    flats.append('% {}'.format(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))))
             pcts = [[titles[i], flats[i]] for i in range(len(titles))]
             em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
             em2.add_field(name='Shortcode', value=champ.short)
