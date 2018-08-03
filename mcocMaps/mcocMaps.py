@@ -436,9 +436,9 @@ class MCOCMaps:
             page_list = []
             for t in tracks:
                 em = discord.Embed(color=tiers[tier], title='{} Alliance War Path {}'.format(tier.title(), track), descritpion='', url=JPAGS)
-                    em.add_field(name='node placeholder',value='boosts placeholders')
-                    em.add_field(name='node placeholder',value='boosts placeholders')
-                    em.add_field(name='node placeholder',value='boosts placeholders')
+                em.add_field(name='node placeholder',value='boosts placeholders')
+                em.add_field(name='node placeholder',value='boosts placeholders')
+                em.add_field(name='node placeholder',value='boosts placeholders')
                 mapurl = '{}warmap_3_{}.png'.format(self.basepath,tier.lower())
                 em.set_image(url=mapurl)
                 em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
