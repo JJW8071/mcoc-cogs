@@ -320,12 +320,11 @@ class MCOCMaps:
     async def _node_info(self, ctx, nodeNumber, tier = 'expert'):
         '''Report Node information.'''
         season = 2
-        tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
         # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         # boosts = json.loads(requests.get(boosturl).text)
         # if boosts is not None:
             # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
-        if tier in tiers:
+        if tier in {'expert','hard','challenger','intermediate','normal','easy'}:
         #     pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
         #     pathdata = json.loads(requests.get(pathurl).text)
         #     # if paths is not None:
@@ -365,11 +364,16 @@ class MCOCMaps:
     async def get_awnode_details(self, ctx, nodeNumber, tier, season):
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
-        pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
+        tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
+        if tier not in tiers:
+            jpagstier = 'advanced'
+        else:
+            jpagstier = tier
+        pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, jpagstier)
         pathdata = json.loads(requests.get(pathurl).text)
         # if paths is not None:
             # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-        em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
+        em = discord.Embed(color=tiers[jpagstier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
         nodedetails = pathdata['boosts'][str(nodeNumber)]
         for n in nodedetails:
             title, text = '','No description. Report to @jpags#5202'
