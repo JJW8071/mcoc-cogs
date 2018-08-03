@@ -330,7 +330,12 @@ class MCOCMaps:
     async def get_awnode_details(self, ctx, nodeNumber, tier, season):
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
-        tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
+        tiers =
+            {'expert'{ color :discord.Color.gold(), minis: [27,28,29,30,31,48,51,52,53,55], boss:[54]},
+            {'hard':discord.Color.red(), minis: [48,51,52,53,55], boss:[54]},
+            {'challenger':discord.Color.orange(), minis: [27,28,29,30,31,48,51,52,53,55], boss:[54]},
+            {'intermediate':discord.Color.blue(), [48,51,52,53,55], boss:[54]},
+            {'advanced':discord.Color.green(), minis: []}}
         if tier not in tiers:
             jpagstier = 'advanced'
         else:
@@ -339,7 +344,13 @@ class MCOCMaps:
         pathdata = json.loads(requests.get(pathurl).text)
         # if paths is not None:
             # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-        em = discord.Embed(color=tiers[jpagstier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
+        if int(nodeNumber) in tiers[japgstier][minis]:
+            title='{} MINIBOSS Node {} Boosts'.format(tier.title(),nodeNumber)
+        elif int(nodeNumber) in tiers[jpagstier][boss]:
+            title='{} BOSS Node {} Boosts'.format(tier.title(),nodeNumber)
+        else:
+            title='{} Node {} Boosts'.format(tier.title(),nodeNumber)
+        em = discord.Embed(color=tiers[jpagstier][color], title=title, nodeNumber), descritpion='', url=JPAGS)
         nodedetails = pathdata['boosts'][str(nodeNumber)]
         for n in nodedetails:
             title, text = '','No description. Report to @jpags#5202'
