@@ -357,12 +357,12 @@ class MCOCMaps:
         #             value = 'Boost details for {} missing from alliancewar.com.  Report to @jpags#5202.'.format(nodename)
         #         em.add_field(name=title, value=text, inline=False)
         #     em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
-            em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier)
+            em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
 
-    async def get_awnode_details(self, ctx, nodeNumber, tier):
+    async def get_awnode_details(self, ctx, nodeNumber, tier, season):
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
         pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
