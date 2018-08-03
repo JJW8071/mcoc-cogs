@@ -331,11 +331,11 @@ class MCOCMaps:
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
         tiers = {
-            'expert':{ color :discord.Color.gold(), minis: [27,28,29,30,31,48,51,52,53,55], boss:[54]},
-            'hard':{ color :discord.Color.red(), minis: [48,51,52,53,55], boss:[54]},
-            'challenger':{ color :discord.Color.orange(), minis: [27,28,29,30,31,48,51,52,53,55], boss:[54]},
-            'intermediate':{ color :discord.Color.blue(), minis: [48,51,52,53,55], boss:[54]},
-            'advanced':{ color :discord.Color.green(), minis: [], boss:[]}}
+            'expert':{ 'color' :discord.Color.gold(), 'minis': [27,28,29,30,31,48,51,52,53,55], 'boss':[54]},
+            'hard':{ 'color' :discord.Color.red(), 'minis': [48,51,52,53,55], 'boss':[54]},
+            'challenger':{ 'color' :discord.Color.orange(), 'minis': [27,28,29,30,31,48,51,52,53,55], boss:[54]},
+            'intermediate':{ 'color' :discord.Color.blue(), 'minis': [48,51,52,53,55], 'boss':[54]},
+            'advanced':{ 'color' :discord.Color.green(), 'minis': [], 'boss':[]}}
         if tier not in tiers:
             jpagstier = 'advanced'
         else:
@@ -344,13 +344,13 @@ class MCOCMaps:
         pathdata = json.loads(requests.get(pathurl).text)
         # if paths is not None:
             # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-        if int(nodeNumber) in tiers[japgstier][minis]:
+        if int(nodeNumber) in tiers[japgstier]['minis']:
             title='{} MINIBOSS Node {} Boosts'.format(tier.title(),nodeNumber)
-        elif int(nodeNumber) in tiers[jpagstier][boss]:
+        elif int(nodeNumber) in tiers[jpagstier]['boss']:
             title='{} BOSS Node {} Boosts'.format(tier.title(),nodeNumber)
         else:
             title='{} Node {} Boosts'.format(tier.title(),nodeNumber)
-        em = discord.Embed(color=tiers[jpagstier][color], title=title, descritpion='', url=JPAGS)
+        em = discord.Embed(color=tiers[jpagstier]['color'], title=title, descritpion='', url=JPAGS)
         nodedetails = pathdata['boosts'][str(nodeNumber)]
         for n in nodedetails:
             title, text = '','No description. Report to @jpags#5202'
