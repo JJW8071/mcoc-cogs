@@ -320,42 +320,8 @@ class MCOCMaps:
     async def _node_info(self, ctx, nodeNumber, tier = 'expert'):
         '''Report Node information.'''
         season = 2
-        # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        # boosts = json.loads(requests.get(boosturl).text)
-        # if boosts is not None:
-            # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         if tier in {'expert','hard','challenger','intermediate','normal','easy'}:
-        #     pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-        #     pathdata = json.loads(requests.get(pathurl).text)
-        #     # if paths is not None:
-        #         # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-        #     em = discord.Embed(color=tiers[tier], title='{} Node {} Boosts'.format(tier.title(), nodeNumber), descritpion='', url=JPAGS)
-        #     nodedetails = pathdata['boosts'][str(nodeNumber)]
-        #     for n in nodedetails:
-        #         title, text = '','No description. Report to @jpags#5202'
-        #         if ':' in n:
-        #             nodename, bump = n.split(':')
-        #         else:
-        #             nodename = n
-        #             bump = 0
-        #         if nodename in boosts:
-        #             title = boosts[nodename]['title']
-        #             if boosts[nodename]['text'] is not '':
-        #                 text = boosts[nodename]['text']
-        #                 print('nodename: {}\ntitle: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], boosts[nodename]['text']))
-        #                 if bump is not None:
-        #                     try:
-        #                         text = text.format(bump)
-        #                     except:  #wrote specifically for limber_percent
-        #                         text = text.replace('}%}','}%').format(bump)  #wrote specifically for limber_percent
-        #                     print('nodename: {}\ntitle: {}\nbump: {}\ntext: {}'.format(nodename, boosts[nodename]['title'], bump, boosts[nodename]['text']))
-        #             else:
-        #                 text = 'Description text is missing from alliancwar.com.  Report to @jpags#5202.'
-        #         else:
-        #             title = 'Error: {}'.format(nodename)
-        #             value = 'Boost details for {} missing from alliancewar.com.  Report to @jpags#5202.'.format(nodename)
-        #         em.add_field(name=title, value=text, inline=False)
-        #     em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
+
             em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
             await self.bot.say(embed=em)
         else:
