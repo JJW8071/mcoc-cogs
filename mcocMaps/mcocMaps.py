@@ -350,7 +350,7 @@ class MCOCMaps:
             title='{} BOSS Node {} Boosts'.format(tier.title(),nodeNumber)
         else:
             title='{} Node {} Boosts'.format(tier.title(),nodeNumber)
-        em = discord.Embed(color=tiers[jpagstier][color], title=title, nodeNumber), descritpion='', url=JPAGS)
+        em = discord.Embed(color=tiers[jpagstier][color], title=title, descritpion='', url=JPAGS)
         nodedetails = pathdata['boosts'][str(nodeNumber)]
         for n in nodedetails:
             title, text = '','No description. Report to @jpags#5202'
