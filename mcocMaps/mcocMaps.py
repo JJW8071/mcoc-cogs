@@ -402,6 +402,7 @@ class MCOCMaps:
         #     img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, boosts['img'])
         # em.set_thumbnail(url=img)
         em.set_footer(icon_url=JPAGS+'/aw/images/app_icon.jpg',text='AllianceWar.com')
+        return em
 
     @alliancewar.command(pass_context=True, hidden=True, name="map")
     async def _map(self, ctx, tier = 'expert'):
