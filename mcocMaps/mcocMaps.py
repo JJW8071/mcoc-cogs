@@ -344,7 +344,7 @@ class MCOCMaps:
         pathdata = json.loads(requests.get(pathurl).text)
         # if paths is not None:
             # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
-        if int(nodeNumber) in tiers[japgstier]['minis']:
+        if int(nodeNumber) in tiers[jpagstier]['minis']:
             title='{} MINIBOSS Node {} Boosts'.format(tier.title(),nodeNumber)
         elif int(nodeNumber) in tiers[jpagstier]['boss']:
             title='{} BOSS Node {} Boosts'.format(tier.title(),nodeNumber)
