@@ -1157,7 +1157,7 @@ class MCOC(ChampionFactory):
             champ = champ_class(hargs.attrs.copy())
             rlist.append(champ.full_name)
         package = '\n'.join(rlist)
-        await self.bot.say('{hargs} Export\n{package}'.format(harglist, package))
+        await self.bot.say('{} Export\n{}'.format(harglist, package))
         # for champ_class in self.champions.values():
         #     champ = champ_class(hargs.attrs.copy())
         #     if champ.has_prestige:
