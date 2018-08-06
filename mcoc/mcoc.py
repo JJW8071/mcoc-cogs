@@ -1154,7 +1154,9 @@ class MCOC(ChampionFactory):
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
         filtered = roster.filter_champs(hargs.tags)
-        package = '\n'.join(champ.full_name for champ in filtered)
+        strs = [champ.full_name for champ in sorted(filtered, reverse=True,
+                    key=attrgetter('full_name'))]
+        package = '\n'.join(strs)
         print(package)
         pages = chat.pagify(package, page_length=2000)
         for page in pages:
