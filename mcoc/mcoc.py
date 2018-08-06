@@ -1155,7 +1155,8 @@ class MCOC(ChampionFactory):
         rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
-            rlist.append(champ.full_name)
+            if champ.has_prestige:
+                rlist.append(champ.full_name)
         package = '\n'.join(rlist)
         print(package)
         pages = chat.pagify(package, page_length=2000)
