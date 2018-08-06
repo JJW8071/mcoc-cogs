@@ -1158,10 +1158,8 @@ class MCOC(ChampionFactory):
             hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
             #await self.update_local()
             roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
-            filtered = roster.filter_champs(hargs.tags)
-            print(filtered.keys)
-            strs = [champ.full_name for champ in sorted(filtered, reverse=True,
-                        key=attrgetter('full_name'))]
+            await filtered = roster.filter_champs(hargs.attrs.copy())
+            strs = [champ.full_name for champ in filtered]##sorted(filtered, reverse=True, key=attrgetter('full_name'))]
             package = '\n'.join(strs)
             print(package)
             pages = chat.pagify(package, page_length=2000)
