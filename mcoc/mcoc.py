@@ -1134,8 +1134,8 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='list')
-    async def champ_list(self, ctx, *, hargs=''):
+    @champ.command(pass_context=True, name='export')
+    async def champ_list_export(self, ctx, *, hargs=''):
         '''List of all champions in prestige order.
 
         hargs:  [attribute_args] [hashtags]
@@ -1164,8 +1164,8 @@ class MCOC(ChampionFactory):
         # roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
         # await roster.display(hargs.tags) #imported from hook
 
-    @champ.command(pass_context=True, name='listExport')
-    async def champ_list_export(self, ctx, *, hargs=''):
+    @champ.command(pass_context=True, name='list')
+    async def champ_list(self, ctx, *, hargs=''):
         '''List of all champions in prestige order.
 
         hargs:  [attribute_args] [hashtags]
