@@ -1154,9 +1154,9 @@ class MCOC(ChampionFactory):
             await self.bot.say('This server is unauthorized.')
             return
         else:
-            harglist = self.bot.user + hargs
+            # harglist = self.bot.user + hargs
             # hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
-            roster = hook.HashtagRosterConverter(ctx, harglist).convert()
+            roster = hook.HashtagRosterConverter(ctx.bot, hargs).convert()
             #await self.update_local()
             # roster = hargs.roster.filter_champs(hargs.tags)
             # filtered = roster.filter_champs(hargs.attrs.copy())
