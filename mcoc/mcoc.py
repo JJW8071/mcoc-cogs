@@ -1153,7 +1153,7 @@ class MCOC(ChampionFactory):
         #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
-        filtered = await self.champions.filter_champs(hargs.tags)
+        filtered = roster.filter_champs(hargs.tags)
         package = '\n'.join(champ.full_name for champ in filtered)
         print(package)
         pages = chat.pagify(package, page_length=2000)
