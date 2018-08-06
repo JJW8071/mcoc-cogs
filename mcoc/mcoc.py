@@ -1148,6 +1148,7 @@ class MCOC(ChampionFactory):
             /champ list    (all 4* champs rank5, sig99)
             /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
         '''
+        harglist = hargs
         hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
         #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
@@ -1156,7 +1157,7 @@ class MCOC(ChampionFactory):
             champ = champ_class(hargs.attrs.copy())
             rlist.append(champ.full_name)
         package = '\n'.join(rlist)
-        await self.bot.say('{hargs} Export\n{package}'.format(hargs, package))
+        await self.bot.say('{hargs} Export\n{package}'.format(harglist, package))
         # for champ_class in self.champions.values():
         #     champ = champ_class(hargs.attrs.copy())
         #     if champ.has_prestige:
