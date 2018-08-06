@@ -1134,9 +1134,10 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='export')
+    @commands.has_any_role('CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
+    @champ.command(pass_context=True, name='export', hidden=True)
     async def champ_list_export(self, ctx, *, hargs=''):
-        '''List of all champions in prestige order.
+        '''List of #hargs champions in name order.
 
         hargs:  [attribute_args] [hashtags]
         The optional attribute arguments can be in any order, with or without spaces.
@@ -1148,19 +1149,24 @@ class MCOC(ChampionFactory):
             /champ list    (all 4* champs rank5, sig99)
             /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
         '''
-        harglist = hargs
-        hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
-        #await self.update_local()
-        roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
-        rlist = []
-        filtered = roster.filter_champs(hargs.tags)
-        strs = [champ.full_name for champ in sorted(filtered, reverse=True,
-                    key=attrgetter('full_name'))]
-        package = '\n'.join(strs)
-        print(package)
-        pages = chat.pagify(package, page_length=2000)
-        for page in pages:
-            await self.bot.say(chat.box(page))
+        guild = await self.check_guild(ctx)
+        if not guild:
+            await self.bot.say('This server is unauthorized.')
+            return
+        else:
+            harglist = hargs
+            hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
+            #await self.update_local()
+            roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
+            filtered = roster.filter_champs(hargs.tags)
+            print(filtered.keys)
+            strs = [champ.full_name for champ in sorted(filtered, reverse=True,
+                        key=attrgetter('full_name'))]
+            package = '\n'.join(strs)
+            print(package)
+            pages = chat.pagify(package, page_length=2000)
+            for page in pages:
+                await self.bot.say(chat.box(page))
 
 
 
