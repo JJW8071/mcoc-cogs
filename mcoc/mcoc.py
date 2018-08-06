@@ -1153,11 +1153,8 @@ class MCOC(ChampionFactory):
         #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
-        for champ_class in self.champions.values():
-            champ = champ_class(hargs.attrs.copy())
-            if champ.has_prestige:
-                rlist.append(champ.full_name)
-        package = '\n'.join(rlist)
+        filtered = await self.champions.filter_champs(hargs.tags)
+        package = '\n'.join(champ.full_name for champ in filtered)
         print(package)
         pages = chat.pagify(package, page_length=2000)
         for page in pages:
