@@ -1152,6 +1152,36 @@ class MCOC(ChampionFactory):
         #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
+        for champ in roster:
+            rlist.append(champ.full_name)
+        package = ''.join('\n',rlist)
+        await self.bot.say('{hargs} Export\n{package}')
+        # for champ_class in self.champions.values():
+        #     champ = champ_class(hargs.attrs.copy())
+        #     if champ.has_prestige:
+        #         rlist.append(champ)
+        # roster.from_list(rlist)
+        # roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
+        # await roster.display(hargs.tags) #imported from hook
+
+    @champ.command(pass_context=True, name='listExport')
+    async def champ_list_export(self, ctx, *, hargs=''):
+        '''List of all champions in prestige order.
+
+        hargs:  [attribute_args] [hashtags]
+        The optional attribute arguments can be in any order, with or without spaces.
+            <digit>* specifies star <default: 4>
+            r<digit> specifies rank <default: 5>
+            s<digit> specifies signature level <default: 99>
+
+        Examples:
+            /champ list    (all 4* champs rank5, sig99)
+            /champ list 5*r3s20 #bleed   (all 5* bleed champs at rank3, sig20)
+        '''
+        hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
+        #await self.update_local()
+        roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
+        rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
             if champ.has_prestige:
