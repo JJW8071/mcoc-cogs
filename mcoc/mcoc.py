@@ -1158,7 +1158,7 @@ class MCOC(ChampionFactory):
             hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
             #await self.update_local()
             roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
-            await filtered = roster.filter_champs(hargs.attrs.copy())
+            filtered = roster.filter_champs(hargs.attrs.copy())
             strs = [champ.full_name for champ in filtered]##sorted(filtered, reverse=True, key=attrgetter('full_name'))]
             package = '\n'.join(strs)
             print(package)
