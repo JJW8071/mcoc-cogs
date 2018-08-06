@@ -1152,8 +1152,9 @@ class MCOC(ChampionFactory):
         #await self.update_local()
         roster = hook.ChampionRoster(self.bot, self.bot.user) #imported from hook
         rlist = []
-        for champ in self.champions.full_name:
-            rlist.append(champ.full_name)
+        for champ_class in self.champions.values():
+            champ = champ_class(hargs.attrs.copy())
+                rlist.append(champ.full_name)
         package = ''.join('\n',rlist)
         await self.bot.say('{hargs} Export\n{package}')
         # for champ_class in self.champions.values():
