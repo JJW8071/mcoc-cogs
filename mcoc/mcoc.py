@@ -1158,7 +1158,11 @@ class MCOC(ChampionFactory):
             rlist.append(champ.full_name)
         package = '\n'.join(rlist)
         print(package)
-        await self.bot.say(chat.pagify(chat.box('{}'.format(package))))
+        pages = chat.pagify(package, page_length=2000)
+        for page in pages:
+            await self.bot.say(chat.box(page))
+
+
 
     @champ.command(pass_context=True, name='list')
     async def champ_list(self, ctx, *, hargs=''):
