@@ -1156,8 +1156,7 @@ class MCOC(ChampionFactory):
         else:
             harglist = hargs
             hargs = await hook.HashtagRankConverter(ctx, hargs).convert() #imported from hook
-            roster = hook.ChampionRoster(self.bot, self.bot.user)
-            roster = roster.HashtagRosterConverter(self.bot, hargs).convert()
+            roster = hook.HashtagRosterConverter(user=self.bot, tags=harglist).convert()
             #await self.update_local()
             # roster = hargs.roster.filter_champs(hargs.tags)
             # filtered = roster.filter_champs(hargs.attrs.copy())
