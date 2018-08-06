@@ -1154,7 +1154,7 @@ class MCOC(ChampionFactory):
         rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
-                rlist.append(champ.full_name)
+            rlist.append(champ.full_name)
         package = ''.join('\n',rlist)
         await self.bot.say('{hargs} Export\n{package}')
         # for champ_class in self.champions.values():
