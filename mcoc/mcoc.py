@@ -1158,14 +1158,7 @@ class MCOC(ChampionFactory):
             rlist.append(champ.full_name)
         package = '\n'.join(rlist)
         print(package)
-        await self.bot.say(chat.box('{}'.format(package)))
-        # for champ_class in self.champions.values():
-        #     champ = champ_class(hargs.attrs.copy())
-        #     if champ.has_prestige:
-        #         rlist.append(champ)
-        # roster.from_list(rlist)
-        # roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
-        # await roster.display(hargs.tags) #imported from hook
+        await self.bot.say(chat.pagify(chat.box('{}'.format(package))))
 
     @champ.command(pass_context=True, name='list')
     async def champ_list(self, ctx, *, hargs=''):
