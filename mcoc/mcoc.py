@@ -1720,13 +1720,22 @@ class MCOC(ChampionFactory):
         spch = sorted(pch, key=attrgetter('prestige'), reverse=True)
         denom = min(len(spch), 5)
         numerator = sum(spch[i].prestige for i in range(denom))
-        em = discord.Embed(color=discord.Color.magenta(),
-                title='Prestige: {}'.format(numerator/denom),
-                url=PRESTIGE_SURVEY,
-                description='\n'.join(c.verbose_prestige_str for c in spch)
-            )
-        em.set_footer(icon_url=GSHEET_ICON,text='mutamatt Prestige for Collector')
-        await self.bot.say(embed=em)
+        if denom != 0:
+            em = discord.Embed(color=discord.Color.magenta(),
+                    title='Prestige: {}'.format(numerator/denom),
+                    url=PRESTIGE_SURVEY,
+                    description='\n'.join(c.verbose_prestige_str for c in spch)
+                )
+            em.set_footer(icon_url=GSHEET_ICON,text='mutamatt Prestige for Collector')
+            await self.bot.say(embed=em)
+        else:
+            em = discord.Embed(color=discord.Color.magenta(),
+                    title='Not Enough Data',
+                    url=PRESTIGE_SURVEY,
+                    description='Summoner, your request would result in a division by zero which would cause a black hole and consume the multiverse.'
+                )
+            em.set_footer(icon_url=GSHEET_ICON,text='mutamatt Prestige for Collector')
+            await self.bot.say(embed=em)
 
     @champ.command(name='aliases', aliases=('alias',))
     async def champ_aliases(self, *args):
