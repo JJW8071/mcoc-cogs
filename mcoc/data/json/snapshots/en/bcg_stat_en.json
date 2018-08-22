@@ -19534,6 +19534,11 @@
       "vn": 13
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_NEBULA_DESC",
+      "v": "When Nebula is out of Self-Repair charges, she tries to recalibrate her implants granting her a {0}% chance to regain a charge every {1} seconds.",
+      "vn": 13
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_NIGHTCRAWLER_DESC",
       "v": "Nightcrawler’s unique heritage, coupled with his X-Men training allows him to switch combat mode {0} seconds faster. Additionally, anytime he strikes a Deep Wound, he gains [16982bff]{1}%[-] increased Attack for {2} seconds.",
       "vn": "11.2"
