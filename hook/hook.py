@@ -30,10 +30,9 @@ def _default(self, obj):
     return getattr(obj.__class__, "to_json", _default.default)(obj)
 
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
-KLASS_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/JJWDev/mcoc/data/class_icons/{}.png'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
 HOOK_URL='http://hook.github.io/champions/#/roster'
-COLLECTOR_ICON='https://images-ext-1.discordapp.net/external/drzqadqtDB3udEqQ-wOcOfNLZFpF7HR05_iiTieI2uQ/https/raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/portraits/portrait_collector.png'
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/portraits/portrait_collector.png'
 GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'
 
 _default.default = JSONEncoder().default  # Save unmodified default.

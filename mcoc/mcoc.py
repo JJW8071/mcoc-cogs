@@ -56,7 +56,7 @@ GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/g
 SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffeOzKiaeQeqoUgaESknK-QpXTYV2GdJgbxQkeCjoSajuLjafKdJ5imE1ADPYeoh8QkAr/pubhtml?gid=1483787822&single=true'
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
-COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/cdt_icon.png'
 MODOKSAYS = ['alien', 'buffoon', 'charlatan', 'creature', 'die', 'disintegrate',
         'evaporate', 'feelmypower', 'fool', 'fry', 'haha', 'iamscience', 'idiot',
         'kill', 'oaf', 'peabrain', 'pretender', 'sciencerules', 'silence',
@@ -114,8 +114,8 @@ gsheet_files = {
 star_glyph = "★"
 lolmap_path="data/mcoc/maps/lolmap.png"
 file_checks_json = "data/mcoc/file_checks.json"
-remote_data_basepath = "https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/"
-icon_sdf = "https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/sdf_icon.png"
+remote_data_basepath = "https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/"
+icon_sdf = "https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/sdf_icon.png"
 
 ###### KEYS for MCOC JSON Data Extraction
 mcoc_dir="data/mcoc/json/snapshots/en/"
