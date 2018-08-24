@@ -145,7 +145,7 @@ class MCOCMaps:
         'x23':['Wolverine (X-23)','Every 15 seconds, Wolverine Regenerates 5\% of her Health over 3 seconds.']
     }
 
-    basepath = 'https://raw.githubusercontent.com/CollectorDevTeam/assets/blob/master/data/images/maps'
+    basepath = 'https://raw.githubusercontent.com/CollectorDevTeam/assets/blob/master/data/images/maps/'
     icon_sdf = 'https://raw.githubusercontent.com/CollectorDevTeam/assets/blob/master/data/sdf_icon.png'
     COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/blob/master/data/cdt_icon.png'
 
