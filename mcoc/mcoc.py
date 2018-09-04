@@ -570,15 +570,22 @@ class GSHandler:
         num_files = len(gfiles)
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
         for i, k in enumerate(gfiles):
-            gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
-            try:
-                await gsdata.retrieve_data()
-            except:
-                await self.bot.say("Error while pulling '{}'".format(k))
-                raise
+            pulled = False
+            for try_num in range(3):
+                gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
+                try:
+                    await gsdata.retrieve_data()
+                    pulled = True
+                    break
+                except:
+                    logger.info("Error while pulling '{}' try: {}".format(k, str(try_num)))
+                    if try_num < 3:
+                        time.sleep(.3 * try_num)
+                        #await self.bot.say("Error while pulling '{}'".format(k))
             msg = await self.bot.edit_message(msg,
-                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
-        await self.bot.say('Retrieval Complete')
+                     'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+            logger.info('Pulled Google Sheet data {}/{}, {}'.format(i+1, num_files, "" if pulled else "Failed"))
+        msg = await self.bot.edit_message(msg, 'Retrieval Complete')
 
     async def authorize(self):
         try:
