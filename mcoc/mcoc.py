@@ -581,7 +581,7 @@ class GSHandler:
                     logger.info("Error while pulling '{}' try: {}".format(k, str(try_num)))
                     if try_num < 3:
                         time.sleep(.3 * try_num)
-                        #await self.bot.say("Error while pulling '{}'".format(k))
+                        msg = await self.bot.edit_message(msg, "Error while pulling '{}'".format(k))
             msg = await self.bot.edit_message(msg,
                      'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
             logger.info('Pulled Google Sheet data {}/{}, {}'.format(i+1, num_files, "" if pulled else "Failed"))
