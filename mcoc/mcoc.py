@@ -2272,13 +2272,20 @@ class Champion:
 
     async def get_bio(self):
         bios = load_kabam_json(kabam_bio)
+        bcg_en = load_kabam_json(kabam_bcg_en)
+        bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
+        bio = ''
+        for s in (bios, bcg_en, bcg_stat_en):
+            if key in s:
+                bio = s[key]
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
-        if key not in bios:
+        # if key not in bios:
+        if bio == '':
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
-        return bios[key]
+        return bio
 
     @property
     def star(self):
