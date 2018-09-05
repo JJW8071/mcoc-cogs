@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "0a5e2601403a8b6ae85fc388f769443a0e232047",
+    "hash": "04685acdad5f519fb181e933a405ff5b12650dda",
     "language": "en",
     "post_processed": true,
-    "string_count": 863,
+    "string_count": 898,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1532035627,
-    "versionLock": "19.1"
+    "ts": 1535056587,
+    "versionLock": "20.0"
   },
   "strings": [
     {
@@ -1344,6 +1344,9 @@
       "vn": "19.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DEADLYPRESENCE",
+      "v": "DEADLY PRESENCE",
+      "vn": 20
       "k": "ID_UI_HERO_SYNERGY_DECIMATION",
       "v": "DECIMATION",
       "vn": "17.1"
@@ -1467,6 +1470,9 @@
       "vn": "19.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_ENCHANTEDBLADES_NEW",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Precision Buff increasing Critical Rate by {0}.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
       "k": "ID_UI_HERO_SYNERGY_DESC_GETINTHEPOOL",
       "v": "[64acff]Masacre:[-] Ignited’s Duration increases by {0}%. \n[64acff]Gwenpool:[-] Incinerate Debuffs have their Durations increased by {0}%. \n[64acff]Venompool:[-] Debuffs and Buffs have their Durations increased by {0}%. \n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "18.1"
@@ -1504,6 +1510,9 @@
       "k": "ID_UI_HERO_SYNERGY_DESC_LOSTDAUGHTERS",
       "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Fury Buff increasing Attack by {0}% of Base Attack.",
       "vn": 19
+      "k": "ID_UI_HERO_SYNERGY_DESC_LOSTDAUGHTERS_NEW",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Fury Buff increasing Attack by {0}% of Base Attack.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_LULLABY",
@@ -1590,8 +1599,11 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_RAINBOWGUARDIAN",
-      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, the first time when you would be knocked out gain both an Indestructible and an Unstoppable Buff which last for 3 seconds.",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, the first time when you would be knocked out gain both an Indestructible and an Unstoppable Buff which last for {0} seconds.",
       "vn": "19.1"
+      "k": "ID_UI_HERO_SYNERGY_DESC_RAINBOWGUARDIAN_NEW",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, the first time when you would be knocked out gain both an Indestructible and an Unstoppable Buff which last for {0} seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_SCIENCE",
@@ -1674,6 +1686,9 @@
       "vn": 19
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DESC_WARRIORSOFASGARD_NEW",
+      "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to Regenerate {0}% of missing Health instantly.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
       "k": "ID_UI_HERO_SYNERGY_EARTH_DEFENDER_I",
       "v": "COSMIC PARTNERS Lv. 1"
     },
@@ -1694,6 +1709,46 @@
       "k": "ID_UI_HERO_SYNERGY_ELECTRICCHARGE_DESC",
       "v": "[64acff]Green Goblin:[-] +{0}% Bag of Tricks Potency.\n[64acff]Electro:[-] While under a Shock Debuff, +30% Attack.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMACOLO",
+      "v": "Impenetrable Hide",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMACOLO_DESC_1",
+      "v": "[64acff]Emma Frost:[-] Emma switches to Diamond Form when she and the Opponent are in the same bar of Power.\n[64acff]Colossus:[-] +{0}% increased Power Gain for each Armor Up Buff.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMACOLO_DESC_2",
+      "v": "[64acff]Emma Frost:[-] Emma switches to Diamond Form when she and the Opponent are in the same bar of Power.\n[64acff]Colossus:[-] Damage for all of Colossus' attacks is increased by his Armor, instead of only his Special Attacks.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMACYCL_DESC",
+      "v": "[64acff]Emma Frost:[-] Emma can strike with Critical Hits even while the Opponent is Blocking.\n[64acff]Cyclops (New Xavier and Blue Team):[-] +{0}% increased Power Gain.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMAPHNX",
+      "v": "Phoenix Force",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMAPHNX_DESC",
+      "v": "[64acff]Emma Frost:[-] Whenever Emma would gain one Prowess Buff, she gains two instead.\n[64acff]Phoenix:[-] Entering Overload does not consume Fury Buffs. When Phoenix stops Overloading, all Fury Buffs are removed.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMASENT",
+      "v": "Memories of Genosha",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_EMMASENT_DESC",
+      "v": "[64acff]Emma Frost:[-] +15% Attack Rating in Diamond Form.\n[64acff]Sentinel:[-] +{0} Physical Resistance for each Analysis Charge.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
     },
     {
       "k": "ID_UI_HERO_SYNERGY_ENCHANTEDBLADES",
@@ -2047,6 +2102,16 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_METALMAYHEM",
+      "v": "METAL MAYHEM",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_METALMAYHEM_LONG",
+      "v": "[64acff]Omega Red:[-] +{0}% Critical Damage for each Death Spore on the opponent.\n[64acff]Wolverine:[-] +20% Stronger Bleeds and +5% Critical Rating.\n[64acff]Colossus:[-] +20% Attack Rating for each Armor Up Buff and Well Timed Blocks grant an Armor Buff.[Max 1 Stack]\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_MICROSCOPICOBSERVATION",
       "v": "MICROSCOPIC OBSERVATION",
       "vn": 19
@@ -2335,6 +2400,12 @@
       "v": "SCIENCE AUTHORITY Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_SEEINGRED",
+      "v": "SEEING RED",
+      "vn": 20
+      "k": "ID_UI_HERO_SYNERGY_SEEINGRED_LONG",
+      "v": "[64acff]Omega Red:[-] Well Timed Blocks have a {0}% chance to inflict 1 Death Spore up to a max of 30 Spores total.\\n[64acff]Red Skull:[-] While under 1 Bar of Power, Charging Red Skull’s Heavy Attack grants an Unstoppable Buff for 2 seconds. If Hit while Unstoppable, the Buff is removed and Red Skull immediately executes the Heavy Attack.\\n[64acff]Red Hulk:[-] +25% Power Rate against Incinerated opponents.\\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
       "k": "ID_UI_HERO_SYNERGY_SEETHINGHATRED",
       "v": "SEETHING HATRED",
       "vn": "14.1"
@@ -2527,6 +2598,16 @@
       "k": "ID_UI_HERO_SYNERGY_WARRIORSOFASGARD",
       "v": "Warriors of Asgard",
       "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_XASSASINS",
+      "v": "X ASSASSINS",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_XASSASINS_LONG",
+      "v": "[64acff]Omega Red:[-] {0}% faster rate to inflict Death Spores and {0}% longer rate for Death Spores to be removed.\n[64acff]Deadpool (X-Force):[-] +25% Power Rate against Bleeding Opponents.\n[64acff]Sabretooth:[-] 30% chance Basic Claw hits inflict Bleed, dealing 40% of Attack as Direct Damage over 4 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
     },
     {
       "k": "ID_UI_HERO_TILE_LEVEL_FORMAT",
@@ -3281,6 +3362,12 @@
       "v": "RECOMMENDED {0} / [FF0000]TOTAL {1}[-]"
     },
     {
+      "k": "ID_UI_TEAM_MANAGEMENT_RESTRICTIONS_MET_FALSE",
+      "v": "CHAMPION REQUIREMENTS  NOT MET",
+      "vn": 20
+      "k": "ID_UI_TEAM_MANAGEMENT_RESTRICTIONS_MET_TRUE",
+      "v": "CHAMPION REQUIREMENTS MET",
+      "vn": 20
       "k": "ID_UI_TEAM_MANAGEMENT_SORT_ALPHABETIC",
       "v": "ALPHABETIC"
     },
@@ -3413,6 +3500,15 @@
       "v": "QUEST DETAILS"
     },
     {
+      "k": "ID_UI_TEAM_SELECT_QUEST_RESTRICTIONS_INFO",
+      "v": "Only Champions which fulfill certain requirements can be used.",
+      "vn": 20
+      "k": "ID_UI_TEAM_SELECT_QUEST_RESTRICTIONS_REQUIRE",
+      "v": "REQUIREMENTS",
+      "vn": 20
+      "k": "ID_UI_TEAM_SELECT_QUEST_RESTRICTIONS_TITLE",
+      "v": "CHAMPION REQUIREMENTS",
+      "vn": 20
       "k": "ID_UI_TEAM_SELECT_RECOMMENDED_RATING",
       "v": "RECOMMENDED"
     },

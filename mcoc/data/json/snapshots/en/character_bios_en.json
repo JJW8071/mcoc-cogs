@@ -19,6 +19,10 @@
       "vn": "15.1"
     },
     {
+      "k": "ID_CHARACTER_BIOS_EMMAFROST",
+      "v": "Emma Frost is an incredibly powerful mutant, with a brilliant mind to match. She possesses staggering telepathic abilities, and is able to transform her body into organic diamond, rendering her almost indestructible. From White Queen of the Hellfire Club, to leader of the X-Men, she handles every challenge with grace, poise, and wit as sharp as diamond.",
+    },
+    {
       "k": "ID_CHARACTER_BIOS_REDSKULL",
       "v": "The Red Skull has managed to orchestrate the assassinations of his enemies, manipulate his way to power, and lead HYDRA in a plan to devastate the world's most influential countries. Using his scientific talents and knowledge of the occult to research what others considered only a myth: the Cosmic Cube. Now armed with knowledge of its deepest secrets, The Red Skull has been able to harness it to power his suit of Hydra armor.",
       "vn": "19.1"
@@ -424,6 +428,11 @@
     {
       "k": "ID_CHARACTER_BIOS_NIGHTCRAWLER",
       "v": "Raised from childhood in an Eastern European circus, Half-Demon Mutant Kurt Wagner has always existed on the outside. Gifted with the power to teleport at will, but marred with his father’s demonic appearance, Kurt eventually found a place for himself amongst Xavier’s X-Men. Despite his intimidating outward appearance, Nightcrawler remains positive and optimistic, always using his powers for the betterment of both mankind and mutantkind."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_OMEGARED",
+      "v": "It was during the peak of the Cold War that saw the Soviets transform Arkady Rossovich into the super soldier Omega Red. Wielding nearly indestructible tentacles and a Death Factor capable of killing by mere proximity, Omega Red was terrifyingly beyond their control. His creators sealed him away in cryogenic stasis where he remained until present day, when he was awoken by criminal organization The Hand to do battle with Wolverine and the X-Men.",
+      "vn": 20
     },
     {
       "k": "ID_CHARACTER_BIOS_PHOENIX",

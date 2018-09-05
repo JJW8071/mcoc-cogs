@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "fd6fba690c117d84d1ef39cbda6173bbb1f5cfd5",
+    "hash": "014b9cba3cff7b11fa129d98e5f7e4fc1ad31e24",
     "language": "en",
     "post_processed": true,
-    "string_count": 4836,
+    "string_count": 4935,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1532376296,
-    "versionLock": "19.1"
+    "ts": 1535062972,
+    "versionLock": "20.0"
   },
   "strings": [
     {
@@ -534,6 +534,11 @@
       "vn": 19
     },
     {
+      "k": "ID_CHARACTER_BIOS_EMMAFROST",
+      "v": "Emma Frost is an incredibly powerful mutant, with a brilliant mind to match. She possesses staggering telepathic abilities, and is able to transform her body into organic diamond, rendering her almost indestructible. From White Queen of the Hellfire Club, to leader of the X-Men, she handles every challenge with grace, poise, and wit as sharp as diamond.",
+      "vn": 20
+    },
+    {
       "k": "ID_CHARACTER_BIOS_GHOST",
       "v": "You can't fight what you don't know, and nobody seems to know anything about who Ghost is or how she can do the things she can do. Feared and admired in the criminal underworld for her ability to phase through solid walls, Ghost's true intentions are as elusive as she is, though one thing is for sure: she's interested in getting her hands on all the Pym Tech she can find. Her advanced technology combined with her skill in combat make her a force to be reckoned with.​",
       "vn": 19
@@ -1019,6 +1024,11 @@
       "vn": "19.1"
     },
     {
+      "k": "ID_DOM191_4_NEW",
+      "v": "[64acff]Domino:[-] If Domino never hit with a Special Attack while both Lucky and Unlucky were active, then she has +20% chance to activate them during her next fight.\n[64acff]M.O.D.O.K. or Taskmaster:[-] Bleed abilities last {0} second(s) longer.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
+    },
+    {
       "k": "ID_DOM191_5",
       "v": "Domino uses her pistol for her first Light hit, her second Medium hit, and her final Heavy hit. These hits do not make contact with opponents.",
       "vn": "19.1"
@@ -1042,6 +1052,16 @@
       "k": "ID_ELNG75T",
       "v": "[b4b4b4ff]Electroshock Charging[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_EMMDF_D",
+      "v": "Emma has increased defenses, and generates Prowess by blocking",
+      "vn": 20
+    },
+    {
+      "k": "ID_EMMTF_D",
+      "v": "Emma has increased Critical Rate and Critical Damage Rate, and her Critical Hits generate Prowess.",
+      "vn": 20
     },
     {
       "k": "ID_EMNK192D",
@@ -2899,6 +2919,21 @@
       "vn": 19
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_EMMAFROST_0",
+      "v": "Emma assails the Opponent's mind directly with a pair of telepathic strikes.",
+      "vn": 20
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_EMMAFROST_1",
+      "v": "Emma launches a psychic blast at the Opponent, following it up with a direct mental attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_EMMAFROST_2",
+      "v": "Emma takes complete control of the Opponent's mind, subjecting them to extreme mental trauma before giving them a harsh return to reality.",
+      "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_GHOST_0",
       "v": "Ghost unleashes a flurry of precise attacks before advancing into a backflip kick.",
       "vn": 19
@@ -2957,6 +2992,21 @@
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SENTRY_2",
       "v": "Sentry transforms into the Void, creating a black hole that consumes the opponent.",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_EMMAFROST_0",
+      "v": "Mental Assault",
+      "vn": 20
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_EMMAFROST_1",
+      "v": "Brainstorm",
+      "vn": 20
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_EMMAFROST_2",
+      "v": "Dominate the Mind",
+      "vn": 20
     },
     {
       "k": "ID_SPECIAL_ATTACK_GHOST_0",
@@ -3475,8 +3525,8 @@
     },
     {
       "k": "ID_STAT_DOM_SIG_TITLE_LONG",
-      "v": "Opponents take up to [16982bff]{1}[-] Base Energy Damage over {2} second(s) whenever their abilities fail to trigger. Potency decreases temporarily for consecutive triggers.",
-      "vn": "19.1"
+      "v": "Opponents take up to [16982bff]{1}[-] Energy Damage over {2} second(s) whenever their abilities fail to trigger. Damage scales with Base Attack only. Potency decreases temporarily for consecutive triggers.",
+      "vn": "18.1"
     },
     {
       "k": "ID_STAT_DOM_SIG_TITLE_LOW",
@@ -4806,6 +4856,11 @@
       "v": "Chance to score a Critical Hit, ignoring a portion of your opponent's Armor and dealing increased damage based on Critical Damage."
     },
     {
+      "k": "ID_UI_ATTRIBUTE_ESCSTEAL",
+      "v": "Essence Steal",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_ATTRIBUTE_MK_SP1CRIT",
       "v": "This attack has a [16982bff]{1}%[-] increased chance to Critically strike.",
       "vn": "11.2"
@@ -4814,6 +4869,16 @@
       "k": "ID_UI_ATTRIBUTE_MK_SP2BLD",
       "v": "Any Bleed effects triggered by this attack have [16982bff]{1}%[-] increased duration.",
       "vn": "11.2"
+    },
+    {
+      "k": "ID_UI_ATTRIBUTE_ORED_DTHFCTR",
+      "v": "Death Factor",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ATTRIBUTE_ORED_DTHFLD",
+      "v": "Death Field",
+      "vn": 20
     },
     {
       "k": "ID_UI_ATTRIBUTE_RALLY",
@@ -4905,6 +4970,11 @@
       "k": "ID_UI_HERO_SYNERGY_CORVUS_MISSION3_LONG",
       "v": "[64acff]Corvus Glaive:[-] Use a Heavy or Special Attack to knock down an opponent that used Evade or Auto-Block in a fight. Once this mission is complete, his True Damage becomes True Strike.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
       "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DEADLYPRESENCE_LONG",
+      "v": "[64acff]Omega Red:[-] The Death Field deals {0}% more damage.\n[64acff]Mephisto:[-] The Aura of Incineration deals 15% more damage.\n[64acff]Void:[-] Intimidating Presence debuffs deal 10% more damage.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 20
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ARMOR_AO",
@@ -5091,6 +5161,56 @@
       "k": "ID_UI_MASTERIES_HUD_TRUE_ACCURACY",
       "v": "TRUE ACCURACY",
       "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_ORED_DTHFLD_CALL",
+      "v": "DEATH FIELD",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_DTHFLD_PAUSE_TITLE",
+      "v": "Death Field",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_DTHFLD_SHORT",
+      "v": "Deals damage to the opponent for each Death Spore on them.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_DTHFLD_SHORT_ALT",
+      "v": "Deals damage to the opponent for each Death Spore on them.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_DTHSPR_PAUSE_TITLE",
+      "v": "Death Spores",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_DTHSPR_SHORT",
+      "v": "Lowers Physical Resistance and the chance to Purify debuffs.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_DTHSPR_TITLE",
+      "v": "Death Spores",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_ESCSTEAL_CALL",
+      "v": "ESSENCE STEAL",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_ESCSTEAL_PAUSE_TITLE",
+      "v": "Essence Steal",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_ORED_ESCSTEAL_SHORT",
+      "v": "Steals both Health and Power over time.",
+      "vn": 20
     },
     {
       "k": "ID_UI_SHOW_NOOB",
@@ -6277,6 +6397,11 @@
       "vn": "13.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_A_NEW",
+      "v": "The sight and smell of blood triggers Carnage’s bloodlust, granting a Power Gain Buff when activating a Bleed on the opponent that lasts as long as the Opponent is Bleeding. The Power gain grants up to [16982bff]{1}%[-] of a Bar of Power per second based on how close Carnage is to the Bleeding opponent.",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_B",
       "v": "The longer the Opponent has been continuously Bleeding the greater the bonus, reaching the maximum after {2} seconds.",
       "vn": "13.1"
@@ -6305,6 +6430,26 @@
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_CRITBLD",
       "v": "If the target is already Bleeding gain a {0}% Chance to Bleed dealing [16982bff]{1}[-] damage over {2} seconds.",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_CRITBLD_NEW",
+      "v": "If the target is already Bleeding or Armor Broken, gain a {0}% Chance to Bleed dealing [16982bff]{1}[-] damage over {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_PWRRT_NEW",
+      "v": "Carnage gains {1}% additional Power from Striking his Opponent. This is reduced by {0}% per Mutation Buff he has, reaching 0 at 4 Mutation Buffs.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_RAV_BLDIMN",
+      "v": "If one of his Bleeds fails to apply due to an Immunity he has a {0}% chance to Armor Break his opponent instead, reducing their Armor by [16982bff]{1}[-] lasting  for {2} seconds. The Armor Break doesn’t stack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_RAV_BLDRFRSH",
+      "v": "Carnage rips and tears at his opponents, each time he triggers a Bleed Debuff on his Opponent he has a {0}% chance to Refresh the Duration of all the other Bleed Debuffs on his Opponent.",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC",
@@ -7413,6 +7558,26 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ELEMENTGUN_WATER",
       "v": "WATER: Drains up to [16982bff]{1}%[-] of the opponent’s Max Power."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_EMMADF_HUD_0",
+      "v": "DIAMOND FORM",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_EMMADF_HUD_1",
+      "v": "Diamond Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_EMMATF_HUD_0",
+      "v": "TELEPATH FORM",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_EMMATF_HUD_1",
+      "v": "Telepath Form",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_EMPATHY_HUD",
@@ -9276,6 +9441,11 @@
       "vn": 12
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_STUN_FURYCOUNT_NEW",
+      "v": "{0}% chance to Stun the opponent for {2} seconds. The duration of the Stun increases by {1} second(s) for each Fury Buff effect the Champion has.",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_STUN_MULTI",
       "v": "Strikes multiple times. Each hit has a [16982bff]{0}%[-] chance to Stun for [16982bff]{2}[-] seconds."
     },
@@ -9358,6 +9528,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_TRUEDAMAGE",
       "v": "This attack deals True Damage, ignoring all of the opponent's Armor."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_TRUEDAMAGE_PLURAL",
+      "v": "These attacks deal True Damage, ignoring all of the Opponent's Armor.",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_UNBLOCKABLE",
@@ -13252,6 +13427,16 @@
       "v": "[fede49]Life Steal IV[-]"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_STEALLIFE_SHORT",
+      "v": "Steals Health over time.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_STEALLIFE_TITLE",
+      "v": "Life Steal",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_STEALLIFE_V",
       "v": "[ff390dff]Life Steal V[-]"
     },
@@ -13282,6 +13467,16 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_STEALMANA_IV",
       "v": "[fede49]Power Steal IV[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_STEALMANA_SHORT",
+      "v": "Steals Power over time.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_STEALMANA_TITLE",
+      "v": "Power Steal",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_STEALMANA_V",
@@ -13598,6 +13793,16 @@
       "vn": "14.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DIAMOND_FORM",
+      "v": "Passive - Diamond Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DIAMOND_HVY",
+      "v": "Heavy Attack - Diamond Form",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DOMFIELD",
       "v": "Probability Field Passive",
       "vn": "18.1"
@@ -13611,6 +13816,16 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DOMLUCKBAD",
       "v": "Unlucky Passive",
       "vn": "18.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DTHFCTR",
+      "v": "Death Factor",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_DTHFLD",
+      "v": "Death Field",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_EXPLOITWEAKNESS",
@@ -13701,6 +13916,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_LEARNTHEFOE",
       "v": "Learn the Foe - Passive",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_LTHLDOSE",
+      "v": "Passive - Opponent has 10 or more Death Spores",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_MADNESS",
@@ -14266,6 +14486,11 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_RAVAGER",
+      "v": "Ravager - Passive",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_REPULSOR",
       "v": "Repulsor Attacks",
       "vn": 18
@@ -14287,6 +14512,21 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_STARKAI",
       "v": "Stark Tech AI"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_TELEPATH_FORM",
+      "v": "Passive - Telepath Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_TELEPATH_HVY",
+      "v": "Heavy Attack - Telepath Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_TENTHIT",
+      "v": "Tentacle Hits",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_TRUESIGHT",
@@ -14502,6 +14742,11 @@
       "vn": 13
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_YND_ARMSTEAL_NEW",
+      "v": "Yondu has a [16982bff]{0}%[-] chance to steal the target’s Armor Buffs, which he might be able to trade for Units later.",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_YND_PWRRED",
       "v": "Generate {0}% less Power in the target for each Debuff they suffer from. Max: {2}%.",
       "vn": 13
@@ -14638,6 +14883,11 @@
       "k": "ID_UI_STAT_DPLGOLD_TAUNT_REF",
       "v": "A boot to the face is always funny, and allows Goldpool to Refresh an active Taunt Debuff. [f1c232]Pow! Right in the...well...[-]",
       "vn": "18.1"
+    },
+    {
+      "k": "ID_UI_STAT_EMMA_HUD_POWERRATE",
+      "v": "POWER RATE",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_FORMAT_AFTERSHOCK_DIZZY",
@@ -14906,6 +15156,216 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_STAT_FORMAT_EMMA_ARMBRK",
+      "v": "If the opponent uses an Armor Break while Emma is in Diamond Form, she is forced into Telepath Form, and cannot swap back for the duration of the Armor Break.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_ARM",
+      "v": "[16982bff]+{1}[-] Armor",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_CD",
+      "v": "Opponents have [16982bff]-{1}[-] Critical Damage Rating",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_CR",
+      "v": "[16982bff]+{1}[-] Critical Resistance Rating",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_HVY",
+      "v": "Generate {1}% additional Power. Opponents generate no Power from this attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_HVY_A",
+      "v": "Generate {1}% additional Power.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_HVY_B",
+      "v": "Opponents generate {1}% less power from this attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_HVY_TITLE",
+      "v": "Heavy Attack - Diamond Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_IMM",
+      "v": "Emma’s organic diamond is immune to all Stun, Bleed, Poison, Incinerate, Shock, Frostbite, Coldsnap, Fatigue, Concussion, and Exhaustion effects.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_PERF_BLOCK",
+      "v": "",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_PROF",
+      "v": "[16982bff]+{1}[-] Block Proficiency",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_PROW",
+      "v": "Well-timed Blocks grant a Prowess Buff.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_RES",
+      "v": "[16982bff]+{1}[-] Physical Resistance",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_RMV",
+      "v": "When Emma changes into Diamond form, she replaces all temporary Prowess Buffs with new indefinite Prowess Buffs that increase Special Attack Damage by [16982bff]+{1}%[-]. Prowess Buffs are capped at 5 in Diamond Form.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_SWAP",
+      "v": "When the Opponent is at least one Power Level ahead of Emma, she deactivates Telepath Form and switches to Diamond Form.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_DF_TITLE",
+      "v": "Passive - Diamond Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_PROW",
+      "v": "Critical hits grant a Prowess Buff, and refresh all existing Prowess Buffs.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_PSV_TITLE",
+      "v": "Passive - Two Forms",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SIG_TF",
+      "v": "When Telepath Form is active and Emma would lose more than [16982bff]{1}%[-] of her Max Health from a single source, she activates Diamond Form for 3 seconds to reduce the damage. This ability activates before checking Armor and Resistances.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SP_CONC",
+      "v": "{0}% chance to inflict Concussion for {2} second(s), reducing the Opponent’s Ability Accuracy by {1}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SP_PS",
+      "v": "{0}% chance to inflict Power Sting for {2} second(s). An Opponent with Power Sting takes [16982bff]{1}[-] Direct Damage when activating a Special Attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SP_PWR",
+      "v": "{0}% chance to reduce the Opponent’s Power Gain from all sources by {1}% for {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SP_RMV",
+      "v": "Once Emma finishes a Special Attack, all Prowess Buffs are removed.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SP_TF",
+      "v": "Emma switches to Telepath form for the duration of the attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_START_DF",
+      "v": "Emma starts the fight in Diamond Form.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TFCD",
+      "v": "[16982bff]+{1}[-] Critical Damage Rating for each active Prowess effect.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TFCP",
+      "v": "Critical Hits consume one stack of Prowess",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TFCR",
+      "v": "[16982bff]+{1}[-] Critical Rate for each active Prowess effect.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TFSWP",
+      "v": "When Emma changes into Telepath form, she replaces all indefinite Prowess Buffs with new Prowess Buffs that increase Special Attack Damage by [16982bff]+{1}%[-] and last {2} seconds. Prowess Buffs are capped at 10 in Telepath form.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_CLEANSE",
+      "v": "These Debuffs are removed if Emma switches to Diamond Form.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_DMG",
+      "v": "If the opponent endures the assault and doesn’t use a Special Attack, they take [16982bff]{1}[-] Direct Damage at the end of the effect.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_FLAVOR",
+      "v": "After hitting the opponent, and they have at least one bar of Power, Emma controls their thoughts for a short time.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_TAUNT",
+      "v": "Opponents are Taunted for {2} seconds, increasing the chance of using a Special Attack by [16982bff]{1}%[-].",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_TAUNT_A",
+      "v": "{0}% chance to Taunt the Opponent for {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_TAUNT_B",
+      "v": "Opponents that are Taunted have their Attack reduced by {1}% and have a {0}% higher chance to activate a Special Attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_TITLE",
+      "v": "Heavy Attack - Telepath Form",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_HVY_WKNS",
+      "v": "Weaken opponents for {2} seconds, decreasing their Attack by [#16982bff]{1}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_PET",
+      "v": "Attacking both the body and mind, Emma’s attacks have a [16982bff]{0}%[-] chance to Petrify the opponent for {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_PROW",
+      "v": "Critical Hits grant a stack of Prowess, increasing Special Attack Damage by [16982bff]+{1}[-] for {2} second(s).",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_REF",
+      "v": "All attacks have a [16982bff]{0}%[-] chance to refresh any other debuff caused by Emma.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_SWAP",
+      "v": "When Emma is at least one Power Level ahead of the Opponent, she deactivates Diamond Form and switches to Telepath Form.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_TITLE",
+      "v": "Passive - Telepath Form",
+      "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_ENERGYDMG",
       "v": "Life Steal deals [16982bff]{1}%[-] Attack as Energy Damage.",
       "vn": "11.2"
@@ -15046,6 +15506,11 @@
       "k": "ID_UI_STAT_FORMAT_GOBLIN_MADNESS_HUD",
       "v": "MADNESS",
       "vn": "14.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_HLTHSTL",
+      "v": "Life Steal",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_FORMAT_HULKB_ARMORUP_BLOCK",
@@ -15243,7 +15708,7 @@
     },
     {
       "k": "ID_UI_STAT_FORMAT_KORG_SIG_0",
-      "v": "While Rock Shield is active and Korg is struck by a Medium, Heavy or Special Attack that makes contact, [16982bff]{1}[-] Physical Damage is inflicted to the opponent. This ability does not activate if the opponent’s hit deals Energy Damage and Mutant Champions take 25% less damage.",
+      "v": "While Rock Shield is active and Korg is struck by a Medium, Heavy or Special Attack that makes contact, [16982bff]{1}[-] Physical Damage is inflicted to the opponent. Damage scales with Base Attack only. This ability does not activate if the opponent’s hit deals Energy Damage and Mutant Champions take 25% less damage.",
       "vn": "19.1"
     },
     {
@@ -15588,6 +16053,176 @@
       "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP3",
       "v": "Once a fight, Mephisto instantly drains up to {2} Power Bars from the opponent. If the maximum amount is drained, Mephisto activates his Aura of Incineration for the rest of the fight.",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD",
+      "v": "The Death Field causes Death Spores on nearby opponents to Passively Degenerate them, dealing [16982bff]{1}[-] damage per second for each Death Spore on them. The Death Field is not affected by Ability Accuracy reduction.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD_ALT",
+      "v": "The Death Field Passively Degenerates nearby opponents, dealing [16982bff]{1}[-] damage every .5 second(s) for each Death Spore on them. Death Spores do not expire while the opponent is out of range of the Death Factor for as long as the Death Field is active.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD_BLD",
+      "v": "While Omega Red is Bleeding, he emits the Death Field.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD_LMT",
+      "v": "While the Death Field is active, the limit for Death Spores on the opponent increases to {1}.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR",
+      "v": "While near the opponent, Omega Red inflicts 1 Death Spore every {1} second(s) up to a maximum of {2}. Once the opponent is out of range they lose 1 Death Spore every {0} second(s). Death Spores are not affected by Ability Accuracy reduction.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_ACC",
+      "v": "Death Spores increase Omega Red’s Ability Accuracy by [16982bff]{1}%[-] for each Death Spore on the Opponent.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_EFT",
+      "v": "Death Spores each lower the opponent’s Armor by [16982bff]{0}%[-] and their Attack Rating by [16982bff]{1}%[-].",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_EFT_ALT",
+      "v": "Death Spores each lower the opponent’s Armor by [16982bff]{0}%[-] and their Attack Rating by [16982bff]{1}%[-]. Additionally, each Death Spore increases Omega Red’s Ability Accuracy by {2}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_EFT_ALT1",
+      "v": "Each Death Spore lowers the opponent’s Physical Resistance by {1} and reduces their chance to Purify Debuffs by {0}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_EFT_ALT2",
+      "v": "Each Death Spore lowers the opponent’s Armor Rating by [16982bff]{1}[-] and reduces their chance to Purify Debuffs by {0}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_EFT_RB",
+      "v": "Death Spores struggle to effect mechanical components and are inflicted {1} times slower against Robots.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_DTHSPR_TITLE",
+      "v": "Death Spores",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_ESSENCESTEAL",
+      "v": "Removes all Death Spores from the opponent to inflict Essence Steal for {2} second(s), Passively Stealing both [16982bff]{1}[-] Health and {0}% of Current Power from the opponent for each Death Spore removed by this attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_HLTHSTL",
+      "v": "Removes all Death Spores from the opponent to inflict Life Steal, Stealing [16982bff]{1}[-] Health from the opponent for each Death Spore removed by this attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_HVYDEGEN",
+      "v": "Inflicts a Degeneration Debuff for {2} second(s), dealing [16982bff]{1}[-] damage for each Death Spore on the opponent.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_PSNIMN",
+      "v": "Omega Red’s mutant physiology renders him immune to the effects of Poisons and reduces the damage of Bleeds by {1}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC1",
+      "v": "Death Spores on the opponent deal [16982bff]{1}[-] damage per second.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC2",
+      "v": "Omega Red’s Basic Tentacle Hits have a [16982bff]{0}%[-] chance to be Unblockable.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC3",
+      "v": "Opponents lose and cannot become Unstoppable.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SIG_SHORT",
+      "v": "Lethal Dose {0}",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SIG_SIMPLE",
+      "v": "When the opponent builds up enough Death Spores they begin to lose health and the strength needed to block Omega Red’s assault.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SIG_TITLE",
+      "v": "LETHAL DOSE",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SP2ACC",
+      "v": "The Ability Accuracy of opponents damaging effects is reduced by {1}% during this Special Attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SP2DMG",
+      "v": "Damaging effects the opponent triggers when hit are {1}% weaker for the duration of this Ppecial Attack.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SP2FIELD",
+      "v": "Omega Red emits the Death Field for {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SP3_A",
+      "v": "Removes all Death Spores from the opponent to inflict Life Steal, Stealing [16982bff]{1}[-] Health from the opponent for each Death Spore removed by this attack over {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_SP3_B",
+      "v": "Inflicts Power Steal, stealing {0}% of Current Power from the opponent for each Death Spore over {2} seconds.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_STPDEGEN",
+      "v": "Death Spores do not expire while the opponent is out of range of the Death Factor for as long as they have an active Degeneration Debuff.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_TENTACC",
+      "v": "Tentacle Hits reduce the Ability Accuracy of enemy abilities that deal passive damage when they are struck by {1}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_TENTCRIT",
+      "v": "Hits from Omega Red’s Tentacles have [16982bff]+{1}[-] Critical Rating and reduce the Ability Accuracy of enemy abilities that deal passive damage when they are struck by {0}%.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_TENTCRIT_ALT",
+      "v": "Hits from Omega Red’s Tentacles have [16982bff]+{1}[-] Critical Rating.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_TENTDMG",
+      "v": "Tentacle Hits reduce {1}% of damage inflicted by enemy abilities that deal passive damage when they are struck.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_TENTHIT",
+      "v": "Omega Red’s Basic Tentacle hits reduce the opponents Defensive Ability Accuracy by [16982bff]{1}%[-] for each Death Spore on them for {2} second(s).",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_ORED_TENT_DMG_ALT",
+      "v": "Hits from Omega Red’s Tentacles have [16982bff]+{1}[-] Critical Rating and reduce {0}% of damage inflicted by enemy abilities that deal passive damage when they are struck.",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_FORMAT_PETRIFYDEBUFF_TITLE",
@@ -18379,6 +19014,21 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_ELEKTRA_TITLE_LOWER",
       "v": "No Loose Ends"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_EMMAFROST_SHORT",
+      "v": "White Queen {0}",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_EMMAFROST_TITLE",
+      "v": "WHITE QUEEN",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_EMMA_SIMPLE",
+      "v": "Emma reveals the full extent of her manipulative powers. When she would take too much damage from a single hit, she quickly swaps into Diamond Form to reduce the strength of the hit. She also gains the ability to reverse the Opponents controls.",
+      "vn": 20
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_FALCON_DESC",
