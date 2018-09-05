@@ -1623,12 +1623,18 @@
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_OMEGARED_0",
       "v": "Omega Red uses his Carbonadium tentacles to take life force through brute force.",
       "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_OMEGARED_1",
       "v": "Flooding the air around him with deadly spores, Omega Red makes any proximity problematic.",
       "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_OMEGARED_2",
       "v": "Wild arcs of tentacles send the opponent helplessly into the air and down again as Omega Red prepares a final attack to leave his opponent completely drained. ",
       "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_PHOENIX_0",
       "v": "The Phoenix Force is released in a wave of telekinesis, amidst a rush of power!"
     },
