@@ -1697,6 +1697,8 @@
       "k": "ID_UI_HERO_SYNERGY_DESC_WARRIORSOFASGARD_NEW",
       "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to Regenerate {0}% of missing Health instantly.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 20
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_EARTH_DEFENDER_I",
       "v": "COSMIC PARTNERS Lv. 1"
     },
