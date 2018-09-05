@@ -1514,6 +1514,8 @@
       "k": "ID_UI_HERO_SYNERGY_DESC_LOSTDAUGHTERS",
       "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Fury Buff increasing Attack by {0}% of Base Attack.",
       "vn": 19
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DESC_LOSTDAUGHTERS_NEW",
       "v": "[64acff]All Champions except Heimdall:[-] Once per fight Heimdall will intercede on your behalf, dash back and hold Block for 1.5 seconds to gain an infinite Duration Fury Buff increasing Attack by {0}% of Base Attack.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": 20
