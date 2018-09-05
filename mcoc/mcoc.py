@@ -2279,6 +2279,7 @@ class Champion:
         for s in (bios, bcg_en, bcg_stat_en):
             if key in s:
                 bio = s[key]
+                break
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
