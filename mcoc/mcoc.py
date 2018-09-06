@@ -2696,15 +2696,12 @@ class Champion:
             )
 
         for x in preambles:
-            if x + '_SIMPLE' in sigs:
+            if x + '_SHORT' in sigs: #replacing _SIMPLE as the test for preamble
                 preamble = x
                 #print('SIG PREAMBLE is : ' + x)
                 break
         if preamble is None and mcocsig == 'BISH':
             preamble = 'ID_STAT_BISH_SIG'
-        if preamble is None and mcocsig == 'EMMAFROST':
-            simple = 'ID_UI_STAT_SIGNATURE_EMMA_SIMPLE'
-            preable = 'ID_UI_STAT_SIGNATURE'
         elif preamble is None:
             raise TitleError("'{}' preamble not found".format(mcocsig))
         if preamble + '_SIMPLE_NEW2' in sigs:
@@ -2715,6 +2712,8 @@ class Champion:
             simple = preamble + '_SIMPLE'
         elif mcocsig == 'BISH':  #BISHOP
             simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
+        elif mcocsig == 'EMMAFROST':
+            simple = 'ID_UI_STAT_SIGNATURE_EMMA_SIMPLE'
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
 
