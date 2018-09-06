@@ -2675,6 +2675,7 @@ class Champion:
             if x in sigs:
                 title = x
                 print('SIG TITLE is : ' + x)
+                break
 
         if title is None:
             raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
@@ -2701,6 +2702,9 @@ class Champion:
                 break
         if preamble is None and mcocsig == 'BISH':
             preamble = 'ID_STAT_BISH_SIG'
+        if preamble is None and mcocsig == 'EMMAFROST':
+            simple = 'ID_UI_STAT_SIGNATURE_EMMA_SIMPLE'
+            preable = 'ID_UI_STAT_SIGNATURE'
         elif preamble is None:
             raise TitleError("'{}' preamble not found".format(mcocsig))
         if preamble + '_SIMPLE_NEW2' in sigs:
