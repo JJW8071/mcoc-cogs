@@ -2720,6 +2720,9 @@ class Champion:
 
         if self.mcocsig == 'CYCLOPS_90S':
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
+        if self.mcocsig == 'EMMAFROST':
+            desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_TF')
+            desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_DF')
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
