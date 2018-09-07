@@ -15304,6 +15304,8 @@
       "k": "ID_UI_STAT_FORMAT_EMMA_TFSWP",
       "v": "When Emma changes into Telepath form, she replaces all indefinite Prowess Buffs with new Prowess Buffs that increase Special Attack Damage by [16982bff]+{1}%[-] and last {2} seconds. Prowess Buffs are capped at 10 in Telepath form.",
       "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_EMMA_TF_EVADE",
       "v": "Emma is able to read her Opponent’s thoughts, allowing all of Emma’s attacks to ignore Evade.",
       "vn": 20
