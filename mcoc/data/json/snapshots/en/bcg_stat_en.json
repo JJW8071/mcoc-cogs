@@ -1,15 +1,15 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "014b9cba3cff7b11fa129d98e5f7e4fc1ad31e24",
+    "hash": "e3663f5d380d50b17c08b6d255dc9d84c8b1cb0e",
     "language": "en",
     "post_processed": true,
-    "string_count": 4935,
+    "string_count": 5008,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1535062972,
+    "ts": 1536189437,
     "versionLock": "20.0"
   },
   "strings": [
@@ -6438,7 +6438,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_PWRRT_NEW",
-      "v": "Carnage gains {1}% additional Power from Striking his Opponent. This is reduced by {0}% per Mutation Buff he has, reaching 0 at 4 Mutation Buffs.",
+      "v": "Carnage gains {1}% additional Power from Striking his Opponent. This is reduced by {0}% per Mutation Buff he has.",
       "vn": 20
     },
     {
@@ -6448,7 +6448,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_RAV_BLDRFRSH",
-      "v": "Carnage rips and tears at his opponents, each time he triggers a Bleed Debuff on his Opponent he has a {0}% chance to Refresh the Duration of all the other Bleed Debuffs on his Opponent.",
+      "v": "Carnage rips and tears at his opponents, each time he triggers a Bleed Debuff on his Opponent he has a {1}% chance to Refresh the Duration of all the other Bleed Debuffs on his Opponent.",
       "vn": 20
     },
     {
@@ -15246,6 +15246,9 @@
       "vn": 20
     },
     {
+      "k": "ID_UI_STAT_FORMAT_EMMA_SIG_DF",
+      "v": "When Emma uses a Special Attack, the Opponent’s controls are reversed until just after the end of the attack.",
+      "vn": 20
       "k": "ID_UI_STAT_FORMAT_EMMA_SIG_TF",
       "v": "When Telepath Form is active and Emma would lose more than [16982bff]{1}%[-] of her Max Health from a single source, she activates Diamond Form for 3 seconds to reduce the damage. This ability activates before checking Armor and Resistances.",
       "vn": 20
@@ -15298,6 +15301,9 @@
     {
       "k": "ID_UI_STAT_FORMAT_EMMA_TFSWP",
       "v": "When Emma changes into Telepath form, she replaces all indefinite Prowess Buffs with new Prowess Buffs that increase Special Attack Damage by [16982bff]+{1}%[-] and last {2} seconds. Prowess Buffs are capped at 10 in Telepath form.",
+      "vn": 20
+      "k": "ID_UI_STAT_FORMAT_EMMA_TF_EVADE",
+      "v": "Emma is able to read her Opponent’s thoughts, allowing all of Emma’s attacks to ignore Evade.",
       "vn": 20
     },
     {
