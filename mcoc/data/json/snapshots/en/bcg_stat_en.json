@@ -15249,6 +15249,8 @@
       "k": "ID_UI_STAT_FORMAT_EMMA_SIG_DF",
       "v": "When Emma uses a Special Attack, the Opponent’s controls are reversed until just after the end of the attack.",
       "vn": 20
+    },
+    {
       "k": "ID_UI_STAT_FORMAT_EMMA_SIG_TF",
       "v": "When Telepath Form is active and Emma would lose more than [16982bff]{1}%[-] of her Max Health from a single source, she activates Diamond Form for 3 seconds to reduce the damage. This ability activates before checking Armor and Resistances.",
       "vn": 20
