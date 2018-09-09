@@ -570,15 +570,22 @@ class GSHandler:
         num_files = len(gfiles)
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
         for i, k in enumerate(gfiles):
-            gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
-            try:
-                await gsdata.retrieve_data()
-            except:
-                await self.bot.say("Error while pulling '{}'".format(k))
-                raise
+            pulled = False
+            for try_num in range(3):
+                gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
+                try:
+                    await gsdata.retrieve_data()
+                    pulled = True
+                    break
+                except:
+                    logger.info("Error while pulling '{}' try: {}".format(k, str(try_num)))
+                    if try_num < 3:
+                        time.sleep(.3 * try_num)
+                        msg = await self.bot.edit_message(msg, "Error while pulling '{}'".format(k))
             msg = await self.bot.edit_message(msg,
-                    'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
-        await self.bot.say('Retrieval Complete')
+                     'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
+            logger.info('Pulled Google Sheet data {}/{}, {}'.format(i+1, num_files, "" if pulled else "Failed"))
+        msg = await self.bot.edit_message(msg, 'Retrieval Complete')
 
     async def authorize(self):
         try:
@@ -2265,13 +2272,21 @@ class Champion:
 
     async def get_bio(self):
         bios = load_kabam_json(kabam_bio)
+        bcg_en = load_kabam_json(kabam_bcg_en)
+        bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
+        bio = ''
+        for s in (bios, bcg_en, bcg_stat_en):
+            if key in s:
+                bio = s[key]
+                break
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
-        if key not in bios:
+        # if key not in bios:
+        if bio == '':
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
-        return bios[key]
+        return bio
 
     @property
     def star(self):
@@ -2660,6 +2675,7 @@ class Champion:
             if x in sigs:
                 title = x
                 print('SIG TITLE is : ' + x)
+                break
 
         if title is None:
             raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
@@ -2680,7 +2696,7 @@ class Champion:
             )
 
         for x in preambles:
-            if x + '_SIMPLE' in sigs:
+            if x + '_SHORT' in sigs: #replacing _SIMPLE as the test for preamble
                 preamble = x
                 #print('SIG PREAMBLE is : ' + x)
                 break
@@ -2696,12 +2712,17 @@ class Champion:
             simple = preamble + '_SIMPLE'
         elif mcocsig == 'BISH':  #BISHOP
             simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
+        elif mcocsig == 'EMMAFROST':
+            simple = 'ID_UI_STAT_SIGNATURE_EMMA_SIMPLE'
         else:
             raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
 
 
         if self.mcocsig == 'CYCLOPS_90S':
             desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
+        if self.mcocsig == 'EMMAFROST':
+            desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_TF')
+            desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_DF')
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
         elif preamble + '_DESC_NEW' in sigs:
@@ -2718,6 +2739,9 @@ class Champion:
                         desc.append(preamble + k)
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
+        # elif mcocsig == 'CARNAGE':  #CARNAGE improvement
+        #     desc.append(preamble+'_DESC_A_NEW')
+        #     desc.append(preamble+'_DESC_B')
         else:
             for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
                       '_DESC_E','_DESC_F','_DESC_G',

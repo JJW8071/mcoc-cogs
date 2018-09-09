@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "073e5bac0ff42dd7f841b26406525188d31b5a58",
+    "hash": "12c08b0f1c877d132ac5709a623a31f2fab62ab5",
     "language": "en",
     "post_processed": true,
-    "string_count": 145,
+    "string_count": 146,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1531517601,
-    "versionLock": "19.1"
+    "ts": 1534294418,
+    "versionLock": "20.0"
   },
   "strings": [
     {
@@ -424,6 +424,11 @@
     {
       "k": "ID_CHARACTER_BIOS_NIGHTCRAWLER",
       "v": "Raised from childhood in an Eastern European circus, Half-Demon Mutant Kurt Wagner has always existed on the outside. Gifted with the power to teleport at will, but marred with his father’s demonic appearance, Kurt eventually found a place for himself amongst Xavier’s X-Men. Despite his intimidating outward appearance, Nightcrawler remains positive and optimistic, always using his powers for the betterment of both mankind and mutantkind."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_OMEGARED",
+      "v": "It was during the peak of the Cold War that saw the Soviets transform Arkady Rossovich into the super soldier Omega Red. Wielding nearly indestructible tentacles and a Death Factor capable of killing by mere proximity, Omega Red was terrifyingly beyond their control. His creators sealed him away in cryogenic stasis where he remained until present day, when he was awoken by criminal organization The Hand to do battle with Wolverine and the X-Men.",
+      "vn": 20
     },
     {
       "k": "ID_CHARACTER_BIOS_PHOENIX",

@@ -1,15 +1,15 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "55afe4bc415a02af1243a318c5771ce6229c0d8c",
+    "hash": "362e055b6899975816fe80f79805d650a721dca2",
     "language": "en",
     "post_processed": true,
-    "string_count": 864,
+    "string_count": 870,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1530823141,
+    "ts": 1533083814,
     "versionLock": "20.0"
   },
   "strings": [
@@ -1396,7 +1396,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_KORG_0",
-      "v": "Oh man, is that what this thing does? I thought it was just going to like, shoot some net or something. I oughta be careful this thing.",
+      "v": "Oh man, is that what this thing does? I thought it was just going to like, shoot some net or something. I oughta be careful with this thing.",
       "vn": "19.1"
     },
     {
@@ -1618,6 +1618,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_NIGHTCRAWLER_2",
       "v": "He’s coming in from every direction. Lieber Gott!"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_OMEGARED_0",
+      "v": "Omega Red uses his Carbonadium tentacles to take life force through brute force.",
+      "vn": 20
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_OMEGARED_1",
+      "v": "Flooding the air around him with deadly spores, Omega Red makes any proximity problematic.",
+      "vn": 20
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_OMEGARED_2",
+      "v": "Wild arcs of tentacles send the opponent helplessly into the air and down again as Omega Red prepares a final attack to leave his opponent completely drained. ",
+      "vn": 20
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_PHOENIX_0",
@@ -3044,6 +3059,15 @@
       "v": "Bamf! Bamf! Bamf!"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_OMEGARED_0",
+      "v": "Draining Experience",
+      "vn": 20
+      "k": "ID_SPECIAL_ATTACK_OMEGARED_1",
+      "v": "Death Field",
+      "vn": 20
+      "k": "ID_SPECIAL_ATTACK_OMEGARED_2",
+      "v": "Tentacled Terror",
+      "vn": 20
       "k": "ID_SPECIAL_ATTACK_PHOENIX_0",
       "v": "Telekinetic Blast"
     },
