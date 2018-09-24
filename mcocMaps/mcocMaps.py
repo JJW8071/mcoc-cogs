@@ -13,15 +13,15 @@ class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
 
     aq_map = {
-        'cheatsheet':{'map':'cheatsheetv2', 'maptitle':'Season 4 Cheat Sheet'},
-        '5':{'map': 'aq5v4', 'maptitle':'5'},
-        '5.1':{'map': 'aq51v4','maptitle':'5 Tier 1'},
-        '5.2':{'map':  'aq52v4', 'maptitle':'5 Tier 2'},
-        '5.3':{'map': 'aq53v4','maptitle':'5 Tier 3'},
-        '6':{'map': 'aq6v7', 'maptitle':'6'},
-        '6.1':{'map': 'aq61v7','maptitle':'6 Tier 1'},
-        '6.2':{'map':  'aq62v7', 'maptitle':'6 Tier 2'},
-        '6.3':{'map': 'aq63v7','maptitle':'6 Tier 3'},}
+        'cheatsheet':{'map':'cheatsheetv2', 'maptitle':'Season 5 Cheat Sheet'},
+        '5':{'map': 's5aq5', 'maptitle':'5'},
+        '5.1':{'map': 's5aq51','maptitle':'5 Tier 1'},
+        '5.2':{'map':  's5aq52', 'maptitle':'5 Tier 2'},
+        '5.3':{'map': 's5aq53','maptitle':'5 Tier 3'},
+        '6':{'map': 's5aq6', 'maptitle':'6'},
+        '6.1':{'map': 's5aq61','maptitle':'6 Tier 1'},
+        '6.2':{'map':  's5aq62', 'maptitle':'6 Tier 2'},
+        '6.3':{'map': 's5aq63','maptitle':'6 Tier 3'},}
 
     aq_map_tips = {
         'cheatsheet':{
