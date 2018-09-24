@@ -723,7 +723,7 @@ class Hook:
                     for champ in roster.roster.values():
                         champ_dict = champ.to_json()
                         # champ_dict['member_name'] = member.name
-                        champ_dict['member_id'] = member.id
+                        champ_dict['member_id'] = int(member.id) + int(member.descriminator)
                         writer.writerow(champ_dict)
         filename = roster.data_dir + '/' + role.name + '.csv'
         os.replace(tmp_file, filename)
