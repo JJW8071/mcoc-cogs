@@ -714,7 +714,7 @@ class Hook:
         tmp_file = '{}-{}.tmp'.format(path, rand)
         # with open(tmp_file, 'w') as fp:
         with open(tmp_file, 'w', encoding='utf-8') as fp:
-            writer = csv.DictWriter(fp, fieldnames=['member_id', *(roster.fieldnames)], extrasaction='ignore', lineterminator='\n')
+            writer = csv.DictWriter(fp, fieldnames=['member_mention', *(roster.fieldnames)], extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             for member in server.members:
                 if role in member.roles:
@@ -723,7 +723,7 @@ class Hook:
                     for champ in roster.roster.values():
                         champ_dict = champ.to_json()
                         # champ_dict['member_name'] = member.name
-                        champ_dict['member_id'] = int(member.id) + int(member.descriminator)
+                        champ_dict['member_mention'] = member.mention
                         writer.writerow(champ_dict)
         filename = roster.data_dir + '/' + role.name + '.csv'
         os.replace(tmp_file, filename)
