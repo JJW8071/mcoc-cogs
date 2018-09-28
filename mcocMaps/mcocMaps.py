@@ -336,6 +336,8 @@ class MCOCMaps:
             nodeNumbers = nodes.split(' ')
             for nodeNumber in nodeNumbers:
                 em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
+                mapurl = '{}warmap_3_{}.png'.format(self.basepath,tier.lower())
+                em.set_image(url=mapurl)
                 page_list.append(em)
                 # await self.bot.say(embed=em)
             if len(page_list) > 0:
