@@ -333,8 +333,8 @@ class MCOCMaps:
         season = 2
         page_list = []
         if tier in {'expert','hard','challenger','intermediate','normal','easy'}:
-            node_numbers = nodes.split(' ')
-            for node in node_numbers:
+            nodeNumbers = nodes.split(' ')
+            for nodeNumber in nodeNumbers:
                 em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
                 page_list.append(em)
                 # await self.bot.say(embed=em)
