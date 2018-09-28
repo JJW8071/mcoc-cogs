@@ -327,6 +327,23 @@ class MCOCMaps:
         else:
             await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
 
+    @alliancewar.command(pass_context=True, hidden=True, name="nodes")
+    async def _nodes_info(self, ctx, tier: str, *, nodes):
+        '''Report Node information.'''
+        season = 2
+        page_list = []
+        if tier in {'expert','hard','challenger','intermediate','normal','easy'}:
+            node_numbers = nodes.split(' ')
+            for node in node_numbers:
+                em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
+                page_list.append(em)
+                # await self.bot.say(embed=em)
+            if len(page_list) > 0:
+                await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=0)
+        else:
+            await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
+
+
     async def get_awnode_details(self, ctx, nodeNumber, tier, season):
         boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
         boosts = json.loads(requests.get(boosturl).text)
