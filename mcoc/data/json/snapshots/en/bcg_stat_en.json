@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "e3663f5d380d50b17c08b6d255dc9d84c8b1cb0e",
+    "hash": "d712242eafa1505757367dad2f420e1c89830697",
     "language": "en",
     "post_processed": true,
-    "string_count": 5008,
+    "string_count": 5049,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1536189437,
-    "versionLock": "20.0"
+    "ts": 1537908929,
+    "versionLock": "20.1"
   },
   "strings": [
     {
@@ -407,6 +407,11 @@
       "k": "ID_BLCY66T",
       "v": "[b4b4b4ff]Block Proficiency[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_BLDLET",
+      "v": "[b4b4b4ff]Bloodletting[-]",
+      "vn": "20.1"
     },
     {
       "k": "ID_BLED98D",
@@ -1894,6 +1899,11 @@
       "vn": "19.1"
     },
     {
+      "k": "ID_LFSTL1",
+      "v": "[b4b4b4ff]Life Steal[-]",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_LIBO75D",
       "v": "Inflicts Energy Damage over time and any damage Magik takes during this period is rewound when the effect expires.",
       "vn": 19
@@ -2617,6 +2627,66 @@
       "k": "ID_PSGE196T",
       "v": "[b4b4b4ff]Psi-Charge[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_PS_VNM1",
+      "v": "[b4b4b4ff]Klyntar Mutation[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VNM2",
+      "v": "Increases Attack Rating & grants more effects based on opponent.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD1",
+      "v": "Symbiote Buff - Increases Attack Rating.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD10",
+      "v": "Grants a random Symbiote Buff when it reaches 100%",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD2",
+      "v": "Symbiote Buff - Increases the chance to land Critical Hits.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD3",
+      "v": "Symbiote Buff: Increases Special Attack damage.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD4",
+      "v": "Symbiote Buff: Gain Power Meter over time.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD5",
+      "v": "Symbiote Buff - Increases Armor to reduce damage taken from attacks.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD6",
+      "v": "Symbiote Buff - Recover Health over time.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD7",
+      "v": "Symbiote Buff - Increases the chance that a Block is Perfect, reducing all damage to zero.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD8",
+      "v": "Symbiote Buff - Gain more Power from attacks.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_PS_VTD9",
+      "v": "Symbiote Buff: Increased Bleed chance.",
+      "vn": "20.1"
     },
     {
       "k": "ID_PWR75D",
@@ -4545,6 +4615,46 @@
       "vn": 19
     },
     {
+      "k": "ID_SYMS_CHTHONCUN_D",
+      "v": "Genetic Blessing that Nullifies Buffs when activating, deals Direct Damage when Nullifying Buffs, and places Staggers on Basic Attack Hits.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_CHTHONCUN_T",
+      "v": "[b4b4b4ff]Chthon's Cunning Genetic Blessing[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_GENETICP_D",
+      "v": "Empowers Genetic Potential bonuses, and consumed by Genetic Blessings to gain Power",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_GENETICP_T",
+      "v": "[b4b4b4ff]Genetic Potential[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_NULLSHADOW_D",
+      "v": "Genetic Blessing that grants a Protection Buff when activating, Armor and Perfect Block Chance while active, and places Staggers when Struck or Blocking.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_NULLSHADOW_T",
+      "v": "[b4b4b4ff]Null's Shadow Genetic Blessing[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_SETSFANGS_D",
+      "v": "Genetic Blessing that grants a Fury Buff when activating, causes Bleed on Hits, and places Staggers when Hitting with Special Attacks.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SYMS_SETSFANGS_T",
+      "v": "[b4b4b4ff]Set's Fangs Genetic Blessing[-]",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_TANT193D",
       "v": "Reduces Attack Rating and increases the likelihood that a Special Attack is activated.",
       "vn": 19
@@ -4633,6 +4743,16 @@
       "k": "ID_TRKE69T",
       "v": "[b4b4b4ff]True Strike[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_TXCAR1",
+      "v": "[b4b4b4ff]Toxic Armor[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_TXCAR2",
+      "v": "Increases Champion Armor, but also causes direct damage when struck.",
+      "vn": "20.1"
     },
     {
       "k": "ID_TYNY109D",
@@ -4941,6 +5061,16 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_ARACHHATE",
+      "v": "ARACHNID HUNTERS",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_ARACHHATE_DESC",
+      "v": "[64acff]Venom:[-] +1 Max Genetic Memory Buff cap.\n[64acff]Vulture:[-] +2000 Armor vs. Special Attacks while an Armor Up Buff active.\n[64acff]Green Goblin:[-] Each Madness & Cunning charge grants +{0}% Attack.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_BECOMEONE",
       "v": "BECOME ONE",
       "vn": "16.1"
@@ -5123,6 +5253,16 @@
       "vn": "14.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_SYMBEVO",
+      "v": "SYMBIOTE PROGENITOR",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_SYMBEVO_DESC",
+      "v": "All Symbiote Champions gain +{0}% Attack and Health.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_TEAMDEADPOOLAWESOME",
       "v": "TEAM DEADPOOL AWESOME-FORCE",
       "vn": "18.1"
@@ -5242,6 +5382,16 @@
       "k": "ID_UI_SIG_ABILITY_UNLOCK_NEW_DESC",
       "v": "Collect duplicate Champions to awaken new Signature Abilities for your 2-Star and above Champions! You can also collect rare Awakening Gems to unlock Signature Abilities!",
       "vn": "18.1"
+    },
+    {
+      "k": "ID_UI_STAT_ABERRATION_SHORT",
+      "v": "[b4b4b4ff]Aberration[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_AMBUSH_LONG",
+      "v": "Subterfuge and ambush tactics allow this attack to ignore Armor.",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTIRBUTE_BONUS_ARMOR",
@@ -5539,12 +5689,12 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ANG_SP1",
-      "v": "If there Is already a Fury active on Angela, this effect lasts for {2} seconds instead.",
+      "v": "If there is already a Fury active on Angela, this effect lasts for {2} seconds instead.",
       "vn": "12.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_ANG_SP2",
-      "v": "If there Is already an Armor Up active on Angela, this effect lasts for {2} seconds instead.",
+      "v": "If there is already an Armor Up active on Angela, this effect lasts for {2} seconds instead.",
       "vn": "12.1"
     },
     {
@@ -6188,7 +6338,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CABLE_BLEED_DEGEN",
-      "v": "When caused to Bleed, Cable has a {1}% chance to trigger his Heavy Attack Degen on his Opponent."
+      "v": "When caused to Bleed, Cable has a {1}% chance to trigger his Heavy Attack Degeneration on his Opponent."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CABLE_SP1",
@@ -6398,8 +6548,8 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_A_NEW",
-      "v": "The sight and smell of blood triggers Carnage’s bloodlust, granting a Power Gain Buff when activating a Bleed on the opponent that lasts as long as the Opponent is Bleeding. The Power gain grants up to [16982bff]{1}%[-] of a Bar of Power per second based on how close Carnage is to the Bleeding opponent.",
-      "vn": 20
+      "v": "The sight and smell of blood triggers Carnage’s bloodlust, granting a Power Gain Buff when activating a Bleed on the opponent that lasts as long as the Opponent is Bleeding or Armor Broken. The Power Gain grants up to [16982bff]{1}%[-] of a Bar of Power per second based on how close Carnage is to the opponent.",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_B",
@@ -6448,8 +6598,13 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_RAV_BLDRFRSH",
-      "v": "Carnage rips and tears at his opponents, each time he triggers a Bleed Debuff on his Opponent he has a {1}% chance to Refresh the Duration of all the other Bleed Debuffs on his Opponent.",
+      "v": "Carnage rips and tears at his opponents, each time he triggers a Bleed Debuff on his Opponent he has a {0}% chance to Refresh the Duration of all the other Bleed Debuffs on his Opponent.",
       "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_CARN_RAV_BLDRFRSH_UNBLK",
+      "v": "While his Opponent is Bleeding or Armor Broken, his Special Attacks become Unblockable.",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARN_SYMBC",
@@ -7166,11 +7321,6 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_DIREHIT_VII",
       "v": "[b310e8]Direct Damage VII[-]"
-    },
-    {
-      "k": "ID_UI_STAT_ATTRIBUTE_DISORIENTED_SHORT",
-      "v": "Disorient",
-      "vn": "18.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_DIZZINESS_HUD",
@@ -9057,7 +9207,7 @@
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_PHOENIX_EMP1_AO",
-      "v": "All attacks gain [16982bff]{0}%[-] chance to Incinerate the opponent, dealing [16982bff]{1}%[-] Energy Damage over {2} seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it's active.",
+      "v": "All attacks gain [16982bff]{0}%[-] chance to Incinerate the opponent, dealing [16982bff]{1}[-] Energy Damage over {2} seconds. This effect also removes Perfect Block Chance and reduces Block Proficiency by 50% while it's active.",
       "vn": 12
     },
     {
@@ -9502,6 +9652,21 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_SYMBIOTESTEALTH",
       "v": "The Venom Symbiote works with Flash’s training to reduce enemy Evasion chance by [16982bff]{1}%[-]."
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_SYMSCC_HUD",
+      "v": "CHTHON'S CUNNING",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_SYMSNS_HUD",
+      "v": "NULL'S SHADOW",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_SYMSSF_HUD",
+      "v": "SET'S FANGS",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_FORMAT_TENACITY",
@@ -11488,6 +11653,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_MK_WAX2_AO",
       "v": "As the Moon waxes, boost Critical Rating by [16982bff]{1}[-] for [16982bff]{2}[-] seconds with up to a [16982bff]{0}%[-] chance. The chance increases nearer to the Full Moon.",
       "vn": 12
+    },
+    {
+      "cn": null,
+      "k": "ID_UI_STAT_ATTRIBUTE_MLS_CRITCHANCE",
+      "v": "While the opponent is under the effect of a Debuff, the Symbioid puts his game face on and receives [16982bff]{1}[-] Critical Rating."
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_MODPERCENTDURATION_X23",
@@ -13788,6 +13958,11 @@
       "vn": "17.2"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_CHTHONSCUNNING",
+      "v": "Chthon's Cunning - Passive",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_CUNNING",
       "v": "Cunning",
       "vn": "14.1"
@@ -13888,6 +14063,21 @@
       "vn": 18
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GENETICBLESSINGS",
+      "v": "Genetic Blessings - Passive",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GENETICPOTENTIAL",
+      "v": "Genetic Potential - Passive",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GENMEM",
+      "v": "Genetic Memory",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_GOD",
       "v": "Goddess of Death - Passive",
       "vn": 16
@@ -13911,6 +14101,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_KINETICPOTENTIAL",
       "v": "Kinetic Potential - Passive",
       "vn": 18
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_KLYBUFF",
+      "v": "Klyntar Buff",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_LEARNTHEFOE",
@@ -13949,6 +14144,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_NONE",
       "v": "Passive"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_NULLSSHADOW",
+      "v": "Null's Shadow - Passive",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONABILITYACTIVATE",
@@ -14457,6 +14657,11 @@
       "vn": 13
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_OPBLW18",
+      "v": "Opponent Below 18% Health",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_OVERPOWER",
       "v": "Overpower - Buff",
       "vn": 15
@@ -14494,6 +14699,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_REPULSOR",
       "v": "Repulsor Attacks",
       "vn": 18
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SETSFANGS",
+      "v": "Set's Fangs - Passive",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_SMACKTALK",
@@ -14539,6 +14749,31 @@
       "vn": 15
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_VTD_A",
+      "v": "Aberration Effect - Builds from 0% to 100% over time",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_VTD_B",
+      "v": "Launch a Special Attack or Land a Heavy Attack",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_VTD_C",
+      "v": "Symbiote Buffs - Frenzy Category",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_VTD_D",
+      "v": "Symbiote Buffs - Survival Category",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_VTD_E",
+      "v": "Start of Fight",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_WARNOVERLOAD",
       "v": "Warning: Power Overload!",
       "vn": "17.1"
@@ -14547,6 +14782,11 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_WELLTIMEDBLOCK",
       "v": "Well Timed Blocks",
       "vn": 13
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_WHUNSTOP",
+      "v": "While Unstoppable",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRUACCURACY_I",
@@ -14816,8 +15056,38 @@
       "v": "Deals Energy damage."
     },
     {
+      "k": "ID_UI_STAT_BASIC_NODUR_NOCH_ARMUP",
+      "v": "Armor Up: [16982bff]{1}[-] increased Armor Rating.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_BASIC_NODUR_NOCH_CRLTY",
+      "v": "Cruelty: [16982bff]{1}[-] increased Critical Hit Damage.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_BASIC_NODUR_NOCH_FURY",
+      "v": "Fury: [16982bff]{1}[-] increased Attack rating.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_BASIC_NODUR_NOCH_PREC",
+      "v": "Precision: [16982bff]{1}[-] increased Critical Rating.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_BASIC_NODUR_NOCH_REPH",
+      "v": "Resist Physical: [16982bff]{1}[-] increased Physical Resistance.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_BASIC_PHYS",
       "v": "Deals Physical damage."
+    },
+    {
+      "k": "ID_UI_STAT_BLOODLETTING_HUD",
+      "v": "BLOODLETTING",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_DPLGOLD_ABREAK",
@@ -15112,7 +15382,7 @@
     {
       "cn": "https://jira.kabaminc.com/browse/MARVEL-63364",
       "k": "ID_UI_STAT_FORMAT_CORVUS_SP2",
-      "v": "When Glaive’s Immunity is active, this Special Attack is Unblockable and instantly drains 20% of the opponent’s Power if they are at max Power.\n",
+      "v": "When Glaive’s Immunity is active, this Special Attack is Unblockable and instantly drains 20% of the opponent’s Power if they are at max Power.",
       "vn": "17.2"
     },
     {
@@ -17638,6 +17908,21 @@
       "v": "[5baefc]Weakness Immunity[-]"
     },
     {
+      "k": "ID_UI_STAT_JUGGER_STN",
+      "v": "Juggernaut is immune to Stun Debuffs and if the opponent attempts to Stun him, he will instead apply his Heavy Attack Stagger to them.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_MLS_BLD",
+      "v": "The Summoned Symbiod has a {1}% chance to bleed on hit.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_MLS_CR",
+      "v": "The Summoned Symbiod has a {1}% increased chance to trigger a Critical Hit on Opponents suffering from debuffs.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_RSKULL_ABL00_01",
       "v": "Red Skull and the Cosmic Cube emit a presence that opponents cannot overcome. This greatly boosts Red Skulls chances to trigger abilities and provides passive bonuses.",
       "vn": "19.1"
@@ -20113,6 +20398,21 @@
       "v": "Venom Blast"
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_MLS",
+      "v": "DOESN’T PLAY WELL WITH OTHERS",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MLS_SHORT",
+      "v": "Doesn’t Play Well With Others {0}",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_MLS_SIMPLE",
+      "v": "Having another Symbioid around would make this one far too jealous. It’s probably for the best you only have one for now.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_MOONKNIGHT_DESC",
       "v": "Either Power Gain is enhanced by up to [16982bff]{1}%[-], or enemies suffer [16982bff]{1}%[-] reduced Power Gain. This cycles every {2} hours."
     },
@@ -20996,6 +21296,26 @@
       "v": "SYMBIOSIS"
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_SYMS",
+      "v": "SYMBIOMANCY",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SYMS_LONG_A",
+      "v": "Every [16982bff]{2}[-] seconds place a Stagger Passive effect on the Opponent, lasting {1} seconds. Stagger will immediately Nullify the next Buff triggered on the Opponent.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SYMS_SHORT",
+      "v": "Symbiomancy {0}",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_SYMS_SIMPLE",
+      "v": "The unique combination of Symbiote and mystic arts that power Symbiote Supreme have a disrupting effect on many abilities of the lesser beings inhabiting the Battlerealm.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_THANOSBOSS_LONG",
       "v": "Abilities activated through his Special Attacks have [16982bff]{1}%[-] increased duration.",
       "vn": 18
@@ -21197,6 +21517,31 @@
       "vn": 12
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_VENOM_NEW_A",
+      "v": "Rapid evolutionary changes to the Symbiote grant Venom an additional Genetic Memory Buff at the start of the fight, as well as a [16982bff]{0}%[-] chance to gain a third Buff to start the fight.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENOM_NEW_B",
+      "v": "Venom’s Genetic Memory Buffs also gain [16982bff]{1}%[-] Potency.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENOM_NEW_SHORT",
+      "v": "Aggressive Symbiosis {0}",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENOM_NEW_SIMPLE",
+      "v": "Rapid evolutionary changes to the symbiote grant Venom additional Genetic Memory Buffs at the start of the fight, as well as a boost to Genetic Memory Buff Potency.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENOM_NEW_TITLE",
+      "v": "AGGRESSIVE SYMBIOSIS",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_VENOM_SHORT",
       "v": "Bloodlust {0}"
     },
@@ -21211,6 +21556,46 @@
     {
       "k": "ID_UI_STAT_SIGNATURE_VENOM_TITLE_LOWER",
       "v": "Bloodlust"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_DESC",
+      "v": "Twisted mutations grant the Aberration effect [16982bff]{1}%[-] charge at the start of the fight, as well the following Special Attack enhancements:",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_DESC_B",
+      "v": "Aberration Buff begins with [16982bff]{1}%[-] charge the at start of the fight.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_DESC_C",
+      "v": "+[16982bff]{1}%[-] siphon damage during Special 1.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_DESC_D",
+      "v": "Toxic Armor gains +[16982bff]{1}%[-] duration.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_DESC_E",
+      "v": "[16982bff]{1}%[-] Aberration charge is gained after Special 3.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_SHORT",
+      "v": "Symbiosis Apotheosis {0}",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_SIMPLE",
+      "v": "Twisted mutations to the symbiote grant enhancements to Venom the Duck's Aberration effect, Siphon, Toxic Armor, and Buff Consumption.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_VENTHEDUCK_TITLE",
+      "v": "SYMBIOSIS APOTHEOSIS",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_VISION_DESC",
@@ -21663,6 +22048,281 @@
     {
       "k": "ID_UI_STAT_SPECIAL_PHYS_ONCE",
       "v": "Strikes once for [16982bff]{1}%[-] of your Attack as Physical damage."
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_CC_ACTIVE",
+      "v": "[16982bff]{1}[-] Direct Damage is Passively dealt to the Opponent for each Buff Nullified, based on Genetic Potential.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_CC_ENTER",
+      "v": "{0}% chance when this blessing is triggered to immediately Nullify all Buffs off the Opponent.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_CC_STAGGER",
+      "v": "Each hit of a Special Attack gains a {0}% chance to place a Stagger Passive on the Opponent lasting {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_GB_A",
+      "v": "Symbiote Supreme can manifest 3 different Genetic Blessings, every {2} seconds he switches to the next in the following order: Chthon’s Cunning, Null’s Shadow, and Set’s Fangs.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_GB_B",
+      "v": "Each time a Blessing Ends {0}% of Genetic Potential is consumed to gain up to {1}% of a Bar of Power.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_GB_B_ALT",
+      "v": "Each time a Blessing triggers {0}% of Genetic Potential is consumed to gain up to {1}% of a Bar of Power.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_GP_A",
+      "v": "Each time a Buff or a Stagger effect on the Opponent ends gain {1} Genetic Potential, to a maximum of 100.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_GP_B",
+      "v": "Gain an additional {1} Genetic Potential if a Buff ends due to a Nullify or Stagger effect.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_NS_ACTIVE",
+      "v": "[16982bff]{1}[-] Armor and {0}% chance to Perfect Block as a Passive effect, based on Genetic Potential.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_NS_ENTER",
+      "v": "{0}% chance when this Blessing is triggered to gain a Protection Buff preventing Symbiote Supreme from taking more than {1}% of his Max Health per hit, lasting {2} for seconds. This Protection threshold is reduced by 50% if the Opponent has an active Buff.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_NS_STAGGER",
+      "v": "While active gain a {0}% chance to place a Stagger Passive on the Opponent lasting {2} seconds each time Symbiote Supreme is Struck by or Blocks the Opponent. Well timed blocks increase the Chance to {1}%.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_PG",
+      "v": "Symbiote Supreme gains 100% less power from Attacking, Blocking, and being Struck. But gains {1}% of his Max Power every {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SF_ACTIVE",
+      "v": "{0}% chance to cause a Bleed Debuff on every Hit, dealing up to [16982bff]{1}[-] Direct Damage based on Genetic Potential and lasting {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SF_ENTER",
+      "v": "{0}% chance when this Blessing is triggered to gain a Fury Buff increasing Attack by up to [16982bff]{1}[-] for {2} Seconds, based on Genetic Potential.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SF_STAGGER",
+      "v": "While active gain a {0}% chance to place a Stagger Passive on the Opponent lasting {2} seconds on each Basic Attack Hit. Critical Hits increase the Chance to {1}%.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP1_GB",
+      "v": "Switch to the next Blessing.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP1_NULL",
+      "v": "{0}% Chance to Nullify {1} Buff. Gain {2} Genetic Potential if a Buff is Nullified.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP2_CC",
+      "v": "While Chthon’s Cunning is active each hit has a {0}% chance to steal {1}% of the Opponent’s Max Power.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP2_NS",
+      "v": "While Null’s Shadow is active each hit has a {0}% chance to place a Weakness Debuff on the Opponent reducing their Attack by {1}% for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP2_SF",
+      "v": "While Set’s Fangs is active each hit has a {0}% chance to place an Armor Break Debuff on the Opponent reducing their Armor by [16982bff]{1}[-] for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP3_GB",
+      "v": "{0}% chance to reset the Genetic Blessing timer, and activate all 3 Genetic Blessings.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_SYMS_SP3_GP",
+      "v": "+{1} Genetic Potential.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_TOXICARMOR_HUD",
+      "v": "TOXIC ARMOR",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_TOXICARMOR_SHORT",
+      "v": "[b4b4b4ff]Toxic Armor[-]",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_UNBLCK_ARMUP_BELOWHP",
+      "v": "While the opponent is below {1}% health, these attacks are Unblockable and cannot trigger opponent Armor Up effects.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_BUFFDMG",
+      "v": "An ambush attack grants Venom +{1}% damage during this attack for each Buff Venom has.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_BUFFEAT",
+      "v": "Each strike has a {0}% chance to steal a Buff and feed it to the symbiote, Nullifying the Buff, triggering a Genetic Memory Buff and healing Venom for [16982bff]{1}[-] Health.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_HVY",
+      "v": "A heavy strike inflicts Armor Break, reducing the opponent’s Armor rating by [16982bff]{1}[-] for {2} seconds. Landing this attack also causes Venom to randomize his most recent Genetic Memory Buff.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_KLY_ATK",
+      "v": "Venom’s Klyntar Mutation Buff provides +[16982bff]{1}[-] Attack and gains additional properties based on Venom’s opponent.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_KLY_BLD",
+      "v": "Hero Champions: +{1}% Bleed Ability Accuracy.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_KLY_EVD",
+      "v": "Spider-Verse Heroes: All attacks ignore Passive Evade effects.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_KLY_TCH",
+      "v": "Tech Champions: Power Burn & Power Drain Immunity.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_MUT",
+      "v": "Venom has a Klyntar Mutation Buff that refreshes itself every {2} seconds. When this effect activates, a random Genetic Memory Buff is gained from the list below. If Venom becomes Incinerated, the Mutation Buff is Nullified. Max Genetic Memory Buffs: {1}.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_TRUSTRK",
+      "v": "Venom’s bloodlust grants him True Strike and Unblockable Special Attacks.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENOMNEW_UNLEASH",
+      "v": "Venom is unleashed, converting all Genetic Memory Buffs into Fury Buffs, each increasing Attack by [16982bff]{1}[-] for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_ARMUP",
+      "v": "Armor Up: +[16982bff]{1}[-] Armor Rating for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_BLD",
+      "v": "{0}% chance to Bleed, dealing [16982bff]{1}[-] direct damage over {2} seconds. If the opponent is Immune to this Bleed, a Passive Degeneration is inflicted instead, albeit at a -25% damage penalty.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_BLODLET",
+      "v": "Bloodletting: +{1}% Bleed Ability Accuracy",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_FURY",
+      "v": "Fury: +[16982bff]{1}[-] Attack for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_LFSTL",
+      "v": "Life Steal: Attacks recover {1}% of damage dealt as Health for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_MUTBUFF",
+      "v": "When the continuous Aberration effect hits 100%, it resets to 0% and a random Symbiote Buff from either category is gained.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_MUTBUFF_B",
+      "v": "Each non-unique Symbiote Buff beyond the first suffers a stacking {2}% Potency penalty [Example: Symbiote Regen #5 will suffer -{1}% Potency compared to the first Symbiote Regen Buff].",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_PRBLK",
+      "v": "Perfect Block: +{1}% Perfect Block Chance for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_PREC",
+      "v": "Precision: +[16982bff]{1}[-] Critical Rating for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_PROW",
+      "v": "Prowess: +{1}% Special Attack damage for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_PWRFLD",
+      "v": "Power Flood: Gain {1} bars of Power over {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_PWRRT",
+      "v": "Power Rate: +{1}% Power Gain Rate for {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_RGN",
+      "v": "Regeneration: Recover [16982bff]{1}[-] Health over {2} seconds.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_RNABANK",
+      "v": "All Symbiote Buffs are removed and stored in the [37bfff]RNA Bank[-]. {2} Symbiote Buffs may be added to the [37bfff]RNA Bank[-] each fight, and up to {1} Buffs may be stored during each quest. Buffs won’t be removed or stored if the per-Fight or per-Quest limits have been reached.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_SP1BUFF",
+      "v": "At the end of this attack, gain 1 Symbiote Buff at Random.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_SP1STL",
+      "v": "Each strike has a {0}% chance to siphon an additional [16982bff]{1}[-] health from the opponent as direct damage and feed it to the Aberration effect, gaining +{2}% charge.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_SP2",
+      "v": "{0}% chance to apply a Toxic Armor Buff to the opponent, increasing their Armor by [16982bff]{1}[-] for 15 seconds. Striking an opponent that has Toxic Armor deals up to +{2}% additional direct damage based on how high the opponent’s Armor is.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_SP3BUFFEAT",
+      "v": "For each Buff the opponent has, Venom has a {0}% chance to eat it, Nullifying the Buff and gaining {1}% Power Meter.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_SP3RNA",
+      "v": "This attack does not lock Symbiote Buffs into the [37bfff]RNA Bank[-]; instead, it activates all Symbiote Buffs locked in the [37bfff]RNA Bank[-].",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_VENTHEDUCK_STOREBANK",
+      "v": "All Symbiote Buffs stored in the [37bfff]RNA Bank[-] are activated.",
+      "vn": "20.1"
     },
     {
       "k": "ID_UI_WASP_COUNTER_STING_PAUSE",

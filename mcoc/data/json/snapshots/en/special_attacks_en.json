@@ -1,16 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "362e055b6899975816fe80f79805d650a721dca2",
+    "hash": "209c8be38e5d3fe6312c3a60a1a04ba6e13ca45d",
     "language": "en",
-    "post_processed": true,
-    "string_count": 870,
+    "string_count": 886,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1533083814,
-    "versionLock": "20.0"
+    "ts": 1537908934
   },
   "strings": [
     {
@@ -650,8 +648,8 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_0",
-      "v": "Carnage hurls himself at his opponent, rending with limbs and tentacles alike.",
-      "vn": "13.1"
+      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him to take the time to revel in the carnage he creates.",
+      "vn": 20
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_1",
@@ -1923,6 +1921,31 @@
       "v": "SUPER_ADAPTOID_XL unleashes a signature attack on their opponent."
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SYMBIOTESUPREME_0",
+      "v": "A portal opens to an unknowable dimension, allowing tendrils from beyond to strike.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SYMBIOTESUPREME_1",
+      "v": "Symbiote Supreme’s composition of dark power erupts forth from the very ground beneath the enemy’s feet.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SYMBIOTESUPREME_2",
+      "v": "When the hivemind hungers Symbiote Supreme offers up his opponent to sate its desires, if only briefly.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SYM_MLS_BRUTE_0",
+      "v": "The Symbioid leaps towards its prey and gives them a good slashing.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_SYM_MLS_BRUTE_1",
+      "v": "The Symbioid lashes out in a flurry of vicious blows.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_TASKMASTER_0",
       "v": "Taskmaster is a master of landing the perfect strike to disrupt his opponent’s rhythm.",
       "vn": "16.1"
@@ -2097,6 +2120,21 @@
       "v": "“Deadpool you idiot! I’m calling Eddie and going back to him!”"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOMTHEDUCK_0",
+      "v": "Barbed tendrils lash out and rip the opponent’s energy right from their body.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOMTHEDUCK_1",
+      "v": "A barrage of strikes from all directions followed by a volley of blistering shots leaves Venom the Duck’s foe broiling in their own armor.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOMTHEDUCK_2",
+      "v": "Howard lays the bait and Venom consumes the greedy prey that wanders too close.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOM_0",
       "v": "Morphing his arm into a whip of constituent-matter, Venom lashes his target thrice."
     },
@@ -2107,6 +2145,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOM_2",
       "v": "Venom’s body writhes and mutates into a creature of nightmares as he plays a twisted game of hide-and-go-seek with his prey."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOM_BETA_0",
+      "v": "Morphing his arm into a whip of constituent-matter, Venom lashes his target thrice.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOM_BETA_1",
+      "v": "Eight repeated strikes tear at opponents with tendril and claw.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VENOM_BETA_2",
+      "v": "Venom’s body writhes and mutates into a creature of nightmares as he plays a twisted game of hide-and-go-seek with his prey.",
+      "vn": "20.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_VISION_0",
@@ -3062,12 +3115,18 @@
       "k": "ID_SPECIAL_ATTACK_OMEGARED_0",
       "v": "Draining Experience",
       "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_OMEGARED_1",
       "v": "Death Field",
       "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_OMEGARED_2",
       "v": "Tentacled Terror",
       "vn": 20
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_PHOENIX_0",
       "v": "Telekinetic Blast"
     },
@@ -3356,6 +3415,31 @@
       "v": "SUPER_ADAPTOID_XL Special Attack 3"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_SYMBIOTESUPREME_0",
+      "v": "Grasping Tendrils",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SYMBIOTESUPREME_1",
+      "v": "Dark Triumvirate",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SYMBIOTESUPREME_2",
+      "v": "Dimensional Hunger",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SYM_MLS_BRUTE_0",
+      "v": "Sic 'em",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_SYM_MLS_BRUTE_1",
+      "v": "Fight or Flight",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_TASKMASTER_0",
       "v": "Use their Weaknesses",
       "vn": "16.1"
@@ -3530,6 +3614,21 @@
       "v": "Ssssssave Me!"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_VENOMTHEDUCK_0",
+      "v": "Symbiotic Siphon",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VENOMTHEDUCK_1",
+      "v": "Caustic Onslaught",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VENOMTHEDUCK_2",
+      "v": "Ravenous Ambush",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_VENOM_0",
       "v": "Constituent Lash"
     },
@@ -3540,6 +3639,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_VENOM_2",
       "v": "Hide-And-Seek"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VENOM_BETA_0",
+      "v": "Constituent Lash",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VENOM_BETA_1",
+      "v": "Constituent Carnage",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_VENOM_BETA_2",
+      "v": "Hide-And-Seek",
+      "vn": "20.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_VISION_0",
