@@ -2680,7 +2680,12 @@ class Champion:
                 break
 
         if title is None:
-            raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
+            if mcocsig == 'SYMS':
+                title = 'ID_UI_STAT_SIGNATURE_SYMS'
+            elif mcocsig == 'MLS':
+                title = 'ID_UI_STAT_SIGNATURE_MLS'
+            else:
+                raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
 
         if self.mcocsig == 'COMICULTRON':
             mcocsig = self.mcocsig  # re-init for Ultron Classic
