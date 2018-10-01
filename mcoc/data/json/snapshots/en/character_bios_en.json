@@ -1,16 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "12c08b0f1c877d132ac5709a623a31f2fab62ab5",
+    "hash": "4b4e6b558b1ab3c61800cf9c3f2a96aaa8b3e4d1",
     "language": "en",
-    "post_processed": true,
-    "string_count": 146,
+    "string_count": 149,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1534294418,
-    "versionLock": "20.0"
+    "ts": 1537914713
   },
   "strings": [
     {
@@ -524,6 +522,16 @@
       "v": "Mutant, thief, leader, goddess – Ororo Munroe has played many roles in her life. As Storm, she controls all aspects of the weather on an astonishing scale. Tornados, lightning, and blizzards are hers to command. Summoned from her home in Africa by Professor X, Ororo found a new family in the X-Men – and a new role, as a hero."
     },
     {
+      "k": "ID_CHARACTER_BIOS_SYMBIOTESUPREME",
+      "v": "The result of an unholy union between an alternate reality Doctor Strange and a particularly virulent Klyntar specimen, the entity known as Symbiote Supreme wields an unnatural power thanks to its mastery of Symbiomancy: the ability to summon and control its Symbiote through magical means. The Symbiote Supreme finds and bonds with any lifeform it can, devouring them into its hivemind in order to spread its dark influence across The Battlerealm.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_SYM_MLS_BRUTE",
+      "v": "Symbioids have existed in the Contest for quite some time! Half sinister Symbiote and half Adaptoid, they’re usually seen serving as grunts for anyone twisted enough to take them under their wing.\nThis one seems… different, however. While usually quite vicious and threatening, this Symbioid seems to have taken quite a liking to you! But make no mistake, it’s still just as dangerous. Maybe it just wants a friend?\n\nThis Symbioid works differently than other Champions. The Summoned Symbioid can only be ranked up with KLYNTAR KATALYSTS and does not have any additional levels. Ranking up will significantly increase the Health of your Symbioid. The Symbioid has a few baseline abilities, but to upgrade it’s powers you’ll need to acquire KLYNTAR STRANDS which can be used to buy SYMBIOTIC ENHANCEMENTS to give your Summoned Symbioid new and powerful abilities. These abilities will ONLY work in the “Blood and Venom: Symbiomancer” quest.",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_CHARACTER_BIOS_TASKMASTER",
       "v": "Tony Masters was a S.H.I.E.L.D. agent exposed to an experimental variant of the Super-Soldier Serum, called the Mnemonic Primer. It grants him the ability to duplicate any movement he sees, but at a cost. The huge amount of information his brain records, causes it to overwrite his own memories, replacing what little remains of his original self. Now known as Taskmaster he offers his skills to the highest bidder as a mercenary and combat trainer.",
       "vn": "16.1"
@@ -584,6 +592,16 @@
     {
       "k": "ID_CHARACTER_BIOS_VENOMPOOL",
       "v": "“Origin story time! Ahem. A long time ago...in a forgotten corner of the Contest, a wise, handsome, kick-butt dude became permanently duct-taped to a weird, alien Venom thingy…”\n“That’sssss not what happened!”\n“Shut up Symbioid, I’m telling the story! Dang. Lost my place. Oh well, anywhoozle, epic story told in haiku! Deadpool Venom mix; Smashed together, best friends; and....Chimichangas?”\n“We must kill the Ssssssspider-Man!”\n“Oh Symby! You’re the funniest. You always crack me up.”"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_VENOMTHEDUCK",
+      "v": "An abject abomination crafted from the chaotic energy of the Contest itself and given shape by the monstrosity calling itself the Symbiote Supreme, Venom the Duck shapes its symbiotic mass to strengthen itself and tear its foes apart. Driven by Venom’s bloodlust and controlled by Howard’s intellect and cunning, this aberration of the Contest is a force to be reckoned with.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_VENOM_BETA",
+      "v": "After Peter Parker rejected a sinister alien symbiote, the extra-terrestrial threat sought revenge by bonding with Eddie Brock, ex-photographer for the Daily Bugle and Peter’s longtime rival. Fueled by their shared hatred of Spider-Man, Brock and the symbiote now use their immense strength and deadly abilities to gain revenge as the fearful Venom.",
+      "vn": "20.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_VISION",

@@ -136,7 +136,7 @@ class_color_codes = {
         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
         'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
-        'All': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
+        'All': discord.Color(0xffffff), 'Superior': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
 class_emoji = {
         'All':'<:all2:339511715920084993>',
