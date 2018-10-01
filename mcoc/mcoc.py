@@ -196,6 +196,7 @@ class ChampConverter(commands.Converter):
                 attrs[self._bare_arg] = int(args[-1])
                 self.argument = args[0]
         arg = ''.join(self.argument.lower().split(' '))
+        arg = arg.replace('(','').replace(')','').replace('-','')
         for m in self.parse_re.finditer(arg):
             attrs[m.lastgroup] = int(m.group(m.lastgroup))
         token = self.parse_re.sub('', arg)
@@ -1234,10 +1235,10 @@ class MCOC(ChampionFactory):
             if float(xref['chance5f']) >0 :
                 chance5=round(float(xref['chance5f'])*100,4)
                 em.add_field(name='5{0.star_char} {1} Odds'.format(champ, xref['5f']), value='{0}%'.format(chance5),inline=True)
-            if float(xref['chance6b']) >0 :
+            if xref['chance6b'] != '' and float(xref['chance6b']) >0 :
                 chance6=round(float(xref['chance6b'])*100,4)
                 em.add_field(name='6{0.star_char} Basic Odds'.format(champ), value='{0}%'.format(chance6),inline=True)
-            if float(xref['chance6f']) >0 :
+            if xref['chance6f'] != '' and float(xref['chance6f']) >0 :
                 chance6=round(float(xref['chance6f'])*100,4)
                 em.add_field(name='6{0.star_char} Featured Odds'.format(champ), value='{0}%'.format(chance6),inline=True)
 
