@@ -139,6 +139,7 @@ class_color_codes = {
         'All': discord.Color(0xffffff), 'Superior': discord.Color(0xffffff), 'default': discord.Color.light_grey(),
         }
 class_emoji = {
+        'Superior':'<:all2:339511715920084993>',
         'All':'<:all2:339511715920084993>',
         'Cosmic':'<:cosmic2:339511716104896512>',
         'Tech':'<:tech2:339511716197171200>',
