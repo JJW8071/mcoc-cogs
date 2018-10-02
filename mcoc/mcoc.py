@@ -2746,8 +2746,8 @@ class Champion:
                         desc.append(preamble + k)
         elif preamble + '_5STAR_DESC_MOD' in sigs:
             desc.append(preamble+'_DESC_MOD')
-        elif preamble + '_NEW_A' in sigs and preamble + '_NEW_B' in sigs:
-            desclist = ('_NEW_A','_NEW_B')
+        elif preamble + '_A' in sigs and preamble + '_B' in sigs: #venom improvement
+            desclist = ('_A','_B')
         elif mcocsig == 'CARNAGE':  #CARNAGE improvement
             desc.append(preamble+'_DESC_A_NEW')
             desc.append(preamble+'_DESC_B')
