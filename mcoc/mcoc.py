@@ -2732,6 +2732,8 @@ class Champion:
             desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_DF')
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
+        elif premable + '_DESC_A_NEW' in sigs: #carnage
+            desclist = ('_DESC_A_NEW')
         elif preamble + '_DESC_NEW' in sigs:
             desclist = ('_DESC_NEW','_DESC_NEW_B')
             if preamble + '_DESC_NEW2' in sigs:
@@ -2748,9 +2750,6 @@ class Champion:
             desc.append(preamble+'_DESC_MOD')
         elif preamble + '_A' in sigs and preamble + '_B' in sigs: #venom improvement
             desclist = ('_A','_B')
-        elif mcocsig == 'CARNAGE':  #CARNAGE improvement
-            desc.append(preamble+'_DESC_A_NEW')
-            desc.append(preamble+'_DESC_B')
         else:
             for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
                       '_DESC_E','_DESC_F','_DESC_G',
