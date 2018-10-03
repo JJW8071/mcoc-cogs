@@ -2703,14 +2703,15 @@ class Champion:
             )
 
         for x in preambles:
-            if x + '_SHORT' in sigs: #replacing _SIMPLE as the test for preamble
+            if x + '_SHORT' in sigs or x + '_SIMPLE' in sigs or x + '_TITLE_SIMPLE': #replacing _SIMPLE as the test for preamble
                 preamble = x
                 #print('SIG PREAMBLE is : ' + x)
                 break
         if preamble is None and mcocsig == 'BISH':
             preamble = 'ID_STAT_BISH_SIG'
         elif preamble is None:
-            raise TitleError("'{}' preamble not found".format(mcocsig))
+            raise TitleError("\n'{}' preamble not found".format(mcocsig))
+
         if preamble + '_SIMPLE_NEW2' in sigs:
             simple = preamble + '_SIMPLE_NEW2'
         if preamble + '_SIMPLE_NEW' in sigs:
