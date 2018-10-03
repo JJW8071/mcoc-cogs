@@ -2732,7 +2732,7 @@ class Champion:
             desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_DF')
         elif mcocsig in champ_exceptions:
             desc.extend(champ_exceptions[mcocsig])
-        elif premable + '_DESC_A_NEW' in sigs: #carnage
+        elif preamble + '_DESC_A_NEW' in sigs: #carnage
             desc.append('_DESC_A_NEW')
         elif preamble + '_A' in sigs and preamble + '_B' in sigs: #venom improvement
             desc.append('_A')
