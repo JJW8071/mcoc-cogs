@@ -2624,155 +2624,163 @@ class Champion:
 
         if sigs is None:
             sigs = load_kabam_json(kabam_bcg_stat_en)
-        if champ_exceptions is None:
-            champ_exceptions = {
-                #'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
-                'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
-                'LOKI': ['ID_UI_STAT_SIGNATURE_LOKI_LONGDESC'],
-                'DEADPOOL': ['ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO'],
-                #'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
-                #'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
-                'IRONMAN_SUPERIOR': ['ID_UI_STAT_SIGNATURE_IRONMAN_DESC_AO',
-                        'ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO'],
-                'BEAST': ['ID_UI_STAT_SIGNATURE_LONGDESC_AO',
-                        'ID_UI_STAT_SIGNATURE_LONGDESC_B_AO',
-                        'ID_UI_STAT_SIGNATURE_LONGDESC_C_AO',
-                        'ID_UI_STAT_SIGNATURE_LONGDESC_D_AO',
-                        'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
-                'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
-                'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
-                #'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO'],
-                'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
-                'DOC_OCK': ['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
-                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
-                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',
-                            'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C']
-            }
+
+        # if champ_exceptions is None:
+        #     champ_exceptions = {
+        #         #'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
+        #         'CYCLOPS_90S': ['ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO'],
+        #         'LOKI': ['ID_UI_STAT_SIGNATURE_LOKI_LONGDESC'],
+        #         'DEADPOOL': ['ID_UI_STAT_SIGNATURE_DEADPOOL_DESC2_AO'],
+        #         #'ULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+        #         #'COMICULTRON': ['ID_UI_STAT_SIGNATURE_ULTRON_DESC'],
+        #         'IRONMAN_SUPERIOR': ['ID_UI_STAT_SIGNATURE_IRONMAN_DESC_AO',
+        #                 'ID_UI_STAT_SIGNATURE_IRONMAN_DESC_B_AO'],
+        #         'BEAST': ['ID_UI_STAT_SIGNATURE_LONGDESC_AO',
+        #                 'ID_UI_STAT_SIGNATURE_LONGDESC_B_AO',
+        #                 'ID_UI_STAT_SIGNATURE_LONGDESC_C_AO',
+        #                 'ID_UI_STAT_SIGNATURE_LONGDESC_D_AO',
+        #                 'ID_UI_STAT_SIGNATURE_LONGDESC_E_AO'],
+        #         'GUILLOTINE': ['ID_UI_STAT_SIGNATURE_GUILLOTINE_DESC'],
+        #         'NEBULA': ['ID_UI_STAT_SIGNATURE_NEBULA_LONG'],
+        #         #'RONAN': ['ID_UI_STAT_SIGNATURE_RONAN_DESC_AO'],
+        #         'MORDO': ['ID_UI_STAT_SIG_MORDO_DESC_AO'],
+        #         'DOC_OCK': ['ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_A',
+        #                     'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_B',
+        #                     'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_D',
+        #                     'ID_UI_STAT_ATTRIBUTE_DOC_OCK_SIGNATURE_DESC_C']
+        #     }
+
+        # mcocsig = self.mcocsig
+        # preamble = None
+        # title = None
+        # simple = None
+        # desc = []
 
         mcocsig = self.mcocsig
-        preamble = None
-        title = None
-        simple = None
-        desc = []
+        title = champ._TITLE
+        simple = champ._SIMPLE
+        desc = champ._DESC_LIST.split(',')
+        huds = champ._HUD_LIST.split(',')
 
-        if mcocsig == 'COMICULTRON':
-            mcocsig = 'DRONE_TECH'
-        elif mcocsig == 'CYCLOPS_90S':
-            mcocsig = 'CYCLOPS'
-
-        titles = ('ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
-            'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
-            'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
-            'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
-            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
-            'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
-            'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
-            'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
-            'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),#added for WASP
-            )
-
-        for x in titles:
-            if x in sigs:
-                title = x
-                print('SIG TITLE is : ' + x)
-                break
-
-        if title is None:
-            if mcocsig == 'SYMS':
-                title = 'ID_UI_STAT_SIGNATURE_SYMS'
-            elif mcocsig == 'MLS':
-                title = 'ID_UI_STAT_SIGNATURE_MLS'
-            else:
-                raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
-
-        if self.mcocsig == 'COMICULTRON':
-            mcocsig = self.mcocsig  # re-init for Ultron Classic
-
-        preambles = ('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
-            'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
-            'ID_UI_STAT_SIG_{}'.format(mcocsig),
-            'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
-            'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
-            'ID_STAT_SIGNATURE_{}'.format(mcocsig),
-            'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
-            'ID_STAT_{}_SIG_TITLE'.format(mcocsig),
-            'ID_UI_STAT_FORMAT_{}_SIG'.format(mcocsig), # added for wasp
-            )
-
-        for x in preambles:
-            if x + '_SHORT' in sigs or x + '_SIMPLE' in sigs or x + '_TITLE_SIMPLE' in sigs: #replacing _SIMPLE as the test for preamble
-                preamble = x
-                print('SIG PREAMBLE is : ' + x)
-                break
-        if preamble is None and mcocsig == 'BISH':
-            preamble = 'ID_STAT_BISH_SIG'
-        elif preamble is None:
-            raise TitleError("\n'{}' preamble not found".format(mcocsig))
-
-        if preamble + '_SIMPLE_NEW2' in sigs:
-            simple = preamble + '_SIMPLE_NEW2'
-        elif preamble + '_TITLE_SIMPLE' in sigs:
-            simple = preamble + '_TITLE_SIMPLE'
-        elif preamble + '_SIMPLE_NEW' in sigs:
-            simple = preamble + '_SIMPLE_NEW'
-        elif preamble + '_SIMPLE' in sigs:
-            simple = preamble + '_SIMPLE'
-        elif mcocsig == 'BISH':  #BISHOP
-            simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
-        elif mcocsig == 'EMMAFROST':
-            simple = 'ID_UI_STAT_SIGNATURE_EMMA_SIMPLE'
-        else:
-            raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
-
-
-        if self.mcocsig == 'CYCLOPS_90S':
-            desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
-        if self.mcocsig == 'EMMAFROST':
-            desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_TF')
-            desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_DF')
-        elif mcocsig in champ_exceptions:
-            desc.extend(champ_exceptions[mcocsig])
-        elif preamble + '_DESC_A_NEW' in sigs: #carnage
-            desc.append('_DESC_A_NEW')
-        elif preamble + '_A' in sigs and preamble + '_B' in sigs: #venom improvement
-            desc.append('_A')
-            desc.append('_B')
-        elif preamble + '_DESC_NEW' in sigs:
-            desclist = ('_DESC_NEW','_DESC_NEW_B')
-            if preamble + '_DESC_NEW2' in sigs:
-                desclist = ('_DESC_NEW2','_DESC_NEW2_B')
-            elif preamble + '_DESC_NEW_FIXED' in sigs:
-                desclist = ('_DESC_NEW_FIXED','_DESC_NEW_B_FIXED')
-            for k in desclist:
-                if preamble + k in sigs:
-                    if preamble + k + '_AO' in sigs:
-                        desc.append(preamble + k + '_AO')
-                    else:
-                        desc.append(preamble + k)
-        elif preamble + '_5STAR_DESC_MOD' in sigs:
-            desc.append(preamble+'_DESC_MOD')
-        else:
-            for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
-                      '_DESC_E','_DESC_F','_DESC_G',
-                      '_LONG','_LONG_1','_LONG_2','_LONG_3','_LONG_4','_LONG_5',
-                      '_LONG1','_LONG2','_LONG3','_LONG4','_LONG5',
-                      '_LONG_A','_LONG_B', '_LONG_C',
-                      '_0','_1',):
-                if preamble + k + '_UPDATED' in sigs:
-                    k = k + '_UPDATED'
-                if preamble + k in sigs:
-                    if preamble + k + '_ALT' in sigs:
-                        desc.append(preamble + k + '_ALT')
-                    elif preamble + k + '_AO' in sigs:
-                        desc.append(preamble + k + '_AO')
-                    else:
-                        desc.append(preamble + k)
+        # if mcocsig == 'COMICULTRON':
+        #     mcocsig = 'DRONE_TECH'
+        # elif mcocsig == 'CYCLOPS_90S':
+        #     mcocsig = 'CYCLOPS'
+        #
+        # titles = ('ID_UI_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_ATTRIBUTE_{}_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_{}_SIGNATURE_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_SIG_{}_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_ATTRIBUTE_{}_SIG_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_SIGNATURE_{}_SIG_TITLE'.format(mcocsig),
+        #     'ID_STAT_SIGNATURE_{}_TITLE'.format(mcocsig),
+        #     'ID_STAT_{}_SIG_TITLE'.format(mcocsig), #added for BISHOP
+        #     'ID_UI_STAT_FORMAT_{}_SIG_TITLE'.format(mcocsig),#added for WASP
+        #     )
+        #
+        # for x in titles:
+        #     if x in sigs:
+        #         title = x
+        #         print('SIG TITLE is : ' + x)
+        #         break
+        #
+        # if title is None:
+        #     if mcocsig == 'SYMS':
+        #         title = 'ID_UI_STAT_SIGNATURE_SYMS'
+        #     elif mcocsig == 'MLS':
+        #         title = 'ID_UI_STAT_SIGNATURE_MLS'
+        #     else:
+        #         raise TitleError("'{}' title not found".format(mcocsig)) #, mcocsig)
+        #
+        # if self.mcocsig == 'COMICULTRON':
+        #     mcocsig = self.mcocsig  # re-init for Ultron Classic
+        #
+        # preambles = ('ID_UI_STAT_SIGNATURE_{}'.format(mcocsig),
+        #     'ID_UI_STAT_{}_SIGNATURE'.format(mcocsig),
+        #     'ID_UI_STAT_SIG_{}'.format(mcocsig),
+        #     'ID_UI_STAT_ATTRIBUTE_{}_SIGNATURE'.format(mcocsig),
+        #     'ID_UI_STAT_SIGNATURE_FORMAT_{}_SIG'.format(mcocsig),
+        #     'ID_UI_STAT_SIGNATURE_{}_SIG'.format(mcocsig),
+        #     'ID_STAT_SIGNATURE_{}'.format(mcocsig),
+        #     'ID_STAT_{}_SIG'.format(mcocsig),  #bishop ID_STAT_BISH_SIG_SHORT
+        #     'ID_STAT_{}_SIG_TITLE'.format(mcocsig),
+        #     'ID_UI_STAT_FORMAT_{}_SIG'.format(mcocsig), # added for wasp
+        #     )
+        #
+        # for x in preambles:
+        #     if x + '_SHORT' in sigs or x + '_SIMPLE' in sigs or x + '_TITLE_SIMPLE' in sigs: #replacing _SIMPLE as the test for preamble
+        #         preamble = x
+        #         print('SIG PREAMBLE is : ' + x)
+        #         break
+        # if preamble is None and mcocsig == 'BISH':
+        #     preamble = 'ID_STAT_BISH_SIG'
+        # elif preamble is None:
+        #     raise TitleError("\n'{}' preamble not found".format(mcocsig))
+        #
+        # if preamble + '_SIMPLE_NEW2' in sigs:
+        #     simple = preamble + '_SIMPLE_NEW2'
+        # elif preamble + '_TITLE_SIMPLE' in sigs:
+        #     simple = preamble + '_TITLE_SIMPLE'
+        # elif preamble + '_SIMPLE_NEW' in sigs:
+        #     simple = preamble + '_SIMPLE_NEW'
+        # elif preamble + '_SIMPLE' in sigs:
+        #     simple = preamble + '_SIMPLE'
+        # elif mcocsig == 'BISH':  #BISHOP
+        #     simple = preamble + '_SHORT' #BISHOP is the only champ that swaps Short for Simple.
+        # elif mcocsig == 'EMMAFROST':
+        #     simple = 'ID_UI_STAT_SIGNATURE_EMMA_SIMPLE'
+        # else:
+        #     raise KeyError('Signature SIMPLE cannot be found with: {}_SIMPLE'.format(preamble))
+        #
+        #
+        # if self.mcocsig == 'CYCLOPS_90S':
+        #     desc.append('ID_UI_STAT_SIGNATURE_CYCLOPS_DESC_90S_AO')
+        # if self.mcocsig == 'EMMAFROST':
+        #     desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_TF')
+        #     desc.append('ID_UI_STAT_FORMAT_EMMA_SIG_DF')
+        # elif mcocsig in champ_exceptions:
+        #     desc.extend(champ_exceptions[mcocsig])
+        # elif preamble + '_DESC_A_NEW' in sigs: #carnage
+        #     desc.append('_DESC_A_NEW')
+        # elif preamble + '_A' in sigs and preamble + '_B' in sigs: #venom improvement
+        #     desc.append('_A')
+        #     desc.append('_B')
+        # elif preamble + '_DESC_NEW' in sigs:
+        #     desclist = ('_DESC_NEW','_DESC_NEW_B')
+        #     if preamble + '_DESC_NEW2' in sigs:
+        #         desclist = ('_DESC_NEW2','_DESC_NEW2_B')
+        #     elif preamble + '_DESC_NEW_FIXED' in sigs:
+        #         desclist = ('_DESC_NEW_FIXED','_DESC_NEW_B_FIXED')
+        #     for k in desclist:
+        #         if preamble + k in sigs:
+        #             if preamble + k + '_AO' in sigs:
+        #                 desc.append(preamble + k + '_AO')
+        #             else:
+        #                 desc.append(preamble + k)
+        # elif preamble + '_5STAR_DESC_MOD' in sigs:
+        #     desc.append(preamble+'_DESC_MOD')
+        # else:
+        #     for k in ('_DESC','_DESC_A','_DESC_B','_DESC_C','_DESC_D',
+        #               '_DESC_E','_DESC_F','_DESC_G',
+        #               '_LONG','_LONG_1','_LONG_2','_LONG_3','_LONG_4','_LONG_5',
+        #               '_LONG1','_LONG2','_LONG3','_LONG4','_LONG5',
+        #               '_LONG_A','_LONG_B', '_LONG_C',
+        #               '_0','_1',):
+        #         if preamble + k + '_UPDATED' in sigs:
+        #             k = k + '_UPDATED'
+        #         if preamble + k in sigs:
+        #             if preamble + k + '_ALT' in sigs:
+        #                 desc.append(preamble + k + '_ALT')
+        #             elif preamble + k + '_AO' in sigs:
+        #                 desc.append(preamble + k + '_AO')
+        #             else:
+        #                 desc.append(preamble + k)
         return dict(title={'k': title, 'v': sigs[title]},
                     simple={'k': simple, 'v': sigs[simple]},
-                    desc={'k': desc, 'v': [sigs[k] for k in desc]})
+                    desc={'k': desc, 'v': [sigs[k] for k in desc]},
+                    huds={'k': huds, 'v': [sigs[k] for k in huds]})
 
     def get_sig_coeff(self):
         return get_csv_row(local_files['sig_coeff'], 'CHAMP', self.full_name)
