@@ -2659,8 +2659,14 @@ class Champion:
         mcocsig = self.mcocsig
         title = self._TITLE
         simple = self._SIMPLE
-        desc = self._DESC_LIST.split(',')
-        huds = self._HUD_LIST.split(',')
+        if isinstance(self._DESC_LIST, list):
+            desc = self._DESC_LIST.split(',')
+        else:
+            desc[0] = self._DESC_LIST
+        if isinstance(self._HUD_LIST, list):
+            huds = self._HUD_LIST.split(',')
+        else:
+            huds[0] = self._HUD_LIST
 
         # if mcocsig == 'COMICULTRON':
         #     mcocsig = 'DRONE_TECH'
