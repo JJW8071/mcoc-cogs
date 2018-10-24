@@ -2662,11 +2662,13 @@ class Champion:
         if isinstance(self._DESC_LIST, list):
             desc = self._DESC_LIST.split(',')
         else:
-            desc[0] = self._DESC_LIST
+            desc = []
+            desc.append(self._DESC_LIST)
         if isinstance(self._HUD_LIST, list):
             huds = self._HUD_LIST.split(',')
         else:
-            huds[0] = self._HUD_LIST
+            huds = []
+            huds.append(self._HUD_LIST)
 
         # if mcocsig == 'COMICULTRON':
         #     mcocsig = 'DRONE_TECH'
