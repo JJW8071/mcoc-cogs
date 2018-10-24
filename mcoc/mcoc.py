@@ -2657,10 +2657,10 @@ class Champion:
         # desc = []
 
         mcocsig = self.mcocsig
-        title = champ._TITLE
-        simple = champ._SIMPLE
-        desc = champ._DESC_LIST.split(',')
-        huds = champ._HUD_LIST.split(',')
+        title = self._TITLE
+        simple = self._SIMPLE
+        desc = self._DESC_LIST.split(',')
+        huds = self._HUD_LIST.split(',')
 
         # if mcocsig == 'COMICULTRON':
         #     mcocsig = 'DRONE_TECH'
