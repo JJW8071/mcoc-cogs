@@ -2714,7 +2714,9 @@ class Champion:
 
         if preamble + '_SIMPLE_NEW2' in sigs:
             simple = preamble + '_SIMPLE_NEW2'
-        if preamble + '_SIMPLE_NEW' in sigs:
+        elif preamble + '_TITLE_SIMPLE' in sigs:
+            simple = preamble + '_TITLE_SIMPLE'
+        elif preamble + '_SIMPLE_NEW' in sigs:
             simple = preamble + '_SIMPLE_NEW'
         elif preamble + '_SIMPLE' in sigs:
             simple = preamble + '_SIMPLE'
