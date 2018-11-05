@@ -1973,7 +1973,7 @@ class MCOC(ChampionFactory):
     @submit.command(pass_context=True, name='defenders', aliases=['awd'])
     async def submit_awd(self, ctx, target_user: str, champs : ChampConverterMult):
 
-        package = [[]]
+        packages = [[]]
         message_text = ['Alliance War Defender Registration','Target User: ' + target_user]
         author = ctx.message.author
         # star = '{0.star}{0.star_char}'.format(champ)
