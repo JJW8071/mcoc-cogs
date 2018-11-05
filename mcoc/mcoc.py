@@ -1973,7 +1973,6 @@ class MCOC(ChampionFactory):
     @submit.command(pass_context=True, name='defenders', aliases=['awd'])
     async def submit_awd(self, ctx, target_user: str, champs : ChampConverterMult):
 
-        packages = Table()
         message_text = ['Alliance War Defender Registration','Target User: ' + target_user]
         author = ctx.message.author
         # star = '{0.star}{0.star_char}'.format(champ)
@@ -1986,7 +1985,6 @@ class MCOC(ChampionFactory):
             return
         for champ in champs:
             message_text.append('{0.star_name_str}'.format(champ))
-            packages.add_row(now, author.name, author.id, target_user, champ.unique)
 
         print('package built')
         message_text.append('Press OK to confirm.')
@@ -2007,7 +2005,10 @@ class MCOC(ChampionFactory):
                 # GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
                 GKEY = '19yPuvT2Vld81RJlp4XD33kSEM-fsW8co5dN9uJkZ908'
                 message2 = await self.bot.say('Submission in progress.')
-                check = await self._process_submission(package=packages, GKEY=GKEY, sheet='collector_submit')
+
+                for champ in champs:
+                    package = [now, author.name, author.id, target_user, champ.unique]
+                    check = await self._process_submission(package=package, GKEY=GKEY, sheet='collector_submit')
                 if check:
                     await self.bot.edit_message(message2, 'Submission complete.')
                     async with aiohttp.ClientSession() as s:
