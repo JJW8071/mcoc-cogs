@@ -1974,7 +1974,7 @@ class MCOC(ChampionFactory):
     async def submit_awd(self, ctx, target_user: str, champs : ChampConverterMult):
 
         packages = []
-        message_text = ['Alliance War Defender Registration','Target: {1}'.format(target_user)]
+        message_text = ['Alliance War Defender Registration','Target User: {}'.format(target_user)]
         for champ in champs:
             message_text.append('{0.star_name_str}'.format(champ))
             author = ctx.message.author
@@ -1983,7 +1983,7 @@ class MCOC(ChampionFactory):
                 if champ.has_prestige:
                     pi=champ.prestige
             now = str(ctx.message.timestamp)
-            package = [[now, author.name, author.id, star, champ.full_name, champ.mutamatt, pi]]
+            package = [[now, author.name, author.id, target_user, champ.mutamatt, star, champ.full_name pi]]
             packages.append(package)
             print('package built')
         message_text.append('Press OK to confirm.')
