@@ -984,7 +984,7 @@ class MCOC(ChampionFactory):
         await raw_modok_says(self.bot, ctx.message.channel, word)
 
     # @checks.admin_or_permissions(manage_server=True)
-    @commands.command(pass_context=True, aliases=['nbs',], hidden=True)
+    @commands.command(pass_context=True, aliases=['nbs',])
     async def nerfbuffsell(self, ctx):
         '''Random draw of 3 champions.
         Choose one to Nerf, one to Buff, and one to Sell'''
@@ -1872,7 +1872,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @submit.command(pass_context=True, name='stats')
+    @submit.command(pass_context=True, name='stats', hidden=True)
     async def submit_stats(self, ctx, champ : ChampConverter, *, stats):
         '''hp, atk, cr, cd, blockpen, critresist, armorpen, armor, bp'''
         guild = await self.check_guild(ctx)
@@ -1938,49 +1938,7 @@ class MCOC(ChampionFactory):
                         await self.bot.edit_message(message2, 'Submission failed.')
             else:
                 await self.bot.say('Ambiguous response.  Submission canceled')
-    # @submit.command(pass_context=True, name='stats')
-    # async def submit_stats(self, ctx, args):
-    #     # Need to split out hp atk cr cd armor bp
-    #     hp = '' #health
-    #     atk = '' #attack
-    #     cr = '' #crit rate
-    #     cd = '' #critical damage
-    #     apen = '' #armor penetration
-    #     bpen = '' #block penetration
-    #     cresist = '' #critical resistance
-    #     armor = '' #armor
-    #     bp = '' #block proficiency
-    #
-    #
-    #     # _bare_arg = None
-    #     # parse_re = re.compile(r'''(?:s(?P<sig>[0-9]{1,3}))|(?:r(?P<rank>[1-5]))|(?:(?P<star>[1-6])\\?\*)|(?:(?P<star>[1-6])\\?\★)|(?:d(?P<debug>[0-9]{1,2}))''', re.X)
-    #     parse_re = re.compile(r'''(?:hp(?P<hp>[0-9]{1,6}))
-    #                             |(?:atk(?P<atk>[0-9]{1,4}))
-    #                             |(?:cr(?P<cr>[0-9]{1,4}))
-    #                             |(?:cd(?P<cd>[0-9]{1,4}))
-    #                             |(?:armor(?P<armor>[0-9]{1,5}))
-    #                             |(?:bp(?P<bp>[0-9]{1,4}))
-    #                             ''',re.X)
-    #
-    #     await self.bot.say('hp: {}\natk: {}\ncr: {}\ncd: {}\narmor: {}\nbp:  {}'.format(hp, atk, cr, cd, armor, bp))
 
-        # async def convert(self):
-        #     bot = self.ctx.bot
-        #     attrs = {}
-        #     if self._bare_arg:
-        #         args = self.argument.rsplit(' ', maxsplit=1)
-        #         if len(args) > 1 and args[-1].isdecimal():
-        #             attrs[self._bare_arg] = int(args[-1])
-        #             self.argument = args[0]
-        #     arg = ''.join(self.argument.lower().split(' '))
-        #     for m in self.parse_re.finditer(arg):
-        #         attrs[m.lastgroup] = int(m.group(m.lastgroup))
-        #     token = self.parse_re.sub('', arg)
-        #     if not token:
-        #         err_str = "No Champion remains from arg '{}'".format(self.argument)
-        #         await bot.say(err_str)
-        #         raise commands.BadArgument(err_str)
-        #     return (await self.get_champion(bot, token, attrs))
 
     @submit.command(pass_context=True, name='prestige')
     async def submit_prestige(self, ctx, champ : ChampConverter, observation : int):
@@ -2011,6 +1969,52 @@ class MCOC(ChampionFactory):
                         await self.bot.edit_message(message2, 'Submission failed.')
             else:
                 await self.bot.say('Ambiguous response.  Submission canceled')
+
+    @submit.command(pass_context=True, name='defenders', aliases=['awd'])
+    async def submit_awd(self, ctx, target_user: str, champs : ChampConverterMult):
+
+        packages = []
+        message_text = ['Alliance War Defender Registration','Target: {1}'.format(target_user)]
+        for champ in champs:
+            message_text.append('{0.star_name_str}'.format(champ))
+            author = ctx.message.author
+            star = '{0.star}{0.star_char}'.format(champ)
+            if pi == 0:
+                if champ.has_prestige:
+                    pi=champ.prestige
+            now = str(ctx.message.timestamp)
+            package = [[now, author.name, author.id, star, champ.full_name, champ.mutamatt, pi]]
+            packages.append(package)
+            print('package built')
+        message_text.append('Press OK to confirm.')
+        message = await self.bot.say('\n'.join(message_text))
+        await self.bot.add_reaction(message, '❌')
+        await self.bot.add_reaction(message, '🆗')
+        react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=30, emoji=['❌', '🆗'])
+
+        # message = await self.bot.say('Alliance War Defender Registration.\nChampion: ' +
+        #         '{0.star_name_str}\nTarget: {1}\nPress OK to confirm.'.format(
+        #         champ, observation))
+
+
+        if react is not None:
+            if react.reaction.emoji == '❌':
+                await self.bot.say('Submission canceled.')
+            elif react.reaction.emoji == '🆗':
+                # GKEY = '1VOqej9o4yLAdMoZwnWbPY-fTFynbDb_Lk8bXDNeonuE'
+                GKEY = '19yPuvT2Vld81RJlp4XD33kSEM-fsW8co5dN9uJkZ908'
+                message2 = await self.bot.say('Submission in progress.')
+                check = await self._process_submission(package=packages, GKEY=GKEY, sheet='collector_submit')
+                if check:
+                    await self.bot.edit_message(message2, 'Submission complete.')
+                    async with aiohttp.ClientSession() as s:
+                        await asyncio.sleep(10)
+                        # await self.cache_remote_file('alliancewardefenders', s, force_cache=True, verbose=True)
+                        await self.bot.edit_message(message2, 'Submission complete.\nAlliance War Defenders refreshed.')
+                else:
+                    await self.bot.edit_message(message2, 'Submission failed.')
+        else:
+            await self.bot.say('Ambiguous response.  Submission canceled')
 
 
     @submit.command(pass_context=True, name='duel', aliases=['duels','target'])
