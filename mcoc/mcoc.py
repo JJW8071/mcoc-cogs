@@ -1971,7 +1971,7 @@ class MCOC(ChampionFactory):
                 await self.bot.say('Ambiguous response.  Submission canceled')
 
     @submit.command(pass_context=True, name='defenders', aliases=['awd'])
-    async def submit_awd(self, ctx, target_user: str, champs : ChampConverterMult):
+    async def submit_awd(self, ctx, target_user: str, *, champs : ChampConverterMult):
 
         message_text = ['Alliance War Defender Registration','Target User: ' + target_user]
         author = ctx.message.author
