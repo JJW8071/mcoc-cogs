@@ -1986,7 +1986,7 @@ class MCOC(ChampionFactory):
             return
         for champ in champs:
             message_text.append('{0.star_name_str}'.format(champ))
-            packages.append([[now, author.name, author.id, target_user, champ.unique]])
+            packages.append([[]now, author.name, author.id, target_user, champ.unique])
 
         print('package built')
         message_text.append('Press OK to confirm.')
