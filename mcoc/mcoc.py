@@ -2669,14 +2669,19 @@ class Champion:
         simple = self._SIMPLE
         if isinstance(self._DESC_LIST, list):
             desc = self._DESC_LIST.split(',')
+        elif isinstance(self._DESC_LIST, str):
+            desc = [self._DESC_LIST]
         else:
-            desc = []
-            desc.append(self._DESC_LIST)
+            desc = ['None Found']
+            print('No Sig Description Found')
         if isinstance(self._HUD_LIST, list):
             huds = self._HUD_LIST.split(',')
+        elif isinstance(self._HUD_LIST, str):
+            huds = [self._HUD_LIST]
         else:
-            huds = []
-            huds.append(self._HUD_LIST)
+            huds = ['None Found']
+            print('No Sig Description Found')
+
 
         # if mcocsig == 'COMICULTRON':
         #     mcocsig = 'DRONE_TECH'
