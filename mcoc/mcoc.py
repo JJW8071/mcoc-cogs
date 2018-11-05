@@ -1983,7 +1983,7 @@ class MCOC(ChampionFactory):
                 if champ.has_prestige:
                     pi=champ.prestige
             now = str(ctx.message.timestamp)
-            package = [[now, author.name, author.id, target_user, champ.mutamatt, star, champ.full_name pi]]
+            package = [now, author.name, author.id, target_user, champ.mutamatt, star, champ.full_name pi]
             packages.append(package)
             print('package built')
         message_text.append('Press OK to confirm.')
