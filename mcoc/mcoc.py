@@ -1981,11 +1981,11 @@ class MCOC(ChampionFactory):
         #     if champ.has_prestige:
         #         pi=champ.prestige
         now = str(ctx.message.timestamp)
-            for champ in champs:
+        for champ in champs:
             message_text.append('{0.star_name_str}'.format(champ))
             packages.append([[now, author.name, author.id, target_user, champ.mutamatt]])
 
-            print('package built')
+        print('package built')
         message_text.append('Press OK to confirm.')
         message = await self.bot.say('\n'.join(message_text))
         await self.bot.add_reaction(message, '❌')
