@@ -1981,9 +1981,12 @@ class MCOC(ChampionFactory):
         #     if champ.has_prestige:
         #         pi=champ.prestige
         now = str(ctx.message.timestamp)
+        if len(champs) > 5:
+            await self.bot.say('Defense Error: No more than 5 Defenders permitted.')
+            return
         for champ in champs:
             message_text.append('{0.star_name_str}'.format(champ))
-            packages.append([[now, author.name, author.id, target_user, champ.mutamatt]])
+            packages.append([[now, author.name, author.id, target_user, champ.mattkraftid]])
 
         print('package built')
         message_text.append('Press OK to confirm.')
