@@ -1256,6 +1256,7 @@ class MCOC(ChampionFactory):
         try:
             title, desc, sig_calcs = await champ.process_sig_description(
                     isbotowner=ctx.message.author == appinfo.owner)
+            print(desc)
         except KeyError:
             await champ.missing_sig_ad()
             raise
