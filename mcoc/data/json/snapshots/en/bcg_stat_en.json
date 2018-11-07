@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "d712242eafa1505757367dad2f420e1c89830697",
+    "hash": "c2ca06ecbba34593bc40dba87096a446220dc203",
     "language": "en",
     "post_processed": true,
-    "string_count": 5049,
+    "string_count": 5103,
     "tagged": [
       "bcg_stat",
       "client"
     ],
-    "ts": 1537908929,
-    "versionLock": "20.1"
+    "ts": 1539384743,
+    "versionLock": "21.0"
   },
   "strings": [
     {
@@ -172,6 +172,16 @@
       "k": "ID_AED8240T",
       "v": "[b4b4b4ff]A.I. Disabled[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_AEGD",
+      "v": "Ægon gains passive abilities as his Combo Meter increases.",
+      "vn": 21
+    },
+    {
+      "k": "ID_AEGT",
+      "v": "Combo Meter Effects",
+      "vn": 21
     },
     {
       "k": "ID_AGHT107D",
@@ -537,6 +547,11 @@
       "k": "ID_CAPS74T",
       "v": "[b4b4b4ff]Caltrops[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_AEGON",
+      "v": "Born to a pacifist race forced into slavery by the Master of the first Contest of Champions, Ægon always defied the strict code of nonviolence amongst his kin. He secretly trained as a gladiator, inspired by love and duty to win the Contest and free his people. Against all odds, he fought his way to the final battle against the Master. Ægon was victorious, but the Master's death caused an explosion, taking Ægon's arm, and the life of his beloved. His tragedy was complete when his own people cast him out as a pariah and left him behind in the Battlerealm. As Champion of the Contest, Ægon’s prize was the Iso-Belt, a powerful artifact that grants him the ability to manifest a phantom limb, and other willpower constructs, to replace his missing arm. However, the full extent of the belt's powers are still unknown.",
+      "vn": 21
     },
     {
       "k": "ID_CHARACTER_BIOS_EMMAFROST",
@@ -1624,6 +1639,11 @@
       "vn": 19
     },
     {
+      "k": "ID_HTDIL1",
+      "v": "Reduces Armor, Attack, Block Proficiency, Regeneration Rate, Physical Resistance, Critical Chance and Critical Damage.",
+      "vn": 21
+    },
+    {
       "k": "ID_HUER193D",
       "v": "Attacks inflict Armor Break. Dash back and hold Block to switch modes.",
       "vn": 19
@@ -2259,6 +2279,16 @@
       "vn": 19
     },
     {
+      "k": "ID_OVCL1",
+      "v": "Overclock",
+      "vn": 21
+    },
+    {
+      "k": "ID_OVCL2",
+      "v": "Grants bonus Energy Damage with each strike. Converted into a Shock Debuff on the opponent when a Special Attack is activated.",
+      "vn": 21
+    },
+    {
       "k": "ID_OVGE75D",
       "v": "This Champion must wait before Overrun can be activated again.",
       "vn": 19
@@ -2597,6 +2627,11 @@
       "k": "ID_PRON_T",
       "v": "Precision",
       "vn": 19
+    },
+    {
+      "k": "ID_PROTA_LONG",
+      "v": "Allows this champion to ignore Auto Block and all Evade effects.",
+      "vn": 21
     },
     {
       "k": "ID_PRSS83D",
@@ -2987,6 +3022,36 @@
       "k": "ID_SPCE8240T",
       "v": "[b4b4b4ff]Special Attack Resistance[-]",
       "vn": 19
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_AEGON_0",
+      "v": "ISO Discharge",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_AEGON_1",
+      "v": "Spear of the Forsaken",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_AEGON_2",
+      "v": "Beyond Limits",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_AEGON_0",
+      "v": "Ægon releases the energy in his phantom limb as a blast of cosmic energy.",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_AEGON_1",
+      "v": "Ægon knocks back his Opponent, invokes his phantom limb holding a spear, then attacks with a series of slashes and strikes.",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_AEGON_2",
+      "v": "Ægon charges up his Iso-belt beyond his own limits, and releases the energy in a violent blast, tearing up the ground and sending his Opponent flying",
+      "vn": 21
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_EMMAFROST_0",
@@ -5540,6 +5605,71 @@
       "vn": "19.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_1000_HUD",
+      "v": "UNBLOCKABLE ACTIVE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_100_HUD",
+      "v": "TENACITY ENHANCED",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_10_HUD",
+      "v": "CRUELTY UP",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_150_HUD",
+      "v": "TRUE ACCURACY ACTIVE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_200_HUD",
+      "v": "RESISTANCE DOWN",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_20_HUD",
+      "v": "CRITICAL HIT ON BLOCK",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_300_HUD",
+      "v": "FURY ACTIVE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_30_HUD",
+      "v": "UNSTOPPABLE ACTIVE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_500_HUD",
+      "v": "CONCUSSION ACTIVE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_50_HUD",
+      "v": "HEAVY ENHANCED",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_5_HUD",
+      "v": "TENACITY ACTIVE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_750_HUD",
+      "v": "UNSTOPPABLE ENHANCED",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_AEG_75_HUD",
+      "v": "BLOCK PROFICIENCY DOWN",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_AFTERSHOCK_HUD",
       "v": "AFTERSHOCK"
     },
@@ -6547,9 +6677,9 @@
       "vn": "13.1"
     },
     {
+      "cn": null,
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_A_NEW",
-      "v": "The sight and smell of blood triggers Carnage’s bloodlust, granting a Power Gain Buff when activating a Bleed on the opponent that lasts as long as the Opponent is Bleeding or Armor Broken. The Power Gain grants up to [16982bff]{1}%[-] of a Bar of Power per second based on how close Carnage is to the opponent.",
-      "vn": "20.1"
+      "v": "The sight and smell of blood triggers Carnage’s bloodlust, granting a Power Gain Buff when activating a Bleed or Armor Break on the opponent that lasts as long as the Opponent is Bleeding or Armor Broken. The Power Gain grants up to [16982bff]{1}%[-] of a Bar of Power per second based on how close Carnage is to the opponent. "
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_CARNAGE_SIGNATURE_DESC_B",
@@ -7321,6 +7451,10 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_DIREHIT_VII",
       "v": "[b310e8]Direct Damage VII[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_DISORIENTED_SHORT",
+      "v": "Disoriented"
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_DIZZINESS_HUD",
@@ -12447,6 +12581,11 @@
       "v": "This champion periodically gains Power throughout the fight equal to [16982bff]{1}%[-] of max Power."
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_POWERGAIN_UI",
+      "v": "This champion receives {0}% less Power from Attacking and Defending, but gains {1}% Power every {2} seconds.",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_POWERGAIN_V",
       "v": "[ff390dff]Power Gain V[-]"
     },
@@ -13943,6 +14082,11 @@
       "vn": 17
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_AEG_COMBO",
+      "v": "Passive - Combo Meter Abilities",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_BAGOFTRICKS",
       "v": "Bag of Tricks - Special & Heavy Attacks",
       "vn": "14.1"
@@ -14205,6 +14349,11 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBELOW20HEALTH",
+      "v": "When below 20% Health",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBELOW35HEALTH",
       "v": "When brought below 35% Max Health",
       "vn": "18.1"
@@ -14242,9 +14391,19 @@
       "vn": 16
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONBOSSNODE",
+      "v": "While attacking or defending the final node in a Quest",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCAPTUREDSOUL",
       "v": "Captured Souls - Passive",
       "vn": "15.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCHAMPUNIVERSE",
+      "v": "Champion of the Universe",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONCHEM",
@@ -14339,6 +14498,11 @@
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONEVILSBANE",
       "v": "Passive - Evil's Bane"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONFIGHTEND",
+      "v": "End of Fight",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONFIGHTSTART",
@@ -14513,6 +14677,21 @@
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONOVERWHELM",
       "v": "Overwhelming Presence - Passive",
       "vn": "19.1"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPCLATTACK",
+      "v": "Light Attacks -  Requires 2 Persistent Charge",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPCMATTACK",
+      "v": "Medium Attacks - Requires 3 Persistent Charges",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPCP",
+      "v": "Passive - Unlocks at 3 Persistent Charges",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_ONPERSISTENTCHARGE",
@@ -14789,8 +14968,18 @@
       "vn": "20.1"
     },
     {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRIGGER_SUBTITLE_onBelow20Health",
+      "v": "When below 20% Health",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_ATTRIBUTE_TRUACCURACY_I",
       "v": "[b4b4b4ff]True Accuracy[-]"
+    },
+    {
+      "k": "ID_UI_STAT_ATTRIBUTE_TRUE_DMG_HUD",
+      "v": "TRUE DAMAGE",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_ATTRIBUTE_TRUSTRIKE_I",
@@ -15158,6 +15347,151 @@
       "k": "ID_UI_STAT_EMMA_HUD_POWERRATE",
       "v": "POWER RATE",
       "vn": 20
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_ABILACC",
+      "v": "500 Hits - Critical Hits cause Opponents to suffer -{0}% reduced Defensive Ability Accuracy for Ægon's next hit",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_ARM",
+      "v": "50 Hits - Critical Hits ignore [16982bff]{1}%[-] of the Opponent's Armor",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_BASESTATS",
+      "v": "Base Attack is increased by [16982bff]15%[-], but Base Critical Rating is [16982bff]0%[-].",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_BLOCKPROF",
+      "v": "75 Hits - Opponents have [16982bff]-{1}[-] Block Proficiency when Ægon strikes with a Critical Hit",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_COMBOCRIT",
+      "v": "Base Critical Rating is [f71817]0[-]. Critical Rating is increased by [16982bff]+{1}[-] for each hit of the Combo Meter.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_CRITBLOCK",
+      "v": "30 Hits - Ægon can strike with Critical Hits even while the Opponent is Blocking.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_CRITCONVERT",
+      "v": "Any Critical Rating Ægon would receive from a source other than his Combo Meter is converted directly into Critical Damage Rating.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_DMG_A",
+      "v": "10 Hits - Critical Damage Rating is increased by [16982bff]+{1}[-] for each hit of the Combo Meter.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_DMG_B",
+      "v": "300 Hits - Critical Hits grant a Fury Buff, increasing Attack by [16982bff]+{1}[-] for {2} second(s). This stacks up to 3 times.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_HVY",
+      "v": "Ægon activates Combo Shield, and cannot lose more than {1}% of his maximum Health from a single source, other than Special Attacks, for {2} seconds.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_HVY_CD",
+      "v": "Once this ability expires, it goes into cooldown and cannot be reactivated for {2} second(s).",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_HVY_CD_RED",
+      "v": "Landing a Heavy Attack reduces the cooldown of this ability by {1} second(s).",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_PHYSRES",
+      "v": "200 Hits - Critical Hits ignore {1}% of the Opponent's Physical Resistance",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_SIG_A",
+      "v": "At the end of the fight, Ægon adds [16982bff]{1}%[-] of his final Combo Meter into his Persistent Combo, up to 999 hits total. Ægon's abilities that count the Combo Meter add his Persistent Combo on top of it.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_SIG_B",
+      "v": "Storing new Persistent Combo replaces the Persistent Combo from the previous fight",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_SIG_C",
+      "v": "When this Signature Ability is at its highest level, Ægon counts both his Combo Meter and his previous Persistent Combo before storing new Persistent Combo.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_SP2",
+      "v": "{0}% chance to inflict Bleed over {2} seconds, dealing [16982bff]{1}[-] direct damage for each hit of the Combo Meter, up to 60 hits.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_SP3",
+      "v": "{0}% chance to Stun the Opponent for {1} second(s). The duration of the Stun increases by {2} second(s) for each hit of the Combo Meter, up to 7 second(s) total.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_STRUCK",
+      "v": "Gain 1 additional Fury Buff for every 50 hits on the Combo Meter, then refresh those Buffs. Ægon can have up to 6 Fury Buffs total.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_TENACITY_A",
+      "v": "5 Hits - Critical Hits have a {0}% chance to shrug off one Debuff.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_TENACITY_B",
+      "v": "100 Hits - Critical Hits have a {0}% chance to shrug off one Debuff.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_TRUEACC",
+      "v": "150 Hits - Critical Hits grant {2} seconds of True Accuracy, allowing him to ignore Auto Block and all Evade effects. This stacks up to 3 times.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_TRUEDMG",
+      "v": "300 Hits - Critical Hits deal True Damage",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_UI",
+      "v": "Ægon unlocks additional Passive Abilities as his Combo Meter increases.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_UNBLOCKABLE",
+      "v": "1000 Hits - Critical Hits cause Ægon's next Hit to be Unblockable",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_UNSTOPPABLE_A",
+      "v": "20 Hits - When the Opponent Evades, Ægon activates a Combo Shield for {1} second(s) and has a {0}% chance to become Unstoppable for {2} second(s).",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_UNSTOPPABLE_B",
+      "v": "50 Hits - Charging a Heavy Attack grants Ægon {2} second(s) of Unstoppable. Cannot be activated while his Heavy Attack ability is on cooldown.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_UNSTOPPABLE_C",
+      "v": "750 Hits - Critical Hits grant {2} seconds of Unstoppable and Combo Shield. This stacks up to 3 times.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_FORMAT_AEGON_UNSTOP_A",
+      "v": "30 Hits - When the Opponent Evades, Ægon has a {0}% chance to become Unstoppable for {2} second(s).",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_FORMAT_AFTERSHOCK_DIZZY",
@@ -18199,6 +18533,21 @@
       "vn": 19
     },
     {
+      "k": "ID_UI_STAT_SIGNATURE_AEGON_SHORT",
+      "v": "Relentless Assault {0}",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_AEGON_SIMPLE",
+      "v": "Ægon is able to carry his Combo Meter between fights",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_SIGNATURE_AEGON_TITLE",
+      "v": "RELENTLESS ASSAULT",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_SIGNATURE_AGENTVENOM_DESC",
       "v": "At the beginning of the fight, and whenever Flash loses {0}% of his Max Health, he temporarily loses control of the Venom symbiote, increasing Attack and Critical Damage by [16982bff]{1}%[-]. This effect is lost once he is struck {2} times.",
       "vn": "11.2"
@@ -18668,7 +19017,7 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_CORVUS_SIMPLE",
-      "v": "As long as Glaive’s Immunity is active, Corvus Glaive cannot die. Instead of dying, he activates a Fury Buff.",
+      "v": "As long as Glaive’s Immunity is active, Corvus Glaive cannot die.",
       "vn": "17.2"
     },
     {
@@ -19040,7 +19389,8 @@
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_DRONE_COSMIC_DESC",
-      "v": "This Ultron Drone emits radiation, causing a [16982bff]{0}%[-] chance to Poison the target upon contact, reducing their Health recovery by 50% and dealing [16982bff]{1}%[-] Attack as direct damage over [16982bff]{2}[-] seconds."
+      "v": "This Ultron Drone emits radiation, causing a [16982bff]{0}%[-] chance to Poison the target upon contact, reducing their Health recovery by 30% and dealing [16982bff]{1}[-] Attack as direct damage over [16982bff]{2}[-] seconds.",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_DRONE_COSMIC_DESC2",
@@ -22160,6 +22510,181 @@
       "vn": "20.1"
     },
     {
+      "k": "ID_UI_STAT_TAUNT_TITLE",
+      "v": "[b4b4b4ff]Taunt[-]",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_LA_01",
+      "v": "Activates True Accuracy for {2} seconds if intercepting the opponent’s Dash Attack, allowing him to ignore Auto Block and all Evade effects.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_LA_02",
+      "v": "Deal an additional [16982bff]{1}[-] Energy Damage.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_LA_03",
+      "v": "When The Champion has at least one active Fury Buff, he is Unstoppable while using a Light Attack.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_MA_01",
+      "v": "Inflicts an Armor Break if intercepting the opponent’s Dash Attack, reducing Armor Rating by [16982bff]{1}[-] for {2} seconds.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_MA_02",
+      "v": "While Armor Shattered is active, opponents cannot suffer Armor Breaks nor activate their Armor Buffs. Additionally, this Debuff shatters Robot Champion’s systems, reducing their Ability Accuracy and Power Gain by 100%.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_MA_03",
+      "v": "When The Champion has at least one active Fury Buff, he is Unstoppable while using a Medium Attack.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_PC_01",
+      "v": "The Champion channels The Power Primordial, the residual energy left over from the Big Bang, to enhance his physical form and gain up to [37bfff]{1}[-] Persistent Charges.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_PC_02",
+      "v": "Every {0} seconds, The Champion gains [37bfff]1[-] Persistent Charge and activates Fury Buffs equal to his Persistent Charge, each granting him [16982bff]+{1}[-] Attack Rating for {2} seconds.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_PC_03",
+      "v": "[37bfff]{1}[-] Persistent Charge(s) are lost for every {2} hits in the opponent’s Combo Meter and when the opponents uses Nullify to remove any of his Fury Buffs.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_PC_HUD",
+      "v": "PRIMAL FURY",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_P_01",
+      "v": "The Champion always seeks to fight against the [64acff]Greatest Fighters[-] in the universe. While fighting them, he gains Persistent Charges {0}% faster and increases the Duration and Ability Accuracy of all of his Buffs by a flat +{1}%.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_P_02",
+      "v": "[64acff]Contest’s Greatest Fighters:[-] Star-lord, Spider-Man (Stark Enhanced), Corvus Glaive, Hyperion, Iceman, Archangel, Blade, Gwenpool, Void, Hulk (Ragnarok), Magik, Ghost Rider.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_01",
+      "v": "While on a Boss Node and at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-], regenerates Health and activates an Unstoppable Buff, shrugging off the impact of the opponent’s Basic Attacks.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_01_B",
+      "v": "While on a Boss Node and at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-], regenerates Health. Additionally, he activates an Unstoppable Buff when he has {2} or more active Fury Buffs, shrugging off the impact of the opponent’s Basic Attacks.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_01_C",
+      "v": "When at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-], and activates an Unstoppable Buff, shrugging off the impact of the opponent’s Basic Attacks.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_01_D",
+      "v": "When at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-]. Additionally, he activates an Unstoppable Buff when he has {2} or more active Fury Buffs, shrugging off the impact of the opponent’s Basic Attacks.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_02",
+      "v": "For each active Fury Buff, The Champion regenerates [16982bff]{1}%[-] of the damage taken this fight per second.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_02_B",
+      "v": "When below {0}% Health, The Champion regenerates [16982bff]{1}%[-] of the damage taken this fight for each active Fury Buff per second.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_02_C",
+      "v": "For each active Fury Buff, The Champion regenerates [16982bff]{1}%[-] of the damage taken by Basic Attacks this fight per second.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_02_D",
+      "v": "While attacking or defending on the final node in a Quest, The Champion is immune to Fate Seal, Heal Block, and Petrify effects. Also, for each active Fury Buff, he regenerates [16982bff]{1}%[-] of the damage taken this fight per second.  ",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_03",
+      "v": "The Champion is immune to Fate Seal, Heal Block, Petrify and Heal Reversal.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_SHORT",
+      "v": "Primal Fury {0}",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_SIMPLE",
+      "v": "The Champion unleashes the full potential of The Power Primordial to enhance his Armor Break, regenerate Health and become Unstoppable.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SIG_TITLE",
+      "v": "PRIMAL FURY",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SP",
+      "v": "When The Champion has {0} or more Persistent Charges, he spends one to activate a Regeneration Buff, regenerating [16982bff]{1}[-] Health over {2} seconds.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SP1_01",
+      "v": "Spends {0} Persistent Charge(s) if hitting the opponent, granting [16982bff]+{1}[-] Critical Rating for this attack.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SP1_02",
+      "v": "Taunts the opponent for {2} seconds.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SP2_01",
+      "v": "Spends {0} Persistent Charge(s) to activate a Fury Buff, granting [16982bff]+{1}[-] Attack Rating for {2} seconds. This Fury also counts towards The Champion’s Primal Fury Signature Ability.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SP3_01",
+      "v": "[16982bff]+{1}[-] Attack Rating for each Persistent Charge.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_SP3_02",
+      "v": "Knocking out the opponent with this Special Attack grants The Champion [37bfff]2[-] Persistent Charge(s), otherwise it grants [37bfff]1[-] Persistent Charge instead.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_STUNONBOSS_01",
+      "v": "When at least one of his Fury Buffs is active, The Champion has a {0}% chance to inflict Stun for {1} second when making contact with his attacks.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_UNIVERSE_HUD",
+      "v": "CHAMPION OF THE UNIVERSE",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_UNIVERSE_HUD_PAUSE",
+      "v": "[b4b4b4ff]Champion of the Universe[-]",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_STAT_THECHAMP_UNIVERSE_HUD_PAUSE_LONG",
+      "v": "The Champion considers the current opponent to be one of the Greatest Fighters in the universe, activating several additional bonuses.",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_STAT_TOXICARMOR_HUD",
       "v": "TOXIC ARMOR",
       "vn": "20.1"
@@ -22173,6 +22698,11 @@
       "k": "ID_UI_STAT_UNBLCK_ARMUP_BELOWHP",
       "v": "While the opponent is below {1}% health, these attacks are Unblockable and cannot trigger opponent Armor Up effects.",
       "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_STAT_UNSTOPPBA_PAUSE_LONG",
+      "v": "Won't react when struck by a Basic Attack. Still receives any damage dealt.",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_VENOMNEW_BUFFDMG",
@@ -22191,8 +22721,8 @@
     },
     {
       "k": "ID_UI_STAT_VENOMNEW_KLY_ATK",
-      "v": "Venom’s Klyntar Mutation Buff provides +[16982bff]{1}[-] Attack and gains additional properties based on Venom’s opponent.",
-      "vn": "20.1"
+      "v": "Venom’s Klyntar Mutation Buff provides [16982bff]+{1}[-] Attack and gains additional properties based on Venom’s opponent.",
+      "vn": 21
     },
     {
       "k": "ID_UI_STAT_VENOMNEW_KLY_BLD",
@@ -22323,6 +22853,66 @@
       "k": "ID_UI_STAT_VENTHEDUCK_STOREBANK",
       "v": "All Symbiote Buffs stored in the [37bfff]RNA Bank[-] are activated.",
       "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_SYNG_S1_SHORT",
+      "v": "[64acff]Luke Cage:[-] Debuffs inflicted by his attacks last {0}% longer.\n[64acff]The Champion:[-] Activates Combo Shield for 5 seconds when he would lose his Combo Meter. This ability can activate 3 times.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_SYNG_S1_TITLE",
+      "v": "Synergy 01",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_SYNG_S2_SHORT",
+      "v": "[64acff]The Champion, Hulk, She-Hulk:[-] +{0}% Potency to Fury effects.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_SYNG_S2_TITLE",
+      "v": "Synergy 02",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_SYNG_S3_SHORT",
+      "v": "[64acff]Mephisto:[-] +{0}% Attack Rating when fighting against Cosmic Champions.\n[64acff]The Champion:[-] When awakened, The Champion can activate his Regeneration Buff when going against Mini-Boss and Boss Champions in a Quest.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_SYNG_S3_TITLE",
+      "v": "Synergy 03",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_THECHAMP_SYNG_S1_SHORT",
+      "v": "[64acff]The Champion:[-] The Champion is Unstoppable when using a Light and Medium Attack.\n[64acff]Luke Cage:[-] +{0}% chance to inflict Debuffs as long as Luke Cage never dashes back in a fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_THECHAMP_SYNG_S1_TITLE",
+      "v": "Tough Brawlers",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_THECHAMP_SYNG_S2_SHORT",
+      "v": "[64acff]The Champion:[-] When The Champion has 3 or more Persistent Charges, he starts the fight with an Indestructible Buff, ignoring all incoming damage for 8 seconds.\n[64acff]Mephisto:[-] +{0}% Attack Rating for each Persistent Charge.\n[64acff]Sentry:[-] +12% Attack Rating for each Reality Warp.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_THECHAMP_SYNG_S2_TITLE",
+      "v": "Persistent Force",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_THECHAMP_SYNG_S3_SHORT",
+      "v": "[64acff]The Champion:[-] Gains a Persistent Charge for every {0} hits in his Combo Meter.\n[64acff]Thor (Ragnarok):[-] +0.8% Attack Rating per hit in the Combo Meter. Max: 100 hits.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate Synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_THECHAMP_SYNG_S3_TITLE",
+      "v": "Combo Fighter",
+      "vn": 21
     },
     {
       "k": "ID_UI_WASP_COUNTER_STING_PAUSE",

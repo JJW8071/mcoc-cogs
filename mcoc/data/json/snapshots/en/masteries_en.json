@@ -1,14 +1,14 @@
 {
     "meta": {
     "format": "sparx",
-    "hash": "57bc24af0b36fb8530f6c4ca2a848f0d16c8eb39",
+    "hash": "5b3972c277a41686a0bd9e5c5128878d1ac3b63d",
     "language": "en",
-    "string_count": 137,
+    "string_count": 138,
     "tagged": [
       "masteries",
       "client"
     ],
-    "ts": 1488833790
+    "ts": 1537812580
     },
     "strings": [
         {
@@ -368,6 +368,11 @@
             "v": "OFFENSE ({0})"
         },
         {
+      "k": "ID_UI_MASTERIES_PROFICIENCIES_FORMAT",
+      "v": "PROFICIENCIES ({0})",
+      "vn": 21
+    },
+    {
             "k": "ID_UI_MASTERIES_PT",
             "v": "MASTERY POINT"
         },

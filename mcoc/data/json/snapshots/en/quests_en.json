@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "206a7b011d026c673383993b72b3d5e1c71debc2",
+    "hash": "70784c21212f51835ac097b628c7ef2cde0bc9ad",
     "language": "en",
     "post_processed": true,
-    "string_count": 300,
+    "string_count": 309,
     "tagged": [
       "quests",
       "client"
     ],
-    "ts": 1513800665,
-    "versionLock": "17.1"
+    "ts": 1534453486,
+    "versionLock": "20.1"
   },
   "strings": [
     {
@@ -794,6 +794,11 @@
       "v": "OPEN GATE"
     },
     {
+      "k": "ID_UI_QUEST_GATE_RESOURCES_NEEDED",
+      "v": "RESOURCES NEEDED",
+      "vn": 19
+    },
+    {
       "k": "ID_UI_QUEST_GATE_TIMEOUT_REFUND",
       "v": "Any items spent to open gates will be refunded to your inventory.",
       "vn": 15
@@ -919,6 +924,11 @@
       "vn": "16.1"
     },
     {
+      "k": "ID_UI_RANDOM_BUFFS_DESC",
+      "v": "The Buff Randomizer item is only available in this quest. Use it now to try and gain an advantage over the enemy!",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_RANDOM_BUFFS_LOCKED_TOOLTIP",
       "v": "This random buff is locked and can not be rerolled.",
       "vn": "16.1"
@@ -942,6 +952,41 @@
       "k": "ID_UI_RANDOM_BUFFS_TOOLTIP",
       "v": "Enemy buffs are completely randomized in this event only!",
       "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_FORMATTER_DISCLUDE",
+      "v": "[EE0000]-{0}[-]",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_FORMATTER_INCLUDE",
+      "v": "+{0}",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_FORMATTER_INCLUDE_FIRST",
+      "v": "{0}",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_OR",
+      "v": "\nOR\n",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_TOOLTIP_REQUIREMENTS_HEADER",
+      "v": "CHAMPION REQUIREMENTS",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_TOOLTIP_SUBTITLE",
+      "v": "Only Champions which fulfill certain requirements can be used.",
+      "vn": 20
+    },
+    {
+      "k": "ID_UI_RESTRICTIONS_TOOLTIP_TITLE",
+      "v": "QUEST RESTRICTION",
+      "vn": 20
     },
     {
       "k": "ID_UI_REWARDS_CHESTS_OPENED",

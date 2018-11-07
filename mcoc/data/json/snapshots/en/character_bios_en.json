@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "4b4e6b558b1ab3c61800cf9c3f2a96aaa8b3e4d1",
+    "hash": "b20221af509708b8c2a54e9100613c3a4c8327a1",
     "language": "en",
-    "string_count": 149,
+    "string_count": 150,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1537914713
+    "ts": 1538506327
   },
   "strings": [
     {
@@ -101,6 +101,11 @@
       "k": "ID_CHARACTER_BIOS_CARNAGE",
       "v": "Cletus Kasady was a serial killer from Brooklyn; psychotic and depraved from an early age. As a cellmate of Eddie Brock’s, he bonded with a spawn of the Venom Symbiote during a prison break, and merged into a single twisted being. Kasady and the Symbiote would go on a killing spree, earning them their name: Carnage. With the Symbiote amplifying Kasady’s psychotic tendencies, there’s no telling how deep their acts of depravity will plunge.",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_CHAMPION",
+      "v": "As an Elders of the Universe member, The Champion is able to control an energy source referred to as the Power Primordial, the residual energy that is left over from the Big Bang itself. He channels this energy to enhance his physical form, and he seeks out the greatest fighters in the universe to test the limits of his powers.",
+      "vn": 21
     },
     {
       "k": "ID_CHARACTER_BIOS_CIVILWARRIOR",

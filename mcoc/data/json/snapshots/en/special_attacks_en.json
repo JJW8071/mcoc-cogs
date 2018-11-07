@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "209c8be38e5d3fe6312c3a60a1a04ba6e13ca45d",
+    "hash": "907ad9bf3537c29fd792108660feef602d58d717",
     "language": "en",
-    "string_count": 886,
+    "string_count": 892,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1537908934
+    "ts": 1539217555
   },
   "strings": [
     {
@@ -253,6 +253,21 @@
       "k": "ID_SPECIAL_ATTACK_CARNAGE_2",
       "v": "Aberrant Soul",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CHAMPION_0",
+      "v": "Judo Chop",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CHAMPION_1",
+      "v": "Missile Dropkick",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CHAMPION_2",
+      "v": "Champion's Press Backbreaker ",
+      "vn": 21
     },
     {
       "k": "ID_SPECIAL_ATTACK_CIVILWARRIOR_0",
@@ -648,7 +663,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_0",
-      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him to take the time to revel in the carnage he creates.",
+      "v": "Carnage hurls himself at his opponent rending with limbs, and tentacles alike.",
       "vn": 20
     },
     {
@@ -658,8 +673,23 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_2",
-      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him take the time to revel in the carnage he creates.",
+      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him to take the time to revel in the carnage he creates.",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CHAMPION_0",
+      "v": "The Champion paralyzes the opponent with a knife-hand-chop combo then finishes them with a powerful skullet hit.",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CHAMPION_1",
+      "v": "The Champion channels the Power Primordial into his legs to unleash a flurry of powered-up kicks, inflicting critical blows onto the opponent.",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CHAMPION_2",
+      "v": "The Champion strikes the opponent with a flurry of combos powered up by the Power Primordial, finishing them with a decisive blow to their back.",
+      "vn": 21
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CIVILWARRIOR_0",

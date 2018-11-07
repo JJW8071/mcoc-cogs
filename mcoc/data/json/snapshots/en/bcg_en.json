@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "95e800f6a097280584261964384b72ba54f3627e",
+    "hash": "8c560559186657582e9224171257d95dd2359c50",
     "language": "en",
     "post_processed": true,
-    "string_count": 916,
+    "string_count": 925,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1537309360,
-    "versionLock": "20.1"
+    "ts": 1539125495,
+    "versionLock": "21.0"
   },
   "strings": [
     {
@@ -1141,6 +1141,21 @@
       "v": "SPECIAL ATTACKS"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_AEGCHAMP",
+      "v": "DAVID AND GOLIATH",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_AEGCOMBO",
+      "v": "COMBO BREAKERS",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_AEGCOSMIC",
+      "v": "WARRIORS OF THE STARS",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_AIM",
       "v": "ADVANCED IDEA MECHANICS",
       "vn": "16.1"
@@ -1410,6 +1425,26 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ABILITYPOWERBWQ",
       "v": "Quake and Black Widow gain +{0}% Ability Accuracy, Duration and Potency"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGCHAMP",
+      "v": "[64acff]Ægon:[-] Ægon gets [16982bff]+{0}%[-] Attack Rating while fighting larger Champions.\n[64acff]The Champion:[-] The Champion gets [16982bff]+{0}%[-] Attack Rating while fighting smaller Champions\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGCOMBO",
+      "v": "[64acff]Ægon, Proxima Midnight, Star-Lord:[-] Activates Combo Shield for {0} seconds when this Champion would lose their Combo Meter. This ability activates only 1 time per fight.\\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGCOSMIC",
+      "v": "[64acff]Ægon, Angela, Proxima Midnight, Captain Marvel:[-] +{0}% Potency to Fury effects.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGSENTRY",
+      "v": "[64acff]Ægon:[-] Well-Timed Blocks guarantee Ægon's next hit will be a Critical Hit.\n[64acff]Sentry:[-] +{0} Critical Rate and Critical Damage Rate for each Reality Warp.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ANCIENTHUNGER",
@@ -2309,7 +2344,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PACTWDEMON_LONG",
-      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange:[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider:[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {
@@ -3341,6 +3376,11 @@
     {
       "k": "ID_UI_PROFILE_TITLE",
       "v": "SUMMONER PROFILE"
+    },
+    {
+      "k": "ID_UI_PROFILE_TOPHERO",
+      "v": "TOP CHAMPION",
+      "vn": 21
     },
     {
       "k": "ID_UI_PROFILE_TOPHEROS",
