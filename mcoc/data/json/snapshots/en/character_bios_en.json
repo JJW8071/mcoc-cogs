@@ -1,20 +1,22 @@
 {
-  "meta": {
-    "format": "sparx",
-    "hash": "b20221af509708b8c2a54e9100613c3a4c8327a1",
-    "language": "en",
-    "string_count": 150,
-    "tagged": [
-      "character_bios",
-      "client"
-    ],
-    "ts": 1538506327
-  },
-  "strings": [
-    {
-      "k": "ID_CHARACER_BIOS_BLADE",
-      "v": "When Eric Brooks' mother was killed during his birth by a bloodthirsty vampire, the newborn Brooks' blood was infused with vampiric enzymes.This event turned him into a Dhampir, a hybrid human/vampire, possessing the powers of a vampire like immortality, but none of their weaknesses. Eventually becoming known as Blade, he has the ability to sense supernatural phenomenon, enabling him to identify Dimensional Beings and quickly react to incoming threats, making him effective at hunting the most powerful beings in the Battlerealm.",
-      "vn": "15.1"
+    "meta": {
+        "format": "sparx",
+        "hash": "d90e928ef293f4d913aa1a777fe4c9890c33a8e9",
+        "language": "en",
+        "post_processed": true,
+        "string_count": 151,
+        "tagged": [
+            "character_bios",
+            "client"
+        ],
+        "ts": 1539643497,
+        "versionLock": "21.0"
+    },
+    "strings": [
+        {
+            "k": "ID_CHARACER_BIOS_BLADE",
+            "v": "When Eric Brooks' mother was killed during his birth by a bloodthirsty vampire, the newborn Brooks' blood was infused with vampiric enzymes.This event turned him into a Dhampir, a hybrid human/vampire, possessing the powers of a vampire like immortality, but none of their weaknesses. Eventually becoming known as Blade, he has the ability to sense supernatural phenomenon, enabling him to identify Dimensional Beings and quickly react to incoming threats, making him effective at hunting the most powerful beings in the Battlerealm.",
+            "vn": "15.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_REDSKULL",

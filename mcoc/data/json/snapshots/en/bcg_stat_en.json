@@ -1,21 +1,21 @@
 {
-  "meta": {
-    "format": "sparx",
-    "hash": "c2ca06ecbba34593bc40dba87096a446220dc203",
-    "language": "en",
-    "post_processed": true,
-    "string_count": 5103,
-    "tagged": [
-      "bcg_stat",
-      "client"
-    ],
-    "ts": 1539384743,
-    "versionLock": "21.0"
-  },
-  "strings": [
-    {
-      "k": "ID_ABTH50D",
-      "v": "Special Attack 2 is unblockable and has increased damage.",
+    "meta": {
+        "format": "sparx",
+        "hash": "d339aedbc7e1a421c6f09ce1ccb38ba2ee834788",
+        "language": "en",
+        "post_processed": true,
+        "string_count": 5292,
+        "tagged": [
+            "bcg_stat",
+            "client"
+        ],
+        "ts": 1541786119,
+        "versionLock": "21.0"
+    },
+    "strings": [
+        {
+            "k": "ID_ABTH50D",
+            "v": "Special Attack 2 is unblockable and has increased damage.",
       "vn": 19
     },
     {
@@ -459,19 +459,19 @@
       "vn": 19
     },
     {
-      "k": "ID_BLTY81T",
-      "v": "[b4b4b4ff]Bleed Immunity[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_BODS221D",
-      "v": "Generates Power over time. Ends of Thor is knocked down by a Special Attack.",
-      "vn": 19
-    },
-    {
-      "k": "ID_BODS221T",
-      "v": "[b4b4b4ff]Boon of the Gods[-]",
-      "vn": 19
+            "k": "ID_BLTY81T",
+            "v": "[b4b4b4ff]Bleed Immunity[-]",
+            "vn": 19
+        },
+        {
+            "k": "ID_BODS221D",
+            "v": "Generates Power over time. Ends if Thor is knocked down by a Special Attack.",
+            "vn": 19
+        },
+        {
+            "k": "ID_BODS221T",
+            "v": "[b4b4b4ff]Boon of the Gods[-]",
+            "vn": 19
     },
     {
       "k": "ID_BOON78D",
@@ -544,19 +544,19 @@
       "vn": 19
     },
     {
-      "k": "ID_CAPS74T",
-      "v": "[b4b4b4ff]Caltrops[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_CHARACTER_BIOS_AEGON",
-      "v": "Born to a pacifist race forced into slavery by the Master of the first Contest of Champions, Ægon always defied the strict code of nonviolence amongst his kin. He secretly trained as a gladiator, inspired by love and duty to win the Contest and free his people. Against all odds, he fought his way to the final battle against the Master. Ægon was victorious, but the Master's death caused an explosion, taking Ægon's arm, and the life of his beloved. His tragedy was complete when his own people cast him out as a pariah and left him behind in the Battlerealm. As Champion of the Contest, Ægon’s prize was the Iso-Belt, a powerful artifact that grants him the ability to manifest a phantom limb, and other willpower constructs, to replace his missing arm. However, the full extent of the belt's powers are still unknown.",
-      "vn": 21
-    },
-    {
-      "k": "ID_CHARACTER_BIOS_EMMAFROST",
-      "v": "Emma Frost is an incredibly powerful mutant, with a brilliant mind to match. She possesses staggering telepathic abilities, and is able to transform her body into organic diamond, rendering her almost indestructible. From White Queen of the Hellfire Club, to leader of the X-Men, she handles every challenge with grace, poise, and wit as sharp as diamond.",
-      "vn": 20
+            "k": "ID_CAPS74T",
+            "v": "[b4b4b4ff]Caltrops[-]",
+            "vn": 19
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_AEGON",
+            "v": "Born to a pacifist race forced into slavery by the Master of the first Contest of Champions, Ægon always defied the strict code of nonviolence amongst his kin. He secretly trained as a gladiator, inspired by love and duty to win the Contest and free his people. Against all odds, he fought his way to the final battle against the Master. Ægon was victorious, but the battle cost him his arm, and the life of his beloved. His tragedy was complete when his own people cast him out as a pariah and left him behind in the Battlerealm. As Champion of the Contest, Ægon’s prize was the Iso-Belt, a powerful artifact that grants him the ability to manifest a phantom limb, and other willpower constructs, to replace his missing arm. However, the full extent of the belt's powers are still unknown.",
+            "vn": 21
+        },
+        {
+            "k": "ID_CHARACTER_BIOS_EMMAFROST",
+            "v": "Emma Frost is an incredibly powerful mutant, with a brilliant mind to match. She possesses staggering telepathic abilities, and is able to transform her body into organic diamond, rendering her almost indestructible. From White Queen of the Hellfire Club, to leader of the X-Men, she handles every challenge with grace, poise, and wit as sharp as diamond.",
+            "vn": 20
     },
     {
       "k": "ID_CHARACTER_BIOS_GHOST",
@@ -2574,20 +2574,19 @@
       "vn": 19
     },
     {
-      "k": "ID_POTY38T",
-      "v": "[b4b4b4ff]Poison Immunity[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_POVE78D",
-      "v": "A portion of the Power spent to activate a Special Attack is recuperated.",
-      "vn": 19
-    },
-    {
-      "k": "ID_POVE78T",
-      "v": "[b4b4b4ff]Power Reserve[-]",
-      "vn": 19
-    },
+            "k": "ID_POTY38T",
+            "v": "[b4b4b4ff]Poison Immunity[-]",
+            "vn": 19
+        },
+        {
+            "k": "ID_POVE78D",
+            "v": "Special Attacks cost less Power."
+        },
+        {
+            "k": "ID_POVE78T",
+            "v": "[b4b4b4ff]Power Reserve[-]",
+            "vn": 19
+        },
     {
       "k": "ID_PRED88D",
       "v": "This Champion must wait for the Protection ability to activate.",
@@ -15409,24 +15408,24 @@
       "vn": 21
     },
     {
-      "k": "ID_UI_STAT_FORMAT_AEGON_PHYSRES",
-      "v": "200 Hits - Critical Hits ignore {1}% of the Opponent's Physical Resistance",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_AEGON_SIG_A",
-      "v": "At the end of the fight, Ægon adds [16982bff]{1}%[-] of his final Combo Meter into his Persistent Combo, up to 999 hits total. Ægon's abilities that count the Combo Meter add his Persistent Combo on top of it.",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_AEGON_SIG_B",
-      "v": "Storing new Persistent Combo replaces the Persistent Combo from the previous fight",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_AEGON_SIG_C",
-      "v": "When this Signature Ability is at its highest level, Ægon counts both his Combo Meter and his previous Persistent Combo before storing new Persistent Combo.",
-      "vn": 21
+            "k": "ID_UI_STAT_FORMAT_AEGON_PHYSRES",
+            "v": "200 Hits - Critical Hits ignore {1}% of the Opponent's Physical Resistance",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_AEGON_SIG_A",
+            "v": "At the end of the fight, Ægon adds [16982bff]{1}%[-] of his final Combo Meter into his [37bfff]Persistent Combo[-], up to 999 hits total. Ægon's abilities that count the Combo Meter add his Persistent Combo on top of it.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_AEGON_SIG_B",
+            "v": "If Persistent Combo is greater than 99, it displays 10% of its value.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_AEGON_SIG_C",
+            "v": "When this Signature Ability is at its highest level, Ægon counts both his Combo Meter and his previous Persistent Combo before storing new Persistent Combo.",
+            "vn": 21
     },
     {
       "k": "ID_UI_STAT_FORMAT_AEGON_SP2",
@@ -16565,20 +16564,19 @@
       "vn": 15
     },
     {
-      "k": "ID_UI_STAT_FORMAT_MEDUSA_SIGNATURE_LONG_2",
-      "v": "Block Proficiency is increased by up to {1}% when she has 3 or more Fury Buffs.",
-      "vn": 15
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_MEDUSA_SIGNATURE_LONG_3",
-      "v": "When struck twice, Medusa has a [16982bff]{0}%[-] chance to Auto Block with her hair, breaking the opponent’s combo, for the cost of {2} Fury Buffs. This can trigger Parry.",
-      "vn": 15
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_MEDUSA_SP1",
-      "v": "Medusa inflicts a 4-hit combo, each breaking the opponent’s Armor and reducing their Armor Rating by [16982bff]{1}[-] per stack for {2} seconds.",
-      "vn": 15
-    },
+            "k": "ID_UI_STAT_FORMAT_MEDUSA_SIGNATURE_LONG_2",
+            "v": "Block Proficiency is increased by up to {1}% when she has 3 or more Fury Buffs.",
+            "vn": 15
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_MEDUSA_SIGNATURE_LONG_3",
+            "v": "When struck twice, Medusa has a [16982bff]{0}%[-] chance to Auto Block with her hair, Purifying any Stun Debuffs, for the cost of {2} Fury Buffs. This can trigger Parry."
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_MEDUSA_SP1",
+            "v": "Medusa inflicts a 4-hit combo, each breaking the opponent’s Armor and reducing their Armor Rating by [16982bff]{1}[-] per stack for {2} seconds.",
+            "vn": 15
+        },
     {
       "k": "ID_UI_STAT_FORMAT_MEDUSA_SP2",
       "v": "Medusa performs a 10-hit combo, each hit has a {0}% chance to inflict Bleed if Armor Shattered is active, dealing [16982bff]{1}[-] Direct Damage over {2} seconds.",
@@ -16664,19 +16662,19 @@
       "vn": "15.1"
     },
     {
-      "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP3",
-      "v": "Once a fight, Mephisto instantly drains up to {2} Power Bars from the opponent. If the maximum amount is drained, Mephisto activates his Aura of Incineration for the rest of the fight.",
-      "vn": "15.1"
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD",
-      "v": "The Death Field causes Death Spores on nearby opponents to Passively Degenerate them, dealing [16982bff]{1}[-] damage per second for each Death Spore on them. The Death Field is not affected by Ability Accuracy reduction.",
-      "vn": 20
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD_ALT",
-      "v": "The Death Field Passively Degenerates nearby opponents, dealing [16982bff]{1}[-] damage every .5 second(s) for each Death Spore on them. Death Spores do not expire while the opponent is out of range of the Death Factor for as long as the Death Field is active.",
-      "vn": 20
+            "k": "ID_UI_STAT_FORMAT_MEPHISTO_SP3",
+            "v": "Once a fight, Mephisto instantly drains up to {2} Power Bars from the opponent. If the maximum amount is drained, Mephisto activates his Aura of Incineration for the rest of the fight.",
+            "vn": "15.1"
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD",
+            "v": "The Death Field causes Death Spores on nearby opponents to Passively Degenerate them, dealing [16982bff]{1}[-] damage per second for each Death Spore on them. The Death Field is not affected by Ability Accuracy reduction and its damage scales with Base Attack only.",
+            "vn": 20
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD_ALT",
+            "v": "The Death Field Passively Degenerates nearby opponents, dealing [16982bff]{1}[-] damage every .5 second(s) for each Death Spore on them. Death Spores do not expire while the opponent is out of range of the Death Factor for as long as the Death Field is active.",
+            "vn": 20
     },
     {
       "k": "ID_UI_STAT_FORMAT_ORED_DTHFLD_BLD",
@@ -16744,19 +16742,19 @@
       "vn": 20
     },
     {
-      "k": "ID_UI_STAT_FORMAT_ORED_PSNIMN",
-      "v": "Omega Red’s mutant physiology renders him immune to the effects of Poisons and reduces the damage of Bleeds by {1}%.",
-      "vn": 20
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC1",
-      "v": "Death Spores on the opponent deal [16982bff]{1}[-] damage per second.",
-      "vn": 20
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC2",
-      "v": "Omega Red’s Basic Tentacle Hits have a [16982bff]{0}%[-] chance to be Unblockable.",
-      "vn": 20
+            "k": "ID_UI_STAT_FORMAT_ORED_PSNIMN",
+            "v": "Omega Red’s mutant physiology renders him immune to the effects of Poisons and reduces the damage of Bleeds by {1}%.",
+            "vn": 20
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC1",
+            "v": "Death Spores on the opponent deal [16982bff]{1}[-] damage per second. This damage scales with Base Attack only.",
+            "vn": 20
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC2",
+            "v": "Omega Red’s Basic Tentacle Hits have a [16982bff]{0}%[-] chance to be Unblockable.",
+            "vn": 20
     },
     {
       "k": "ID_UI_STAT_FORMAT_ORED_SIG_DESC3",
@@ -16819,19 +16817,19 @@
       "vn": 20
     },
     {
-      "k": "ID_UI_STAT_FORMAT_ORED_TENTCRIT_ALT",
-      "v": "Hits from Omega Red’s Tentacles have [16982bff]+{1}[-] Critical Rating.",
-      "vn": 20
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_ORED_TENTDMG",
-      "v": "Tentacle Hits reduce {1}% of damage inflicted by enemy abilities that deal passive damage when they are struck.",
-      "vn": 20
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_ORED_TENTHIT",
-      "v": "Omega Red’s Basic Tentacle hits reduce the opponents Defensive Ability Accuracy by [16982bff]{1}%[-] for each Death Spore on them for {2} second(s).",
-      "vn": 20
+            "k": "ID_UI_STAT_FORMAT_ORED_TENTCRIT_ALT",
+            "v": "Hits from Omega Red’s Tentacles have [16982bff]+{1}[-] Critical Rating.",
+            "vn": 20
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ORED_TENTDMG",
+            "v": "Tentacle Hits reduce {1}% of damage inflicted by enemy abilities that deal instant passive damage when they are struck.",
+            "vn": 20
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_ORED_TENTHIT",
+            "v": "Omega Red’s Basic Tentacle hits reduce the opponents Defensive Ability Accuracy by [16982bff]{1}%[-] for each Death Spore on them for {2} second(s).",
+            "vn": 20
     },
     {
       "k": "ID_UI_STAT_FORMAT_ORED_TENT_DMG_ALT",
@@ -17117,19 +17115,19 @@
       "v": "[b4b4b4ff]Auto-Block[-]"
     },
     {
-      "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON",
-      "v": "Activates for every {2} hits on the Combo Meter or whenever struck {1} times.",
-      "vn": 16
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON_POWER",
-      "v": "Fills to max Power over {2} seconds. This Power Gain is interrupted If Thor gets knocked down by a Special Attack. Boon of the Gods is not affected by Ability Accuracy and prevents Thor from gaining Power when struck by Special Attacks.",
-      "vn": 16
-    },
-    {
-      "k": "ID_UI_STAT_FORMAT_REDHULK_BLOCK",
-      "v": "Blocking has a {0}% chance to convert Energy Attacks into Heat Charges. All Attacks from Mystic Champions are considered as Energy Attacks towards this ability.",
-      "vn": "16.1"
+            "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON",
+            "v": "Activates for every {2} hits on the Combo Meter or whenever struck {1} times.",
+            "vn": 16
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_RAGTHOR_BOON_POWER",
+            "v": "Fills to max Power over {2} seconds. This Power Gain is interrupted if Thor gets knocked down by a Special Attack. Boon of the Gods is not affected by Ability Accuracy and prevents Thor from gaining Power when struck by Special Attacks.",
+            "vn": 16
+        },
+        {
+            "k": "ID_UI_STAT_FORMAT_REDHULK_BLOCK",
+            "v": "Blocking has a {0}% chance to convert Energy Attacks into Heat Charges. All Attacks from Mystic Champions are considered as Energy Attacks towards this ability.",
+            "vn": "16.1"
     },
     {
       "k": "ID_UI_STAT_FORMAT_REDHULK_HEAT",
@@ -18533,19 +18531,19 @@
       "vn": 19
     },
     {
-      "k": "ID_UI_STAT_SIGNATURE_AEGON_SHORT",
-      "v": "Relentless Assault {0}",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_AEGON_SIMPLE",
-      "v": "Ægon is able to carry his Combo Meter between fights",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_AEGON_TITLE",
-      "v": "RELENTLESS ASSAULT",
-      "vn": 21
+            "k": "ID_UI_STAT_SIGNATURE_AEGON_SHORT",
+            "v": "Relentless Assault {0}",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_AEGON_SIMPLE",
+            "v": "Ægon is able to carry his Combo Meter between fights.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_AEGON_TITLE",
+            "v": "RELENTLESS ASSAULT",
+            "vn": 21
     },
     {
       "k": "ID_UI_STAT_SIGNATURE_AGENTVENOM_DESC",
@@ -20838,23 +20836,23 @@
       "v": "When Nebula is out of Self-Repair charges, she tries to recalibrate her implants to regain a charge.",
       "vn": 13
     },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_NEBULA_TITLE",
-      "v": "CYBERNETIC ENHANCEMENTS",
-      "vn": 13
-    },
-    {
+        {
+            "k": "ID_UI_STAT_SIGNATURE_NEBULA_TITLE",
+            "v": "CYBERNETIC ENHANCEMENTS",
+            "vn": 13
+        },
+        {
       "k": "ID_UI_STAT_SIGNATURE_NEBULA_DESC",
       "v": "When Nebula is out of Self-Repair charges, she tries to recalibrate her implants granting her a {0}% chance to regain a charge every {1} seconds.",
       "vn": 13
     },
     {
-      "k": "ID_UI_STAT_SIGNATURE_NIGHTCRAWLER_DESC",
-      "v": "Nightcrawler’s unique heritage, coupled with his X-Men training allows him to switch combat mode {0} seconds faster. Additionally, anytime he strikes a Deep Wound, he gains [16982bff]{1}%[-] increased Attack for {2} seconds.",
-      "vn": "11.2"
-    },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_NIGHTCRAWLER_DESC_AO",
+            "k": "ID_UI_STAT_SIGNATURE_NIGHTCRAWLER_DESC",
+            "v": "Nightcrawler’s unique heritage, coupled with his X-Men training allows him to switch combat mode {0} seconds faster. Additionally, anytime he strikes a Deep Wound, he gains [16982bff]{1}%[-] increased Attack for {2} seconds.",
+            "vn": "11.2"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_NIGHTCRAWLER_DESC_AO",
       "v": "Nightcrawler’s unique heritage, coupled with his X-Men training allows him to switch combat mode {0} seconds faster. Additionally, anytime he strikes a Deep Wound, he gains [16982bff]{1}[-] increased Attack for {2} seconds.",
       "vn": 12
     },
@@ -20983,19 +20981,19 @@
       "vn": "13.1"
     },
     {
-      "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_TITLE",
-      "v": "RETRIBUTION 2099",
-      "vn": "13.1"
-    },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_PUNISHER_DESC",
-      "v": "Marine Corps. The Vietnam War. The Italian Mafia. Frank Castle has conditioned himself for high pain tolerance, granting him a [16982bff]{0}%[-] chance to endure a lethal blow."
-    },
-    {
-      "k": "ID_UI_STAT_SIGNATURE_PUNISHER_HUD",
-      "v": "ENDURED"
-    },
-    {
+            "k": "ID_UI_STAT_SIGNATURE_PUNISHER2099_TITLE",
+            "v": "RETRIBUTION 2099",
+            "vn": "13.1"
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_PUNISHER_DESC",
+            "v": "Marine Corps. The Vietnam War. The Italian Mafia. Frank Castle has conditioned himself for high pain tolerance, granting him a [16982bff]{0}%[-] chance to trigger an Indestructible Passive that lasts 8 seconds when receiving a lethal blow.  This can only trigger once per fight."
+        },
+        {
+            "k": "ID_UI_STAT_SIGNATURE_PUNISHER_HUD",
+            "v": "ENDURED"
+        },
+        {
       "k": "ID_UI_STAT_SIGNATURE_PUNISHER_SHORT",
       "v": "Defy Pain {0}"
     },
@@ -22585,19 +22583,19 @@
       "vn": 21
     },
     {
-      "k": "ID_UI_STAT_THECHAMP_SIG_01_C",
-      "v": "When at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-], and activates an Unstoppable Buff, shrugging off the impact of the opponent’s Basic Attacks.",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_THECHAMP_SIG_01_D",
-      "v": "When at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-]. Additionally, he activates an Unstoppable Buff when he has {2} or more active Fury Buffs, shrugging off the impact of the opponent’s Basic Attacks.",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_THECHAMP_SIG_02",
-      "v": "For each active Fury Buff, The Champion regenerates [16982bff]{1}%[-] of the damage taken this fight per second.",
-      "vn": 21
+            "k": "ID_UI_STAT_THECHAMP_SIG_01_C",
+            "v": "When at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-], and activates an Unstoppable Buff, shrugging off the impact of the opponent’s Basic Attacks.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_THECHAMP_SIG_01_D",
+            "v": "When at least one of his Fury Buffs is active, The Champion unleashes the full potential of The Power Primordial. This increases the Potency of his Armor Break by [16982bff]{1}%[-]. Additionally, when he activates {2} or more of his Fury Buffs, he becomes Unstoppable, shrugging off the impact of the opponent’s Basic Attacks for {0} seconds.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_THECHAMP_SIG_02",
+            "v": "For each active Fury Buff, The Champion regenerates [16982bff]{1}%[-] of the damage taken this fight per second.",
+            "vn": 21
     },
     {
       "k": "ID_UI_STAT_THECHAMP_SIG_02_B",
@@ -22605,24 +22603,29 @@
       "vn": 21
     },
     {
-      "k": "ID_UI_STAT_THECHAMP_SIG_02_C",
-      "v": "For each active Fury Buff, The Champion regenerates [16982bff]{1}%[-] of the damage taken by Basic Attacks this fight per second.",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_THECHAMP_SIG_02_D",
-      "v": "While attacking or defending on the final node in a Quest, The Champion is immune to Fate Seal, Heal Block, and Petrify effects. Also, for each active Fury Buff, he regenerates [16982bff]{1}%[-] of the damage taken this fight per second.  ",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_THECHAMP_SIG_03",
-      "v": "The Champion is immune to Fate Seal, Heal Block, Petrify and Heal Reversal.",
-      "vn": 21
-    },
-    {
-      "k": "ID_UI_STAT_THECHAMP_SIG_SHORT",
-      "v": "Primal Fury {0}",
-      "vn": 21
+            "k": "ID_UI_STAT_THECHAMP_SIG_02_C",
+            "v": "For each active Fury Buff, The Champion regenerates [16982bff]{1}%[-] of the damage taken by Basic Attacks this fight per second.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_THECHAMP_SIG_02_D",
+            "v": "While attacking or defending on the final node in a Quest, for each active Fury Buff and while his Unstoppable Buff is active, he regenerates [16982bff]{1}%[-] of the damage taken this fight per second, excluding the amount already regenerated by this ability. This ability can regenerate up to a maximum of {2}% Health per second.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_THECHAMP_SIG_03",
+            "v": "The Champion is immune to Fate Seal, Heal Block, Petrify and Heal Reversal.",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_THECHAMP_SIG_03_SUB",
+            "v": "In addition to regenerating Health, The Champion is immune to Fate Seal, Heal Block, Petrify, and any effects that modify Regeneration other than Poison.   ",
+            "vn": 21
+        },
+        {
+            "k": "ID_UI_STAT_THECHAMP_SIG_SHORT",
+            "v": "Primal Fury {0}",
+            "vn": 21
     },
     {
       "k": "ID_UI_STAT_THECHAMP_SIG_SIMPLE",
@@ -23030,40 +23033,38 @@
       "vn": "19.1"
     },
     {
-      "k": "ID_VTHCKD",
-      "v": "Whenever Power is gained, a portion of that Power is drained and Direct Damage is inflicted based on the amount of Power lost.",
-      "vn": "19.1"
-    },
-    {
-      "k": "ID_WAON163D",
-      "v": "As the Moon wanes, Moon Knight has a chance to gain Fury.",
-      "vn": 19
-    },
-    {
-      "k": "ID_WAON163T",
-      "v": "[b4b4b4ff]Waning Moon[-]",
-      "vn": 19
-    },
+            "k": "ID_VTHCKD",
+            "v": "Whenever Power is gained, a portion of that Power is drained and Direct Damage is inflicted based on the amount of Power lost.",
+            "vn": "19.1"
+        },
+        {
+            "k": "ID_WAON163D",
+            "v": "As the moon Wanes, Moon Knight has an increased chance to gain Fury, and a decreased chance to gain Precision."
+        },
+        {
+            "k": "ID_WAON163T",
+            "v": "[b4b4b4ff]Waning Moon[-]",
+            "vn": 19
+        },
     {
       "k": "ID_WAON164D",
       "v": "As the Moon waxes, Moon Knight has a chance to gain Precision.",
       "vn": 19
     },
     {
-      "k": "ID_WAON164T",
-      "v": "[b4b4b4ff]Waxing Moon[-]",
-      "vn": 19
-    },
-    {
-      "k": "ID_WAXN164D",
-      "v": "As the Moon waxes, Moon Knight has a chance to gain Precision.",
-      "vn": "19.1"
-    },
-    {
-      "k": "ID_WAXN164T",
-      "v": "[b4b4b4ff]Waxing Moon[-]",
-      "vn": "19.1"
-    },
+            "k": "ID_WAON164T",
+            "v": "[b4b4b4ff]Waxing Moon[-]",
+            "vn": 19
+        },
+        {
+            "k": "ID_WAXN164D",
+            "v": "As the moon Waxes, Moon Knight has an increased chance to gain Precision, and a decreased chance to gain Fury."
+        },
+        {
+            "k": "ID_WAXN164T",
+            "v": "[b4b4b4ff]Waxing Moon[-]",
+            "vn": "19.1"
+        },
     {
       "k": "ID_WESS99D",
       "v": "Decreases Attack Rating.",

@@ -1,14 +1,14 @@
 {
     "meta": {
-    "format": "sparx",
-    "hash": "5b3972c277a41686a0bd9e5c5128878d1ac3b63d",
-    "language": "en",
-    "string_count": 138,
-    "tagged": [
-      "masteries",
-      "client"
-    ],
-    "ts": 1537812580
+        "format": "sparx",
+        "hash": "5b3972c277a41686a0bd9e5c5128878d1ac3b63d",
+        "language": "en",
+        "string_count": 138,
+        "tagged": [
+            "masteries",
+            "client"
+        ],
+        "ts": 1537812580
     },
     "strings": [
         {
@@ -368,11 +368,11 @@
             "v": "OFFENSE ({0})"
         },
         {
-      "k": "ID_UI_MASTERIES_PROFICIENCIES_FORMAT",
-      "v": "PROFICIENCIES ({0})",
-      "vn": 21
-    },
-    {
+            "k": "ID_UI_MASTERIES_PROFICIENCIES_FORMAT",
+            "v": "PROFICIENCIES ({0})",
+            "vn": 21
+        },
+        {
             "k": "ID_UI_MASTERIES_PT",
             "v": "MASTERY POINT"
         },
@@ -518,7 +518,7 @@
         },
         {
             "k": "ID_UI_MASTERIES_SPEND_FRACTION_FORMAT",
-            "v": "{0} / {1}"
+            "v": "{0}/{1}"
         },
         {
             "k": "ID_UI_MASTERIES_STAY",
