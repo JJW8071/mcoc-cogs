@@ -2635,9 +2635,11 @@ class Champion:
             sigs = load_kabam_json(kabam_bcg_stat_en)
 
         mcocsig = self.mcocsig
+        print(mcocsig)
         title = self._TITLE
+        print(title)
         simple = self._SIMPLE
-        print(self._DESC_LIST)
+        print(simple)
         if isinstance(self._DESC_LIST, list):
             desc = self._DESC_LIST.split(',')
         elif isinstance(self._DESC_LIST, str):
@@ -2645,6 +2647,7 @@ class Champion:
         else:
             desc = ['None Found']
             print('No Sig Description Found')
+        print(self._DESC_LIST)
 
         return dict(title={'k': title, 'v': sigs[title]},
                     simple={'k': simple, 'v': sigs[simple]},
