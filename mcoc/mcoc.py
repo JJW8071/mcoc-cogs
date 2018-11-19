@@ -1208,12 +1208,11 @@ class MCOC(ChampionFactory):
     @champ.command(pass_context=True, name='released', aliases=('odds','chances',))
     async def champ_released(self, ctx, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
-        cdt = await self.check_collectordevteam(ctx)
         for champ in champs:
             print('check_release')
-            rstatus = await self.check_release(champ)
+            rstatus = await self.check_release(ctx, champ)
             print(rstatus)
-            if cdt = True or rstatus = True:
+            if rstatus:
                 xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
                 em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
                 em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -2145,14 +2144,14 @@ class MCOC(ChampionFactory):
 
     async def check_collectordevteam(self, ctx):
         author = ctx.message.author.id
-        if author in (148622879817334784, 124984294035816448, 209339409655398400):
+        if author in ('148622879817334784', '124984294035816448', '209339409655398400'):
             print('{} is CollectorDevTeam'.format(author))
             return True
         else:
             print('{} is not CollectorDevTeam'.format(author))
             return False
 
-    async def check_release(self, champ):
+    async def check_release(self, ctx, champ):
         '''Champion Data is under embargo until the Champion Release date'''
         print('initializing release status check')
         try:
@@ -2161,6 +2160,9 @@ class MCOC(ChampionFactory):
             now = datetime.now()
             if rdate <= now:
                 print('rdate <= now')
+                return True
+            elif await self.check_collectordevteam(ctx) = True:
+                print('CollectorDevTeam override.')
                 return True
             else:
                 print('rdate > now')
