@@ -1207,6 +1207,7 @@ class MCOC(ChampionFactory):
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
+        rstatus = self.release_check
         for champ in champs:
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
@@ -2133,6 +2134,20 @@ class MCOC(ChampionFactory):
         authorized = ['215271081517383682','124984400747167744','378035654736609280','260436844515164160']
         serverid = ctx.message.server.id
         return serverid in authorized
+
+    async def release_check(self, ctx, champ):
+        rdate = Date(champ.released)
+        if isinstance(rdate, datetime.date):
+            print('champ.released is a datetime.date object')
+            now = datetime.datetime.now()
+            if rdate <= now:
+                print('rdate <= now')
+                return True
+            else:
+                print('rdate > now')
+                return False
+
+
 
     async def _process_submission(self, package, GKEY, sheet):
         try:
