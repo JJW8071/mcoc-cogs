@@ -1205,7 +1205,7 @@ class MCOC(ChampionFactory):
         roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
         await roster.display(hargs.tags) #imported from hook
 
-    @champ.command(name='released', aliases=('odds','chances',))
+    @champ.command(pass_context=True, name='released', aliases=('odds','chances',))
     async def champ_released(self, ctx, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
         cdt = await self.check_collectordevteam(ctx)
@@ -1254,14 +1254,7 @@ class MCOC(ChampionFactory):
                 em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
                 await self.bot.say(embed=em)
             else:
-                em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
-                em.description = 'Champion information is under KABAM embargo until release date.  \nCheck back on {}'.format(champ.released)
-                em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
-
-                em.add_field(name='Shortcode', value=champ.short, inline=True)
-                em.set_thumbnail(url=champ.get_featured())
-                em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
-                await self.bot.say(embed=em)
+                await self.champ_embargo(champ)
 
 
 
@@ -2173,6 +2166,16 @@ class MCOC(ChampionFactory):
         except ValueError:
             print('dateParse Failure')
             return False
+
+    async def champ_embargo(self, ctx, champ):
+        em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
+        em.description = 'Champion information is under KABAM embargo until release date.  \nCheck back on {}'.format(champ.released)
+        em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
+
+        em.add_field(name='Shortcode', value=champ.short, inline=True)
+        em.set_thumbnail(url=champ.get_featured())
+        em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
+        await self.bot.say(embed=em)
 
 
 
