@@ -1252,10 +1252,6 @@ class MCOC(ChampionFactory):
                 em.set_thumbnail(url=champ.get_featured())
                 em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
                 await self.bot.say(embed=em)
-            else:
-                await self.champ_embargo(ctx, champ)
-
-
 
     @champ.command(pass_context=True, name='sig', aliases=['signature',])
     async def champ_sig(self, ctx, *, champ : ChampConverterSig):
@@ -2166,13 +2162,15 @@ class MCOC(ChampionFactory):
                 return True
             else:
                 print('rdate > now')
+                await self.champ_embargo(ctx, champ)
                 return False
         except ValueError:
             print('dateParse Failure')
+            await self.champ_embargo(ctx, champ)
             return False
 
     async def champ_embargo(self, ctx, champ):
-        em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
+        em=discord.Embed(color=champ.class_color, title='Information Embargo', url=SPOTLIGHT_DATASET)
         em.description = 'Champion information is under KABAM embargo until release date.  \nCheck back on {}'.format(champ.released)
         em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
 
