@@ -289,6 +289,9 @@ class ChampConverterMult(ChampConverter):
             if token != '':
                 champ = await self.get_champion(bot, token, attrs)
                 dangling_arg = None
+                released = await self.check_release(self.ctx, champ)
+                if released:
+                    syn_champs.append(champ)
                 champs.append(champ)
             else:
                 default.update(attrs)
@@ -1037,20 +1040,24 @@ class MCOC(ChampionFactory):
     async def champ_featured(self, *, champs : ChampConverterMult):
         '''Champion Featured image'''
         for champ in champs:
-            em = discord.Embed(color=champ.class_color, title=champ.full_name)
-            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-            em.set_image(url=champ.get_featured())
-            await self.bot.say(embed=em)
+            released = await self.check_release(ctx, champ)
+            if released:
+                em = discord.Embed(color=champ.class_color, title=champ.full_name)
+                em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+                em.set_image(url=champ.get_featured())
+                await self.bot.say(embed=em)
 
     @champ.command(name='portrait', aliases=['avatar',])
     async def champ_portrait(self, *, champs : ChampConverterMult):
         '''Champion portraits'''
         for champ in champs:
-            em = discord.Embed(color=champ.class_color, title=champ.full_name)
-            em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
-            em.set_image(url=champ.get_avatar())
-            print(champ.get_avatar())
-            await self.bot.say(embed=em)
+            released = await self.check_release(ctx, champ)
+            if released:
+                em = discord.Embed(color=champ.class_color, title=champ.full_name)
+                em.set_author(name=champ.full_name + ' - ' + champ.short, icon_url=champ.get_avatar())
+                em.set_image(url=champ.get_avatar())
+                print(champ.get_avatar())
+                await self.bot.say(embed=em)
 
     @champ.command(name='bio', aliases=('biography',))
     async def champ_bio(self, *, champ : ChampConverterDebug):
@@ -1074,75 +1081,79 @@ class MCOC(ChampionFactory):
     async def champ_duel(self, champ : ChampConverter):
         '''Duel & Spar Targets'''
         #dataset=data_files['duelist']['local']
-        gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-        sh = gc.open_by_key('1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q')
-        ws = sh.worksheet('title', 'DataExport')
-        data = ws.get_all_records()
-        if not len(data):
-            await self.bot.say("Data did not get retrieved")
-            raise IndexError
+        released = await self.check_release(ctx, champ)
+        if released:
+            gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
+            sh = gc.open_by_key('1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q')
+            ws = sh.worksheet('title', 'DataExport')
+            data = ws.get_all_records()
+            if not len(data):
+                await self.bot.say("Data did not get retrieved")
+                raise IndexError
 
-        DUEL_SPREADSHEET='https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/view#gid=61189525'
-        em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets',url=DUEL_SPREADSHEET)
-        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        em.set_thumbnail(url=champ.get_featured())
-        em.set_footer(text='2OO2RC51\' Duel Targets',
-                icon_url=GSHEET_ICON)
+            DUEL_SPREADSHEET='https://docs.google.com/spreadsheets/d/1FZdJPB8sayzrXkE3F2z3b1VzFsNDhh-_Ukl10OXRN6Q/view#gid=61189525'
+            em = discord.Embed(color=champ.class_color, title='Duel & Spar Targets',url=DUEL_SPREADSHEET)
+            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+            em.set_thumbnail(url=champ.get_featured())
+            em.set_footer(text='2OO2RC51\' Duel Targets',
+                    icon_url=GSHEET_ICON)
 
-        targets = []
-        for duel in data:    # single iteration through the data
-            uniq = duel['unique']
-            star, duel_champ, rank = int(uniq[:1]), uniq[2:-2], int(uniq[-1:])
-            if duel_champ == champ.full_name:
-                targets.append('{}{} {} {} : {}'.format(star, champ.star_char,
-                            duel['maxlevel'],
-                            champ.full_name,
-                            duel['username']))
-        targets.sort()
-        #for star in range(3,7):
-            #for rank in range(1,6):
-                #key = '{0}-{1}-{2}'.format(star, champ.full_name, rank)
-                #for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
-                    #targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
-        if len(targets) > 0:
-            em.description='\n'.join(targets)
-        else:
-            em.description='Target not found!\nAdd one to the Community Spreadhseet!\n[bit.ly/DuelTargetForm](http://bit.ly/DuelTargetForm)'
-            em.url='http://bit.ly/DuelTargetForm'
-        em.add_field(name='Shortcode', value=champ.short, inline=False)
-        await self.bot.say(embed=em)
+            targets = []
+            for duel in data:    # single iteration through the data
+                uniq = duel['unique']
+                star, duel_champ, rank = int(uniq[:1]), uniq[2:-2], int(uniq[-1:])
+                if duel_champ == champ.full_name:
+                    targets.append('{}{} {} {} : {}'.format(star, champ.star_char,
+                                duel['maxlevel'],
+                                champ.full_name,
+                                duel['username']))
+            targets.sort()
+            #for star in range(3,7):
+                #for rank in range(1,6):
+                    #key = '{0}-{1}-{2}'.format(star, champ.full_name, rank)
+                    #for data in get_csv_rows(dataset, 'unique', key):#champ.unique):
+                        #targets.append( '{}{} {} {} : {}'.format(star, champ.star_char, data['maxlevel'], champ.full_name, data['username']))
+            if len(targets) > 0:
+                em.description='\n'.join(targets)
+            else:
+                em.description='Target not found!\nAdd one to the Community Spreadhseet!\n[bit.ly/DuelTargetForm](http://bit.ly/DuelTargetForm)'
+                em.url='http://bit.ly/DuelTargetForm'
+            em.add_field(name='Shortcode', value=champ.short, inline=False)
+            await self.bot.say(embed=em)
 
     @champ.command(name='about', aliases=('about_champ',))
     async def champ_about(self, *, champ : ChampConverterRank):
         '''Champion Base Stats'''
-        data = champ.get_spotlight(default='x')
-        title = 'Base Attributes for {}'.format(champ.verbose_str)
-        em = discord.Embed(color=champ.class_color,
-                title='Base Attributes')
-        em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
-        titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
-        keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
-        xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+        released = await self.check_release(ctx, champ)
+        if released:
+            data = champ.get_spotlight(default='x')
+            title = 'Base Attributes for {}'.format(champ.verbose_str)
+            em = discord.Embed(color=champ.class_color,
+                    title='Base Attributes')
+            em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
+            titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor', 'Block Prof')
+            keys = ('health', 'attack', 'critical', 'critdamage', 'armor', 'blockprof')
+            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
 
-        if champ.debug:
-            em.add_field(name='Attrs', value='\n'.join(titles))
-            em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
-            em.add_field(name='Added to PHC', value=xref['4basic'])
-        else:
-            stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
-            em.add_field(name='Base Stats',
-                value=tabulate(stats, width=11, rotate=False, header_sep=False))
-        em = await self.get_synergies([champ], em)
-        if champ.infopage != 'none':
-            em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
-        else:
-            em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
-            em.add_field(name='hashtags',
-                    value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
-        em.add_field(name='Shortcode', value=champ.short)
-        em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
-        em.set_thumbnail(url=champ.get_avatar())
-        await self.bot.say(embed=em)
+            if champ.debug:
+                em.add_field(name='Attrs', value='\n'.join(titles))
+                em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+                em.add_field(name='Added to PHC', value=xref['4basic'])
+            else:
+                stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+                em.add_field(name='Base Stats',
+                    value=tabulate(stats, width=11, rotate=False, header_sep=False))
+            em = await self.get_synergies([champ], em)
+            if champ.infopage != 'none':
+                em.add_field(name='Infopage',value='<{}>'.format(champ.infopage),inline=False)
+            else:
+                em.add_field(name='Infopage',value='No spotlight post from Kabam',inline=False)
+                em.add_field(name='hashtags',
+                        value=chat.box(' '.join(champ.class_tags.union(champ.tags))))
+            em.add_field(name='Shortcode', value=champ.short)
+            em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
+            em.set_thumbnail(url=champ.get_avatar())
+            await self.bot.say(embed=em)
 
     @commands.has_any_role('CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @champ.command(pass_context=True, name='export', hidden=True)
@@ -1199,8 +1210,10 @@ class MCOC(ChampionFactory):
         rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
-            if champ.has_prestige:
-                rlist.append(champ)
+            released = await self.check_release(ctx, champ)
+            if released:
+                if champ.has_prestige:
+                    rlist.append(champ)
         roster.from_list(rlist)
         roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
         await roster.display(hargs.tags) #imported from hook
@@ -1210,9 +1223,8 @@ class MCOC(ChampionFactory):
         '''Champion(s) Release Date'''
         for champ in champs:
             print('check_release')
-            rstatus = await self.check_release(ctx, champ)
-            print(rstatus)
-            if rstatus:
+            released = await self.check_release(ctx, champ)
+            if released:
                 xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
                 em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
                 em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -1256,26 +1268,28 @@ class MCOC(ChampionFactory):
     @champ.command(pass_context=True, name='sig', aliases=['signature',])
     async def champ_sig(self, ctx, *, champ : ChampConverterSig):
         '''Champion Signature Ability'''
-        appinfo = await self.bot.application_info()
-        try:
-            title, desc, sig_calcs = await champ.process_sig_description(
-                    isbotowner=ctx.message.author == appinfo.owner)
-            print(desc)
-        except KeyError:
-            await champ.missing_sig_ad()
-            raise
-            return
-        if title is None:
-            return
-        em = discord.Embed(color=champ.class_color, title='Signature Ability')
-        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        em.add_field(name=title, value=champ.star_str)
-        em.add_field(name='Signature Level {}'.format(champ.sig),
-                value=desc.format(d=sig_calcs))
-        em.add_field(name='Shortcode', value=champ.short)
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        em.set_thumbnail(url=champ.get_avatar())
-        await self.bot.say(embed=em)
+        released = await self.check_release(ctx, champ)
+        if released:
+            appinfo = await self.bot.application_info()
+            try:
+                title, desc, sig_calcs = await champ.process_sig_description(
+                        isbotowner=ctx.message.author == appinfo.owner)
+                print(desc)
+            except KeyError:
+                await champ.missing_sig_ad()
+                raise
+                return
+            if title is None:
+                return
+            em = discord.Embed(color=champ.class_color, title='Signature Ability')
+            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+            em.add_field(name=title, value=champ.star_str)
+            em.add_field(name='Signature Level {}'.format(champ.sig),
+                    value=desc.format(d=sig_calcs))
+            em.add_field(name='Shortcode', value=champ.short)
+            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            em.set_thumbnail(url=champ.get_avatar())
+            await self.bot.say(embed=em)
 
     @champ.command(pass_context=True, name='sigplot', hidden=True)
     async def champ_sigplot(self,ctx,*, champ: ChampConverterSig):
@@ -1305,56 +1319,58 @@ class MCOC(ChampionFactory):
     async def champ_stats(self, *, champs : ChampConverterMult):
         '''Champion(s) Base Stats'''
         for champ in champs:
-            data = champ.get_spotlight(default='x')
-            embeds =[]
-            em = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
-            em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
-            em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
-            titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor Penetration', 'Block Penetration', 'Crit Resistance', 'Armor', 'Block Prof')
-            keys = ('health', 'attack', 'critical', 'critdamage', 'armor_pen', 'block_pen', 'crit_resist', 'armor', 'blockprof')
-            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
-            # if champ.debug:
-            #     em.add_field(name='Attrs', value='\n'.join(titles))
-            #     em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
-            #     em.add_field(name='Added to PHC', value=xref['4basic'])
-            # else:
-            stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
-            em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
-            em.add_field(name='Shortcode',value=champ.short)
-            # em.set_thumbnail(url=champ.get_featured())
-            embeds.append(em)
+            released = await self.check_release(ctx, champ)
+            if released:
+                data = champ.get_spotlight(default='x')
+                embeds =[]
+                em = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
+                em.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
+                em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
+                titles = ('Health', 'Attack', 'Crit Rate', 'Crit Dmg', 'Armor Penetration', 'Block Penetration', 'Crit Resistance', 'Armor', 'Block Prof')
+                keys = ('health', 'attack', 'critical', 'critdamage', 'armor_pen', 'block_pen', 'crit_resist', 'armor', 'blockprof')
+                xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+                # if champ.debug:
+                #     em.add_field(name='Attrs', value='\n'.join(titles))
+                #     em.add_field(name='Values', value='\n'.join([data[k] for k in keys]), inline=True)
+                #     em.add_field(name='Added to PHC', value=xref['4basic'])
+                # else:
+                stats = [[titles[i], data[keys[i]]] for i in range(len(titles))]
+                em.add_field(name='Base Stats', value=tabulate(stats, width=18, rotate=False, header_sep=False), inline=False)
+                em.add_field(name='Shortcode',value=champ.short)
+                # em.set_thumbnail(url=champ.get_featured())
+                embeds.append(em)
 
-            em2 = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
-            em2.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
-            em2.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
-            # em2.set_thumbnail(url=champ.get_featured())
-            flats = []
-            flats.append(data[keys[0]])
-            flats.append(data[keys[1]])
-            if data[keys[2]] == 'x':
-                flats.append('x')
-            else:
-                flats.append('% {}'.format(from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating))))
-            if data[keys[3]] == 'x':
-                flats.append('x')
-            else:
-                critdmg=round(0.5+5*from_flat(int(data[keys[3]].replace(',','')), int(champ.chlgr_rating)),2)
-                flats.append('% {}'.format(critdmg))
-            for k in range(4,len(keys)):
-                if data[keys[k]] == 'x':
+                em2 = discord.Embed(color=champ.class_color, title='Champion Stats',url=SPOTLIGHT_SURVEY)
+                em2.set_author(name=champ.verbose_str, icon_url=champ.get_avatar())
+                em2.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
+                # em2.set_thumbnail(url=champ.get_featured())
+                flats = []
+                flats.append(data[keys[0]])
+                flats.append(data[keys[1]])
+                if data[keys[2]] == 'x':
                     flats.append('x')
                 else:
-                    flats.append('% {}'.format(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))))
-            pcts = [[titles[i], flats[i]] for i in range(len(titles))]
-            em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
-            em2.add_field(name='Shortcode', value=champ.short)
-            embeds.append(em2)
-            try:
-                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-                await menu.menu_start(embeds)                # for page in pages:
-            except:
-                print('PagesMenu failure')
-                await self.bot.say(embed=em)
+                    flats.append('% {}'.format(from_flat(int(data[keys[2]].replace(',','')), int(champ.chlgr_rating))))
+                if data[keys[3]] == 'x':
+                    flats.append('x')
+                else:
+                    critdmg=round(0.5+5*from_flat(int(data[keys[3]].replace(',','')), int(champ.chlgr_rating)),2)
+                    flats.append('% {}'.format(critdmg))
+                for k in range(4,len(keys)):
+                    if data[keys[k]] == 'x':
+                        flats.append('x')
+                    else:
+                        flats.append('% {}'.format(from_flat(int(data[keys[k]].replace(',','')), int(champ.chlgr_rating))))
+                pcts = [[titles[i], flats[i]] for i in range(len(titles))]
+                em2.add_field(name='Base Stats %', value=tabulate(pcts, width=19, rotate=False, header_sep=False), inline=False)
+                em2.add_field(name='Shortcode', value=champ.short)
+                embeds.append(em2)
+                try:
+                    menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                    await menu.menu_start(embeds)                # for page in pages:
+                except:
+                    print('PagesMenu failure')
+                    await self.bot.say(embed=em)
 
     @champ.command(pass_context=True, name='update', aliases=('add', 'dupe'), hidden=True)
     async def champ_update(self, ctx, *, args):
