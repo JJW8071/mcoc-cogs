@@ -1036,8 +1036,8 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @champ.command(name='featured',aliases=['feature',])
-    async def champ_featured(self, *, champs : ChampConverterMult):
+    @champ.command(pass_context=True, name='featured',aliases=['feature',])
+    async def champ_featured(self, ctx, *, champs : ChampConverterMult):
         '''Champion Featured image'''
         for champ in champs:
             released = await self.check_release(ctx, champ)
@@ -1047,8 +1047,8 @@ class MCOC(ChampionFactory):
                 em.set_image(url=champ.get_featured())
                 await self.bot.say(embed=em)
 
-    @champ.command(name='portrait', aliases=['avatar',])
-    async def champ_portrait(self, *, champs : ChampConverterMult):
+    @champ.command(pass_context=True, name='portrait', aliases=['avatar',])
+    async def champ_portrait(self, ctx, *, champs : ChampConverterMult):
         '''Champion portraits'''
         for champ in champs:
             released = await self.check_release(ctx, champ)
@@ -1059,26 +1059,28 @@ class MCOC(ChampionFactory):
                 print(champ.get_avatar())
                 await self.bot.say(embed=em)
 
-    @champ.command(name='bio', aliases=('biography',))
-    async def champ_bio(self, *, champ : ChampConverterDebug):
+    @champ.command(pass_context=True, name='bio', aliases=('biography',))
+    async def champ_bio(self, ctx, *, champ : ChampConverterDebug):
         '''Champio Bio'''
         try:
             bio_desc = await champ.get_bio()
         except KeyError:
             await self.say_user_error("Cannot find bio for Champion '{}'".format(champ.full_name))
             return
-        em = discord.Embed(color=champ.class_color, title='Champion Biography',
-                description=bio_desc)
-        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-        em.add_field(name='hashtags',
-                value=chat.box(' '.join(champ.class_tags.union(champ.tags))),inline=False)
-        em.add_field(name='Shortcode', value=champ.short,inline=False)
-        em.set_thumbnail(url=champ.get_avatar())
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
-        await self.bot.say(embed=em)
+        released = await self.check_release(ctx, champ)
+        if released:
+            em = discord.Embed(color=champ.class_color, title='Champion Biography',
+                    description=bio_desc)
+            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+            em.add_field(name='hashtags',
+                    value=chat.box(' '.join(champ.class_tags.union(champ.tags))),inline=False)
+            em.add_field(name='Shortcode', value=champ.short,inline=False)
+            em.set_thumbnail(url=champ.get_avatar())
+            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            await self.bot.say(embed=em)
 
-    @champ.command(name='duel')
-    async def champ_duel(self, champ : ChampConverter):
+    @champ.command(pass_context=True, name='duel')
+    async def champ_duel(self, ctx, champ : ChampConverter):
         '''Duel & Spar Targets'''
         #dataset=data_files['duelist']['local']
         released = await self.check_release(ctx, champ)
@@ -1121,8 +1123,8 @@ class MCOC(ChampionFactory):
             em.add_field(name='Shortcode', value=champ.short, inline=False)
             await self.bot.say(embed=em)
 
-    @champ.command(name='about', aliases=('about_champ',))
-    async def champ_about(self, *, champ : ChampConverterRank):
+    @champ.command(pass_context=True, name='about', aliases=('about_champ',))
+    async def champ_about(self, ctx, *, champ : ChampConverterRank):
         '''Champion Base Stats'''
         released = await self.check_release(ctx, champ)
         if released:
@@ -1315,8 +1317,8 @@ class MCOC(ChampionFactory):
             print('champ_sigplot nothing happened')
 
 
-    @champ.command(name='stats', aliases=('stat',))
-    async def champ_stats(self, *, champs : ChampConverterMult):
+    @champ.command(pass_context=True, name='stats', aliases=('stat',))
+    async def champ_stats(self, ctx, *, champs : ChampConverterMult):
         '''Champion(s) Base Stats'''
         for champ in champs:
             released = await self.check_release(ctx, champ)
@@ -1636,8 +1638,8 @@ class MCOC(ChampionFactory):
             json.dump(struct, fp, indent='  ', sort_keys=True)
         await self.bot.upload("data/mcoc/gs_json_test.json")
 
-    @champ.command(name='use', aliases=('howto','htf',))
-    async def champ_use(self, *, champs :ChampConverterMult):
+    @champ.command(pass_context=True, name='use', aliases=('howto','htf',))
+    async def champ_use(self, ctx, *, champs :ChampConverterMult):
         '''How to Fight With videos by MCOC Community'''
         for champ in champs:
             # xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
@@ -1650,8 +1652,8 @@ class MCOC(ChampionFactory):
                 await self.bot.say('I got nothing. Send the CollectorDevTeam a good video.\nClick the blue text for a survey link.')
 
 
-    @champ.command(name='info', aliases=('infopage',))
-    async def champ_info(self, *, champ : ChampConverterDebug):
+    @champ.command(pass_context=True, name='info', aliases=('infopage',))
+    async def champ_info(self, ctx, *, champ : ChampConverterDebug):
         '''Champion Spotlight link'''
         xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         em = discord.Embed(color=champ.class_color, title='Champ Info',url=SPOTLIGHT_SURVEY)
@@ -1669,8 +1671,8 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(name='abilities')
-    async def champ_abilities(self, *, champ : ChampConverterDebug):
+    @champ.command(pass_context=True, name='abilities')
+    async def champ_abilities(self, ctx,  *, champ : ChampConverterDebug):
         '''Champion Abilities'''
         xref=get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
         abilities=xref['abilities'].split(', ')
@@ -1718,8 +1720,8 @@ class MCOC(ChampionFactory):
         else:
             await self.bot.say(embed=em)
 
-    @champ.command(name='specials', aliases=['special',])
-    async def champ_specials(self, champ : ChampConverter):
+    @champ.command(pass_context=True, name='specials', aliases=['special',])
+    async def champ_specials(self, ctx, champ : ChampConverter):
         '''Special Attack Descritpion'''
         try:
             specials = champ.get_special_attacks()
@@ -1753,8 +1755,8 @@ class MCOC(ChampionFactory):
     #     em.set_thumbnail(url=champ.get_avatar())
     #     await self.bot.say(embed=em)
 
-    @champ.command(name='prestige')
-    async def champ_prestige(self, *, champs : ChampConverterMult):
+    @champ.command(pass_context=True, name='prestige')
+    async def champ_prestige(self, ctx, *, champs : ChampConverterMult):
         '''Champion(s) Prestige'''
         pch = [c for c in champs if c.has_prestige]
         numerator = 0
@@ -1778,8 +1780,8 @@ class MCOC(ChampionFactory):
             em.set_footer(icon_url=GSHEET_ICON,text='mutamatt Prestige for Collector')
             await self.bot.say(embed=em)
 
-    @champ.command(name='aliases', aliases=('alias',))
-    async def champ_aliases(self, *args):
+    @champ.command(pass_context=True, name='aliases', aliases=('alias',))
+    async def champ_aliases(self, ctx, *args):
         '''Champion Aliases'''
         em = discord.Embed(color=discord.Color.teal(), title='Champion Aliases')
         champs_matched = set()
