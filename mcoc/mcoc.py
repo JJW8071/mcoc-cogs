@@ -1374,7 +1374,12 @@ class MCOC(ChampionFactory):
     @champ.command(name='synergies', aliases=['syn',])
     async def champ_synergies(self, *, champs: ChampConverterMult):
         '''Champion(s) Synergies'''
-        pack = await self.get_synergies(champs)
+        syn_champs = []
+        for champ in champs:
+            released = await self.check_release(champ)
+            if released:
+                syn_champs.append(champ)
+        pack = await self.get_synergies(syn_champs)
         self.set_collectordev_footer(pack)
         menu = PagesMenu(self.bot, timeout=120)
         await menu.menu_start(pack)
