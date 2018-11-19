@@ -2144,7 +2144,7 @@ class MCOC(ChampionFactory):
         try:
             rdate = dateParse(champ.released)
             print('champ.released is a datetime.date object')
-            now = datetime.datetime.now()
+            now = datetime.now()
             if rdate <= now:
                 print('rdate <= now')
                 return True
