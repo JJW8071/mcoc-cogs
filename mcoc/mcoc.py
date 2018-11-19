@@ -1379,10 +1379,13 @@ class MCOC(ChampionFactory):
             released = await self.check_release(ctx, champ)
             if released:
                 syn_champs.append(champ)
-        pack = await self.get_synergies(syn_champs)
-        self.set_collectordev_footer(pack)
-        menu = PagesMenu(self.bot, timeout=120)
-        await menu.menu_start(pack)
+        if len(syn_champs) > 0:
+            pack = await self.get_synergies(syn_champs)
+            self.set_collectordev_footer(pack)
+            menu = PagesMenu(self.bot, timeout=120)
+            await menu.menu_start(pack)
+        else:
+            return
         #await self.bot.say(embed=em)
 
     async def get_synergies(self, champs, embed=None):
@@ -1394,6 +1397,8 @@ class MCOC(ChampionFactory):
             return await self.get_multiple_synergies(champs, syn_data, embed)
         elif len(champs) == 1:
             return await self.get_single_synergies(champs[0], syn_data, embed)
+        else:
+            return
 
     async def get_single_synergies(self, champ, syn_data, embed=None):
         if embed is None:
