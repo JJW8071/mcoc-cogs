@@ -1209,7 +1209,7 @@ class MCOC(ChampionFactory):
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
         for champ in champs:
-            rstatus = self.check_release(ctx, champ)
+            rstatus = self.check_release(champ)
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -2136,7 +2136,7 @@ class MCOC(ChampionFactory):
         serverid = ctx.message.server.id
         return serverid in authorized
 
-    async def check_release(self, ctx, champ):
+    async def check_release(self, champ):
         '''Champion Data is under embargo until the Champion Release date'''
         print('initializing release status check')
         try:
