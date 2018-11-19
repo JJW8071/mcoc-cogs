@@ -1371,8 +1371,8 @@ class MCOC(ChampionFactory):
         except TypeError:
             pack.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
 
-    @champ.command(name='synergies', aliases=['syn',])
-    async def champ_synergies(self, *, champs: ChampConverterMult):
+    @champ.command(pass_context=True, name='synergies', aliases=['syn',])
+    async def champ_synergies(self, ctx, *, champs: ChampConverterMult):
         '''Champion(s) Synergies'''
         syn_champs = []
         for champ in champs:
