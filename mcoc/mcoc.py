@@ -2152,12 +2152,13 @@ class MCOC(ChampionFactory):
         print('initializing release status check')
         try:
             rdate = dateParse(champ.released)
+            cdt = await self.check_collectordevteam(ctx)
             print('champ.released is a datetime.date object')
             now = datetime.now()
             if rdate <= now:
                 print('rdate <= now')
                 return True
-            elif await self.check_collectordevteam(ctx) = True:
+            elif cdt:
                 print('CollectorDevTeam override.')
                 return True
             else:
