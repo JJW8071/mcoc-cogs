@@ -1254,7 +1254,7 @@ class MCOC(ChampionFactory):
                 em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
                 await self.bot.say(embed=em)
             else:
-                await self.champ_embargo(champ)
+                await self.champ_embargo(ctx, champ)
 
 
 
