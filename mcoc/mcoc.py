@@ -1,5 +1,6 @@
 import re
 from datetime import datetime, timedelta
+from dateutil.parser import parse as dateParse
 from textwrap import wrap
 from collections import UserDict, defaultdict, ChainMap, namedtuple, OrderedDict
 from functools import partial
@@ -1207,8 +1208,8 @@ class MCOC(ChampionFactory):
     @champ.command(name='released', aliases=('odds','chances',))
     async def champ_released(self, *, champs : ChampConverterMult):
         '''Champion(s) Release Date'''
-        rstatus = self.release_check
         for champ in champs:
+            rstatus = self.check_release(ctx, champ)
             xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
             em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
@@ -2135,9 +2136,11 @@ class MCOC(ChampionFactory):
         serverid = ctx.message.server.id
         return serverid in authorized
 
-    async def release_check(self, ctx, champ):
-        rdate = Date(champ.released)
-        if isinstance(rdate, datetime.date):
+    async def check_release(self, ctx, champ):
+        '''Champion Data is under embargo until the Champion Release date'''
+        print('initializing release status check')
+        try:
+            rdate = dateParse(champ.released)
             print('champ.released is a datetime.date object')
             now = datetime.datetime.now()
             if rdate <= now:
@@ -2146,6 +2149,9 @@ class MCOC(ChampionFactory):
             else:
                 print('rdate > now')
                 return False
+        except ValueError:
+            print('dateParse Failure')
+            return False
 
 
 
