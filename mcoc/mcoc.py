@@ -1376,7 +1376,7 @@ class MCOC(ChampionFactory):
         '''Champion(s) Synergies'''
         syn_champs = []
         for champ in champs:
-            released = await self.check_release(champ)
+            released = await self.check_release(ctx, champ)
             if released:
                 syn_champs.append(champ)
         pack = await self.get_synergies(syn_champs)
