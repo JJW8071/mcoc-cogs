@@ -1640,11 +1640,12 @@ class MCOC(ChampionFactory):
     async def champ_use(self, *, champs :ChampConverterMult):
         '''How to Fight With videos by MCOC Community'''
         for champ in champs:
-            xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
+            # xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
             em = discord.Embed(color=champ.class_color, title='How-To-Use: '+champ.full_name, url='https://goo.gl/forms/VXSQ1z40H4Knia0t2')
             await self.bot.say(embed=em)
-            if xref['infovideo'] != '':
-                await self.bot.say(xref['infovideo'])
+            if champ.infovideo != '':
+                await self.bot.say(champ.infovideo)
+                # await self.bot.say(xref['infovideo'])
             else:
                 await self.bot.say('I got nothing. Send the CollectorDevTeam a good video.\nClick the blue text for a survey link.')
 
