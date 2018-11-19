@@ -1213,7 +1213,7 @@ class MCOC(ChampionFactory):
             print('check_release')
             rstatus = await self.check_release(champ)
             print(rstatus)
-                if cdt or rstatus:
+            if cdt or rstatus:
                 xref = get_csv_row(data_files['crossreference']['local'],'champ',champ.full_name)
                 em=discord.Embed(color=champ.class_color, title='Release Date & Estimated Pull Chance', url=SPOTLIGHT_DATASET)
                 em.set_author(name=champ.full_name, icon_url=champ.get_avatar())
