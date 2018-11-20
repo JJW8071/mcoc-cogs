@@ -289,9 +289,6 @@ class ChampConverterMult(ChampConverter):
             if token != '':
                 champ = await self.get_champion(bot, token, attrs)
                 dangling_arg = None
-                released = await self.check_release(self.ctx, champ)
-                if released:
-                    syn_champs.append(champ)
                 champs.append(champ)
             else:
                 default.update(attrs)
