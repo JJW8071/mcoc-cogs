@@ -1209,10 +1209,10 @@ class MCOC(ChampionFactory):
         rlist = []
         for champ_class in self.champions.values():
             champ = champ_class(hargs.attrs.copy())
-            released = await self.check_release(ctx, champ)
-            if released:
-                if champ.has_prestige:
-                    rlist.append(champ)
+            # released = await self.check_release(ctx, champ)
+            # if released:
+            if champ.has_prestige:
+                rlist.append(champ)
         roster.from_list(rlist)
         roster.display_override = 'Prestige Listing: {0.attrs_str}'.format(rlist[0])
         await roster.display(hargs.tags) #imported from hook
