@@ -1639,7 +1639,7 @@ class MCOC(ChampionFactory):
         await self.bot.upload("data/mcoc/gs_json_test.json")
 
     @champ.command(pass_context=True, name='use', aliases=('howto',))
-    async def champ_use(self, ctx, *, champs : ChampConverter):
+    async def champ_use(self, ctx, *, champ : ChampConverter):
         '''How to Fight With videos by MCOC Community'''
         released = await self.check_release(ctx, champ)
         if released:
