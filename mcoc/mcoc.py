@@ -130,15 +130,16 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 ### CollectorDevTeam Repo JSON files
 def load_cdt_json(file, aux=None):
     # raw_data = json.load(requests.get(file).text)
-    raw_data = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}.json'.format(file)).text)
+    get_file = requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}.json'.format(file))
+    raw_data = json.loads(get_file.text)
     data = ChainMap()
     aux = aux if aux is not None else []
     for dlist in aux, file['strings']:
         data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
-cdt_bcg_en = load_cdt_json('bcg_en.json')
-cdt_bcg_stat_en = load_cdt_json('bcg_stat_en.json')
+cdt_bcg = load_cdt_json('bcg_en.json')
+cdt_bcg_stat = load_cdt_json('bcg_stat_en.json')
 cdt_special_attacks = load_cdt_json('special_attacks_en.json')
 cdt_masteries = load_cdt_json('masteries_en.json')
 cdt_bio = load_cdt_json('character_bios_en.json')
