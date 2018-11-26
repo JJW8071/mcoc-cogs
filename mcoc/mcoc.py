@@ -129,18 +129,18 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ### CollectorDevTeam Repo JSON files
 def load_cdt_json(file, aux=None):
-    raw_data = json.load(file)
+    raw_data = json.load(requests.get(file).text)
     data = ChainMap()
     aux = aux if aux is not None else []
     for dlist in aux, raw_data['strings']:
         data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
-cdt_bcg_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json').text)
-cdt_bcg_stat_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json').text)
-cdt_special_attacks = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks.json').text)
-cdt_masteries = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries.json').text)
-cdt_bio = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios.json').text)
+cdt_bcg_en = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json')
+cdt_bcg_stat_en = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json')
+cdt_special_attacks = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks.json')
+cdt_masteries = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries.json')
+cdt_bio = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios.json')
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
