@@ -130,17 +130,18 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 ### CollectorDevTeam Repo JSON files
 def load_cdt_json(file, aux=None):
     # raw_data = json.load(requests.get(file).text)
+    raw_data = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}.json'.format(file)).text)
     data = ChainMap()
     aux = aux if aux is not None else []
     for dlist in aux, file['strings']:
         data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
-cdt_bcg_en = load_cdt_json(json.load(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json').text))
-cdt_bcg_stat_en = load_cdt_json(json.load(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json').text))
-cdt_special_attacks = load_cdt_json(json.load(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json').text))
-cdt_masteries = load_cdt_json(json.load(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries_en.json').text))
-cdt_bio = load_cdt_json(json.load(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios_en.json').text))
+cdt_bcg_en = load_cdt_json('bcg_en.json')
+cdt_bcg_stat_en = load_cdt_json('bcg_stat_en.json')
+cdt_special_attacks = load_cdt_json('special_attacks_en.json')
+cdt_masteries = load_cdt_json('masteries_en.json')
+cdt_bio = load_cdt_json('character_bios_en.json')
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
@@ -2368,12 +2369,12 @@ class Champion:
         return image
 
     async def get_bio(self):
-        # bios = load_kabam_json(kabam_bio)
-        # bcg_en = load_kabam_json(kabam_bcg_en)
-        # bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
+        bios = load_kabam_json(kabam_bio)
+        bcg_en = load_kabam_json(kabam_bcg_en)
+        bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         bio = ''
-        for s in (cdt_bio, cdt_bcg_en, cdt_bcg_stat_en):
+        for s in (bios, bcg_en, bcg_stat_en):
             if key in s:
                 bio = s[key]
                 break
