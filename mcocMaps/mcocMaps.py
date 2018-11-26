@@ -8,6 +8,7 @@ from discord.ext import commands
 
 JPAGS = 'http://www.alliancewar.com'
 PATREON = 'https://patreon.com/collectorbot'
+alliancewarboosts = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/boosts.json').text)
 
 class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
@@ -296,14 +297,15 @@ class MCOCMaps:
 
     @commands.command(pass_context=True, hidden=True)
     async def boost_info(self, ctx, boost):
-        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        boosts = json.loads(requests.get(boosturl).text)
+        # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
+        boosts = self.alliancewarboosts
         keys = boosts.keys()
         if boost not in keys:
             await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
         else:
             info = boosts[boost]
-            img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, info['img'])
+            # img = '{}/global/ui/images/booster/{}.png'.format(JPAGS, info['img'])
+            img = 'https://raw.githubusercontent.com/JPags/alliancewar_data/master/global/images/boosterr/{}.png'.format(info['img'])
             title = info['title']
             text = info['text']
             em = discord.Embed(color=discord.Color.gold(), title='Boost Info', descritpion='', url=JPAGS)
@@ -347,8 +349,7 @@ class MCOCMaps:
 
 
     async def get_awnode_details(self, ctx, nodeNumber, tier, season):
-        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        boosts = json.loads(requests.get(boosturl).text)
+        boosts = self.alliancewarboosts
         tiers = {
             'expert':{ 'color' :discord.Color.gold(), 'minis': [27,28,29,30,31,48,51,52,53,55], 'boss':[54]},
             'hard':{ 'color' :discord.Color.red(), 'minis': [48,51,52,53,55], 'boss':[54]},
@@ -404,8 +405,7 @@ class MCOCMaps:
     async def _map(self, ctx, tier = 'expert'):
         '''Report AW track information.'''
         season = 2
-        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        boosts = json.loads(requests.get(boosturl).text)
+        boosts = self.alliancewarboosts
         # if boosts is not None:
             # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         tiers = {'expert': discord.Color.gold(),'bosskill': discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(), 'advanced':discord.Color.green(), 'normal':discord.Color.green(), 'easy':discord.Color.green()}
@@ -425,8 +425,9 @@ class MCOCMaps:
     async def _path_info(self, ctx, track='A', tier = 'expert'):
         '''Report AW track information.'''
         season = 2
-        boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        boosts = json.loads(requests.get(boosturl).text)
+
+        boosts = self.alliancewarboosts
+
         # if boosts is not None:
             # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
