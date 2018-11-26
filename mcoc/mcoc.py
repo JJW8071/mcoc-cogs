@@ -130,7 +130,7 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 ### CollectorDevTeam Repo JSON files
 def load_cdt_json(file, aux=None):
     # raw_data = json.load(requests.get(file).text)
-    get_file = requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}.json'.format(file))
+    get_file = requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}'.format(file))
     raw_data = json.loads(get_file.text)
     data = ChainMap()
     aux = aux if aux is not None else []
