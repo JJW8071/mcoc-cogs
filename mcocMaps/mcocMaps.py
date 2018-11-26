@@ -9,6 +9,14 @@ from discord.ext import commands
 JPAGS = 'http://www.alliancewar.com'
 PATREON = 'https://patreon.com/collectorbot'
 boosts = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/boosts.json').text)
+aw_advanced = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/aw_advanced.json').text)
+aw_challenger = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/aw_challenger.json').text)
+aw_expert = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/aw_expert.json').text)
+aw_hard = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/aw_hard.json').text)
+aw_intermediate = json.loads(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/alliancewar/aw_intermediate.json').text)
+
+
+
 
 class MCOCMaps:
     '''Maps for Marvel Contest of Champions'''
@@ -348,7 +356,7 @@ class MCOCMaps:
             await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
 
 
-    async def get_awnode_details(self, ctx, nodeNumber, tier, season):
+    async def get_awnode_details(self, ctx, nodeNumber, tier):
         # boosts = self.alliancewarboosts
         tiers = {
             'expert':{ 'color' :discord.Color.gold(), 'minis': [27,28,29,30,31,48,51,52,53,55], 'boss':[54]},
@@ -360,8 +368,18 @@ class MCOCMaps:
             jpagstier = 'advanced'
         else:
             jpagstier = tier
-        pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, jpagstier)
-        pathdata = json.loads(requests.get(pathurl).text)
+        if tier in tiers:
+            # pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(tier)
+            if tier is 'expert':
+                pathdata = aw_expert
+            elif tier is 'hard':
+                pathdata = aw_hard
+            elif tier is 'challenger':
+                pathdata = aw_challenger
+            elif tier is 'advanced':
+                pathdata = aw_advanced
+            else tier is 'intermediate':
+                pathdata is aw_intermediate
         # if paths is not None:
             # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
         if int(nodeNumber) in tiers[jpagstier]['minis']:
@@ -425,16 +443,22 @@ class MCOCMaps:
     async def _path_info(self, ctx, track='A', tier = 'expert'):
         '''Report AW track information.'''
         season = 2
-
-        # boosts = self.alliancewarboosts
-
-        # if boosts is not None:
-            # await self.bot.say('DEBUG: boosts.json loaded from alliancewar.com')
         tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
         tracks = {'A':1,'B':2,'C':3,'D':4,'E':5,'F':6,'G':7,'H':8,'I':9}
+
         if tier in tiers:
-            pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(season, tier)
-            pathdata = json.loads(requests.get(pathurl).text)
+            # pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(tier)
+            if tier is 'expert':
+                pathdata = aw_expert
+            elif tier is 'hard':
+                pathdata = aw_hard
+            elif tier is 'challenger':
+                pathdata = aw_challenger
+            elif tier is 'advanced':
+                pathdata = aw_advanced
+            else tier is 'intermediate':
+                pathdata is aw_intermediate
+            # pathdata = json.loads(requests.get(pathurl).text)
             page_list = []
             for t in tracks:
                 em = discord.Embed(color=tiers[tier], title='{} Alliance War Path {}'.format(tier.title(), track), descritpion='', url=JPAGS)
