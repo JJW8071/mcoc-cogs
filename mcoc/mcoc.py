@@ -128,13 +128,12 @@ kabam_bcg_en= mcoc_dir+"bcg_en.json"
 kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ### CollectorDevTeam Repo JSON files
-def load_cdt_json(file, aux=None):
+def load_cdt_json(file):
     # raw_data = json.load(requests.get(file).text)
     get_file = requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}'.format(file))
     raw_data = json.loads(get_file.text)
     data = ChainMap()
-    aux = aux if aux is not None else []
-    for dlist in aux, file['strings']:
+    for dlist in file['strings']:
         data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
