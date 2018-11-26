@@ -127,6 +127,14 @@ kabam_bcg_en= mcoc_dir+"bcg_en.json"
 kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ### CollectorDevTeam Repo JSON files
+def load_cdt_json(file, aux=None):
+    raw_data = json.load(file)
+    data = ChainMap()
+    aux = aux if aux is not None else []
+    for dlist in aux, raw_data['strings']:
+        data.maps.append({d['k']:d['v'] for d in dlist})
+    return data
+    
 cdt_bcg_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json').text)
 cdt_bcg_stat_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json').text)
 cdt_special_attacks = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks.json').text)
@@ -2898,14 +2906,6 @@ def iter_rows(array, rotate):
 
 def load_kabam_json(file, aux=None):
     raw_data = dataIO.load_json(file)
-    data = ChainMap()
-    aux = aux if aux is not None else []
-    for dlist in aux, raw_data['strings']:
-        data.maps.append({d['k']:d['v'] for d in dlist})
-    return data
-
-def load_cdt_json(file, aux=None):
-    raw_data = json.load(file)
     data = ChainMap()
     aux = aux if aux is not None else []
     for dlist in aux, raw_data['strings']:
