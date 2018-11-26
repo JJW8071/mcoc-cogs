@@ -332,7 +332,7 @@ class MCOCMaps:
         season = 2
         if tier in {'expert','hard','challenger','intermediate','normal','easy'}:
 
-            em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
+            em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier)
             await self.bot.say(embed=em)
         else:
             await self.bot.say('Valid tiers include: advanced, intermediate, challenger, hard, expert')
@@ -345,7 +345,7 @@ class MCOCMaps:
         if tier in {'expert','hard','challenger','intermediate','normal','easy'}:
             nodeNumbers = nodes.split(' ')
             for nodeNumber in nodeNumbers:
-                em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier, season=season)
+                em = await self.get_awnode_details(ctx = ctx, nodeNumber=nodeNumber,tier=tier)
                 mapurl = '{}warmap_3_{}.png'.format(self.basepath,tier.lower())
                 em.set_image(url=mapurl)
                 page_list.append(em)
