@@ -128,20 +128,21 @@ kabam_bcg_en= mcoc_dir+"bcg_en.json"
 kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ### CollectorDevTeam Repo JSON files
-def load_cdt_json(file):
-    # raw_data = json.load(requests.get(file).text)
-    get_file = requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}'.format(file))
-    raw_data = json.loads(get_file.text)
-    data = ChainMap()
-    for dlist in file['strings']:
-        data.maps.append({d['k']:d['v'] for d in dlist})
-    return data
-
-cdt_bcg = load_cdt_json('bcg_en.json')
-cdt_bcg_stat = load_cdt_json('bcg_stat_en.json')
-cdt_special_attacks = load_cdt_json('special_attacks_en.json')
-cdt_masteries = load_cdt_json('masteries_en.json')
-cdt_bio = load_cdt_json('character_bios_en.json')
+## Having trouble getting JSON data to load into memory.
+# def load_cdt_json(file):
+#     # raw_data = json.load(requests.get(file).text)
+#     get_file = requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/{}'.format(file))
+#     raw_data = json.loads(get_file.text)
+#     data = ChainMap()
+#     for dlist in file['strings']:
+#         data.maps.append({d['k']:d['v'] for d in dlist})
+#     return data
+#
+# cdt_bcg = load_cdt_json('bcg_en.json')
+# cdt_bcg_stat = load_cdt_json('bcg_stat_en.json')
+# cdt_special_attacks = load_cdt_json('special_attacks_en.json')
+# cdt_masteries = load_cdt_json('masteries_en.json')
+# cdt_bio = load_cdt_json('character_bios_en.json')
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
