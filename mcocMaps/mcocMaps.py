@@ -378,7 +378,7 @@ class MCOCMaps:
                 pathdata = aw_challenger
             elif tier is 'advanced':
                 pathdata = aw_advanced
-            else tier is 'intermediate':
+            else:
                 pathdata is aw_intermediate
         # if paths is not None:
             # await self.bot.say('DEBUG: 9path.json loaded from alliancewar.com')
@@ -456,7 +456,7 @@ class MCOCMaps:
                 pathdata = aw_challenger
             elif tier is 'advanced':
                 pathdata = aw_advanced
-            else tier is 'intermediate':
+            else:
                 pathdata is aw_intermediate
             # pathdata = json.loads(requests.get(pathurl).text)
             page_list = []
