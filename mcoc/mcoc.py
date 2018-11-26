@@ -138,9 +138,9 @@ def load_cdt_json(file, aux=None):
 
 cdt_bcg_en = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json')
 cdt_bcg_stat_en = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json')
-cdt_special_attacks = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks.json')
-cdt_masteries = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries.json')
-cdt_bio = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios.json')
+cdt_special_attacks = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json')
+cdt_masteries = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries_en.json')
+cdt_bio = load_cdt_json('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios_en.json')
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
