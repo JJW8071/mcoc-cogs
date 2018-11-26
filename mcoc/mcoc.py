@@ -16,6 +16,7 @@ import csv
 import json
 import pygsheets
 import random
+import requests
 
 from pygsheets.utils import numericise_all, numericise
 import asyncio
@@ -134,7 +135,7 @@ def load_cdt_json(file, aux=None):
     for dlist in aux, raw_data['strings']:
         data.maps.append({d['k']:d['v'] for d in dlist})
     return data
-    
+
 cdt_bcg_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json').text)
 cdt_bcg_stat_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json').text)
 cdt_special_attacks = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks.json').text)
