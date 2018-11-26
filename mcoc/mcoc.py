@@ -125,12 +125,15 @@ kabam_special_attacks = mcoc_dir+"special_attacks_en.json"
 kabam_bcg_stat_en = mcoc_dir+"bcg_stat_en.json"
 kabam_bcg_en= mcoc_dir+"bcg_en.json"
 kabam_masteries=mcoc_dir+"masteries_en.json"
+
+### CollectorDevTeam Repo JSON files
+cdt_bcg_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json').text)
+cdt_bcg_stat_en = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json').text)
+cdt_special_attacks = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks.json').text)
+cdt_masteries = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries.json').text)
+cdt_bio = load_cdt_json(requests.get('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios.json').text)
+
 ability_desc = "data/mcoc/ability-desc/{}.txt"
-##### Special attacks require:
-## mcoc_files + mcoc_special_attack + <champ.mcocjson> + {"_0","_1","_2"} ---> Special Attack title
-#mcoc_special_attack="ID_SPECIAL_ATTACK_"
-## mcoc_files mcoc_special_attack_desc + <champ.mcocjson> + {"_0","_1","_2"} ---> Special Attack Short description
-#mcoc_special_attack_desc="ID_SPECIAL_ATTACK_DESCRIPTION_"
 
 
 class_color_codes = {
@@ -2356,12 +2359,12 @@ class Champion:
         return image
 
     async def get_bio(self):
-        bios = load_kabam_json(kabam_bio)
-        bcg_en = load_kabam_json(kabam_bcg_en)
-        bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
+        # bios = load_kabam_json(kabam_bio)
+        # bcg_en = load_kabam_json(kabam_bcg_en)
+        # bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         bio = ''
-        for s in (bios, bcg_en, bcg_stat_en):
+        for s in (cdt_bio, cdt_bcg_en, cdt_bcg_stat_en):
             if key in s:
                 bio = s[key]
                 break
@@ -2895,6 +2898,14 @@ def iter_rows(array, rotate):
 
 def load_kabam_json(file, aux=None):
     raw_data = dataIO.load_json(file)
+    data = ChainMap()
+    aux = aux if aux is not None else []
+    for dlist in aux, raw_data['strings']:
+        data.maps.append({d['k']:d['v'] for d in dlist})
+    return data
+
+def load_cdt_json(file, aux=None):
+    raw_data = json.load(file)
     data = ChainMap()
     aux = aux if aux is not None else []
     for dlist in aux, raw_data['strings']:
