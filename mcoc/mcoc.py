@@ -1400,17 +1400,17 @@ class MCOC(ChampionFactory):
         except TypeError:
             pack.set_footer(text='CollectorDevTeam', icon_url=COLLECTOR_ICON)
 
-    @champ.command(pass_context=True, name='triggers', aliases=['synw',])
-    async def champ_syn_with(self, ctx, *, champ: ChampConverter):
-        '''Find Synergies triggered by Champion'''
-        if champs[0].debug:
-            await self.gsheet_handler.cache_gsheets('synergy')
-        syn_data = dataIO.load_json(local_files['synergy'])['SynExport']
-        syn_keys = syn_data.keys()
-        syn_list =[]
-        for activation in syn_keys:
-            if champ.full_name in activation['triggers']:
-                syn_list.append('{} from {}'.format(syn_keys[activation][synergycode]), activation)
+    # @champ.command(pass_context=True, name='triggers', aliases=['synw',])
+    # async def champ_syn_with(self, ctx, *, champ: ChampConverter):
+    #     '''Find Synergies triggered by Champion'''
+    #     if champs[0].debug:
+    #         await self.gsheet_handler.cache_gsheets('synergy')
+    #     syn_data = dataIO.load_json(local_files['synergy'])['SynExport']
+    #     syn_keys = syn_data.keys()
+    #     syn_list =[]
+    #     for activation in syn_keys:
+    #         if champ.full_name in activation['triggers']:
+    #             syn_list.append('{} from {}'.format(syn_keys[activation][synergycode]), activation)
 
 
     @champ.command(pass_context=True, name='synergies', aliases=['syn',])
