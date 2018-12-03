@@ -2504,17 +2504,22 @@ class Champion:
 
     def get_special_attacks(self):
         specials = load_kabam_json(kabam_special_attacks)
+        bios = load_kabam_json(kabam_bio)
+        bcg_en = load_kabam_json(kabam_bcg_en)
+        bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         prefix = 'ID_SPECIAL_ATTACK_'
         desc = 'DESCRIPTION_'
         zero = '_0'
         one = '_1'
         two = '_2'
-        s0 = specials[prefix + self.mcocjson + zero]
-        s1 = specials[prefix + self.mcocjson + one]
-        s2 = specials[prefix + self.mcocjson + two]
-        s0d = specials[prefix + desc + self.mcocjson + zero]
-        s1d = specials[prefix + desc + self.mcocjson + one]
-        s2d = specials[prefix + desc + self.mcocjson + two]
+        for i in (specials, bios, bcg_en, bcg_stat_en):
+            if prefix+self.mcocjson+one in i:
+                s0 = i[prefix + self.mcocjson + zero]
+                s1 = i[prefix + self.mcocjson + one]
+                s2 = i[prefix + self.mcocjson + two]
+                s0d = i[prefix + desc + self.mcocjson + zero]
+                s1d = i[prefix + desc + self.mcocjson + one]
+                s2d = i[prefix + desc + self.mcocjson + two]
         specials = (s0, s1, s2, s0d, s1d, s2d)
         return specials
 
