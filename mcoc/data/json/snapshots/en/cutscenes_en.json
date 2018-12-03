@@ -1,14 +1,14 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "974d35b911cc08f8c31ee789a43406325dd8255a",
+    "hash": "891ea81dff74d4699f2f182074de318b49add359",
     "language": "en",
-    "string_count": 335,
+    "string_count": 356,
     "tagged": [
       "cutscenes",
       "client"
     ],
-    "ts": 1538608244
+    "ts": 1542683329
   },
   "strings": [
     {
@@ -985,591 +985,698 @@
       "k": "ID_UI_CUTSCENE_INFINITYNIGHTMARE",
       "v": "INFINITY NIGHTMARE",
       "vn": 18
-            "k": "ID_UI_CUTSCENE_INTRO",
-            "v": "PROLOGUE"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK",
-            "v": "M.O.D.O.K",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_01",
-            "v": "SERVICE, PLEASE! Where the $^#*$ is everyone…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_02",
-            "v": "If we’re going to run a five-star facility, we need to do better!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_03",
-            "v": "There you are. I do believe I ordered my cocktail on the rocks!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_04",
-            "v": "Ah yes… much better.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_05",
-            "v": "I propose a toast… to all self-proclaimed “Cosmic Gods” out there.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_06",
-            "v": "There’s no game you can play, that M.O.D.O.K. can’t master!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_MODOK_07",
-            "v": "Cheers to the future... of the CONTEST OF CHAMPIONS!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_XMEN01",
-            "v": "X-MEN PART 1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_XMEN02",
-            "v": "X-MEN PART 2"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET01",
-            "v": "YOUNG ELDERS 1",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET02",
-            "v": "YOUNG ELDERS 2",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET03",
-            "v": "YOUNG ELDERS 3",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET04",
-            "v": "YOUNG ELDERS 4",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG01_01",
-            "v": "The Tivan residence.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG01_02",
-            "v": "Three Billion Years ago.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG01_03",
-            "v": "THE YOUNG ELDERS TALE",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG01_04",
-            "v": "Story by Gabriel Frizzera - Art by Luke Ross",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG02_01",
-            "v": "Wake up, Dad!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG02_02",
-            "v": "W-What?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG02_03",
-            "v": "Today is the day, remember?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG02_04",
-            "v": "You and Uncle En Dwi are going on a exploration trip… and this time you’ll take ME!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG02_05",
-            "v": "Yes, but remember you promised not to run away again—",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG02_07",
-            "v": "YAY! we’re venturing into the unknown!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG03_01",
-            "v": "A few days later: The storm between realities.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG03_02",
-            "v": "The vortex is getting rougher! we shouldn’t have brought Carina…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG03_03",
-            "v": "You can only protect her for so long, Taneleer.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG03_04",
-            "v": "I know. The truth is I’ve been trying to keep it together since her mother passed, but most of the time I… have no idea what I am doing.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG03_05",
-            "v": "Don’t we all? Look at us, the worst Elders of Universe ever. We don’t even have our own “Things” yet!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG03_06",
-            "v": "Our “Things”?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG04_01",
-            "v": "You know, the Things! “Every Elder of the Universe must find a single Pursuit to dedicate their life to, or taste the bitter wine of mortality”, etc, etc..",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG04_02",
-            "v": "Oh yes. Some of those “Things” are getting ridiculous, though. Who’s that Elder dedicating his life to judging other people? Yellow guy with red hair…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG04_03",
-            "v": "“The Judicator”. Don’t ever try to get in an argument with him, you’ll lose every time. According to his own flawless judgment, of course.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG04_04",
-            "v": "“The Judicator”, “The Contemplator”… what’s next? “The Procrastinator”?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG04_05",
-            "v": "HAHAHA!!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG05_01",
-            "v": "The Battlerealm. Before it had a name.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG05_02",
-            "v": "We’ve done it, brother! According to the instruments, this “nexus realm” is a patchwork of many times and places, brimming with the primordial energy of creation itself!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG05_03",
-            "v": "Yes. And since I brought us here… I should be the Elder called “The Explorer”!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG05_04",
-            "v": "I was thinking the same thing. Maybe we should flip for it? Whoever loses can be called “The Cartographer” or something like it?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG05_05",
-            "v": "HA! I would never bet my future on your loaded coin tosses…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG06_01",
-            "v": "The Battlerealm. Eons before the Contest of Champions.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG06_02",
-            "v": "Wow! Look at the weird crystals!  What are those?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG07_01",
-            "v": "They are called Iso-crystals… they’re a strong source of primordial energy. Some theorize they're all that remained from the cataclysm that created our universe.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG07_02",
-            "v": "En Dwi…are you sure we’re going the right direction?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG07_03",
-            "v": "The quantum footprint of the crystals clearly flows this way. Just keep…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG07_04",
-            "v": "…driving…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG07_05",
-            "v": "What… is that a ship? It’s huge!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG08_01",
-            "v": "This is no ship… It’s a continent-sized being, clad in armor from head to toe!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG08_02",
-            "v": "And his kind is no stranger to us. This is a Celestial, member of a powerful new race of self-proclaimed cosmic “gods”.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG08_03",
-            "v": "This one is much larger than usual… and seems to be dead, or at least dying. Hard to know with these armored types.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG09_01",
-            "v": "His body seems to be… fused to core of the planet. Teleportation accident?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG09_02",
-            "v": "Whatever happened here, it’s spewing Iso-crystals as a byproduct.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG09_03",
-            "v": "Perhaps the Celestial tried to escape his dying universe, breaching into ours as it was born… and crashed in the process.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG09_04",
-            "v": "You wanted some crystals, Carina? we have discovered the mother load—",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG09_05",
-            "v": "I think she just stepped outside, brother.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_01",
-            "v": "Carina, I believe we’ve discussed this…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_02",
-            "v": "Just one small sample, dad! I promise!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_03",
-            "v": "Guys… I’m in some kind of ancient temple, and the giant man is carved all over the walls!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_04",
-            "v": "Carina, please return—",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_05",
-            "v": "That’s interesting, Carina. Perhaps the Celestial was considered a god to the people who lived here?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_06",
-            "v": "Carina, I’m reading a massive energy buildup coming from the planet!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG10_07",
-            "v": "GET OUT OF THERE NOW!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG11_01",
-            "v": "NO!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG12_01",
-            "v": "W-what…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG12_02",
-            "v": "Carina? En Dwi? Can you hear me?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG12_03",
-            "v": "Taneleer, I landed on a rock… it’s spinning free of the planet’s gravity…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG12_04",
-            "v": "offzxx plxxnettsz grvzzzty…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG12_05",
-            "v": "En Dwi, is that you?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG13_01",
-            "v": "Carina! Are you there?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG13_02",
-            "v": "Please, don’t…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG14_01",
-            "v": "Kracckk—",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG15_01",
-            "v": "CARINAAAAA!!!!!!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG16_01",
-            "v": "One thousand lifetimes later.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG17_01",
-            "v": "You really need to hire a maid for this place.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG17_02",
-            "v": "En Dwi. I hear you are called “Grandmaster” now. Odd name for someone who could never beat his younger brother in a card game.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG17_03",
-            "v": "I bet I could beat you now. Can you still find your old playing cards in this hoarding mess, “Collector”?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG17_04",
-            "v": "Can you find your way out of this maze?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG18_01",
-            "v": "Brother… I’m lost… please help…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG18_02",
-            "v": "I mzzxxz… lozzxzzzxxxk… plszzz hllzzzp…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG18_03",
-            "v": "If I collect all the pieces, I know can put her back together…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG18_04",
-            "v": "I can SAVE her!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG19_01",
-            "v": "BrotheeEEEERRRR!!!!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_20_01",
-            "v": "And to think all we wanted when we were young was to be called Explorers.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_20_02",
-            "v": "Hm. We would do much better than that sycophant calling himself “The Explorer” nowadays. Have you seen him?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_20_03",
-            "v": "Unfortunately. What is he trying to “explore” in those golden pirate boots? a Kree red light district?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_20_04",
-            "v": "AHAHAHA!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_21_01",
-            "v": "Why are you here, En Dwi?",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_21_02",
-            "v": "You know, I was stuck on that rock for a long time. Eventually I broke free, but I was still trapped in that nightmarish Realm. Without a spaceship or working communicator, I would have to WALK home.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_21_03",
-            "v": "Have you tried to walk on a straight line in a place where space-time is fragmented? Every few steps I would travel years back in time, or be transported a hundred miles in the wrong direction!",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_21_04",
-            "v": "I had to solve the largest puzzle in all creation just to be able to return… so I have to thank you, brother. In a way, your betrayal is what made me The Grandmaster.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_22_01",
-            "v": "Then we’re quite even, brother. I too was defined by that fateful trip, in ways you will never comprehend.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_22_02",
-            "v": "Oh, I know.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_23_01",
-            "v": "I kept the fragment for the whole time I was trapped in that realm… As a birthday gift for my niece.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_23_02",
-            "v": "She would have been a much better Collector than you.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_23_03",
-            "v": "She would…",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUTSCENE_YET_PG_24_01",
-            "v": "…And she will.",
-            "vn": "16.1"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_01",
-            "v": "Forgiveness Master... we have failed you.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_02",
-            "v": "The hated Champions of Earth... they have bested our army at every turn. They have stolen the Infinity Stones!",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_03",
-            "v": "NOT ALL OF THEM.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_04",
-            "v": "Master?",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_05",
-            "v": "YOU HAVE DONE WELL, MY CHILDREN... EVEN IF UNAWARE OF YOUR TRUE MISSION.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_06",
-            "v": "You have led the heroes through a ruse, deep into the mirror universe inside the Death Stone: an exact copy of our own reality, but dead and powerless…",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_07",
-            "v": "…as they will soon learn.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_08",
-            "v": "It’s time.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_09",
-            "v": "Meanwhile, in the “real” world, my Nameless marched unopposed…",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_10",
-            "v": "…gathering the true Infinity Stones… ",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_11",
-            "v": "…for their true master.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_12",
-            "v": "It’s as you said, Goddess of Death. Used in the right way, a single stone can be as dangerous as all of them combined.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_13",
-            "v": "Come with me. We have a multiverse to reshape… together.",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYCHAOS_14",
-            "v": "TO BE CONCLUDED IN INFINITY NIGHTMARE",
-            "vn": "17.2"
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_01",
-            "v": "Beautiful, isn’t it?",
+    },
+    {
+      "k": "ID_UI_CUTSCENE_INTRO",
+      "v": "PROLOGUE"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK",
+      "v": "M.O.D.O.K",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_01",
+      "v": "SERVICE, PLEASE! Where the $^#*$ is everyone…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_02",
+      "v": "If we’re going to run a five-star facility, we need to do better!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_03",
+      "v": "There you are. I do believe I ordered my cocktail on the rocks!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_04",
+      "v": "Ah yes… much better.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_05",
+      "v": "I propose a toast… to all self-proclaimed “Cosmic Gods” out there.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_06",
+      "v": "There’s no game you can play, that M.O.D.O.K. can’t master!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_MODOK_07",
+      "v": "Cheers to the future... of the CONTEST OF CHAMPIONS!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT",
+      "v": "NIGHT",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_1",
+      "v": "Here’s my theory about this so-called “Battle-Realm”. ",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_10",
+      "v": " It’s is made of junk scraps, but in a virtuoso fashion… as if built by a mixture of Mozart and Robinson Crusoe.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_11",
+      "v": "As far as I can understand, it’s attuned to the brittle space-time structure of the Battlerealm. ",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_12",
+      "v": "It probes it for weak spots, based on ISO-8 residual signature.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_13",
+      "v": "Whoever built this was looking for an exit.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_14",
+      "v": "The signal is particularly strong in this place… a shattered crossroad of realities, surrounding what can only be described as a compact-size wormhole.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_15",
+      "v": "As soon as I arrived, the device went haywire. It wants to be reunited with something down there in the abyss.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_16",
+      "v": "Even I can’t skate the singularity, so I keep my distance. I attach the device to a vibranium-laced cable and let it sink.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_17",
+      "v": "Let’s see what kind of fish dwells in these murky waters.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_18",
+      "v": "Turns out the catch is bigger than I expected…",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_19",
+      "v": "Oh, Crap.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_2",
+      "v": "It’s doubtful that the Elders of the Universe created it.  ",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_20",
+      "v": "NEXT: THIS MAN, THIS MONSTER!",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_3",
+      "v": "Most likely they stumbled into a unique time-space paradox, and tried to control it for their own agenda.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_4",
+      "v": "But for all their bravado, they have never been truly in charge. ",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_5",
+      "v": "They’re trapped in here as much as we are… doomed to enact their silly games for all eternity.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_6",
+      "v": "I don’t think it really matters if we win the Contest. The whole thing would probably reset under a new management, like many times before.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_7",
+      "v": "The only chance we have is to solve this cosmic puzzle, once and for all.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_8",
+      "v": "Since the other ”Champions” are too busy fighting each other, I’ve decided to poke around on my own to see what kind of answers I can find.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_NIGHT_9",
+      "v": "The device I found tells me I’m not the first to try.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_XMEN01",
+      "v": "X-MEN PART 1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_XMEN02",
+      "v": "X-MEN PART 2"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET01",
+      "v": "YOUNG ELDERS 1",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET02",
+      "v": "YOUNG ELDERS 2",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET03",
+      "v": "YOUNG ELDERS 3",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET04",
+      "v": "YOUNG ELDERS 4",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG01_01",
+      "v": "The Tivan residence.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG01_02",
+      "v": "Three Billion Years ago.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG01_03",
+      "v": "THE YOUNG ELDERS TALE",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG01_04",
+      "v": "Story by Gabriel Frizzera - Art by Luke Ross",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG02_01",
+      "v": "Wake up, Dad!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG02_02",
+      "v": "W-What?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG02_03",
+      "v": "Today is the day, remember?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG02_04",
+      "v": "You and Uncle En Dwi are going on a exploration trip… and this time you’ll take ME!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG02_05",
+      "v": "Yes, but remember you promised not to run away again—",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG02_07",
+      "v": "YAY! we’re venturing into the unknown!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG03_01",
+      "v": "A few days later: The storm between realities.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG03_02",
+      "v": "The vortex is getting rougher! we shouldn’t have brought Carina…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG03_03",
+      "v": "You can only protect her for so long, Taneleer.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG03_04",
+      "v": "I know. The truth is I’ve been trying to keep it together since her mother passed, but most of the time I… have no idea what I am doing.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG03_05",
+      "v": "Don’t we all? Look at us, the worst Elders of Universe ever. We don’t even have our own “Things” yet!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG03_06",
+      "v": "Our “Things”?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG04_01",
+      "v": "You know, the Things! “Every Elder of the Universe must find a single Pursuit to dedicate their life to, or taste the bitter wine of mortality”, etc, etc..",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG04_02",
+      "v": "Oh yes. Some of those “Things” are getting ridiculous, though. Who’s that Elder dedicating his life to judging other people? Yellow guy with red hair…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG04_03",
+      "v": "“The Judicator”. Don’t ever try to get in an argument with him, you’ll lose every time. According to his own flawless judgment, of course.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG04_04",
+      "v": "“The Judicator”, “The Contemplator”… what’s next? “The Procrastinator”?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG04_05",
+      "v": "HAHAHA!!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG05_01",
+      "v": "The Battlerealm. Before it had a name.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG05_02",
+      "v": "We’ve done it, brother! According to the instruments, this “nexus realm” is a patchwork of many times and places, brimming with the primordial energy of creation itself!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG05_03",
+      "v": "Yes. And since I brought us here… I should be the Elder called “The Explorer”!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG05_04",
+      "v": "I was thinking the same thing. Maybe we should flip for it? Whoever loses can be called “The Cartographer” or something like it?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG05_05",
+      "v": "HA! I would never bet my future on your loaded coin tosses…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG06_01",
+      "v": "The Battlerealm. Eons before the Contest of Champions.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG06_02",
+      "v": "Wow! Look at the weird crystals!  What are those?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG07_01",
+      "v": "They are called Iso-crystals… they’re a strong source of primordial energy. Some theorize they're all that remained from the cataclysm that created our universe.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG07_02",
+      "v": "En Dwi…are you sure we’re going the right direction?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG07_03",
+      "v": "The quantum footprint of the crystals clearly flows this way. Just keep…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG07_04",
+      "v": "…driving…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG07_05",
+      "v": "What… is that a ship? It’s huge!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG08_01",
+      "v": "This is no ship… It’s a continent-sized being, clad in armor from head to toe!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG08_02",
+      "v": "And his kind is no stranger to us. This is a Celestial, member of a powerful new race of self-proclaimed cosmic “gods”.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG08_03",
+      "v": "This one is much larger than usual… and seems to be dead, or at least dying. Hard to know with these armored types.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG09_01",
+      "v": "His body seems to be… fused to core of the planet. Teleportation accident?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG09_02",
+      "v": "Whatever happened here, it’s spewing Iso-crystals as a byproduct.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG09_03",
+      "v": "Perhaps the Celestial tried to escape his dying universe, breaching into ours as it was born… and crashed in the process.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG09_04",
+      "v": "You wanted some crystals, Carina? we have discovered the mother load—",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG09_05",
+      "v": "I think she just stepped outside, brother.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_01",
+      "v": "Carina, I believe we’ve discussed this…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_02",
+      "v": "Just one small sample, dad! I promise!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_03",
+      "v": "Guys… I’m in some kind of ancient temple, and the giant man is carved all over the walls!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_04",
+      "v": "Carina, please return—",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_05",
+      "v": "That’s interesting, Carina. Perhaps the Celestial was considered a god to the people who lived here?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_06",
+      "v": "Carina, I’m reading a massive energy buildup coming from the planet!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG10_07",
+      "v": "GET OUT OF THERE NOW!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG11_01",
+      "v": "NO!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG12_01",
+      "v": "W-what…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG12_02",
+      "v": "Carina? En Dwi? Can you hear me?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG12_03",
+      "v": "Taneleer, I landed on a rock… it’s spinning free of the planet’s gravity…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG12_04",
+      "v": "offzxx plxxnettsz grvzzzty…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG12_05",
+      "v": "En Dwi, is that you?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG13_01",
+      "v": "Carina! Are you there?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG13_02",
+      "v": "Please, don’t…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG14_01",
+      "v": "Kracckk—",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG15_01",
+      "v": "CARINAAAAA!!!!!!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG16_01",
+      "v": "One thousand lifetimes later.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG17_01",
+      "v": "You really need to hire a maid for this place.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG17_02",
+      "v": "En Dwi. I hear you are called “Grandmaster” now. Odd name for someone who could never beat his younger brother in a card game.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG17_03",
+      "v": "I bet I could beat you now. Can you still find your old playing cards in this hoarding mess, “Collector”?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG17_04",
+      "v": "Can you find your way out of this maze?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG18_01",
+      "v": "Brother… I’m lost… please help…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG18_02",
+      "v": "I mzzxxz… lozzxzzzxxxk… plszzz hllzzzp…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG18_03",
+      "v": "If I collect all the pieces, I know can put her back together…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG18_04",
+      "v": "I can SAVE her!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG19_01",
+      "v": "BrotheeEEEERRRR!!!!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_20_01",
+      "v": "And to think all we wanted when we were young was to be called Explorers.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_20_02",
+      "v": "Hm. We would do much better than that sycophant calling himself “The Explorer” nowadays. Have you seen him?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_20_03",
+      "v": "Unfortunately. What is he trying to “explore” in those golden pirate boots? a Kree red light district?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_20_04",
+      "v": "AHAHAHA!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_21_01",
+      "v": "Why are you here, En Dwi?",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_21_02",
+      "v": "You know, I was stuck on that rock for a long time. Eventually I broke free, but I was still trapped in that nightmarish Realm. Without a spaceship or working communicator, I would have to WALK home.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_21_03",
+      "v": "Have you tried to walk on a straight line in a place where space-time is fragmented? Every few steps I would travel years back in time, or be transported a hundred miles in the wrong direction!",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_21_04",
+      "v": "I had to solve the largest puzzle in all creation just to be able to return… so I have to thank you, brother. In a way, your betrayal is what made me The Grandmaster.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_22_01",
+      "v": "Then we’re quite even, brother. I too was defined by that fateful trip, in ways you will never comprehend.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_22_02",
+      "v": "Oh, I know.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_23_01",
+      "v": "I kept the fragment for the whole time I was trapped in that realm… As a birthday gift for my niece.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_23_02",
+      "v": "She would have been a much better Collector than you.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_23_03",
+      "v": "She would…",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUTSCENE_YET_PG_24_01",
+      "v": "…And she will.",
+      "vn": "16.1"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_01",
+      "v": "Forgiveness Master... we have failed you.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_02",
+      "v": "The hated Champions of Earth... they have bested our army at every turn. They have stolen the Infinity Stones!",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_03",
+      "v": "NOT ALL OF THEM.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_04",
+      "v": "Master?",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_05",
+      "v": "YOU HAVE DONE WELL, MY CHILDREN... EVEN IF UNAWARE OF YOUR TRUE MISSION.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_06",
+      "v": "You have led the heroes through a ruse, deep into the mirror universe inside the Death Stone: an exact copy of our own reality, but dead and powerless…",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_07",
+      "v": "…as they will soon learn.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_08",
+      "v": "It’s time.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_09",
+      "v": "Meanwhile, in the “real” world, my Nameless marched unopposed…",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_10",
+      "v": "…gathering the true Infinity Stones… ",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_11",
+      "v": "…for their true master.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_12",
+      "v": "It’s as you said, Goddess of Death. Used in the right way, a single stone can be as dangerous as all of them combined.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_13",
+      "v": "Come with me. We have a multiverse to reshape… together.",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYCHAOS_14",
+      "v": "TO BE CONCLUDED IN INFINITY NIGHTMARE",
+      "vn": "17.2"
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_01",
+      "v": "Beautiful, isn’t it?",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_02",
-            "v": "The first time I saw the Battlerealm, I thought it was the most perfect jewel in all creation.",
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_02",
+      "v": "The first time I saw the Battlerealm, I thought it was the most perfect jewel in all creation.",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_03",
-            "v": "But I now realize it’s nothing but a cosmic trap... one that neither man nor god can escape.",
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_03",
+      "v": "But I now realize it’s nothing but a cosmic trap... one that neither man nor god can escape.",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_04",
-            "v": "We will not die here. I promise you.",
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_04",
+      "v": "We will not die here. I promise you.",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_05",
-            "v": "And how do mere humans plan to succeed, where cosmic entities have failed?",
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_05",
+      "v": "And how do mere humans plan to succeed, where cosmic entities have failed?",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_06",
-            "v": "Same way we’ve always done it...",
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_06",
+      "v": "Same way we’ve always done it...",
       "vn": 18
-        },
-        {
-            "k": "ID_UI_CUT_INFINITYNIGHT_07",
-            "v": "...Together.",
+    },
+    {
+      "k": "ID_UI_CUT_INFINITYNIGHT_07",
+      "v": "...Together.",
       "vn": 18
-        }
-    ]
+    }
+  ]
 }
