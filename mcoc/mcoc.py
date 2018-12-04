@@ -2828,7 +2828,8 @@ class PagesMenu:
                 page_list.append(page)
         page_length = len(page_list)
         if page_length == 1:
-            await self.display_page(page_list, 0)
+            self.page_list  = page_list
+            await self.display_page(None, 0)
             return
         self.embedded = isinstance(page_list[0], discord.Embed)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
