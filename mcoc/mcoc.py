@@ -2829,9 +2829,9 @@ class PagesMenu:
         page_length = len(page_list)
         if page_length == 1:
             if isinstance(page_list[0], discord.Embed) == True:
-                message = await self.bot.say(embed=self.page_list[0])
+                message = await self.bot.say(embed=page_list[0])
             else:
-                message = await self.bot.say(self.page_list[0])
+                message = await self.bot.say(page_list[0])
             return
         self.embedded = isinstance(page_list[0], discord.Embed)
         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
