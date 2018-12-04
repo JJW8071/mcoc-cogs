@@ -1825,7 +1825,7 @@ class MCOC(ChampionFactory):
         await self.bot.say(embed=em)
 
     @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
-    async def kabam_search(self, ctx, *, term: str = None):
+    async def kabam_search(self, ctx, *, term: str):
         '''Enter a search term or a JSON key'''
         masteries = load_kabam_json(kabam_masteries)
         special_attacks = load_kabam_json(kabam_special_attacks)
