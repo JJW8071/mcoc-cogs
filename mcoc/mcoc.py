@@ -1832,7 +1832,8 @@ class MCOC(ChampionFactory):
         bcg = load_kabam_json(kabam_bcg_en)
         bcg_stat = load_kabam_json(kabam_bcg_stat_en)
         ksearchlist = []
-        for keylist in (masteries.keys(), special_attacks.keys(), bcg.keys(), bcg_stat.keys()):
+        for data in (masteries, special_attacks, bcg, bcg_stat):
+            keylist = data.keys()
             if term in keylist:
                 await self.bot.say(self._bcg_recompile(data[term]))
                 return
