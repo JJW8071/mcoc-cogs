@@ -129,19 +129,24 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ## CollectorDevTeam Repo JSON files
 # Having trouble getting JSON data to load into memory.
-def load_cdt_json():
+async def load_cdt_json():
     data = ChainMap()
-    cdt_baseurl = 'https://github.com/CollectorDevTeam/assets/blob/master/data/'
-    json_url = 'json/snapshots/en/'
-    files = ('bcg_en.json', 'bcg_stat_en.json', 'special_attacks_en.json', 'masteries_en.json','character_bios_en.json')
+    # cdt_baseurl = 'https://github.com/CollectorDevTeam/assets/blob/master/data/'
+    # json_url = 'json/snapshots/en/'
+    files = ('https://github.com/CollectorDevTeam/assets/blob/master/data/bcg_en.json',
+        'https://github.com/CollectorDevTeam/assets/blob/master/data/bcg_stat_en.json',
+        'https://github.com/CollectorDevTeam/assets/blob/master/data/special_attacks_en.json',
+        'https://github.com/CollectorDevTeam/assets/blob/master/data/masteries_en.json',
+        'https://github.com/CollectorDevTeam/assets/blob/master/data/character_bios_en.json')
     for file in files:
-        raw_data = json.loads(requests.get(cdt_baseurl+json_url+file).text)
-        print(cdt_baseurl+json_url+file)
+        get_file = requests.get(file)
+        raw_data = json.loads(get_file.text)
+        print(file)
         for dlist in raw_data['strings']:
             data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
-cdt_json = load_cdt_json()
+cdt_json = await load_cdt_json()
 print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
