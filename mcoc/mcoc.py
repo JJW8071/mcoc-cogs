@@ -129,18 +129,19 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ## CollectorDevTeam Repo JSON files
 # Having trouble getting JSON data to load into memory.
-async def load_cdt_json():
+def load_cdt_json():
     data = ChainMap()
     cdt_baseurl = 'https://github.com/CollectorDevTeam/assets/blob/master/data/'
     json_url = 'json/snapshots/en/'
     files = ('bcg_en.json', 'bcg_stat_en.json', 'special_attacks_en.json', 'masteries_en.json','character_bios_en.json')
     for file in files:
         raw_data = json.loads(requests.get(baseurl+json_url+file).text)
+        print(baseurl+json_url+file)
         for dlist in raw_data['strings']:
             data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
-cdt_json = await load_cdt_json()
+cdt_json = load_cdt_json()
 print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
