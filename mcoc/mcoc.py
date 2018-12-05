@@ -133,6 +133,7 @@ def load_cdt_json():
     data = ChainMap()
     # cdt_baseurl = 'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/'
     # json_url = 'json/snapshots/en/'
+    aux = []
     files = ('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
         'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
         'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json',
@@ -142,7 +143,7 @@ def load_cdt_json():
         get_file = requests.get(file)
         raw_data = json.loads(get_file.text)
         print(file)
-        for dlist in raw_data['strings']:
+        for dlist in aux, raw_data['strings']:
             data.maps.append({d['k']:d['v'] for d in dlist})
     return data
 
