@@ -135,8 +135,8 @@ def load_cdt_json():
     json_url = 'json/snapshots/en/'
     files = ('bcg_en.json', 'bcg_stat_en.json', 'special_attacks_en.json', 'masteries_en.json','character_bios_en.json')
     for file in files:
-        raw_data = json.loads(requests.get(baseurl+json_url+file).text)
-        print(baseurl+json_url+file)
+        raw_data = json.loads(requests.get(cdt_baseurl+json_url+file).text)
+        print(cdt_baseurl+json_url+file)
         for dlist in raw_data['strings']:
             data.maps.append({d['k']:d['v'] for d in dlist})
     return data
