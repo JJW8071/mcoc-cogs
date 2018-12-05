@@ -131,13 +131,13 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 # Having trouble getting JSON data to load into memory.
 def load_cdt_json():
     data = ChainMap()
-    # cdt_baseurl = 'https://github.com/CollectorDevTeam/assets/blob/master/data/'
+    # cdt_baseurl = 'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/'
     # json_url = 'json/snapshots/en/'
-    files = ('https://github.com/CollectorDevTeam/assets/blob/master/data/bcg_en.json',
-        'https://github.com/CollectorDevTeam/assets/blob/master/data/bcg_stat_en.json',
-        'https://github.com/CollectorDevTeam/assets/blob/master/data/special_attacks_en.json',
-        'https://github.com/CollectorDevTeam/assets/blob/master/data/masteries_en.json',
-        'https://github.com/CollectorDevTeam/assets/blob/master/data/character_bios_en.json')
+    files = ('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
+        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
+        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json',
+        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries_en.json',
+        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios_en.json')
     for file in files:
         get_file = requests.get(file)
         raw_data = json.loads(get_file.text)
