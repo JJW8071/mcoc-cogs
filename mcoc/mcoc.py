@@ -1834,20 +1834,21 @@ class MCOC(ChampionFactory):
     @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
     async def kabam_search(self, ctx, *, term: str):
         '''Enter a search term or a JSON key'''
-        masteries = load_kabam_json(kabam_masteries)
-        special_attacks = load_kabam_json(kabam_special_attacks)
-        bcg = load_kabam_json(kabam_bcg_en)
-        bcg_stat = load_kabam_json(kabam_bcg_stat_en)
+        # masteries = load_kabam_json(kabam_masteries)
+        # special_attacks = load_kabam_json(kabam_special_attacks)
+        # bcg = load_kabam_json(kabam_bcg_en)
+        # bcg_stat = load_kabam_json(kabam_bcg_stat_en)
         ksearchlist = []
-        for data in (masteries, special_attacks, bcg, bcg_stat):
-            keylist = data.keys()
-            if term in keylist:
-                await self.bot.say(self._bcg_recompile(data[term]))
-                return
-            else:
-                for k in keylist:
-                    if term in data[k]:
-                        ksearchlist.append('\n{}\n{}'.format(k, self._bcg_recompile(data[k])))
+        # for data in (masteries, special_attacks, bcg, bcg_stat):
+        data = cdt_json
+        keylist = data.keys()
+        if term in keylist:
+            await self.bot.say(self._bcg_recompile(data[term]))
+            return
+        else:
+            for k in keylist:
+                if term in data[k]:
+                    ksearchlist.append('\n{}\n{}'.format(k, self._bcg_recompile(data[k])))
         if len(ksearchlist) > 0:
             pages = chat.pagify('\n'.join(s for s in ksearchlist))
             page_list = []
