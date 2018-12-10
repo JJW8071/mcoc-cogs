@@ -1,4 +1,4 @@
-KABAM_ICONimport re
+import re
 from datetime import datetime, timedelta
 from dateutil.parser import parse as dateParse
 from textwrap import wrap
@@ -1692,7 +1692,7 @@ class MCOC(ChampionFactory):
         # if xref['royal_writeup'] != '':
         #     em.add_field(name='Royal Writeup', value=xref['royal_writeup'])
         em.add_field(name='Shortcode', value=champ.short)
-        em.set_footer(text='MCOC Website', icon_url='https://imgur.com/UniRf5f.png')
+        em.set_footer(text='MCOC Website', icon_url=KABAM_ICON)
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
@@ -1814,7 +1814,7 @@ class MCOC(ChampionFactory):
         if term in cdt_keylist:
             em = discord.Embed(title='Data Search',  description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
             em.set_thumbnail(url=COLLECTOR_ICON)
-            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             ## term is a specific JSON key
             # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
             await self.bot.say(embed=em)
@@ -1830,7 +1830,7 @@ class MCOC(ChampionFactory):
             for page in pages:
                 em = discord.Embed(title='Data Search',  description = page)
                 em.set_thumbnail(url=COLLECTOR_ICON)
-                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+                em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
                 page_list.append(em)
                 # page_list.append(page)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
