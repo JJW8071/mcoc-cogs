@@ -1830,7 +1830,7 @@ class MCOC(ChampionFactory):
             for page in pages:
                 em.description = page
                 page_list.append(em)
-                page_list.append(page)
+                # page_list.append(page)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
             await menu.menu_start(page_list)
 
