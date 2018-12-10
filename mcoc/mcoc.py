@@ -1810,9 +1810,15 @@ class MCOC(ChampionFactory):
     async def kabam_search(self, ctx, *, term: str):
         '''Enter a search term or a JSON key'''
         ksearchlist = []
+        em = discord.Embed(title='Data Search')
+        em.set_thumbnail(url=champ.get_avatar())
+        em.add_field(name='Shortcode', value=champ.short)
+        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         if term in cdt_keylist:
             ## term is a specific JSON key
-            await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
+            # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
+            em.description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])
+            await self.bot.say(embed=em)
             return
         else:
             ## search for term in json
@@ -1823,7 +1829,9 @@ class MCOC(ChampionFactory):
             pages = chat.pagify('\n'.join(s for s in ksearchlist))
             page_list = []
             for page in pages:
-                page_list.append(page)#chat.box(page))
+                em.description = page
+                page_list.append(em)
+                page_list.append(page)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
             await menu.menu_start(page_list)
 
