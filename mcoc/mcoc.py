@@ -1812,18 +1812,18 @@ class MCOC(ChampionFactory):
         ksearchlist = []
         if term in cdt_keylist:
             ## term is a specific JSON key
-            await self.bot.say(self._bcg_recompile(cdt_json[term]))
+            await self.bot.say('\n**{}**\n{}'.format(k, self._bcg_recompile(cdt_json[term])))
             return
         else:
             ## search for term in json
             for k in cdt_keylist:
                 if term in cdt_json[k]:
-                    ksearchlist.append('\n{}\n{}'.format(k, self._bcg_recompile(cdt_json[k])))
+                    ksearchlist.append('\n**{}**\n{}'.format(k, self._bcg_recompile(cdt_json[k])))
         if len(ksearchlist) > 0:
             pages = chat.pagify('\n'.join(s for s in ksearchlist))
             page_list = []
             for page in pages:
-                page_list.append(chat.box(page))
+                page_list.append(page)#chat.box(page))
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
             await menu.menu_start(page_list)
 
