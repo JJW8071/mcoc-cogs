@@ -1812,7 +1812,6 @@ class MCOC(ChampionFactory):
         ksearchlist = []
         em = discord.Embed(title='Data Search')
         em.set_thumbnail(url=COLLECTOR_ICON)
-        em.add_field(name='Shortcode', value=champ.short)
         em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         if term in cdt_keylist:
             ## term is a specific JSON key
