@@ -102,12 +102,6 @@ gsheet_files = {
     'sig_coeff_5star': {'gkey': '1VHi9MioEGAsLoZneYQm37gPkmbD8mx7HHa-zuMiwWns',
             'local': local_files['sig_coeff_5star'],
             },
-    #'spotlight': {'gkey': '1I3T2G2tRV05vQKpBfmI04VpvP5LjCBPfVICDmuJsjks',
-            #'local': 'data/mcoc/spotlight_test.json',
-            #},
-    #'crossreference': {'gkey': '1WghdD4mfchduobH0me4T6IvhZ-owesCIyLxb019744Y',
-            #'local': 'data/mcoc/xref_test.json',
-            #},
     'synergy': {'gkey': '1Apun0aUcr8HcrGmIODGJYhr-ZXBCE_lAR7EaFg_ZJDY',
             'local': local_files['synergy'],
             },
@@ -131,8 +125,6 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 # Having trouble getting JSON data to load into memory.
 def load_cdt_json():
     data = ChainMap()
-    # cdt_baseurl = 'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/'
-    # json_url = 'json/snapshots/en/'
     aux = []
     files = ('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
         'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
@@ -1768,24 +1760,6 @@ class MCOC(ChampionFactory):
             await self.bot.say(embed=em)
         except:
             await self.bot.say('Special Attack not found')
-    # @commands.command()
-    # async def sigarray(self, champ : ChampConverter, dbg=1, *args):
-    #     '''the Signature Ability of a Champion at multiple levels'''
-    #     champ = self._resolve_alias(champ)
-    #     title, desc = champ.get_sigarray(**self.settings)
-    #     if dbg == 0:
-    #         em = discord.Embed(color=champ.class_color, title=title,
-    #                 description=desc)
-    #     elif dbg == 1:
-    #         em = discord.Embed(color=champ.class_color, title=champ.full_name)
-    #         em.add_field(name='Signature Ability Array', value=desc)
-    #     else:
-    #         em = discord.Embed(color=champ.class_color, title=title)
-    #         em.add_field(name='__SigLvl__', value='1\n20\n40')
-    #         em.add_field(name='__X__', value='1.0\n1.9\n2.1', inline=True)
-    #
-    #     em.set_thumbnail(url=champ.get_avatar())
-    #     await self.bot.say(embed=em)
 
     @champ.command(pass_context=True, name='prestige')
     async def champ_prestige(self, ctx, *, champs : ChampConverterMult):
@@ -2357,12 +2331,8 @@ class Champion:
         return image
 
     async def get_bio(self):
-        # bios = load_kabam_json(kabam_bio)
-        # bcg_en = load_kabam_json(kabam_bcg_en)
-        # bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         bio = ''
-        # for s in (bios, bcg_en, bcg_stat_en):
         ## switched to memory loaded json data
         if key in cdt_keylist:
             bio = cdt_json[key]
@@ -2477,16 +2447,11 @@ class Champion:
         return pack
 
     def get_special_attacks(self):
-        # specials = load_kabam_json(kabam_special_attacks)
-        # bios = load_kabam_json(kabam_bio)
-        # bcg_en = load_kabam_json(kabam_bcg_en)
-        # bcg_stat_en=load_kabam_json(kabam_bcg_stat_en)
         prefix = 'ID_SPECIAL_ATTACK_'
         desc = 'DESCRIPTION_'
         zero = '_0'
         one = '_1'
         two = '_2'
-        # for i in (specials, bios, bcg_en, bcg_stat_en):
         if prefix+self.mcocjson+one in cdt_keylist:
             s0 = cdt_json[prefix + self.mcocjson + zero]
             s1 = cdt_json[prefix + self.mcocjson + one]
