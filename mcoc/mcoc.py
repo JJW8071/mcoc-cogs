@@ -2684,9 +2684,9 @@ class Champion:
         simplekey = preample + simple
         descriptionkey = preamble + desc,
         '''
-
-        if sigs is None:
-            sigs = load_kabam_json(kabam_bcg_stat_en)
+        #
+        # if sigs is None:
+        #     sigs = load_kabam_json(kabam_bcg_stat_en)
 
         mcocsig = self.mcocsig
         print(mcocsig)
@@ -2703,9 +2703,14 @@ class Champion:
             print('No Sig Description Found')
         print(self._DESC_LIST)
 
-        return dict(title={'k': title, 'v': sigs[title]},
-                    simple={'k': simple, 'v': sigs[simple]},
-                    desc={'k': desc, 'v': [sigs[k] for k in desc]})
+        return dict(title={'k': title, 'v': cdt_json[title]},
+                    simple={'k': simple, 'v': cdt_json[simple]},
+                    desc={'k': desc, 'v': [cdt_json[k] for k in desc]})
+
+        #
+        # return dict(title={'k': title, 'v': sigs[title]},
+        #             simple={'k': simple, 'v': sigs[simple]},
+        #             desc={'k': desc, 'v': [sigs[k] for k in desc]})
                     # desc={'k': desc, 'v': [sigs[k] for k in desc]},
                     # huds={'k': huds, 'v': [sigs[k] for k in huds]})
 
