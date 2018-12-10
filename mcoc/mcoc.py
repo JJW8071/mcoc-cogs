@@ -2366,7 +2366,6 @@ class Champion:
         ## switched to memory loaded json data
         if key in cdt_keylist:
             bio = cdt_json[key]
-            break
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
