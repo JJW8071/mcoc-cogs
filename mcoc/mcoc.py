@@ -1817,7 +1817,7 @@ class MCOC(ChampionFactory):
         if term in cdt_keylist:
             ## term is a specific JSON key
             # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
-            em.description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])
+            em.description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term]))
             await self.bot.say(embed=em)
             return
         else:
