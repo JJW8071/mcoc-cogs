@@ -1,4 +1,4 @@
-import re
+KABAM_ICONimport re
 from datetime import datetime, timedelta
 from dateutil.parser import parse as dateParse
 from textwrap import wrap
@@ -59,6 +59,7 @@ SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffe
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/cdt_icon.png'
+KABAM_ICON='https://imgur.com/UniRf5f.png'
 MODOKSAYS = ['alien', 'buffoon', 'charlatan', 'creature', 'die', 'disintegrate',
         'evaporate', 'feelmypower', 'fool', 'fry', 'haha', 'iamscience', 'idiot',
         'kill', 'oaf', 'peabrain', 'pretender', 'sciencerules', 'silence',
@@ -1087,7 +1088,7 @@ class MCOC(ChampionFactory):
                     value=chat.box(' '.join(champ.class_tags.union(champ.tags))),inline=False)
             em.add_field(name='Shortcode', value=champ.short,inline=False)
             em.set_thumbnail(url=champ.get_avatar())
-            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             await self.bot.say(embed=em)
 
     @champ.command(pass_context=True, name='duel')
@@ -1300,7 +1301,7 @@ class MCOC(ChampionFactory):
             em.add_field(name='Signature Level {}'.format(champ.sig),
                     value=desc.format(d=sig_calcs))
             em.add_field(name='Shortcode', value=champ.short)
-            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             em.set_thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
 
@@ -1718,7 +1719,7 @@ class MCOC(ChampionFactory):
                     em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
                 em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
                 em.set_thumbnail(url=champ.get_avatar())
-                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+                em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
                 em.description = page
                 embeds.append(em)
         appinfo = await self.bot.application_info()
@@ -1734,7 +1735,7 @@ class MCOC(ChampionFactory):
                 em.add_field(name='Counters (#!)', value=', '.join(c.title() for c in counters), inline=False)
             em.add_field(name='Hashtags (#)', value=champ.hashtags, inline=False)
             em.set_thumbnail(url=champ.get_avatar())
-            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             embeds.append(em)
         # else:
         #     embeds.append(em)
@@ -1756,7 +1757,7 @@ class MCOC(ChampionFactory):
             em.add_field(name=specials[2], value=specials[5])
             em.set_thumbnail(url=champ.get_avatar())
             em.add_field(name='Shortcode', value=champ.short)
-            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             await self.bot.say(embed=em)
         except:
             await self.bot.say('Special Attack not found')
@@ -1810,13 +1811,12 @@ class MCOC(ChampionFactory):
     async def kabam_search(self, ctx, *, term: str):
         '''Enter a search term or a JSON key'''
         ksearchlist = []
-        em = discord.Embed(title='Data Search')
-        em.set_thumbnail(url=COLLECTOR_ICON)
-        em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
         if term in cdt_keylist:
+            em = discord.Embed(title='Data Search',  description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
+            em.set_thumbnail(url=COLLECTOR_ICON)
+            em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
             ## term is a specific JSON key
             # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
-            em.description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term]))
             await self.bot.say(embed=em)
             return
         else:
@@ -1828,7 +1828,9 @@ class MCOC(ChampionFactory):
             pages = chat.pagify('\n'.join(s for s in ksearchlist))
             page_list = []
             for page in pages:
-                em.description = page
+                em = discord.Embed(title='Data Search',  description = page)
+                em.set_thumbnail(url=COLLECTOR_ICON)
+                em.set_footer(text='MCOC Game Files', icon_url='https://imgur.com/UniRf5f.png')
                 page_list.append(em)
                 # page_list.append(page)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
