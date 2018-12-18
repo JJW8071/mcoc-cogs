@@ -1,6 +1,8 @@
 {
-  "Vitality":
+  "vitality":
     {
+      "proper": "Vitality",
+      "icon": "<:vitality:345009436022276116>",
       "category":"Defense",
       "ranks":9,
       "text":"Increase the Health of all Champions by {}.",
@@ -96,8 +98,10 @@
         "runit": null
       }
     },
-  "Greater Vitality":
+    "greatervitality":
     {
+      "proper": "Greater Vitality",
+      "icon": "<:friendshp:344221218708389888>",
       "category": "Defense",
       "ranks": 9,
       "text": "Increase the Health of all Champions by {}%.",
@@ -193,8 +197,10 @@
         "runit": null
       }
     },
-  "Salve":
+    "salve":
     {
+      "proper": "Salve",
+      "icon": "<:salve:345011513498664960>",
       "category": "Defense",
       "ranks": 3,
       "text": "Your Champions recover {} Health twice per second for 60 seconds. No effect on robots.",
@@ -230,8 +236,10 @@
         "runit": 3
       }
     },
-  "Recovery":
+    "recovery":
     {
+      "proper": "Recovery",
+      "icon": "<:recovery:345011480422383619>",
       "category": "Defense",
       "ranks": 3,
       "text": "Increase any Health your Champions recover during a fight by {}%",
@@ -267,8 +275,10 @@
         "runit": 3
       }
     },
-  "Energy Resistance":
+    "energyresistance":
     {
+      "proper": "Energy Resistance",
+      "icon": "<:energyresist:345009435472560129>",
       "category": "Defense",
       "ranks": 4,
       "text": "Increase any Health your Champions recover during a fight by {}%",
@@ -314,8 +324,10 @@
         "runit": null
       }
     },
-  "Physical Resistance":
+    "physicalresistance":
     {
+      "proper": "Physical Resistance",
+      "icon": "<:pysicalresist:345002186754752512>",
       "category": "Defense",
       "ranks": 4,
       "text": "Increase Resistance against Physical damage by {} for all Champions.",
@@ -361,8 +373,10 @@
         "runit": 4
       }
     },
-  "Block Proficiency":
+    "blockproficiency":
     {
+      "proper": "Block Proficiency",
+      "icon": "<:teammates:344221218779430922> ",
       "category": "Defense",
       "ranks": 4,
       "text": "Increase the Block Proficiency of your Champions by {}.",
@@ -408,8 +422,10 @@
         "runit": null
       }
     },
-  "Perfect Block":
+    "perfectblock":
     {
+      "proper": "Perfect Block",
+      "icon": "<:teammates:344221218779430922> ",
       "category": "Defense",
       "ranks": 4,
       "text": "While Blocking, your Champions have a {}% chance to perform a Perfect Block.",
@@ -455,8 +471,10 @@
         "runit": null
       }
     },
-  "Stand Your Ground":
+    "standyourground":
     {
+      "proper": "Stand Your Ground",
+      "icon": "<:friendar:344221218477703188> ",
       "category": "Defense",
       "ranks": 5,
       "text": "While Blocking, your Champions have a {}% chance to resist a Block Break.",
@@ -512,8 +530,10 @@
         "runit": 4
       }
     },
-  "Collar Tech":
+    "collartech":
     {
+      "proper": "Collar Tech",
+      "icon": "<:engineering:344902813576331275>",
       "category": "Defense",
       "ranks": 5,
       "text": "Retrofit Tech Champions with a field that inhibits enemy Power Gain by {}%.",
@@ -569,8 +589,10 @@
           "runit": 5
         }
     },
-  "Serum Science":
+    "serumscience":
     {
+      "proper": "Serum Science",
+      "icon": "<:serumscience:345008510276206593>",
       "category": "Defense",
       "ranks": 5,
       "text": "Give Science Champions a Serum of {} Energy Resistance.",
@@ -626,8 +648,10 @@
         "runit": null
       }
     },
-  "Willpower":
+    "willpower":
     {
+      "proper": "Willpower",
+      "icon": "<:willpower:345002106345881610>",
       "category": "Defense",
       "ranks": 3,
       "text": "For each new type of detrimental effect your champions suffer, they regenerate {}% Health per second and gain +{} Armor until that effect expires. No effect on robots.",
@@ -663,8 +687,10 @@
         "runit": 6
       }
     },
-  "Coagulate":
+    "coagulate":
     {
+      "proper": "Coagulate",
+      "icon": "<:coagulate:345010036436631552>",
       "category": "Defense",
       "ranks": 3,
       "text": "Your Champions take {}% less damage from any Bleed effect they suffer.",
@@ -700,8 +726,10 @@
         "runit": 6
       }
     },
-  "Suture":
+    "suture":
     {
+      "proper": "Suture",
+      "icon": "<:coagulate:345010036436631552>",
       "category": "Defense",
       "ranks": 3,
       "text": "Reduce the duration of enemy Bleed effects by {}%.",
@@ -718,7 +746,7 @@
       },
       "2":{
         "effects": 15,
-        "pibump": "?",
+        "pibump": 0.0049,
         "ucarbs": 1,
         "uclass": null,
         "uunits": null,
@@ -728,7 +756,7 @@
       },
       "3":{
         "effects": 20,
-        "pibump": "?",
+        "pibump": 0.0050,
         "ucarbs": 1,
         "uclass": null,
         "uunits": null,
@@ -737,8 +765,10 @@
         "runit": 6
       }
     },
-  "Inequity":
+    "inequity":
     {
+      "proper": "Inequity",
+      "icon": "<:friendar:344221218477703188> ",
       "category": "Defense",
       "ranks": 3,
       "text": "Decrease opponents' Attack by {}% for each detrimental effect they sufer, up to a maximum of 36% reduction.",
@@ -774,8 +804,10 @@
         "runit": 6
       }
     },
-  "Resonate":
+    "resonate":
     {
+      "proper": "Resonate",
+      "icon": "<:resonate:524637109559099433>",
       "category": "Defense",
       "ranks": 3,
       "text": "Contact & Physical Attacks have a {} chance to Weaken the opponent, reducing their Attack by {}% for {} seconds.",
@@ -811,8 +843,10 @@
         "runit": 6
       }
     },
-  "Strength":
+    "strength":
     {
+      "proper": "Strength",
+      "icon": "<:nemesis:344221218825830400>",
       "category": "Offense",
       "ranks": 9,
       "text": "Increase the Attack of all Champions by {}.",
@@ -908,8 +942,10 @@
         "runit": null
       }
     },
-  "Greater Strength":
+    "greaterstrength":
     {
+      "proper": "Greater Strength",
+      "icon": "<:nemesis:344221218825830400>",
       "category": "Offense",
       "ranks": 9,
       "text": "Increase the Attack of all Champions by {}%.",
@@ -1005,8 +1041,10 @@
         "runit": null
       }
     },
-  "Pierce":
+    "pierce":
     {
+      "proper": "Pierce",
+      "icon": "<:crimebosses:344223568084598784>",
       "category": "Offense",
       "ranks": 3,
       "text": "Critical Hits from your Champions ignore an additional {}% of Armor.",
@@ -1042,8 +1080,10 @@
         "runit": 3
       }
     },
-  "Lesser Precision":
+    "lesserprecision":
     {
+      "proper": "Lesser Precision",
+      "icon": "<:enemies:344221218788081664> ",
       "category": "Offense",
       "ranks": 5,
       "text": "Increase the Critical Rate of all Champions by {}.",
@@ -1099,8 +1139,10 @@
         "runit": 300
       }
     },
-  "Precision":
+    "precision":
     {
+      "proper": "Precision",
+      "icon": "<:enemies:344221218788081664> ",
       "category": "Offense",
       "ranks": 5,
       "text": "Increase the Critical Rate of all Champions by {}.",
@@ -1156,8 +1198,10 @@
         "runit": 5
       }
     },
-  "Lesser Cruelty":
+    "lessercruelty":
     {
+      "proper": "Lesser Cruelty",
+      "icon": "<:rivals:344221218397880332>",
       "category": "Offense",
       "ranks": 5,
       "text": "Increase the Critical Damage of all Champions by {}.",
@@ -1213,8 +1257,10 @@
         "runit": null
       }
     },
-  "Cruelty":
+    "cruelty":
     {
+      "proper": "Cruelty",
+      "icon": "<:rivals:344221218397880332>",
       "category": "Offense",
       "ranks": 5,
       "text": "Increase the Critical Damage of all Champions by {}.",
@@ -1270,8 +1316,10 @@
         "runit": 5
       }
     },
-  "Courage":
+    "courage":
     {
+      "proper": "Courage",
+      "icon": "<:courage:368111157325594625>",
       "category": "Offense",
       "ranks": 3,
       "text": "Increase the Attack of all Champions by {}% while they're below 50% Health.",
@@ -1307,8 +1355,10 @@
         "runit": null
       }
     },
-  "Extended Fury":
+    "extendedfury":
     {
+      "proper": "Extended Fury",
+      "icon": "<:extendedfury:524638475845369888>",
       "category": "Offense",
       "ranks": 4,
       "text": "Increase the duration of Fury by {} second(s).",
@@ -1354,8 +1404,10 @@
         "runit": null
       }
     },
-  "Enhanced Fury":
+    "enhancedfury":
     {
+      "proper": "Enhanced Fury",
+      "icon": "<:extendedfury:524638475845369888>",
       "category": "Offense",
       "ranks": 4,
       "text": "Increase the effectiveness of Fury by {}%.",
@@ -1401,15 +1453,17 @@
         "runit": null
       }
     },
-  "Pure Skill":
+    "pureskill":
     {
+      "proper": "Pure Skill",
+      "icon": "<:skilldomination:344264765146923028>",
       "category": "Offense",
       "ranks": 5,
       "text": "With extensive field training, Skill Champions ignore an additional {} enemy Armor with Critical Hits.",
       "modifier": 0.1,
       "1":{
         "effects": 4,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 5,
         "uunits": null,
@@ -1419,7 +1473,7 @@
       },
       "2":{
         "effects": 8,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 10,
         "uunits": null,
@@ -1429,7 +1483,7 @@
       },
       "3":{
         "effects": 16,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 20,
         "uunits": null,
@@ -1439,7 +1493,7 @@
       },
       "4":{
         "effects": 32,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 40,
         "uunits": null,
@@ -1449,7 +1503,7 @@
       },
       "5":{
         "effects": 64,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 80,
         "uunits": null,
@@ -1458,15 +1512,17 @@
         "runit": null
       }
     },
-  "Mutagenesis":
+    "mutagenesis":
     {
+      "proper": "Mutagenesis",
+      "icon": "<:mutant:344221218276114433> ",
       "category": "Offense",
       "ranks": 5,
       "text": "Rapid mutagenesis closes Bleed wounds in your Mutant Champions {} second(s) faster than non-Mutants.",
       "modifier": 1,
       "1":{
         "effects": 0.5,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 5,
         "uunits": null,
@@ -1476,7 +1532,7 @@
       },
       "2":{
         "effects": 1,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 10,
         "uunits": null,
@@ -1486,7 +1542,7 @@
       },
       "3":{
         "effects": 1.5,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 20,
         "uunits": null,
@@ -1496,7 +1552,7 @@
       },
       "4":{
         "effects": 2,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 40,
         "uunits": null,
@@ -1506,7 +1562,7 @@
       },
       "5":{
         "effects": 2.5,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": 80,
         "uunits": null,
@@ -1515,8 +1571,10 @@
         "runit": null
       }
     },
-  "Glass Canon":
+    "glasscanon":
     {
+      "proper": "Glass Canon",
+      "icon": "<:nemesis:344221218825830400>",
       "category": "Offense",
       "ranks": 3,
       "text": "Increase the Attack of all Champions by {}%, but reduce their maximum Health by {}%.",
@@ -1552,8 +1610,10 @@
         "runit": 3
       }
     },
-  "Recoil":
+    "recoil":
     {
+      "proper": "Recoil",
+      "icon": "<:recoil:524641305347883009> ",
       "category": "Offense",
       "ranks": 3,
       "text": "Increase Special Attack damage for all Champions by {}%, but they sacrifice {}% Health for each activation.",
@@ -1589,8 +1649,10 @@
         "runit": 3
       }
     },
-  "Liquid Courage":
+    "liquidcourage":
     {
+      "proper": "Liquid Courage",
+      "icon": "<:liquidcourage:524641304802623490>",
       "category": "Offense",
       "ranks": 3,
       "text": "Increase the Attack of all Champions by {}%, but they suffer an eternal Poison that drains {}% Health each second.",
@@ -1626,8 +1688,10 @@
         "runit": 3
       }
     },
-  "Double Edge":
+    "doubleedge":
     {
+      "proper": "Double Edge",
+      "icon": "<:midnightpursuit:519238795988566017>",
       "category": "Offense",
       "ranks": 3,
       "text": "Increase the Attack of all Champions by {}%, but up to {}% Health is lost by Bleeding over {} seconds.",
@@ -1663,15 +1727,17 @@
         "runit": 6
       }
     },
-  "Despair":
+    "despair":
     {
+      "proper": "Despair",
+      "icon": "<:healblock:474638487103078411>",
       "category": "Offense",
       "ranks": 3,
       "text": "Debuffs applied to enemies reduce their healing and Regeneration by {}% each",
       "modifier": 0.01,
       "1":{
         "effects": 5,
-        "pibump": "?",
+        "pibump": 0.0092,
         "ucarbs": 2,
         "uclass": null,
         "uunits": 10,
@@ -1681,7 +1747,7 @@
       },
       "2":{
         "effects": 10,
-        "pibump": "?",
+        "pibump": 0.0045,
         "ucarbs": 1,
         "uclass": null,
         "uunits": 20,
@@ -1691,7 +1757,7 @@
       },
       "3":{
         "effects": 15,
-        "pibump": "?",
+        "pibump": 0.0071,
         "ucarbs": 1,
         "uclass": null,
         "uunits": 30,
@@ -1700,8 +1766,10 @@
         "runit": 6
       }
     },
-  "Deep Wounds":
+    "deepwounds":
     {
+      "proper": "Deep Wounds",
+      "icon": "<:contestteammates:520658239592071189>",
       "category": "Offense",
       "ranks": 5,
       "text": "Bleed your Champions inflict lasts {} seconds longer. If they have more HP than their target, their Bleed instantly strikes down an additional {}% max Health from enemies.",
@@ -1738,7 +1806,7 @@
       },
       "4":{
         "effects": [2, 0.8],
-        "pibump": "?",
+        "pibump": 0.0046,
         "ucarbs": 1,
         "uclass": null,
         "uunits": 25,
@@ -1757,8 +1825,10 @@
         "runit": 10
       }
     },
-  "Unfazed":
+    "unfazed":
     {
+      "proper": "Unfazed",
+      "icon": "<:unfazed:524641305348014080>",
       "category": "Offense",
       "ranks": 5,
       "text": "When an enemy Evades, your Champions have a {}% chance to stack an additional {} Critical Damage for their next Critical hit and become Unstoppable for {} seconds",
@@ -1814,8 +1884,10 @@
         "runit": 10
       }
     },
-  "Assassin":
+    "assassin":
     {
+      "proper": "Assassin",
+      "icon": "<:baneofhellskitchen:355810788704780299>",
       "category": "Offense",
       "ranks": 5,
       "text": "Against enemies below 18% Health your Champions gain {}% Attack and decrease enemies' defense Ability Accuracy by {}%.  If enemies start the fight below 18% your Champions also gain 30% offensive Ability Accuracy.",
@@ -1852,7 +1924,7 @@
       },
       "4":{
         "effects": [50, 18],
-        "pibump": "?",
+        "pibump": 0.0045,
         "ucarbs": 1,
         "uclass": null,
         "uunits": null,
@@ -1862,7 +1934,7 @@
       },
       "5":{
         "effects": [60, 20],
-        "pibump": "?",
+        "pibump": 0.0045,
         "ucarbs": 1,
         "uclass": null,
         "uunits": null,
@@ -1871,15 +1943,17 @@
         "runit": 10
       }
     },
-  "Wisdom":
+    "wisdom":
     {
-      "category": "Utility",
+      "proper": "Wisdom",
+      "icon": "<:wisdom:524644067028762625>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Earn +{} XP with all Summoner XP rewards.",
       "modifier": 1,
       "1":{
         "effects": 10,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1889,7 +1963,7 @@
       },
       "2":{
         "effects": 20,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1899,7 +1973,7 @@
       },
       "3":{
         "effects": 30,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1908,15 +1982,17 @@
         "runit": null
       }
     },
-  "Intelligence":
+    "intelligence":
     {
-      "category": "Utility",
+      "proper": "Intelligence",
+      "icon": "<:wisdom:524644067028762625>",
+      "category": "Proficiencies",
       "ranks": 5,
       "text": "Increases all Summoner XP rewards by {}%.",
       "modifier": 0.01,
       "1":{
         "effects": 4,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1926,7 +2002,7 @@
       },
       "2":{
         "effects": 8,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1936,7 +2012,7 @@
       },
       "3":{
         "effects": 12,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1946,7 +2022,7 @@
       },
       "4":{
         "effects": 16,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1956,7 +2032,7 @@
       },
       "5":{
         "effects": 20,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -1965,9 +2041,11 @@
         "runit": 5
       }
     },
-  "Limber":
+    "limber":
     {
-      "category": "Utility",
+      "proper": "Limber",
+      "icon": "<:avengers:344221218678767616>",
+      "category": "Proficiencies",
       "ranks": 5,
       "text": "Rigorous mental and physical training reduces the duration of enemy Stun effects by {}%.",
       "modifier": 0.01,
@@ -2022,9 +2100,11 @@
         "runit": 5
       }
     },
-  "Parry":
+    "parry":
     {
-      "category": "Utility",
+      "proper": "Parry",
+      "icon": "<:parry:524657243904540682>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Timing a Block right when attacked reduces damage by {}%. If contact is made, Stun attackers for up to {} second(s). Stun duration increases with Perfect Block Chance.",
       "modifier": [0.01, 1],
@@ -2059,9 +2139,11 @@
         "runit": 3
       }
     },
-  "Stupefy":
+    "stupefy":
     {
-      "category": "Utility",
+      "proper": "Stupefy",
+      "icon": "",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "When your champions inflict Stun, it lasts for {} additional second(s).",
       "modifier": 1,
@@ -2096,9 +2178,11 @@
         "runit": 3
       }
     },
-  "Petrify":
+    "petrify":
     {
-      "category": "Utility",
+      "proper": "Petrify",
+      "icon": "<:petrify:524644083696795675>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "When your Champions inflict Stun, they also reduce enemy Health and Power gains by up to {}% for the duration of the Stun.",
       "modifier": 1,
@@ -2133,9 +2217,11 @@
         "runit": 3
       }
     },
-  "Pacify":
+    "pacify":
     {
-      "category": "Utility",
+      "proper": "Pacify",
+      "icon": "<:petrify:524644083696795675>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "When you Champions inflict Stun, they also reduce enemy ability triggers by {}% for the duration of the Stun.",
       "modifier": 1,
@@ -2170,9 +2256,11 @@
         "runit": 3
       }
     },
-  "Dexterity":
+    "dexterity":
     {
-      "category": "Utility",
+      "proper": "Dexterity",
+      "icon": "<:dexterity:524656565702230031>",
+      "category": "Proficiencies",
       "ranks": 1,
       "text": "Evade all attacks while Dodging back. Dodging an attack in this way grants {}% Critical Rate for your next attack.",
       "modifier": 1,
@@ -2207,15 +2295,17 @@
         "runit": 3
       }
     },
-  "Pitance":
+    "pitance":
     {
-      "category": "Utility",
+      "proper": "Pitance",
+      "icon": "<:competition:355811218520539136>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Earn +{} Gold with all Gold rewards.",
       "modifier": 1,
       "1":{
         "effects": 1,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -2225,7 +2315,7 @@
       },
       "2":{
         "effects": 2,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -2235,7 +2325,7 @@
       },
       "3":{
         "effects": 3,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -2244,15 +2334,17 @@
         "runit": null
       }
     },
-  "Prosperity":
+    "prosperity":
     {
-      "category": "Utility",
+      "proper": "Prosperity",
+      "icon": "<:competition:355811218520539136>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Increase all Gold rewards by {}%.",
       "modifier": 0.01,
       "1":{
         "effects": 0.4,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -2262,7 +2354,7 @@
       },
       "2":{
         "effects": 1.2,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -2272,7 +2364,7 @@
       },
       "3":{
         "effects": 2,
-        "pibump": "?",
+        "pibump": 0,
         "ucarbs": null,
         "uclass": null,
         "uunits": null,
@@ -2281,9 +2373,11 @@
         "runit": null
       }
     },
-  "Cosmic Awareness":
+    "cosmicawareness":
     {
-      "category": "Utility",
+      "proper": "Cosmic Awareness",
+      "icon": "<:cosmicsupremacy:344221218209005570>",
+      "category": "Proficiencies",
       "ranks": 5,
       "text": "Imbue Cosmic Champions with perception rivalling Heimdall, reducing enemy Armor Up effectiveness by {}%",
       "modifier": 0.01,
@@ -2338,9 +2432,11 @@
         "runit": 5
       }
     },
-  "Mystic Dispersion":
+    "mysticdispersion":
     {
-      "category": "Utility",
+      "proper": "Mystic Dispersion",
+      "icon": "<:mysticdispersion:345008510330732565>",
+      "category": "Proficiencies",
       "ranks": 5,
       "text": "Your Mystic Champions accrue {}% Power each time an enemy beneficial effect expires.",
       "modifier": 0.01,
@@ -2395,9 +2491,11 @@
         "runit": 5
       }
     },
-  "Detect Cosmic":
+    "detectcosmic":
     {
-      "category": "Utility",
+      "proper": "Detect Cosmic",
+      "icon": "<:cosmicsupremacy:344221218209005570>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Reveal the hidden Class of Cosmic enemies up to {} steps on a Quest Map. This information is shared with allies.",
       "modifier": 1,
@@ -2432,9 +2530,11 @@
         "runit": 3
       }
     },
-  "Detect Tech":
+    "detecttech":
     {
-      "category": "Utility",
+      "proper": "Detect Tech",
+      "icon": "<:engineering:344902813576331275>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Reveal the hidden Class of Tech enemies up to {} steps on a Quest Map. This information is shared with allies.",
       "modifier": 1,
@@ -2469,9 +2569,11 @@
         "runit": 3
       }
     },
-  "Detect Mystic":
+    "detectmystic":
     {
-      "category": "Utility",
+      "proper": "Detect Mystic",
+      "icon": "<:mysticdispersion:345008510330732565>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Reveal the hidden Class of Mystic enemies up to {} steps on a Quest Map. This information is shared with allies.",
       "modifier": 3,
@@ -2506,9 +2608,11 @@
         "runit": 3
       }
     },
-  "Scouter Lens":
+    "scouterlens":
     {
-      "category": "Utility",
+      "proper": "Scouter Lens",
+      "icon": "<:scouterlens:524655284350877696>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Reveal the hidden Hero Rating and Star Rating of enemies up to {} steps away on a Quest Map. This information is shared with allies.",
       "modifier": 1,
@@ -2542,9 +2646,11 @@
         "runit": 3
       }
     },
-  "Detect Mutant":
+    "detectmutant":
     {
-      "category": "Utility",
+      "proper": "Detect Mutant",
+      "icon": "<:mutant:344221218276114433> ",
+      "category": "Proficiencies",
       "ranks": null,
       "text": "Reveal the hidden Class of Mutant enemies up to {} steps on a Quest Map. This information is shared with allies.",
       "modifier": null,
@@ -2579,9 +2685,11 @@
         "runit": 3
       }
     },
-  "Detect Science":
+    "detectscience":
     {
-      "category": "Utility",
+      "proper": "Detect Science",
+      "icon": "<:serumscience:345008510276206593>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Reveal the hidden Class of Science enemies up to {} steps on a Quest Map. This information is shared with allies.",
       "modifier": null,
@@ -2616,9 +2724,11 @@
         "runit": 3
       }
     },
-  "Detect Skill":
+    "detectskill":
     {
-      "category": "Utility",
+      "proper": "Detect Skill",
+      "icon": "<:skilldomination:344264765146923028>",
+      "category": "Proficiencies",
       "ranks": 3,
       "text": "Reveal the hidden Class of Skill enemies up to {} steps on a Quest Map. This information is shared with allies.",
       "modifier": 1,
