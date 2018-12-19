@@ -433,9 +433,9 @@ class MCOCMaps:
                 tier ='normal'
             mapurl = '{}warmap_3_{}.png'.format(self.basepath,tier.lower())
             em = discord.Embed(color=tiers[tier],title=mapTitle,url=PATREON)
-        em.set_image(url=mapurl)
-        em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
-        await self.bot.say(embed=em)
+            em.set_image(url=mapurl)
+            em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
+            await self.bot.say(embed=em)
 
 
 
