@@ -2162,20 +2162,23 @@ class MCOC(ChampionFactory):
         '''Champion Data is under embargo until the Champion Release date'''
         print('initializing release status check')
         try:
-            rdate = dateParse(champ.released)
-            cdt = await self.check_collectordevteam(ctx)
-            print('champ.released is a datetime.date object')
-            now = datetime.now()
-            if rdate <= now:
-                print('rdate <= now')
-                return True
-            elif cdt:
-                print('CollectorDevTeam override.')
-                return True
+            if champ.released is not None:
+                rdate = dateParse(champ.released)
+                cdt = await self.check_collectordevteam(ctx)
+                print('champ.released is a datetime.date object')
+                now = datetime.now()
+                if rdate <= now:
+                    print('rdate <= now')
+                    return True
+                elif cdt:
+                    print('CollectorDevTeam override.')
+                    return True
+                else:
+                    print('rdate > now')
+                    await self.champ_embargo(ctx, champ)
+                    return False
             else:
-                print('rdate > now')
-                await self.champ_embargo(ctx, champ)
-                return False
+                return True
         except ValueError:
             print('dateParse Failure')
             await self.champ_embargo(ctx, champ)
