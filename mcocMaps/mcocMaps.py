@@ -472,14 +472,11 @@ class MCOCMaps:
 
         await self.pages_menu(ctx=ctx, embed_list=page_list, timeout=60, page=tracks[track]-1)
 
-    @alliancewar.command(pass_context=True, hidden=True, name="tiers", aliases=('tier')0)
+    @alliancewar.command(pass_context=True, hidden=True, name="tiers", aliases=('tier'))
     async def _tiers(self, ctx):
-        await self.bot.say('```Expert       : Tier 1 - Tier 3.'
-        'Hard         : Tier 4 - Tier 7.'
-        'Intermediate : Tier 8 - Tier 10.'
-        'Normal       : Tier 11 - Tier 13.'
-        'Easy         : Tier 14 - Tier 20.```')
-
+        em = discord.Embed(color=discord.Color.gold(), title='Alliance War Tiers', descritpion='', url=JPAGS)
+        em.set_image(url='https://cdn.discordapp.com/attachments/278246904620646410/525791637184446474/zqyh48pgmptc.png')
+        await self.bot.say(embed=em)
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
