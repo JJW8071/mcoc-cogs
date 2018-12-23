@@ -36,6 +36,27 @@ import matplotlib.pyplot as plt
 logger = logging.getLogger('red.mcoc')
 logger.setLevel(logging.INFO)
 
+class SignatureError(Exception):
+    pass
+
+class MissingKabamText(SignatureError):
+    pass
+
+class MissingSignatureData(SignatureError):
+    pass
+
+class SignatureSchemaError(SignatureError):
+    pass
+
+class InsufficientData(SignatureError):
+    pass
+
+class LowDataWarning(SignatureError):
+    pass
+
+class PoorDataFit(SignatureError):
+    pass
+
 class TitleError(Exception):
     def __init__(self, champ):
         self.champ = champ
@@ -1284,27 +1305,51 @@ class MCOC(ChampionFactory):
     async def champ_sig(self, ctx, *, champ : ChampConverterSig):
         '''Champion Signature Ability'''
         released = await self.check_release(ctx, champ)
-        if released:
-            appinfo = await self.bot.application_info()
+        if not released:
+            await self.bot.say("Champion {} is not released yet".format(champ.fullname))
+            return
+        appinfo = await self.bot.application_info()
+        try:
+            title, desc, sig_calcs = await champ.process_sig_description(
+                    isbotowner=ctx.message.author == appinfo.owner)
+            #print(desc)
+        except KeyError:
+            await champ.missing_sig_ad()
+            raise
+            return
+        if title is None:
+            return
+        em = discord.Embed(color=champ.class_color, title='Signature Ability')
+        em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
+        em.add_field(name=title, value=champ.star_str)
+        em.add_field(name='Signature Level {}'.format(champ.sig),
+                value=desc.format(d=sig_calcs))
+        em.add_field(name='Shortcode', value=champ.short)
+        em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+        em.set_thumbnail(url=champ.get_avatar())
+        await self.bot.say(embed=em)
+
+    @champ.command(pass_context=True, name='sig_report', hidden=True)
+    async def champ_sig_report(self, ctx):
+        '''Check All Champion Signature Abilities'''
+        bad_champ = []
+        for champ_class in self.champions.values():
+            champ = champ_class()
+            if not champ.is_user_playable:
+                continue
             try:
                 title, desc, sig_calcs = await champ.process_sig_description(
-                        isbotowner=ctx.message.author == appinfo.owner)
-                print(desc)
-            except KeyError:
-                await champ.missing_sig_ad()
-                raise
-                return
-            if title is None:
-                return
-            em = discord.Embed(color=champ.class_color, title='Signature Ability')
-            em.set_author(name='{0.full_name}'.format(champ), icon_url=champ.get_avatar())
-            em.add_field(name=title, value=champ.star_str)
-            em.add_field(name='Signature Level {}'.format(champ.sig),
-                    value=desc.format(d=sig_calcs))
-            em.add_field(name='Shortcode', value=champ.short)
+                        isbotowner=True, quiet=True)
+            except Exception as e:
+                bad_champ.append("{}\t{}".format(champ.full_name, type(e)))
+        pages = chat.pagify('\n'.join(bad_champ))
+        page_list = []
+        for page in pages:
+            em = discord.Embed(title='Champion Sig Errors',  description = page)
             em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
-            em.set_thumbnail(url=champ.get_avatar())
-            await self.bot.say(embed=em)
+            page_list.append(em)
+        menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+        await menu.menu_start(page_list)
 
     @champ.command(pass_context=True, name='sigplot', hidden=True)
     async def champ_sigplot(self,ctx,*, champ: ChampConverterSig):
@@ -2373,6 +2418,11 @@ class Champion:
         return hasattr(self, '_' + attr)
 
     @property
+    def is_user_playable(self):
+        return (self.released is not None
+                and dateParse(self.released) <= datetime.now())
+
+    @property
     def immutable_id(self):
         return (type(self), self.star)
 
@@ -2523,7 +2573,10 @@ class Champion:
 
     async def process_sig_description(self, data=None, quiet=False, isbotowner=False):
         sd = await self.retrieve_sig_data(data, isbotowner)
-        ktxt = sd['kabam_text']
+        try:
+            ktxt = sd['kabam_text']
+        except KeyError:
+            raise MissingKabamText
         if self.debug:
             dbg_str = ['Title:  ' + ktxt['title']['k']]
             dbg_str.append('Simple:  ' + ktxt['simple']['k'])
@@ -2534,7 +2587,7 @@ class Champion:
                             for d in ktxt['desc']['v']])
             await self.bot.say(chat.box('\n'.join(dbg_str)))
 
-        await self._sig_error_code_handling(sd)
+        await self._sig_error_code_handling(sd, raise_error=quiet)
         if self.sig == 0:
             return self._get_sig_simple(ktxt)
 
@@ -2588,18 +2641,26 @@ class Champion:
             sd = data[self.full_name] if self.full_name in data else data
         return sd
 
-    async def _sig_error_code_handling(self, sd):
+    async def _sig_error_code_handling(self, sd, raise_error=False):
         if 'error_codes' not in sd or sd['error_codes']['undefined_key']:
+            if raise_error:
+                raise MissingSignatureData
             await self.warn_bold_say('Champion Signature data is not defined')
             self.update_attrs(dict(sig=0))
         elif sd['error_codes']['no_curve']:
+            if raise_error:
+                raise InsufficientData
             await self.warn_bold_say('{} '.format(self.star_name_str)
                     + 'does not have enough data points to create a curve')
             self.update_attrs(dict(sig=0))
         elif sd['error_codes']['low_count']:
+            if raise_error:
+                raise LowDataWarning
             await self.warn_bold_say('{} '.format(self.star_name_str)
                     + 'has low data count.  Unknown estimate quality')
         elif sd['error_codes']['poor_fit']:
+            if raise_error:
+                raise PoorDataFit
             await self.warn_bold_say('{} '.format(self.star_name_str)
                     + 'has poor curve fit.  Data is known to contain errors.')
 
@@ -2698,13 +2759,14 @@ class Champion:
         print(title)
         simple = self._SIMPLE
         print(simple)
-        if isinstance(self._DESC_LIST, list):
-            desc = self._DESC_LIST.split(',')
-        elif isinstance(self._DESC_LIST, str):
-            desc = [self._DESC_LIST]
-        else:
-            desc = ['None Found']
-            print('No Sig Description Found')
+        #if isinstance(self._DESC_LIST, list):
+            #desc = self._DESC_LIST.split(',')
+        #elif isinstance(self._DESC_LIST, str):
+            #desc = [self._DESC_LIST]
+        #else:
+            #desc = ['None Found']
+            #print('No Sig Description Found')
+        desc = [key.strip() for key in self._DESC_LIST.split(',')]
         print(self._DESC_LIST)
 
         return dict(title={'k': title, 'v': cdt_json[title]},
