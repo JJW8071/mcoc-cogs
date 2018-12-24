@@ -99,6 +99,7 @@ async def postprocess_sig_data(bot, struct):
     sigs = load_kabam_json(kabam_bcg_stat_en, aux=struct.get("bcg_stat_en_aux"))
     mcoc = bot.get_cog('MCOC')
     missing = []
+    aux = {i['k']: i['v'] for i in struct.get("bcg_stat_en_aux", [])}
     for key in struct.keys():
         champ_class = mcoc.champions.get(key.lower(), None)
         if champ_class is None:
@@ -106,7 +107,8 @@ async def postprocess_sig_data(bot, struct):
         try:
             struct[key]['kabam_text'] = champ_class.get_kabam_sig_text(
                     champ_class, sigs=sigs,
-                    champ_exceptions=struct['kabam_key_override'])
+                    #champ_exceptions=struct['kabam_key_override'])
+                    champ_exceptions=aux)
         except TitleError as e:
             missing.append(e.champ)
     if missing:
@@ -147,6 +149,7 @@ kabam_masteries=mcoc_dir+"masteries_en.json"
 # Having trouble getting JSON data to load into memory.
 def load_cdt_json():
     data = ChainMap()
+    dver = ChainMap()
     aux = []
     files = ('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
         'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
@@ -159,13 +162,13 @@ def load_cdt_json():
         raw_data = json.loads(get_file.text)
         print(file)
         for dlist in aux, raw_data['strings']:
-            data.maps.append({d['k']:d['v'] for d in dlist})
-    return data
+            data.maps.append({d['k']: d['v'] for d in dlist})
+            dver.maps.append({d['k']: d['vn'] for d in dlist if 'vn' in d})
+    return data, dver
 
-cdt_json = load_cdt_json()
-cdt_keylist = cdt_json.keys()
+cdt_json, cdt_json_versions = load_cdt_json()
 
-print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
+#print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
@@ -618,10 +621,10 @@ class GSHandler:
                     pulled = True
                     break
                 except:
-                    logger.info("Error while pulling '{}' try: {}".format(k, str(try_num)))
+                    logger.info("Error while pulling '{}' try: {}".format(k, try_num))
                     if try_num < 3:
                         time.sleep(.3 * try_num)
-                        msg = await self.bot.edit_message(msg, "Error while pulling '{}'".format(k))
+                        await self.bot.say("Error while pulling '{}', try: {}".format(k, try_num))
             msg = await self.bot.edit_message(msg,
                      'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
             logger.info('Pulled Google Sheet data {}/{}, {}'.format(i+1, num_files, "" if pulled else "Failed"))
@@ -1857,8 +1860,23 @@ class MCOC(ChampionFactory):
     async def kabam_search(self, ctx, *, term: str):
         '''Enter a search term or a JSON key'''
         ksearchlist = []
-        if term in cdt_keylist:
-            em = discord.Embed(title='Data Search',  description = '\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
+        is_number = term.replace('.', '').isdigit()
+        if is_number:
+            for k,v in cdt_json_versions.items():
+                if term == v:
+                    ksearchlist.append('\n**{}**\n{}\nvn: {}'.format(k,
+                            self._bcg_recompile(cdt_json[k]), v))
+        elif term.upper() in cdt_json:
+            term = term.upper()
+            if term in cdt_json_versions:
+                ver = '\nvn: {}'.format(cdt_json_versions[term])
+            else:
+                ver = ''
+            em = discord.Embed(title='Data Search',
+                    description='\n**{}**\n{}{}'.format(term,
+                            self._bcg_recompile(cdt_json[term]),
+                            ver)
+                )
             # em.set_thumbnail(url=COLLECTOR_ICON)
             em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             ## term is a specific JSON key
@@ -1867,9 +1885,15 @@ class MCOC(ChampionFactory):
             return
         else:
             ## search for term in json
-            for k in cdt_keylist:
-                if term in cdt_json[k]:
-                    ksearchlist.append('\n**{}**\n{}'.format(k, self._bcg_recompile(cdt_json[k])))
+            for k,v in cdt_json.items():
+                if term.lower() in v.lower():
+                    if k in cdt_json_versions:
+                        ver = '\nvn: {}'.format(cdt_json_versions[k])
+                    else:
+                        ver = ''
+                    ksearchlist.append('\n**{}**\n{}{}'.format(k,
+                            self._bcg_recompile(v), ver)
+                    )
         if len(ksearchlist) > 0:
             pages = chat.pagify('\n'.join(s for s in ksearchlist))
             page_list = []
@@ -2390,15 +2414,12 @@ class Champion:
 
     async def get_bio(self):
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
-        bio = ''
-        ## switched to memory loaded json data
-        if key in cdt_keylist:
-            bio = cdt_json[key]
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
-        # if key not in bios:
-        if bio == '':
+        try:
+            bio = cdt_json[key]
+        except KeyError:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bio
 
@@ -2515,7 +2536,7 @@ class Champion:
         zero = '_0'
         one = '_1'
         two = '_2'
-        if prefix+self.mcocjson+one in cdt_keylist:
+        if prefix+self.mcocjson+one in cdt_json:
             s0 = cdt_json[prefix + self.mcocjson + zero]
             s1 = cdt_json[prefix + self.mcocjson + one]
             s2 = cdt_json[prefix + self.mcocjson + two]
@@ -2749,36 +2770,23 @@ class Champion:
         simplekey = preample + simple
         descriptionkey = preamble + desc,
         '''
-        #
-        # if sigs is None:
-        #     sigs = load_kabam_json(kabam_bcg_stat_en)
 
         mcocsig = self.mcocsig
-        print(mcocsig)
+        #print(mcocsig)
         title = self._TITLE
-        print(title)
+        #print(title)
         simple = self._SIMPLE
-        print(simple)
-        #if isinstance(self._DESC_LIST, list):
-            #desc = self._DESC_LIST.split(',')
-        #elif isinstance(self._DESC_LIST, str):
-            #desc = [self._DESC_LIST]
-        #else:
-            #desc = ['None Found']
-            #print('No Sig Description Found')
-        desc = [key.strip() for key in self._DESC_LIST.split(',')]
-        print(self._DESC_LIST)
+        #print(simple)
+        desc = [key.strip() for key in self._DESC_LIST.split(',') if key.strip()]
+        #print(self._DESC_LIST)
 
-        return dict(title={'k': title, 'v': cdt_json[title]},
-                    simple={'k': simple, 'v': cdt_json[simple]},
-                    desc={'k': desc, 'v': [cdt_json[k] for k in desc]})
+        # allow manual override of Kabam Keys
+        champ_exceptions = champ_exceptions if champ_exceptions else {}
+        keymap = {**cdt_json, **champ_exceptions}
+        return dict(title={'k': title, 'v': keymap[title]},
+                    simple={'k': simple, 'v': keymap[simple]},
+                    desc={'k': desc, 'v': [keymap[k] for k in desc]})
 
-        #
-        # return dict(title={'k': title, 'v': sigs[title]},
-        #             simple={'k': simple, 'v': sigs[simple]},
-        #             desc={'k': desc, 'v': [sigs[k] for k in desc]})
-                    # desc={'k': desc, 'v': [sigs[k] for k in desc]},
-                    # huds={'k': huds, 'v': [sigs[k] for k in huds]})
 
     def get_sig_coeff(self):
         return get_csv_row(local_files['sig_coeff'], 'CHAMP', self.full_name)
