@@ -1335,7 +1335,7 @@ class MCOC(ChampionFactory):
     @champ.command(pass_context=True, name='sig_report', hidden=True)
     async def champ_sig_report(self, ctx):
         '''Check All Champion Signature Abilities'''
-        bad_champ = []
+        bad_champs = defaultdict(list)
         for champ_class in self.champions.values():
             champ = champ_class()
             if not champ.is_user_playable:
@@ -1344,11 +1344,12 @@ class MCOC(ChampionFactory):
                 title, desc, sig_calcs = await champ.process_sig_description(
                         isbotowner=True, quiet=True)
             except Exception as e:
-                bad_champ.append("{}\t{}".format(champ.full_name, type(e)))
-        pages = chat.pagify('\n'.join(bad_champ))
+                bad_champs[type(e)].append(champ.full_name)
+        #pages = chat.pagify('\n'.join(bad_champ))
         page_list = []
-        for page in pages:
-            em = discord.Embed(title='Champion Sig Errors',  description = page)
+        for err, champs in bad_champs.items():
+            em = discord.Embed(title='Champion Sig Errors')
+            em.add_field(name=err.__name__, value='\n'.join(champs))
             em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             page_list.append(em)
         menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
@@ -2782,7 +2783,7 @@ class Champion:
 
         # allow manual override of Kabam Keys
         champ_exceptions = champ_exceptions if champ_exceptions else {}
-        keymap = {**cdt_json, **champ_exceptions}
+        keymap = cdt_json.new_child(champ_exceptions)
         return dict(title={'k': title, 'v': keymap[title]},
                     simple={'k': simple, 'v': keymap[simple]},
                     desc={'k': desc, 'v': [keymap[k] for k in desc]})
