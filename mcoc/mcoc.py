@@ -143,10 +143,16 @@ kabam_bio = mcoc_dir + "character_bios_en.json"
 kabam_special_attacks = mcoc_dir+"special_attacks_en.json"
 kabam_bcg_stat_en = mcoc_dir+"bcg_stat_en.json"
 kabam_bcg_en= mcoc_dir+"bcg_en.json"
-kabam_masteries=mcoc_dir+"masteries_en.json"
+# kabam_masteries=mcoc_dir+"masteries_en.json"
 
 ## CollectorDevTeam Repo JSON files
 # Having trouble getting JSON data to load into memory.
+def fetch_json(url):
+    get_file = requests.get(url)
+    raw_data = json.loads(get_file.text)
+    return raw_data
+
+
 def load_cdt_json():
     data = ChainMap()
     dver = ChainMap()
@@ -167,6 +173,7 @@ def load_cdt_json():
     return data, dver
 
 cdt_json, cdt_json_versions = load_cdt_json()
+cdt_masteries = fetch_json(remote_base_path+'json/masteries.json')
 
 #print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
@@ -1018,6 +1025,63 @@ class MCOC(ChampionFactory):
     #     await gsdata.retrieve_data()
     #     if not silent:
     #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
+
+    @commands.group(pass_context=True, alias='masteries', hidden=True)
+    async def mastery(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @mastery.commmand
+    async def mastery_info(self, ctx, word: str, rank:int = None):
+        '''Present Mastery Text and rank information'''
+        keys = cdt_masteries.keys()
+        found = False
+        if word.lowercase() in keys:
+            key = word
+            await self.bot.say('mastery key found')
+        else:
+            for key in keys:
+                if word.lowercase() = cdt_masteries[key]['title']:
+                    await self.bot.say('mastery Title found')
+                    found = True
+                    break
+        if found:
+            classcores = {'mutagenesis':'<:mutantcore:527924989643587584> Mastery Core X','pureskill':'<:skillcore:527924989970743316> Mastery Core of Aptitude',
+                        'serumscience','<:sciencecore:527924989194928150> Mastery Serum','mysticdispersion':'<:mysticcore:527924989400186882> Mystical Mastery',
+                        'cosmicawareness':'<:cosmiccore:527924988661989397> Cosmic Mastery', 'collartech':'<:techcore:527924989777805322> Mastery Core 14',
+                        'detectmutant':'<:mutantcore:527924989643587584> Mastery Core X','detectskill':'<:skillcore:527924989970743316> Master Core of Aptitude','detectscience':'<:sciencecore:527924989194928150> Mastery Serum',
+                        'detectmystic':'<:mysticcore:527924989400186882> Mystical Mastery','detectcosmic':'<:cosmiccore:527924988661989397> Cosmic Mastery','detecttech':'<:techcore:527924989777805322> Mastery Core 14'}
+            unlocks = {'ucarbs': '<:carbcore:527924990159355904>} Carbonium Core(s)', 'uclass': ' {} Core(s)'.format(classcores[key]), 'ustony': '<:stonycore:416405764937089044> Stony Core(s)', 'uunits': '<:units:344506213335302145> Units'}
+            rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runits': '<:units:344506213335302145> Unit(s)'}
+            colors = {'attack': discord.Color.red(),'defense':diccord.Color.red(), 'utility': discord.Color.green(), 'proficiencies': discord.Color.green()}
+            page_list = []
+            desc = cdt_masteries[key]['text']
+            titled = cdt_masteries[key]['icon']+' '+cdt_masteries[key]['proper']+ ' rank {}'
+            for r in cdt_masteries[key]['ranks']:
+                em = discord.Embed(color=colors[key], title=titled.format(r), description = desc.format(cdt_masteries[key][r]['effects']))
+                unlock_costs = []
+                rankup_costs = []
+                for u in unlocks.keys():
+                    if cdt_masteries[key][r][u] != 'null':
+                        unlock_costs.append(cdt_masteries[key][r][u]) + ' ' + unlocks[u]
+                for ru in rankups.keys():
+                    if cdt_masteries[key][r][ru] !='null':
+                        rankup_costs.append(cdt_masteries[key][r][ru] + ' ' + rankups[ru])
+                if len(unlock_costs) >0:
+                    em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs))
+                if len(rankup_costs) > 0:
+                    em.add_field(name='Rank Up Cost', value='\n'.join(rankupcosts))
+                page_list.append(em)
+
+            if len(page_list) > 0:
+                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                if rank = None:
+                    page_number = 0
+                elif rank > cdt_masteries[key][ranks]:
+                    page_number = cdt_masteries[key][ranks] - 1
+                else:
+                    page_number = rank - 1
+                await menu.menu_start(page_list, page_number)
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
@@ -2820,7 +2884,7 @@ class PagesMenu:
         self.delete_onX = delete_onX
         self.embedded = True
 
-    async def menu_start(self, pages):
+    async def menu_start(self, pages, page_number=0):
         page_list = []
         if isinstance(pages, list):
             page_list = pages
@@ -2855,7 +2919,7 @@ class PagesMenu:
                     page += '\n(Page {} of {})'.format(i+1, page_length)
 
         self.page_list = page_list
-        await self.display_page(None, 0)
+        await self.display_page(None, page_number)
 
     async def display_page(self, message, page):
         if not message:
