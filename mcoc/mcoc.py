@@ -1075,7 +1075,7 @@ class MCOC(ChampionFactory):
                         unlock_costs.append('{} {}'.format(cm[key][mrank][u]), unlocks[u])
                 for ru in rankups.keys():
                     if cm[key][mrank][ru] > 0:
-                        rankup_costs.append('{} {}'.format(cm[key][mrank][ru]), unlocks[ru])
+                        rankup_costs.append('{} {}'.format(cm[key][mrank][ru]), rankups[ru])
                 if len(unlock_costs) >0:
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs), inline=False)
                 if len(rankup_costs) > 0:
