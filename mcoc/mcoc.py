@@ -1041,9 +1041,10 @@ class MCOC(ChampionFactory):
         if word.lower() in keys:
             key = word
             await self.bot.say('mastery key found')
+            found = True
         else:
             for key in keys:
-                if word.lower() == cdt_masteries[key]['title']:
+                if word.lower() == cdt_masteries[key]['proper'].lower():
                     await self.bot.say('mastery Title found')
                     found = True
                     break
