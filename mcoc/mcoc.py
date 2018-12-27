@@ -1036,6 +1036,7 @@ class MCOC(ChampionFactory):
     @commands.command(pass_context=True, hidden=True)
     async def mastery_info(self, ctx, word: str, rank:int = None):
         '''Present Mastery Text and rank information'''
+        cm = *cdt_masteries
         keys = cdt_masteries.keys()
         found = False
         if word.lower() in keys:
@@ -1044,7 +1045,7 @@ class MCOC(ChampionFactory):
             found = True
         else:
             for key in keys:
-                if word.lower() == cdt_masteries[key]['proper'].lower():
+                if word.lower() == cm[key]['proper'].lower():
                     await self.bot.say('mastery Title found')
                     found = True
                     break
@@ -1059,20 +1060,20 @@ class MCOC(ChampionFactory):
             rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runits': '<:units:344506213335302145> Unit(s)'}
             colors = {'offense': discord.Color.red(),'defense':discord.Color.red(), 'proficiencies': discord.Color.green()}
             page_list = []
-            desc = cdt_masteries[key]['text']
-            titled = cdt_masteries[key]['icon']+' '+cdt_masteries[key]['proper']+ ' rank {}'
-            embedcolor = colors[cdt_masteries[key]['category'].lower()]
-            for r in range(1, cdt_masteries[key]['ranks']):
+            desc = cm[key]['text']
+            titled = cm[key]['icon']+' '+cm[key]['proper']+ ' rank {}'
+            embedcolor = colors[cm[key]['category'].lower()]
+            for r in range(1, cm[key]['ranks']):
                 effects = cdt_mmasteries[key][str(r)]['effects']
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects))
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
-                    if cdt_masteries[key][str(r)][u] != 'null':
-                        unlock_costs.append(cdt_masteries[key][str(r)][u]) + ' ' + unlocks[u]
+                    if cm[key][str(r)][u] != 'null':
+                        unlock_costs.append(cm[key][str(r)][u]) + ' ' + unlocks[u]
                 for ru in rankups.keys():
-                    if cdt_masteries[key][str(r)][ru] !='null':
-                        rankup_costs.append(cdt_masteries[key][str(r)][ru] + ' ' + rankups[ru])
+                    if cm[key][str(r)][ru] !='null':
+                        rankup_costs.append(cm[key][str(r)][ru] + ' ' + rankups[ru])
                 if len(unlock_costs) >0:
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs))
                 if len(rankup_costs) > 0:
@@ -1083,8 +1084,8 @@ class MCOC(ChampionFactory):
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 if rank == None:
                     page_number = 0
-                elif rank > cdt_masteries[key][ranks]:
-                    page_number = cdt_masteries[key][ranks] - 1
+                elif rank > cm[key][ranks]:
+                    page_number = cm[key][ranks] - 1
                 else:
                     page_number = rank - 1
                 await menu.menu_start(page_list, page_number)
