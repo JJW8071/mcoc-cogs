@@ -1064,16 +1064,16 @@ class MCOC(ChampionFactory):
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' rank {}'
             embedcolor = colors[cm[key]['category'].lower()]
             for r in range(1, cm[key]['ranks']):
-                effects = cm[key][str(r)]['effects']
+                effects = cm[key][r]['effects']
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects))
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
-                    if cm[key][str(r)][u] > 0:
-                        unlock_costs.append(cm[key][str(r)][u]) + ' ' + unlocks[u]
+                    if cm[key][r][u] > 0:
+                        unlock_costs.append(cm[key][r][u]) + ' ' + unlocks[u]
                 for ru in rankups.keys():
-                    if cm[key][str(r)][ru] > 0:
-                        rankup_costs.append(cm[key][str(r)][ru] + ' ' + rankups[ru])
+                    if cm[key][r][ru] > 0:
+                        rankup_costs.append(cm[key][r][ru] + ' ' + rankups[ru])
                 if len(unlock_costs) >0:
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs))
                 if len(rankup_costs) > 0:
