@@ -1086,8 +1086,8 @@ class MCOC(ChampionFactory):
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 if rank == None:
                     page_number = 0
-                elif rank > cm[key][ranks]:
-                    page_number = cm[key][ranks] - 1
+                elif rank > cm[key]['ranks']:
+                    page_number = cm[key]['ranks'] - 1
                 else:
                     page_number = rank - 1
                 await menu.menu_start(page_list, page_number)
