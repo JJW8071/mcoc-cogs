@@ -1036,7 +1036,7 @@ class MCOC(ChampionFactory):
     @commands.command(pass_context=True, hidden=True)
     async def mastery_info(self, ctx, word: str, rank:int = None):
         '''Present Mastery Text and rank information'''
-        cm = *cdt_masteries
+        cm = cdt_masteries
         keys = cdt_masteries.keys()
         found = False
         if word.lower() in keys:
@@ -1064,7 +1064,7 @@ class MCOC(ChampionFactory):
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' rank {}'
             embedcolor = colors[cm[key]['category'].lower()]
             for r in range(1, cm[key]['ranks']):
-                effects = cdt_mmasteries[key][str(r)]['effects']
+                effects = cm[key][str(r)]['effects']
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects))
                 unlock_costs = []
                 rankup_costs = []
