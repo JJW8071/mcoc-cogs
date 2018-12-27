@@ -1060,8 +1060,10 @@ class MCOC(ChampionFactory):
             page_list = []
             desc = cdt_masteries[key]['text']
             titled = cdt_masteries[key]['icon']+' '+cdt_masteries[key]['proper']+ ' rank {}'
+            embedcolor = colors[cdt_masteries[key]['class'].lower()]
             for r in range(1, cdt_masteries[key]['ranks']):
-                em = discord.Embed(color=colors[key], title=titled.format(r), description = desc.format(cdt_masteries[key][str(r)]['effects']))
+                effects = cdt_mmasteries[key][str(r)]['effects']
+                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects))
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
