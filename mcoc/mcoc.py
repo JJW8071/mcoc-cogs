@@ -1066,7 +1066,7 @@ class MCOC(ChampionFactory):
             embedcolor = colors[cm[key]['category'].lower()]
             for r in range(1, maxranks):
                 mrank = str(r)
-                effects = cm[key][mrank]['effects']
+                effects = list(cm[key][mrank]['effects'])
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects[e] for e in effects))
                 unlock_costs = []
                 rankup_costs = []
