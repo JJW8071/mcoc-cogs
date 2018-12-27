@@ -1075,7 +1075,7 @@ class MCOC(ChampionFactory):
 
             if len(page_list) > 0:
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-                if rank = None:
+                if rank == None:
                     page_number = 0
                 elif rank > cdt_masteries[key][ranks]:
                     page_number = cdt_masteries[key][ranks] - 1
