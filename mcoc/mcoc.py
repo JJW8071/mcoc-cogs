@@ -1047,7 +1047,7 @@ class MCOC(ChampionFactory):
                     break
         if found:
             classcores = {'mutagenesis':'<:mutantcore:527924989643587584> Mastery Core X','pureskill':'<:skillcore:527924989970743316> Mastery Core of Aptitude',
-                        'serumscience','<:sciencecore:527924989194928150> Mastery Serum','mysticdispersion':'<:mysticcore:527924989400186882> Mystical Mastery',
+                        'serumscience':'<:sciencecore:527924989194928150> Mastery Serum','mysticdispersion':'<:mysticcore:527924989400186882> Mystical Mastery',
                         'cosmicawareness':'<:cosmiccore:527924988661989397> Cosmic Mastery', 'collartech':'<:techcore:527924989777805322> Mastery Core 14',
                         'detectmutant':'<:mutantcore:527924989643587584> Mastery Core X','detectskill':'<:skillcore:527924989970743316> Master Core of Aptitude','detectscience':'<:sciencecore:527924989194928150> Mastery Serum',
                         'detectmystic':'<:mysticcore:527924989400186882> Mystical Mastery','detectcosmic':'<:cosmiccore:527924988661989397> Cosmic Mastery','detecttech':'<:techcore:527924989777805322> Mastery Core 14'}
