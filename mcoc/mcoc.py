@@ -1026,7 +1026,7 @@ class MCOC(ChampionFactory):
     #     if not silent:
     #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
-    @commands.group(pass_context=True, alias='masteries', hidden=True)
+    @commands.group(pass_context=True, alias=('masteries',), hidden=True)
     async def mastery(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
