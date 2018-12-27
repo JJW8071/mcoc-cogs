@@ -1068,8 +1068,7 @@ class MCOC(ChampionFactory):
                 mrank = str(r)
                 effects = cm[key][mrank]['effects']
                 print('len(effects) = '+str(len(effects)))
-                print('effects = ' + effects)
-                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(e for e in effects))
+                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects[e] for e in range(effects)))
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
