@@ -1061,15 +1061,15 @@ class MCOC(ChampionFactory):
             desc = cdt_masteries[key]['text']
             titled = cdt_masteries[key]['icon']+' '+cdt_masteries[key]['proper']+ ' rank {}'
             for r in range(1, cdt_masteries[key]['ranks']):
-                em = discord.Embed(color=colors[key], title=titled.format(r), description = desc.format(cdt_masteries[key][r]['effects']))
+                em = discord.Embed(color=colors[key], title=titled.format(r), description = desc.format(cdt_masteries[key][str(r)]['effects']))
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
-                    if cdt_masteries[key][r][u] != 'null':
-                        unlock_costs.append(cdt_masteries[key][r][u]) + ' ' + unlocks[u]
+                    if cdt_masteries[key][str(r)][u] != 'null':
+                        unlock_costs.append(cdt_masteries[key][str(r)][u]) + ' ' + unlocks[u]
                 for ru in rankups.keys():
-                    if cdt_masteries[key][r][ru] !='null':
-                        rankup_costs.append(cdt_masteries[key][r][ru] + ' ' + rankups[ru])
+                    if cdt_masteries[key][str(r)][ru] !='null':
+                        rankup_costs.append(cdt_masteries[key][str(r)][ru] + ' ' + rankups[ru])
                 if len(unlock_costs) >0:
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs))
                 if len(rankup_costs) > 0:
