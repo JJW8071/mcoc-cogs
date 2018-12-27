@@ -1026,12 +1026,20 @@ class MCOC(ChampionFactory):
     #     if not silent:
     #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
-    @commands.group(pass_context=True, alias=('masteries',), hidden=True)
-    async def mastery(self, ctx):
+    # @commands.group(pass_context=True, aliases=['champs',])
+    # async def champ(self, ctx):
+    #     if ctx.invoked_subcommand is None:
+    #         await send_cmd_help(ctx)
+    #
+    # @champ.command(pass_context=True, name='featured',aliases=['feature',])
+    # async def champ_featured(self, ctx, *, champs : ChampConverterMult):
+
+    @commands.group(pass_context=True, name='mastery', hidden=True)
+    async def masteries(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @mastery.commmand(pass_context=True, name='info')
+    @masteries.commmand(pass_context=True, name='info')
     async def mastery_info(self, ctx, word: str, rank:int = None):
         '''Present Mastery Text and rank information'''
         keys = cdt_masteries.keys()
