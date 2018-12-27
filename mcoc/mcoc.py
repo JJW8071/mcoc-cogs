@@ -1054,7 +1054,8 @@ class MCOC(ChampionFactory):
                         'cosmicawareness':'<:cosmiccore:527924988661989397> Cosmic Mastery', 'collartech':'<:techcore:527924989777805322> Mastery Core 14',
                         'detectmutant':'<:mutantcore:527924989643587584> Mastery Core X','detectskill':'<:skillcore:527924989970743316> Master Core of Aptitude','detectscience':'<:sciencecore:527924989194928150> Mastery Serum',
                         'detectmystic':'<:mysticcore:527924989400186882> Mystical Mastery','detectcosmic':'<:cosmiccore:527924988661989397> Cosmic Mastery','detecttech':'<:techcore:527924989777805322> Mastery Core 14'}
-            unlocks = {'ucarbs': '<:carbcore:527924990159355904>} Carbonium Core(s)', 'uclass': ' {} Core(s)'.format(classcores[key] if key in classcores), 'ustony': '<:stonycore:416405764937089044> Stony Core(s)', 'uunits': '<:units:344506213335302145> Units'}
+            classcorekeys = classcores.keys()
+            unlocks = {'ucarbs': '<:carbcore:527924990159355904> Carbonium Core(s)', 'uclass': ' {} Core(s)'.format(classcores[key] if key in classcores else 'Class'), 'ustony': '<:stonycore:416405764937089044> Stony Core(s)', 'uunits': '<:units:344506213335302145> Units'}    
             rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runits': '<:units:344506213335302145> Unit(s)'}
             colors = {'attack': discord.Color.red(),'defense':discord.Color.red(), 'utility': discord.Color.green(), 'proficiencies': discord.Color.green()}
             page_list = []
