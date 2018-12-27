@@ -1031,7 +1031,7 @@ class MCOC(ChampionFactory):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @mastery.commmand
+    @mastery.commmand(pass_context=True, name='info')
     async def mastery_info(self, ctx, word: str, rank:int = None):
         '''Present Mastery Text and rank information'''
         keys = cdt_masteries.keys()
