@@ -1079,7 +1079,7 @@ class MCOC(ChampionFactory):
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs))
                 if len(rankup_costs) > 0:
                     em.add_field(name='Rank Up Cost', value='\n'.join(rankup_costs))
-                em.add_field(name='Prestige Bump', value='{}%'.format(cm[key][rank][pibump]*100))
+                em.add_field(name='Prestige Bump', value='{}%'.format(cm[key][rank]['pibump']*100))
                 page_list.append(em)
 
             if len(page_list) > 0:
