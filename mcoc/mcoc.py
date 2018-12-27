@@ -173,7 +173,7 @@ def load_cdt_json():
     return data, dver
 
 cdt_json, cdt_json_versions = load_cdt_json()
-cdt_masteries = fetch_json(remote_base_path+'json/masteries.json')
+cdt_masteries = fetch_json(remote_data_basepath+'json/masteries.json')
 
 #print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
