@@ -1063,31 +1063,32 @@ class MCOC(ChampionFactory):
             desc = cm[key]['text']
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' rank {}'
             embedcolor = colors[cm[key]['category'].lower()]
-            for r in range(1, cm[key]['ranks']):
-                rank = str(r)
-                effects = cm[key][rank]['effects']
+            maxranks = cm[key]['ranks']
+            for r in range(1, maxranks):
+                mrank = str(r)
+                effects = cm[key][mrank]['effects']
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects))
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
-                    if cm[key][rank][u] > 0:
-                        unlock_costs.append(str(cm[key][rank][u])) + ' ' + unlocks[u]
+                    if cm[key][mrank][u] > 0:
+                        unlock_costs.append(str(cm[key][mrank][u])) + ' ' + unlocks[u]
                 for ru in rankups.keys():
-                    if cm[key][rank][ru] > 0:
-                        rankup_costs.append(str(cm[key][rank][ru]) + ' ' + rankups[ru])
+                    if cm[key][mrank][ru] > 0:
+                        rankup_costs.append(str(cm[key][mrank][ru]) + ' ' + rankups[ru])
                 if len(unlock_costs) >0:
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs))
                 if len(rankup_costs) > 0:
                     em.add_field(name='Rank Up Cost', value='\n'.join(rankup_costs))
-                em.add_field(name='Prestige Bump', value='{}%'.format(cm[key][rank]['pibump']*100))
+                em.add_field(name='Prestige Bump', value='{}%'.format(cm[key][mrank]['pibump']*100))
                 page_list.append(em)
 
             if len(page_list) > 0:
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 if rank == None:
                     page_number = 0
-                elif rank > cm[key]['ranks']:
-                    page_number = cm[key]['ranks'] - 1
+                elif rank > maxranks:
+                    page_number = maxranks - 1
                 else:
                     page_number = rank - 1
                 await menu.menu_start(page_list, page_number)
