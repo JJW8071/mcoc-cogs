@@ -1057,7 +1057,7 @@ class MCOC(ChampionFactory):
                         'detectmystic':'<:mysticcore:527924989400186882> Mystical Mastery','detectcosmic':'<:cosmiccore:527924988661989397> Cosmic Mastery','detecttech':'<:techcore:527924989777805322> Mastery Core 14'}
             classcorekeys = classcores.keys()
             unlocks = {'ucarbs': '<:carbcore:527924990159355904> Carbonium Core(s)', 'uclass': ' {} Core(s)'.format(classcores[key] if key in classcores else 'Class'), 'ustony': '<:stonycore:416405764937089044> Stony Core(s)', 'uunits': '<:units:344506213335302145> Units'}
-            rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runits': '<:units:344506213335302145> Unit(s)'}
+            rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runit': '<:units:344506213335302145> Unit(s)'}
             colors = {'offense': discord.Color.red(),'defense':discord.Color.red(), 'proficiencies': discord.Color.green()}
             page_list = []
             desc = cm[key]['text']
