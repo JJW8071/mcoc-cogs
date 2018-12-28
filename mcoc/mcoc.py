@@ -1064,7 +1064,7 @@ class MCOC(ChampionFactory):
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' {}/'+str(maxranks)
             embedcolor = colors[cm[key]['category'].lower()]
             desc = cm[key]['text']
-            cumulative_unlock = {'ucarb':0, 'uclass': 0, 'ustony': 0, 'uunits':0}
+            cumulative_unlock = {'ucarbs':0, 'uclass': 0, 'ustony': 0, 'uunits':0}
             cumulative_rankups = {'rgold':0, 'runit':0}
             for r in range(1, maxranks + 1):
                 mrank = str(r)
