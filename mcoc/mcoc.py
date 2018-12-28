@@ -1093,11 +1093,13 @@ class MCOC(ChampionFactory):
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 if rank == None:
                     page_number = 0
+                elif maxranks = 0:
+                    page_number = 0
                 elif rank > maxranks:
-                    page_number = maxranks - 1
+                    page_number = maxranks
                 else:
-                    page_number = rank - 1
-                await menu.menu_start(page_list, page_number)
+                    page_number = rank
+                await menu.menu_start(page_list=page_list, page_number=page_number)
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
