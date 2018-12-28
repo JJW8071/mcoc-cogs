@@ -1066,7 +1066,7 @@ class MCOC(ChampionFactory):
             desc = cm[key]['text']
             for r in range(1, maxranks):
                 mrank = str(r)
-                effects = cm[key][mrank]['effects'][0]
+                effects = list(cm[key][mrank]['effects'])
                 print('len(effects) = '+str(effects))
                 # for i in range(1, len(effects)):
                 #     desc=desc.format(effects[i-1])
