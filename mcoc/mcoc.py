@@ -1099,7 +1099,7 @@ class MCOC(ChampionFactory):
                     page_number = maxranks
                 else:
                     page_number = rank
-                await menu.menu_start(page_list=page_list, page_number=page_number)
+                await menu.menu_start(pages=page_list, page_number=page_number)
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
     async def modok_says(self, ctx, *, word:str = None):
