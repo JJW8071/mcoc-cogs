@@ -1063,15 +1063,15 @@ class MCOC(ChampionFactory):
             maxranks = cm[key]['ranks']
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' {}/'+str(maxranks)
             embedcolor = colors[cm[key]['category'].lower()]
+            desc = cm[key]['text']
             for r in range(1, maxranks):
                 mrank = str(r)
-                desc = cm[key]['text']
                 effects = cm[key][mrank]['effects'][0]
-                print('len(effects) = '+str(len(effects)))
+                print('len(effects) = '+str(effects))
                 # for i in range(1, len(effects)):
                 #     desc=desc.format(effects[i-1])
-                desc=desc.format(effects)
-                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc)
+                desceffects=desc.format(effects)
+                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desceffects)
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
@@ -1084,7 +1084,7 @@ class MCOC(ChampionFactory):
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs), inline=False)
                 if len(rankup_costs) > 0:
                     em.add_field(name='Rank Up Cost', value='\n'.join(rankup_costs), inline=False)
-                em.add_field(name='Prestige Bump', value='{}%'.format(round(cm[key][mrank]['pibump']*100,3)), inline=False)
+                em.add_field(name='Prestige Bump', value='{} %'.format(round(cm[key][mrank]['pibump']*100,3)), inline=False)
                 page_list.append(em)
 
             if len(page_list) > 0:
