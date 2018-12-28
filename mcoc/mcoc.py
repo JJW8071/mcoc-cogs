@@ -1071,7 +1071,7 @@ class MCOC(ChampionFactory):
                 print('mastery effects = '+str(effects))
                 # for i in range(1, len(effects)):
                 #     desc=desc.format(effects[i-1])
-                desceffects=desc.format(join(i for i in effects))
+                desceffects=desc.format(*effects)
                 print('mastery desc(effects)' + str(desceffects))
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desceffects)
                 unlock_costs = []
