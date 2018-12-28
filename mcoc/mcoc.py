@@ -1096,9 +1096,9 @@ class MCOC(ChampionFactory):
                 elif maxranks == 0:
                     page_number = 0
                 elif rank >= maxranks:
-                    page_number = maxranks
+                    page_number = maxranks -1
                 else:
-                    page_number = rank
+                    page_number = max(rank-1, 0)
                 await menu.menu_start(pages=page_list, page_number=page_number)
 
     @commands.command(pass_context=True, aliases=['modok',], hidden=True)
