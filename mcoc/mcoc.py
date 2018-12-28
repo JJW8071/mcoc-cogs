@@ -1060,15 +1060,17 @@ class MCOC(ChampionFactory):
             rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runit': '<:units:344506213335302145> Unit(s)'}
             colors = {'offense': discord.Color.red(),'defense':discord.Color.red(), 'proficiencies': discord.Color.green()}
             page_list = []
-            desc = cm[key]['text']
             maxranks = cm[key]['ranks']
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' {}/'+str(maxranks)
             embedcolor = colors[cm[key]['category'].lower()]
             for r in range(1, maxranks):
                 mrank = str(r)
+                desc = cm[key]['text']
                 effects = cm[key][mrank]['effects']
                 print('len(effects) = '+str(len(effects)))
-                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc.format(effects[e] for e in range(len(effects)-1)))
+                for i in range(0, len(effects)-1):
+                    desc=desc.format(effects[i])
+                em = discord.Embed(color=embedcolor, title=titled.format(r), description = desc)
                 unlock_costs = []
                 rankup_costs = []
                 for u in unlocks.keys():
