@@ -1064,6 +1064,8 @@ class MCOC(ChampionFactory):
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' {}/'+str(maxranks)
             embedcolor = colors[cm[key]['category'].lower()]
             desc = cm[key]['text']
+            cumulative_unlock = {'ucarb':0, 'uclass': 0, 'ustony': 0, 'uunits':0}
+            cumulative_rankups = {'rgold':0, 'runit':0}
             for r in range(1, maxranks + 1):
                 mrank = str(r)
                 effects = list(cm[key][mrank]['effects'])
@@ -1076,16 +1078,26 @@ class MCOC(ChampionFactory):
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desceffects)
                 unlock_costs = []
                 rankup_costs = []
+                cum_unlock_costs = []
+                cum_rankup_costs = []
                 for u in unlocks.keys():
                     if cm[key][mrank][u] > 0:
+                        cumulative_unlock[key] = cumulative_unlock[key] + cm[key][mrank][u]
                         unlock_costs.append('{} {}'.format(cm[key][mrank][u], unlocks[u]))
+                        cum_unlock_costs.append('{} {}'.format(cum_unlock_costs[key], unlocks[u]))
                 for ru in rankups.keys():
                     if cm[key][mrank][ru] > 0:
+                        cumulative_rankups[key] = cumulative_rankup[key] + cm[key][mrank][u]
                         rankup_costs.append('{} {}'.format(cm[key][mrank][ru], rankups[ru]))
+                        cum_rankup_costs.append('{} {}'.format(cum_rankup_costs[key], rankups[u]))
                 if len(unlock_costs) >0:
                     em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs), inline=False)
                 if len(rankup_costs) > 0:
                     em.add_field(name='Rank Up Cost', value='\n'.join(rankup_costs), inline=False)
+                if len(cum_unlock_costs) >0:
+                    em.add_field(name='Cumulative Unlock Cost', value='\n'.join(cum_unlock_costs), inline=False)
+                if len(cum_rankup_costs) > 0:
+                    em.add_field(name='Cumulative Rank Up Cost', value='\n'.join(cum_rankup_costs), inline=False)
                 em.add_field(name='Prestige Bump', value='{} %'.format(round(cm[key][mrank]['pibump']*100,3)), inline=False)
                 page_list.append(em)
 
