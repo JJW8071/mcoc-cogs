@@ -1026,27 +1026,31 @@ class MCOC(ChampionFactory):
     #     if not silent:
     #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
-    # @commands.group(pass_context=True, aliases=['mastery',])
-    # async def masteries(self, ctx):
-    #     if ctx.invoked_subcommand is None:
-    #         await send_cmd_help(ctx)
-    #
-    # @masteries.command(pass_context=True, name='info')
+    @commands.group(pass_context=True, aliases=['masteries',])
+    async def mastery(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
 
-    @commands.command(pass_context=True, hidden=True)
+    @mastery.command(pass_context=True, name='info')
+    # @commands.command(pass_context=True, hidden=True)
     async def mastery_info(self, ctx, word: str, rank:int = None):
-        '''Present Mastery Text and rank information'''
+        '''BETA: Present Mastery Text and rank information
+        Mastery must be in quotes if it includes whitespace
+        ex
+        /mastery info "Deep Wounds" 4 [works]
+        /mastery info deepwounds 4 [works]
+        /mastery info Deep Wounds 4 [fails]'''
         cm = cdt_masteries
         keys = cdt_masteries.keys()
         found = False
         if word.lower() in keys:
             key = word
-            await self.bot.say('mastery key found')
+            # await self.bot.say('mastery key found')
             found = True
         else:
             for key in keys:
                 if word.lower() == cm[key]['proper'].lower():
-                    await self.bot.say('mastery Title found')
+                    # await self.bot.say('mastery Title found')
                     found = True
                     break
         if found:
