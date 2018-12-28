@@ -1093,9 +1093,9 @@ class MCOC(ChampionFactory):
                 menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
                 if rank == None:
                     page_number = 0
-                elif maxranks = 0:
+                elif maxranks == 0:
                     page_number = 0
-                elif rank > maxranks:
+                elif rank >= maxranks:
                     page_number = maxranks
                 else:
                     page_number = rank
