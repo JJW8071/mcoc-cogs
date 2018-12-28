@@ -1064,7 +1064,7 @@ class MCOC(ChampionFactory):
             titled = cm[key]['icon']+' '+cm[key]['proper']+ ' {}/'+str(maxranks)
             embedcolor = colors[cm[key]['category'].lower()]
             desc = cm[key]['text']
-            for r in range(1, maxranks):
+            for r in range(1, maxranks + 1):
                 mrank = str(r)
                 effects = list(cm[key][mrank]['effects'])
                 print('mastery desc = ' + desc)
