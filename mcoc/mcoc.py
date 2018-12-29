@@ -1455,9 +1455,9 @@ class MCOC(ChampionFactory):
 
     @champ.command(pass_context=True, name='sigplot', hidden=True)
     async def champ_sigplot(self,ctx,*, champ: ChampConverterSig):
-        try:
-            title, desc, sig_calcs = await champ.process_sig_description(
-                    isbotowner=ctx.message.author == appinfo.owner)
+        # try:
+        #     title, desc, sig_calcs = await champ.process_sig_description(
+        #             isbotowner=ctx.message.author == appinfo.owner)
 
         if champ.star <= 4 and champ.star > 1:
             x = 99
