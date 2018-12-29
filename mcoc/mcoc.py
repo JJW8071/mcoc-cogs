@@ -1080,6 +1080,7 @@ class MCOC(ChampionFactory):
                 desceffects=desc.format(*effects)
                 print('mastery desc(effects)' + str(desceffects))
                 em = discord.Embed(color=embedcolor, title=titled.format(r), description = desceffects)
+                em.set_footer(text='CollectorDevTeam Dataset', icon_url=COLLECTOR_ICON)
                 unlock_costs = []
                 rankup_costs = []
                 cum_unlock_costs = []
@@ -1474,7 +1475,7 @@ class MCOC(ChampionFactory):
             plt.axis([0, x, 0, tempYmax])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
-            plt.suptitle('Sig Plot Test')
+            plt.suptitle('{} Sig Plot [Test]'.format(champ.full_name))
             # plt.show()
             plt.draw()
             plt.savefig('data/mcoc/sigtemp.png', format='png', dpi=150)
