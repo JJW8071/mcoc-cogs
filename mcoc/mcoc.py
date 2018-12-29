@@ -1487,7 +1487,7 @@ class MCOC(ChampionFactory):
         try:
             plt.plot(x, [69, 182.54, 202.82, 224.2, 235.11, 243.20], '-', label='Y1 effects', color=y1color)
             plt.plot(x, [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], '--', label='Y2 effects', color=y2color)
-            plt.axis([0, max(x), 0, tempYmax])
+            plt.axis([0, 99, 0, tempYmax])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
             plt.suptitle('{} Sig Plot [Test]'.format(champ.full_name))
