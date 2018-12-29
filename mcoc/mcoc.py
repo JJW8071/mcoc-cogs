@@ -1460,19 +1460,34 @@ class MCOC(ChampionFactory):
         #     title, desc, sig_calcs = await champ.process_sig_description(
         #             isbotowner=ctx.message.author == appinfo.owner)
 
-        if champ.star <= 4 and champ.star > 1:
-            x = [1, 20, 40, 60, 80, 99]#99
-        elif champ.star > 4:
-            x = 200
-        elif champ.star == 1:
-            await self.bot.say('1★ champs have no signature ability.')
-            return
+        # if champ.star <= 4 and champ.star > 1:
+        #     x = [1, 20, 40, 60, 80, 99]#99
+        # elif champ.star > 4:
+        #     x = 200
+        # elif champ.star == 1:
+        #     await self.bot.say('1★ champs have no signature ability.')
+        #     return
 
+        #Random
+        colors=[discord.Color.teal(), discord.Color.dark_teal(),
+                discord.Color.green(), discord.Color.dark_green(),
+                discord.Color.blue(), discord.Color.dark_blue(),
+                discord.Color.purple(), discord.Color.dark_purple(),
+                discord.Color.magenta(), discord.Color.dark_magenta(),
+                discord.Color.gold(), discord.Color.dark_gold(),
+                discord.Color.orange(), discord.Color.dark_orange(),
+                discord.Color.red(), discord.Color.dark_red(),
+                discord.Color.lighter_grey(), discord.Color.dark_grey(),
+                discord.Color.light_grey(), discord.Color.darker_grey()]
+        y1color=random.choice(colors)
+        y2color=random.choice(colors)
+
+        x = [1, 20, 40, 60, 80, 99]#99
         tempYmax = 250
         try:
-            plt.plot(x, [69, 182.54, 202.82, 224.2, 235.11, 243.20], '-', label='Y1 effects')
-            plt.plot(x, [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], '--', label='Y2 effects')
-            plt.axis([0, x, 0, tempYmax])
+            plt.plot(x, [69, 182.54, 202.82, 224.2, 235.11, 243.20], '-', label='Y1 effects', color=y1color)
+            plt.plot(x, [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], '--', label='Y2 effects', color=y2color)
+            plt.axis([0, max(x), 0, tempYmax])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
             plt.suptitle('{} Sig Plot [Test]'.format(champ.full_name))
