@@ -1455,17 +1455,23 @@ class MCOC(ChampionFactory):
 
     @champ.command(pass_context=True, name='sigplot', hidden=True)
     async def champ_sigplot(self,ctx,*, champ: ChampConverterSig):
+        try:
+            title, desc, sig_calcs = await champ.process_sig_description(
+                    isbotowner=ctx.message.author == appinfo.owner)
+
         if champ.star <= 4 and champ.star > 1:
             x = 99
         elif champ.star > 4:
             x = 200
         elif champ.star == 1:
             await self.bot.say('1★ champs have no signature ability.')
+            return
 
-
+        tempYmax = 250
         try:
-            plt.plot([1,2,3,4], [1,4,9,16], 'ro')
-            plt.axis([0, 6, 0, 20])
+            plt.plot([1, 20, 40, 60, 80, 99], [69, 182.54, 202.82, 224.2, 235.11, 243.20], 'ro')
+            plt.plot([1, 20, 40, 60, 80, 99], [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], 'ro')
+            plt.axis([0, x, 0, tempYmax])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
             plt.suptitle('Sig Plot Test')
@@ -1473,6 +1479,7 @@ class MCOC(ChampionFactory):
             plt.draw()
             plt.savefig('data/mcoc/sigtemp.png', format='png', dpi=150)
             await self.bot.upload('data/mcoc/sigtemp.png')
+            os.remove('data/mcoc/sigtemp.png')
         except:
             print('champ_sigplot nothing happened')
 
