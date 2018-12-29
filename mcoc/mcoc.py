@@ -1477,7 +1477,7 @@ class MCOC(ChampionFactory):
             plt.axis([0, 99, 0, 300])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
-            plt.suptitle('{} Sig Plot [Test]'.format(champ.full_name))
+            plt.suptitle('Sig Plot [Test]')
             # plt.show()
             plt.draw()
             plt.savefig('data/mcoc/sigtemp.png', format='png', dpi=150)
