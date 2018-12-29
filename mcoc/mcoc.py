@@ -1474,7 +1474,7 @@ class MCOC(ChampionFactory):
             #     plt.axis()
             # except:
             plt.plot([1,2,3,4],[1,4,9,16], 'ro')
-            plt.plot([0,10,0,20])
+            plt.axis([0,10,0,20])
             # plt.plot(x, [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], fmt='g--', label='Y2 effects')
             # plt.axis([0, 99, 0, 300])
             plt.xlabel('Signature Ability Level')
