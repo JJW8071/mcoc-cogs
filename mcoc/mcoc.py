@@ -1461,7 +1461,7 @@ class MCOC(ChampionFactory):
         #             isbotowner=ctx.message.author == appinfo.owner)
 
         if champ.star <= 4 and champ.star > 1:
-            x = 99
+            x = [1, 20, 40, 60, 80, 99]#99
         elif champ.star > 4:
             x = 200
         elif champ.star == 1:
@@ -1470,8 +1470,8 @@ class MCOC(ChampionFactory):
 
         tempYmax = 250
         try:
-            plt.plot([1, 20, 40, 60, 80, 99], [69, 182.54, 202.82, 224.2, 235.11, 243.20], '-')
-            plt.plot([1, 20, 40, 60, 80, 99], [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], '--')
+            plt.plot(x, [69, 182.54, 202.82, 224.2, 235.11, 243.20], '-', label='Y1 effects')
+            plt.plot(x, [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], '--', label='Y2 effects')
             plt.axis([0, x, 0, tempYmax])
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
