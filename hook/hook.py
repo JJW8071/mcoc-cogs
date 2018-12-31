@@ -356,7 +356,9 @@ class ChampionRoster:
             try:
                 champ = await self.get_champion(champ_csv)
             except KeyError:
-                missing.append(champ_csv['Id'])
+                if champ_csv['Id'].strip():
+                    # non-empty champion ID
+                    missing.append(champ_csv['Id'])
                 continue
             if champ.immutable_id in self.roster:
                 dupes.append(champ)

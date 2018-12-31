@@ -4,12 +4,152 @@ import csv
 import random
 import os
 import datetime
+import json
+import requests
+import asyncio
+import aiohttp
 from operator import itemgetter, attrgetter
+from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
 from .utils.dataIO import dataIO
 from cogs.utils import checks
 from discord.ext import commands
 from . import hook as hook
+
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/cdt_icon.png'
+KABAM_ICON='https://imgur.com/UniRf5f.png'
+
+class KabamData:
+    instance = None
+    CDT_JSON, CDT_VER_JSON = None, None
+    def __new__(cls):
+        if cls.instance is None:
+            cls.instance = super().__new__(cls)
+        return cls.instance
+
+    async def load_cdt_json(self):
+        CDT_JSON, CDT_VER_JSON = ChainMap(), ChainMap()
+        files = (
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/dungeons_en.json'
+        )
+        async with aiohttp.ClientSession() as session:
+            for file in files:
+                async with session.get(file) as response:
+                    raw_data = json.loads(await response.text())
+                print(file)
+                val, ver = {}, {}
+                for dlist in raw_data['strings']:
+                    val[dlist['k']] = dlist['v']
+                    if 'vn' in dlist:
+                        ver[dlist['k']] = dlist['vn']
+                CDT_JSON.maps.append(val)
+                CDT_VER_JSON.maps.append(ver)
+        self.CDT_JSON = CDT_JSON
+        self.CDT_VER_JSON = CDT_VER_JSON
+
+
+class PagesMenu:
+
+    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
+
+    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
+            delete_onX=True):
+        self.bot = bot
+        self.timeout = timeout
+        self.add_pageof = add_pageof
+        self.choice = choice
+        self.delete_onX = delete_onX
+        self.embedded = True
+
+    async def menu_start(self, pages, page_number=0):
+        page_list = []
+        if isinstance(pages, list):
+            page_list = pages
+        else:
+            for page in pages:
+                page_list.append(page)
+        page_length = len(page_list)
+        if page_length == 1:
+            if isinstance(page_list[0], discord.Embed) == True:
+                message = await self.bot.say(embed=page_list[0])
+            else:
+                message = await self.bot.say(page_list[0])
+            return
+        self.embedded = isinstance(page_list[0], discord.Embed)
+        self.all_emojis = OrderedDict([(i.emoji, i) for i in (
+            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+            self.EmojiReact("\N{CROSS MARK}", True, None),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+                      )])
+
+        print('menu_pages is embedded: '+str(self.embedded))
+
+        if self.add_pageof:
+            for i, page in enumerate(page_list):
+                if isinstance(page, discord.Embed):
+                    ftr = page.footer
+                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
+                            i+1, page_length), icon_url=ftr.icon_url)
+                else:
+                    page += '\n(Page {} of {})'.format(i+1, page_length)
+
+        self.page_list = page_list
+        await self.display_page(None, page_number)
+
+    async def display_page(self, message, page):
+        if not message:
+            if isinstance(self.page_list[page], discord.Embed) == True:
+                message = await self.bot.say(embed=self.page_list[page])
+            else:
+                message = await self.bot.say(self.page_list[page])
+            self.included_emojis = set()
+            for emoji in self.all_emojis.values():
+                if emoji.include:
+                    await self.bot.add_reaction(message, emoji.emoji)
+                    self.included_emojis.add(emoji.emoji)
+        else:
+            if self.embedded == True:
+                message = await self.bot.edit_message(message, embed=self.page_list[page])
+            else:
+                message = await self.bot.edit_message(message, self.page_list[page])
+        await asyncio.sleep(1)
+
+        react = await self.bot.wait_for_reaction(message=message,
+                timeout=self.timeout, emoji=self.included_emojis)
+        if react is None:
+            try:
+                await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                logger.warn("clear_reactions didn't work")
+                for emoji in self.included_emojis:
+                    await self.bot.remove_reaction(message, emoji, self.bot.user)
+            return None
+
+        emoji = react.reaction.emoji
+        pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
+        if pages_to_inc:
+            next_page = (page + pages_to_inc) % len(self.page_list)
+            try:
+                await self.bot.remove_reaction(message, emoji, react.user)
+                await self.display_page(message=message, page=next_page)
+            except discord.Forbidden:
+                await self.bot.delete_message(message)
+                await self.display_page(message=None, page=next_page)
+        elif emoji == '\N{CROSS MARK}':
+            try:
+                if self.delete_onX:
+                    await self.bot.delete_message(message)
+                else:
+                    await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                await self.bot.say("Bot does not have the proper Permissions")
 
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
@@ -182,6 +322,62 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+
+    @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
+    async def kabam_search(self, ctx, *, term: str):
+        '''Enter a search term or a JSON key'''
+        kdata = KabamData()
+        CDT_JSON, CDT_VER_JSON = kdata.CDT_JSON, kdata.CDT_VER_JSON
+        ksearchlist = []
+        is_number = term.replace('.', '').isdigit()
+        if is_number:
+            for k,v in CDT_VER_JSON.items():
+                if term == v:
+                    ksearchlist.append('\n**{}**\n{}\nvn: {}'.format(k,
+                            self._bcg_recompile(CDT_JSON[k]), v))
+        elif term.upper() in CDT_JSON:
+            term = term.upper()
+            if term in CDT_VER_JSON:
+                ver = '\nvn: {}'.format(CDT_VER_JSON[term])
+            else:
+                ver = ''
+            em = discord.Embed(title='Data Search',
+                    description='\n**{}**\n{}{}'.format(term,
+                            self._bcg_recompile(CDT_JSON[term]),
+                            ver)
+                )
+            # em.set_thumbnail(url=COLLECTOR_ICON)
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+            ## term is a specific JSON key
+            # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(CDT_JSON[term])))
+            await self.bot.say(embed=em)
+            return
+        else:
+            ## search for term in json
+            for k,v in CDT_JSON.items():
+                if term.lower() in v.lower():
+                    if k in CDT_VER_JSON:
+                        ver = '\nvn: {}'.format(CDT_VER_JSON[k])
+                    else:
+                        ver = ''
+                    ksearchlist.append('\n**{}**\n{}{}'.format(k,
+                            self._bcg_recompile(v), ver)
+                    )
+        if len(ksearchlist) > 0:
+            pages = chat.pagify('\n'.join(s for s in ksearchlist))
+            page_list = []
+            for page in pages:
+                em = discord.Embed(title='Data Search',  description = page)
+                # em.set_thumbnail(url=COLLECTOR_ICON)
+                em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+                page_list.append(em)
+                # page_list.append(page)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)
+
+    def _bcg_recompile(self, str_data):
+        hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
+        return hex_re.sub(r'\1', str_data)
 
     # @commands.command()
     # async def keygen(self, prefix='SDCC17'):
@@ -562,7 +758,7 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return chat.box('\n'.join(rows))
 
-
-
 def setup(bot):
+    kdata = KabamData()
+    bot.loop.create_task(kdata.load_cdt_json())
     bot.add_cog(MCOCTools(bot))

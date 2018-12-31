@@ -79,8 +79,6 @@ GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/g
 SPOTLIGHT_DATASET='https://docs.google.com/spreadsheets/d/e/2PACX-1vRFLWYdFMyffeOzKiaeQeqoUgaESknK-QpXTYV2GdJgbxQkeCjoSajuLjafKdJ5imE1ADPYeoh8QkAr/pubhtml?gid=1483787822&single=true'
 SPOTLIGHT_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSe4JYzU5CsDz2t0gtQ4QKV8IdVjE5vaxJBrp-mdfKxOG8fYiA/viewform?usp=sf_link'
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
-COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/cdt_icon.png'
-KABAM_ICON='https://imgur.com/UniRf5f.png'
 MODOKSAYS = ['alien', 'buffoon', 'charlatan', 'creature', 'die', 'disintegrate',
         'evaporate', 'feelmypower', 'fool', 'fry', 'haha', 'iamscience', 'idiot',
         'kill', 'oaf', 'peabrain', 'pretender', 'sciencerules', 'silence',
@@ -153,29 +151,9 @@ def fetch_json(url):
     return raw_data
 
 
-def load_cdt_json():
-    data = ChainMap()
-    dver = ChainMap()
-    aux = []
-    files = ('https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
-        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
-        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json',
-        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries_en.json',
-        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios_en.json',
-        'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/dungeons_en.json')
-    for file in files:
-        get_file = requests.get(file)
-        raw_data = json.loads(get_file.text)
-        print(file)
-        for dlist in aux, raw_data['strings']:
-            data.maps.append({d['k']: d['v'] for d in dlist})
-            dver.maps.append({d['k']: d['vn'] for d in dlist if 'vn' in d})
-    return data, dver
-
-cdt_json, cdt_json_versions = load_cdt_json()
 cdt_masteries = fetch_json(remote_data_basepath+'json/masteries.json')
 
-#print(cdt_json['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
+#print(CDT_JSON['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
@@ -1417,7 +1395,15 @@ class MCOC(ChampionFactory):
             #print(desc)
         except KeyError:
             await champ.missing_sig_ad()
-            raise
+            if champ.debug:
+                raise
+            return
+        except SignatureSchemaError as e:
+            await self.bot.say("Technical Difficulties with Signature Retrieval."
+                    "\n'{}' needs a bit of cleanup".format(champ.full_name)
+                )
+            if champ.debug:
+                await self.bot.say(chat.box(str(e)))
             return
         if title is None:
             return
@@ -1967,60 +1953,6 @@ class MCOC(ChampionFactory):
                     champs_matched.add(champ.mattkraftid)
         await self.bot.say(embed=em)
 
-    @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
-    async def kabam_search(self, ctx, *, term: str):
-        '''Enter a search term or a JSON key'''
-        ksearchlist = []
-        is_number = term.replace('.', '').isdigit()
-        if is_number:
-            for k,v in cdt_json_versions.items():
-                if term == v:
-                    ksearchlist.append('\n**{}**\n{}\nvn: {}'.format(k,
-                            self._bcg_recompile(cdt_json[k]), v))
-        elif term.upper() in cdt_json:
-            term = term.upper()
-            if term in cdt_json_versions:
-                ver = '\nvn: {}'.format(cdt_json_versions[term])
-            else:
-                ver = ''
-            em = discord.Embed(title='Data Search',
-                    description='\n**{}**\n{}{}'.format(term,
-                            self._bcg_recompile(cdt_json[term]),
-                            ver)
-                )
-            # em.set_thumbnail(url=COLLECTOR_ICON)
-            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
-            ## term is a specific JSON key
-            # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_json[term])))
-            await self.bot.say(embed=em)
-            return
-        else:
-            ## search for term in json
-            for k,v in cdt_json.items():
-                if term.lower() in v.lower():
-                    if k in cdt_json_versions:
-                        ver = '\nvn: {}'.format(cdt_json_versions[k])
-                    else:
-                        ver = ''
-                    ksearchlist.append('\n**{}**\n{}{}'.format(k,
-                            self._bcg_recompile(v), ver)
-                    )
-        if len(ksearchlist) > 0:
-            pages = chat.pagify('\n'.join(s for s in ksearchlist))
-            page_list = []
-            for page in pages:
-                em = discord.Embed(title='Data Search',  description = page)
-                # em.set_thumbnail(url=COLLECTOR_ICON)
-                em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
-                page_list.append(em)
-                # page_list.append(page)
-            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(page_list)
-
-    def _bcg_recompile(self, str_data):
-        hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
-        return hex_re.sub(r'\1', str_data)
-
 
     @commands.command(hidden=True)
     async def tst(self, key):
@@ -2524,12 +2456,13 @@ class Champion:
         return image
 
     async def get_bio(self):
+        kdata = KabamData()
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
         try:
-            bio = cdt_json[key]
+            bio = kdata.CDT_JSON[key]
         except KeyError:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bio
@@ -2642,18 +2575,20 @@ class Champion:
         return pack
 
     def get_special_attacks(self):
+        kdata = KabamData()
+        CDT_JSON = kdata.CDT_JSON
         prefix = 'ID_SPECIAL_ATTACK_'
         desc = 'DESCRIPTION_'
         zero = '_0'
         one = '_1'
         two = '_2'
-        if prefix+self.mcocjson+one in cdt_json:
-            s0 = cdt_json[prefix + self.mcocjson + zero]
-            s1 = cdt_json[prefix + self.mcocjson + one]
-            s2 = cdt_json[prefix + self.mcocjson + two]
-            s0d = cdt_json[prefix + desc + self.mcocjson + zero]
-            s1d = cdt_json[prefix + desc + self.mcocjson + one]
-            s2d = cdt_json[prefix + desc + self.mcocjson + two]
+        if prefix+self.mcocjson+one in CDT_JSON:
+            s0 = CDT_JSON[prefix + self.mcocjson + zero]
+            s1 = CDT_JSON[prefix + self.mcocjson + one]
+            s2 = CDT_JSON[prefix + self.mcocjson + two]
+            s0d = CDT_JSON[prefix + desc + self.mcocjson + zero]
+            s1d = CDT_JSON[prefix + desc + self.mcocjson + one]
+            s2d = CDT_JSON[prefix + desc + self.mcocjson + two]
             specials = (s0, s1, s2, s0d, s1d, s2d)
             return specials
 
@@ -2750,7 +2685,13 @@ class Champion:
                         self._sig_header(txt)))
         if self.debug:
             await self.bot.say(chat.box('\n'.join(fdesc)))
-        return ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
+        title, desc, sig_calcs = ktxt['title']['v'], '\n'.join(fdesc), sig_calcs
+        try:
+            desc.format(d=sig_calcs)
+        except KeyError as e:
+            raise SignatureSchemaError("'{}' key error at {}".format(
+                    self.full_name, str(e)))
+        return title, desc, sig_calcs
 
     async def retrieve_sig_data(self, data, isbotowner):
         if data is None:
@@ -2882,6 +2823,7 @@ class Champion:
         descriptionkey = preamble + desc,
         '''
 
+        kdata = KabamData()
         mcocsig = self.mcocsig
         #print(mcocsig)
         title = self._TITLE
@@ -2893,7 +2835,7 @@ class Champion:
 
         # allow manual override of Kabam Keys
         champ_exceptions = champ_exceptions if champ_exceptions else {}
-        keymap = cdt_json.new_child(champ_exceptions)
+        keymap = kdata.CDT_JSON.new_child(champ_exceptions)
         return dict(title={'k': title, 'v': keymap[title]},
                     simple={'k': simple, 'v': keymap[simple]},
                     desc={'k': desc, 'v': [keymap[k] for k in desc]})
@@ -2916,104 +2858,6 @@ class Champion:
     def _sig_header(str_data):
         hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
         return '• ' + hex_re.sub(r'**\1**', str_data)
-
-class PagesMenu:
-
-    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
-
-    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
-            delete_onX=True):
-        self.bot = bot
-        self.timeout = timeout
-        self.add_pageof = add_pageof
-        self.choice = choice
-        self.delete_onX = delete_onX
-        self.embedded = True
-
-    async def menu_start(self, pages, page_number=0):
-        page_list = []
-        if isinstance(pages, list):
-            page_list = pages
-        else:
-            for page in pages:
-                page_list.append(page)
-        page_length = len(page_list)
-        if page_length == 1:
-            if isinstance(page_list[0], discord.Embed) == True:
-                message = await self.bot.say(embed=page_list[0])
-            else:
-                message = await self.bot.say(page_list[0])
-            return
-        self.embedded = isinstance(page_list[0], discord.Embed)
-        self.all_emojis = OrderedDict([(i.emoji, i) for i in (
-            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
-            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
-            self.EmojiReact("\N{CROSS MARK}", True, None),
-            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
-            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
-                      )])
-
-        print('menu_pages is embedded: '+str(self.embedded))
-
-        if self.add_pageof:
-            for i, page in enumerate(page_list):
-                if isinstance(page, discord.Embed):
-                    ftr = page.footer
-                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
-                            i+1, page_length), icon_url=ftr.icon_url)
-                else:
-                    page += '\n(Page {} of {})'.format(i+1, page_length)
-
-        self.page_list = page_list
-        await self.display_page(None, page_number)
-
-    async def display_page(self, message, page):
-        if not message:
-            if isinstance(self.page_list[page], discord.Embed) == True:
-                message = await self.bot.say(embed=self.page_list[page])
-            else:
-                message = await self.bot.say(self.page_list[page])
-            self.included_emojis = set()
-            for emoji in self.all_emojis.values():
-                if emoji.include:
-                    await self.bot.add_reaction(message, emoji.emoji)
-                    self.included_emojis.add(emoji.emoji)
-        else:
-            if self.embedded == True:
-                message = await self.bot.edit_message(message, embed=self.page_list[page])
-            else:
-                message = await self.bot.edit_message(message, self.page_list[page])
-        await asyncio.sleep(1)
-
-        react = await self.bot.wait_for_reaction(message=message,
-                timeout=self.timeout, emoji=self.included_emojis)
-        if react is None:
-            try:
-                await self.bot.clear_reactions(message)
-            except discord.Forbidden:
-                logger.warn("clear_reactions didn't work")
-                for emoji in self.included_emojis:
-                    await self.bot.remove_reaction(message, emoji, self.bot.user)
-            return None
-
-        emoji = react.reaction.emoji
-        pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
-        if pages_to_inc:
-            next_page = (page + pages_to_inc) % len(self.page_list)
-            try:
-                await self.bot.remove_reaction(message, emoji, react.user)
-                await self.display_page(message=message, page=next_page)
-            except discord.Forbidden:
-                await self.bot.delete_message(message)
-                await self.display_page(message=None, page=next_page)
-        elif emoji == '\N{CROSS MARK}':
-            try:
-                if self.delete_onX:
-                    await self.bot.delete_message(message)
-                else:
-                    await self.bot.clear_reactions(message)
-            except discord.Forbidden:
-                await self.bot.say("Bot does not have the proper Permissions")
 
 def bound_lvl(siglvl, max_lvl=99):
     if isinstance(siglvl, list):
@@ -3148,6 +2992,7 @@ def override_error_handler(bot):
 
 # avoiding cyclic importing
 from . import hook as hook
+from .mcocTools import (KABAM_ICON, COLLECTOR_ICON, PagesMenu, KabamData)
 
 def setup(bot):
     override_error_handler(bot)
