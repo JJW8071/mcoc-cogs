@@ -1456,13 +1456,16 @@ class MCOC(ChampionFactory):
 
         try:
             # try:
-            #     plt.plot([1, 20, 40, 60, 80, 99], [69, 182.54, 202.82, 224.2, 235.11, 243.20], fmt='b-', label='Y1 effects')
             #     plt.axis()
             # except:
-            plt.plot([1,2,3,4],[1,4,9,16], 'ro')
-            plt.plot([0,10,0,20])
-            # plt.plot(x, [23.92, 65.61, 75.39, 81.14, 85.22, 88.25], fmt='g--', label='Y2 effects')
-            # plt.axis([0, 99, 0, 300])
+            # plt.plot([1,2,3,4],[1,4,9,16], 'r-')
+            x = [1, 20, 40, 60, 80, 99]
+            y1 = [69, 182.54, 202.82, 224.2, 235.11, 243.20]
+            y2 = [23.92, 65.61, 75.39, 81.14, 85.22, 88.25]
+            plt.plot(x, y1, 'rs', label='line 1')
+            plt.plot(x, y2, 'go-', label='line 2')
+            plt.axis()
+            plt.legend()
             plt.xlabel('Signature Ability Level')
             plt.ylabel('Signature Ability Effect')
             plt.suptitle('Sig Plot [Test]')
