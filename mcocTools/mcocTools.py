@@ -2,33 +2,44 @@ import discord
 import re
 import csv
 import random
+import logging
 import os
 import datetime
 import json
-import requests
 import asyncio
 import aiohttp
-from operator import itemgetter, attrgetter
 from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
 from .utils.dataIO import dataIO
 from cogs.utils import checks
 from discord.ext import commands
-from . import hook as hook
+#from . import hook as hook
+
+logger = logging.getLogger('red.mcoc.tools')
+logger.setLevel(logging.INFO)
 
 COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/cdt_icon.png'
 KABAM_ICON='https://imgur.com/UniRf5f.png'
 
-class KabamData:
+class StaticGameData:
     instance = None
-    CDT_JSON, CDT_VER_JSON = None, None
+
+    remote_data_basepath = "https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/"
+    cdt_data, cdt_versions, cdt_masteries = None, None, None
+    test = 2
+
     def __new__(cls):
         if cls.instance is None:
             cls.instance = super().__new__(cls)
         return cls.instance
 
-    async def load_cdt_json(self):
-        CDT_JSON, CDT_VER_JSON = ChainMap(), ChainMap()
+    async def ainit(self):
+        if self.cdt_data is None:
+            await self.load_cdt_data()
+        return self
+
+    async def load_cdt_data(self):
+        cdt_data, cdt_versions = ChainMap(), ChainMap()
         files = (
             'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
             'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
@@ -38,19 +49,29 @@ class KabamData:
             'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/dungeons_en.json'
         )
         async with aiohttp.ClientSession() as session:
-            for file in files:
-                async with session.get(file) as response:
-                    raw_data = json.loads(await response.text())
-                print(file)
+            for url in files:
+                raw_data = await self.fetch_json(url, session)
                 val, ver = {}, {}
                 for dlist in raw_data['strings']:
                     val[dlist['k']] = dlist['v']
                     if 'vn' in dlist:
                         ver[dlist['k']] = dlist['vn']
-                CDT_JSON.maps.append(val)
-                CDT_VER_JSON.maps.append(ver)
-        self.CDT_JSON = CDT_JSON
-        self.CDT_VER_JSON = CDT_VER_JSON
+                cdt_data.maps.append(val)
+                cdt_versions.maps.append(ver)
+            self.cdt_data = cdt_data
+            self.cdt_versions = cdt_versions
+
+            self.cdt_masteries = await self.fetch_json(
+                    self.remote_data_basepath + 'json/masteries.json',
+                    session )
+
+    @staticmethod
+    async def fetch_json(url, session):
+        async with session.get(url) as response:
+            raw_data = json.loads(await response.text())
+        logger.info("Fetching " + url)
+        return raw_data
+
 
 
 class PagesMenu:
@@ -326,38 +347,38 @@ class MCOCTools:
     @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
     async def kabam_search(self, ctx, *, term: str):
         '''Enter a search term or a JSON key'''
-        kdata = KabamData()
-        CDT_JSON, CDT_VER_JSON = kdata.CDT_JSON, kdata.CDT_VER_JSON
+        kdata = StaticGameData()
+        cdt_data, cdt_versions = kdata.cdt_data, kdata.cdt_versions
         ksearchlist = []
         is_number = term.replace('.', '').isdigit()
         if is_number:
-            for k,v in CDT_VER_JSON.items():
+            for k,v in cdt_versions.items():
                 if term == v:
                     ksearchlist.append('\n**{}**\n{}\nvn: {}'.format(k,
-                            self._bcg_recompile(CDT_JSON[k]), v))
-        elif term.upper() in CDT_JSON:
+                            self._bcg_recompile(cdt_data[k]), v))
+        elif term.upper() in cdt_data:
             term = term.upper()
-            if term in CDT_VER_JSON:
-                ver = '\nvn: {}'.format(CDT_VER_JSON[term])
+            if term in cdt_versions:
+                ver = '\nvn: {}'.format(cdt_versions[term])
             else:
                 ver = ''
             em = discord.Embed(title='Data Search',
                     description='\n**{}**\n{}{}'.format(term,
-                            self._bcg_recompile(CDT_JSON[term]),
+                            self._bcg_recompile(cdt_data[term]),
                             ver)
                 )
             # em.set_thumbnail(url=COLLECTOR_ICON)
             em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
             ## term is a specific JSON key
-            # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(CDT_JSON[term])))
+            # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_data[term])))
             await self.bot.say(embed=em)
             return
         else:
             ## search for term in json
-            for k,v in CDT_JSON.items():
+            for k,v in cdt_data.items():
                 if term.lower() in v.lower():
-                    if k in CDT_VER_JSON:
-                        ver = '\nvn: {}'.format(CDT_VER_JSON[k])
+                    if k in cdt_versions:
+                        ver = '\nvn: {}'.format(cdt_versions[k])
                     else:
                         ver = ''
                     ksearchlist.append('\n**{}**\n{}{}'.format(k,
@@ -759,6 +780,6 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
     return chat.box('\n'.join(rows))
 
 def setup(bot):
-    kdata = KabamData()
-    bot.loop.create_task(kdata.load_cdt_json())
+    sgd = StaticGameData()
+    bot.loop.create_task(sgd.load_cdt_data())
     bot.add_cog(MCOCTools(bot))

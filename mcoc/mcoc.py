@@ -143,17 +143,7 @@ kabam_bcg_stat_en = mcoc_dir+"bcg_stat_en.json"
 kabam_bcg_en= mcoc_dir+"bcg_en.json"
 # kabam_masteries=mcoc_dir+"masteries_en.json"
 
-## CollectorDevTeam Repo JSON files
-# Having trouble getting JSON data to load into memory.
-def fetch_json(url):
-    get_file = requests.get(url)
-    raw_data = json.loads(get_file.text)
-    return raw_data
-
-
-cdt_masteries = fetch_json(remote_data_basepath+'json/masteries.json')
-
-#print(CDT_JSON['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
+#print(cdt_data['ID_UI_STAT_FORMAT_GOBLIN_MADNESS_C'])
 
 ability_desc = "data/mcoc/ability-desc/{}.txt"
 
@@ -1011,32 +1001,43 @@ class MCOC(ChampionFactory):
 
     @mastery.command(pass_context=True, name='info')
     # @commands.command(pass_context=True, hidden=True)
-    async def mastery_info(self, ctx, word: str, rank:int = None):
+    async def mastery_info(self, ctx, word: str, rank: int = None):
         '''BETA: Present Mastery Text and rank information
         Mastery must be in quotes if it includes whitespace
         ex
         /mastery info "Deep Wounds" 4 [works]
         /mastery info deepwounds 4 [works]
         /mastery info Deep Wounds 4 [fails]'''
-        cm = cdt_masteries
-        keys = cdt_masteries.keys()
+        sgd = StaticGameData()
+        await sgd.ainit()
+        print(len(sgd.cdt_data), len(sgd.cdt_masteries), sgd.test)
+        cm = sgd.cdt_masteries
         found = False
-        if word.lower() in keys:
+        if word.lower() in cm:
             key = word
             # await self.bot.say('mastery key found')
             found = True
         else:
-            for key in keys:
+            for key in cm.keys():
                 if word.lower() == cm[key]['proper'].lower():
                     # await self.bot.say('mastery Title found')
                     found = True
                     break
         if found:
-            classcores = {'mutagenesis':'<:mutantcore:527924989643587584> Mastery Core X','pureskill':'<:skillcore:527924989970743316> Mastery Core of Aptitude',
-                        'serumscience':'<:sciencecore:527924989194928150> Mastery Serum','mysticdispersion':'<:mysticcore:527924989400186882> Mystical Mastery',
-                        'cosmicawareness':'<:cosmiccore:527924988661989397> Cosmic Mastery', 'collartech':'<:techcore:527924989777805322> Mastery Core 14',
-                        'detectmutant':'<:mutantcore:527924989643587584> Mastery Core X','detectskill':'<:skillcore:527924989970743316> Master Core of Aptitude','detectscience':'<:sciencecore:527924989194928150> Mastery Serum',
-                        'detectmystic':'<:mysticcore:527924989400186882> Mystical Mastery','detectcosmic':'<:cosmiccore:527924988661989397> Cosmic Mastery','detecttech':'<:techcore:527924989777805322> Mastery Core 14'}
+            classcores = {
+                    'mutagenesis':'<:mutantcore:527924989643587584> Mastery Core X',
+                    'pureskill':'<:skillcore:527924989970743316> Mastery Core of Aptitude',
+                    'serumscience':'<:sciencecore:527924989194928150> Mastery Serum',
+                    'mysticdispersion':'<:mysticcore:527924989400186882> Mystical Mastery',
+                    'cosmicawareness':'<:cosmiccore:527924988661989397> Cosmic Mastery',
+                    'collartech':'<:techcore:527924989777805322> Mastery Core 14',
+                    'detectmutant':'<:mutantcore:527924989643587584> Mastery Core X',
+                    'detectskill':'<:skillcore:527924989970743316> Master Core of Aptitude',
+                    'detectscience':'<:sciencecore:527924989194928150> Mastery Serum',
+                    'detectmystic':'<:mysticcore:527924989400186882> Mystical Mastery',
+                    'detectcosmic':'<:cosmiccore:527924988661989397> Cosmic Mastery',
+                    'detecttech':'<:techcore:527924989777805322> Mastery Core 14'
+                }
             classcorekeys = classcores.keys()
             unlocks = {'ucarbs': '<:carbcore:527924990159355904> Carbonium Core(s)', 'uclass': ' {} Core(s)'.format(classcores[key] if key in classcores else 'Class'), 'ustony': '<:stonycore:416405764937089044> Stony Core(s)', 'uunits': '<:units:344506213335302145> Units'}
             rankups = {'rgold': '<:gold:344506213662326785> Gold', 'runit': '<:units:344506213335302145> Unit(s)'}
@@ -2459,13 +2460,14 @@ class Champion:
         return image
 
     async def get_bio(self):
-        kdata = KabamData()
+        sgd = StaticGameData()
+        await sgd.ainit()
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         if self.debug:
             dbg_str = "BIO:  " + key
             await self.bot.say('```{}```'.format(dbg_str))
         try:
-            bio = kdata.CDT_JSON[key]
+            bio = sgd.cdt_data[key]
         except KeyError:
             raise KeyError('Cannot find Champion {} in data files'.format(self.full_name))
         return bio
@@ -2578,20 +2580,21 @@ class Champion:
         return pack
 
     def get_special_attacks(self):
-        kdata = KabamData()
-        CDT_JSON = kdata.CDT_JSON
+        sgd = StaticGameData()
+        #await sgd.ainit()
+        cdt_data = sgd.cdt_data
         prefix = 'ID_SPECIAL_ATTACK_'
         desc = 'DESCRIPTION_'
         zero = '_0'
         one = '_1'
         two = '_2'
-        if prefix+self.mcocjson+one in CDT_JSON:
-            s0 = CDT_JSON[prefix + self.mcocjson + zero]
-            s1 = CDT_JSON[prefix + self.mcocjson + one]
-            s2 = CDT_JSON[prefix + self.mcocjson + two]
-            s0d = CDT_JSON[prefix + desc + self.mcocjson + zero]
-            s1d = CDT_JSON[prefix + desc + self.mcocjson + one]
-            s2d = CDT_JSON[prefix + desc + self.mcocjson + two]
+        if prefix+self.mcocjson+one in cdt_data:
+            s0 = cdt_data[prefix + self.mcocjson + zero]
+            s1 = cdt_data[prefix + self.mcocjson + one]
+            s2 = cdt_data[prefix + self.mcocjson + two]
+            s0d = cdt_data[prefix + desc + self.mcocjson + zero]
+            s1d = cdt_data[prefix + desc + self.mcocjson + one]
+            s2d = cdt_data[prefix + desc + self.mcocjson + two]
             specials = (s0, s1, s2, s0d, s1d, s2d)
             return specials
 
@@ -2826,7 +2829,8 @@ class Champion:
         descriptionkey = preamble + desc,
         '''
 
-        kdata = KabamData()
+        sgd = StaticGameData()
+        #await sgd.ainit()
         mcocsig = self.mcocsig
         #print(mcocsig)
         title = self._TITLE
@@ -2838,7 +2842,7 @@ class Champion:
 
         # allow manual override of Kabam Keys
         champ_exceptions = champ_exceptions if champ_exceptions else {}
-        keymap = kdata.CDT_JSON.new_child(champ_exceptions)
+        keymap = sgd.cdt_data.new_child(champ_exceptions)
         return dict(title={'k': title, 'v': keymap[title]},
                     simple={'k': simple, 'v': keymap[simple]},
                     desc={'k': desc, 'v': [keymap[k] for k in desc]})
@@ -2995,21 +2999,8 @@ def override_error_handler(bot):
 
 # avoiding cyclic importing
 from . import hook as hook
-from .mcocTools import (KABAM_ICON, COLLECTOR_ICON, PagesMenu, KabamData)
+from .mcocTools import (KABAM_ICON, COLLECTOR_ICON, PagesMenu, StaticGameData)
 
 def setup(bot):
     override_error_handler(bot)
-    # if not hasattr(bot, '_command_error_orig'):
-    #     bot._command_error_orig = bot.on_command_error
-    # @bot.event
-    # async def on_command_error(error, ctx):
-    #     if isinstance(error, MODOKError):
-    #         bot.logger.info('<{}> {}'.format(type(error).__name__, error))
-    #         await bot.send_message(ctx.message.channel, error)
-    #         await raw_modok_says(bot, ctx.message.channel)
-    #     elif isinstance(error, QuietUserError):
-    #         print("I'm here")
-    #         bot.logger.info('<{}> {}'.format(type(error).__name__, error))
-    #     else:
-    #         await bot._command_error_orig(error, ctx)
     bot.add_cog(MCOC(bot))
