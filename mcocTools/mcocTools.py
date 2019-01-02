@@ -39,7 +39,7 @@ class StaticGameData:
         if self.cdt_data is None:
             await self.load_cdt_data()
         if self.cdt_trials is None:
-            await self.fetch_gsx2json('1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4')
+            await self.load_cdt_trials()
         return self
 
     async def load_cdt_data(self):
@@ -69,6 +69,21 @@ class StaticGameData:
                     self.remote_data_basepath + 'json/masteries.json',
                     session )
 
+    async def load_cdt_trials(self):
+        raw_data = await self.fetch_gsx2json('1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4')
+        package = {}
+        rows = raw_data['rows'][0]
+        for dlist in rows:
+            package[dlist['unique']] = {'name': dlist['name'],
+                                        'champs': dlist['champs'],
+                                        'easy': dlist['easy'],
+                                        'medium': dlist['medium'],
+                                        'hard': dlist['hard'],
+                                        'expert': dlist['expert']}
+        self.cdt_trials = package
+        return
+
+
     @staticmethod
     async def fetch_json(url, session):
         async with session.get(url) as response:
@@ -82,9 +97,8 @@ class StaticGameData:
         if query != '':
             url=url+'&q'+query
         async with aiohttp.ClientSession() as session:
-            temp = await self.fetch_json(url, session)
-            package = tmp['rows'][0]
-            return package
+            return = await self.fetch_json(url, session)
+
 
 
 class PagesMenu:
@@ -618,9 +632,10 @@ class MCOCTools:
         playera = 1/(1+exp(10,(gain-loss)/400))
         await self.bot.say('{}'.format(playera))
 
-    # @commands.command(pass_context=True, hiddent=True)
-    # async def trials(self, ctx, trial, tier='epic'):
-        
+    @commands.command(pass_context=True, hiddent=True)
+    async def trials(self, ctx, trial, tier='epic'):
+
+
 
 
 
