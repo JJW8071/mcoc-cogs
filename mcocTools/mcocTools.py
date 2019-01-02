@@ -97,7 +97,8 @@ class StaticGameData:
         if query != '':
             url=url+'&q'+query
         async with aiohttp.ClientSession() as session:
-            return = await self.fetch_json(url, session)
+            json_data = await self.fetch_json(url, session)
+            return json_data
 
 
 
