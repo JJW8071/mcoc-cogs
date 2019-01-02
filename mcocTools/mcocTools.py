@@ -38,8 +38,8 @@ class StaticGameData:
     async def ainit(self):
         if self.cdt_data is None:
             await self.load_cdt_data()
-        if self.cdt_trials is None:
-            await self.load_cdt_trials()
+        # if self.cdt_trials is None:
+        #     await self.load_cdt_trials()
         return self
 
     async def load_cdt_data(self):
@@ -74,15 +74,8 @@ class StaticGameData:
         package = {}
         rows = raw_data['rows'][0]
         for dlist in rows:
-            package[dlist['unique']] = {'name': dlist['name'],
-                                        'champs': dlist['champs'],
-                                        'easy': dlist['easy'],
-                                        'medium': dlist['medium'],
-                                        'hard': dlist['hard'],
-                                        'expert': dlist['expert']}
+            package[dlist['unique']] = {'name': dlist['name'], 'champs': dlist['champs'],'easy': dlist['easy'],'medium': dlist['medium'],'hard': dlist['hard'],'expert': dlist['expert']}
         self.cdt_trials = package
-        return
-
 
     @staticmethod
     async def fetch_json(url, session):
@@ -635,9 +628,6 @@ class MCOCTools:
 
     @commands.command(pass_context=True, hiddent=True)
     async def trials(self, ctx, trial, tier='epic'):
-
-
-
 
 
 def load_csv(filename):
