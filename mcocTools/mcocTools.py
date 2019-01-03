@@ -653,7 +653,7 @@ class MCOCTools:
             await self.cache_sgd_gsheets()
             cdt_trials = sgd.from_sheets['elemental_trials']
         trials = set(cdt_trials.keys()) - {'_headers'}
-        tiers = ('easy', 'medium', 'hard', 'expert', 'epic')
+        tiers = {'easy': discord.Color.green(), 'medium': discord.Color.gold(), 'hard': discord.Color.red(), 'expert': discord.Color.purple(), 'epic':discord.Color.cyan()}
         if trial not in trials:
             em = discord.Embed(color=discord.Color.red(), title='Trials Error',
                     description="Invalid trial '{}'".format(trial))
@@ -665,9 +665,13 @@ class MCOCTools:
             em.add_field(name='Valid Tiers:', value='\n'.join(tiers))
             await self.bot.say(embed=em)
         else:
-            em = discord.Embed(color=discord.Color.gold(), title=cdt_trials[trial]['name'], description='')
+            em = discord.Embed(color=tiers[tier], title=cdt_trials[trial]['name'], description='')
             em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
             em.add_field(name='Boosts', value=cdt_trials[trial][tier])
+            if trial = 'alchemist':
+                em.add_field(name=cdt_trials['alchemistrewrds']['name'], value=cdt_trials['alchemistrewrds'][tier])
+            else:
+                em.add_field(name=cdt_trials['rewards']['name'], value=cdt_trials['rewards'][tier] )
             await self.bot.say(embed=em)
 
 
