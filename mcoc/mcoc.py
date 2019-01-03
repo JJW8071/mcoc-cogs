@@ -1397,7 +1397,7 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.command(pass_context=True, name='sigreport', hidden=False)
+    @champ.command(pass_context=True, name='sigreport', aliases='sig_report', hidden=False)
     async def champ_sig_report(self, ctx):
         '''Check All Champion Signature Abilities'''
         bad_champs = defaultdict(list)
