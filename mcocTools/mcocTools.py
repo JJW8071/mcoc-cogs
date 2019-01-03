@@ -620,7 +620,8 @@ class MCOCTools:
 
     @commands.command(name='trials', pass_context=True, hidden=True)
     async def _trials(self,ctx, trial, tier):
-        cdt_trials = self.cdt_trials
+        kdata = StaticGameData()
+        cdt_trials = kdata.cdt_trials
         if trial in cdt_trials.keys() and tier in ('easy', 'epic', 'expert', 'hard', 'medium'):
             if cdt_trials is not None:
                 em = discord.embed(color=discord.Color.gold(), title=cdt_trials[trial]['name'], description='')
