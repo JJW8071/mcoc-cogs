@@ -650,7 +650,7 @@ class MCOCTools:
     async def aux_sheets(self):
         await self.cache_sgd_gsheets()
 
-    @commands.command(name='trials', pass_context=True, aliases=('trial'), hidden=True)
+    @commands.command(name='trials', pass_context=True, aliases=('trial',), hidden=True)
     async def _trials(self,ctx, trial, tier='epic'):
         '''Elemnts of the Trials
         trials   | tier
