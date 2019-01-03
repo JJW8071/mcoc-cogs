@@ -652,16 +652,7 @@ class MCOCTools:
 
     @commands.command(name='trials', pass_context=True, hidden=True)
     async def _trials(self,ctx, trial, tier='epic'):
-        ```Elemnts of the Trials \
-        trials  | tier \
-        Wind    | easy \
-        Fire    | medium\
-        Earth   | hard\
-        Darkness | expert \
-        Water   | epic\
-        Light \
-        Alchemist
-        ```
+        ```Elemnts of the Trials\ntrials  | tier \nWind    | easy\nFire    | medium\nEarth   | hard  \nDarkness | expert  \nWater   | epic\nLight\nAlchemist```
 
         sgd = StaticGameData()
         #cdt_trials = sgd.cdt_trials
