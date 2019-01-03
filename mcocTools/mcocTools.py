@@ -38,8 +38,8 @@ class StaticGameData:
     async def ainit(self):
         if self.cdt_data is None:
             await self.load_cdt_data()
-        # if self.cdt_trials is None:
-        #     await self.load_cdt_trials()
+        if self.cdt_trials is None:
+            await self.load_cdt_trials()
         return self
 
     async def load_cdt_data(self):
@@ -618,16 +618,16 @@ class MCOCTools:
             for page in pages:
                 await self.bot.say(chat.box(page))
 
-    @commands.command(pass_context=True, hidden=True)
-    async def awopp_calc(self, ctx, wr:int, gain:int, loss:int):
-        '''MutaMatt's War Opponent Calculator
-        https://en.wikipedia.org/wiki/Elo_rating_system
-        '''
-        playera = 1/(1+exp(10,(gain-loss)/400))
-        await self.bot.say('{}'.format(playera))
+    # @commands.command(pass_context=True, hidden=True)
+    # async def awopp_calc(self, ctx, wr:int, gain:int, loss:int):
+    #     '''MutaMatt's War Opponent Calculator
+    #     https://en.wikipedia.org/wiki/Elo_rating_system
+    #     '''
+    #     playera = 1/(1+exp(10,(gain-loss)/400))
+    #     await self.bot.say('{}'.format(playera))
 
-    @commands.command(pass_context=True, hiddent=True)
-    async def trials(self, ctx, trial, tier='epic'):
+    # @commands.command(pass_context=True, hiddent=True)
+    # async def trials(self, ctx, trial, tier='epic'):
 
 
 def load_csv(filename):
