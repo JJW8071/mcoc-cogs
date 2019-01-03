@@ -23,6 +23,13 @@ COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master
 KABAM_ICON='https://imgur.com/UniRf5f.png'
 GSX2JSON='http://gsx2json.com/api?id={}&sheet={}&columns=false&integers=false'
 
+# class_color_codes = {
+#         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
+#         'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
+#         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
+#         'All': discord.Color(0x03f193), 'Superior': discord.Color(0x03f193), 'default': discord.Color.light_grey(),
+#         }
+
 class StaticGameData:
     instance = None
 
@@ -653,7 +660,7 @@ class MCOCTools:
             await self.cache_sgd_gsheets()
             cdt_trials = sgd.from_sheets['elemental_trials']
         trials = set(cdt_trials.keys()) - {'_headers'}
-        tiers = {'easy': discord.Color.green(), 'medium': discord.Color.gold(), 'hard': discord.Color.red(), 'expert': discord.Color.purple(), 'epic':discord.Color.cyan()}
+        tiers = {'easy': discord.Color.green(), 'medium': discord.Color.gold(), 'hard': discord.Color.red(), 'expert': discord.Color.purple(), 'epic':discord.Color.(0x2799f7)}
         if trial not in trials:
             em = discord.Embed(color=discord.Color.red(), title='Trials Error',
                     description="Invalid trial '{}'".format(trial))
