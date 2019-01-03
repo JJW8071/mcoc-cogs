@@ -306,7 +306,7 @@ class MCOCMaps:
     @commands.command(pass_context=True, hidden=True)
     async def boost_info(self, ctx, boost):
         # boosturl = 'http://www.alliancewar.com/global/ui/js/boosts.json'
-        boosts = alliancewarboosts
+        # boosts = alliancewarboosts
         keys = boosts.keys()
         if boost not in keys:
             await self.bot.say('Available boosts:\n'+'\n'.join(k for k in keys))
@@ -475,8 +475,22 @@ class MCOCMaps:
     @alliancewar.command(pass_context=True, hidden=True, name="tiers", aliases=('tier'))
     async def _tiers(self, ctx):
         em = discord.Embed(color=discord.Color.gold(), title='Alliance War Tiers', descritpion='', url=JPAGS)
-        em.set_image(url='https://cdn.discordapp.com/attachments/278246904620646410/525791637184446474/zqyh48pgmptc.png')
+        em.set_image(url='https://us.v-cdn.net/6029252/uploads/editor/ok/zqyh48pgmptc.png') ## from Kabam_mike ~ Jan 2018
         await self.bot.say(embed=em)
+
+    @alliancewar.command(pass_context=True, hidden=True, name="scout")
+    async def _scout(self, ctx, tier: string, node: int, hp: int, attack: int, *, hargs):
+        tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
+        if tier not in tiers:
+            await self.bot.say('Tier not recognized')
+            return
+        champ_class = None
+        champ_classes = ('Mystic', 'Science', 'Skill', 'Mutant', 'Tech', 'Cosmic')
+        for c in champ_classes:
+            if c in hargs:
+                champ_class = c
+
+
 
     async def pages_menu(self, ctx, embed_list: list, category: str='', message: discord.Message=None, page=0, timeout: int=30, choice=False):
         """menu control logic for this taken from
