@@ -1251,6 +1251,7 @@ class MCOC(ChampionFactory):
             em.set_thumbnail(url=champ.get_avatar())
             await self.bot.say(embed=em)
 
+    @commands.has_any_role('CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @champ.command(pass_context=True, name='export', hidden=True)
     async def champ_list_export(self, ctx, *, hargs=''):
         '''List of #hargs champions in name order.
@@ -1396,7 +1397,6 @@ class MCOC(ChampionFactory):
         em.set_thumbnail(url=champ.get_avatar())
         await self.bot.say(embed=em)
 
-    @champ.has_any_role('DataDonors','CollectorDevTeam','CollectorSupportTeam','CollectorPartners')
     @champ.command(pass_context=True, name='sigreport', aliases=('sig_report'), hidden=False)
     async def champ_sig_report(self, ctx):
         '''Check All Champion Signature Abilities'''
