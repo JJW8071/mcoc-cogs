@@ -660,7 +660,7 @@ class MCOCTools:
             await self.cache_sgd_gsheets()
             cdt_trials = sgd.from_sheets['elemental_trials']
         trials = set(cdt_trials.keys()) - {'_headers'}
-        tiers = {'easy': discord.Color.green(), 'medium': discord.Color.gold(), 'hard': discord.Color.red(), 'expert': discord.Color.purple(), 'epic':discord.Color.(0x2799f7)}
+        tiers = {'easy': discord.Color.green(), 'medium': discord.Color.gold(), 'hard': discord.Color.red(), 'expert': discord.Color.purple(), 'epic':discord.Color(0x2799f7)}
         if trial not in trials:
             em = discord.Embed(color=discord.Color.red(), title='Trials Error',
                     description="Invalid trial '{}'".format(trial))
