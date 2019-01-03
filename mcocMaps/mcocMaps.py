@@ -479,7 +479,7 @@ class MCOCMaps:
         await self.bot.say(embed=em)
 
     @alliancewar.command(pass_context=True, hidden=True, name="scout")
-    async def _scout(self, ctx, tier: string, node: int, hp: int, attack: int, *, hargs):
+    async def _scout(self, ctx, tier: str, node: int, hp: int, attack: int, *, hargs):
         tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
         if tier not in tiers:
             await self.bot.say('Tier not recognized')
