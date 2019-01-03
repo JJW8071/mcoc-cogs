@@ -330,7 +330,8 @@ def strip_and_numericise(val):
         return numericise_bool(val.strip())
 
 def cell_to_list(cell):
-    return [strip_and_numericise(i) for i in cell.split(',')] if cell is not None else None
+    if cell is not None:
+        return [strip_and_numericise(i) for c in cell.split(',') for i in c.split('\n')]
 
 def cell_to_dict(cell):
     if cell is None:
@@ -587,12 +588,13 @@ class GSHandler:
 
         num_files = len(gfiles)
         msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
+        package = {}
         for i, k in enumerate(gfiles):
             pulled = False
             for try_num in range(3):
                 gsdata = GSExport(self.bot, gc, name=k, **self.gsheets[k])
                 try:
-                    await gsdata.retrieve_data()
+                    package[k] = await gsdata.retrieve_data()
                     pulled = True
                     break
                 except:
@@ -604,6 +606,7 @@ class GSHandler:
                      'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
             logger.info('Pulled Google Sheet data {}/{}, {}'.format(i+1, num_files, "" if pulled else "Failed"))
         msg = await self.bot.edit_message(msg, 'Retrieval Complete')
+        return package
 
     async def authorize(self):
         try:
@@ -970,29 +973,6 @@ class MCOC(ChampionFactory):
     async def cache_gsheets(self, key=None):
          await self.update_local()
          await self.gsheet_handler.cache_gsheets(key)
-    #     try:
-    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-    #     except FileNotFoundError:
-    #         await self.bot.say('Cannot find credentials file.  Needs to be located:\n'
-    #                 + gapi_service_creds)
-    #         return
-    #     num_files = len(gsheet_files)
-    #     msg = await self.bot.say('Pulled Google Sheet data 0/{}'.format(num_files))
-    #     for i, k in enumerate(gsheet_files.keys()):
-    #         await self.retrieve_gsheet(k, gc)
-    #         msg = await self.bot.edit_message(msg,
-    #                 'Pulled Google Sheet data {}/{}'.format(i+1, num_files))
-    #     await self.bot.say('Retrieval Complete')
-    #
-    # async def retrieve_gsheet(self, key, gc=None, silent=True):
-    #     if gc is None:
-    #         gc = pygsheets.authorize(service_file=gapi_service_creds, no_cache=True)
-    #     if not silent:
-    #         msg = await self.bot.say('Pulling Google Sheet for {}'.format(key))
-    #     gsdata = GSExport(self.bot, gc, name=key, **gsheet_files[key])
-    #     await gsdata.retrieve_data()
-    #     if not silent:
-    #         await self.bot.edit_message(msg, 'Downloaded Google Sheet for {}'.format(key))
 
     @commands.group(pass_context=True, aliases=['masteries',])
     async def mastery(self, ctx):
@@ -1008,9 +988,8 @@ class MCOC(ChampionFactory):
         /mastery info "Deep Wounds" 4 [works]
         /mastery info deepwounds 4 [works]
         /mastery info Deep Wounds 4 [fails]'''
-        sgd = StaticGameData()
-        await sgd.ainit()
-        print(len(sgd.cdt_data), len(sgd.cdt_masteries), sgd.test)
+        sgd = cogs.mcocTools.StaticGameData()
+        #print(len(sgd.cdt_data), len(sgd.cdt_masteries), sgd.test)
         cm = sgd.cdt_masteries
         found = False
         if word.lower() in cm:
@@ -2460,8 +2439,7 @@ class Champion:
         return image
 
     async def get_bio(self):
-        sgd = StaticGameData()
-        await sgd.ainit()
+        sgd = cogs.mcocTools.StaticGameData()
         key = "ID_CHARACTER_BIOS_{}".format(self.mcocjson)
         if self.debug:
             dbg_str = "BIO:  " + key
@@ -2580,8 +2558,7 @@ class Champion:
         return pack
 
     def get_special_attacks(self):
-        sgd = StaticGameData()
-        #await sgd.ainit()
+        sgd = cogs.mcocTools.StaticGameData()
         cdt_data = sgd.cdt_data
         prefix = 'ID_SPECIAL_ATTACK_'
         desc = 'DESCRIPTION_'
@@ -2829,8 +2806,7 @@ class Champion:
         descriptionkey = preamble + desc,
         '''
 
-        sgd = StaticGameData()
-        #await sgd.ainit()
+        sgd = cogs.mcocTools.StaticGameData()
         mcocsig = self.mcocsig
         #print(mcocsig)
         title = self._TITLE
@@ -2999,7 +2975,8 @@ def override_error_handler(bot):
 
 # avoiding cyclic importing
 from . import hook as hook
-from .mcocTools import (KABAM_ICON, COLLECTOR_ICON, PagesMenu, StaticGameData)
+import cogs.mcocTools
+from .mcocTools import (KABAM_ICON, COLLECTOR_ICON, PagesMenu)
 
 def setup(bot):
     override_error_handler(bot)

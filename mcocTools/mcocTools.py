@@ -11,6 +11,7 @@ import aiohttp
 from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
 from .utils.dataIO import dataIO
+from .mcoc import GSHandler, gapi_service_creds
 from cogs.utils import checks
 from discord.ext import commands
 #from . import hook as hook
@@ -28,12 +29,21 @@ class StaticGameData:
     remote_data_basepath = "https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/"
     cdt_data, cdt_versions, cdt_masteries = None, None, None
     cdt_trials = None
-    test = 2
+    test = 3
 
     def __new__(cls):
         if cls.instance is None:
             cls.instance = super().__new__(cls)
         return cls.instance
+
+    def register_gsheets(self, bot):
+        self.gsheet_handler = GSHandler(bot, gapi_service_creds)
+        self.gsheet_handler.register_gsheet(
+                name='elemental_trials',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                local='data/mcoc/elemental_trials.json',
+                #settings=dict(column_handler='champs: to_list')
+        )
 
     async def ainit(self):
         if self.cdt_data is None:
@@ -69,6 +79,10 @@ class StaticGameData:
                     self.remote_data_basepath + 'json/masteries.json',
                     session )
 
+    async def cache_gsheets(self):
+        print("Attempt gsheet pull")
+        self.from_sheets = await self.gsheet_handler.cache_gsheets()
+
     async def load_cdt_trials(self):
         raw_data = await self.fetch_gsx2json('1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4')
         package = {}
@@ -76,6 +90,9 @@ class StaticGameData:
         for dlist in rows:
             package[dlist['unique']] = {'name': dlist['name'], 'champs': dlist['champs'],'easy': dlist['easy'],'medium': dlist['medium'],'hard': dlist['hard'],'expert': dlist['expert']}
         self.cdt_trials = package
+
+    #async def alt_load_cdt_trials(self):
+
 
     @staticmethod
     async def fetch_json(url, session):
@@ -618,18 +635,40 @@ class MCOCTools:
             for page in pages:
                 await self.bot.say(chat.box(page))
 
+    async def cache_sgd_gsheets(self):
+        sgd = StaticGameData()
+        await sgd.cache_gsheets()
+
+    @commands.command()
+    async def aux_sheets(self):
+        await self.cache_sgd_gsheets()
+
     @commands.command(name='trials', pass_context=True, hidden=True)
     async def _trials(self,ctx, trial, tier):
-        kdata = StaticGameData()
-        cdt_trials = kdata.cdt_trials
-        if trial in cdt_trials.keys() and tier in ('easy', 'epic', 'expert', 'hard', 'medium'):
-            if cdt_trials is not None:
-                em = discord.embed(color=discord.Color.gold(), title=cdt_trials[trial]['name'], description='')
-                em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
-                em.add_field(namem='Boosts', value=cdt_trials[trial][tier])
-                await self.bot.say(embed=em)
+        sgd = StaticGameData()
+        #cdt_trials = sgd.cdt_trials
+        try:
+            cdt_trials = sgd.from_sheets['elemental_trials']
+        except AttributeError:
+            await self.cache_sgd_gsheets()
+            cdt_trials = sgd.from_sheets['elemental_trials']
+        trials = set(cdt_trials.keys()) - {'_headers'}
+        tiers = ('easy', 'medium', 'hard', 'expert', 'epic')
+        if trial not in trials:
+            em = discord.Embed(color=discord.Color.red(), title='Trials Error',
+                    description="Invalid trial '{}'".format(trial))
+            em.add_field(name='Valid Trials:', value='\n'.join(trials))
+            await self.bot.say(embed=em)
+        elif tier not in tiers:
+            em = discord.Embed(color=discord.Color.red(), title='Trials Error',
+                    description="Invalid tier '{}'".format(tier))
+            em.add_field(name='Valid Tiers:', value='\n'.join(tiers))
+            await self.bot.say(embed=em)
         else:
-            await self.bot.say('Yeah, no - something went wrong.')
+            em = discord.Embed(color=discord.Color.gold(), title=cdt_trials[trial]['name'], description='')
+            em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
+            em.add_field(name='Boosts', value=cdt_trials[trial][tier])
+            await self.bot.say(embed=em)
 
 
     # @commands.command(pass_context=True, hidden=True)
@@ -686,5 +725,6 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
 
 def setup(bot):
     sgd = StaticGameData()
+    sgd.register_gsheets(bot)
     bot.loop.create_task(sgd.load_cdt_data())
     bot.add_cog(MCOCTools(bot))
