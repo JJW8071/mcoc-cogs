@@ -651,9 +651,22 @@ class MCOCTools:
         await self.cache_sgd_gsheets()
 
     @commands.command(name='trials', pass_context=True, hidden=True)
-    async def _trials(self,ctx, trial, tier):
+    async def _trials(self,ctx, trial, tier='epic'):
+        ```Elemnts of the Trials \
+        trials  | tier \
+        Wind    | easy \
+        Fire    | medium\
+        Earth   | hard\
+        Darkness | expert \
+        Water   | epic\
+        Light \
+        Alchemist 
+        ```
+
         sgd = StaticGameData()
         #cdt_trials = sgd.cdt_trials
+        trial = trial.lower()
+        tier = tier.lower()
         try:
             cdt_trials = sgd.from_sheets['elemental_trials']
         except AttributeError:
