@@ -650,7 +650,7 @@ class MCOCTools:
     async def aux_sheets(self):
         await self.cache_sgd_gsheets()
 
-    @commands.command(name='trials', pass_context=True, hidden=True)
+    @commands.command(name='trials', pass_context=True, aliases=('trials'), hidden=True)
     async def _trials(self,ctx, trial, tier='epic'):
         '''Elemnts of the Trials
         trials   | tier
@@ -683,7 +683,7 @@ class MCOCTools:
             em.add_field(name='Valid Tiers:', value='\n'.join(tiers))
             await self.bot.say(embed=em)
         else:
-            em = discord.Embed(color=tiers[tier], title=cdt_trials[trial]['name'], description='', url='https://forums.playcontestofchampions.com/en/discussion/114604/take-on-the-trials-of-the-elementals/p1')
+            em = discord.Embed(color=tiers[tier], title=tier.title()+" "+cdt_trials[trial]['name'], description='', url='https://forums.playcontestofchampions.com/en/discussion/114604/take-on-the-trials-of-the-elementals/p1')
             em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
             em.add_field(name='Boosts', value=cdt_trials[trial][tier])
             if trial == 'alchemist':
