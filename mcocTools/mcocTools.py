@@ -618,6 +618,18 @@ class MCOCTools:
             for page in pages:
                 await self.bot.say(chat.box(page))
 
+    @commands.command(name='trials', pass_context=True, hidden=True)
+    async def _trials(self,ctx, trial, tier):
+        if trial in cdt_trials.keys() and if tier in ('easy', 'epic', 'expert', 'hard', 'medium'):
+            if cdt_trials is not None:
+                em = discord.embed(color=discord.Color.gold(), title=cdt_trials[trial]['name'], description='')
+                em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
+                em.add_field(namem='Boosts', value=cdt_trials[trial][tier])
+                await self.bot.say(embed=em)
+        else:
+            await self.bot.say('Yeah, no - something went wrong.')
+
+
     # @commands.command(pass_context=True, hidden=True)
     # async def awopp_calc(self, ctx, wr:int, gain:int, loss:int):
     #     '''MutaMatt's War Opponent Calculator
