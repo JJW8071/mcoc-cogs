@@ -601,7 +601,8 @@ class Hook:
 
     @roster.command(pass_context=True, name='add', aliases=('update',))
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
-        '''Update your roster using the standard command line syntax.
+        '''Add or Update champion(s) from your roster.
+        Add or Update your roster using the standard command line syntax.
 
         Defaults for champions you specify are the current values in your roster.
         If it is a new champ, defaults are 4*, rank 1, sig 0.
@@ -629,7 +630,8 @@ class Hook:
 
     @roster.command(pass_context=True, name='dupe')
     async def _roster_dupe(self, ctx, *, champs: ChampConverterMult):
-        '''Update your roster by incrementing your champs by the duped sig level, i.e. 20 for a 4*.
+        '''Increase sig level by dupe.
+        Update your roster by incrementing your champs by the duped sig level, i.e. 20 for a 4*.
         '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
