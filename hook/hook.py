@@ -599,7 +599,7 @@ class Hook:
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         await hargs.roster.display(hargs.tags)
 
-    @roster.command(pass_context=True, name='update', aliases=('add',))
+    @roster.command(pass_context=True, name='add', aliases=('update',))
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
         '''Update your roster using the standard command line syntax.
 
