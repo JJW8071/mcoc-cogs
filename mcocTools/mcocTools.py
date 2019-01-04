@@ -702,8 +702,8 @@ class MCOCTools:
             em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
             em.add_field(name='Boosts', value=cdt_trials[trial][tier])
             if trial == 'alchemist':
-                em.add_field(name=cdt_trials['alchemistrewrds']['name'],
-                        value=cdt_trials['alchemistrewrds'][tier])
+                em.add_field(name=cdt_trials['alchemistrewards']['name'],
+                        value=cdt_trials['alchemistrewards'][tier])
             else:
                 em.add_field(name=cdt_trials['rewards']['name'],
                         value=cdt_trials['rewards'][tier])
