@@ -594,22 +594,26 @@ class Hook:
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
         """Displays a user roster with tag filtering
-        ex.
+
+        example:
         /roster [user] [#mutant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         await hargs.roster.display(hargs.tags)
 
     @roster.command(pass_context=True, name='add', aliases=('update',))
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
-        '''Add or Update champion(s) from your roster.
-        Add or Update your roster using the standard command line syntax.
+        '''Add or Update champion(s).
 
+        Add or Update your roster using the standard command line syntax.
         Defaults for champions you specify are the current values in your roster.
         If it is a new champ, defaults are 4*, rank 1, sig 0.
 
         This means that
         /roster update some_champs20
         would just set some_champ's sig to 20 but keep it's rank the same.
+
+        example:
+        /roster add angelar4s20 karnakr5s80 medusar4s20
         '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
@@ -631,7 +635,10 @@ class Hook:
     @roster.command(pass_context=True, name='dupe')
     async def _roster_dupe(self, ctx, *, champs: ChampConverterMult):
         '''Increase sig level by dupe.
+
         Update your roster by incrementing your champs by the duped sig level, i.e. 20 for a 4*.
+        example:
+        /roster dupe karnak
         '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
@@ -646,7 +653,11 @@ class Hook:
 
     @roster.command(pass_context=True, name='delete', aliases=('del','remove',))
     async def _roster_del(self, ctx, *, champs: ChampConverterMult):
-        '''Delete champion(s) from your roster'''
+        '''Delete champion(s)
+
+        Delete champion(s) from your roster.
+        example:
+        /roter delete angela blackbolt medusa'''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
         track = roster.delete(champs)
@@ -658,9 +669,9 @@ class Hook:
                         value='\n'.join(sorted(track[k])), inline=False)
         await self.bot.say(embed=em)
 
-    @roster.command(pass_context=True, name='import')
+    @roster.command(pass_context=True, name='import', hidden=True)
     async def _roster_import(self, ctx):
-        '''Silent import file attachement command'''
+        '''Silent import file attachement'''
         if not ctx.message.attachments:
             await self.bot.say('This command can only be used when uploading files')
             return
