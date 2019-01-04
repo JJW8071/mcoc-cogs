@@ -8,6 +8,8 @@ import datetime
 import json
 import asyncio
 import aiohttp
+import modgrammar
+
 from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
 from .utils.dataIO import dataIO
@@ -36,7 +38,15 @@ class StaticGameData:
     remote_data_basepath = "https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/"
     cdt_data, cdt_versions, cdt_masteries = None, None, None
     cdt_trials = None
+    gsheets_data = None
     test = 3
+    tiers = {
+            'easy': discord.Color.green(),
+            'medium': discord.Color.gold(),
+            'hard': discord.Color.red(),
+            'expert': discord.Color.purple(),
+            'epic':discord.Color(0x2799f7)
+        }
 
     def __new__(cls):
         if cls.instance is None:
@@ -51,13 +61,6 @@ class StaticGameData:
                 local='data/mcoc/elemental_trials.json',
                 #settings=dict(column_handler='champs: to_list')
         )
-
-    async def ainit(self):
-        if self.cdt_data is None:
-            await self.load_cdt_data()
-        if self.cdt_trials is None:
-            await self.load_cdt_trials()
-        return self
 
     async def load_cdt_data(self):
         cdt_data, cdt_versions = ChainMap(), ChainMap()
@@ -88,7 +91,7 @@ class StaticGameData:
 
     async def cache_gsheets(self):
         print("Attempt gsheet pull")
-        self.from_sheets = await self.gsheet_handler.cache_gsheets()
+        self.gsheets_data = await self.gsheet_handler.cache_gsheets()
 
     async def load_cdt_trials(self):
         raw_data = await self.fetch_gsx2json('1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4')
@@ -98,8 +101,18 @@ class StaticGameData:
             package[dlist['unique']] = {'name': dlist['name'], 'champs': dlist['champs'],'easy': dlist['easy'],'medium': dlist['medium'],'hard': dlist['hard'],'expert': dlist['expert']}
         self.cdt_trials = package
 
-    #async def alt_load_cdt_trials(self):
-
+    async def get_gsheets_data(self, key=None, force=False):
+        if force or self.gsheets_data is None:
+            await self.cache_gsheets()
+        if key:
+            try:
+                return self.gsheets_data[key]
+            except KeyError:
+                raise KeyError("Unregistered Key '{}':\n{}".format(
+                        key, ', '.join(self.gsheets_data.keys())
+                ))
+        else:
+            return self.gsheets_data
 
     @staticmethod
     async def fetch_json(url, session):
@@ -661,17 +674,14 @@ class MCOCTools:
         Water    | epic
         Light
         Alchemist'''
-        sgd = StaticGameData()
-        #cdt_trials = sgd.cdt_trials
         trial = trial.lower()
         tier = tier.lower()
-        try:
-            cdt_trials = sgd.from_sheets['elemental_trials']
-        except AttributeError:
-            await self.cache_sgd_gsheets()
-            cdt_trials = sgd.from_sheets['elemental_trials']
+
+        sgd = StaticGameData()
+        cdt_trials = await sgd.get_gsheets_data('elemental_trials')
         trials = set(cdt_trials.keys()) - {'_headers'}
-        tiers = {'easy': discord.Color.green(), 'medium': discord.Color.gold(), 'hard': discord.Color.red(), 'expert': discord.Color.purple(), 'epic':discord.Color(0x2799f7)}
+        tiers = sgd.tiers
+
         if trial not in trials:
             em = discord.Embed(color=discord.Color.red(), title='Trials Error',
                     description="Invalid trial '{}'".format(trial))
@@ -683,14 +693,22 @@ class MCOCTools:
             em.add_field(name='Valid Tiers:', value='\n'.join(tiers))
             await self.bot.say(embed=em)
         else:
-            em = discord.Embed(color=tiers[tier], title=tier.title()+" "+cdt_trials[trial]['name'], description='', url='https://forums.playcontestofchampions.com/en/discussion/114604/take-on-the-trials-of-the-elementals/p1')
+            em = discord.Embed(
+                    color=tiers[tier],
+                    title=tier.title()+" "+cdt_trials[trial]['name'],
+                    description='',
+                    url='https://forums.playcontestofchampions.com/en/discussion/114604/take-on-the-trials-of-the-elementals/p1'
+                )
             em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
             em.add_field(name='Boosts', value=cdt_trials[trial][tier])
             if trial == 'alchemist':
-                em.add_field(name=cdt_trials['alchemistrewrds']['name'], value=cdt_trials['alchemistrewrds'][tier])
+                em.add_field(name=cdt_trials['alchemistrewrds']['name'],
+                        value=cdt_trials['alchemistrewrds'][tier])
             else:
-                em.add_field(name=cdt_trials['rewards']['name'], value=cdt_trials['rewards'][tier] )
-            em.set_footer(text='CollectorDevTeam',icon_url=self.COLLECTOR_ICON)
+                em.add_field(name=cdt_trials['rewards']['name'],
+                        value=cdt_trials['rewards'][tier])
+            em.set_footer(text='CollectorDevTeam',
+                    icon_url=self.COLLECTOR_ICON)
             await self.bot.say(embed=em)
 
 
