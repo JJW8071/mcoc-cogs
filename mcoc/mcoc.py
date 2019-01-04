@@ -1053,12 +1053,12 @@ class MCOC(ChampionFactory):
                         cumulative_rankups[ru] = cumulative_rankups[ru] + cm[key][mrank][ru]
                         rankup_costs.append('{} {}'.format(cm[key][mrank][ru], rankups[ru]))
                 if len(unlock_costs) >0:
-                    cumulative_units = cumulative_unlock['ucarbs']*550+cumulative_unlock['ustony']*135+cumulative_unlock['uunits']
-                    em.add_field(name='Unlock Cost [{} <:units:344506213335302145> value]'.format(cumulative_units), value='\n'.join(unlock_costs), inline=False)
+                    em.add_field(name='Unlock Cost', value='\n'.join(unlock_costs), inline=False)
                 if len(rankup_costs) > 0:
                     em.add_field(name='Rank Up Cost', value='\n'.join(rankup_costs), inline=False)
                 if len(cum_unlock_costs) >0:
-                    em.add_field(name='Cumulative Unlock Cost', value='\n'.join(cum_unlock_costs), inline=False)
+                    cumulative_units = cumulative_unlock['ucarbs']*550+cumulative_unlock['ustony']*135+cumulative_unlock['uunits']
+                    em.add_field(name='Cumulative Unlock Cost  [ {} <:units:344506213335302145> ]'.format(cumulative_units), value='\n'.join(cum_unlock_costs), inline=False)
                 if len(cum_rankup_costs) > 0:
                     em.add_field(name='Cumulative Rank Up Cost', value='\n'.join(cum_rankup_costs), inline=False)
                 em.add_field(name='Prestige Bump', value='{} %'.format(round(cm[key][mrank]['pibump']*100,3)), inline=False)
