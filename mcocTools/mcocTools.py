@@ -8,7 +8,7 @@ import datetime
 import json
 import asyncio
 import aiohttp
-import modgrammar
+import modgrammar as md
 
 from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
@@ -130,7 +130,89 @@ class StaticGameData:
             json_data = await self.fetch_json(url, session)
             return json_data
 
+##################################################
+#  Grammar definitions
+##################################################
+md.grammar_whitespace_mode = 'optional'
 
+class SearchNumber(md.Grammar):
+    grammar = md.WORD('.0-9')
+
+    def match(self, data, ver_data):
+        matches = set()
+        ver = self.string
+        for key, val in ver_data.items():
+            if ver == val:
+                matches.add(key)
+        return matches
+
+class SearchWord(md.Grammar):
+    grammar = md.WORD('-.,0-9A-Za-z_')
+
+class SearchPhrase(md.Grammar):
+    grammar = md.ONE_OR_MORE(SearchWord)
+
+    def match(self, data, ver_data):
+        matches = set()
+        up, low = self.string.upper(), self.string.lower()
+        for key, val in data.items():
+            if up == key:
+                matches.add(key)
+            elif low in val.lower():
+                matches.add(key)
+        return matches
+
+class ExplicitKeyword(md.Grammar):
+    grammar = (md.L('k:') | md.L('K:'), SearchWord)
+
+    def match(self, data, ver_data):
+        matches = set()
+        up = self[1].string.upper()
+        for key in data.keys():
+            if up in key:
+                matches.add(key)
+        return matches
+
+class ParenExpr(md.Grammar):
+    grammar = (md.L('('), md.REF("SearchExpr"), md.L(")"))
+
+    def match(self, data, ver_data):
+        return self[1].match(data, ver_data)
+
+class Operator(md.Grammar):
+    grammar = md.L('&') | md.L('|')
+
+    def op(self):
+        if self.string == '&':
+            return set.intersection
+        elif self.string == '|':
+            return set.union
+
+class P0Term(md.Grammar):
+    grammar = (ParenExpr | SearchNumber | SearchPhrase | ExplicitKeyword)
+
+    def match(self, data, ver_data):
+        return self[0].match(data, ver_data)
+
+class P0Expr(md.Grammar):
+    grammar = (P0Term, md.ONE_OR_MORE(Operator, P0Term))
+
+    def match(self, data, ver_data):
+        matches = self[0].match(data, ver_data)
+        for e in self[1]:
+            matches = e[0].op()(matches, e[1].match(data, ver_data))
+        return matches
+
+class SearchExpr(md.Grammar):
+    grammar = (P0Expr | ParenExpr | SearchNumber | SearchPhrase | ExplicitKeyword)
+
+    def match(self, data, ver_data):
+        return self[0].match(data, ver_data)
+
+
+##################################################
+#  End Grammar definitions
+##################################################
 
 class PagesMenu:
 
@@ -276,6 +358,7 @@ class MCOCTools:
 
     def __init__(self, bot):
         self.bot = bot
+        self.search_parser = SearchExpr.parser()
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title='',description=lookup[1])
@@ -401,6 +484,36 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+
+    @commands.command(hidden=True, pass_context=True, name='parse_search', aliases=('ps',))
+    async def kabam_search2(self, ctx, *, phrase: str):
+        '''Enter a search term or a JSON key'''
+        kdata = StaticGameData()
+        cdt_data, cdt_versions = kdata.cdt_data, kdata.cdt_versions
+        result = self.search_parser.parse_string(phrase)
+        print(result.elements)
+        matches = result.match(cdt_data, cdt_versions)
+        #print(matches)
+        if len(matches) == 0:
+            await self.bot.say('**Search resulted in 0 matches**')
+            return
+        package = []
+        for k in sorted(matches):
+            if k in cdt_versions:
+                ver = '\nvn: {}'.format(cdt_versions[k])
+            else:
+                ver = ''
+            package.append('\n**{}**\n{}{}'.format(
+                    k, self._bcg_recompile(cdt_data[k]), ver))
+        pages = chat.pagify('\n'.join(package))
+        page_list = []
+        for page in pages:
+            em = discord.Embed(title='Data Search',  description = page)
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+            page_list.append(em)
+        menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+        await menu.menu_start(page_list)
+
 
     @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
     async def kabam_search(self, ctx, *, term: str):
