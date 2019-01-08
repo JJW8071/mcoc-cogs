@@ -61,6 +61,14 @@ class StaticGameData:
                 local='data/mcoc/elemental_trials.json',
                 #settings=dict(column_handler='champs: to_list')
         )
+        self.gsheet_handler.register_gsheet(
+                name='aw_season_rewards',
+                gkey='1DZUoQr4eELkjxRo6N6UTtd6Jn15OfpEjiAV8M_v7_LI',
+                sheet_name='season7',
+                # local='data/mcoc/elemental_trials.json',
+                #settings=dict(column_handler='champs: to_list')
+        )
+
 
     async def load_cdt_data(self):
         cdt_data, cdt_versions = ChainMap(), ChainMap()
@@ -408,7 +416,7 @@ class MCOCTools:
         devteam = ( "DeltaSigma#8530\n"
                     "JJW#8071\n"
                     )
-        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\ntaoness#5565\nOtriux#9964')
+        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\ntaoness#5565')
         embed = discord.Embed(colour=discord.Colour.red(), title="Collector", url=collectorpatreon)
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
