@@ -876,7 +876,7 @@ class MCOCTools:
             return
         else:
             page_number = list(rows).index(tier)
-            pages = []
+            page_list = []
             for row in rows:
                 em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty Rewards'.format(row.title()),
                     url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
