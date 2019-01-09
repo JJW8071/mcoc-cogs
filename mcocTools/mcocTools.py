@@ -865,10 +865,34 @@ class MCOCTools:
 
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
-        # tiers = ('beginner', 'normal', 'heroic', 'master', 'uncollected')
         tier = tier.lower()
+        event = 'eq_monster'
+        url = 'https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster'
+        await self.format_eventquest(event, tier, url)
+
+        # sgd = StaticGameData()
+        # cdt_eq = await sgd.get_gsheets_data('eq_monster')
+        # rows = set(cdt_eq.keys()) - {'_headers'}
+        # print(', '.join(rows))
+        # if tier not in rows:
+        #     await self.bot.say('Invalid tier selection')
+        #     return
+        # else:
+        #     page_number = list(rows).index(tier)
+        #     page_list = []
+        #     for row in rows:
+        #         em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty Rewards'.format(row.title()),
+        #             url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
+        #             description=cdt_eq[row]['rewardsregex'])
+        #         em.set_footer(text='CollectorDevTeam',
+        #                 icon_url=self.COLLECTOR_ICON)
+        #         page_list.append(em)
+            # menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            # await menu.menu_start(page_list, page_number)
+
+    async def format_eventquest(self, event, tier, url=''):
         sgd = StaticGameData()
-        cdt_eq = await sgd.get_gsheets_data('eq_monster')
+        cdt_eq = await sgd.get_gsheets_data(event)
         rows = set(cdt_eq.keys()) - {'_headers'}
         print(', '.join(rows))
         if tier not in rows:
@@ -878,12 +902,14 @@ class MCOCTools:
             page_number = list(rows).index(tier)
             page_list = []
             for row in rows:
-                em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty Rewards'.format(row.title()),
-                    url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
-                    description=cdt_eq[row]['rewardsregex'])
+                em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty'.format(row.title()),
+                    url=url,
+                    em.add_field(name='Rewards', value=description=cdt_eq[row]['rewardsregex'])
+                em.set_footer(text='CollectorDevTeam',
+                        icon_url=self.COLLECTOR_ICON)
                 page_list.append(em)
-            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(page_list, page_number)
+                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+                await menu.menu_start(page_list, page_number)
 
 
 
