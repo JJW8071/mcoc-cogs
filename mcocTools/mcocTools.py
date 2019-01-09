@@ -78,7 +78,6 @@ class StaticGameData:
                 gkey='1DZUoQr4eELkjxRo6N6UTtd6Jn15OfpEjiAV8M_v7_LI',
                 local='data/mcoc/aw_season7.json',
                 sheet_name='season7',
-                local='data/mcoc/aw_season_rewards.json',
                 #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
