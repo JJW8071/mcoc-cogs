@@ -54,6 +54,7 @@ class StaticGameData:
     test = 3
     tiercolors = {
             'easy': discord.Color.green(),
+            'beginner': discord.Color.green(),
             'medium': discord.Color.gold(),
             'hard': discord.Color.red(),
             'expert': discord.Color.purple(),
@@ -867,19 +868,19 @@ class MCOCTools:
         cdt_eq = await sgd.get_gsheets_data('eq_monster')
         rows = set(cdt_eq.keys()) - {'_headers'}
         print(', '.join(rows))
-
         if tier not in rows:
             await self.bot.say('Invalid tier selection')
             return
         else:
+            page_number = rows.index(tier)
             pages = []
-            for t in tiers:
-                em = discord.Embed(color=sgd.tiercolors[t], title='{} Difficulty Rewards'.format(t.title()),
+            for row in rows:
+                em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty Rewards'.format(row.title()),
                     url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
-                    description=cdt_eq[t]['rewardsregex'])
+                    description=cdt_eq[row]['rewardsregex'])
                 pages.append(em)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(page_list)
+            await menu.menu_start(page_list, page_number)
 
 
 
