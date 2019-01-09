@@ -876,7 +876,7 @@ class MCOCTools:
                     title='{} Difficulty Rewards'.format(t.title(),
                     url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
                     description=cdt_eq[t]['rewardsregex'])
-                pages.append(embed=em)
+                pages.append(em)
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
             await menu.menu_start(page_list)
 
