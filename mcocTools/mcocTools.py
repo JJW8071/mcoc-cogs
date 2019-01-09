@@ -902,9 +902,11 @@ class MCOCTools:
             page_list = []
             page_number = list(rows).index(tier)
             for row in rows:
-                em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty'.format(row.title()),
+                em = discord.Embed(color=sgd.tiercolors[row], title=cdt_eq[row]['event_title'],
                     url=url, description='')
-                em.add_field(name='Rewards', value=cdt_eq[row]['rewardsregex'])
+                em.add_field(name=cdt_eq[row]['story_title'], value=cdt_eq[row]['story_value'])
+                em.add_field(name='{} Rewards'.format(row.title()), value=cdt_eq[row]['rewardsregex'])
+                em.set_image(url=cdt_eq[row]['story_image'])
                 em.set_footer(text='CollectorDevTeam',
                         icon_url=self.COLLECTOR_ICON)
                 page_list.append(em)
