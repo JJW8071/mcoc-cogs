@@ -899,7 +899,7 @@ class MCOCTools:
             await self.bot.say('Invalid tier selection')
             return
         else:
-            page_number = list(rows).index(tier)
+            page_number = list(rows).index(tier)+1
             page_list = []
             for row in rows:
                 em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty'.format(row.title()),
