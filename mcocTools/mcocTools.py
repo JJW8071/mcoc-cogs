@@ -819,7 +819,7 @@ class MCOCTools:
         Alchemist'''
         trial = trial.lower()
         tier = tier.lower()
-
+        tiers =('easy', 'medium', 'hard', 'expert', 'epic')
         sgd = StaticGameData()
         cdt_trials = await sgd.get_gsheets_data('elemental_trials')
         trials = set(cdt_trials.keys()) - {'_headers'}
