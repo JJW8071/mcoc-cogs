@@ -393,7 +393,6 @@ class MCOCTools:
     def __init__(self, bot):
         self.bot = bot
         self.search_parser = SearchExpr.parser()
-        self.sgd = StaticGameData()
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title='',description=lookup[1])
@@ -825,8 +824,8 @@ class MCOCTools:
         trial = trial.lower()
         tier = tier.lower()
         tiers =('easy', 'medium', 'hard', 'expert', 'epic')
-        # sgd = StaticGameData()
-        sgd = self.sgd
+        sgd = StaticGameData()
+        # sgd = self.sgd
         cdt_trials = await sgd.get_gsheets_data('elemental_trials')
         trials = set(cdt_trials.keys()) - {'_headers'}
         tiercolors = sgd.tiercolors
@@ -893,8 +892,8 @@ class MCOCTools:
             # await menu.menu_start(page_list, page_number)
 
     async def format_eventquest(self, event, tier, url=''):
-        # sgd = StaticGameData()
-        sgd = self.sgd
+        sgd = StaticGameData()
+        # sgd = self.sgd
         cdt_eq = await sgd.get_gsheets_data(event)
         rows = set(cdt_eq.keys()) - {'_headers'}
         # print(', '.join(rows))
