@@ -903,8 +903,8 @@ class MCOCTools:
             page_list = []
             for row in rows:
                 em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty'.format(row.title()),
-                    url=url,
-                    em.add_field(name='Rewards', value=description=cdt_eq[row]['rewardsregex'])
+                    url=url, description='')
+                em.add_field(name='Rewards', value=description=cdt_eq[row]['rewardsregex'])
                 em.set_footer(text='CollectorDevTeam',
                         icon_url=self.COLLECTOR_ICON)
                 page_list.append(em)
