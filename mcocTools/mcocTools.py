@@ -17,6 +17,8 @@ from .utils.dataIO import dataIO
 from .mcoc import GSHandler, gapi_service_creds
 from cogs.utils import checks
 from discord.ext import commands
+from __main__ import send_cmd_help
+
 #from . import hook as hook
 
 logger = logging.getLogger('red.mcoc.tools')
