@@ -865,7 +865,7 @@ class MCOCTools:
         tier = tier.lower()
         sgd = StaticGameData()
         cdt_eq = await sgd.get_gsheets_data('eq_monster')
-        trials = set(cdt_trials.keys()) - {'_headers'}
+        trials = set(cdt_eq.keys()) - {'_headers'}
 
         if tier not in tiers:
             await self.bot.say('Invalid tier selection')
