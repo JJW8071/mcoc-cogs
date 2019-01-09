@@ -871,27 +871,7 @@ class MCOCTools:
         url = 'https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster'
         await self.format_eventquest(event, tier, url)
 
-        # sgd = StaticGameData()
-        # cdt_eq = await sgd.get_gsheets_data('eq_monster')
-        # rows = set(cdt_eq.keys()) - {'_headers'}
-        # print(', '.join(rows))
-        # if tier not in rows:
-        #     await self.bot.say('Invalid tier selection')
-        #     return
-        # else:
-        #     page_number = list(rows).index(tier)
-        #     page_list = []
-        #     for row in rows:
-        #         em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty Rewards'.format(row.title()),
-        #             url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
-        #             description=cdt_eq[row]['rewardsregex'])
-        #         em.set_footer(text='CollectorDevTeam',
-        #                 icon_url=self.COLLECTOR_ICON)
-        #         page_list.append(em)
-            # menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            # await menu.menu_start(page_list, page_number)
-
-    async def format_eventquest(self, event, tier, url='', tiers=('beginner','normal','heroic','master','uncollected')):
+    async def format_eventquest(self, event, tier, forum_url='', tiers=('beginner','normal','heroic','master','uncollected')):
         sgd = StaticGameData()
         # sgd = self.sgd
         cdt_eq = await sgd.get_gsheets_data(event)
@@ -902,10 +882,10 @@ class MCOCTools:
             return
         else:
             page_list = []
-            page_number = list(rows).index(tier)
+            page_number = list(tiers).index(tier)
             for row in tiers:
                 em = discord.Embed(color=sgd.tiercolors[row], title=cdt_eq['event_title']['value'],
-                    url=url, description='')
+                    url=forum_url, description='')
                 em.add_field(name=cdt_eq['story_title']['value'], value=cdt_eq['story_value']['value'])
                 em.add_field(name='{} Rewards'.format(row.title()), value=cdt_eq[row]['rewardsregex'])
                 em.set_image(url=cdt_eq['story_image']['value'])
