@@ -873,7 +873,7 @@ class MCOCTools:
         else:
             pages = []
             for t in tiers:
-                em = discord.embed(color=sgd.tiercolors[t], title='{} Difficulty Rewards'.format(t.title()),
+                em = discord.Embed(color=sgd.tiercolors[t], title='{} Difficulty Rewards'.format(t.title()),
                     url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster',
                     description=cdt_eq[t]['rewardsregex'])
                 pages.append(em)
