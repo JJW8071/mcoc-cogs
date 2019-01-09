@@ -56,8 +56,11 @@ class StaticGameData:
             'easy': discord.Color.green(),
             'beginner': discord.Color.green(),
             'medium': discord.Color.gold(),
+            'normal': discord.Color.gold(),
+            'heroic': discord.Color.red(),
             'hard': discord.Color.red(),
             'expert': discord.Color.purple(),
+            'master': discord.Color.purple(),
             'epic':discord.Color(0x2799f7),
             'uncollected':discord.Color(0x2799f7),
         }
