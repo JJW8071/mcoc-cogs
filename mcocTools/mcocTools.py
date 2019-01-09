@@ -861,13 +861,14 @@ class MCOCTools:
 
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
-        tiers = ('easy', 'normal', 'heroic', 'master', 'uncollected')
+        # tiers = ('beginner', 'normal', 'heroic', 'master', 'uncollected')
         tier = tier.lower()
         sgd = StaticGameData()
         cdt_eq = await sgd.get_gsheets_data('eq_monster')
-        trials = set(cdt_eq.keys()) - {'_headers'}
+        rows = set(cdt_eq.keys()) - {'_headers'}
+        print(', '.join(rows))
 
-        if tier not in tiers:
+        if tier not in rows:
             await self.bot.say('Invalid tier selection')
             return
         else:
