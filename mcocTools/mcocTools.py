@@ -87,10 +87,10 @@ class StaticGameData:
                 #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
-                name='eq_monster',
+                name='eq_21.2',
                 gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                 local='data/mcoc/eq_monster_21.2.json',
-                sheet_name='eq_monster',
+                sheet_name='eq_21.2',
                 #settings=dict(column_handler='champs: to_list')
         )
 
@@ -867,7 +867,7 @@ class MCOCTools:
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
         tier = tier.lower()
-        event = 'eq_monster'
+        event = 'eq_21.2'
         url = 'https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster'
         await self.format_eventquest(event, tier, url)
 
