@@ -894,13 +894,13 @@ class MCOCTools:
         sgd = StaticGameData()
         cdt_eq = await sgd.get_gsheets_data(event)
         rows = set(cdt_eq.keys()) - {'_headers'}
-        print(', '.join(rows))
+        # print(', '.join(rows))
         if tier not in rows:
             await self.bot.say('Invalid tier selection')
             return
         else:
-            page_number = list(rows).index(tier)+1
             page_list = []
+            page_number = list(rows).index(tier)
             for row in rows:
                 em = discord.Embed(color=sgd.tiercolors[row], title='{} Difficulty'.format(row.title()),
                     url=url, description='')
@@ -908,8 +908,9 @@ class MCOCTools:
                 em.set_footer(text='CollectorDevTeam',
                         icon_url=self.COLLECTOR_ICON)
                 page_list.append(em)
-                menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-                await menu.menu_start(page_list, page_number)
+
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list, page_number)
 
 
 
