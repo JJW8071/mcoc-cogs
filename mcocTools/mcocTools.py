@@ -853,12 +853,12 @@ class MCOCTools:
                     icon_url=self.COLLECTOR_ICON)
             await self.bot.say(embed=em)
 
-    @commands.group(name='eq', pass_context=True, aliases=('eventquest',), hidden=True)
+    @commands.group(name='eq', pass_context=True, aliases=('eventquest',), hidden=False)
     async def eventquest(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @eq.command(name='monster', pass_context=True, aliases=('21.2', 'thismanthismonster', 'thing', 'diablo',))
+    @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
         tiers = ('easy', 'normal', 'heroic', 'master', 'uncollected')
         tier = tier.lower()
