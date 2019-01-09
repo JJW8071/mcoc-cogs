@@ -9,6 +9,7 @@ import json
 import asyncio
 import aiohttp
 import modgrammar as md
+# from functools import wraps, partial
 
 from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
@@ -32,6 +33,15 @@ GSX2JSON='http://gsx2json.com/api?id={}&sheet={}&columns=false&integers=false'
 #         'All': discord.Color(0x03f193), 'Superior': discord.Color(0x03f193), 'default': discord.Color.light_grey(),
 #         }
 
+# def sync_to_async(func):
+#     @wraps(func)
+#     async def run(*args, loop=None, executor=None, **kwargs):
+#         if loop is None:
+#             loop = asyncio.get_event_loop()
+#         pfunc = partial(func, *args, **kwargs)
+#         return await loop.run_in_executor(executor, pfunc)
+#     return run
+
 class StaticGameData:
     instance = None
 
@@ -40,12 +50,13 @@ class StaticGameData:
     cdt_trials = None
     gsheets_data = None
     test = 3
-    tiers = {
+    tiercolors = {
             'easy': discord.Color.green(),
             'medium': discord.Color.gold(),
             'hard': discord.Color.red(),
             'expert': discord.Color.purple(),
-            'epic':discord.Color(0x2799f7)
+            'epic':discord.Color(0x2799f7),
+            'uncollected':discord.Color(0x2799f7),
         }
 
     def __new__(cls):
@@ -59,13 +70,22 @@ class StaticGameData:
                 name='elemental_trials',
                 gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                 local='data/mcoc/elemental_trials.json',
+                sheet_name='trials',
                 #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
                 name='aw_season_rewards',
                 gkey='1DZUoQr4eELkjxRo6N6UTtd6Jn15OfpEjiAV8M_v7_LI',
+                local='data/mcoc/aw_season7.json',
                 sheet_name='season7',
-                # local='data/mcoc/elemental_trials.json',
+                local='data/mcoc/aw_season_rewards.json',
+                #settings=dict(column_handler='champs: to_list')
+        )
+        self.gsheet_handler.register_gsheet(
+                name='eq_monster',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                local='data/mcoc/eq_monster_21.2.json',
+                sheet_name='eq_monster',
                 #settings=dict(column_handler='champs: to_list')
         )
 
@@ -214,6 +234,7 @@ class P0Expr(md.Grammar):
 class SearchExpr(md.Grammar):
     grammar = (P0Expr | ParenExpr | SearchNumber | SearchPhrase | ExplicitKeyword)
 
+    #@sync_to_async
     def match(self, data, ver_data):
         return self[0].match(data, ver_data)
 
@@ -784,7 +805,7 @@ class MCOCTools:
     async def aux_sheets(self):
         await self.cache_sgd_gsheets()
 
-    @commands.command(name='trials', pass_context=True, aliases=('trial',), hidden=True)
+    @commands.command(name='trials', pass_context=True, aliases=('trial',), hidden=False)
     async def _trials(self,ctx, trial, tier='epic'):
         '''Elemnts of the Trials
         trials   | tier
@@ -801,7 +822,7 @@ class MCOCTools:
         sgd = StaticGameData()
         cdt_trials = await sgd.get_gsheets_data('elemental_trials')
         trials = set(cdt_trials.keys()) - {'_headers'}
-        tiers = sgd.tiers
+        tiercolors = sgd.tiercolors
 
         if trial not in trials:
             em = discord.Embed(color=discord.Color.red(), title='Trials Error',
@@ -815,7 +836,7 @@ class MCOCTools:
             await self.bot.say(embed=em)
         else:
             em = discord.Embed(
-                    color=tiers[tier],
+                    color=tiercolors[tier],
                     title=tier.title()+" "+cdt_trials[trial]['name'],
                     description='',
                     url='https://forums.playcontestofchampions.com/en/discussion/114604/take-on-the-trials-of-the-elementals/p1'
@@ -831,6 +852,32 @@ class MCOCTools:
             em.set_footer(text='CollectorDevTeam',
                     icon_url=self.COLLECTOR_ICON)
             await self.bot.say(embed=em)
+
+    @commands.group(name='eq', pass_context=True, aliases=('eventquest',), hidden=True)
+    async def eventquest(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    @eq.command(name='monster', pass_context=True, aliases=('21.2', 'thismanthismonster', 'thing', 'diablo',))
+    async def eq_monster(self, ctx, tier='uncollected'):
+        tiers = ('easy', 'normal', 'heroic', 'master', 'uncollected')
+        tier = tier.lower()
+        sgd = StaticGameData()
+        cdt_eq = await sgd.get_gsheets_data('eq_monster')
+        trials = set(cdt_trials.keys()) - {'_headers'}
+
+        if tier not in tiers:
+            await self.bot.say('Invalid tier selection')
+            return
+        else:
+            pages = []
+            for t in tiers:
+                em = discord.embed(color=sgd.tiercolors[t], title='{} Difficulty Rewards'.format(t.title(),description='',url='https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster')
+                em.description=cdt_eq[t]['rewardsregex']
+                pages.append(embed=em)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)
+
 
 
     # @commands.command(pass_context=True, hidden=True)
