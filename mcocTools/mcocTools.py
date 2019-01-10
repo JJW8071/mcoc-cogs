@@ -94,8 +94,14 @@ class StaticGameData:
                 #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
+                name='eq_21.1',
+                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                local='data/mcoc/eq_21.1.json',
+                sheet_name='eq_21.1',
+        )
+        self.gsheet_handler.register_gsheet(
                 name='eq_21',
-                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4'
+                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                 local='data/mcoc/eq_21.json',
                 sheet_name='eq_21',
         )
@@ -883,11 +889,22 @@ class MCOCTools:
         tiers=('beginner','norma','heroic','master','epic','symboite')
         await self.format_eventquest(event, tier, tiers=tiers)
 
+    @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
+    async def eq_monster(self, ctx, tier='uncollected'):
+        tier = tier.lower()
+        event = 'eq_21'
+        await self.format_eventquest(event, tier)
+
+    @eventquest.command(name='21.1', pass_context=True, aliases=('nightriders', 'nightthrasher', 'darkhawk',))
+    async def eq_monster(self, ctx, tier='uncollected'):
+        tier = tier.lower()
+        event = 'eq_21'
+        await self.format_eventquest(event, tier)
+
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
         tier = tier.lower()
         event = 'eq_21.2'
-        # url = 'https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster'
         await self.format_eventquest(event, tier)
 
     async def format_eventquest(self, event, tier, tiers=('beginner','normal','heroic','master','uncollected')):
