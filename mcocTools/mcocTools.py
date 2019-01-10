@@ -918,6 +918,7 @@ class MCOCTools:
         rows = set(cdt_eq.keys()) - {'_headers'}
         # print(', '.join(rows))
         tiers=cdt_eq['tiers']['value'].split(", ")
+        print(tiers)
 
         if tier not in tiers:
             await self.bot.say('Invalid tier selection')
