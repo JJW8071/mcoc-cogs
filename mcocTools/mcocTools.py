@@ -876,7 +876,7 @@ class MCOCTools:
     #     await self.format_eventquest(event, tier.lower())
 
     @eventquest.command(name='16', pass_context=True, aliases=('thorragnarok','hela','tr','godsofthearena','godsofarena',))
-    async def eq_godsofthearena(self, ctx, tier='Uncollected'):
+    async def eq_godsofthearena(self, ctx, tier='Master'):
         '''Gods of the Arena'''
         event = 'eq_16'
         await self.format_eventquest(event, tier.lower())
