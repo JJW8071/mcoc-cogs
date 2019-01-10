@@ -898,7 +898,7 @@ class MCOCTools:
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='20', pass_context=True, aliases=('omega','omegared','emma','emmafrost',))
-    async def eq_symbiomancer(self, ctx, tier='epic'):
+    async def eq_symbiomancer(self, ctx, tier='Uncollected'):
         '''X-Men: Class Omega'''
         tier = tier.lower()
         event = 'eq_20'
