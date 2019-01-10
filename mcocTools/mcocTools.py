@@ -112,6 +112,13 @@ class StaticGameData:
                 local='data/mcoc/eq_20.json',
                 sheet_name='eq_20',
         )
+        self.gsheet_handler.register_gsheet(
+                name='eq_20.1',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                local='data/mcoc/eq_20.1.json',
+                sheet_name='eq_20.1',
+        )
+
 
 
     async def load_cdt_data(self):
@@ -883,12 +890,18 @@ class MCOCTools:
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
-    @eventquest.command(name='20', pass_context=True, aliases=('symbiotes', 'symbiomancer',))
+    @eventquest.command(name='20.1', pass_context=True, aliases=('symbiotes', 'symbiomancer','venomtheduck','symbiotesupreme'))
     async def eq_symbiomancer(self, ctx, tier='epic'):
         '''Blood & Venom: Symbiomanncer'''
         tier = tier.lower()
+        event = 'eq_20.1'
+        await self.format_eventquest(event, tier)
+
+    @eventquest.command(name='20', pass_context=True, aliases=('omega','omegared','emma','emmafrost',))
+    async def eq_symbiomancer(self, ctx, tier='epic'):
+        '''X-Men: Class Omega'''
+        tier = tier.lower()
         event = 'eq_20'
-        # tiers=('beginner','normal','heroic','master','epic','symbiote')
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
@@ -896,7 +909,6 @@ class MCOCTools:
         '''Brawl in the Battlerealm'''
         tier = tier.lower()
         event = 'eq_21'
-        tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.1', pass_context=True, aliases=('nightriders', 'nightthrasher', 'darkhawk',))
@@ -904,7 +916,6 @@ class MCOCTools:
         '''Night Riders'''
         tier = tier.lower()
         event = 'eq_21.1'
-        # tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
@@ -912,7 +923,6 @@ class MCOCTools:
         '''This Man... This Monster'''
         tier = tier.lower()
         event = 'eq_21.2'
-        tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
     async def format_eventquest(self, event, tier): #, tiers=('beginner','normal','heroic','master')):
