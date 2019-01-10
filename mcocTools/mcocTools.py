@@ -887,8 +887,8 @@ class MCOCTools:
         '''Blood & Venom: Symbiomanncer'''
         tier = tier.lower()
         event = 'eq_20'
-        tiers=('beginner','normal','heroic','master','epic','symbiote')
-        await self.format_eventquest(event, tier, tiers=tiers)
+        # tiers=('beginner','normal','heroic','master','epic','symbiote')
+        await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
     async def eq_brawl(self, ctx, tier='uncollected'):
@@ -903,7 +903,7 @@ class MCOCTools:
         '''Night Riders'''
         tier = tier.lower()
         event = 'eq_21.1'
-        tiers=('beginner','normal','heroic','master','uncollected')
+        # tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
@@ -914,12 +914,14 @@ class MCOCTools:
         tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
-    async def format_eventquest(self, event, tier, tiers=('beginner','normal','heroic','master')):
+    async def format_eventquest(self, event, tier): #, tiers=('beginner','normal','heroic','master')):
         sgd = StaticGameData()
         # sgd = self.sgd
         cdt_eq = await sgd.get_gsheets_data(event)
         rows = set(cdt_eq.keys()) - {'_headers'}
         # print(', '.join(rows))
+        tiers=sgd['tiers']['value'].split(", ")
+
         if tier not in tiers:
             await self.bot.say('Invalid tier selection')
             return
