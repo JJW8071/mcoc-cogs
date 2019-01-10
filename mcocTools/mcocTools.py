@@ -884,25 +884,29 @@ class MCOCTools:
 
     @eventquest.command(name='20', pass_context=True, aliases=('symbiotes', 'symbiomancer',))
     async def eq_symbiomancer(self, ctx, tier='uncollected'):
+        '''Blood & Venom: Symbiomanncer'''
         tier = tier.lower()
         event = 'eq_20'
         tiers=('beginner','norma','heroic','master','epic','symboite')
         await self.format_eventquest(event, tier, tiers=tiers)
 
     @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
-    async def eq_monster(self, ctx, tier='uncollected'):
+    async def eq_brawl(self, ctx, tier='uncollected'):
+        '''Brawl in the Battlerealm'''
         tier = tier.lower()
         event = 'eq_21'
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.1', pass_context=True, aliases=('nightriders', 'nightthrasher', 'darkhawk',))
-    async def eq_monster(self, ctx, tier='uncollected'):
+    async def eq_nightriders(self, ctx, tier='uncollected'):
+        '''Night Riders'''
         tier = tier.lower()
         event = 'eq_21'
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
+        '''This Man... This Monster'''
         tier = tier.lower()
         event = 'eq_21.2'
         await self.format_eventquest(event, tier)
