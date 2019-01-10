@@ -89,7 +89,7 @@ class StaticGameData:
         )
 
         # Update this list to add Events
-        events = ['18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
+        events = ['16.1','17','17.1','18','18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
 
         for event in events:
             self.gsheet_handler.register_gsheet(
@@ -868,6 +868,36 @@ class MCOCTools:
     async def eventquest(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
+
+    # @eventquest.command(name='', pass_context=True, aliases=(,))
+    # async def eq_(self, ctx, tier='Uncollected'):
+    #     '''TITLE'''
+    #     event = 'eq_'
+    #     await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='16.1', pass_context=True, aliases=('hotelmodok','modok','taskmaster','tm',))
+    async def eq_hotelmodok(self, ctx, tier='Uncollected'):
+        '''HOTEL M.O.D.O.K.'''
+        event = 'eq_16.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='17', pass_context=True, aliases=('riseoftheblackpanther','hulkragnarok','killmonger','hr','km',))
+    async def eq_riseoftheblackpanther(self, ctx, tier='Uncollected'):
+        '''Rise of the Black Panther'''
+        event = 'eq_17'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='17.1', pass_context=True, aliases=('bishop', 'sabretooth', 'sentinel','savage','savagefuture',))
+    async def eq_savagefuture(self, ctx, tier='Uncollected'):
+        '''X-Men: Savage Future'''
+        event = 'eq_17.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='18', pass_context=True, aliases=('infinity','capiw','imiw','infinitywar','iw',))
+    async def eq_infinitynightmare(self, ctx, tier='Uncollected'):
+        '''Infinity Nightmare'''
+        event = 'eq_18'
+        await self.format_eventquest(event, tier.lower())
 
     @eventquest.command(name='18.1', pass_context=True, aliases=('mercs','masacre','domino','goldpool','mercsformoney',))
     async def eq_mercsforthemoney(self, ctx, tier='Uncollected'):
