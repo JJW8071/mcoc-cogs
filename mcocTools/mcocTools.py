@@ -95,7 +95,7 @@ class StaticGameData:
             self.gsheet_handler.register_gsheet(
                     name='eq_{}'.format(event),
                     gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                    local='data/mcoc/eq_{}.json'.format(event),
+                    local='data/mcoc/events/eq_{}.json'.format(event),
                     sheet_name='eq_{}'.format(event),
                     #settings=dict(column_handler='champs: to_list')
             )
@@ -874,7 +874,6 @@ class MCOCTools:
         '''Masacre and the Mercs for Money'''
         event = 'eq_18.1'
         await self.format_eventquest(event, tier.lower())
-
 
     @eventquest.command(name='19.1', pass_context=True, aliases=('cabal','enterthecabal','korg','redskull','heimdall',))
     async def eq_enterthecabal(self, ctx, tier='Uncollected'):
