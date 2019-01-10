@@ -96,7 +96,7 @@ class StaticGameData:
                     name='eq_'+event,
                     gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                     local='data/mcoc/events/eq_'+event+'.json',
-                    sheet_name='eq_'event,
+                    sheet_name='eq_'+event,
                     #settings=dict(column_handler='champs: to_list')
             )
 
