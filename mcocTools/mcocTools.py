@@ -883,7 +883,7 @@ class MCOCTools:
             await send_cmd_help(ctx)
 
     @eventquest.command(name='20', pass_context=True, aliases=('symbiotes', 'symbiomancer',))
-    async def eq_symbiomancer(self, ctx, tier='uncollected'):
+    async def eq_symbiomancer(self, ctx, tier='epic'):
         '''Blood & Venom: Symbiomanncer'''
         tier = tier.lower()
         event = 'eq_20'
