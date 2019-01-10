@@ -75,40 +75,38 @@ class StaticGameData:
         self.gsheet_handler.register_gsheet(
                 name='elemental_trials',
                 gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                local='data/mcoc/elemental_trials.json',
+                local='data/mcoc/{}.json'.format(name),
                 sheet_name='trials',
-                #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
                 name='aw_season_rewards',
                 gkey='1DZUoQr4eELkjxRo6N6UTtd6Jn15OfpEjiAV8M_v7_LI',
-                local='data/mcoc/aw_season7.json',
+                local='data/mcoc/{}.json'.format(name),
                 sheet_name='season7',
                 #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_21.2',
                 gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                local='data/mcoc/eq_monster_21.2.json',
+                local='data/mcoc/{}.json'.format(name),
                 sheet_name='eq_21.2',
-                #settings=dict(column_handler='champs: to_list')
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_21.1',
                 gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                local='data/mcoc/eq_21.1.json',
+                local='data/mcoc/{}.json'.format(name),
                 sheet_name='eq_21.1',
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_21',
                 gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                local='data/mcoc/eq_21.json',
+                local='data/mcoc/{}.json'.format(name),
                 sheet_name='eq_21',
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_20',
-                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4'
-                local='data/mcoc/eq_20.json',
+                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                local='data/mcoc/{}.json'.format(name),
                 sheet_name='eq_20',
         )
 
