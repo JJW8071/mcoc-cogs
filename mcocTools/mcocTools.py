@@ -887,7 +887,7 @@ class MCOCTools:
         '''Blood & Venom: Symbiomanncer'''
         tier = tier.lower()
         event = 'eq_20'
-        tiers=('beginner','normal','heroic','master','epic','symboite')
+        tiers=('beginner','normal','heroic','master','epic','symbiote')
         await self.format_eventquest(event, tier, tiers=tiers)
 
     @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
