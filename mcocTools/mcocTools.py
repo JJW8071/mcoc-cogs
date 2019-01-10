@@ -89,7 +89,7 @@ class StaticGameData:
         )
 
         # Update this list to add Events
-        events = ['16.1','17','17.1','18','18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
+        events = ['16','16.1','17','17.1','18','18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
 
         for event in events:
             self.gsheet_handler.register_gsheet(
@@ -874,6 +874,12 @@ class MCOCTools:
     #     '''TITLE'''
     #     event = 'eq_'
     #     await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='16', pass_context=True, aliases=('thorragnarok','hela','tr','godsofthearena','godsofarena',))
+    async def eq_godsofthearena(self, ctx, tier='Uncollected'):
+        '''Gods of the Arena'''
+        event = 'eq_16'
+        await self.format_eventquest(event, tier.lower())
 
     @eventquest.command(name='16.1', pass_context=True, aliases=('hotelmodok','modok','taskmaster','tm',))
     async def eq_hotelmodok(self, ctx, tier='Uncollected'):
