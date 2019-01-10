@@ -63,6 +63,7 @@ class StaticGameData:
             'master': discord.Color.purple(),
             'epic':discord.Color(0x2799f7),
             'uncollected':discord.Color(0x2799f7),
+            'symbiote':discord.Color.black(),
         }
 
     def __new__(cls):
