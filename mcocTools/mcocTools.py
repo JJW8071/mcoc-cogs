@@ -93,7 +93,7 @@ class StaticGameData:
 
         for event in events:
             self.gsheet_handler.register_gsheet(
-                    name='eq_'+event',
+                    name='eq_'+event,
                     gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                     local='data/mcoc/events/eq_'+event+'.json',
                     sheet_name='eq_'event,
