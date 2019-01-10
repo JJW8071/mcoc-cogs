@@ -876,14 +876,21 @@ class MCOCTools:
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
 
+    @eventquest.command(name='20', pass_context=True, aliases=('symbiotes', 'symbiomancer',))
+    async def eq_symbiomancer(self, ctx, tier='uncollected'):
+        tier = tier.lower()
+        event = 'eq_20'
+        tiers=('beginner','norma','heroic','master','epic','symboite')
+        await self.format_eventquest(event, tier, tiers=tiers)
+
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
     async def eq_monster(self, ctx, tier='uncollected'):
         tier = tier.lower()
         event = 'eq_21.2'
-        url = 'https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster'
-        await self.format_eventquest(event, tier, url)
+        # url = 'https://forums.playcontestofchampions.com/en/discussion/116507/announcing-event-quest-this-man-this-monster'
+        await self.format_eventquest(event, tier)
 
-    async def format_eventquest(self, event, tier, forum_url='', tiers=('beginner','normal','heroic','master','uncollected')):
+    async def format_eventquest(self, event, tier, tiers=('beginner','normal','heroic','master','uncollected')):
         sgd = StaticGameData()
         # sgd = self.sgd
         cdt_eq = await sgd.get_gsheets_data(event)
@@ -897,7 +904,7 @@ class MCOCTools:
             page_number = list(tiers).index(tier)
             for row in tiers:
                 em = discord.Embed(color=sgd.tiercolors[row], title=cdt_eq['event_title']['value'],
-                    url=forum_url, description='')
+                    url=cdt_eq['event_url']['value'], description='')
                 em.add_field(name=cdt_eq['story_title']['value'], value=cdt_eq['story_value']['value'])
                 em.add_field(name='{} Rewards'.format(row.title()), value=cdt_eq[row]['rewardsregex'])
                 em.set_image(url=cdt_eq['story_image']['value'])
