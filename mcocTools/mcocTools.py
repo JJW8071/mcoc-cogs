@@ -88,14 +88,15 @@ class StaticGameData:
                 #settings=dict(column_handler='champs: to_list')
         )
 
-        events = ('19.1','20','20.1','21','21.1','21.2')
+        # Update this list to add Events
+        events = (18.1, 19.1, 20, 20.1, 21, 21.1, 21.2)
 
         for event in events:
             self.gsheet_handler.register_gsheet(
-                    name='eq_'+event,
+                    name='eq_{}'.format(event),
                     gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                    local='data/mcoc/eq_'+event+'.json',
-                    sheet_name='eq_'+event,
+                    local='data/mcoc/eq_{}.json'.format(event),
+                    sheet_name='eq_{}'.format(event),
                     #settings=dict(column_handler='champs: to_list')
             )
 
@@ -867,6 +868,13 @@ class MCOCTools:
     async def eventquest(self, ctx):
         if ctx.invoked_subcommand is None:
             await send_cmd_help(ctx)
+
+    @eventquest.command(name='18.1', pass_context=True, aliases=('mercs','masacre','domino','goldpool','mercsformoney',))
+    async def eq_enterthecabal(self, ctx, tier='Uncollected'):
+        '''Masacre and the Mercs for Money'''
+        event = 'eq_18.1'
+        await self.format_eventquest(event, tier.lower())
+
 
     @eventquest.command(name='19.1', pass_context=True, aliases=('cabal','enterthecabal','korg','redskull','heimdall',))
     async def eq_enterthecabal(self, ctx, tier='Uncollected'):
