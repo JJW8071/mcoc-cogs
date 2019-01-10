@@ -920,7 +920,7 @@ class MCOCTools:
         cdt_eq = await sgd.get_gsheets_data(event)
         rows = set(cdt_eq.keys()) - {'_headers'}
         # print(', '.join(rows))
-        tiers=sgd['tiers']['value'].split(", ")
+        tiers=cdt_eq['tiers']['value'].split(", ")
 
         if tier not in tiers:
             await self.bot.say('Invalid tier selection')
