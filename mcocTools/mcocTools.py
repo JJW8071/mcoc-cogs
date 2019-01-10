@@ -887,7 +887,7 @@ class MCOCTools:
         '''Blood & Venom: Symbiomanncer'''
         tier = tier.lower()
         event = 'eq_20'
-        tiers=('beginner','norma','heroic','master','epic','symboite')
+        tiers=('beginner','normal','heroic','master','epic','symboite')
         await self.format_eventquest(event, tier, tiers=tiers)
 
     @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
@@ -895,6 +895,7 @@ class MCOCTools:
         '''Brawl in the Battlerealm'''
         tier = tier.lower()
         event = 'eq_21'
+        tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.1', pass_context=True, aliases=('nightriders', 'nightthrasher', 'darkhawk',))
@@ -902,6 +903,7 @@ class MCOCTools:
         '''Night Riders'''
         tier = tier.lower()
         event = 'eq_21'
+        tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
     @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
@@ -909,9 +911,10 @@ class MCOCTools:
         '''This Man... This Monster'''
         tier = tier.lower()
         event = 'eq_21.2'
+        tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
-    async def format_eventquest(self, event, tier, tiers=('beginner','normal','heroic','master','uncollected')):
+    async def format_eventquest(self, event, tier, tiers=('beginner','normal','heroic','master')):
         sgd = StaticGameData()
         # sgd = self.sgd
         cdt_eq = await sgd.get_gsheets_data(event)
