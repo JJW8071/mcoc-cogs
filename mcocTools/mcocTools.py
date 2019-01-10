@@ -870,7 +870,7 @@ class MCOCTools:
             await send_cmd_help(ctx)
 
     @eventquest.command(name='18.1', pass_context=True, aliases=('mercs','masacre','domino','goldpool','mercsformoney',))
-    async def eq_enterthecabal(self, ctx, tier='Uncollected'):
+    async def eq_mercsforthemoney(self, ctx, tier='Uncollected'):
         '''Masacre and the Mercs for Money'''
         event = 'eq_18.1'
         await self.format_eventquest(event, tier.lower())
