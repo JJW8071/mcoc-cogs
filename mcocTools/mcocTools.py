@@ -89,14 +89,14 @@ class StaticGameData:
         )
 
         # Update this list to add Events
-        events = (18.1, 19.1, 20, 20.1, 21, 21.1, 21.2)
+        events = ['18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
 
         for event in events:
             self.gsheet_handler.register_gsheet(
-                    name='eq_{}'.format(event),
+                    name='eq_'+event',
                     gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
-                    local='data/mcoc/events/eq_{}.json'.format(event),
-                    sheet_name='eq_{}'.format(event),
+                    local='data/mcoc/events/eq_'+event+'.json',
+                    sheet_name='eq_'event,
                     #settings=dict(column_handler='champs: to_list')
             )
 
