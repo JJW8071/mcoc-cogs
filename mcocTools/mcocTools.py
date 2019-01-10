@@ -922,8 +922,12 @@ class MCOCTools:
                 em = discord.Embed(color=sgd.tiercolors[row], title=cdt_eq['event_title']['value'],
                     url=cdt_eq['event_url']['value'], description='')
                 em.add_field(name=cdt_eq['story_title']['value'], value=cdt_eq['story_value']['value'])
-                em.add_field(name='{} Rewards'.format(row.title()), value=cdt_eq[row]['rewardsregex'])
-                em.set_image(url=cdt_eq['story_image']['value'])
+                if cdt_eq[row]['rewardsregex'] is not None:
+                    em.add_field(name='{} Rewards'.format(row.title()), value=cdt_eq[row]['rewardsregex'])
+                if cdt_eq['introducing']['value'] is not None:
+                    em.add_field(name='Introducing', value=cdt_eq['introducing']['value'])
+                if cdt_eq['story_image']['value'] is not None:
+                    em.set_image(url=cdt_eq['story_image']['value'])
                 em.set_footer(text='CollectorDevTeam',
                         icon_url=self.COLLECTOR_ICON)
                 page_list.append(em)
