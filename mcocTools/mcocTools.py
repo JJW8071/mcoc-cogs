@@ -93,6 +93,18 @@ class StaticGameData:
                 sheet_name='eq_21.2',
                 #settings=dict(column_handler='champs: to_list')
         )
+        self.gsheet_handler.register_gsheet(
+                name='eq_21',
+                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4'
+                local='data/mcoc/eq_21.json',
+                sheet_name='eq_21',
+        )
+        self.gsheet_handler.register_gsheet(
+                name='eq_20',
+                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4'
+                local='data/mcoc/eq_20.json',
+                sheet_name='eq_20',
+        )
 
 
     async def load_cdt_data(self):
