@@ -95,19 +95,19 @@ class StaticGameData:
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_21.1',
-                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                 local='data/mcoc/eq_21.1.json',
                 sheet_name='eq_21.1',
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_21',
-                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                 local='data/mcoc/eq_21.json',
                 sheet_name='eq_21',
         )
         self.gsheet_handler.register_gsheet(
                 name='eq_20',
-                gkey='jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
                 local='data/mcoc/eq_20.json',
                 sheet_name='eq_20',
         )
