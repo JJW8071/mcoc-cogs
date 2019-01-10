@@ -902,7 +902,7 @@ class MCOCTools:
     async def eq_nightriders(self, ctx, tier='uncollected'):
         '''Night Riders'''
         tier = tier.lower()
-        event = 'eq_21'
+        event = 'eq_21.1'
         tiers=('beginner','normal','heroic','master','uncollected')
         await self.format_eventquest(event, tier)
 
