@@ -869,7 +869,7 @@ class MCOCTools:
             await send_cmd_help(ctx)
 
     @eventquest.command(name='19.1', pass_context=True, aliases=('cabal','enterthecabal','korg','redskull','heimdall',))
-    async def eq_classomega(self, ctx, tier='Uncollected'):
+    async def eq_enterthecabal(self, ctx, tier='Uncollected'):
         '''Enter The Cabal'''
         event = 'eq_19.1'
         await self.format_eventquest(event, tier.lower())
