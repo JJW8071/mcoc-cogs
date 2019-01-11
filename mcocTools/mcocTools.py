@@ -89,7 +89,7 @@ class StaticGameData:
         )
 
         # Update this list to add Events
-        events = ['16','16.1','17','17.1','18','18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
+        events = ['15','15.1','16','16.1','17','17.1','17.2','18','18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
 
         for event in events:
             self.gsheet_handler.register_gsheet(
@@ -874,6 +874,18 @@ class MCOCTools:
     #     '''TITLE'''
     #     event = 'eq_'
     #     await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='15', pass_context=True, aliases=('haveyouseenthisdog','kingping','medusa','kp',))
+    async def eq_(self, ctx, tier='Master'):
+        '''Have You Seen This Dog?'''
+        event = 'eq_15'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='15.1', pass_context=True, aliases=('blades','blade','mephisto','morningstar',))
+    async def eq_blades(self, ctx, tier='Master'):
+        '''Blades'''
+        event = 'eq_15.1'
+        await self.format_eventquest(event, tier.lower())
 
     @eventquest.command(name='16', pass_context=True, aliases=('thorragnarok','hela','tr','godsofthearena','godsofarena',))
     async def eq_godsofthearena(self, ctx, tier='Master'):
