@@ -870,7 +870,7 @@ class MCOCTools:
             await send_cmd_help(ctx)
 
     # @eventquest.command(name='', pass_context=True, aliases=(,))
-    # async def eq_(self, ctx, tier='Uncollected'):
+    # async def eq_(self, ctx, tier='Master'):
     #     '''TITLE'''
     #     event = 'eq_'
     #     await self.format_eventquest(event, tier.lower())
@@ -897,6 +897,12 @@ class MCOCTools:
     async def eq_savagefuture(self, ctx, tier='Uncollected'):
         '''X-Men: Savage Future'''
         event = 'eq_17.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='17.2', pass_context=True, aliases=('chaos','infinitychaos','corvus','proximamidnight','pm','corvusglaive','cg','proxima',))
+    async def eq_infinitychaos(self, ctx, tier='Uncollected'):
+        '''Infinity Chaos'''
+        event = 'eq_17.2'
         await self.format_eventquest(event, tier.lower())
 
     @eventquest.command(name='18', pass_context=True, aliases=('infinity','capiw','imiw','infinitywar','iw',))
@@ -946,6 +952,12 @@ class MCOCTools:
         '''This Man... This Monster'''
         event = 'eq_21.2'
         await self.format_eventquest(event, tier.lower())
+
+    # @eventquest.command(name='', pass_context=True, aliases=(,))
+    # async def eq_(self, ctx, tier='Uncollected'):
+    #     '''TITLE'''
+    #     event = 'eq_'
+    #     await self.format_eventquest(event, tier.lower())
 
     async def format_eventquest(self, event, tier): #, tiers=('beginner','normal','heroic','master')):
         sgd = StaticGameData()
