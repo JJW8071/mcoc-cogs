@@ -490,45 +490,45 @@ class Hook:
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
 
 
-    @commands.command(pass_context=True)
-    #async def profile(self, roster: RosterUserConverter):
-    async def profile(self, ctx, user=''):
-        """Displays a user profile."""
-        roster = await RosterUserConverter(ctx, user).convert()
-        user = roster.user
-        embeds = []
-        if roster:
-            em = discord.Embed(color=discord.Color.gold(),title='Prestige: {}'.format(roster.prestige))
-            em.set_author(name=roster.user.name, icon_url=roster.user.avatar_url)
-            em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
-            embeds.append(em)
-            em2 = discord.Embed(color=discord.Color.red(),title='Max Prestige: {}'.format(roster.max_prestige))
-            em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
-            em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
-            embeds.append(em2)
-            em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
-            em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
-            total = 0
-            #
-            # em3.add_field(name='Cosmic ',value='TBD')
-            # em3.add_field(name='Mystic ',value='TBD')
-            # em3.add_field(name='Science ',value='TBD')
-            # em3.add_field(name='Skill ',value='TBD')
-            # em3.add_field(name='Mutant ',value='TBD')
-            # em3.add_field(name='Tech ',value='TBD')
-            # rating=0
-            # for r in range(len(roster)):
-            #     champ = roster[r]
-            #     if champ["Stars"] == "4" or champ["Stars"] == "5":
-            #         rating += roster[r]['Pi']
-            # # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
-            # em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
-            # embeds.append(em3)
-        else:
-            embeds = await self.roster_kickback(user.color)
-        await self.pages_menu(ctx, embed_list=embeds)
+    # @commands.command(pass_context=True)
+    # #async def profile(self, roster: RosterUserConverter):
+    # async def profile(self, ctx, user=''):
+    #     """Displays a user profile."""
+    #     roster = await RosterUserConverter(ctx, user).convert()
+    #     user = roster.user
+    #     embeds = []
+    #     if roster:
+    #         em = discord.Embed(color=discord.Color.gold(),title='Prestige: {}'.format(roster.prestige))
+    #         em.set_author(name=roster.user.name, icon_url=roster.user.avatar_url)
+    #         em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
+    #         em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
+    #         embeds.append(em)
+    #         em2 = discord.Embed(color=discord.Color.red(),title='Max Prestige: {}'.format(roster.max_prestige))
+    #         em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
+    #         em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
+    #         em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
+    #         embeds.append(em2)
+    #         em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
+    #         em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
+    #         total = 0
+    #         #
+    #         # em3.add_field(name='Cosmic ',value='TBD')
+    #         # em3.add_field(name='Mystic ',value='TBD')
+    #         # em3.add_field(name='Science ',value='TBD')
+    #         # em3.add_field(name='Skill ',value='TBD')
+    #         # em3.add_field(name='Mutant ',value='TBD')
+    #         # em3.add_field(name='Tech ',value='TBD')
+    #         # rating=0
+    #         # for r in range(len(roster)):
+    #         #     champ = roster[r]
+    #         #     if champ["Stars"] == "4" or champ["Stars"] == "5":
+    #         #         rating += roster[r]['Pi']
+    #         # # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
+    #         # em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
+    #         # embeds.append(em3)
+    #     else:
+    #         embeds = await self.roster_kickback(user.color)
+    #     await self.pages_menu(ctx, embed_list=embeds)
 
     async def roster_kickback(self, ucolor = discord.Color.gold()):
         embeds=[]
