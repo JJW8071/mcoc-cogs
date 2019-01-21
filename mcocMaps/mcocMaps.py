@@ -5,6 +5,7 @@ import os
 import requests
 from .utils.dataIO import dataIO
 from discord.ext import commands
+# from .mcocTools import StaticGameData
 
 JPAGS = 'http://www.alliancewar.com'
 PATREON = 'https://patreon.com/collectorbot'
@@ -326,6 +327,24 @@ class MCOCMaps:
     async def alliancewar(self, ctx):
         '''Alliancewar.com Commands [WIP]'''
 
+    @alliancewar.command(pass_context=True, hidden=True, name='seasons', aliases=['rewards'])
+    async def _season_rewards(self, ctx, tier, rank=''):
+        sgd = cogs.mcocTools.StaticGameData()
+        cdt_sr = await sgd.get_gsheets_data('aw_season_rewards')
+        col = set(cdt_season_rewards.keys()) - {'_headers'}
+        rows = sgd.tiers
+        tier = tier.lower()
+        if tier in rows:
+            pages=[]
+            for r in (1, 2, 3, ''):
+                if tier+r in cdt_sr['unique']:
+                    em=discord.embed(color=discord.Color.gold(),)
+
+        else:
+            await self.bot.say('Valid tiers: Master\nPlatinum\nGold\nSilver\nBronze\nStone\nParticipation')
+
+
+
     @alliancewar.command(pass_context=True, hidden=True, name="node")
     async def _node_info(self, ctx, nodeNumber, tier = 'expert'):
         '''Report Node information.'''
@@ -479,7 +498,46 @@ class MCOCMaps:
         await self.bot.say(embed=em)
 
     @alliancewar.command(pass_context=True, hidden=True, name="scout")
-    async def _scout(self, ctx, tier: str, node: int, hp: int, attack: int, *, hargs):
+    async def _scout(self, ctx, tier, node: int, hp: int, attack: int, *, hargs):
+        # default = {'hp': 0, 'atk': 0, 'node' : 0, 'class' : '', 'star': ''}
+        # pares_re = re.compile(r'''(?:(h,hp)(?P<hp>[0-9]{1,6}))
+        #                         | (?:(a,atk)(?P<atk>[0-9]{1,5}))
+        #                         | (?:(n,node)(?P<node>[0-9]{1,2}))
+        #                         | (?:(?P<star>[1-6])(?:star|s|★|☆|\\?\*))
+        #                         ''',re.X)
+
+        tiers = {
+            'expert':{ 'color' :discord.Color.gold()},
+            'hard':{ 'color' :discord.Color.red()},
+            'challenger':{ 'color' :discord.Color.orange()},
+            'intermediate':{ 'color' :discord.Color.blue()},
+            'advanced':{ 'color' :discord.Color.green()}}
+        if tier not in tiers:
+            jpagstier = 'advanced'
+        else:
+            jpagstier = tier
+        if tier in tiers:
+            # pathurl = 'http://www.alliancewar.com/aw/js/aw_s{}_{}_9path.json'.format(tier)
+            if tier is 'expert' or tier <= 3 :
+                pathdata = aw_expert
+            elif tier is 'hard' or tier == 6 or tier == 7 or tier == 8 or tier == 9:
+                pathdata = aw_hard :
+            elif tier is 'challenger' or tier == 4 or tier == 5:
+                pathdata = aw_challenger
+            elif tier is 'advanced':
+                pathdata = aw_advanced
+            else:
+                pathdata = aw_intermediate
+        title='Scout Test node {}'.format(node)
+        nodedetails = pathdata['boosts'][str(node)]
+        em = discord.Embed(color=tiers[jpagstier]['color'], title=title, descritpion='', url=JPAGS)
+        em.add_field(name='nodedetails', value=nodedetails)
+        em.add_field(name='observed hp', value='{}'.format(hp))
+        em.add_field(name='observed attack', value='{}'.format(attack))
+
+
+
+
         tiers = {'expert':discord.Color.gold(),'hard':discord.Color.red(),'challenger':discord.Color.orange(),'intermediate':discord.Color.blue(),'advanced':discord.Color.green()}
         if tier not in tiers:
             await self.bot.say('Tier not recognized')
