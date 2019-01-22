@@ -1087,7 +1087,7 @@ class CDTReport:
         embed.add_field(name="User:", value=person, inline=False)
         embed.add_field(name="Reason:", value=reason, inline=False)
         embed.add_field(name="Reported By:", value=author, inline=True)
-        em.set_footer(text='CollectorDevTeam',
+        embed.set_footer(text='CollectorDevTeam',
                 icon_url=self.COLLECTOR_ICON)
         await self.bot.send_message(ctx.message.author, "Your report against {} has been created.".format(person)) #Privately whispers to a user that said report was created and sent
         await self.bot.send_message(reportchannel, embed=embed) #Sends report to the channel we specified earlier
