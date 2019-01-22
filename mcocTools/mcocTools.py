@@ -398,7 +398,7 @@ class MCOCTools:
     def __init__(self, bot):
         self.bot = bot
         self.search_parser = SearchExpr.parser()
-        self.settings = dataIO.load_json('data/mcocTools/settings.json')
+        # self.settings = dataIO.load_json('data/mcocTools/settings.json')
 
 
     def present(self, lookup):
@@ -1003,12 +1003,12 @@ class MCOCTools:
             await menu.menu_start(page_list, page_number)
 
 
-# class CDTReport:
-#     """Report Users"""
-#
-#     def __init__(self, bot):
-#         self.bot = bot
-#         self.settings = dataIO.load_json('data/mcocTools/settings.json')
+class CDTReport:
+    """Report Users"""
+
+    def __init__(self, bot):
+        self.bot = bot
+        self.settings = dataIO.load_json('data/mcocTools/settings.json')
 
     async def init(self, server):
         self.settings[server.id] = {
