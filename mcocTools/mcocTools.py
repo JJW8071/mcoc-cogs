@@ -398,6 +398,8 @@ class MCOCTools:
     def __init__(self, bot):
         self.bot = bot
         self.search_parser = SearchExpr.parser()
+        self.settings = dataIO.load_json('data/mcocTools/settings.json')
+
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title='',description=lookup[1])
@@ -811,7 +813,7 @@ class MCOCTools:
         sgd = StaticGameData()
         await sgd.cache_gsheets()
 
-    @commands.command()
+    @commands.command(hidden=True)
     async def aux_sheets(self):
         await self.cache_sgd_gsheets()
 
@@ -1001,17 +1003,116 @@ class MCOCTools:
             await menu.menu_start(page_list, page_number)
 
 
+# class CDTReport:
+#     """Report Users"""
+#
+#     def __init__(self, bot):
+#         self.bot = bot
+#         self.settings = dataIO.load_json('data/mcocTools/settings.json')
 
-    # @commands.command(pass_context=True, hidden=True)
-    # async def awopp_calc(self, ctx, wr:int, gain:int, loss:int):
-    #     '''MutaMatt's War Opponent Calculator
-    #     https://en.wikipedia.org/wiki/Elo_rating_system
-    #     '''
-    #     playera = 1/(1+exp(10,(gain-loss)/400))
-    #     await self.bot.say('{}'.format(playera))
+    async def init(self, server):
+        self.settings[server.id] = {
+            'report-channel': '0'
+            }
 
-    # @commands.command(pass_context=True, hiddent=True)
-    # async def trials(self, ctx, trial, tier='epic'):
+    async def error(self, ctx):  #In case files dont exist.
+        for folder in folders:
+            if not os.path.exists(folder):
+                message_file += "`{}` folder\n".format(folder)
+                print("Creating " + folder + " folder...")
+                os.makedirs(folder)
+                error_file = 1
+        for filename in files:
+            if not os.path.isfile('data/mcocTools/{}'.format(filename)):
+                print("Creating empty {}".format(filename))
+                dataIO.save_json('data/mcocTools/{}'.format(filename), {})
+                message_file += "`{}` is missing\n".format(filename)
+                error_file = 1
+        if error_file == 1:
+            message_file += "The files were successfully re-created. Try again your command (you may need to set your local settings again)"
+            await self.bot.say(message_file)
+        if ctx.message.server.id not in self.settings:
+            await self.init(ctx.message.server)
+
+
+    @commands.group(pass_context=True)
+    @checks.admin()
+    async def reportchannel(self, ctx, *, channel: discord.Channel=None):
+        """Sets a channel as log"""
+
+        if not channel:
+            channel = ctx.message.channel
+        else:
+            pass
+        server = ctx.message.server
+        if server.id not in self.settings:
+            await self.init(server)
+        self.settings[server.id]['report-channel'] = channel.id
+        await self.bot.say("Reports will be sent to **" + channel.name + "**.")
+        dataIO.save_json('data/mcocTools/settings.json', self.settings)
+
+    @commands.group(pass_context=True, hidden=True)
+    @checks.admin()
+    async def masterchannel(self, ctx, *, channel: discord.Channel=None):
+        """Sets a global channel as log"""
+        if ctx.message.author.id in ('148622879817334784', '124984294035816448', '209339409655398400'):
+            if not channel:
+                channel = ctx.message.channel
+            else:
+                pass
+            server = ctx.message.server
+            self.settings['cdt-master-channel'] = channel.id
+            await self.bot.say("Reports will be sent to **" + channel.name + "**.")
+            dataIO.save_json('data/mcocTools/settings.json', self.settings)
+        else:
+            await self.bot.say("CollectorDevTeam only sucka!")
+
+
+    @commands.command(pass_context=True, no_pm=True, name='report')
+    async def cdtreport(self, ctx, person, *, reason): #changed terminology. Discord has people not players.
+        """Report a user. Please provide evidence.
+        Upload a screenshot, and copy a link to the screenshotself.
+        Include the link in your report.""" #Where is the evidence field? Might want to add one
+        author = ctx.message.author.name #String for the Author's name
+        server = ctx.message.server
+        try:
+            reportchannel = self.bot.get_channel(self.settings[server.id]['report-channel'])
+            masterchannel = self.bot.get_channel(self.settings['cdt-master-channel'])
+        except:
+            KeyError
+            await self.bot.send_message(ctx.message.author, "Uh Oh! Your report was not sent D: Please let an admin know that they need to set the default report channel")
+            return
+        embed=discord.Embed(title="Report:", description="A Report has been filed against somebody!")
+        embed.set_author(name="CollectorVerse Report System")
+        embed.add_field(name="User:", value=person, inline=False)
+        embed.add_field(name="Reason:", value=reason, inline=False)
+        embed.add_field(name="Reported By:", value=author, inline=True)
+        em.set_footer(text='CollectorDevTeam',
+                icon_url=self.COLLECTOR_ICON)
+        await self.bot.send_message(ctx.message.author, "Your report against {} has been created.".format(person)) #Privately whispers to a user that said report was created and sent
+        await self.bot.send_message(reportchannel, embed=embed) #Sends report to the channel we specified earlier
+        await self.bot.send_message(masterchannel, embed=embed) #Sends report to the channel we specified earlier
+
+
+def check_folders():
+    folders = ('data', 'data/mcocTools/')
+    for folder in folders:
+        if not os.path.exists(folder):
+            print("Creating " + folder + " folder...")
+            os.makedirs(folder)
+
+def check_files():
+    ignore_list = {'SERVERS': [], 'CHANNELS': []}
+
+    files = {
+        'settings.json'         : {}
+    }
+
+    for filename, value in files.items():
+        if not os.path.isfile('data/mcocTools/{}'.format(filename)):
+            print("Creating empty {}".format(filename))
+            dataIO.save_json('data/mcocTools/{}'.format(filename), value)
+
 
 
 def load_csv(filename):
@@ -1055,7 +1156,10 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
     return chat.box('\n'.join(rows))
 
 def setup(bot):
+    check_folders()
+    check_files()
     sgd = StaticGameData()
     sgd.register_gsheets(bot)
     bot.loop.create_task(sgd.load_cdt_data())
     bot.add_cog(MCOCTools(bot))
+    bot.add_cog(CDTReport(bot))
