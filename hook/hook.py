@@ -32,7 +32,7 @@ def _default(self, obj):
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
 HOOK_URL='http://hook.github.io/champions/#/roster'
-COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/portraits/collector.png'
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/images/portraits/collector.png'
 GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'
 
 _default.default = JSONEncoder().default  # Save unmodified default.
@@ -486,51 +486,10 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
 
-
-    # @commands.command(pass_context=True)
-    # #async def profile(self, roster: RosterUserConverter):
-    # async def profile(self, ctx, user=''):
-    #     """Displays a user profile."""
-    #     roster = await RosterUserConverter(ctx, user).convert()
-    #     user = roster.user
-    #     embeds = []
-    #     if roster:
-    #         em = discord.Embed(color=discord.Color.gold(),title='Prestige: {}'.format(roster.prestige))
-    #         em.set_author(name=roster.user.name, icon_url=roster.user.avatar_url)
-    #         em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-    #         em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
-    #         embeds.append(em)
-    #         em2 = discord.Embed(color=discord.Color.red(),title='Max Prestige: {}'.format(roster.max_prestige))
-    #         em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
-    #         em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-    #         em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
-    #         embeds.append(em2)
-    #         em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
-    #         em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
-    #         total = 0
-    #         #
-    #         # em3.add_field(name='Cosmic ',value='TBD')
-    #         # em3.add_field(name='Mystic ',value='TBD')
-    #         # em3.add_field(name='Science ',value='TBD')
-    #         # em3.add_field(name='Skill ',value='TBD')
-    #         # em3.add_field(name='Mutant ',value='TBD')
-    #         # em3.add_field(name='Tech ',value='TBD')
-    #         # rating=0
-    #         # for r in range(len(roster)):
-    #         #     champ = roster[r]
-    #         #     if champ["Stars"] == "4" or champ["Stars"] == "5":
-    #         #         rating += roster[r]['Pi']
-    #         # # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
-    #         # em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
-    #         # embeds.append(em3)
-    #     else:
-    #         embeds = await self.roster_kickback(user.color)
-    #     await self.pages_menu(ctx, embed_list=embeds)
-
     async def roster_kickback(self, ucolor = discord.Color.gold()):
         embeds=[]
         em0=discord.Embed(color=ucolor,title='No Roster detected!', description='There are several methods available to you to create your roster.  \nPlease note the paging buttons below to select your instruction set.')
-        em0.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
+        em0.set_footer(text='CollectorVerse Roster',icon_url=COLLECTOR_ICON)
         embeds.append(em0)
         em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ```/roster add <champs>``` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n```/roster del <champs>``` allows you to remove a Champion.\n\nYouTube demo: https://youtu.be/O9Wqn1l2DEg', url='https://youtu.be/O9Wqn1l2DEg')
         em01.set_footer(text='CollectorVerse Roster',icon_url=COLLECTOR_ICON)
