@@ -70,10 +70,10 @@ class HashtagRosterConverter(commands.Converter):
                 color=user.color
             except:
                 color = discord.Color.gold()
-            embeds = await *.roster_kickback(color)
+            embeds = await Hook.roster_kickback(self.ctx, color)
+            await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
             # try:
             #     embeds = await Hook.roster_kickback(self.ctx, user.color)
-            #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
             # except:
             # await self.ctx.bot.say('No roster detected.  \nUse ``/profile`` for import instructions.')
 
