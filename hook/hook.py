@@ -32,7 +32,7 @@ def _default(self, obj):
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
 HOOK_URL='http://hook.github.io/champions/#/roster'
-COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/portraits/portrait_collector.png'
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/portraits/collector.png'
 GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'
 
 _default.default = JSONEncoder().default  # Save unmodified default.
@@ -75,21 +75,6 @@ class HashtagRosterConverter(commands.Converter):
             embeds = await hook.roster_kickback(color)
             await menu.menu_start(page_list=embeds)
 
-
-
-            # try:
-            #     embeds = await Hook.roster_kickback(self.ctx, user.color)
-            #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
-            # except:
-
-            # await self.ctx.bot.say('No roster detected.  \nUse ``/profile`` for import instructions.')
-
-            # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
-            # em.add_field(name='Missing Roster',
-            #         value='Load up a "champ*.csv" file from Hook to import your roster')
-            # em.add_field(name='Hook Web App', value=HOOK_URL)
-            # em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            # await self.ctx.bot.say(embed=em)
             raise MissingRosterError('No Roster found for {}'.format(user.name))
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
 
@@ -548,10 +533,10 @@ class Hook:
         em0.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
         embeds.append(em0)
         em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ```/roster add <champs>``` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n```/roster del <champs>``` allows you to remove a Champion.\n\nYouTube demo: https://youtu.be/O9Wqn1l2DEg', url='https://youtu.be/O9Wqn1l2DEg')
-        em01.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
+        em01.set_footer(text='CollectorVerse Roster',icon_url=COLLECTOR_ICON)
         embeds.append(em01)
         em=discord.Embed(color=ucolor, title='Champion CSV template', url='https://goo.gl/LaFrg7')
-        em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
+        em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champion rows you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
         em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
         em.set_footer(text='CSV import',icon_url=GSHEET_ICON)
         embeds.append(em)
