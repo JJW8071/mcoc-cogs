@@ -66,12 +66,15 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(embeds)
+            hook = Hook(self.bot)
             try:
                 color=user.color
             except:
                 color = discord.Color.gold()
-            embeds = await Hook.roster_kickback(self, color)
-            await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
+            embeds = await hook.roster_kickback(color)
+            await menu.pages_menu(self.ctx.bot, self.ctx, embeds)
             # try:
             #     embeds = await Hook.roster_kickback(self.ctx, user.color)
             # except:
