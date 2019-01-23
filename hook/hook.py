@@ -67,7 +67,6 @@ class HashtagRosterConverter(commands.Converter):
         await chmp_rstr.load_champions()
         if not chmp_rstr:
             menu = PagesMenu(self.ctx.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(embeds)
             hook = Hook(self, self.ctx.bot)
             try:
                 color=user.color
