@@ -66,11 +66,16 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
+            try:
+                color=user.color
+            except:
+                color = discord.Color.gold()
+            embeds = await self.roster_kickback(color)
             # try:
             #     embeds = await Hook.roster_kickback(self.ctx, user.color)
             #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
             # except:
-            await self.ctx.bot.say('No roster detected.  \nUse ``/profile`` for import instructions.')
+            # await self.ctx.bot.say('No roster detected.  \nUse ``/profile`` for import instructions.')
 
             # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
             # em.add_field(name='Missing Roster',
