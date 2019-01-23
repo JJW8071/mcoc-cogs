@@ -70,7 +70,7 @@ class HashtagRosterConverter(commands.Converter):
                 color=user.color
             except:
                 color = discord.Color.gold()
-            embeds = await Hook.roster_kickback(self.ctx, color)
+            embeds = await Hook.roster_kickback(self, color)
             await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
             # try:
             #     embeds = await Hook.roster_kickback(self.ctx, user.color)
