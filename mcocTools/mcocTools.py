@@ -32,23 +32,11 @@ class MCOCTools:
             'spotlight': (
                 '<http://simians.tk/MCoCspotlight>',
                 '[MCOC Spotlight Dataset](http://simians.tk/MCoCspotlight)\nIf you would like to donate prestige, signatures or stats, join us at \n[CollectorDevTeam](https://discord.gg/BwhgZxk)'),
-            # 'marvelsynergy': (
-            #     '<http://www.marvelsynergy.com/team-builder>',
-            #     '[Marvel Synergy Team Builder](http://www.marvelsynergy.com/team-builder)',
-            #     'Marvel Synergy',
-            #     'http://www.marvelsynergy.com/images/marvelsynergy.png'),
             'alsciende':(
                 '<https://alsciende.github.io/masteries/v10.0.1/#>',
                 '[Alsciende Mastery Tool](https://alsciende.github.io/masteries/v17.0.2/#)',
                 'by u/alsciende',
                 'https://images-ext-2.discordapp.net/external/ymdMNrkhO9L5tUDupbFSEmu-JK0X2bpV0ZE-VYTBICc/%3Fsize%3D1024/https/cdn.discordapp.com/avatars/268829380262756357/b55ae7fc51d9b741450f949accd15fbe.webp?width=80&height=80'),
-            'simulator': (
-                '<http://simians.tk/msimSDF>',
-                '[-SDF- Mastery Simulator](http://simians.tk/msimSDF)'),
-            # 'streak': (
-            #     '<http://simians.tk/-sdf-streak>'
-            #     '[Infinite Streak](http://simians.tk/-sdf-streak)'),
-            #     #'http://simians.tk/SDFstreak')
     }
     mcolor = discord.Color.red()
     COLLECTOR_ICON='https://raw.githubusercontent.com/JasonJW/mcoc-cogs/master/mcoc/data/cdt_icon.png'
@@ -141,7 +129,7 @@ class MCOCTools:
     #     await self.bot.say(embed=em)
 
 
-    @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',])
+    @commands.command(help=lookup_links['event'][0], aliases=['events','schedule',], hidden=True)
     async def event(self):
         x = 'event'
         lookup = self.lookup_links[x]
@@ -150,6 +138,7 @@ class MCOCTools:
 
     @commands.command(help=lookup_links['spotlight'][0],)
     async def spotlight(self):
+        '''CollectorDevTeam Spotlight Dataset'''
         x = 'spotlight'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
@@ -162,21 +151,14 @@ class MCOCTools:
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
-    @commands.command(help=lookup_links['simulator'][0],aliases=['msim'])
-    async def simulator(self):
-        x = 'simulator'
-        lookup = self.lookup_links[x]
-        await self.bot.say(embed=self.present(lookup))
-        # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
-
-    @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',))
+    @commands.command(help=lookup_links['alsciende'][0], aliases=('mrig',), hidden=True)
     async def alsciende(self):
         x = 'alsciende'
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
 
-    @commands.command(help=lookup_links['hook'][0])
+    @commands.command(help=lookup_links['hook'][0], hidden=True)
     async def hook(self):
         x = 'hook'
         lookup = self.lookup_links[x]
