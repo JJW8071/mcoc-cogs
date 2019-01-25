@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "95e800f6a097280584261964384b72ba54f3627e",
+    "hash": "70b72c21c8a6d737a5d08f9abff74cba854842d4",
     "language": "en",
     "post_processed": true,
-    "string_count": 916,
+    "string_count": 940,
     "tagged": [
       "bcg",
       "client"
     ],
-    "ts": 1537309360,
-    "versionLock": "20.1"
+    "ts": 1542327982,
+    "versionLock": "21.1"
   },
   "strings": [
     {
@@ -1141,6 +1141,21 @@
       "v": "SPECIAL ATTACKS"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_AEGCHAMP",
+      "v": "DAVID AND GOLIATH",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_AEGCOMBO",
+      "v": "COMBO BREAKERS",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_AEGCOSMIC",
+      "v": "WARRIORS OF THE STARS",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_AIM",
       "v": "ADVANCED IDEA MECHANICS",
       "vn": "16.1"
@@ -1196,6 +1211,16 @@
       "k": "ID_UI_HERO_SYNERGY_BELIEVER_DESC",
       "v": "[64acff]Punisher 2099:[-] The first use of the Nano-Tech Battery is immediately recharged.\n[64acff]Thor:[-] +{0}% Fury Potency.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_BIRDSOFPREY",
+      "v": "BIRDS OF PREY",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_BIRDSOFPREY_LONG",
+      "v": "[64acff]Darkhawk, Vulture, Falcon, Hawkeye:[-] + 5% Critical Rating and Damaging Debuffs are {0}% stronger.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_BLOODLUST",
@@ -1364,6 +1389,16 @@
       "vn": "19.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_DARKJUST",
+      "v": "DARK JUSTICE",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DARKJUST_LONG",
+      "v": "[64acff]Darkhawk, Venom, Punisher, Ghost Rider:[-] + {0}% Power Rate against Villains. +10% Critical Rating against Heroes.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_DEADLYPRESENCE",
       "v": "DEADLY PRESENCE",
       "vn": 20
@@ -1410,6 +1445,26 @@
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ABILITYPOWERBWQ",
       "v": "Quake and Black Widow gain +{0}% Ability Accuracy, Duration and Potency"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGCHAMP",
+      "v": "[64acff]Ægon:[-] Ægon gets [16982bff]+{0}%[-] Attack Rating while fighting larger Champions.\n[64acff]The Champion:[-] The Champion gets [16982bff]+{0}%[-] Attack Rating while fighting smaller Champions\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGCOMBO",
+      "v": "[64acff]Ægon, Proxima Midnight, Star-Lord:[-] Activates Combo Shield for {0} seconds when this Champion would lose their Combo Meter. This ability activates only 1 time per fight.\\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGCOSMIC",
+      "v": "[64acff]Ægon, Angela, Proxima Midnight, Captain Marvel:[-] +{0}% Potency to Fury effects.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_DESC_AEGSENTRY",
+      "v": "[64acff]Ægon:[-] Well-Timed Blocks guarantee Ægon's next hit will be a Critical Hit.\n[64acff]Sentry:[-] +{0} Critical Rate and Critical Damage Rate for each Reality Warp.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": 21
     },
     {
       "k": "ID_UI_HERO_SYNERGY_DESC_ANCIENTHUNGER",
@@ -2052,6 +2107,16 @@
       "vn": "18.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_JUSTICEONWHEELS",
+      "v": "JUSTICE ON WHEELS",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_JUSTICEONWHEELS_LONG",
+      "v": "[64acff]Night Thrasher:[-] Night Thrasher becomes Unstoppable when Dashing towards the enemy.\n[64acff]Ghost Rider:[-] The durations of Bleed, Fate Seal, and Damnation are increased by 40%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_KNOWSHARE",
       "v": "KNOWLEDGE SHARE",
       "vn": 14
@@ -2172,6 +2237,16 @@
       "vn": 19
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_MIDNIGHTPURSUIT",
+      "v": "MIDNIGHT PURSUIT",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_MIDNIGHTPURSUIT_LONG",
+      "v": "[64acff]Night Thrasher:[-] Medium Attacks have a 30% chance to inflict Bleed, dealing {0}% of Base Attack as Direct Damage over 3 seconds. As the Moon waxes, the chance to Bleed on Medium Attacks is 100%.\n[64acff]Punisher, Moon Knight:[-] The duration of Bleeds are increased 40%.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_MONSTERS_DESC",
       "v": "All champions gain +{0} Block Penetration.",
       "vn": "12.1"
@@ -2268,6 +2343,16 @@
       "v": "NEMESIS Lv. 3"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_NIGHTHAWKS",
+      "v": "NIGHT HAWKS",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_NIGHTHAWKS_LONG",
+      "v": "[64acff]Darkhawk:[-] Start the fight in a random mode.\n[64acff]Night Thrasher:[-] Enemies have -{0}% Armor Rating for each unique debuff on them.\n[64acff]Moon Knight:[-] New and Waxing Moons grant 30% of Max Power over 6 seconds at the beginning of the fight. Full and Waning Moons grant 10% of Max Health over 3 seconds at the beginning of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_NOTAFRAIDOFDEATH",
       "v": "NOT AFRAID OF DEATH",
       "vn": 16
@@ -2309,7 +2394,7 @@
     },
     {
       "k": "ID_UI_HERO_SYNERGY_PACTWDEMON_LONG",
-      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "v": "[64acff]Mephisto:[-] +{0}% Incinerate Energy Damage.\n[64acff]Doctor Strange:[-] Life Steal Heals an additional {0}%.\n[64acff]Ghost Rider:[-] +10% Attack at the start of the fight.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
       "vn": "15.1"
     },
     {
@@ -2573,9 +2658,29 @@
       "vn": "20.1"
     },
     {
+      "k": "ID_UI_HERO_SYNERGY_TACTICALTRAINING",
+      "v": "TACTICAL TRAINING",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_TACTICALTRAINING_LONG",
+      "v": "[64acff]Captain America (Infinity War), Cyclops, Star-Lord:[-] Well Timed Blocks have a 50% chance to apply a Disorient Debuff for 3 seconds.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
+    },
+    {
       "k": "ID_UI_HERO_SYNERGY_TEAMBUILDING",
       "v": "TEAM BUILDING EXERCISE",
       "vn": 17
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_TEAMMATESINTHECONTEST",
+      "v": "CONTEST TEAMMATES",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_UI_HERO_SYNERGY_TEAMMATESINTHECONTEST_LONG",
+      "v": "[64acff]Night Thrasher:[-] Critical Hits have a 50% chance to inflict Bleed, dealing 70% of Attack as Direct Damage over 4.5 seconds.\n[64acff]Guillotine:[-] Each Soul grants an additional 100 Critical Rating.\n[f79f0e]Unique Synergy:[-] Does not stack with duplicate synergies.",
+      "vn": "21.1"
     },
     {
       "k": "ID_UI_HERO_SYNERGY_TEAMMATES_I",
@@ -3343,6 +3448,11 @@
       "v": "SUMMONER PROFILE"
     },
     {
+      "k": "ID_UI_PROFILE_TOPHERO",
+      "v": "TOP CHAMPION",
+      "vn": 21
+    },
+    {
       "k": "ID_UI_PROFILE_TOPHEROS",
       "v": "TOP CHAMPIONS"
     },
@@ -3441,6 +3551,11 @@
     {
       "k": "ID_UI_SYNERGY_UNAVAILABLE",
       "v": "Bonuses for Team Synergy await at higher rarities."
+    },
+    {
+      "k": "ID_UI_TAP_TO_CLAIM_REWARDS",
+      "v": "TAP TO CLAIM REWARDS",
+      "vn": "21.1"
     },
     {
       "k": "ID_UI_TEAM_HERO_RATING_TEAM_RATING",

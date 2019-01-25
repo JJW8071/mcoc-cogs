@@ -2,14 +2,354 @@ import discord
 import re
 import csv
 import random
+import logging
 import os
 import datetime
-from operator import itemgetter, attrgetter
+import json
+import asyncio
+import aiohttp
+import modgrammar as md
+# from functools import wraps, partial
+
+from collections import ChainMap, namedtuple, OrderedDict
 from .utils import chat_formatting as chat
 from .utils.dataIO import dataIO
+from .mcoc import GSHandler, gapi_service_creds
 from cogs.utils import checks
 from discord.ext import commands
-from . import hook as hook
+from __main__ import send_cmd_help
+
+#from . import hook as hook
+
+logger = logging.getLogger('red.mcoc.tools')
+logger.setLevel(logging.INFO)
+
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/cdt_icon.png'
+KABAM_ICON='https://imgur.com/UniRf5f.png'
+GSX2JSON='http://gsx2json.com/api?id={}&sheet={}&columns=false&integers=false'
+
+# class_color_codes = {
+#         'Cosmic': discord.Color(0x2799f7), 'Tech': discord.Color(0x0033ff),
+#         'Mutant': discord.Color(0xffd400), 'Skill': discord.Color(0xdb1200),
+#         'Science': discord.Color(0x0b8c13), 'Mystic': discord.Color(0x7f0da8),
+#         'All': discord.Color(0x03f193), 'Superior': discord.Color(0x03f193), 'default': discord.Color.light_grey(),
+#         }
+
+# def sync_to_async(func):
+#     @wraps(func)
+#     async def run(*args, loop=None, executor=None, **kwargs):
+#         if loop is None:
+#             loop = asyncio.get_event_loop()
+#         pfunc = partial(func, *args, **kwargs)
+#         return await loop.run_in_executor(executor, pfunc)
+#     return run
+
+class StaticGameData:
+    instance = None
+
+    remote_data_basepath = "https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/"
+    cdt_data, cdt_versions, cdt_masteries = None, None, None
+    cdt_trials = None
+    gsheets_data = None
+    test = 3
+    tiercolors = {
+            'easy': discord.Color.green(),
+            'beginner': discord.Color.green(),
+            'medium': discord.Color.gold(),
+            'normal': discord.Color.gold(),
+            'heroic': discord.Color.red(),
+            'hard': discord.Color.red(),
+            'expert': discord.Color.purple(),
+            'master': discord.Color.purple(),
+            'epic':discord.Color(0x2799f7),
+            'uncollected':discord.Color(0x2799f7),
+            'symbiote':discord.Color.darker_grey(),
+        }
+
+    def __new__(cls):
+        if cls.instance is None:
+            cls.instance = super().__new__(cls)
+        return cls.instance
+
+    def register_gsheets(self, bot):
+        self.gsheet_handler = GSHandler(bot, gapi_service_creds)
+        self.gsheet_handler.register_gsheet(
+                name='elemental_trials',
+                gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                local='data/mcoc/elemental_trials.json',
+                sheet_name='trials',
+                #settings=dict(column_handler='champs: to_list')
+        )
+        self.gsheet_handler.register_gsheet(
+                name='aw_season_rewards',
+                gkey='1DZUoQr4eELkjxRo6N6UTtd6Jn15OfpEjiAV8M_v7_LI',
+                local='data/mcoc/aw_season7.json',
+                sheet_name='season7',
+                #settings=dict(column_handler='champs: to_list')
+        )
+
+        # Update this list to add Events
+        events = ['15','15.1','16','16.1','17','17.1','17.2','18','18.1', '19.1', '20', '20.1', '21', '21.1', '21.2']
+
+        for event in events:
+            self.gsheet_handler.register_gsheet(
+                    name='eq_'+event,
+                    gkey='1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4',
+                    local='data/mcoc/eq_'+event+'.json',
+                    sheet_name='eq_'+event,
+                    #settings=dict(column_handler='champs: to_list')
+            )
+
+    async def load_cdt_data(self):
+        cdt_data, cdt_versions = ChainMap(), ChainMap()
+        files = (
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/bcg_stat_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/special_attacks_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/masteries_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/character_bios_en.json',
+            'https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/json/snapshots/en/dungeons_en.json'
+        )
+        async with aiohttp.ClientSession() as session:
+            for url in files:
+                raw_data = await self.fetch_json(url, session)
+                val, ver = {}, {}
+                for dlist in raw_data['strings']:
+                    val[dlist['k']] = dlist['v']
+                    if 'vn' in dlist:
+                        ver[dlist['k']] = dlist['vn']
+                cdt_data.maps.append(val)
+                cdt_versions.maps.append(ver)
+            self.cdt_data = cdt_data
+            self.cdt_versions = cdt_versions
+
+            self.cdt_masteries = await self.fetch_json(
+                    self.remote_data_basepath + 'json/masteries.json',
+                    session )
+
+    async def cache_gsheets(self):
+        print("Attempt gsheet pull")
+        self.gsheets_data = await self.gsheet_handler.cache_gsheets()
+
+    async def load_cdt_trials(self):
+        raw_data = await self.fetch_gsx2json('1TSmQOTXz0-jIVgyuFRoaPCUZA73t02INTYoXNgrI5y4')
+        package = {}
+        rows = raw_data['rows'][0]
+        for dlist in rows:
+            package[dlist['unique']] = {'name': dlist['name'], 'champs': dlist['champs'],'easy': dlist['easy'],'medium': dlist['medium'],'hard': dlist['hard'],'expert': dlist['expert']}
+        self.cdt_trials = package
+
+    async def get_gsheets_data(self, key=None, force=False):
+        if force or self.gsheets_data is None:
+            await self.cache_gsheets()
+        if key:
+            try:
+                return self.gsheets_data[key]
+            except KeyError:
+                raise KeyError("Unregistered Key '{}':\n{}".format(
+                        key, ', '.join(self.gsheets_data.keys())
+                ))
+        else:
+            return self.gsheets_data
+
+    @staticmethod
+    async def fetch_json(url, session):
+        async with session.get(url) as response:
+            raw_data = json.loads(await response.text())
+        logger.info("Fetching " + url)
+        return raw_data
+
+    @staticmethod
+    async def fetch_gsx2json(sheet_id, sheet_number = 1, query: str = ''):
+        url = GSX2JSON.format(sheet_id, sheet_number)
+        if query != '':
+            url=url+'&q'+query
+        async with aiohttp.ClientSession() as session:
+            json_data = await self.fetch_json(url, session)
+            return json_data
+
+##################################################
+#  Grammar definitions
+##################################################
+md.grammar_whitespace_mode = 'optional'
+
+class SearchNumber(md.Grammar):
+    grammar = md.WORD('.0-9')
+
+    def match(self, data, ver_data):
+        matches = set()
+        ver = self.string
+        for key, val in ver_data.items():
+            if ver == val:
+                matches.add(key)
+        return matches
+
+class SearchWord(md.Grammar):
+    grammar = md.WORD('-.,0-9A-Za-z_')
+
+class SearchPhrase(md.Grammar):
+    grammar = md.ONE_OR_MORE(SearchWord)
+
+    def match(self, data, ver_data):
+        matches = set()
+        up, low = self.string.upper(), self.string.lower()
+        for key, val in data.items():
+            if up == key:
+                matches.add(key)
+            elif low in val.lower():
+                matches.add(key)
+        return matches
+
+class ExplicitKeyword(md.Grammar):
+    grammar = (md.L('k:') | md.L('K:'), SearchWord)
+
+    def match(self, data, ver_data):
+        matches = set()
+        up = self[1].string.upper()
+        for key in data.keys():
+            if up in key:
+                matches.add(key)
+        return matches
+
+class ParenExpr(md.Grammar):
+    grammar = (md.L('('), md.REF("SearchExpr"), md.L(")"))
+
+    def match(self, data, ver_data):
+        return self[1].match(data, ver_data)
+
+class Operator(md.Grammar):
+    grammar = md.L('&') | md.L('|')
+
+    def op(self):
+        if self.string == '&':
+            return set.intersection
+        elif self.string == '|':
+            return set.union
+
+class P0Term(md.Grammar):
+    grammar = (ParenExpr | SearchNumber | SearchPhrase | ExplicitKeyword)
+
+    def match(self, data, ver_data):
+        return self[0].match(data, ver_data)
+
+class P0Expr(md.Grammar):
+    grammar = (P0Term, md.ONE_OR_MORE(Operator, P0Term))
+
+    def match(self, data, ver_data):
+        matches = self[0].match(data, ver_data)
+        for e in self[1]:
+            matches = e[0].op()(matches, e[1].match(data, ver_data))
+        return matches
+
+class SearchExpr(md.Grammar):
+    grammar = (P0Expr | ParenExpr | SearchNumber | SearchPhrase | ExplicitKeyword)
+
+    #@sync_to_async
+    def match(self, data, ver_data):
+        return self[0].match(data, ver_data)
+
+
+##################################################
+#  End Grammar definitions
+##################################################
+
+class PagesMenu:
+
+    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
+
+    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
+            delete_onX=True):
+        self.bot = bot
+        self.timeout = timeout
+        self.add_pageof = add_pageof
+        self.choice = choice
+        self.delete_onX = delete_onX
+        self.embedded = True
+
+    async def menu_start(self, pages, page_number=0):
+        page_list = []
+        if isinstance(pages, list):
+            page_list = pages
+        else:
+            for page in pages:
+                page_list.append(page)
+        page_length = len(page_list)
+        if page_length == 1:
+            if isinstance(page_list[0], discord.Embed) == True:
+                message = await self.bot.say(embed=page_list[0])
+            else:
+                message = await self.bot.say(page_list[0])
+            return
+        self.embedded = isinstance(page_list[0], discord.Embed)
+        self.all_emojis = OrderedDict([(i.emoji, i) for i in (
+            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+            self.EmojiReact("\N{CROSS MARK}", True, None),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+                      )])
+
+        print('menu_pages is embedded: '+str(self.embedded))
+
+        if self.add_pageof:
+            for i, page in enumerate(page_list):
+                if isinstance(page, discord.Embed):
+                    ftr = page.footer
+                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
+                            i+1, page_length), icon_url=ftr.icon_url)
+                else:
+                    page += '\n(Page {} of {})'.format(i+1, page_length)
+
+        self.page_list = page_list
+        await self.display_page(None, page_number)
+
+    async def display_page(self, message, page):
+        if not message:
+            if isinstance(self.page_list[page], discord.Embed) == True:
+                message = await self.bot.say(embed=self.page_list[page])
+            else:
+                message = await self.bot.say(self.page_list[page])
+            self.included_emojis = set()
+            for emoji in self.all_emojis.values():
+                if emoji.include:
+                    await self.bot.add_reaction(message, emoji.emoji)
+                    self.included_emojis.add(emoji.emoji)
+        else:
+            if self.embedded == True:
+                message = await self.bot.edit_message(message, embed=self.page_list[page])
+            else:
+                message = await self.bot.edit_message(message, self.page_list[page])
+        await asyncio.sleep(1)
+
+        react = await self.bot.wait_for_reaction(message=message,
+                timeout=self.timeout, emoji=self.included_emojis)
+        if react is None:
+            try:
+                await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                logger.warn("clear_reactions didn't work")
+                for emoji in self.included_emojis:
+                    await self.bot.remove_reaction(message, emoji, self.bot.user)
+            return None
+
+        emoji = react.reaction.emoji
+        pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
+        if pages_to_inc:
+            next_page = (page + pages_to_inc) % len(self.page_list)
+            try:
+                await self.bot.remove_reaction(message, emoji, react.user)
+                await self.display_page(message=message, page=next_page)
+            except discord.Forbidden:
+                await self.bot.delete_message(message)
+                await self.display_page(message=None, page=next_page)
+        elif emoji == '\N{CROSS MARK}':
+            try:
+                if self.delete_onX:
+                    await self.bot.delete_message(message)
+                else:
+                    await self.bot.clear_reactions(message)
+            except discord.Forbidden:
+                await self.bot.say("Bot does not have the proper Permissions")
 
 class MCOCTools:
     '''Tools for Marvel Contest of Champions'''
@@ -45,6 +385,9 @@ class MCOCTools:
 
     def __init__(self, bot):
         self.bot = bot
+        self.search_parser = SearchExpr.parser()
+        # self.settings = dataIO.load_json('data/mcocTools/settings.json')
+
 
     def present(self, lookup):
         em=discord.Embed(color=self.mcolor,title='',description=lookup[1])
@@ -94,7 +437,7 @@ class MCOCTools:
         devteam = ( "DeltaSigma#8530\n"
                     "JJW#8071\n"
                     )
-        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\ntaoness#5565\n')
+        supportteam=('phil_wo#3733\nSpiderSebas#9910\nsuprmatt#2753\ntaoness#5565')
         embed = discord.Embed(colour=discord.Colour.red(), title="Collector", url=collectorpatreon)
         embed.add_field(name="Instance owned by", value=str(owner))
         embed.add_field(name="Python", value=py_version)
@@ -164,6 +507,92 @@ class MCOCTools:
         lookup = self.lookup_links[x]
         await self.bot.say(embed=self.present(lookup))
         # await self.bot.say('iOS dumblink:\n{}'.format(lookup[0]))
+
+    @commands.command(hidden=True, pass_context=True, name='parse_search', aliases=('ps',))
+    async def kabam_search2(self, ctx, *, phrase: str):
+        '''Enter a search term or a JSON key'''
+        kdata = StaticGameData()
+        cdt_data, cdt_versions = kdata.cdt_data, kdata.cdt_versions
+        result = self.search_parser.parse_string(phrase)
+        print(result.elements)
+        matches = result.match(cdt_data, cdt_versions)
+        #print(matches)
+        if len(matches) == 0:
+            await self.bot.say('**Search resulted in 0 matches**')
+            return
+        package = []
+        for k in sorted(matches):
+            if k in cdt_versions:
+                ver = '\nvn: {}'.format(cdt_versions[k])
+            else:
+                ver = ''
+            package.append('\n**{}**\n{}{}'.format(
+                    k, self._bcg_recompile(cdt_data[k]), ver))
+        pages = chat.pagify('\n'.join(package))
+        page_list = []
+        for page in pages:
+            em = discord.Embed(title='Data Search',  description = page)
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+            page_list.append(em)
+        menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+        await menu.menu_start(page_list)
+
+
+    @commands.command(hidden=True, pass_context=True, name='datamine', aliases=('dm', 'search'))
+    async def kabam_search(self, ctx, *, term: str):
+        '''Enter a search term or a JSON key'''
+        kdata = StaticGameData()
+        cdt_data, cdt_versions = kdata.cdt_data, kdata.cdt_versions
+        ksearchlist = []
+        is_number = term.replace('.', '').isdigit()
+        if is_number:
+            for k,v in cdt_versions.items():
+                if term == v:
+                    ksearchlist.append('\n**{}**\n{}\nvn: {}'.format(k,
+                            self._bcg_recompile(cdt_data[k]), v))
+        elif term.upper() in cdt_data:
+            term = term.upper()
+            if term in cdt_versions:
+                ver = '\nvn: {}'.format(cdt_versions[term])
+            else:
+                ver = ''
+            em = discord.Embed(title='Data Search',
+                    description='\n**{}**\n{}{}'.format(term,
+                            self._bcg_recompile(cdt_data[term]),
+                            ver)
+                )
+            # em.set_thumbnail(url=COLLECTOR_ICON)
+            em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+            ## term is a specific JSON key
+            # await self.bot.say('\n**{}**\n{}'.format(term, self._bcg_recompile(cdt_data[term])))
+            await self.bot.say(embed=em)
+            return
+        else:
+            ## search for term in json
+            for k,v in cdt_data.items():
+                if term.lower() in v.lower():
+                    if k in cdt_versions:
+                        ver = '\nvn: {}'.format(cdt_versions[k])
+                    else:
+                        ver = ''
+                    ksearchlist.append('\n**{}**\n{}{}'.format(k,
+                            self._bcg_recompile(v), ver)
+                    )
+        if len(ksearchlist) > 0:
+            pages = chat.pagify('\n'.join(s for s in ksearchlist))
+            page_list = []
+            for page in pages:
+                em = discord.Embed(title='Data Search',  description = page)
+                # em.set_thumbnail(url=COLLECTOR_ICON)
+                em.set_footer(text='MCOC Game Files', icon_url=KABAM_ICON)
+                page_list.append(em)
+                # page_list.append(page)
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list)
+
+    def _bcg_recompile(self, str_data):
+        hex_re = re.compile(r'\[[0-9a-f]{6,8}\](.+?)\[-\]', re.I)
+        return hex_re.sub(r'\1', str_data)
 
     # @commands.command()
     # async def keygen(self, prefix='SDCC17'):
@@ -361,148 +790,312 @@ class MCOCTools:
             pages = chat.pagify('\n'.join(missing))
             for page in pages:
                 await self.bot.say(chat.box(page))
-    # @checks.admin_or_permissions(manage_server=True, manage_roles=True)
-    # @commands.command(name='setup', pass_context=True)
-    # async def collectorsetup(self,ctx,*args):
-    #     '''Server Setup Guide
-    #     Collector Role Requires admin
-    #     '''
-        # 1) Check Roles present
-        # 2) Check Role Permissions
-        # 3) Check Role Order
-        # Manage Messages required for Cleanup
-        # Manage Server required for Role Creation / Deletion
-        # Manage Roles required for Role assignment / removal
-        # 2 ) Check roles
-        # 3 ) Check role order
-        # check1 = await self.setup_phase_one(ctx)
-        # if check1:
-        #     await self.bot.say(embed=discord.Embed(color=discord.color.red(),
-        #                         title='Collector Setup Protocol',
-        #                         description='☑ setup_phase_one '))
+
+    async def cache_sgd_gsheets(self):
+        sgd = StaticGameData()
+        await sgd.cache_gsheets()
+
+    @commands.command(hidden=True)
+    async def aux_sheets(self):
+        await self.cache_sgd_gsheets()
+
+    @commands.command(name='trials', pass_context=True, aliases=('trial',), hidden=False)
+    async def _trials(self,ctx, trial, tier='epic'):
+        '''Elemnts of the Trials
+        trials   | tier
+        Wind     | easy
+        Fire     | medium
+        Earth    | hard
+        Darkness | expert
+        Water    | epic
+        Light
+        Alchemist'''
+        trial = trial.lower()
+        tier = tier.lower()
+        tiers =('easy', 'medium', 'hard', 'expert', 'epic')
+        sgd = StaticGameData()
+        # sgd = self.sgd
+        cdt_trials = await sgd.get_gsheets_data('elemental_trials')
+        trials = set(cdt_trials.keys()) - {'_headers'}
+        tiercolors = sgd.tiercolors
+
+        if trial not in trials:
+            em = discord.Embed(color=discord.Color.red(), title='Trials Error',
+                    description="Invalid trial '{}'".format(trial))
+            em.add_field(name='Valid Trials:', value='\n'.join(trials))
+            await self.bot.say(embed=em)
+        elif tier not in tiers:
+            em = discord.Embed(color=discord.Color.red(), title='Trials Error',
+                    description="Invalid tier '{}'".format(tier))
+            em.add_field(name='Valid Tiers:', value='\n'.join(tiers))
+            await self.bot.say(embed=em)
+        else:
+            em = discord.Embed(
+                    color=tiercolors[tier],
+                    title=tier.title()+" "+cdt_trials[trial]['name'],
+                    description='',
+                    url='https://forums.playcontestofchampions.com/en/discussion/114604/take-on-the-trials-of-the-elementals/p1'
+                )
+            em.add_field(name='Champions', value=cdt_trials[trial]['champs'])
+            em.add_field(name='Boosts', value=cdt_trials[trial][tier])
+            if trial == 'alchemist':
+                em.add_field(name=cdt_trials['alchemistrewards']['name'],
+                        value=cdt_trials['alchemistrewards'][tier])
+            else:
+                em.add_field(name=cdt_trials['rewards']['name'],
+                        value=cdt_trials['rewards'][tier])
+            em.set_footer(text='CollectorDevTeam',
+                    icon_url=self.COLLECTOR_ICON)
+            await self.bot.say(embed=em)
+
+    @commands.group(name='eq', pass_context=True, aliases=('eventquest',), hidden=False)
+    async def eventquest(self, ctx):
+        if ctx.invoked_subcommand is None:
+            await send_cmd_help(ctx)
+
+    # @eventquest.command(name='', pass_context=True, aliases=(,))
+    # async def eq_(self, ctx, tier='Master'):
+    #     '''TITLE'''
+    #     event = 'eq_'
+    #     await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='15', pass_context=True, aliases=('haveyouseenthisdog','kingping','medusa','kp',))
+    async def eq_(self, ctx, tier='Master'):
+        '''Have You Seen This Dog?'''
+        event = 'eq_15'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='15.1', pass_context=True, aliases=('blades','blade','mephisto','morningstar',))
+    async def eq_blades(self, ctx, tier='Master'):
+        '''Blades'''
+        event = 'eq_15.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='16', pass_context=True, aliases=('thorragnarok','hela','tr','godsofthearena','godsofarena',))
+    async def eq_godsofthearena(self, ctx, tier='Master'):
+        '''Gods of the Arena'''
+        event = 'eq_16'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='16.1', pass_context=True, aliases=('hotelmodok','modok','taskmaster','tm',))
+    async def eq_hotelmodok(self, ctx, tier='Uncollected'):
+        '''HOTEL M.O.D.O.K.'''
+        event = 'eq_16.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='17', pass_context=True, aliases=('riseoftheblackpanther','hulkragnarok','killmonger','hr','km',))
+    async def eq_riseoftheblackpanther(self, ctx, tier='Uncollected'):
+        '''Rise of the Black Panther'''
+        event = 'eq_17'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='17.1', pass_context=True, aliases=('bishop', 'sabretooth', 'sentinel','savage','savagefuture',))
+    async def eq_savagefuture(self, ctx, tier='Uncollected'):
+        '''X-Men: Savage Future'''
+        event = 'eq_17.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='17.2', pass_context=True, aliases=('chaos','infinitychaos','corvus','proximamidnight','pm','corvusglaive','cg','proxima',))
+    async def eq_infinitychaos(self, ctx, tier='Uncollected'):
+        '''Infinity Chaos'''
+        event = 'eq_17.2'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='18', pass_context=True, aliases=('infinity','capiw','imiw','infinitywar','iw',))
+    async def eq_infinitynightmare(self, ctx, tier='Uncollected'):
+        '''Infinity Nightmare'''
+        event = 'eq_18'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='18.1', pass_context=True, aliases=('mercs','masacre','domino','goldpool','mercsformoney',))
+    async def eq_mercsforthemoney(self, ctx, tier='Uncollected'):
+        '''Masacre and the Mercs for Money'''
+        event = 'eq_18.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='19.1', pass_context=True, aliases=('cabal','enterthecabal','korg','redskull','heimdall',))
+    async def eq_enterthecabal(self, ctx, tier='Uncollected'):
+        '''Enter The Cabal'''
+        event = 'eq_19.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='20', pass_context=True, aliases=('omega','classomega','omegared','emma','emmafrost',))
+    async def eq_classomega(self, ctx, tier='Uncollected'):
+        '''X-Men: Class Omega'''
+        event = 'eq_20'
+        await self.format_eventquest(event, tier)
+
+    @eventquest.command(name='20.1', pass_context=True, aliases=('symbiotes', 'symbiomancer','venomtheduck','symbiotesupreme'))
+    async def eq_symbiomancer(self, ctx, tier='epic'):
+        '''Blood & Venom: Symbiomanncer'''
+        event = 'eq_20.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='21', pass_context=True, aliases=('brawlinthebattlerealm', 'aegon','thechampion','brawl',))
+    async def eq_brawl(self, ctx, tier='uncollected'):
+        '''Brawl in the Battlerealm'''
+        event = 'eq_21'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='21.1', pass_context=True, aliases=('nightriders', 'nightthrasher', 'darkhawk',))
+    async def eq_nightriders(self, ctx, tier='uncollected'):
+        '''Night Riders'''
+        event = 'eq_21.1'
+        await self.format_eventquest(event, tier.lower())
+
+    @eventquest.command(name='21.2', pass_context=True, aliases=('monster', 'thismanthismonster', 'thing', 'diablo',))
+    async def eq_monster(self, ctx, tier='uncollected'):
+        '''This Man... This Monster'''
+        event = 'eq_21.2'
+        await self.format_eventquest(event, tier.lower())
+
+    # @eventquest.command(name='', pass_context=True, aliases=(,))
+    # async def eq_(self, ctx, tier='Uncollected'):
+    #     '''TITLE'''
+    #     event = 'eq_'
+    #     await self.format_eventquest(event, tier.lower())
+
+    async def format_eventquest(self, event, tier): #, tiers=('beginner','normal','heroic','master')):
+        sgd = StaticGameData()
+        # sgd = self.sgd
+        cdt_eq = await sgd.get_gsheets_data(event)
+        rows = set(cdt_eq.keys()) - {'_headers'}
+        # print(', '.join(rows))
+        tiers=cdt_eq['tiers']['value'].split(", ")
+        print(tiers)
+
+        if tier not in tiers:
+            await self.bot.say('Invalid tier selection')
+            return
+        else:
+            page_list = []
+            page_number = list(tiers).index(tier)
+            for row in tiers:
+                em = discord.Embed(color=sgd.tiercolors[row], title=cdt_eq['event_title']['value'],
+                    url=cdt_eq['event_url']['value'], description='')
+                em.add_field(name=cdt_eq['story_title']['value'], value=cdt_eq['story_value']['value'])
+                em.add_field(name='{} Rewards'.format(row.title()), value=cdt_eq[row]['rewardsregex'])
+                em.add_field(name='Introducing', value=cdt_eq['champions']['value'])
+                em.set_image(url=cdt_eq['story_image']['value'])
+                em.set_footer(text='CollectorDevTeam',
+                        icon_url=self.COLLECTOR_ICON)
+                page_list.append(em)
+
+            menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
+            await menu.menu_start(page_list, page_number)
 
 
+class CDTReport:
+    """Report Users"""
 
-    # async def setup_phase_one(self, ctx):
-    #     '''Check Server ROLES'''
-    #     # repeat_phase = await self.setup_phase_one(ctx)
-    #     # next_phase = await self.setup_phase_two(ctx)
-    #
-    #     server = ctx.message.server
-    #     roles = server.roles
-    #     rolenames = []
-    #     phase = True
-    #     for r in roles:
-    #         rolenames.append(r.name)
-    #     required_roles={'Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner','TestRole1','TestRole2'}
-    #     roles_fields={'officers': {True, discord.Color.lighter_grey(),},
-    #                 'bg1':{True, discord.Color.blue(), },
-    #                 'bg2':{True, discord.Color.purple(), },
-    #                 'bg3':{True, discord.Color.orange(), },
-    #                 'TestRole1':{True, discord.Color.default(), },
-    #                 'TestRole2':{True, discord.Color.light_grey()},
-    #                 }
-    #     stageone=['Setup Conditions 1:\nRoles Required for Guild Setup:',]
-    #     for i in required_roles:
-    #         if i in rolenames:
-    #             stageone.append('☑️ {}'.format(i))
-    #         else:
-    #             stageone.append('❌ {}'.format(i))
-    #             phase = False
-    #     desc = '\n'.join(stageone)
-    #     if phase == False:
-    #         em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [1]',description=desc)
-    #         em.add_field(name='Corrective Action', value='Roles are missing. Create missing roles and Rerun test.\n🔁 == Rerun test\n❌ == Cancel setup')
-    #         message = await self.bot.send_message(ctx.message.channel, embed=em)
-    #         await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
-    #         await self.bot.add_reaction(message,'\N{CROSS MARK}')
-    #         await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
-    #         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
-    #         if react is None or react.reaction.emoji == '\N{CROSS MARK}':
-    #             try:
-    #                 await self.bot.delete_message(message)
-    #             except:
-    #                 pass
-    #             return None
-    #         elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
-    #             await self.bot.delete_message(message)
-    #             return await self.setup_phase_one(ctx)
-    #         elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
-    #             await self.bot.delete_message(message)
-    #             return await self.setup_phase_two(ctx)
-    #     elif phase == True:
-    #         await setup_phase_two
-    #
-    # async def setup_phase_two(self, ctx):
-    #     '''Check Role ORDER'''
-    #     server = ctx.message.server
-    #     roles = sorted(server.roles, key=lambda roles:roles.position, reverse=True)
-    #     required_roles = ('Collector','officers','bg1','bg2','bg3','LEGEND','100%LOL','LOL','RTL','ROL','100%Act4','Summoner', 'everyone')
-    #     said = []
-    #     em = discord.Embed(color=discord.Color.red(), title='Role Order Prerequisite',description='Role: Collector')
-    #     positions = []
-    #     for r in roles:
-    #         positions.append('{} = {}'.format(r.position, r.name))
-    #     em.add_field(name='Role Position on Server',value=chat.box('\n'.join(positions)),inline=False)
-    #     said.append(await self.bot.say(embed=em))
-    #     order = []
-    #     c=len(required_roles)-1
-    #     for r in required_roles:
-    #         order.append('{} = {}'.format(c, r))
-    #         c-=1
-    #     em = discord.Embed(color=discord.Color.red(), title='',description='')
-    #     em.add_field(name='Correct Role Positions', value =chat.box('\n'.join(order)),inline=False)
-    #     perm_order = []
-    #     phase = True
-    #     for i in range(0,len(required_roles)-2):
-    #         j = i+1
-    #         if required_roles[j] > required_roles[i]:
-    #             phase = False
-    #             # perm_order.append('{} should be above {}'.format(required_roles[i],required_roles[j]))
-    #     if phase == False:
-    #         # em=discord.Embed(color=discord.Color.red(),title='Server Setup Protocol [2]',description=desc)
-    #         em.add_field(name='Corrective Action', value='Roles are out of order. Adjust role order and Rerun test.')
-    #         # em.add_field(name='',value='\n'.join(perm_order))
-    #         message = await self.bot.send_message(ctx.message.channel, embed=em)
-    #         said.append(message)
-    #         await self.bot.add_reaction(message,'\N{BLACK LEFT-POINTING TRIANGLE}')
-    #         await self.bot.add_reaction(message,'\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}')
-    #         await self.bot.add_reaction(message,'\N{CROSS MARK}')
-    #         await self.bot.add_reaction(message, '\N{BLACK RIGHT-POINTING TRIANGLE}')
-    #         react = await self.bot.wait_for_reaction(message=message, user=ctx.message.author, timeout=120, emoji=['\N{CROSS MARK}','\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}','\N{BLACK RIGHT-POINTING TRIANGLE}'])
-    #         if react is None or react.reaction.emoji == '\N{CROSS MARK}':
-    #             try:
-    #                 for message in said:
-    #                     await self.bot.delete_message(message)
-    #             except:
-    #                 pass
-    #             return None
-    #         elif react.reaction.emoji == '\N{ANTICLOCKWISE DOWNWARDS AND UPWARDS OPEN CIRCLE ARROWS}':
-    #             for message in said:
-    #                 await self.bot.delete_message(message)
-    #             return await self.setup_phase_two(ctx)
-    #         elif react.reaction.emoji == '\N{BLACK RIGHT-POINTING TRIANGLE}':
-    #             for message in said:
-    #                 await self.bot.delete_message(message)
-    #             return await self.setup_phase_three(ctx)
-    #         elif react.reaction.emoji == '\N{BLACK LEFT-POINTING TRIANGLE}':
-    #             for message in said:
-    #                 await self.bot.delete_message(message)
-    #             return await self.setup_phase_one(ctx)
-    #     elif phase == True:
-    #         await setup_phase_three
-    #
-    # async def setup_phase_three(self, ctx):
-    #     '''Check Role Permissions'''
-    #     message = await self.bot.say('initiate phase three')
+    def __init__(self, bot):
+        self.bot = bot
+        self.settings = dataIO.load_json('data/mcocTools/settings.json')
 
-    @commands.command(pass_context=True, hidden=True)
-    async def awopp_calc(self, ctx, wr:int, gain:int, loss:int):
-        '''MutaMatt's War Opponent Calculator
-        https://en.wikipedia.org/wiki/Elo_rating_system
-        '''
-        playera = 1/(1+exp(10,(gain-loss)/400))
-        await self.bot.say('{}'.format(playera))
+    async def init(self, server):
+        self.settings[server.id] = {
+            'report-channel': '0'
+            }
+
+    async def error(self, ctx):  #In case files dont exist.
+        for folder in folders:
+            if not os.path.exists(folder):
+                message_file += "`{}` folder\n".format(folder)
+                print("Creating " + folder + " folder...")
+                os.makedirs(folder)
+                error_file = 1
+        for filename in files:
+            if not os.path.isfile('data/mcocTools/{}'.format(filename)):
+                print("Creating empty {}".format(filename))
+                dataIO.save_json('data/mcocTools/{}'.format(filename), {})
+                message_file += "`{}` is missing\n".format(filename)
+                error_file = 1
+        if error_file == 1:
+            message_file += "The files were successfully re-created. Try again your command (you may need to set your local settings again)"
+            await self.bot.say(message_file)
+        if ctx.message.server.id not in self.settings:
+            await self.init(ctx.message.server)
+
+
+    @commands.group(pass_context=True)
+    @checks.admin()
+    async def reportchannel(self, ctx, *, channel: discord.Channel=None):
+        """Sets a channel as log"""
+
+        if not channel:
+            channel = ctx.message.channel
+        else:
+            pass
+        server = ctx.message.server
+        if server.id not in self.settings:
+            await self.init(server)
+        self.settings[server.id]['report-channel'] = channel.id
+        await self.bot.say("Reports will be sent to **" + channel.name + "**.")
+        dataIO.save_json('data/mcocTools/settings.json', self.settings)
+
+    @commands.group(pass_context=True, hidden=True)
+    @checks.admin()
+    async def masterchannel(self, ctx, *, channel: discord.Channel=None):
+        """Sets a global channel as log"""
+        if ctx.message.author.id in ('148622879817334784', '124984294035816448', '209339409655398400'):
+            if not channel:
+                channel = ctx.message.channel
+            else:
+                pass
+            server = ctx.message.server
+            self.settings['cdt-master-channel'] = channel.id
+            await self.bot.say("Reports will be sent to **" + channel.name + "**.")
+            dataIO.save_json('data/mcocTools/settings.json', self.settings)
+        else:
+            await self.bot.say("CollectorDevTeam only sucka!")
+
+
+    @commands.command(pass_context=True, no_pm=True, name='report')
+    async def cdtreport(self, ctx, person, *, reason): #changed terminology. Discord has people not players.
+        """Report a user. Please provide evidence.
+        Upload a screenshot, and copy a link to the screenshotself.
+        Include the link in your report.""" #Where is the evidence field? Might want to add one
+        author = ctx.message.author.name #String for the Author's name
+        server = ctx.message.server
+        try:
+            reportchannel = self.bot.get_channel(self.settings[server.id]['report-channel'])
+            masterchannel = self.bot.get_channel(self.settings['cdt-master-channel'])
+        except:
+            KeyError
+            await self.bot.send_message(ctx.message.author, "Uh Oh! Your report was not sent D: Please let an admin know that they need to set the default report channel")
+            return
+        embed=discord.Embed(title="Report:", description="A Report has been filed against somebody!")
+        embed.set_author(name="CollectorVerse Report System")
+        embed.add_field(name="User:", value=person, inline=False)
+        embed.add_field(name="Reason:", value=reason, inline=False)
+        embed.add_field(name="Reported By:", value=author, inline=True)
+        embed.set_footer(text='CollectorDevTeam',
+                icon_url=COLLECTOR_ICON)
+        await self.bot.send_message(ctx.message.author, "Your report against {} has been created.".format(person)) #Privately whispers to a user that said report was created and sent
+        await self.bot.send_message(reportchannel, embed=embed) #Sends report to the channel we specified earlier
+        await self.bot.send_message(masterchannel, embed=embed) #Sends report to the channel we specified earlier
+
+
+def check_folders():
+    folders = ('data', 'data/mcocTools/')
+    for folder in folders:
+        if not os.path.exists(folder):
+            print("Creating " + folder + " folder...")
+            os.makedirs(folder)
+
+def check_files():
+    ignore_list = {'SERVERS': [], 'CHANNELS': []}
+
+    files = {
+        'settings.json'         : {}
+    }
+
+    for filename, value in files.items():
+        if not os.path.isfile('data/mcocTools/{}'.format(filename)):
+            print("Creating empty {}".format(filename))
+            dataIO.save_json('data/mcocTools/{}'.format(filename), value)
+
+
 
 def load_csv(filename):
     return csv.DictReader(open(filename))
@@ -544,7 +1137,11 @@ def tabulate(table_data, width, rotate=True, header_sep=True):
         rows.insert(1, '|'.join(['-' * width] * cells_in_row))
     return chat.box('\n'.join(rows))
 
-
-
 def setup(bot):
+    check_folders()
+    check_files()
+    sgd = StaticGameData()
+    sgd.register_gsheets(bot)
+    bot.loop.create_task(sgd.load_cdt_data())
     bot.add_cog(MCOCTools(bot))
+    bot.add_cog(CDTReport(bot))

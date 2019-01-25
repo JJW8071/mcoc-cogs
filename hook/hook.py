@@ -32,7 +32,7 @@ def _default(self, obj):
 PRESTIGE_SURVEY='https://docs.google.com/forms/d/e/1FAIpQLSeo3YhZ70PQ4t_I4i14jX292CfBM8DMb5Kn2API7O8NAsVpRw/viewform?usp=sf_link'
 GITHUB_ICON='http://www.smallbutdigital.com/static/media/twitter.png'
 HOOK_URL='http://hook.github.io/champions/#/roster'
-COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/portraits/portrait_collector.png'
+COLLECTOR_ICON='https://raw.githubusercontent.com/CollectorDevTeam/assets/master/data/images/portraits/collector.png'
 GSHEET_ICON='https://d2jixqqjqj5d23.cloudfront.net/assets/developer/imgs/icons/google-spreadsheet-icon.png'
 
 _default.default = JSONEncoder().default  # Save unmodified default.
@@ -66,18 +66,15 @@ class HashtagRosterConverter(commands.Converter):
         chmp_rstr = ChampionRoster(self.ctx.bot, user)
         await chmp_rstr.load_champions()
         if not chmp_rstr:
-            # try:
-            #     embeds = await Hook.roster_kickback(self.ctx, user.color)
-            #     await Hook.pages_menu(self.ctx.bot, self.ctx, embeds)
-            # except:
-            await self.ctx.bot.say('No roster detected.  \nUse ``/profile`` for import instructions.')
+            menu = PagesMenu(self.ctx.bot, timeout=120, delete_onX=True, add_pageof=True)
+            hook = Hook(self.ctx.bot)
+            try:
+                color=user.color
+            except:
+                color = discord.Color.gold()
+            embeds = await hook.roster_kickback(color)
+            await menu.menu_start(page_list=embeds)
 
-            # em = discord.Embed(color=discord.Color.green(),title='[????] {}'.format(user.name))
-            # em.add_field(name='Missing Roster',
-            #         value='Load up a "champ*.csv" file from Hook to import your roster')
-            # em.add_field(name='Hook Web App', value=HOOK_URL)
-            # em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            # await self.ctx.bot.say(embed=em)
             raise MissingRosterError('No Roster found for {}'.format(user.name))
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
 
@@ -356,7 +353,9 @@ class ChampionRoster:
             try:
                 champ = await self.get_champion(champ_csv)
             except KeyError:
-                missing.append(champ_csv['Id'])
+                if champ_csv['Id'].strip():
+                    # non-empty champion ID
+                    missing.append(champ_csv['Id'])
                 continue
             if champ.immutable_id in self.roster:
                 dupes.append(champ)
@@ -487,57 +486,16 @@ class Hook:
         #self.champ_re = re.compile(r'champions(?:_\d+)?.csv')
         #self.champ_str = '{0[Stars]}★ R{0[Rank]} S{0[Awakened]:<2} {0[Id]}'
 
-
-    @commands.command(pass_context=True)
-    #async def profile(self, roster: RosterUserConverter):
-    async def profile(self, ctx, user=''):
-        """Displays a user profile."""
-        roster = await RosterUserConverter(ctx, user).convert()
-        user = roster.user
-        embeds = []
-        if roster:
-            em = discord.Embed(color=discord.Color.gold(),title='Prestige: {}'.format(roster.prestige))
-            em.set_author(name=roster.user.name, icon_url=roster.user.avatar_url)
-            em.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            em.add_field(name='Top Champs', value='\n'.join(roster.top5), inline=False)
-            embeds.append(em)
-            em2 = discord.Embed(color=discord.Color.red(),title='Max Prestige: {}'.format(roster.max_prestige))
-            em2.set_author(name=roster.user.name,icon_url=roster.user.avatar_url)
-            em2.set_footer(text='hook/champions for Collector',icon_url=GITHUB_ICON)
-            em2.add_field(name='Max Champs', value='\n'.join(roster.max5), inline=False)
-            embeds.append(em2)
-            em3 = discord.Embed(color=discord.Color.red(),title='User Stats'.format(roster.max_prestige))
-            em3.add_field(name='Total Number of Heroes', value='{}'.format(len(roster)))
-            total = 0
-            #
-            # em3.add_field(name='Cosmic ',value='TBD')
-            # em3.add_field(name='Mystic ',value='TBD')
-            # em3.add_field(name='Science ',value='TBD')
-            # em3.add_field(name='Skill ',value='TBD')
-            # em3.add_field(name='Mutant ',value='TBD')
-            # em3.add_field(name='Tech ',value='TBD')
-            # rating=0
-            # for r in range(len(roster)):
-            #     champ = roster[r]
-            #     if champ["Stars"] == "4" or champ["Stars"] == "5":
-            #         rating += roster[r]['Pi']
-            # # em3.add_field(name='Total Hero Rating',value='{}'.format(rating))
-            # em3.add_field(name='Total 4★ & 5★ Hero Rating',value='{}'.format(rating))
-            # embeds.append(em3)
-        else:
-            embeds = await self.roster_kickback(user.color)
-        await self.pages_menu(ctx, embed_list=embeds)
-
     async def roster_kickback(self, ucolor = discord.Color.gold()):
         embeds=[]
         em0=discord.Embed(color=ucolor,title='No Roster detected!', description='There are several methods available to you to create your roster.  \nPlease note the paging buttons below to select your instruction set.')
-        em0.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
+        em0.set_footer(text='CollectorVerse Roster',icon_url=COLLECTOR_ICON)
         embeds.append(em0)
-        em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ```/roster add <champs>``` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n```/roster del <champs>``` allows you to remove a Champion.')
-        em01.set_footer(text='Collector Profile',icon_url=COLLECTOR_ICON)
+        em01=discord.Embed(color=ucolor, title='Manual Entry', description='Use the ```/roster add <champs>``` command to submit Champions directly to Collector.\nThis is the most common method to add to your roster, and the method you will use to maintain your roster.\n```/roster del <champs>``` allows you to remove a Champion.\n\nYouTube demo: https://youtu.be/O9Wqn1l2DEg', url='https://youtu.be/O9Wqn1l2DEg')
+        em01.set_footer(text='CollectorVerse Roster',icon_url=COLLECTOR_ICON)
         embeds.append(em01)
         em=discord.Embed(color=ucolor, title='Champion CSV template', url='https://goo.gl/LaFrg7')
-        em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
+        em.add_field(name='Google Sheet Instructions',value='Save a copy of the template (blue text):\n1. Add 5★ champions you do have.\n2. Delete 4★ champion rows you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Select OK to confirm')
         em.add_field(name='Prerequisite', value='Google Sheets\n(there is an app for iOS|Android)',inline=False)
         em.set_footer(text='CSV import',icon_url=GSHEET_ICON)
         embeds.append(em)
@@ -592,21 +550,26 @@ class Hook:
     async def roster(self, ctx, *, hargs=''):
     #async def roster(self, ctx, *, hargs: HashtagRosterConverter):
         """Displays a user roster with tag filtering
-        ex.
+
+        example:
         /roster [user] [#mutant #bleed]"""
         hargs = await HashtagRosterConverter(ctx, hargs).convert()
         await hargs.roster.display(hargs.tags)
 
-    @roster.command(pass_context=True, name='update', aliases=('add',))
+    @roster.command(pass_context=True, name='add', aliases=('update',))
     async def _roster_update(self, ctx, *, champs: ChampConverterMult):
-        '''Update your roster using the standard command line syntax.
+        '''Add or Update champion(s).
 
+        Add or Update your roster using the standard command line syntax.
         Defaults for champions you specify are the current values in your roster.
         If it is a new champ, defaults are 4*, rank 1, sig 0.
 
         This means that
         /roster update some_champs20
         would just set some_champ's sig to 20 but keep it's rank the same.
+
+        example:
+        /roster add angelar4s20 karnakr5s80 medusar4s20
         '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
@@ -627,7 +590,11 @@ class Hook:
 
     @roster.command(pass_context=True, name='dupe')
     async def _roster_dupe(self, ctx, *, champs: ChampConverterMult):
-        '''Update your roster by incrementing your champs by the duped sig level, i.e. 20 for a 4*.
+        '''Increase sig level by dupe.
+
+        Update your roster by incrementing your champs by the duped sig level, i.e. 20 for a 4*.
+        example:
+        /roster dupe karnak
         '''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
@@ -642,7 +609,11 @@ class Hook:
 
     @roster.command(pass_context=True, name='delete', aliases=('del','remove',))
     async def _roster_del(self, ctx, *, champs: ChampConverterMult):
-        '''Delete champion(s) from your roster'''
+        '''Delete champion(s)
+
+        Delete champion(s) from your roster.
+        example:
+        /roter delete angela blackbolt medusa'''
         roster = ChampionRoster(ctx.bot, ctx.message.author)
         await roster.load_champions()
         track = roster.delete(champs)
@@ -654,9 +625,9 @@ class Hook:
                         value='\n'.join(sorted(track[k])), inline=False)
         await self.bot.say(embed=em)
 
-    @roster.command(pass_context=True, name='import')
+    @roster.command(pass_context=True, name='import', hidden=True)
     async def _roster_import(self, ctx):
-        '''Silent import file attachement command'''
+        '''Silent import file attachement'''
         if not ctx.message.attachments:
             await self.bot.say('This command can only be used when uploading files')
             return
@@ -692,7 +663,19 @@ class Hook:
 
     @roster.command(pass_context=True, name='template')
     async def _roster_template(self, ctx, *, user : discord.User = None):
-        '''Blank CSV template for champion import'''
+        '''Google Sheet Template
+
+        Blank CSV template for champion importself.
+
+        1. Add 5★ champions you do have.
+        2. Delete 4★ champions (rows) you do not have.
+        3. Set Rank = champion rank (1 to 5).
+        4. Set Awakened = signature ability level.
+        [4★: 0 to 99 | 5★: 0 to 200]
+        5. Export file as 'champions.csv'.
+        6. Upload CSV to Collector.
+        7. Press OK'''
+
         if user is None:
             user=ctx.message.author
         message = 'Save a copy of the template (blue text):\n\n1. Add 5★ champions you do have.\n2. Delete 4★ champions you do not have.\n3. Set Rank = champion rank (1 to 5).\n4. Set Awakened = signature ability level.\n``[4★: 0 to 99 | 5★: 0 to 200]``\n5. Export file as \'champions.csv\'.\n6. Upload to Collector.\n7. Press OK\n\nPrerequisite: Google Sheets\n(there is an app for iOS|Android)\n'
@@ -714,7 +697,7 @@ class Hook:
         tmp_file = '{}-{}.tmp'.format(path, rand)
         # with open(tmp_file, 'w') as fp:
         with open(tmp_file, 'w', encoding='utf-8') as fp:
-            writer = csv.DictWriter(fp, fieldnames=['member_mention', *(roster.fieldnames)], extrasaction='ignore', lineterminator='\n')
+            writer = csv.DictWriter(fp, fieldnames=['member_mention','member_name', *(roster.fieldnames)], extrasaction='ignore', lineterminator='\n')
             writer.writeheader()
             for member in server.members:
                 if role in member.roles:
@@ -722,8 +705,8 @@ class Hook:
                     await roster.load_champions()
                     for champ in roster.roster.values():
                         champ_dict = champ.to_json()
-                        # champ_dict['member_name'] = member.name
                         champ_dict['member_mention'] = member.mention
+                        champ_dict['member_name'] = member.name
                         writer.writerow(champ_dict)
         filename = roster.data_dir + '/' + role.name + '.csv'
         os.replace(tmp_file, filename)

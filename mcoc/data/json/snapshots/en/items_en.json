@@ -1,16 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "7415a9397b6d17662c47832169018658883487e2",
+    "hash": "5a43d0c161983cd5e3fe13367b7127466064ce2e",
     "language": "en",
     "post_processed": true,
-    "string_count": 334,
+    "string_count": 337,
     "tagged": [
       "items",
       "client"
     ],
-    "ts": 1509750665,
-    "versionLock": "16.1"
+    "ts": 1534967118,
+    "versionLock": "20.1"
   },
   "strings": [
     {
@@ -476,7 +476,7 @@
     },
     {
       "k": "ID_UI_HARDCURRENCY_ANDMORE",
-      "v": "& MORE!"
+      "v": ""
     },
     {
       "k": "ID_UI_HARDCURRENCY_CANCELPURCHASEBODY",
@@ -768,12 +768,28 @@
       "v": "Head to the Store to get more units!"
     },
     {
+      "k": "ID_UI_NSF_KLYNTAR_STRANDS",
+      "v": "Not enough KLYNTAR STRANDS.",
+      "vn": "20.1"
+    },
+    {
+      "k": "ID_UI_NSF_KLYNTAR_STRANDS_LOCATION",
+      "v": "Participate in Special Events to earn more Klyntar Strands!",
+      "vn": "20.1"
+    },
+    {
       "k": "ID_UI_NSF_PVP_CUR",
       "v": "Not enough BATTLE CHIPS."
     },
     {
       "k": "ID_UI_NSF_PVP_CUR_LOCATION",
       "v": "Play Versus to earn more battle chips!"
+    },
+    {
+      "cn": null,
+      "k": "ID_UI_NSF_PYM_CANISTERS_LOCATION",
+      "v": "Participate in Special Events, Daily Quests and Arenas to earn Pym Canisters!",
+      "vn": 19
     },
     {
       "k": "ID_UI_NSF_SC",

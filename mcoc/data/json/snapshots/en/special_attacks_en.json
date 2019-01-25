@@ -1,14 +1,16 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "209c8be38e5d3fe6312c3a60a1a04ba6e13ca45d",
+    "hash": "fe60c6d5a793c811662bbc302195ac133b665860",
     "language": "en",
-    "string_count": 886,
+    "post_processed": true,
+    "string_count": 904,
     "tagged": [
       "special_attacks",
       "client"
     ],
-    "ts": 1537908934
+    "ts": 1541723400,
+    "versionLock": "21.1"
   },
   "strings": [
     {
@@ -255,6 +257,21 @@
       "vn": "13.1"
     },
     {
+      "k": "ID_SPECIAL_ATTACK_CHAMPION_0",
+      "v": "Judo Chop",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CHAMPION_1",
+      "v": "Missile Dropkick",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_CHAMPION_2",
+      "v": "Champion's Press Backbreaker ",
+      "vn": 21
+    },
+    {
       "k": "ID_SPECIAL_ATTACK_CIVILWARRIOR_0",
       "v": "Arc Blast"
     },
@@ -377,6 +394,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_DAREDEVIL_NETFLIX_2",
       "v": "Deliverance"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DARKHAWK_0",
+      "v": "Amulet Blast",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DARKHAWK_1",
+      "v": "Stealth Mode",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DARKHAWK_2",
+      "v": "Null Mode",
+      "vn": "21.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DEADPOOL_0",
@@ -648,7 +680,7 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_0",
-      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him to take the time to revel in the carnage he creates.",
+      "v": "Carnage hurls himself at his opponent rending with limbs, and tentacles alike.",
       "vn": 20
     },
     {
@@ -658,8 +690,23 @@
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CARNAGE_2",
-      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him take the time to revel in the carnage he creates.",
+      "v": "Carnage uses his tentacles to pin his opponent in place, allowing him to take the time to revel in the carnage he creates.",
       "vn": "13.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CHAMPION_0",
+      "v": "The Champion paralyzes the opponent with a knife-hand-chop combo then finishes them with a powerful skullet hit.",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CHAMPION_1",
+      "v": "The Champion channels the Power Primordial into his legs to unleash a flurry of powered-up kicks, inflicting critical blows onto the opponent.",
+      "vn": 21
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CHAMPION_2",
+      "v": "The Champion strikes the opponent with a flurry of combos powered up by the Power Primordial, finishing them with a decisive blow to their back.",
+      "vn": 21
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_CIVILWARRIOR_0",
@@ -783,6 +830,21 @@
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DAREDEVIL_NETFLIX_2",
       "v": "Daredevil enters a heightened state of 360° awareness, evading all attacks and countering with strikes to enemy pressure points."
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DARKHAWK_0",
+      "v": "The Darkhawk Amulet taps into the vast powers in Null Space, directing it towards the opponent with devastating force.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DARKHAWK_1",
+      "v": "Using Null Space to distort the light around him, Darkhawk is able to elude his opponent and deliver a flurry of slicing attacks.",
+      "vn": "21.1"
+    },
+    {
+      "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DARKHAWK_2",
+      "v": "The Raptor Armor, acting as a conduit for the unlimited power contained in Null Space, becomes bathed in Null Energy and unleashes its full destructive potential.",
+      "vn": "21.1"
     },
     {
       "k": "ID_SPECIAL_ATTACK_DESCRIPTION_DEADPOOL_0",

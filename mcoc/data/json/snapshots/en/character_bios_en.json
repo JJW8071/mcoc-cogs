@@ -1,25 +1,22 @@
 {
   "meta": {
     "format": "sparx",
-    "hash": "4b4e6b558b1ab3c61800cf9c3f2a96aaa8b3e4d1",
+    "hash": "caf631cd44207b76e7930898e0c6a17f6131ebd5",
     "language": "en",
-    "string_count": 149,
+    "post_processed": true,
+    "string_count": 152,
     "tagged": [
       "character_bios",
       "client"
     ],
-    "ts": 1537914713
+    "ts": 1541723397,
+    "versionLock": "21.1"
   },
   "strings": [
     {
       "k": "ID_CHARACER_BIOS_BLADE",
       "v": "When Eric Brooks' mother was killed during his birth by a bloodthirsty vampire, the newborn Brooks' blood was infused with vampiric enzymes.This event turned him into a Dhampir, a hybrid human/vampire, possessing the powers of a vampire like immortality, but none of their weaknesses. Eventually becoming known as Blade, he has the ability to sense supernatural phenomenon, enabling him to identify Dimensional Beings and quickly react to incoming threats, making him effective at hunting the most powerful beings in the Battlerealm.",
       "vn": "15.1"
-    },
-    {
-      "k": "ID_CHARACTER_BIOS_REDSKULL",
-      "v": "The Red Skull has managed to orchestrate the assassinations of his enemies, manipulate his way to power, and lead HYDRA in a plan to devastate the world's most influential countries. Using his scientific talents and knowledge of the occult to research what others considered only a myth: the Cosmic Cube. Now armed with knowledge of its deepest secrets, The Red Skull has been able to harness it to power his suit of Hydra armor.",
-      "vn": "19.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_ABOMINATION",
@@ -103,6 +100,11 @@
       "vn": "13.1"
     },
     {
+      "k": "ID_CHARACTER_BIOS_CHAMPION",
+      "v": "As an Elders of the Universe member, The Champion is able to control an energy source referred to as the Power Primordial, the residual energy that is left over from the Big Bang itself. He channels this energy to enhance his physical form, and he seeks out the greatest fighters in the universe to test the limits of his powers.",
+      "vn": 21
+    },
+    {
       "k": "ID_CHARACTER_BIOS_CIVILWARRIOR",
       "v": "There are many rumors about the origin of the mysterious Civil Warrior… legend says he is a Captain America from an alternate Earth ravaged by the Civil War between his own army and Iron Man’s forces. On that world, the two heroes mortally wounded each other in the final battle of the war; Steve survived, but Tony didn’t. Riddled with guilt for the battle’s destruction and the death of his former ally at his own hands, he assumed the mantle of the Civil Warrior. Adding Tony’s ARC technology to his Captain America gear, he vowed to use his friend’s legacy to stop this senseless conflict from ever happening again."
     },
@@ -138,6 +140,11 @@
     {
       "k": "ID_CHARACTER_BIOS_DAREDEVIL_NETFLIX",
       "v": "Matt Murdock grew up around crime, corruption and violence. After a freak accident involving radioactive waste took his sight, Matt was trained by the mysterious martial artist Stick to condition his body to near perfection and hone his remaining senses to superhuman levels."
+    },
+    {
+      "k": "ID_CHARACTER_BIOS_DARKHAWK",
+      "v": "Christopher Powell discovered an alien amulet allowing him to transform into the robotic Darkhawk. Having witnessed his father turn to a life of crime, Powell vowed to use the powers of the amulet to fight crime. This path would eventually lead him to team up with some of Earth’s mightiest heroes.",
+      "vn": "21.1"
     },
     {
       "k": "ID_CHARACTER_BIOS_DEADPOOL",
@@ -198,16 +205,6 @@
     {
       "k": "ID_CHARACTER_BIOS_GAMORA",
       "v": "The most dangerous woman in the galaxy is a title hard to earn, and harder to keep. But Gamora has brawled and battled her way across the cosmos enough times to make that title stick. She's stronger than you, faster than you, and tougher than anyone. She is the adopted daughter of Thanos, but fiercely loyal to her comrades in the Guardians of the Galaxy."
-    },
-    {
-      "k": "ID_CHARACTER_BIOS_SENTINEL",
-      "v": "Although the Sentinels were created by a Mutant elite, who had the goal of controlling the Champions of The Contest, 100 years in the future, they rebelled; killed their creator and subsequently engineered a way into the present day. The Mark-ISO evolved from these rogue Sentinels, adapting to the ISO-8 rich environment of the current Contest. Powered by an ISO fusion engine, the Mark-ISO Sentinel can quell any uprising within The Contest with extreme prejudice.",
-      "vn": "17.1"
-    },
-    {
-      "k": "ID_CHARACTER_BIOS_GHOST",
-      "v": "You can't fight what you don't know, and nobody seems to know anything about who Ghost is or how she can do the things she can do. Feared and admired in the criminal underworld for her ability to phase through solid walls, Ghost's true intentions are as elusive as she is, though one thing is for sure: she's interested in getting her hands on all the Pym Tech she can find. Her advanced technology combined with her skill in combat make her a force to be reckoned with.​",
-      "vn": 19
     },
     {
       "k": "ID_CHARACTER_BIOS_GHOSTRIDER",
