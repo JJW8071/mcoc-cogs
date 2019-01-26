@@ -3,5 +3,6 @@
     "INSTALL_MSG" : "Thanks for installing DeltaSigma's Clan Mod",
     "NAME" : "clan_mod",
     "SHORT" : "Set Alliance prefix in User Nickname",
-    "DESCRIPTION" : "Set Alliance prefix in User Nickname."
+    "DESCRIPTION" : "Set Alliance prefix in User Nickname.",
+    "HIDDEN" : true
 }
