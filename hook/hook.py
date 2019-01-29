@@ -22,6 +22,8 @@ import re
 import asyncio
 ### Monkey Patch of JSONEncoder
 from json import JSONEncoder, dump, dumps
+from .mcocTools import (KABAM_ICON, COLLECTOR_ICON, PagesMenu)
+
 
 logger = logging.getLogger('red.roster')
 logger.setLevel(logging.INFO)
@@ -73,7 +75,7 @@ class HashtagRosterConverter(commands.Converter):
             except:
                 color = discord.Color.gold()
             embeds = await hook.roster_kickback(color)
-            await menu.menu_start(page_list=embeds)
+            await menu.menu_start(pages=embeds)
 
             raise MissingRosterError('No Roster found for {}'.format(user.name))
         return types.SimpleNamespace(tags=tags, roster=chmp_rstr)
@@ -120,86 +122,86 @@ class RosterConverter(commands.Converter):
         return chmp_rstr
 
 
-class PagesMenu:
-
-    EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
-
-    def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
-            delete_onX=True):
-        self.bot = bot
-        self.timeout = timeout
-        self.add_pageof = add_pageof
-        self.choice = choice
-        self.delete_onX = delete_onX
-
-    async def menu_start(self, page_list):
-        page_length = len(page_list)
-        self.all_emojis = OrderedDict([(i.emoji, i) for i in (
-            self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
-            self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
-            self.EmojiReact("\N{CROSS MARK}", True, None),
-            self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
-            self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
-                      )])
-
-        self.is_embeds = isinstance(page_list[0], discord.Embed)
-        if not self.is_embeds:
-            await self.bot.say('Function does not support non-embeds currently')
-            return
-
-        if self.add_pageof:
-            for i, page in enumerate(page_list):
-                if self.is_embeds:
-                    ftr = page.footer
-                    page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
-                            i+1, page_length), icon_url=ftr.icon_url)
-                else:
-                    page += '\n(Page {} of {})'.format(i+1, page_length)
-
-        self.page_list = page_list
-        await self.display_page(None, 0)
-
-    async def display_page(self, message, page):
-        if not message:
-            message = await self.bot.say(embed=self.page_list[page])
-            self.included_emojis = set()
-            for emoji in self.all_emojis.values():
-                if emoji.include:
-                    await self.bot.add_reaction(message, emoji.emoji)
-                    self.included_emojis.add(emoji.emoji)
-        else:
-            message = await self.bot.edit_message(message, embed=self.page_list[page])
-        await asyncio.sleep(1)
-
-        react = await self.bot.wait_for_reaction(message=message,
-                timeout=self.timeout, emoji=self.included_emojis)
-        if react is None:
-            try:
-                await self.bot.clear_reactions(message)
-            except discord.Forbidden:
-                logger.warn("clear_reactions didn't work")
-                for emoji in self.included_emojis:
-                    await self.bot.remove_reaction(message, emoji, self.bot.user)
-            return None
-
-        emoji = react.reaction.emoji
-        pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
-        if pages_to_inc:
-            next_page = (page + pages_to_inc) % len(self.page_list)
-            try:
-                await self.bot.remove_reaction(message, emoji, react.user)
-                await self.display_page(message=message, page=next_page)
-            except discord.Forbidden:
-                await self.bot.delete_message(message)
-                await self.display_page(message=None, page=next_page)
-        elif emoji == '\N{CROSS MARK}':
-            try:
-                if self.delete_onX:
-                    await self.bot.delete_message(message)
-                else:
-                    await self.bot.clear_reactions(message)
-            except discord.Forbidden:
-                await self.bot.say("Bot does not have the proper Permissions")
+# class PagesMenu:
+#
+#     EmojiReact = namedtuple('EmojiReact', 'emoji include page_inc')
+#
+#     def __init__(self, bot, *, add_pageof=True, timeout=30, choice=False,
+#             delete_onX=True):
+#         self.bot = bot
+#         self.timeout = timeout
+#         self.add_pageof = add_pageof
+#         self.choice = choice
+#         self.delete_onX = delete_onX
+#
+#     async def menu_start(self, page_list):
+#         page_length = len(page_list)
+#         self.all_emojis = OrderedDict([(i.emoji, i) for i in (
+#             self.EmojiReact("\N{BLACK LEFT-POINTING DOUBLE TRIANGLE}", page_length > 5, -5),
+#             self.EmojiReact("\N{BLACK LEFT-POINTING TRIANGLE}", True, -1),
+#             self.EmojiReact("\N{CROSS MARK}", True, None),
+#             self.EmojiReact("\N{BLACK RIGHT-POINTING TRIANGLE}", True, 1),
+#             self.EmojiReact("\N{BLACK RIGHT-POINTING DOUBLE TRIANGLE}", page_length > 5, 5),
+#                       )])
+#
+#         self.is_embeds = isinstance(page_list[0], discord.Embed)
+#         if not self.is_embeds:
+#             await self.bot.say('Function does not support non-embeds currently')
+#             return
+#
+#         if self.add_pageof:
+#             for i, page in enumerate(page_list):
+#                 if self.is_embeds:
+#                     ftr = page.footer
+#                     page.set_footer(text='{} (Page {} of {})'.format(ftr.text,
+#                             i+1, page_length), icon_url=ftr.icon_url)
+#                 else:
+#                     page += '\n(Page {} of {})'.format(i+1, page_length)
+#
+#         self.page_list = page_list
+#         await self.display_page(None, 0)
+#
+#     async def display_page(self, message, page):
+#         if not message:
+#             message = await self.bot.say(embed=self.page_list[page])
+#             self.included_emojis = set()
+#             for emoji in self.all_emojis.values():
+#                 if emoji.include:
+#                     await self.bot.add_reaction(message, emoji.emoji)
+#                     self.included_emojis.add(emoji.emoji)
+#         else:
+#             message = await self.bot.edit_message(message, embed=self.page_list[page])
+#         await asyncio.sleep(1)
+#
+#         react = await self.bot.wait_for_reaction(message=message,
+#                 timeout=self.timeout, emoji=self.included_emojis)
+#         if react is None:
+#             try:
+#                 await self.bot.clear_reactions(message)
+#             except discord.Forbidden:
+#                 logger.warn("clear_reactions didn't work")
+#                 for emoji in self.included_emojis:
+#                     await self.bot.remove_reaction(message, emoji, self.bot.user)
+#             return None
+#
+#         emoji = react.reaction.emoji
+#         pages_to_inc = self.all_emojis[emoji].page_inc if emoji in self.all_emojis else None
+#         if pages_to_inc:
+#             next_page = (page + pages_to_inc) % len(self.page_list)
+#             try:
+#                 await self.bot.remove_reaction(message, emoji, react.user)
+#                 await self.display_page(message=message, page=next_page)
+#             except discord.Forbidden:
+#                 await self.bot.delete_message(message)
+#                 await self.display_page(message=None, page=next_page)
+#         elif emoji == '\N{CROSS MARK}':
+#             try:
+#                 if self.delete_onX:
+#                     await self.bot.delete_message(message)
+#                 else:
+#                     await self.bot.clear_reactions(message)
+#             except discord.Forbidden:
+#                 await self.bot.say("Bot does not have the proper Permissions")
 
 
 class ChampionRoster:
@@ -475,7 +477,7 @@ class ChampionRoster:
             await self.bot.say(embed=embeds[0])
         else:
             menu = PagesMenu(self.bot, timeout=120, delete_onX=True, add_pageof=True)
-            await menu.menu_start(embeds)
+            await menu.menu_start(pages=embeds)
 
 class Hook:
 
@@ -788,96 +790,96 @@ class Hook:
     #         em.add_field(name='AWD:',value=team)
     #         self.bot.say(embed=em)
 
-    async def pages_menu(self, ctx, embed_list: list, category: str='',
-            message: discord.Message=None, page=0, timeout: int=30, choice=False):
-        """menu control logic for this taken from
-           https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
-        #print('list len = {}'.format(len(embed_list)))
-        length = len(embed_list)
-        em = embed_list[page]
-        if not message:
-            message = await self.bot.say(embed=em)
-            if length > 5:
-                await self.bot.add_reaction(message, '⏪')
-            if length > 1:
-                await self.bot.add_reaction(message, '◀')
-            if choice is True:
-                await self.bot.add_reaction(message,'🆗')
-            await self.bot.add_reaction(message, '❌')
-            if length > 1:
-                await self.bot.add_reaction(message, '▶')
-            if length > 5:
-                await self.bot.add_reaction(message, '⏩')
-        else:
-            message = await self.bot.edit_message(message, embed=em)
-        await asyncio.sleep(1)
-
-        react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
-        # if react.reaction.me == self.bot.user:
-        #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
-        if react is None:
-            try:
-                try:
-                    await self.bot.clear_reactions(message)
-                except:
-                    await self.bot.remove_reaction(message,'⏪', self.bot.user) #rewind
-                    await self.bot.remove_reaction(message, '◀', self.bot.user) #previous_page
-                    await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
-                    await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
-                    await self.bot.remove_reaction(message, '▶', self.bot.user) #next_page
-                    await self.bot.remove_reaction(message,'⏩', self.bot.user) # fast_forward
-            except:
-                pass
-            return None
-        elif react is not None:
-            # react = react.reaction.emoji
-            if react.reaction.emoji == '▶': #next_page
-                next_page = (page + 1) % len(embed_list)
-                # await self.bot.remove_reaction(message, '▶', react.user)
-                try:
-                    await self.bot.remove_reaction(message, '▶', react.user)
-                except:
-                    pass
-                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '◀': #previous_page
-                next_page = (page - 1) % len(embed_list)
-                try:
-                    await self.bot.remove_reaction(message, '◀', react.user)
-                except:
-                    pass
-                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '⏪': #rewind
-                next_page = (page - 5) % len(embed_list)
-                try:
-                    await self.bot.remove_reaction(message, '⏪', react.user)
-                except:
-                    pass
-                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '⏩': # fast_forward
-                next_page = (page + 5) % len(embed_list)
-                try:
-                    await self.bot.remove_reaction(message, '⏩', react.user)
-                except:
-                    pass
-                return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
-            elif react.reaction.emoji == '🆗': #choose
-                if choice is True:
-                    # await self.bot.remove_reaction(message, '🆗', react.user)
-                    prompt = await self.bot.say(SELECTION.format(category+' '))
-                    answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
-                    if answer is not None:
-                        await self.bot.delete_message(prompt)
-                        prompt = await self.bot.say('Process choice : {}'.format(answer.content.lower().strip()))
-                        url = '{}{}/{}'.format(BASEURL,category,answer.content.lower().strip())
-                        await self._process_item(ctx, url=url, category=category)
-                        await self.bot.delete_message(prompt)
-                else:
-                    pass
-            else:
-                try:
-                    return await self.bot.delete_message(message)
-                except:
-                    pass
+    # async def pages_menu(self, ctx, embed_list: list, category: str='',
+    #         message: discord.Message=None, page=0, timeout: int=30, choice=False):
+    #     """menu control logic for this taken from
+    #        https://github.com/Lunar-Dust/Dusty-Cogs/blob/master/menu/menu.py"""
+    #     #print('list len = {}'.format(len(embed_list)))
+    #     length = len(embed_list)
+    #     em = embed_list[page]
+    #     if not message:
+    #         message = await self.bot.say(embed=em)
+    #         if length > 5:
+    #             await self.bot.add_reaction(message, '⏪')
+    #         if length > 1:
+    #             await self.bot.add_reaction(message, '◀')
+    #         if choice is True:
+    #             await self.bot.add_reaction(message,'🆗')
+    #         await self.bot.add_reaction(message, '❌')
+    #         if length > 1:
+    #             await self.bot.add_reaction(message, '▶')
+    #         if length > 5:
+    #             await self.bot.add_reaction(message, '⏩')
+    #     else:
+    #         message = await self.bot.edit_message(message, embed=em)
+    #     await asyncio.sleep(1)
+    #
+    #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
+    #     # if react.reaction.me == self.bot.user:
+    #     #     react = await self.bot.wait_for_reaction(message=message, timeout=timeout,emoji=['▶', '◀', '❌', '⏪', '⏩','🆗'])
+    #     if react is None:
+    #         try:
+    #             try:
+    #                 await self.bot.clear_reactions(message)
+    #             except:
+    #                 await self.bot.remove_reaction(message,'⏪', self.bot.user) #rewind
+    #                 await self.bot.remove_reaction(message, '◀', self.bot.user) #previous_page
+    #                 await self.bot.remove_reaction(message, '❌', self.bot.user) # Cancel
+    #                 await self.bot.remove_reaction(message,'🆗',self.bot.user) #choose
+    #                 await self.bot.remove_reaction(message, '▶', self.bot.user) #next_page
+    #                 await self.bot.remove_reaction(message,'⏩', self.bot.user) # fast_forward
+    #         except:
+    #             pass
+    #         return None
+    #     elif react is not None:
+    #         # react = react.reaction.emoji
+    #         if react.reaction.emoji == '▶': #next_page
+    #             next_page = (page + 1) % len(embed_list)
+    #             # await self.bot.remove_reaction(message, '▶', react.user)
+    #             try:
+    #                 await self.bot.remove_reaction(message, '▶', react.user)
+    #             except:
+    #                 pass
+    #             return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+    #         elif react.reaction.emoji == '◀': #previous_page
+    #             next_page = (page - 1) % len(embed_list)
+    #             try:
+    #                 await self.bot.remove_reaction(message, '◀', react.user)
+    #             except:
+    #                 pass
+    #             return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+    #         elif react.reaction.emoji == '⏪': #rewind
+    #             next_page = (page - 5) % len(embed_list)
+    #             try:
+    #                 await self.bot.remove_reaction(message, '⏪', react.user)
+    #             except:
+    #                 pass
+    #             return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+    #         elif react.reaction.emoji == '⏩': # fast_forward
+    #             next_page = (page + 5) % len(embed_list)
+    #             try:
+    #                 await self.bot.remove_reaction(message, '⏩', react.user)
+    #             except:
+    #                 pass
+    #             return await self.pages_menu(ctx, embed_list, message=message, page=next_page, timeout=timeout)
+    #         elif react.reaction.emoji == '🆗': #choose
+    #             if choice is True:
+    #                 # await self.bot.remove_reaction(message, '🆗', react.user)
+    #                 prompt = await self.bot.say(SELECTION.format(category+' '))
+    #                 answer = await self.bot.wait_for_message(timeout=10, author=ctx.message.author)
+    #                 if answer is not None:
+    #                     await self.bot.delete_message(prompt)
+    #                     prompt = await self.bot.say('Process choice : {}'.format(answer.content.lower().strip()))
+    #                     url = '{}{}/{}'.format(BASEURL,category,answer.content.lower().strip())
+    #                     await self._process_item(ctx, url=url, category=category)
+    #                     await self.bot.delete_message(prompt)
+    #             else:
+    #                 pass
+    #         else:
+    #             try:
+    #                 return await self.bot.delete_message(message)
+    #             except:
+    #                 pass
 
     async def _on_attachment(self, msg):
         channel = msg.channel
